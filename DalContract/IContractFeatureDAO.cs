@@ -2,7 +2,7 @@
 
 namespace DalContract
 {
-    public interface IContractFeatureDAO : IContractEntites<Feature>
+    public interface IContractFeatureDAO : IContractEntitesDAO<Feature>
     {
     }
 }

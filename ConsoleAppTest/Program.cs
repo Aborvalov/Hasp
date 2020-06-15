@@ -17,7 +17,7 @@ namespace ConsoleAppTest
         {
             // TestHaspKey();
             // TestFeature();
-             TestClient();
+            // TestClient();
             // TestKeyFeature();
             // TestKeyFeatureCliet();
         }
@@ -151,10 +151,10 @@ namespace ConsoleAppTest
                 //foreach(var str in test.GetAll())
                 //     Console.WriteLine(str.Id +"-"+'\t'+str.Name+"-" + '\t'+str.Number+ "-" + '\t'+str.Description);
 
-                var feat = test.GetById(8);
+               // var feat = test.GetById(8);
                // var updateTest = test.Update(update);
 
-               var remove = test.Remove(2);
+               var remove = test.Remove(5);
             }
         }
         static void TestHaspKey()
@@ -197,12 +197,10 @@ namespace ConsoleAppTest
                  foreach(var str in test.GetAll())
                      Console.WriteLine(str.Id +"-"+'\t' + str.InnerId + "-"+'\t' + str.Number + "-"+ '\t' + str.TypeKey + "-"+ '\t' + str.Location);
                  
-
-                var haspKey = test.GetById(5);
-                var remove = test.Remove(44);
-
-                var updateTest = test.Update(update);
-                */
+                 */
+                //var haspKey = test.GetById(5);
+                var remove = test.Remove(2);
+                //var updateTest = test.Update(update);               
             }
         }
     }

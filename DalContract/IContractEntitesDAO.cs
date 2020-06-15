@@ -2,7 +2,7 @@
 
 namespace DalContract
 {
-    public interface IContractEntites<TEntites>
+    public interface IContractEntitesDAO<TEntites>
     {
         int Add(TEntites entity);
         bool Remove(int id);
