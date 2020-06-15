@@ -11,24 +11,26 @@ namespace UnitTestDal
     {
         private IContractKeyFeatureClientDAO keyFeatureClientDAO;
 
-        [TestMethod]
-        public void TestAdd()
-        {
-            KeyFeatureClient kfc = new KeyFeatureClient
-            {
-                Id           = 1,
-                IdClient     = 1,
-                IdKeyFeature = 1,
-                Initiator    = "Test Testovich",
-                Note         = "Bla bla bla.",
-            };
+        //[TestMethod]
+        //public void AddTest()
+        //{
+        //    int idExpected = 1;
+        //    int add;
+        //    KeyFeatureClient kfc = new KeyFeatureClient
+        //    {
+        //        IdClient     = 1,
+        //        IdKeyFeature = 1,
+        //        Initiator    = "Test Testovich",
+        //        Note         = "Bla bla bla.",
+        //    };
 
-            using (var db = new EntitesContext())
-            {
-                keyFeatureClientDAO = new DbKeyFaetureClientDAO(db);
+        //    using (var db = new EntitesContext())
+        //    {
+        //        keyFeatureClientDAO = new DbKeyFaetureClientDAO(db);
+        //        add = keyFeatureClientDAO.Add(kfc);
+        //    }
 
-                var add = keyFeatureClientDAO.Add(kfc);
-            }
-        }
+        //    Assert.AreEqual(idExpected, add);
+        //}  
     }
 }
