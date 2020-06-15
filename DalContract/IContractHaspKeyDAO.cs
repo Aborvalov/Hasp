@@ -15,6 +15,6 @@ namespace DalContract
         /// Поиск действующих ключей.
         /// </summary>
         /// <returns>Список действующих ключей.</returns>
-        IEnumerable<HaspKey> GaetByActive();
+        IEnumerable<HaspKey> GetByActive();
     }
 }

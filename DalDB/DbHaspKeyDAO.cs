@@ -30,7 +30,7 @@ namespace DalDB
             return haspKey.Id;
         }
                
-        public IEnumerable<HaspKey> GaetByActive()
+        public IEnumerable<HaspKey> GetByActive()
         {
             List<HaspKey> haspKeys = new List<HaspKey>();
             HaspKey hk;
@@ -71,7 +71,7 @@ namespace DalDB
                                       Location = hk.Location,
                                       TypeKey  = hk.TypeKey,
                                   })
-                                  .ToList();
+                                  .ToList().Distinct();
 
             #region SQL запрос.
 

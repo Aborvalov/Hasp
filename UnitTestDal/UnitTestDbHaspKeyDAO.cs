@@ -5,6 +5,7 @@ using DalDB;
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace UnitTestDal
 {
@@ -12,6 +13,7 @@ namespace UnitTestDal
     public class UnitTestDbHaspKeyDAO
     {
         private IContractHaspKeyDAO haspKeyDAO;
+        private DateTime date = DateTime.Now.Date;
 
         [TestMethod]
         public void AddHaspKey()
@@ -28,12 +30,12 @@ namespace UnitTestDal
 
             using (var db = new EntitesContext())
             {
-                haspKeyDAO = new DbHaspKeyDAO(db);                
+                haspKeyDAO = new DbHaspKeyDAO(db);
                 add = haspKeyDAO.Add(haspKey);
-                ClearTable(db);
+                ClearTable.HaspKeys(db);
             }
 
-            Assert.AreEqual(idExpected, add);
+            Assert.AreEqual(add, idExpected);
         }
         [TestMethod]
         public void AddNullHaspKey()
@@ -41,8 +43,8 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
-                Assert.ThrowsException<ArgumentNullException>(()=>haspKeyDAO.Add(null));
-            }            
+                Assert.ThrowsException<ArgumentNullException>(() => haspKeyDAO.Add(null));
+            }
         }
         [TestMethod]
         public void AddDuplicateHaspKey()
@@ -60,24 +62,431 @@ namespace UnitTestDal
                 haspKeyDAO = new DbHaspKeyDAO(db);
                 haspKeyDAO.Add(haspKey);
                 Assert.ThrowsException<Exception>(() => haspKeyDAO.Add(haspKey));
-                ClearTable(db);
+                ClearTable.HaspKeys(db);
             }
         }
-
-        private void ClearTable(EntitesContext db)
+        [TestMethod]
+        public void GetAllHaspKey()
         {
-            db.Database.ExecuteSqlCommand("DROP TABLE HASPKeys");
-            db.Database.ExecuteSqlCommand(@"CREATE TABLE HASPKeys (
-                                                Id       INTEGER PRIMARY KEY AUTOINCREMENT
-                                                                 NOT NULL
-                                                                 UNIQUE,
-                                                InnerId  INTEGER NOT NULL
-                                                                 UNIQUE,
-                                                Number   TEXT    NOT NULL,
-                                                TypeKey  STRING  NOT NULL,
-                                                Location BOOLEAN NOT NULL
-                                            ); ");
-            db.SaveChanges();
+            List<HaspKey> getAll = new List<HaspKey>(); ;
+            List<HaspKey> haspKeysExpected = new List<HaspKey>();
+
+            for (int i = 1; i <= 10; i++)
+            {
+                HaspKey key = new HaspKey
+                {
+                    Id = i,
+                    InnerId = i,
+                    Number = "uz-2",
+                    Location = true,
+                    TypeKey = TypeKey.Pro,
+                };
+
+                haspKeysExpected.Add(key);
+            }
+
+            using (var db = new EntitesContext())
+            {
+                haspKeyDAO = new DbHaspKeyDAO(db);
+
+                for (int i = 1; i <= 10; i++)
+                {
+                    HaspKey key = new HaspKey
+                    {
+                        Id = i,
+                        InnerId = i,
+                        Number = "uz-2",
+                        Location = true,
+                        TypeKey = TypeKey.Pro,
+                    };
+
+                    haspKeyDAO.Add(key);
+                }
+
+                getAll = haspKeyDAO.GetAll().ToList();
+                ClearTable.HaspKeys(db);
+            }
+
+            CollectionAssert.AreEqual(getAll, haspKeysExpected);
+        }
+        [TestMethod]
+        public void GetByIdHaspKey()
+        {
+            HaspKey getbyId;
+            HaspKey keyExpected = new HaspKey
+            {
+                Id = 1,
+                InnerId = 1,
+                Number = "uz-2",
+                Location = true,
+                TypeKey = TypeKey.Pro,
+            };
+
+            using (var db = new EntitesContext())
+            {
+                haspKeyDAO = new DbHaspKeyDAO(db);
+
+                haspKeyDAO.Add(new HaspKey
+                {
+                    InnerId = 1,
+                    Number = "uz-2",
+                    Location = true,
+                    TypeKey = TypeKey.Pro,
+                });
+
+                getbyId = haspKeyDAO.GetById(1);
+                ClearTable.HaspKeys(db);
+            }
+
+            Assert.AreEqual(getbyId, keyExpected);
+        }
+        /// <summary>
+        /// Поиск неправильного id.
+        /// </summary>
+        [TestMethod]
+        public void GetByErroneousIdHaspKey()
+        {
+            using (var db = new EntitesContext())
+            {
+                haspKeyDAO = new DbHaspKeyDAO(db);
+                Assert.ThrowsException<ArgumentException>(() => haspKeyDAO.GetById(-412536));
+            }
+        }
+        /// <summary>
+        /// Поиск id которого нет в базе.
+        /// </summary>
+        [TestMethod]
+        public void GetByIdNoDBHaspKey()
+        {
+            HaspKey getbyId;
+
+            using (var db = new EntitesContext())
+            {
+                haspKeyDAO = new DbHaspKeyDAO(db);
+                getbyId = haspKeyDAO.GetById(1);
+            }
+
+            Assert.AreEqual(getbyId, null);
+        }
+        [TestMethod]
+        public void UpdateHaspKey()
+        {
+            bool update;
+            using (var db = new EntitesContext())
+            {
+                haspKeyDAO = new DbHaspKeyDAO(db);
+                haspKeyDAO.Add(new HaspKey
+                {
+                    Id = 1,
+                    InnerId = 12,
+                    Number = "Qwres",
+                    Location = false,
+                    TypeKey = TypeKey.NetTime,
+                });
+                update = haspKeyDAO.Update(new HaspKey
+                {
+                    Id = 1,
+                    InnerId = 1,
+                    Number = "uz-2",
+                    Location = true,
+                    TypeKey = TypeKey.Pro,
+                });
+
+                ClearTable.HaspKeys(db);
+            }
+
+            Assert.AreEqual(update, true);
+        }
+        [TestMethod]
+        public void UpdateNullHaspKey()
+        {
+            using (var db = new EntitesContext())
+            {
+                haspKeyDAO = new DbHaspKeyDAO(db);
+                Assert.ThrowsException<ArgumentNullException>(() => haspKeyDAO.Update(null));
+            }
+        }
+        /// <summary>
+        /// Дублирование ключа при обновлении.
+        /// </summary>
+        [TestMethod]
+        public void UpdateDuplicateHaspKey()
+        {
+            HaspKey haspKey = new HaspKey
+            {
+                InnerId = 1,
+                Number = "uz-2",
+                Location = true,
+                TypeKey = TypeKey.Pro,
+            };
+
+            using (var db = new EntitesContext())
+            {
+                haspKeyDAO = new DbHaspKeyDAO(db);
+                haspKeyDAO.Add(haspKey);
+                Assert.ThrowsException<Exception>(
+                    () => haspKeyDAO.Update(new HaspKey
+                    {
+                        Id = 2,
+                        InnerId = 1,
+                        Number = "uz-2",
+                        Location = true,
+                        TypeKey = TypeKey.Pro,
+                    }));
+                ClearTable.HaspKeys(db);
+            }
+        }
+        /// <summary>
+        /// Обновление ключа которого не существует в базе.
+        /// </summary>
+        [TestMethod]
+        public void UpdateNoDBHaspKey()
+        {
+            HaspKey haspKey = new HaspKey
+            {
+                InnerId = 1,
+                Number = "uz-2",
+                Location = true,
+                TypeKey = TypeKey.Pro,
+            };
+            HaspKey keyNoDB = new HaspKey
+            {
+                Id = 234,
+                InnerId = 1546,
+                Number = "uz-265",
+                Location = false,
+                TypeKey = TypeKey.NetTime,
+            };
+
+            using (var db = new EntitesContext())
+            {
+                haspKeyDAO = new DbHaspKeyDAO(db);
+                haspKeyDAO.Add(haspKey);
+                Assert.ThrowsException<NullReferenceException>(
+                    () => haspKeyDAO.Update(keyNoDB));
+                ClearTable.HaspKeys(db);
+            }
+        }
+        [TestMethod]
+        public void GetByActiveHaspKey()
+        {
+            List<HaspKey> GetByActive;
+            List<HaspKey> GetByActiveExpected = new List<HaspKey>
+            { new HaspKey
+                {
+                    Id       = 1,
+                    InnerId  = 1,
+                    Number   = "uz-2",
+                    Location = true,
+                    TypeKey  = TypeKey.Pro,
+                }
+            };
+
+            using (var db = new EntitesContext())
+            {
+                haspKeyDAO = new DbHaspKeyDAO(db);
+
+                db.HaspKeys.AddRange(CreateArreyHaspKeys());
+                db.Features.AddRange(CreateArrayFeatures());
+                db.KeyFeatures.AddRange(CreateArrayKeyFeatures());
+                db.SaveChanges();
+
+                GetByActive = haspKeyDAO.GetByActive().ToList();
+
+                ClearTable.HaspKeys(db);
+                ClearTable.Features(db);
+                ClearTable.KeyFeatures(db);
+            }
+
+            CollectionAssert.AreEqual(GetByActive, GetByActiveExpected);
+        }
+        [TestMethod]
+        public void GetByPastDueHaspKey()
+        {
+            List<HaspKey> GetByActive;
+            List<HaspKey> GetByActiveExpected = new List<HaspKey>
+            { new HaspKey
+                {
+                    Id       = 2,
+                    InnerId  = 2,
+                    Number   = "uz-3",
+                    Location = true,
+                    TypeKey  = TypeKey.Pro,
+                }
+            };
+
+            using (var db = new EntitesContext())
+            {
+                haspKeyDAO = new DbHaspKeyDAO(db);
+
+                db.HaspKeys.AddRange(CreateArreyHaspKeys());
+                db.Features.AddRange(CreateArrayFeatures());
+                db.KeyFeatures.AddRange(CreateArrayKeyFeatures());
+                db.SaveChanges();
+
+                GetByActive = haspKeyDAO.GetByPastDue().ToList();
+
+                ClearTable.HaspKeys(db);
+                ClearTable.Features(db);
+                ClearTable.KeyFeatures(db);
+            }
+
+            CollectionAssert.AreEqual(GetByActive, GetByActiveExpected);
+        }
+        [TestMethod]
+        public void GetByClientHaspKey()
+        {
+            List<HaspKey> GetByClient;
+            List<HaspKey> GetByClientExpected = new List<HaspKey>
+            { new HaspKey
+                {
+                    Id       = 1,
+                    InnerId  = 1,
+                    Number   = "uz-2",
+                    Location = true,
+                    TypeKey  = TypeKey.Pro,
+                }
+            };
+
+            Client client = new Client
+            {
+                Id = 1,
+                Name = "Ivanov Ivan",
+            };
+
+            using (var db = new EntitesContext())
+            {
+                haspKeyDAO = new DbHaspKeyDAO(db);
+                ClearTable.Clients(db);
+                db.HaspKeys.AddRange(CreateArreyHaspKeys());
+                db.Features.AddRange(CreateArrayFeatures());
+                db.KeyFeatures.AddRange(CreateArrayKeyFeatures());
+                db.Clients.AddRange(CreateArrayClients());
+                db.KeyFeatureClients.AddRange(kfc);
+                db.SaveChanges();
+
+                GetByClient = haspKeyDAO.GetByClient(client).ToList();
+
+                ClearTable.HaspKeys(db);
+                ClearTable.Features(db);
+                ClearTable.KeyFeatures(db);
+                ClearTable.Clients(db);
+                ClearTable.KeyFeatureClients(db);
+            }
+
+            CollectionAssert.AreEqual(GetByClient, GetByClientExpected);
+        }
+        private List<HaspKey> CreateArreyHaspKeys()
+        {
+            return new List<HaspKey>
+            {
+                new HaspKey
+            {
+                InnerId  = 1,
+                Number   = "uz-2",
+                Location = true,
+                TypeKey  = TypeKey.Pro,
+            },
+            new HaspKey
+            {
+                InnerId  = 2,
+                Number   = "uz-3",
+                Location = true,
+                TypeKey  = TypeKey.Pro,
+            },
+        };
+        }
+        private List<Feature> CreateArrayFeatures()
+        {
+            return new List<Feature>
+            {
+                new Feature
+                {
+                    Number = 1,
+                    Name   = "qwe",
+                },
+                new Feature
+                {
+                    Number = 2,
+                    Name = "qwe",
+                },
+            };            
+        }
+        private List<Client> CreateArrayClients()
+        {
+            return new List<Client>
+            {
+                new Client
+                {
+                    Id   = 1,
+                    Name = "Ivanov Ivan",
+                },
+                new Client
+                {
+                    Id = 2,
+                    Name = "Petrov FD",
+                },
+        };
+        }
+        private List<KeyFeature> CreateArrayKeyFeatures()
+        {
+            return new List<KeyFeature>
+            {
+                new KeyFeature
+                {
+                    IdHaspKey = 1,
+                    IdFeature = 1,
+                    StartDate = date,
+                    EndDate   = date.AddDays(12),
+                },
+                new KeyFeature
+                {
+                    IdHaspKey = 1,
+                    IdFeature = 2,
+                    StartDate = date,
+                    EndDate   = date.AddDays(-12),
+                },
+                new KeyFeature
+                {
+                    IdHaspKey = 2,
+                    IdFeature = 1,
+                    StartDate = date.AddDays(-30),
+                    EndDate   = date.AddDays(-12),
+                },
+                new KeyFeature
+                {
+                    IdHaspKey = 2,
+                    IdFeature = 2,
+                    StartDate = date.AddDays(-50),
+                    EndDate   = date.AddDays(-12),
+                },
+            };
+        }
+        private List<KeyFeatureClient> CreateArrayKeyFeatureClients()
+        {
+            return new List<KeyFeatureClient>
+            {
+                new KeyFeatureClient
+                {
+                    IdClient     = 1,
+                    IdKeyFeature = 1,
+                },
+                new KeyFeatureClient
+                {
+                    IdClient     = 1,
+                    IdKeyFeature = 2,
+                },
+                new KeyFeatureClient
+                {
+                    IdClient     = 2,
+                    IdKeyFeature = 3,
+                },
+                new KeyFeatureClient
+                {
+                    IdClient     = 2,
+                    IdKeyFeature = 4,
+                },
+            };
         }
     }
 }

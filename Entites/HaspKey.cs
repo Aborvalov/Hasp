@@ -16,15 +16,7 @@ namespace Entities
         /// </summary>
         public bool Location { get; set; }
 
-        public bool Equals(HaspKey other)
-        {
-            if (ReferenceEquals(other, null))
-                return false;
-            if (ReferenceEquals(this, other))
-                return true;
-
-            return Id.Equals(other.Id) && InnerId.Equals(other.InnerId);
-        }
+        bool IEquatable<HaspKey>.Equals(HaspKey other) => Equals(other);
         public override int GetHashCode()
         {
             int hashProductNumber = Number == null ? 0 : Number.GetHashCode();
@@ -38,5 +30,18 @@ namespace Entities
                    hashProductInnerId ^ 
                    hashProductTypeKey;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is HaspKey other))
+                return false;
+
+            if (ReferenceEquals(other, null))
+                return false;
+            if (ReferenceEquals(this, other))
+                return true;
+
+            return Id.Equals(other.Id) && InnerId.Equals(other.InnerId);
+        }       
     }
 }
