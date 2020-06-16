@@ -123,7 +123,35 @@ namespace UnitTestDal
 
             Assert.AreEqual(getById, null);
         }
+        [TestMethod]
+        public void UpdateFeature()
+        {
+            bool update;
+            using (var db = new EntitesContext())
+            {
+                featureDAO = new DbFeatureDAO(db);
+                featureDAO.Add(CreateNew());
+                update = featureDAO.Update(new Feature
+                {
+                    Id          = 1,
+                    Number      = 1002,
+                    Name        = "TestUpdate",
+                    Description = "Test ______",
+                });
+                ClearTable.Features(db);
+            }
 
+            Assert.AreEqual(update, true);
+        }
+        [TestMethod]
+        public void UpdateNullFeature()
+        {
+            using (var db = new EntitesContext())
+            {
+                featureDAO = new DbFeatureDAO(db);
+                Assert.ThrowsException<ArgumentNullException>(() => featureDAO.Update(null));
+            }
+        }
         private Feature CreateNew()
         {
             return new Feature
@@ -132,6 +160,46 @@ namespace UnitTestDal
                 Number = 123,
                 Description = "asd sdf dfg",
             };
+        }
+        /// <summary>
+        /// Дублирование фичи при обновлении.
+        /// </summary>
+        [TestMethod]
+        public void UpdateDuplicateFeature()
+        {
+            Feature feature = CreateNew();
+
+            using (var db = new EntitesContext())
+            {
+                featureDAO = new DbFeatureDAO(db);
+                featureDAO.Add(feature);
+
+                Feature update = CreateNew(1);
+
+                Assert.ThrowsException<Exception>(
+                    () => featureDAO.Update(update));
+                ClearTable.Features(db);
+            }
+        }
+        [TestMethod]
+        public void UpdateNoDBFeature()
+        {
+            Feature featureNoDB = new Feature
+            {
+                Id          = 234234,
+                Number      = -2354,
+                Name        = "____________",
+                Description = "ssdsssss",
+            };
+
+            using (var db = new EntitesContext())
+            {
+                featureDAO = new DbFeatureDAO(db);
+                featureDAO.Add(CreateNew());
+                Assert.ThrowsException<NullReferenceException>(
+                    () => featureDAO.Update(featureNoDB));
+                ClearTable.Features(db);
+            }
         }
         private Feature CreateNew(int id)
         {

@@ -66,6 +66,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddArrayEntities.cs" />
     <Compile Include="ClearTable.cs" />
     <Compile Include="UnitTestDbFeatureDAO.cs" />
     <Compile Include="UnitTestDbHaspKeyDAO.cs" />

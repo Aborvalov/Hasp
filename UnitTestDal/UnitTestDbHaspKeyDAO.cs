@@ -12,7 +12,6 @@ namespace UnitTestDal
     public class UnitTestDbHaspKeyDAO
     {
         private IContractHaspKeyDAO haspKeyDAO;
-        private DateTime date = DateTime.Now.Date;
         [TestMethod]
         public void NullEntitesContextHaspKey()
         {
@@ -129,11 +128,11 @@ namespace UnitTestDal
                 haspKeyDAO.Add(CreateNew());
                 update = haspKeyDAO.Update(new HaspKey
                 {
-                    Id = 1,
-                    InnerId = 23,
-                    Number = "u2322",
+                    Id       = 1,
+                    InnerId  = 23,
+                    Number   = "u2322",
                     Location = false,
-                    TypeKey = TypeKey.Time,
+                    TypeKey  = TypeKey.Time,
                 });
 
                 ClearTable.HaspKeys(db);
@@ -163,7 +162,7 @@ namespace UnitTestDal
                 haspKeyDAO = new DbHaspKeyDAO(db);
                 haspKeyDAO.Add(haspKey);
 
-                HaspKey update = CreateNew(2);
+                HaspKey update = CreateNew(1);
                 
                 Assert.ThrowsException<Exception>(
                     () => haspKeyDAO.Update(update));
@@ -176,7 +175,6 @@ namespace UnitTestDal
         [TestMethod]
         public void UpdateNoDBHaspKey()
         {
-            HaspKey haspKey = CreateNew();
             HaspKey keyNoDB = new HaspKey
             {
                 Id = 234,
@@ -189,7 +187,7 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
-                haspKeyDAO.Add(haspKey);
+                haspKeyDAO.Add(CreateNew());
                 Assert.ThrowsException<NullReferenceException>(
                     () => haspKeyDAO.Update(keyNoDB));
                 ClearTable.HaspKeys(db);
@@ -208,9 +206,9 @@ namespace UnitTestDal
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
 
-                db.HaspKeys.AddRange(CreateArreyHaspKeys());
-                db.Features.AddRange(CreateArrayFeatures());
-                db.KeyFeatures.AddRange(CreateArrayKeyFeatures());
+                db.HaspKeys.AddRange(CreateListEntities.HaspKeys());
+                db.Features.AddRange(CreateListEntities.Features());
+                db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
                 db.SaveChanges();
 
                 GetByActive = haspKeyDAO.GetByActive().ToList();
@@ -241,9 +239,9 @@ namespace UnitTestDal
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
 
-                db.HaspKeys.AddRange(CreateArreyHaspKeys());
-                db.Features.AddRange(CreateArrayFeatures());
-                db.KeyFeatures.AddRange(CreateArrayKeyFeatures());
+                db.HaspKeys.AddRange(CreateListEntities.HaspKeys());
+                db.Features.AddRange(CreateListEntities.Features());
+                db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
                 db.SaveChanges();
 
                 GetByActive = haspKeyDAO.GetByPastDue().ToList();
@@ -273,11 +271,11 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
-                db.HaspKeys.AddRange(CreateArreyHaspKeys());
-                db.Features.AddRange(CreateArrayFeatures());
-                db.KeyFeatures.AddRange(CreateArrayKeyFeatures());
-                db.Clients.AddRange(CreateArrayClients());
-                db.KeyFeatureClients.AddRange(CreateArrayKeyFeatureClients());
+                db.HaspKeys.AddRange(CreateListEntities.HaspKeys());
+                db.Features.AddRange(CreateListEntities.Features());
+                db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
+                db.Clients.AddRange(CreateListEntities.Clients());
+                db.KeyFeatureClients.AddRange(CreateListEntities.KeyFeatureClients());
                 db.SaveChanges();
 
                 GetByClient = haspKeyDAO.GetByClient(client).ToList();
@@ -310,11 +308,11 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
-                db.HaspKeys.AddRange(CreateArreyHaspKeys());
-                db.Features.AddRange(CreateArrayFeatures());
-                db.KeyFeatures.AddRange(CreateArrayKeyFeatures());
-                db.Clients.AddRange(CreateArrayClients());
-                db.KeyFeatureClients.AddRange(CreateArrayKeyFeatureClients());
+                db.HaspKeys.AddRange(CreateListEntities.HaspKeys());
+                db.Features.AddRange(CreateListEntities.Features());
+                db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
+                db.Clients.AddRange(CreateListEntities.Clients());
+                db.KeyFeatureClients.AddRange(CreateListEntities.KeyFeatureClients());
                 db.SaveChanges();
 
                 remove = haspKeyDAO.Remove(1);
@@ -361,119 +359,6 @@ namespace UnitTestDal
             HaspKey haspKey = CreateNew(id);
             haspKey.InnerId = innerId;
             return haspKey;
-        }
-
-        private List<HaspKey> CreateArreyHaspKeys()
-        {
-            return new List<HaspKey>
-            {
-                new HaspKey
-            {
-                InnerId  = 1,
-                Number   = "uz-2",
-                Location = true,
-                TypeKey  = TypeKey.Pro,
-            },
-            new HaspKey
-            {
-                InnerId  = 2,
-                Number   = "uz-3",
-                Location = true,
-                TypeKey  = TypeKey.Pro,
-            },
-        };
-        }
-        private List<Feature> CreateArrayFeatures()
-        {
-            return new List<Feature>
-            {
-                new Feature
-                {
-                    Number = 1,
-                    Name   = "qwe",
-                },
-                new Feature
-                {
-                    Number = 2,
-                    Name = "qwe",
-                },
-            };            
-        }
-        private List<Client> CreateArrayClients()
-        {
-            return new List<Client>
-            {
-                new Client
-                {
-                    Id   = 1,
-                    Name = "Ivanov Ivan",
-                },
-                new Client
-                {
-                    Id = 2,
-                    Name = "Petrov FD",
-                },
-        };
-        }
-        private List<KeyFeature> CreateArrayKeyFeatures()
-        {
-            return new List<KeyFeature>
-            {
-                new KeyFeature
-                {
-                    IdHaspKey = 1,
-                    IdFeature = 1,
-                    StartDate = date,
-                    EndDate   = date.AddDays(12),
-                },
-                new KeyFeature
-                {
-                    IdHaspKey = 1,
-                    IdFeature = 2,
-                    StartDate = date,
-                    EndDate   = date.AddDays(-12),
-                },
-                new KeyFeature
-                {
-                    IdHaspKey = 2,
-                    IdFeature = 1,
-                    StartDate = date.AddDays(-30),
-                    EndDate   = date.AddDays(-12),
-                },
-                new KeyFeature
-                {
-                    IdHaspKey = 2,
-                    IdFeature = 2,
-                    StartDate = date.AddDays(-50),
-                    EndDate   = date.AddDays(-12),
-                },
-            };
-        }
-        private List<KeyFeatureClient> CreateArrayKeyFeatureClients()
-        {
-            return new List<KeyFeatureClient>
-            {
-                new KeyFeatureClient
-                {
-                    IdClient     = 1,
-                    IdKeyFeature = 1,
-                },
-                new KeyFeatureClient
-                {
-                    IdClient     = 1,
-                    IdKeyFeature = 2,
-                },
-                new KeyFeatureClient
-                {
-                    IdClient     = 2,
-                    IdKeyFeature = 3,
-                },
-                new KeyFeatureClient
-                {
-                    IdClient     = 2,
-                    IdKeyFeature = 4,
-                },
-            };
         }
     }
 }
