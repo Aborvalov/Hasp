@@ -260,7 +260,7 @@ namespace UnitTestDal
 
             Client client = new Client
             {
-                Id = 1,
+                Id   = 1,
                 Name = "Ivanov Ivan",
             };
 

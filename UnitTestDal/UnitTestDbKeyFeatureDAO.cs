@@ -250,7 +250,7 @@ namespace UnitTestDal
                 IdFeature = 1,
                 IdHaspKey = 1,
                 StartDate = date,
-                EndDate = date.AddDays(14),
+                EndDate   = date.AddDays(14),
             };
         }
         private KeyFeature CreateNew(int id)
@@ -262,8 +262,8 @@ namespace UnitTestDal
         private KeyFeature CreateNew(int id, int idHaspKey, int idFeature)
         {
             KeyFeature kf = CreateNew(id);
-            kf.IdHaspKey = idHaspKey;
-            kf.IdFeature = idFeature;
+            kf.IdHaspKey  = idHaspKey;
+            kf.IdFeature  = idFeature;
             return kf;
         }
     }

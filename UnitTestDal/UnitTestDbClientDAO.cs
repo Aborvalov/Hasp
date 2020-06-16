@@ -128,11 +128,11 @@ namespace UnitTestDal
                 clientDAO.Add(CreateNew());
                 update = clientDAO.Update(new Client
                 {
-                    Id = 1,
-                    Name = "____",
-                    Address = "____",
+                    Id            = 1,
+                    Name          = "____",
+                    Address       = "____",
                     ContactPerson = "____",
-                    Phone = "____",
+                    Phone         = "____",
                 });
 
                 ClearTable.Clients(db);
@@ -177,11 +177,11 @@ namespace UnitTestDal
         {
             Client clientNoDB = new Client
             {
-                Id = 234,
-                Name = "______",
+                Id            = 234,
+                Name          = "______",
                 ContactPerson = "______",
-                Address = "______",
-                Phone = "______",
+                Address       = "______",
+                Phone         = "______",
             };
 
             using (var db = new EntitesContext())
@@ -258,9 +258,9 @@ namespace UnitTestDal
 
                 getByFeature = clientDAO.GetByFeature(new Feature
                 {
-                    Id = 1,
+                    Id     = 1,
                     Number = 1,
-                    Name = "qwe",
+                    Name   = "qwe",
                 }).ToList();
 
                 ClearTable.Features(db);
@@ -335,13 +335,13 @@ namespace UnitTestDal
         private Client CreateNew(int id)
         {
             Client client = CreateNew();
-            client.Id = id;
+            client.Id     = id;
             return client;
         }
         private Client CreateNew(int id, string name)
         {
-            Client client= CreateNew(id);
-            client.Name = name;
+            Client client = CreateNew(id);
+            client.Name   = name;
             return client;
         }
     }

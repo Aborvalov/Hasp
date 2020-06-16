@@ -243,8 +243,8 @@ namespace UnitTestDal
         {
             return new Feature
             {
-                Name = "print",
-                Number = 123,
+                Name        = "print",
+                Number      = 123,
                 Description = "asd sdf dfg",
             };
         }
