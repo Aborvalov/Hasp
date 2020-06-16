@@ -1,10 +1,9 @@
-﻿using System;
-using DalContract;
+﻿using DalContract;
 using DalDB;
 using Entities;
-using System.Text;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace UnitTestDal
