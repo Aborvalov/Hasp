@@ -108,15 +108,15 @@ namespace UnitTestDal
         [TestMethod]
         public void GetByIdNoDBHaspKey()
         {
-            HaspKey getBbyId;
+            HaspKey getById;
 
             using (var db = new EntitesContext())
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
-                getBbyId = haspKeyDAO.GetById(1);
+                getById = haspKeyDAO.GetById(1);
             }
 
-            Assert.AreEqual(getBbyId, null);
+            Assert.AreEqual(getById, null);
         }
         [TestMethod]
         public void UpdateHaspKey()

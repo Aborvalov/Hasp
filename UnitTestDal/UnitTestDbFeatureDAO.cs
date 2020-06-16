@@ -1,10 +1,9 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using DalContract;
+﻿using DalContract;
 using DalDB;
 using Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace UnitTestDal
@@ -233,7 +232,7 @@ namespace UnitTestDal
         /// Удаление фичи которой не существует в базе.
         /// </summary>
         [TestMethod]
-        public void RemoveNoDBHaspKey()
+        public void RemoveNoDBFeature()
         {
             using (var db = new EntitesContext())
             {
@@ -241,7 +240,7 @@ namespace UnitTestDal
                 featureDAO.Add(CreateNew());
                 Assert.ThrowsException<NullReferenceException>(
                     () => featureDAO.Remove(1235));
-                ClearTable.HaspKeys(db);
+                ClearTable.Features(db);
             }
         }
         private Feature CreateNew()
