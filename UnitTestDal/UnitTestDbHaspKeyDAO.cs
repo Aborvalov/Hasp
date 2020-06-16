@@ -338,6 +338,21 @@ namespace UnitTestDal
                 Assert.ThrowsException<ArgumentException>(() => haspKeyDAO.Remove(-412536));
             }
         }
+        /// <summary>
+        /// Удаление ключа которого не существует в базе.
+        /// </summary>
+        [TestMethod]
+        public void RemoveNoDBHaspKey()
+        {
+            using (var db = new EntitesContext())
+            {
+                haspKeyDAO = new DbHaspKeyDAO(db);
+                haspKeyDAO.Add(CreateNew());
+                Assert.ThrowsException<NullReferenceException>(
+                    () => haspKeyDAO.Remove(123));
+                ClearTable.HaspKeys(db);
+            }
+        }
         private HaspKey CreateNew()
         {
             return new HaspKey

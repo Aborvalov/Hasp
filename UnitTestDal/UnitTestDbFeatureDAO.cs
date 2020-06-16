@@ -65,7 +65,6 @@ namespace UnitTestDal
 
             using (var db = new EntitesContext())
             {
-                ClearTable.Features(db);
                 featureDAO = new DbFeatureDAO(db);
 
                 for (int i = 1; i <= 10; i++)
@@ -151,16 +150,7 @@ namespace UnitTestDal
                 featureDAO = new DbFeatureDAO(db);
                 Assert.ThrowsException<ArgumentNullException>(() => featureDAO.Update(null));
             }
-        }
-        private Feature CreateNew()
-        {
-            return new Feature
-            {
-                Name = "print",
-                Number = 123,
-                Description = "asd sdf dfg",
-            };
-        }
+        }        
         /// <summary>
         /// Дублирование фичи при обновлении.
         /// </summary>
@@ -200,6 +190,68 @@ namespace UnitTestDal
                     () => featureDAO.Update(featureNoDB));
                 ClearTable.Features(db);
             }
+        }
+        [TestMethod]
+        public void RemoveFeature()
+        {
+            bool removeExpected = true;
+            bool remove;
+            using (var db = new EntitesContext())
+            {
+                featureDAO = new DbFeatureDAO(db);
+                db.HaspKeys.AddRange(CreateListEntities.HaspKeys());
+                db.Features.AddRange(CreateListEntities.Features());
+                db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
+                db.Clients.AddRange(CreateListEntities.Clients());
+                db.KeyFeatureClients.AddRange(CreateListEntities.KeyFeatureClients());
+                db.SaveChanges();
+
+                remove = featureDAO.Remove(1);
+
+                ClearTable.HaspKeys(db);
+                ClearTable.Features(db);
+                ClearTable.KeyFeatures(db);
+                ClearTable.Clients(db);
+                ClearTable.KeyFeatureClients(db);
+            }
+
+            Assert.AreEqual(remove, removeExpected);
+        }
+        /// <summary>
+        /// Удаление неправильного id.
+        /// </summary>
+        [TestMethod]
+        public void RemoveErroneousIdFeature()
+        {
+            using (var db = new EntitesContext())
+            {
+                featureDAO = new DbFeatureDAO(db);
+                Assert.ThrowsException<ArgumentException>(() => featureDAO.Remove(-412536));
+            }
+        }
+        /// <summary>
+        /// Удаление фичи которой не существует в базе.
+        /// </summary>
+        [TestMethod]
+        public void RemoveNoDBHaspKey()
+        {
+            using (var db = new EntitesContext())
+            {
+                featureDAO = new DbFeatureDAO(db);
+                featureDAO.Add(CreateNew());
+                Assert.ThrowsException<NullReferenceException>(
+                    () => featureDAO.Remove(1235));
+                ClearTable.HaspKeys(db);
+            }
+        }
+        private Feature CreateNew()
+        {
+            return new Feature
+            {
+                Name = "print",
+                Number = 123,
+                Description = "asd sdf dfg",
+            };
         }
         private Feature CreateNew(int id)
         {
