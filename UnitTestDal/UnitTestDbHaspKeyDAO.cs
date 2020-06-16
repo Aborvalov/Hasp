@@ -1,10 +1,9 @@
-﻿using System;
-using DalContract;
-using Entities;
+﻿using DalContract;
 using DalDB;
-using System.Text;
-using System.Collections.Generic;
+using Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace UnitTestDal
@@ -14,7 +13,11 @@ namespace UnitTestDal
     {
         private IContractHaspKeyDAO haspKeyDAO;
         private DateTime date = DateTime.Now.Date;
-
+        [TestMethod]
+        public void NullEntitesContext()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => haspKeyDAO = new DbHaspKeyDAO(null));
+        }
         [TestMethod]
         public void AddHaspKey()
         {
@@ -357,12 +360,11 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
-                ClearTable.Clients(db);
                 db.HaspKeys.AddRange(CreateArreyHaspKeys());
                 db.Features.AddRange(CreateArrayFeatures());
                 db.KeyFeatures.AddRange(CreateArrayKeyFeatures());
                 db.Clients.AddRange(CreateArrayClients());
-                db.KeyFeatureClients.AddRange(kfc);
+                db.KeyFeatureClients.AddRange(CreateArrayKeyFeatureClients());
                 db.SaveChanges();
 
                 GetByClient = haspKeyDAO.GetByClient(client).ToList();
@@ -375,6 +377,55 @@ namespace UnitTestDal
             }
 
             CollectionAssert.AreEqual(GetByClient, GetByClientExpected);
+        }
+
+        [TestMethod]
+        public void GetByNullClientHaspKey()
+        {
+            using (var db = new EntitesContext())
+            {
+                haspKeyDAO = new DbHaspKeyDAO(db);
+                Assert.ThrowsException<ArgumentNullException>(() => haspKeyDAO.GetByClient(null));
+            }
+        }
+
+        [TestMethod]
+        public void RemoveHaspKey()
+        {
+            bool removeExpected = true;
+            bool remove;
+            using (var db = new EntitesContext())
+            {
+                haspKeyDAO = new DbHaspKeyDAO(db);
+                db.HaspKeys.AddRange(CreateArreyHaspKeys());
+                db.Features.AddRange(CreateArrayFeatures());
+                db.KeyFeatures.AddRange(CreateArrayKeyFeatures());
+                db.Clients.AddRange(CreateArrayClients());
+                db.KeyFeatureClients.AddRange(CreateArrayKeyFeatureClients());
+                db.SaveChanges();
+
+                remove = haspKeyDAO.Remove(1);
+                
+                ClearTable.HaspKeys(db);
+                ClearTable.Features(db);
+                ClearTable.KeyFeatures(db);
+                ClearTable.Clients(db);
+                ClearTable.KeyFeatureClients(db);
+            }
+
+            Assert.AreEqual(remove, removeExpected);
+        }
+        /// <summary>
+        /// Удаление неправильного id.
+        /// </summary>
+        [TestMethod]
+        public void RemoveErroneousIdHaspKey()
+        {
+            using (var db = new EntitesContext())
+            {
+                haspKeyDAO = new DbHaspKeyDAO(db);
+                Assert.ThrowsException<ArgumentException>(() => haspKeyDAO.Remove(-412536));
+            }
         }
         private List<HaspKey> CreateArreyHaspKeys()
         {
