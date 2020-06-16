@@ -249,9 +249,90 @@ namespace UnitTestDal
                 ClearTable.Clients(db);
             }
         }
+        [TestMethod]
+        public void GetByFeatureClient()
+        {
+            List<Client> getByFeature;
 
+            using (var db = new EntitesContext())
+            {
+                clientDAO = new DbClientDAO(db);
+                db.HaspKeys.AddRange(CreateListEntities.HaspKeys());
+                db.Features.AddRange(CreateListEntities.Features());
+                db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
+                db.Clients.AddRange(CreateListEntities.Clients());
+                db.KeyFeatureClients.AddRange(CreateListEntities.KeyFeatureClients());
+                db.SaveChanges();
 
+                getByFeature = clientDAO.GetByFeature(new Feature
+                {
+                    Id = 1,
+                    Number = 1,
+                    Name = "qwe",
+                }).ToList();
 
+                ClearTable.HaspKeys(db);
+                ClearTable.Features(db);
+                ClearTable.KeyFeatures(db);
+                ClearTable.Clients(db);
+                ClearTable.KeyFeatureClients(db);
+            }
+
+            CollectionAssert.AreEqual(getByFeature, CreateListEntities.Clients());
+        }
+        [TestMethod]
+        public void GetByNullFeatureClient()
+        {
+            using (var db = new EntitesContext())
+            {
+                clientDAO = new DbClientDAO(db);
+                Assert.ThrowsException<ArgumentNullException>(() => clientDAO.GetByFeature(null));
+            }
+        }
+        [TestMethod]
+        public void GetByErroneousNumberKeyClient()
+        {
+            using (var db = new EntitesContext())
+            {
+                clientDAO = new DbClientDAO(db);
+                Assert.ThrowsException<ArgumentException>(() => clientDAO.GetByNumberKey(-234));
+            }
+        }
+        [TestMethod]
+        public void GetByNumberKeyNoDBClient()
+        {
+            using (var db = new EntitesContext())
+            {
+                clientDAO = new DbClientDAO(db);
+                Assert.ThrowsException<ArgumentNullException>(() => clientDAO.GetByNumberKey(2));
+            }
+        }
+        [TestMethod]
+        public void GetByNumberKeyClient()
+        {
+            Client getByNumberKey;
+
+            using (var db = new EntitesContext())
+            {
+                clientDAO = new DbClientDAO(db);
+                db.HaspKeys.AddRange(CreateListEntities.HaspKeys());
+                db.Features.AddRange(CreateListEntities.Features());
+                db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
+                db.Clients.AddRange(CreateListEntities.Clients());
+                db.KeyFeatureClients.AddRange(CreateListEntities.KeyFeatureClients());
+                db.SaveChanges();
+
+                getByNumberKey = clientDAO.GetByNumberKey(1);
+
+                ClearTable.HaspKeys(db);
+                ClearTable.Features(db);
+                ClearTable.KeyFeatures(db);
+                ClearTable.Clients(db);
+                ClearTable.KeyFeatureClients(db);
+            }
+
+            Assert.AreEqual(getByNumberKey, CreateListEntities.Clients()[0]);
+        }
         private Client CreateNew()
         {
             return new Client

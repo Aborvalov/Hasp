@@ -188,7 +188,6 @@ namespace DalDB
                 throw new NullReferenceException("Объект не найден в базе, " + nameof(client));
             return client;
         }
-
         /// <summary>
         /// Проверка на дубли.
         /// </summary>

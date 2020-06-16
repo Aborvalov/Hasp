@@ -256,8 +256,8 @@ namespace UnitTestDal
         [TestMethod]
         public void GetByClientHaspKey()
         {
-            List<HaspKey> GetByClient;
-            List<HaspKey> GetByClientExpected = new List<HaspKey>
+            List<HaspKey> getByClient;
+            List<HaspKey> getByClientExpected = new List<HaspKey>
             {
                 CreateNew(1),
             };
@@ -278,7 +278,7 @@ namespace UnitTestDal
                 db.KeyFeatureClients.AddRange(CreateListEntities.KeyFeatureClients());
                 db.SaveChanges();
 
-                GetByClient = haspKeyDAO.GetByClient(client).ToList();
+                getByClient = haspKeyDAO.GetByClient(client).ToList();
 
                 ClearTable.HaspKeys(db);
                 ClearTable.Features(db);
@@ -287,7 +287,7 @@ namespace UnitTestDal
                 ClearTable.KeyFeatureClients(db);
             }
 
-            CollectionAssert.AreEqual(GetByClient, GetByClientExpected);
+            CollectionAssert.AreEqual(getByClient, getByClientExpected);
         }
 
         [TestMethod]

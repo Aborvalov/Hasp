@@ -107,19 +107,19 @@ namespace ConsoleAppTest
 
                 Feature feature = new Feature
                 {
-                    Id = 5,
+                    Id = 1235,
                     Number = 1,
                     Name = "FitPrint",
                     Description = "qqq-www-eee",
                 };
 
 
-                var clientGetByFeature = test.GetByFeature(feature);
+                var clientGetByFeature = test.GetByFeature(feature).ToList();
                 //var temp = test.GetAll();
                 //int id = test.Add(client);
                 // var client_ = test.GetById(10);
                 // var update_ = test.Update(update);
-                 var remove = test.Remove(10);
+                // var remove = test.Remove(10);
             }
         }
         static void TestFeature()
