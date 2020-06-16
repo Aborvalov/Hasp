@@ -30,7 +30,6 @@ namespace Entities
                    hashProductInnerId ^ 
                    hashProductTypeKey;
         }
-
         public override bool Equals(object obj)
         {
             if (!(obj is HaspKey other))

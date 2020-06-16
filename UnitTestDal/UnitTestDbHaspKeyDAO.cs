@@ -14,7 +14,7 @@ namespace UnitTestDal
         private IContractHaspKeyDAO haspKeyDAO;
         private DateTime date = DateTime.Now.Date;
         [TestMethod]
-        public void NullEntitesContext()
+        public void NullEntitesContextHaspKey()
         {
             Assert.ThrowsException<ArgumentNullException>(() => haspKeyDAO = new DbHaspKeyDAO(null));
         }
@@ -23,18 +23,11 @@ namespace UnitTestDal
         {
             int idExpected = 1;
             int add;
-            HaspKey haspKey = new HaspKey
-            {
-                InnerId = 1,
-                Number = "uz-2",
-                Location = false,
-                TypeKey = TypeKey.Net,
-            };
-
+            
             using (var db = new EntitesContext())
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
-                add = haspKeyDAO.Add(haspKey);
+                add = haspKeyDAO.Add(CreateNew());
                 ClearTable.HaspKeys(db);
             }
 
@@ -52,19 +45,11 @@ namespace UnitTestDal
         [TestMethod]
         public void AddDuplicateHaspKey()
         {
-            HaspKey haspKey = new HaspKey
-            {
-                InnerId = 1,
-                Number = "uz-2",
-                Location = true,
-                TypeKey = TypeKey.Pro,
-            };
-
             using (var db = new EntitesContext())
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
-                haspKeyDAO.Add(haspKey);
-                Assert.ThrowsException<Exception>(() => haspKeyDAO.Add(haspKey));
+                haspKeyDAO.Add(CreateNew());
+                Assert.ThrowsException<Exception>(() => haspKeyDAO.Add(CreateNew()));
                 ClearTable.HaspKeys(db);
             }
         }
@@ -75,36 +60,14 @@ namespace UnitTestDal
             List<HaspKey> haspKeysExpected = new List<HaspKey>();
 
             for (int i = 1; i <= 10; i++)
-            {
-                HaspKey key = new HaspKey
-                {
-                    Id = i,
-                    InnerId = i,
-                    Number = "uz-2",
-                    Location = true,
-                    TypeKey = TypeKey.Pro,
-                };
-
-                haspKeysExpected.Add(key);
-            }
+                haspKeysExpected.Add(CreateNew(i,i));
 
             using (var db = new EntitesContext())
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
 
                 for (int i = 1; i <= 10; i++)
-                {
-                    HaspKey key = new HaspKey
-                    {
-                        Id = i,
-                        InnerId = i,
-                        Number = "uz-2",
-                        Location = true,
-                        TypeKey = TypeKey.Pro,
-                    };
-
-                    haspKeyDAO.Add(key);
-                }
+                    haspKeyDAO.Add(CreateNew(i,i));
 
                 getAll = haspKeyDAO.GetAll().ToList();
                 ClearTable.HaspKeys(db);
@@ -115,33 +78,18 @@ namespace UnitTestDal
         [TestMethod]
         public void GetByIdHaspKey()
         {
-            HaspKey getbyId;
-            HaspKey keyExpected = new HaspKey
-            {
-                Id = 1,
-                InnerId = 1,
-                Number = "uz-2",
-                Location = true,
-                TypeKey = TypeKey.Pro,
-            };
+            HaspKey getById;
+            HaspKey keyExpected = CreateNew(1);
 
             using (var db = new EntitesContext())
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
-
-                haspKeyDAO.Add(new HaspKey
-                {
-                    InnerId = 1,
-                    Number = "uz-2",
-                    Location = true,
-                    TypeKey = TypeKey.Pro,
-                });
-
-                getbyId = haspKeyDAO.GetById(1);
+                haspKeyDAO.Add(CreateNew());
+                getById = haspKeyDAO.GetById(1);
                 ClearTable.HaspKeys(db);
             }
 
-            Assert.AreEqual(getbyId, keyExpected);
+            Assert.AreEqual(getById, keyExpected);
         }
         /// <summary>
         /// Поиск неправильного id.
@@ -161,15 +109,15 @@ namespace UnitTestDal
         [TestMethod]
         public void GetByIdNoDBHaspKey()
         {
-            HaspKey getbyId;
+            HaspKey getBbyId;
 
             using (var db = new EntitesContext())
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
-                getbyId = haspKeyDAO.GetById(1);
+                getBbyId = haspKeyDAO.GetById(1);
             }
 
-            Assert.AreEqual(getbyId, null);
+            Assert.AreEqual(getBbyId, null);
         }
         [TestMethod]
         public void UpdateHaspKey()
@@ -178,21 +126,14 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
-                haspKeyDAO.Add(new HaspKey
-                {
-                    Id = 1,
-                    InnerId = 12,
-                    Number = "Qwres",
-                    Location = false,
-                    TypeKey = TypeKey.NetTime,
-                });
+                haspKeyDAO.Add(CreateNew());
                 update = haspKeyDAO.Update(new HaspKey
                 {
                     Id = 1,
-                    InnerId = 1,
-                    Number = "uz-2",
-                    Location = true,
-                    TypeKey = TypeKey.Pro,
+                    InnerId = 23,
+                    Number = "u2322",
+                    Location = false,
+                    TypeKey = TypeKey.Time,
                 });
 
                 ClearTable.HaspKeys(db);
@@ -215,27 +156,17 @@ namespace UnitTestDal
         [TestMethod]
         public void UpdateDuplicateHaspKey()
         {
-            HaspKey haspKey = new HaspKey
-            {
-                InnerId = 1,
-                Number = "uz-2",
-                Location = true,
-                TypeKey = TypeKey.Pro,
-            };
+            HaspKey haspKey = CreateNew();
 
             using (var db = new EntitesContext())
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
                 haspKeyDAO.Add(haspKey);
+
+                HaspKey update = CreateNew(2);
+                
                 Assert.ThrowsException<Exception>(
-                    () => haspKeyDAO.Update(new HaspKey
-                    {
-                        Id = 2,
-                        InnerId = 1,
-                        Number = "uz-2",
-                        Location = true,
-                        TypeKey = TypeKey.Pro,
-                    }));
+                    () => haspKeyDAO.Update(update));
                 ClearTable.HaspKeys(db);
             }
         }
@@ -245,13 +176,7 @@ namespace UnitTestDal
         [TestMethod]
         public void UpdateNoDBHaspKey()
         {
-            HaspKey haspKey = new HaspKey
-            {
-                InnerId = 1,
-                Number = "uz-2",
-                Location = true,
-                TypeKey = TypeKey.Pro,
-            };
+            HaspKey haspKey = CreateNew();
             HaspKey keyNoDB = new HaspKey
             {
                 Id = 234,
@@ -275,14 +200,8 @@ namespace UnitTestDal
         {
             List<HaspKey> GetByActive;
             List<HaspKey> GetByActiveExpected = new List<HaspKey>
-            { new HaspKey
-                {
-                    Id       = 1,
-                    InnerId  = 1,
-                    Number   = "uz-2",
-                    Location = true,
-                    TypeKey  = TypeKey.Pro,
-                }
+            {
+                CreateNew(1),
             };
 
             using (var db = new EntitesContext())
@@ -341,14 +260,8 @@ namespace UnitTestDal
         {
             List<HaspKey> GetByClient;
             List<HaspKey> GetByClientExpected = new List<HaspKey>
-            { new HaspKey
-                {
-                    Id       = 1,
-                    InnerId  = 1,
-                    Number   = "uz-2",
-                    Location = true,
-                    TypeKey  = TypeKey.Pro,
-                }
+            {
+                CreateNew(1),
             };
 
             Client client = new Client
@@ -427,6 +340,29 @@ namespace UnitTestDal
                 Assert.ThrowsException<ArgumentException>(() => haspKeyDAO.Remove(-412536));
             }
         }
+        private HaspKey CreateNew()
+        {
+            return new HaspKey
+            {
+                InnerId  = 1,
+                Number   = "uz-2",
+                Location = false,
+                TypeKey  = TypeKey.Net,
+            };
+        }
+        private HaspKey CreateNew(int id)
+        {
+            HaspKey haspKey = CreateNew();
+            haspKey.Id      = id;
+            return haspKey;
+        }
+        private HaspKey CreateNew(int id, int innerId)
+        {
+            HaspKey haspKey = CreateNew(id);
+            haspKey.InnerId = innerId;
+            return haspKey;
+        }
+
         private List<HaspKey> CreateArreyHaspKeys()
         {
             return new List<HaspKey>

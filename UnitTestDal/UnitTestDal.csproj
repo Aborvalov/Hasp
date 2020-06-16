@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClearTable.cs" />
+    <Compile Include="UnitTestDbFeatureDAO.cs" />
     <Compile Include="UnitTestDbHaspKeyDAO.cs" />
     <Compile Include="UnitTestDbKeyFeatureClientDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
