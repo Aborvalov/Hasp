@@ -41,7 +41,7 @@ namespace ConsoleAppTest
             };
             using (var db = new EntitesContext())
             {
-                test = new DbKeyFaetureClientDAO(db);
+                test = new DbKeyFeatureClientDAO(db);
                 //int idAdd = test.Add(kfc);
                 //var all = test.GetAll();
                 //var gatId = test.GetById(6);

@@ -101,21 +101,29 @@ namespace UnitTestDal
                 {
                     IdClient     = 1,
                     IdKeyFeature = 1,
+                    Initiator    = "Test Testovich",
+                    Note         = "Bla bla bla.",
                 },
                 new KeyFeatureClient
                 {
                     IdClient     = 1,
                     IdKeyFeature = 2,
+                    Initiator    = "Test Testovich",
+                    Note         = "Bla bla bla.",
                 },
                 new KeyFeatureClient
                 {
                     IdClient     = 2,
                     IdKeyFeature = 3,
+                    Initiator    = "Test Testovich",
+                    Note         = "Bla bla bla.",
                 },
                 new KeyFeatureClient
                 {
                     IdClient     = 2,
                     IdKeyFeature = 4,
+                    Initiator    = "Test Testovich",
+                    Note         = "Bla bla bla.",
                 },
             };
         }

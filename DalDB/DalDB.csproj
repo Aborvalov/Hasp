@@ -60,7 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbKeyFaetureClientDAO.cs" />
+    <Compile Include="DbKeyFeatureClientDAO.cs" />
     <Compile Include="DbClientDAO.cs" />
     <Compile Include="DbFeatureDAO.cs" />
     <Compile Include="DbHaspKeyDAO.cs" />

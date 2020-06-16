@@ -6,11 +6,11 @@ using System.Linq;
 
 namespace DalDB
 {
-    public class DbKeyFaetureClientDAO : IContractKeyFeatureClientDAO
+    public class DbKeyFeatureClientDAO : IContractKeyFeatureClientDAO
     {
         private EntitesContext Db { get; }
 
-        public DbKeyFaetureClientDAO(EntitesContext db)
+        public DbKeyFeatureClientDAO(EntitesContext db)
         {
             this.Db = db ?? throw new ArgumentNullException(nameof(db));
         }

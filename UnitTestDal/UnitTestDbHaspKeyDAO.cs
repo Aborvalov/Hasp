@@ -59,14 +59,14 @@ namespace UnitTestDal
             List<HaspKey> haspKeysExpected = new List<HaspKey>();
 
             for (int i = 1; i <= 10; i++)
-                haspKeysExpected.Add(CreateNew(i,i));
+                haspKeysExpected.Add(CreateNew(i, i));
 
             using (var db = new EntitesContext())
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
 
                 for (int i = 1; i <= 10; i++)
-                    haspKeyDAO.Add(CreateNew(i,i));
+                    haspKeyDAO.Add(CreateNew(i, i));
 
                 getAll = haspKeyDAO.GetAll().ToList();
                 ClearTable.HaspKeys(db);
