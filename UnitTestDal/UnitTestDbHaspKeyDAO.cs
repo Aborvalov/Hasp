@@ -29,7 +29,6 @@ namespace UnitTestDal
                 add = haspKeyDAO.Add(CreateNew());
                 ClearTable.HaspKeys(db);
             }
-
             Assert.AreEqual(add, idExpected);
         }
         [TestMethod]
