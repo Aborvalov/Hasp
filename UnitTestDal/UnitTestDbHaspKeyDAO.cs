@@ -207,14 +207,12 @@ namespace UnitTestDal
                 haspKeyDAO = new DbHaspKeyDAO(db);
 
                 db.HaspKeys.AddRange(CreateListEntities.HaspKeys());
-                db.Features.AddRange(CreateListEntities.Features());
                 db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
                 db.SaveChanges();
 
                 GetByActive = haspKeyDAO.GetByActive().ToList();
 
                 ClearTable.HaspKeys(db);
-                ClearTable.Features(db);
                 ClearTable.KeyFeatures(db);
             }
 
@@ -240,14 +238,12 @@ namespace UnitTestDal
                 haspKeyDAO = new DbHaspKeyDAO(db);
 
                 db.HaspKeys.AddRange(CreateListEntities.HaspKeys());
-                db.Features.AddRange(CreateListEntities.Features());
                 db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
                 db.SaveChanges();
 
                 GetByActive = haspKeyDAO.GetByPastDue().ToList();
 
                 ClearTable.HaspKeys(db);
-                ClearTable.Features(db);
                 ClearTable.KeyFeatures(db);
             }
 
@@ -271,19 +267,15 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
-                db.HaspKeys.AddRange(CreateListEntities.HaspKeys());
-                db.Features.AddRange(CreateListEntities.Features());
+                db.HaspKeys.AddRange(CreateListEntities.HaspKeys());                
                 db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
-                db.Clients.AddRange(CreateListEntities.Clients());
                 db.KeyFeatureClients.AddRange(CreateListEntities.KeyFeatureClients());
                 db.SaveChanges();
 
                 getByClient = haspKeyDAO.GetByClient(client).ToList();
 
                 ClearTable.HaspKeys(db);
-                ClearTable.Features(db);
                 ClearTable.KeyFeatures(db);
-                ClearTable.Clients(db);
                 ClearTable.KeyFeatureClients(db);
             }
 
@@ -309,18 +301,14 @@ namespace UnitTestDal
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
                 db.HaspKeys.AddRange(CreateListEntities.HaspKeys());
-                db.Features.AddRange(CreateListEntities.Features());
                 db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
-                db.Clients.AddRange(CreateListEntities.Clients());
                 db.KeyFeatureClients.AddRange(CreateListEntities.KeyFeatureClients());
                 db.SaveChanges();
 
                 remove = haspKeyDAO.Remove(1);
                 
                 ClearTable.HaspKeys(db);
-                ClearTable.Features(db);
                 ClearTable.KeyFeatures(db);
-                ClearTable.Clients(db);
                 ClearTable.KeyFeatureClients(db);
             }
 
@@ -359,8 +347,8 @@ namespace UnitTestDal
             {
                 InnerId  = 1,
                 Number   = "uz-2",
-                Location = false,
-                TypeKey  = TypeKey.Net,
+                Location = true,
+                TypeKey  = TypeKey.Pro,
             };
         }
         private HaspKey CreateNew(int id)

@@ -203,18 +203,12 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 clientDAO = new DbClientDAO(db);
-                db.HaspKeys.AddRange(CreateListEntities.HaspKeys());
-                db.Features.AddRange(CreateListEntities.Features());
-                db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
                 db.Clients.AddRange(CreateListEntities.Clients());
                 db.KeyFeatureClients.AddRange(CreateListEntities.KeyFeatureClients());
                 db.SaveChanges();
 
                 remove = clientDAO.Remove(1);
 
-                ClearTable.HaspKeys(db);
-                ClearTable.Features(db);
-                ClearTable.KeyFeatures(db);
                 ClearTable.Clients(db);
                 ClearTable.KeyFeatureClients(db);
             }
@@ -256,7 +250,6 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 clientDAO = new DbClientDAO(db);
-                db.HaspKeys.AddRange(CreateListEntities.HaspKeys());
                 db.Features.AddRange(CreateListEntities.Features());
                 db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
                 db.Clients.AddRange(CreateListEntities.Clients());
@@ -270,7 +263,6 @@ namespace UnitTestDal
                     Name = "qwe",
                 }).ToList();
 
-                ClearTable.HaspKeys(db);
                 ClearTable.Features(db);
                 ClearTable.KeyFeatures(db);
                 ClearTable.Clients(db);
@@ -315,7 +307,6 @@ namespace UnitTestDal
             {
                 clientDAO = new DbClientDAO(db);
                 db.HaspKeys.AddRange(CreateListEntities.HaspKeys());
-                db.Features.AddRange(CreateListEntities.Features());
                 db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
                 db.Clients.AddRange(CreateListEntities.Clients());
                 db.KeyFeatureClients.AddRange(CreateListEntities.KeyFeatureClients());
@@ -324,7 +315,6 @@ namespace UnitTestDal
                 getByNumberKey = clientDAO.GetByNumberKey(1);
 
                 ClearTable.HaspKeys(db);
-                ClearTable.Features(db);
                 ClearTable.KeyFeatures(db);
                 ClearTable.Clients(db);
                 ClearTable.KeyFeatureClients(db);

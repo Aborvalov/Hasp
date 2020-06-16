@@ -21,14 +21,16 @@ namespace Entities
         {
             int hashProductNumber = Number == null ? 0 : Number.GetHashCode();
 
-            int hashProductTypeKey = TypeKey.GetHashCode();
-            int hashProductId      = Id.GetHashCode();
-            int hashProductInnerId = InnerId.GetHashCode();
+            int hashProductTypeKey  = TypeKey.GetHashCode();
+            int hashProductId       = Id.GetHashCode();
+            int hashProductInnerId  = InnerId.GetHashCode();
+            int hashProductLocation = Location.GetHashCode();
 
             return hashProductNumber ^ 
                    hashProductId ^
                    hashProductInnerId ^ 
-                   hashProductTypeKey;
+                   hashProductTypeKey ^
+                   hashProductLocation;
         }
         public override bool Equals(object obj)
         {
@@ -40,7 +42,11 @@ namespace Entities
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Id.Equals(other.Id) && InnerId.Equals(other.InnerId);
+            return Id.Equals(other.Id) &&
+                   InnerId.Equals(other.InnerId) &&
+                   Number.Equals(other.Number) &&
+                   TypeKey.Equals(other.TypeKey) &&
+                   Location.Equals(other.Location);
         }       
     }
 }

@@ -198,19 +198,15 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 featureDAO = new DbFeatureDAO(db);
-                db.HaspKeys.AddRange(CreateListEntities.HaspKeys());
                 db.Features.AddRange(CreateListEntities.Features());
                 db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
-                db.Clients.AddRange(CreateListEntities.Clients());
                 db.KeyFeatureClients.AddRange(CreateListEntities.KeyFeatureClients());
                 db.SaveChanges();
 
                 remove = featureDAO.Remove(1);
 
-                ClearTable.HaspKeys(db);
                 ClearTable.Features(db);
                 ClearTable.KeyFeatures(db);
-                ClearTable.Clients(db);
                 ClearTable.KeyFeatureClients(db);
             }
 
