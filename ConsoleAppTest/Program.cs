@@ -95,7 +95,7 @@ namespace ConsoleAppTest
 
         //    Client update = new Client
         //    {
-        //        Id = 102,
+        //        Id = 2,
         //        Address = "ul. Lunnaya d.1",
         //        ContactPerson = "Iv E.F.",
         //        Name = "ost",
@@ -116,11 +116,11 @@ namespace ConsoleAppTest
         //        };
 
 
-        //        var clientGetByFeature = test.GetByFeature(feature).ToList();
+        //        //var clientGetByFeature = test.GetByFeature(feature).ToList();
         //        //var temp = test.GetAll();
         //        //int id = test.Add(client);
         //        // var client_ = test.GetById(10);
-        //        // var update_ = test.Update(update);
+        //         var update_ = test.Update(update);
         //        // var remove = test.Remove(10);
         //    }
         //}

@@ -186,10 +186,10 @@ namespace DalDB
         private bool ContainsDB(Client entity)
         {
             Client client = Db.Clients
-                       .SingleOrDefault(c => c.Name == entity.Name &&
-                                             c.Address == entity.Address &&
+                       .SingleOrDefault(c => c.Name          == entity.Name &&
+                                             c.Address       == entity.Address &&
                                              c.ContactPerson == entity.ContactPerson &&
-                                             c.Phone == entity.Phone);
+                                             c.Phone         == entity.Phone);
             return client != null;
         }        
     }

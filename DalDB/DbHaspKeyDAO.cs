@@ -224,9 +224,9 @@ namespace DalDB
         {
             HaspKey key = Db.HaspKeys
                        .SingleOrDefault(hk =>
-                                        hk.InnerId == entity.InnerId &&
-                                        hk.Number == entity.Number &&
-                                        hk.TypeKey == entity.TypeKey &&
+                                        hk.InnerId  == entity.InnerId &&
+                                        hk.Number   == entity.Number &&
+                                        hk.TypeKey  == entity.TypeKey &&
                                         hk.Location == entity.Location );
 
             return key != null;
