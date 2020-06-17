@@ -19,7 +19,7 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            if(ContainsDb(entity) != -1)
+            if(ContainsDb(entity))
                 throw new Exception("Данная запись имеется в базе.");
 
             var keyFeatureClient = Db.KeyFeatureClients.Add(entity);
@@ -70,7 +70,7 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            if (ContainsDb(entity) != -1)
+            if (ContainsDb(entity))
                 throw new Exception("Данная запись имеется в базе.");
 
             var keyFeatureClient = CheckKeyFeatureClientInDb(entity.Id);
@@ -104,14 +104,15 @@ namespace DalDB
         /// </summary>
         /// <param name="entity">Связь (ключ-фича)-клиент.</param>
         /// <returns>Результат проверки.</returns>
-        private int ContainsDb(KeyFeatureClient entity)
+        private bool ContainsDb(KeyFeatureClient entity)
         {
-            int id = Db.KeyFeatureClients
-                       .SingleOrDefault(kfc =>
-                                        kfc.IdKeyFeature == entity.IdKeyFeature &&
-                                        kfc.IdClient     == entity.IdClient)
-                       ?.Id ?? -1;
-            return id;
+            KeyFeatureClient kfc = Db.KeyFeatureClients
+                                   .SingleOrDefault(x =>
+                                                    x.IdKeyFeature == entity.IdKeyFeature &&
+                                                    x.IdClient     == entity.IdClient &&
+                                                    x.Initiator    == entity.Initiator &&
+                                                    x.Note         == entity.Note);
+            return kfc != null;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            if (ContainsDB(entity) != -1)
+            if (ContainsDB(entity))
                 throw new Exception("Данная запись имеется в базе.");
 
             var keyFeature = Db.KeyFeatures.Add(entity);
@@ -77,7 +77,7 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            if (ContainsDB(entity) != -1)
+            if (ContainsDB(entity))
                 throw new Exception("Данная запись имеется в базе.");
 
             KeyFeature keyFeature = CheckKeyFeatureInDb(entity.Id);
@@ -96,15 +96,15 @@ namespace DalDB
         /// </summary>
         /// <param name="entity">Связь ключ-фича.</param>
         /// <returns>Результат проверки.</returns>
-        private int ContainsDB(KeyFeature entity)
+        private bool ContainsDB(KeyFeature entity)
         {
-            int id = Db.KeyFeatures
-                       .SingleOrDefault(kf =>
-                                        kf.IdHaspKey == entity.IdHaspKey &&
-                                        kf.IdFeature == entity.IdFeature)
-                       ?.Id ?? -1;
-
-            return id;
+            KeyFeature kf = Db.KeyFeatures
+                       .SingleOrDefault(x =>
+                                        x.IdHaspKey == entity.IdHaspKey &&
+                                        x.IdFeature == entity.IdFeature &&
+                                        x.StartDate == entity.StartDate &&
+                                        x.EndDate   == entity.EndDate);
+            return kf != null;
         }
         /// <summary>
         /// Проверка наличия записи в базе. (Связь ключ-фича)

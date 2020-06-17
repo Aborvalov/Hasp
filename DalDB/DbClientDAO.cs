@@ -157,8 +157,6 @@ namespace DalDB
             if (ContainsDB(entity))
                 throw new Exception("Нет изменений по данному клиенту.");
 
-            
-
             client.Name          = entity.Name;
             client.Address       = entity.Address;
             client.ContactPerson = entity.ContactPerson;

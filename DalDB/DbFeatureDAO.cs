@@ -20,7 +20,7 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            if (ContainsDB(entity) != -1)
+            if (ContainsDB(entity))
                 throw new Exception("Данный функционал имеется в базе.");
 
             var feature = Db.Features.Add(entity);
@@ -88,7 +88,7 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            if (ContainsDB(entity) != -1)
+            if (ContainsDB(entity))
                 throw new Exception("Данный функционал имеется в базе.");
 
             Feature feature = CheckFeatureInDb(entity.Id);
@@ -119,16 +119,15 @@ namespace DalDB
         /// </summary>
         /// <param name="entity">Функционал.</param>
         /// <returns>Результат проверки.</returns>
-        private int ContainsDB(Feature entity)
+        private bool ContainsDB(Feature entity)
         {
-            int id = Db.Features
+            Feature feature = Db.Features
                        .SingleOrDefault(f =>
                                         f.Number      == entity.Number &&
                                         f.Name        == entity.Name &&
-                                        f.Description == entity.Description)
-                       ?.Id ?? -1;
+                                        f.Description == entity.Description);
 
-            return id;
+            return feature != null;
         }
     }
 }

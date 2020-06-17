@@ -21,7 +21,7 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            if (ContainsDB(entity) != -1)
+            if (ContainsDB(entity))
                 throw new Exception("Данный ключ имеется в базе.");
 
             var haspKey = Db.HaspKeys.Add(entity);
@@ -189,7 +189,7 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            if (ContainsDB(entity) != -1)
+            if (ContainsDB(entity))
                 throw new Exception("Данный ключ имеется в базе.");
 
             HaspKey haspKey = CheckHaspKeyInDb(entity.Id);
@@ -220,14 +220,16 @@ namespace DalDB
         /// </summary>
         /// <param name="entity">HASP-ключ</param>
         /// <returns>Результат проверки.</returns>
-        private int ContainsDB(HaspKey entity)
+        private bool ContainsDB(HaspKey entity)
         {
-            int id = Db.HaspKeys
-                       .SingleOrDefault(hk => 
-                                        hk.InnerId == entity.InnerId)
-                       ?.Id ?? -1;
+            HaspKey key = Db.HaspKeys
+                       .SingleOrDefault(hk =>
+                                        hk.InnerId == entity.InnerId &&
+                                        hk.Number == entity.Number &&
+                                        hk.TypeKey == entity.TypeKey &&
+                                        hk.Location == entity.Location );
 
-            return id;
+            return key != null;
         }
     }
 }
