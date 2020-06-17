@@ -146,7 +146,9 @@ namespace DalDB
             if (id < 1)
                 throw new ArgumentException("Неверное значение.", nameof(id));
 
-            HaspKey haspKey = CheckHaspKeyInDb(id);
+            HaspKey haspKey = GetById(id);
+            if (haspKey == null)
+                throw new NullReferenceException("Объект не найден в базе, " + nameof(haspKey));
 
             List<KeyFeature> keyFeature = Db.KeyFeatures
                                             .Where(kf => kf.IdHaspKey == id)
@@ -192,7 +194,9 @@ namespace DalDB
             if (ContainsDB(entity))
                 throw new Exception("Данный ключ имеется в базе.");
 
-            HaspKey haspKey = CheckHaspKeyInDb(entity.Id);
+            HaspKey haspKey = GetById(entity.Id);
+            if (haspKey == null)
+                throw new NullReferenceException("Объект не найден в базе, " + nameof(haspKey));
 
             haspKey.InnerId  = entity.InnerId;
             haspKey.Number   = entity.Number;
@@ -202,19 +206,6 @@ namespace DalDB
             Db.SaveChanges();
             return true;
         }
-        /// <summary>
-        /// Проверка ключа на наличие в базе.
-        /// </summary>
-        /// <param name="id">id ключа.</param>
-        /// <returnsКлюч.></returns>
-        private HaspKey CheckHaspKeyInDb(int id)
-        {
-            var haspKey = GetById(id);
-            if (haspKey == null)
-                throw new NullReferenceException("Объект не найден в базе, " + nameof(haspKey));
-            return haspKey;
-        }
-
         /// <summary>
         /// Проверка на дубли.
         /// </summary>

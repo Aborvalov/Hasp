@@ -45,7 +45,9 @@ namespace DalDB
             if (id < 1)
                 throw new ArgumentException("Неверное значение.", nameof(id));
 
-            Feature feature = CheckFeatureInDb(id);
+            Feature feature = GetById(id);
+            if (feature == null)
+                throw new NullReferenceException("Объект не найден в базе, " + nameof(feature));
 
             List<KeyFeature> keyFeatures = Db.KeyFeatures
                                              .Where(kf => kf.IdFeature == id)
@@ -91,7 +93,9 @@ namespace DalDB
             if (ContainsDB(entity))
                 throw new Exception("Данный функционал имеется в базе.");
 
-            Feature feature = CheckFeatureInDb(entity.Id);
+            Feature feature = GetById(entity.Id);
+            if (feature == null)
+                throw new NullReferenceException("Объект не найден в базе, " + nameof(feature));
 
             feature.Number      = entity.Number;
             feature.Name        = entity.Name;
@@ -100,19 +104,6 @@ namespace DalDB
             Db.SaveChanges();
 
             return true;
-        }
-
-        /// <summary>
-        /// Проверка фичи на наличе в баазе.
-        /// </summary>
-        /// <param name="id">id фичи.</param>
-        /// <returns>Фича.</returns>
-        private Feature CheckFeatureInDb(int id)
-        {
-            var feature = GetById(id);
-            if (feature == null)
-                throw new NullReferenceException("Объект не найден в базе, " + nameof(feature));
-            return feature;
         }
         /// <summary>
         /// Проверка на дубли.(При)

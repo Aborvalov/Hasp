@@ -120,7 +120,9 @@ namespace DalDB
             if (id < 1)
                 throw new ArgumentException("Неверное значение.", nameof(id));
 
-            Client client = CheckClientInDb(id);
+            Client client = GetById(id);
+            if (client == null)
+                throw new NullReferenceException("Объект не найден в базе, " + nameof(client));
 
             List<KeyFeatureClient> keyFeatureClients = Db.KeyFeatureClients
                                                          .Where(kfc => kfc.IdClient == id)
@@ -152,7 +154,9 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            Client client = CheckClientInDb(entity.Id);
+            Client client = GetById(entity.Id);
+            if (client == null)
+                throw new NullReferenceException("Объект не найден в базе, " + nameof(client));
 
             if (ContainsDB(entity))
                 throw new Exception("Нет изменений по данному клиенту.");
@@ -164,19 +168,6 @@ namespace DalDB
 
             Db.SaveChanges();
             return true;
-        }
-
-        /// <summary>
-        /// Проверка клиента на наличие в базе.
-        /// </summary>
-        /// <param name="id">id клиента.</param>
-        /// <returns>Клиент.</returns>
-        private Client CheckClientInDb(int id)
-        {
-            var client = GetById(id);
-            if (client == null)
-                throw new NullReferenceException("Объект не найден в базе, " + nameof(client));
-            return client;
         }
         /// <summary>
         /// Проверка на дубли.

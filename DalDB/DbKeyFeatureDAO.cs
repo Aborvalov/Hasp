@@ -45,7 +45,9 @@ namespace DalDB
             if (id < 1)
                 throw new ArgumentException("Неверное значение.", nameof(id));
 
-            KeyFeature keyFeature = CheckKeyFeatureInDb(id);
+            KeyFeature keyFeature = GetById(id);
+            if (keyFeature == null)
+                throw new NullReferenceException("Объект не найден в базе, " + nameof(keyFeature));
 
             List<KeyFeatureClient> keyFeatureClient = Db.KeyFeatureClients
                                                         .Where(kfc => kfc.IdKeyFeature == id)
@@ -80,7 +82,9 @@ namespace DalDB
             if (ContainsDB(entity))
                 throw new Exception("Данная запись имеется в базе.");
 
-            KeyFeature keyFeature = CheckKeyFeatureInDb(entity.Id);
+            KeyFeature keyFeature = GetById(entity.Id);
+            if (keyFeature == null)
+                throw new NullReferenceException("Объект не найден в базе, " + nameof(keyFeature));
 
             keyFeature.IdFeature = entity.IdFeature;
             keyFeature.IdHaspKey = entity.IdHaspKey;
@@ -105,19 +109,6 @@ namespace DalDB
                                         x.StartDate == entity.StartDate &&
                                         x.EndDate   == entity.EndDate);
             return kf != null;
-        }
-        /// <summary>
-        /// Проверка наличия записи в базе. (Связь ключ-фича)
-        /// </summary>
-        /// <param name="id">id записи связи.</param>
-        /// <returns>Связь ключ-фича.</returns>
-        private KeyFeature CheckKeyFeatureInDb(int id)
-        {
-            var keyFeature = GetById(id);
-            if (keyFeature == null)
-                throw new NullReferenceException("Объект не найден в базе, " + nameof(keyFeature));
-
-            return keyFeature;
         }
     }
 }

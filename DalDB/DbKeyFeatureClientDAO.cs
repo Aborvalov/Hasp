@@ -46,7 +46,9 @@ namespace DalDB
             if (id < 1)
                 throw new ArgumentException("Неверное значение.", nameof(id));
 
-            var keyFeatureClient = CheckKeyFeatureClientInDb(id);
+            var keyFeatureClient = GetById(id);
+            if (keyFeatureClient == null)
+                throw new NullReferenceException("Объект не найден в базе, " + nameof(keyFeatureClient));
 
             try
             {
@@ -73,7 +75,9 @@ namespace DalDB
             if (ContainsDb(entity))
                 throw new Exception("Данная запись имеется в базе.");
 
-            var keyFeatureClient = CheckKeyFeatureClientInDb(entity.Id);
+            var keyFeatureClient = GetById(entity.Id);
+            if (keyFeatureClient == null)
+                throw new NullReferenceException("Объект не найден в базе, " + nameof(keyFeatureClient));
 
             keyFeatureClient.IdClient     = entity.IdKeyFeature;
             keyFeatureClient.IdKeyFeature = entity.IdKeyFeature;
@@ -84,21 +88,6 @@ namespace DalDB
 
             return true;
         }
-
-        /// <summary>
-        /// Проверка наличия записи в базе. (Связь (ключ-фича)-клиент)
-        /// </summary>
-        /// <param name="id">id записи связи.</param>
-        /// <returns>Связь (ключ-фича)-клиент.</returns>
-        private KeyFeatureClient CheckKeyFeatureClientInDb(int id)
-        {
-            var keyFeatureClient = GetById(id);
-            if (keyFeatureClient == null)
-                throw new NullReferenceException("Объект не найден в базе, " + nameof(keyFeatureClient));
-
-            return keyFeatureClient;
-        }
-
         /// <summary>
         /// Проверка на дубли связи (ключ-фича)-клиент.
         /// </summary>
