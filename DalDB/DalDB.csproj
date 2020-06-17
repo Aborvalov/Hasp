@@ -65,6 +65,7 @@
     <Compile Include="DbFeatureDAO.cs" />
     <Compile Include="DbHaspKeyDAO.cs" />
     <Compile Include="DbKeyFeatureDAO.cs" />
+    <Compile Include="DuplicateException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

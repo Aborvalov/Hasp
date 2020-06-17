@@ -19,7 +19,7 @@ namespace DalDB
                 throw new ArgumentNullException(nameof(entity));
 
             if (ContainsDB(entity))
-                throw new Exception("Данная запись имеется в базе.");
+                throw new DuplicateException("Данная запись имеется в базе.");
 
             var keyFeature = Db.KeyFeatures.Add(entity);
             Db.SaveChanges();
@@ -80,7 +80,7 @@ namespace DalDB
                 throw new ArgumentNullException(nameof(entity));
 
             if (ContainsDB(entity))
-                throw new Exception("Данная запись имеется в базе.");
+                throw new DuplicateException("Данная запись имеется в базе.");
 
             KeyFeature keyFeature = GetById(entity.Id);
             if (keyFeature == null)

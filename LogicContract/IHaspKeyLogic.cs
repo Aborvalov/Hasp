@@ -3,15 +3,23 @@ using System.Collections.Generic;
 
 namespace LogicContract
 {
-    interface IHaspKeyLogic
+    public interface IHaspKeyLogic
     {
         HaspKey Save(HaspKey haspKey);
         HaspKey GetById(int id);
         List<HaspKey> GetAll();
         bool Remove(int id);
-        HaspKey Update(HaspKey haspKey);
-        List<HaspKey> GetByCompany(Client client);
+        HaspKey Update(HaspKey haspKey);       
+        List<HaspKey> GetByClient(Client client);
+        /// <summary>
+        /// Поиск просроченных ключей.
+        /// </summary>
+        /// <returns>Список просроченных ключей.</returns>
         List<HaspKey> GetByPastDue();
-        List<HaspKey> GaetByActive();
+        /// <summary>
+        /// Поиск действующих ключей.
+        /// </summary>
+        /// <returns>Список действующих ключей.</returns>
+        List<HaspKey> GetByActive();
     }
 }

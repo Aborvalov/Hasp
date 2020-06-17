@@ -20,7 +20,7 @@ namespace DalDB
                 throw new ArgumentNullException(nameof(entity));
 
             if (ContainsDB(entity))
-                throw new Exception("Данный клиент имеется в базе.");
+                throw new DuplicateException("Данный клиент имеется в базе.");
 
             var client = Db.Clients.Add(entity);
             Db.SaveChanges();
@@ -159,7 +159,7 @@ namespace DalDB
                 throw new NullReferenceException("Объект не найден в базе, " + nameof(client));
 
             if (ContainsDB(entity))
-                throw new Exception("Нет изменений по данному клиенту.");
+                throw new DuplicateException("Нет изменений по данному клиенту.");
 
             client.Name          = entity.Name;
             client.Address       = entity.Address;

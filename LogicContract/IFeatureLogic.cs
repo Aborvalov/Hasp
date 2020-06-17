@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LogicContract
 {
-    interface IFeatureLogic
+    public interface IFeatureLogic
     {
         Feature Save(Feature feature);
         Feature Update(Feature feature);

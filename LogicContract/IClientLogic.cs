@@ -9,8 +9,8 @@ namespace LogicContract
         Client Update(Client client);
         Client GetById(int id);
         bool Remove(int id);
-        List<Client> GetAll();
-        Client GetByNumberKey(string numberKey);
-        Client GetByFeature(Feature feature);
+        List<Client> GetAll();       
+        List<Client> GetByFeature(Feature feature);
+        Client GetByNumberKey(int KeyInnerId);
     }
 }
