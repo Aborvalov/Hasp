@@ -5,11 +5,11 @@ namespace LogicContract
 {
     interface IHaspKeyLogic
     {
-        HaspKey Save(string number, TypeKey type, Feature feature, Client client, string other);
+        HaspKey Save(HaspKey haspKey);
         HaspKey GetById(int id);
         List<HaspKey> GetAll();
         bool Remove(int id);
-        HaspKey Update(int id, string number, TypeKey type, Feature feature, Client client, string other);
+        HaspKey Update(HaspKey haspKey);
         List<HaspKey> GetByCompany(Client client);
         List<HaspKey> GetByPastDue();
         List<HaspKey> GaetByActive();

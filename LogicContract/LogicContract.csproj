@@ -44,6 +44,8 @@
     <Compile Include="IClientLogic.cs" />
     <Compile Include="IFeatureLogic.cs" />
     <Compile Include="IHaspKeyLogic.cs" />
+    <Compile Include="IKeyFeatureClientLogic.cs" />
+    <Compile Include="IKeyFeatureLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
