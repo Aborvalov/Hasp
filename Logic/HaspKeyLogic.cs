@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DalContract;
+using DalDB;
 using Entities;
 using LogicContract;
-using DalContract;
-using DalDB;
+using System;
+using System.Collections.Generic;
 
 namespace Logic
 {
@@ -28,11 +25,11 @@ namespace Logic
             }
             catch (ArgumentException)
             {
-                return false;
+                throw;
             }
             catch (NullReferenceException)
             {
-                return false;
+                throw;
             }
             catch (Exception e)
             {
@@ -52,11 +49,11 @@ namespace Logic
             {
                 id = haspKeyDAO.Add(haspKey);
             }
-            catch (ArgumentNullException e)
+            catch (ArgumentNullException)
             {
                 throw;
             }
-            catch (DuplicateException e)
+            catch (DuplicateException)
             {
                 throw;
             }
@@ -79,13 +76,20 @@ namespace Logic
             {
                 if (haspKeyDAO.Update(haspKey))
                     return haspKey;
+                else throw new InvalidOperationException("Не удалсь обновить HASP-ключ.");
+            }
+            catch (ArgumentNullException)
+            {
+                throw;
+            }
+            catch (DuplicateException)
+            {
+                throw;
             }
             catch (Exception e)
             {
                 throw new InvalidOperationException("Не удалсь обновить HASP-ключ.", e);
-            }
-
-            throw new InvalidOperationException("Не удалсь обновить HASP-ключ.");
+            }            
         }
         public List<HaspKey> GetByActive() => haspKeyDAO.GetByActive();
         public List<HaspKey> GetAll() => haspKeyDAO.GetAll();
