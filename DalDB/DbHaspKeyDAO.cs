@@ -30,7 +30,7 @@ namespace DalDB
             return haspKey.Id;
         }
                
-        public IEnumerable<HaspKey> GetByActive()
+        public List<HaspKey> GetByActive()
         {
             List<HaspKey> haspKeys = new List<HaspKey>();
             HaspKey hk;
@@ -48,9 +48,9 @@ namespace DalDB
             return haspKeys;
         }
 
-        public IEnumerable<HaspKey> GetAll() => Db.HaspKeys.ToList();
-                
-        public IEnumerable<HaspKey> GetByPastDue()
+        public List<HaspKey> GetAll() => Db.HaspKeys.ToList();
+               
+        public List<HaspKey> GetByPastDue()
         {
             var keyFeature = Db.KeyFeatures.ToList();
 
@@ -71,7 +71,7 @@ namespace DalDB
                                       Location = hk.Location,
                                       TypeKey  = hk.TypeKey,
                                   })
-                                  .ToList().Distinct();
+                                  .Distinct().ToList();
 
             #region SQL запрос.
 
@@ -92,7 +92,7 @@ namespace DalDB
             return haspKeysPastDue;
         }
                 
-        public IEnumerable<HaspKey> GetByClient(Client client)
+        public List<HaspKey> GetByClient(Client client)
         {
             if (client == null)
                 throw new ArgumentNullException(nameof(client));
@@ -115,7 +115,7 @@ namespace DalDB
                                 Location = hk.Location,
                                 TypeKey = hk.TypeKey,
                             }) 
-                         .ToList().Distinct();
+                         .Distinct().ToList();
 
 
             #region SQL запрос.

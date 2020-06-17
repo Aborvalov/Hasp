@@ -19,7 +19,7 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            if (ContainsDB(entity) != -1)
+            if (ContainsDB(entity))
                 throw new Exception("Данный клиент имеется в базе.");
 
             var client = Db.Clients.Add(entity);
@@ -154,7 +154,7 @@ namespace DalDB
 
             Client client = CheckClientInDb(entity.Id);
 
-            if (CheckUpdate(entity))
+            if (ContainsDB(entity))
                 throw new Exception("Нет изменений по данному клиенту.");
 
             
@@ -181,31 +181,18 @@ namespace DalDB
             return client;
         }
         /// <summary>
-        /// Проверка на дубли.(Добавление нового.)
+        /// Проверка на дубли.
         /// </summary>
         /// <param name="entity">Клиент.</param>
         /// <returns>Результат проверки.</returns>
-        private int ContainsDB(Client entity)
+        private bool ContainsDB(Client entity)
         {
-            var tt = Db.Clients.ToList();
-            int id = Db.Clients
-                       .SingleOrDefault(c => c.Name    == entity.Name &&
-                                             c.Address == entity.Address) 
-                       ?.Id ?? -1;
-            return id;
-        }
-        /// <summary>
-        /// Проверка на изменение.(Обновление.)
-        /// </summary>
-        /// <param name="client">Изменение по клиенту.</param>
-        /// <returns>Результат проверки.</returns>
-        private bool CheckUpdate(Client client)
-        {
-            Client clientDb = GetById(client.Id);
-            return clientDb.Name == client.Name &&
-                   clientDb.Address == client.Address &&
-                   clientDb.ContactPerson == client.ContactPerson &&
-                   clientDb.Phone == client.Phone;
-        }
+            Client client = Db.Clients
+                       .SingleOrDefault(c => c.Name == entity.Name &&
+                                             c.Address == entity.Address &&
+                                             c.ContactPerson == entity.ContactPerson &&
+                                             c.Phone == entity.Phone);
+            return client != null;
+        }        
     }
 }

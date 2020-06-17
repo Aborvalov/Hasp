@@ -123,8 +123,9 @@ namespace DalDB
         {
             int id = Db.Features
                        .SingleOrDefault(f =>
-                                        f.Number == entity.Number &&
-                                        f.Name   == entity.Name)
+                                        f.Number      == entity.Number &&
+                                        f.Name        == entity.Name &&
+                                        f.Description == entity.Description)
                        ?.Id ?? -1;
 
             return id;

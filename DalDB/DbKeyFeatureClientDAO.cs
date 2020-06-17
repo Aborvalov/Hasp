@@ -28,7 +28,7 @@ namespace DalDB
             return keyFeatureClient.Id;
         }
 
-        public IEnumerable<KeyFeatureClient> GetAll() => Db.KeyFeatureClients.ToList();
+        public List<KeyFeatureClient> GetAll() => Db.KeyFeatureClients.ToList();
 
         public KeyFeatureClient GetById(int id)
         {
