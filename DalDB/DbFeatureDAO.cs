@@ -29,7 +29,7 @@ namespace DalDB
             return feature.Id;
         }
 
-        public IEnumerable<Feature> GetAll() => Db.Features.ToList();
+        public List<Feature> GetAll() => Db.Features.ToList();
 
         public Feature GetById(int id)
         {
@@ -48,8 +48,8 @@ namespace DalDB
             Feature feature = CheckFeatureInDb(id);
 
             List<KeyFeature> keyFeatures = Db.KeyFeatures
-                                            .Where(kf => kf.IdFeature == id)
-                                            .ToList();
+                                             .Where(kf => kf.IdFeature == id)
+                                             .ToList();
 
             List<KeyFeatureClient> keyFeatureClients;
 
@@ -114,9 +114,8 @@ namespace DalDB
                 throw new NullReferenceException("Объект не найден в базе, " + nameof(feature));
             return feature;
         }
-
         /// <summary>
-        /// Проверка на дубли.
+        /// Проверка на дубли.(При)
         /// </summary>
         /// <param name="entity">Функционал.</param>
         /// <returns>Результат проверки.</returns>

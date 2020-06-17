@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Data.SqlClient;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -178,9 +180,29 @@ namespace ConsoleAppTest
                 TypeKey = TypeKey.Pro,
             };
 
+            var ConnectionString =
+            new SQLiteConnectionStringBuilder()
+            {
+               
+                
+            }
+            .ConnectionString;
+
+
+            // DataSource = @"D:\Новая папка\HASPKey\UnitTestDal\HASPKey"
             using (var db = new EntitesContext())
             {
+
+                var jdj = db.Database.Connection.ConnectionString;
+
+
+
                 test = new DbHaspKeyDAO(db);
+                var ff = test.GetAll();
+
+
+
+
 
                 // var active = test.GaetByActive().ToList();
                 Client client = new Client
@@ -190,7 +212,7 @@ namespace ConsoleAppTest
 
                 //var keyClient = test.GetByClient(client).ToList();
                 //var pastDue = test.GetByPastDue().ToList();
-                var ff = test.GetAll();
+                //var ff = test.GetAll();
 
                 //int id = test.Add(key);                
                 /*
@@ -199,7 +221,7 @@ namespace ConsoleAppTest
                  
                  */
                 //var haspKey = test.GetById(5);
-                var remove = test.Remove(2);
+                //var remove = test.Remove(2);
                 //var updateTest = test.Update(update);               
             }
         }

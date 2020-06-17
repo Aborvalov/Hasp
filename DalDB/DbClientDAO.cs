@@ -28,9 +28,9 @@ namespace DalDB
             return client.Id;
         }
 
-        public IEnumerable<Client> GetAll() => Db.Clients.ToList();
+        public List<Client> GetAll() => Db.Clients.ToList();
         
-        public IEnumerable<Client> GetByFeature(Feature feature)
+        public List<Client> GetByFeature(Feature feature)
         {
             if (feature == null)
                 throw new ArgumentNullException(nameof(feature));
@@ -77,12 +77,12 @@ namespace DalDB
             return client;
         }
         
-        public Client GetByNumberKey(int numberKay)
+        public Client GetByNumberKey(int KeyInnerId)
         {
-            if (numberKay < 1)
-                throw new ArgumentException("Неверное значение.", nameof(numberKay));
+            if (KeyInnerId < 1)
+                throw new ArgumentException("Неверное значение.", nameof(KeyInnerId));
 
-            var haspKey = Db.HaspKeys.SingleOrDefault(hk => hk.InnerId == numberKay);
+            var haspKey = Db.HaspKeys.SingleOrDefault(hk => hk.InnerId == KeyInnerId);
             if (haspKey == null)
                 throw new ArgumentNullException(nameof(haspKey),"HASP-ключ с данным номерем не найдн.");
 
@@ -95,9 +95,9 @@ namespace DalDB
                               on kfc.IdKeyFeature equals kf.Id
                             join hk in haspKeys
                               on kf.IdHaspKey equals hk.Id
-                           where hk.InnerId == numberKay
+                           where hk.InnerId == KeyInnerId
                           select kfc.IdClient)
-                           .First();
+                           .Last();
 
             return GetById(idClient);
 
@@ -126,22 +126,12 @@ namespace DalDB
                                                          .Where(kfc => kfc.IdClient == id)
                                                          .ToList();
 
-            List<KeyFeature> keyFeatures;
             try
             {
                 Db.Clients.Remove(client);
 
                 foreach (var kfc in keyFeatureClients)
-                {
                     Db.KeyFeatureClients.Remove(kfc);
-
-                    keyFeatures = Db.KeyFeatures
-                                    .Where(kf => kf.Id == kfc.IdKeyFeature)
-                                    .ToList();
-
-                    foreach (var kf in keyFeatures)
-                        Db.KeyFeatures.Remove(kf);
-                }
 
                 Db.SaveChanges();
             }
@@ -162,10 +152,12 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            if (ContainsDB(entity) != -1)
-                throw new Exception("Данный клиент имеется в базе.");
-
             Client client = CheckClientInDb(entity.Id);
+
+            if (CheckUpdate(entity))
+                throw new Exception("Нет изменений по данному клиенту.");
+
+            
 
             client.Name          = entity.Name;
             client.Address       = entity.Address;
@@ -189,7 +181,7 @@ namespace DalDB
             return client;
         }
         /// <summary>
-        /// Проверка на дубли.
+        /// Проверка на дубли.(Добавление нового.)
         /// </summary>
         /// <param name="entity">Клиент.</param>
         /// <returns>Результат проверки.</returns>
@@ -197,9 +189,23 @@ namespace DalDB
         {
             var tt = Db.Clients.ToList();
             int id = Db.Clients
-                       .SingleOrDefault(c => c.Name == entity.Name)
+                       .SingleOrDefault(c => c.Name    == entity.Name &&
+                                             c.Address == entity.Address) 
                        ?.Id ?? -1;
             return id;
+        }
+        /// <summary>
+        /// Проверка на изменение.(Обновление.)
+        /// </summary>
+        /// <param name="client">Изменение по клиенту.</param>
+        /// <returns>Результат проверки.</returns>
+        private bool CheckUpdate(Client client)
+        {
+            Client clientDb = GetById(client.Id);
+            return clientDb.Name == client.Name &&
+                   clientDb.Address == client.Address &&
+                   clientDb.ContactPerson == client.ContactPerson &&
+                   clientDb.Phone == client.Phone;
         }
     }
 }

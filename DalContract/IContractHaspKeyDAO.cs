@@ -5,16 +5,16 @@ namespace DalContract
 {
     public interface IContractHaspKeyDAO : IContractEntitesDAO<HaspKey>
     {
-        IEnumerable<HaspKey> GetByClient(Client client);
+        List<HaspKey> GetByClient(Client client);
         /// <summary>
         /// Поиск просроченных ключей.
         /// </summary>
         /// <returns>Список просроченных ключей.</returns>
-        IEnumerable<HaspKey> GetByPastDue();
+        List<HaspKey> GetByPastDue();
         /// <summary>
         /// Поиск действующих ключей.
         /// </summary>
         /// <returns>Список действующих ключей.</returns>
-        IEnumerable<HaspKey> GetByActive();
+        List<HaspKey> GetByActive();
     }
 }
