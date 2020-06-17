@@ -47,7 +47,7 @@ namespace UnitTestDal
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
                 haspKeyDAO.Add(CreateNew());
-                Assert.ThrowsException<Exception>(() => haspKeyDAO.Add(CreateNew()));
+                Assert.ThrowsException<DuplicateException>(() => haspKeyDAO.Add(CreateNew()));
                 ClearTable.HaspKeys(db);
             }
         }
@@ -163,7 +163,7 @@ namespace UnitTestDal
 
                 HaspKey update = CreateNew(1);
                 
-                Assert.ThrowsException<Exception>(
+                Assert.ThrowsException<DuplicateException>(
                     () => haspKeyDAO.Update(update));
                 ClearTable.HaspKeys(db);
             }

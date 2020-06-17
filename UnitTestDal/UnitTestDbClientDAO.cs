@@ -48,7 +48,7 @@ namespace UnitTestDal
             {
                 clientDAO = new DbClientDAO(db);
                 clientDAO.Add(CreateNew());
-                Assert.ThrowsException<Exception>(() => clientDAO.Add(CreateNew()));
+                Assert.ThrowsException<DuplicateException>(() => clientDAO.Add(CreateNew()));
                 ClearTable.Clients(db);
             }
         }
@@ -164,7 +164,7 @@ namespace UnitTestDal
 
                 Client update = CreateNew(1);
 
-                Assert.ThrowsException<Exception>(
+                Assert.ThrowsException<DuplicateException>(
                     () => clientDAO.Update(update));
                 ClearTable.Clients(db);
             }

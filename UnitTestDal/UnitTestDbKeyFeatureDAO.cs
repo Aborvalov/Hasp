@@ -50,7 +50,7 @@ namespace UnitTestDal
             {
                 kfDAO = new DbKeyFeatureDAO(db);
                 kfDAO.Add(CreateNew());
-                Assert.ThrowsException<Exception>(() => kfDAO.Add(CreateNew()));
+                Assert.ThrowsException<DuplicateException>(() => kfDAO.Add(CreateNew()));
                 ClearTable.KeyFeatures(db);
             }
         }
@@ -167,7 +167,7 @@ namespace UnitTestDal
 
                 KeyFeature update = CreateNew(1);
 
-                Assert.ThrowsException<Exception>(
+                Assert.ThrowsException<DuplicateException>(
                     () => kfDAO.Update(update));
                 ClearTable.KeyFeatures(db);
             }
@@ -192,7 +192,7 @@ namespace UnitTestDal
                 kfDAO.Add(CreateNew());
                 Assert.ThrowsException<NullReferenceException>(
                     () => kfDAO.Update(kfNoDB));
-                ClearTable.HaspKeys(db);
+                ClearTable.KeyFeatures(db);
             }
         }
         [TestMethod]

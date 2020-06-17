@@ -47,7 +47,7 @@ namespace UnitTestDal
             {
                 kfcDAO = new DbKeyFeatureClientDAO(db);
                 kfcDAO.Add(CreateNew());
-                Assert.ThrowsException<Exception>(() => kfcDAO.Add(CreateNew()));
+                Assert.ThrowsException<DuplicateException>(() => kfcDAO.Add(CreateNew()));
                 ClearTable.KeyFeatureClients(db);
             }
         }
@@ -161,7 +161,7 @@ namespace UnitTestDal
 
                 KeyFeatureClient update = CreateNew(1);
 
-                Assert.ThrowsException<Exception>(
+                Assert.ThrowsException<DuplicateException>(
                     () => kfcDAO.Update(update));
                 ClearTable.KeyFeatureClients(db);
             }

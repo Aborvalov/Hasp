@@ -50,7 +50,7 @@ namespace UnitTestDal
             {
                 featureDAO = new DbFeatureDAO(db);
                 featureDAO.Add(CreateNew());
-                Assert.ThrowsException<Exception>(() => featureDAO.Add(CreateNew()));
+                Assert.ThrowsException<DuplicateException>(() => featureDAO.Add(CreateNew()));
                 ClearTable.Features(db);
             }
         }
@@ -165,7 +165,7 @@ namespace UnitTestDal
 
                 Feature update = CreateNew(1);
 
-                Assert.ThrowsException<Exception>(
+                Assert.ThrowsException<DuplicateException>(
                     () => featureDAO.Update(update));
                 ClearTable.Features(db);
             }
