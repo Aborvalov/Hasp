@@ -70,7 +70,7 @@ namespace UnitTestDal
                 for (int i = 1; i <= 10; i++)
                     kfDAO.Add(CreateNew(i, i, i));
 
-                getAll = kfDAO.GetAll().ToList();
+                getAll = kfDAO.GetAll();
                 ClearTable.KeyFeatures(db);
             }
 

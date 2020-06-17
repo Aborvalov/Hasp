@@ -69,7 +69,7 @@ namespace UnitTestDal
                 for (int i = 1; i <= 10; i++)
                     featureDAO.Add(CreateNew(i, i, i.ToString() + "_sd"));
 
-                getAll = featureDAO.GetAll().ToList();
+                getAll = featureDAO.GetAll();
 
                 ClearTable.Features(db);
             }

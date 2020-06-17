@@ -68,7 +68,7 @@ namespace UnitTestDal
                 for (int i = 1; i <= 10; i++)
                     clientDAO.Add(CreateNew(i, i.ToString() + "_eer cvc"));
 
-                getAll = clientDAO.GetAll().ToList();
+                getAll = clientDAO.GetAll();
                 ClearTable.Clients(db);
             }
 
@@ -261,7 +261,7 @@ namespace UnitTestDal
                     Id     = 1,
                     Number = 1,
                     Name   = "qwe",
-                }).ToList();
+                });
 
                 ClearTable.Features(db);
                 ClearTable.KeyFeatures(db);

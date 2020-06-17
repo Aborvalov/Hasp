@@ -66,7 +66,7 @@ namespace UnitTestDal
                 for (int i = 1; i <= 10; i++)
                     kfcDAO.Add(CreateNew(i, i, i));
 
-                getAll = kfcDAO.GetAll().ToList();
+                getAll = kfcDAO.GetAll();
                 ClearTable.KeyFeatureClients(db);
             }
 

@@ -67,7 +67,7 @@ namespace UnitTestDal
                 for (int i = 1; i <= 10; i++)
                     haspKeyDAO.Add(CreateNew(i, i));
 
-                getAll = haspKeyDAO.GetAll().ToList();
+                getAll = haspKeyDAO.GetAll();
                 ClearTable.HaspKeys(db);
             }
 
@@ -209,7 +209,7 @@ namespace UnitTestDal
                 db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
                 db.SaveChanges();
 
-                GetByActive = haspKeyDAO.GetByActive().ToList();
+                GetByActive = haspKeyDAO.GetByActive();
 
                 ClearTable.HaspKeys(db);
                 ClearTable.KeyFeatures(db);
@@ -240,7 +240,7 @@ namespace UnitTestDal
                 db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
                 db.SaveChanges();
 
-                GetByActive = haspKeyDAO.GetByPastDue().ToList();
+                GetByActive = haspKeyDAO.GetByPastDue();
 
                 ClearTable.HaspKeys(db);
                 ClearTable.KeyFeatures(db);
@@ -271,7 +271,7 @@ namespace UnitTestDal
                 db.KeyFeatureClients.AddRange(CreateListEntities.KeyFeatureClients());
                 db.SaveChanges();
 
-                getByClient = haspKeyDAO.GetByClient(client).ToList();
+                getByClient = haspKeyDAO.GetByClient(client);
 
                 ClearTable.HaspKeys(db);
                 ClearTable.KeyFeatures(db);
