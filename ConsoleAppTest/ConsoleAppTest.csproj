@@ -82,6 +82,14 @@
       <Project>{22d9c86f-1103-47fc-bcd6-5e35fc54de22}</Project>
       <Name>Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LogicContract\LogicContract.csproj">
+      <Project>{4bf66fdd-c19d-4467-a441-0a01b4ad9b3d}</Project>
+      <Name>LogicContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Logic\Logic.csproj">
+      <Project>{77c069c5-75c2-4dc0-b576-55a894ed471d}</Project>
+      <Name>Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientLogic.cs" />
+    <Compile Include="FeatureLogic.cs" />
     <Compile Include="HaspKeyLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

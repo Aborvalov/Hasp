@@ -1,6 +1,8 @@
 ﻿using DalContract;
 using DalDB;
 using Entities;
+using Logic;
+using LogicContract;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -17,6 +19,21 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
+            using (var db = new EntitesContext())
+            {
+
+                IClientLogic clientLogic = new ClientLogic(new DbClientDAO(db));
+
+                var all = clientLogic.GetAll();
+            }
+
+
+
+
+
+
+
+
              TestHaspKey();
             // TestFeature();
             // TestClient();
