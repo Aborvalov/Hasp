@@ -77,7 +77,7 @@ namespace DalDB
                                       Id       = haspKey.Id,
                                       InnerId  = haspKey.InnerId,
                                       Number   = haspKey.Number,
-                                      Location = haspKey.Location,
+                                      IsHome = haspKey.IsHome,
                                       TypeKey  = haspKey.TypeKey,
                                   })
                                   .Distinct().ToList();
@@ -119,7 +119,7 @@ namespace DalDB
                                 Id       = haspKey.Id,
                                 InnerId  = haspKey.InnerId,
                                 Number   = haspKey.Number,
-                                Location = haspKey.Location,
+                                IsHome = haspKey.IsHome,
                                 TypeKey  = haspKey.TypeKey,
                             }) 
                          .Distinct().ToList();
@@ -192,7 +192,7 @@ namespace DalDB
             haspKey.InnerId  = entity.InnerId;
             haspKey.Number   = entity.Number;
             haspKey.TypeKey  = haspKey.TypeKey;
-            haspKey.Location = haspKey.Location;
+            haspKey.IsHome = haspKey.IsHome;
 
             try
             {
@@ -221,7 +221,7 @@ namespace DalDB
                                         hk.InnerId  == entity.InnerId &&
                                         hk.Number   == entity.Number &&
                                         hk.TypeKey  == entity.TypeKey &&
-                                        hk.Location == entity.Location );
+                                        hk.IsHome == entity.IsHome );
 
             return key != null;
         }

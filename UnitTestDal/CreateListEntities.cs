@@ -15,14 +15,14 @@ namespace UnitTestDal
             {
                 InnerId  = 1,
                 Number   = "uz-2",
-                Location = true,
+                IsHome = true,
                 TypeKey  = TypeKey.Pro,
             },
             new HaspKey
             {
                 InnerId  = 2,
                 Number   = "uz-3",
-                Location = true,
+                IsHome = true,
                 TypeKey  = TypeKey.Pro,
             },
         };

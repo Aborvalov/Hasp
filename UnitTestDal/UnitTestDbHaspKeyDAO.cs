@@ -143,7 +143,7 @@ namespace UnitTestDal
                     Id = 1,
                     InnerId = 23,
                     Number = "u2322",
-                    Location = false,
+                    IsHome = false,
                     TypeKey = TypeKey.Time,
                 });
             }
@@ -190,7 +190,7 @@ namespace UnitTestDal
                 Id = 234,
                 InnerId = 1546,
                 Number = "uz-265",
-                Location = false,
+                IsHome = false,
                 TypeKey = TypeKey.NetTime,
             };
 
@@ -237,7 +237,7 @@ namespace UnitTestDal
                     Id       = 2,
                     InnerId  = 2,
                     Number   = "uz-3",
-                    Location = true,
+                    IsHome = true,
                     TypeKey  = TypeKey.Pro,
                 }
             };
@@ -379,7 +379,7 @@ namespace UnitTestDal
             {
                 InnerId  = 1,
                 Number   = "uz-2",
-                Location = true,
+                IsHome = true,
                 TypeKey  = TypeKey.Pro,
             };
         }

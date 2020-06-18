@@ -167,7 +167,7 @@ namespace ConsoleAppTest
             {
 
                 InnerId = 125,
-                Location = true,
+                IsHome = true,
                 Number = "12-34-df g",
                 TypeKey = TypeKey.Pro,
             };
@@ -176,7 +176,7 @@ namespace ConsoleAppTest
             {
                 Id = 5,
                 InnerId = 125,
-                Location = true,
+                IsHome = true,
                 Number = "12-34-df g",
                 TypeKey = TypeKey.Pro,
             };
