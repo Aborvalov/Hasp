@@ -46,8 +46,7 @@ namespace DalDB
             HaspKey hk;
 
             var keyFeature = db.KeyFeatures
-                               .Where(kf => kf.EndDate >= date)
-                               .ToList();
+                               .Where(kf => kf.EndDate >= date);
 
             foreach (var kf in keyFeature)
             {
@@ -62,7 +61,7 @@ namespace DalDB
                
         public List<HaspKey> GetByPastDue()
         {
-            var keyFeatures = db.KeyFeatures.ToList();
+            var keyFeatures = db.KeyFeatures;
             
             var haspKeysPastDue = (from haspKey in GetAll()
                                    join keyFeature in keyFeatures
@@ -156,10 +155,8 @@ namespace DalDB
                 return false;
 
             var keyFeature = db.KeyFeatures
-                               .Where(kf => kf.IdHaspKey == id)
-                               .ToList();
+                               .Where(kf => kf.IdHaspKey == id);
 
-            var keyFeatureClients = new List<KeyFeatureClient>();
             
             db.HaspKeys.Remove(haspKey);
 
@@ -167,9 +164,8 @@ namespace DalDB
             {
                 db.KeyFeatures.Remove(kf);
 
-                keyFeatureClients = db.KeyFeatureClients
-                                      .Where(kefFeatureClient => kefFeatureClient.IdKeyFeature == kf.Id)
-                                      .ToList();
+                var keyFeatureClients = db.KeyFeatureClients
+                                      .Where(kefFeatureClient => kefFeatureClient.IdKeyFeature == kf.Id);
 
                 foreach (var kfc in keyFeatureClients)
                     db.KeyFeatureClients.Remove(kfc);
@@ -192,7 +188,7 @@ namespace DalDB
             haspKey.InnerId  = entity.InnerId;
             haspKey.Number   = entity.Number;
             haspKey.TypeKey  = haspKey.TypeKey;
-            haspKey.IsHome = haspKey.IsHome;
+            haspKey.IsHome   = haspKey.IsHome;
 
             try
             {
@@ -218,10 +214,10 @@ namespace DalDB
         {
             var key = db.HaspKeys
                         .SingleOrDefault(hk =>
-                                        hk.InnerId  == entity.InnerId &&
-                                        hk.Number   == entity.Number &&
-                                        hk.TypeKey  == entity.TypeKey &&
-                                        hk.IsHome == entity.IsHome );
+                                         hk.InnerId  == entity.InnerId &&
+                                         hk.Number   == entity.Number &&
+                                         hk.TypeKey  == entity.TypeKey &&
+                                         hk.IsHome   == entity.IsHome );
 
             return key != null;
         }

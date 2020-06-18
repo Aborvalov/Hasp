@@ -273,6 +273,7 @@ namespace UnitTestDal
         {
             using (var db = new EntitesContext())
             {
+                ClearTable.HaspKeys(db);
                 clientDAO = new DbClientDAO(db);
                 Assert.AreEqual(clientDAO.GetByNumberKey(2), null);
             }

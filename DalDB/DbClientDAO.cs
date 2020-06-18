@@ -120,8 +120,7 @@ namespace DalDB
                 return false;
 
             var keyFeatureClients = db.KeyFeatureClients
-                                      .Where(kfc => kfc.IdClient == id)
-                                      .ToList();
+                                      .Where(kfc => kfc.IdClient == id);
 
             db.Clients.Remove(client);
 

@@ -48,20 +48,16 @@ namespace DalDB
                 return false;
 
             var keyFeatures = db.KeyFeatures
-                                .Where(kf => kf.IdFeature == id)
-                                .ToList();
-
-            List<KeyFeatureClient> keyFeatureClients;
-
+                                .Where(kf => kf.IdFeature == id);
+                        
             db.Features.Remove(feature);
 
             foreach (var kf in keyFeatures)
             {
                 db.KeyFeatures.Remove(kf);
 
-                keyFeatureClients = db.KeyFeatureClients
-                                      .Where(kfc => kfc.IdKeyFeature == kf.Id)
-                                      .ToList();
+                var keyFeatureClients = db.KeyFeatureClients
+                                      .Where(kfc => kfc.IdKeyFeature == kf.Id);
 
                 foreach (var kfc in keyFeatureClients)
                     db.KeyFeatureClients.Remove(kfc);
