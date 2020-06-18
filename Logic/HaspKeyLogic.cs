@@ -56,10 +56,7 @@ namespace Logic
             {
                 throw;
             }
-            catch (DuplicateException)
-            {
-                throw;
-            }
+            
             catch (Exception e)
             {
                 throw new InvalidOperationException("Не удалсь создать HASP-ключ.", e);
@@ -85,10 +82,7 @@ namespace Logic
             {
                 throw;
             }
-            catch (DuplicateException)
-            {
-                throw;
-            }
+            
             catch (Exception e)
             {
                 throw new InvalidOperationException("Не удалсь обновить HASP-ключ.", e);

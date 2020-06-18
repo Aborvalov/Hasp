@@ -2,7 +2,6 @@
 using Entities;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 
 namespace DalDB
@@ -23,19 +22,8 @@ namespace DalDB
 
             var feature = db.Features.Add(entity);
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                return -1;
-            }
-            catch
-            {
-                throw;
-            }
-
+            db.SaveChanges();
+            
             return feature.Id;
         }
 
@@ -97,19 +85,8 @@ namespace DalDB
             feature.Name        = entity.Name;
             feature.Description = entity.Description;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                return false;
-            }
-            catch
-            {
-                throw;
-            }
-
+            db.SaveChanges();
+            
             return true;
         }
         /// <summary>

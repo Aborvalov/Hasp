@@ -2,7 +2,6 @@
 using Entities;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 
 namespace DalDB
@@ -22,19 +21,8 @@ namespace DalDB
 
             var client = db.Clients.Add(entity);
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                return -1;
-            }
-            catch
-            {
-                throw;
-            }
-
+            db.SaveChanges();
+            
             return client.Id;
         }
 
@@ -159,19 +147,8 @@ namespace DalDB
             client.ContactPerson = entity.ContactPerson;
             client.Phone         = entity.Phone;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                return false;
-            }
-            catch
-            {
-                throw;
-            }
-
+            db.SaveChanges();
+           
             return true;
         }
         /// <summary>

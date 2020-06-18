@@ -21,20 +21,9 @@ namespace DalDB
                 throw new ArgumentNullException(nameof(entity));
 
             var keyFeatureClient = db.KeyFeatureClients.Add(entity);
-            
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                return -1;
-            }
-            catch
-            {
-                throw;
-            }
 
+            db.SaveChanges();
+            
             return keyFeatureClient.Id;
         }
 
@@ -80,19 +69,8 @@ namespace DalDB
             keyFeatureClient.Note         = entity.Note;
             keyFeatureClient.Initiator    = entity.Initiator;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                return false;
-            }
-            catch
-            {
-                throw;
-            }
-
+            db.SaveChanges();
+            
             return true;
         }
         /// <summary>

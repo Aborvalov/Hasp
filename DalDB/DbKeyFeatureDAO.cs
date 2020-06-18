@@ -21,19 +21,8 @@ namespace DalDB
 
             var keyFeature = db.KeyFeatures.Add(entity);
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                return -1;
-            }
-            catch
-            {
-                throw;
-            }
-
+            db.SaveChanges();
+            
             return keyFeature.Id;
         }
 
@@ -87,19 +76,8 @@ namespace DalDB
             keyFeature.StartDate = entity.StartDate;
             keyFeature.EndDate   = entity.EndDate;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                return false;
-            }
-            catch
-            {
-                throw;
-            }
-
+            db.SaveChanges();
+            
             return true;
         }
         /// <summary>

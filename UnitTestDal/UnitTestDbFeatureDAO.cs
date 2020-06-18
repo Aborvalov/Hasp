@@ -4,7 +4,6 @@ using Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace UnitTestDal
 {
@@ -26,10 +25,9 @@ namespace UnitTestDal
 
             using (var db = new EntitesContext())
             {
+                ClearTable.Features(db);
                 featureDAO = new DbFeatureDAO(db);
                 add = featureDAO.Add(CreateNew());
-
-                ClearTable.Features(db);
             }
 
             Assert.AreEqual(add, idExpected);
@@ -42,40 +40,42 @@ namespace UnitTestDal
                 featureDAO = new DbFeatureDAO(db);
                 Assert.ThrowsException<ArgumentNullException>(() => featureDAO.Add(null));
             }
-        }
-        [TestMethod]
-        public void AddDuplicateFeature()
-        {
-            using (var db = new EntitesContext())
-            {
-                featureDAO = new DbFeatureDAO(db);
-                featureDAO.Add(CreateNew());
-                Assert.ThrowsException<DuplicateException>(() => featureDAO.Add(CreateNew()));
-                ClearTable.Features(db);
-            }
-        }
+        }        
         [TestMethod]
         public void GetAllFeature()
         {
-            List<Feature> getAll = new List<Feature>();
-            List<Feature> featureExpected = new List<Feature>();
+            var getAll = new List<Feature>();
+            var featureExpected = new List<Feature>();
             for (int i = 1; i <= 10; i++)
                 featureExpected.Add(CreateNew(i, i, i.ToString() + "_sd"));
 
             using (var db = new EntitesContext())
             {
+                ClearTable.Features(db);
                 featureDAO = new DbFeatureDAO(db);
 
                 for (int i = 1; i <= 10; i++)
                     featureDAO.Add(CreateNew(i, i, i.ToString() + "_sd"));
 
                 getAll = featureDAO.GetAll();
+            }
 
+            CollectionAssert.AreEqual(getAll, featureExpected);            
+        }
+        [TestMethod]
+        public void GetAllEmptyFeature()
+        {
+            var getAll = new List<Feature>();
+            var featureExpected = new List<Feature>();
+           
+            using (var db = new EntitesContext())
+            {
                 ClearTable.Features(db);
+                featureDAO = new DbFeatureDAO(db);
+                getAll = featureDAO.GetAll();
             }
 
             CollectionAssert.AreEqual(getAll, featureExpected);
-            
         }
         [TestMethod]
         public void GetByIdFeature()
@@ -85,10 +85,10 @@ namespace UnitTestDal
 
             using (var db = new EntitesContext())
             {
+                ClearTable.Features(db);
                 featureDAO = new DbFeatureDAO(db);
                 featureDAO.Add(CreateNew());
-                getById = featureDAO.GetById(1);
-                ClearTable.Features(db);
+                getById = featureDAO.GetById(1);                
             }
 
             Assert.AreEqual(getById, featureExpected);
@@ -112,13 +112,12 @@ namespace UnitTestDal
         public void GetByIdNoDBFeature()
         {
             Feature getById;
-
             using (var db = new EntitesContext())
             {
+                ClearTable.Features(db);
                 featureDAO = new DbFeatureDAO(db);
                 getById = featureDAO.GetById(1);
             }
-
             Assert.AreEqual(getById, null);
         }
         [TestMethod]
@@ -127,6 +126,7 @@ namespace UnitTestDal
             bool update;
             using (var db = new EntitesContext())
             {
+                ClearTable.Features(db);
                 featureDAO = new DbFeatureDAO(db);
                 featureDAO.Add(CreateNew());
                 update = featureDAO.Update(new Feature
@@ -135,10 +135,8 @@ namespace UnitTestDal
                     Number      = 1002,
                     Name        = "TestUpdate",
                     Description = "Test ______",
-                });
-                ClearTable.Features(db);
+                });                
             }
-
             Assert.AreEqual(update, true);
         }
         [TestMethod]
@@ -149,31 +147,11 @@ namespace UnitTestDal
                 featureDAO = new DbFeatureDAO(db);
                 Assert.ThrowsException<ArgumentNullException>(() => featureDAO.Update(null));
             }
-        }        
-        /// <summary>
-        /// Дублирование фичи при обновлении.
-        /// </summary>
-        [TestMethod]
-        public void UpdateDuplicateFeature()
-        {
-            Feature feature = CreateNew();
-
-            using (var db = new EntitesContext())
-            {
-                featureDAO = new DbFeatureDAO(db);
-                featureDAO.Add(feature);
-
-                Feature update = CreateNew(1);
-
-                Assert.ThrowsException<DuplicateException>(
-                    () => featureDAO.Update(update));
-                ClearTable.Features(db);
-            }
-        }
+        } 
         [TestMethod]
         public void UpdateNoDBFeature()
         {
-            Feature featureNoDB = new Feature
+            var featureNoDB = new Feature
             {
                 Id          = 234234,
                 Number      = -2354,
@@ -183,11 +161,10 @@ namespace UnitTestDal
 
             using (var db = new EntitesContext())
             {
+                ClearTable.Features(db);
                 featureDAO = new DbFeatureDAO(db);
                 featureDAO.Add(CreateNew());
-                Assert.ThrowsException<NullReferenceException>(
-                    () => featureDAO.Update(featureNoDB));
-                ClearTable.Features(db);
+                Assert.AreEqual(featureDAO.Update(featureNoDB), false);                
             }
         }
         [TestMethod]
@@ -197,6 +174,10 @@ namespace UnitTestDal
             bool remove;
             using (var db = new EntitesContext())
             {
+                ClearTable.Features(db);
+                ClearTable.KeyFeatures(db);
+                ClearTable.KeyFeatureClients(db);
+
                 featureDAO = new DbFeatureDAO(db);
                 db.Features.AddRange(CreateListEntities.Features());
                 db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
@@ -204,10 +185,6 @@ namespace UnitTestDal
                 db.SaveChanges();
 
                 remove = featureDAO.Remove(1);
-
-                ClearTable.Features(db);
-                ClearTable.KeyFeatures(db);
-                ClearTable.KeyFeatureClients(db);
             }
 
             Assert.AreEqual(remove, removeExpected);
@@ -232,11 +209,35 @@ namespace UnitTestDal
         {
             using (var db = new EntitesContext())
             {
+                ClearTable.Features(db);
                 featureDAO = new DbFeatureDAO(db);
                 featureDAO.Add(CreateNew());
-                Assert.ThrowsException<NullReferenceException>(
-                    () => featureDAO.Remove(1235));
+                Assert.AreEqual(featureDAO.Remove(1235), false);                
+            }
+        }
+        [TestMethod]
+        public void ContainsDBFeature()
+        {
+            var feature = CreateNew();
+            using (var db = new EntitesContext())
+            {
                 ClearTable.Features(db);
+                featureDAO = new DbFeatureDAO(db);
+                featureDAO.Add(feature);
+                Assert.AreEqual(featureDAO.ContainsDB(feature), true);
+            }
+        }
+        [TestMethod]
+        public void NoContainsDBFeature()
+        {
+            var feature = CreateNew();
+            using (var db = new EntitesContext())
+            {
+                ClearTable.Features(db);
+                featureDAO = new DbFeatureDAO(db);
+                featureDAO.Add(feature);
+                feature.Name = "adasdsa___";
+                Assert.AreEqual(featureDAO.ContainsDB(feature), false);
             }
         }
         private Feature CreateNew()
