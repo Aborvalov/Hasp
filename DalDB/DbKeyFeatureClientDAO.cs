@@ -2,37 +2,50 @@
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 
 namespace DalDB
 {
     public class DbKeyFeatureClientDAO : IContractKeyFeatureClientDAO
     {
-        private EntitesContext Db { get; }
+        private readonly EntitesContext db;
 
         public DbKeyFeatureClientDAO(EntitesContext db)
         {
-            this.Db = db ?? throw new ArgumentNullException(nameof(db));
+            this.db = db ?? throw new ArgumentNullException(nameof(db));
         }
         public int Add(KeyFeatureClient entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            var keyFeatureClient = Db.KeyFeatureClients.Add(entity);
-            Db.SaveChanges();
+            var keyFeatureClient = db.KeyFeatureClients.Add(entity);
+            
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                return -1;
+            }
+            catch
+            {
+                throw;
+            }
 
             return keyFeatureClient.Id;
         }
 
-        public List<KeyFeatureClient> GetAll() => Db.KeyFeatureClients.ToList();
+        public List<KeyFeatureClient> GetAll() => db.KeyFeatureClients.ToList();
 
         public KeyFeatureClient GetById(int id)
         {
             if (id < 1)
                 throw new ArgumentException("Неверное значение.", nameof(id));
 
-            var keyFeatureClient = Db.KeyFeatureClients
+            var keyFeatureClient = db.KeyFeatureClients
                                      .SingleOrDefault(kfc => kfc.Id == id);
 
             return keyFeatureClient;
@@ -45,22 +58,11 @@ namespace DalDB
 
             var keyFeatureClient = GetById(id);
             if (keyFeatureClient == null)
-                throw new NullReferenceException("Объект не найден в базе, " + nameof(keyFeatureClient));
-
-            try
-            {
-                Db.KeyFeatureClients.Remove(keyFeatureClient);
-                Db.SaveChanges();
-            }
-            catch (NullReferenceException)
-            {
                 return false;
-            }
-            catch
-            {
-                throw;
-            }
 
+            db.KeyFeatureClients.Remove(keyFeatureClient);
+            db.SaveChanges();
+            
             return true;
         }
 
@@ -71,14 +73,25 @@ namespace DalDB
 
             var keyFeatureClient = GetById(entity.Id);
             if (keyFeatureClient == null)
-                throw new NullReferenceException("Объект не найден в базе, " + nameof(keyFeatureClient));
+                return false;
 
             keyFeatureClient.IdClient     = entity.IdKeyFeature;
             keyFeatureClient.IdKeyFeature = entity.IdKeyFeature;
             keyFeatureClient.Note         = entity.Note;
             keyFeatureClient.Initiator    = entity.Initiator;
 
-            Db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                return false;
+            }
+            catch
+            {
+                throw;
+            }
 
             return true;
         }
@@ -89,12 +102,12 @@ namespace DalDB
         /// <returns>Результат проверки.</returns>
         public bool ContainsDB(KeyFeatureClient entity)
         {
-            KeyFeatureClient kfc = Db.KeyFeatureClients
-                                   .SingleOrDefault(x =>
-                                                    x.IdKeyFeature == entity.IdKeyFeature &&
-                                                    x.IdClient     == entity.IdClient &&
-                                                    x.Initiator    == entity.Initiator &&
-                                                    x.Note         == entity.Note);
+            var kfc = db.KeyFeatureClients
+                        .SingleOrDefault(x =>
+                                         x.IdKeyFeature == entity.IdKeyFeature &&
+                                         x.IdClient     == entity.IdClient &&
+                                         x.Initiator    == entity.Initiator &&
+                                         x.Note         == entity.Note);
             return kfc != null;
         }
     }

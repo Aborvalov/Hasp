@@ -2,17 +2,18 @@
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 
 namespace DalDB
 {
     public class DbFeatureDAO : IContractFeatureDAO
     {
-        private EntitesContext Db { get; }
+        private readonly EntitesContext db;
 
         public DbFeatureDAO(EntitesContext db)
         {
-            this.Db = db ?? throw new ArgumentNullException(nameof(db));  
+            this.db = db ?? throw new ArgumentNullException(nameof(db));  
         }
 
         public int Add(Feature entity)
@@ -20,23 +21,32 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            if (ContainsDB(entity))
-                throw new DuplicateException("Данный функционал имеется в базе.");
+            var feature = db.Features.Add(entity);
 
-            var feature = Db.Features.Add(entity);
-            Db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                return -1;
+            }
+            catch
+            {
+                throw;
+            }
 
             return feature.Id;
         }
 
-        public List<Feature> GetAll() => Db.Features.ToList();
+        public List<Feature> GetAll() => db.Features.ToList();
 
         public Feature GetById(int id)
         {
             if (id < 1)
                 throw new ArgumentException("Неверное значение.", nameof(id));
 
-            var feature = Db.Features.SingleOrDefault(f => f.Id == id);
+            var feature = db.Features.SingleOrDefault(f => f.Id == id);
             return feature;
         }
 
@@ -45,43 +55,32 @@ namespace DalDB
             if (id < 1)
                 throw new ArgumentException("Неверное значение.", nameof(id));
 
-            Feature feature = GetById(id);
+            var feature = GetById(id);
             if (feature == null)
-                throw new NullReferenceException("Объект не найден в базе, " + nameof(feature));
+                return false;
 
-            List<KeyFeature> keyFeatures = Db.KeyFeatures
-                                             .Where(kf => kf.IdFeature == id)
-                                             .ToList();
+            var keyFeatures = db.KeyFeatures
+                                .Where(kf => kf.IdFeature == id)
+                                .ToList();
 
             List<KeyFeatureClient> keyFeatureClients;
 
-            try
+            db.Features.Remove(feature);
+
+            foreach (var kf in keyFeatures)
             {
-                Db.Features.Remove(feature);
+                db.KeyFeatures.Remove(kf);
 
-                foreach (var kf in keyFeatures)
-                {
-                    Db.KeyFeatures.Remove(kf);
+                keyFeatureClients = db.KeyFeatureClients
+                                      .Where(kfc => kfc.IdKeyFeature == kf.Id)
+                                      .ToList();
 
-                    keyFeatureClients = Db.KeyFeatureClients
-                                          .Where(kfc => kfc.IdKeyFeature == kf.Id)
-                                          .ToList();
-
-                    foreach (var kfc in keyFeatureClients)
-                        Db.KeyFeatureClients.Remove(kfc);
-                }
-
-                Db.SaveChanges();
+                foreach (var kfc in keyFeatureClients)
+                    db.KeyFeatureClients.Remove(kfc);
             }
-            catch (NullReferenceException)
-            {
-                return false;
-            }
-            catch
-            {
-                throw;
-            }
-            
+
+            db.SaveChanges();
+           
             return true;
         }        
 
@@ -90,18 +89,26 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            if (ContainsDB(entity))
-                throw new DuplicateException("Данный функционал имеется в базе.");
-
-            Feature feature = GetById(entity.Id);
+            var feature = GetById(entity.Id);
             if (feature == null)
-                throw new NullReferenceException("Объект не найден в базе, " + nameof(feature));
+                return false;
 
             feature.Number      = entity.Number;
             feature.Name        = entity.Name;
             feature.Description = entity.Description;
 
-            Db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                return false;
+            }
+            catch
+            {
+                throw;
+            }
 
             return true;
         }
@@ -112,8 +119,8 @@ namespace DalDB
         /// <returns>Результат проверки.</returns>
         public bool ContainsDB(Feature entity)
         {
-            Feature feature = Db.Features
-                       .SingleOrDefault(f =>
+            var feature = db.Features
+                            .SingleOrDefault(f =>
                                         f.Number      == entity.Number &&
                                         f.Name        == entity.Name &&
                                         f.Description == entity.Description);

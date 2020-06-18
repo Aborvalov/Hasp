@@ -22,7 +22,7 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            HaspKey haspKey = db.HaspKeys.Add(entity);
+            var haspKey = db.HaspKeys.Add(entity);
 
             try
             {
@@ -82,6 +82,7 @@ namespace DalDB
                                   })
                                   .Distinct().ToList();
 
+            return haspKeysPastDue;
             #region SQL запрос.
 
             /*
@@ -97,10 +98,8 @@ namespace DalDB
             */
 
             #endregion
-
-            return haspKeysPastDue;
         }
-                
+
         public List<HaspKey> GetByClient(Client client)
         {
             if (client == null)
@@ -109,23 +108,23 @@ namespace DalDB
             var keyFeatures      = db.KeyFeatures.ToList();
             var keyFeatureCliets = db.KeyFeatureClients.ToList();
 
-            var haspKeys = (from keyFeatureCk in keyFeatureCliets
-                            join keyFeat in keyFeatures
-                              on keyFeatureCk.IdKeyFeature equals keyFeat.Id
-                            join jaspKey in GetAll()
-                              on keyFeat.IdHaspKey equals jaspKey.Id
-                            where keyFeatureCk.IdClient == client.Id
+            var haspKeys = (from keyFeatureClient in keyFeatureCliets
+                            join keyFeature in keyFeatures
+                              on keyFeatureClient.IdKeyFeature equals keyFeature.Id
+                            join haspKey in GetAll()
+                              on keyFeature.IdHaspKey equals haspKey.Id
+                            where keyFeatureClient.IdClient == client.Id
                             select new HaspKey
                             {
-                                Id       = jaspKey.Id,
-                                InnerId  = jaspKey.InnerId,
-                                Number   = jaspKey.Number,
-                                Location = jaspKey.Location,
-                                TypeKey  = jaspKey.TypeKey,
+                                Id       = haspKey.Id,
+                                InnerId  = haspKey.InnerId,
+                                Number   = haspKey.Number,
+                                Location = haspKey.Location,
+                                TypeKey  = haspKey.TypeKey,
                             }) 
                          .Distinct().ToList();
 
-
+            return haspKeys;
             #region SQL запрос.
             /*
               select distinct hk.*
@@ -135,8 +134,6 @@ namespace DalDB
                  where kfc.IdClient = 1
              */
             #endregion
-
-            return haspKeys;
         }
 
         public HaspKey GetById(int id)
@@ -154,7 +151,7 @@ namespace DalDB
             if (id < 1)
                 throw new ArgumentException("Неверное значение.", nameof(id));
 
-            HaspKey haspKey = GetById(id);
+            var haspKey = GetById(id);
             if (haspKey == null)
                 return false;
 
@@ -188,7 +185,7 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            HaspKey haspKey = GetById(entity.Id);
+            var haspKey = GetById(entity.Id);
             if (haspKey == null)
                 return false;
 
@@ -219,8 +216,8 @@ namespace DalDB
         /// <returns>Результат проверки.</returns>
         public bool ContainsDB(HaspKey entity)
         {
-            HaspKey key = db.HaspKeys
-                       .SingleOrDefault(hk =>
+            var key = db.HaspKeys
+                        .SingleOrDefault(hk =>
                                         hk.InnerId  == entity.InnerId &&
                                         hk.Number   == entity.Number &&
                                         hk.TypeKey  == entity.TypeKey &&
