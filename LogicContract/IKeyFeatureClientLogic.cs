@@ -1,14 +1,8 @@
 ﻿using Entities;
-using System.Collections.Generic;
 
 namespace LogicContract
 {
-    public interface IKeyFeatureClientLogic
+    public interface IKeyFeatureClientLogic : IEntitesLogic<KeyFeatureClient>
     {
-        bool Save(KeyFeatureClient keyFeatureClient);
-        bool Update(KeyFeatureClient keyFeatureClient);
-        KeyFeatureClient GetById(int id);
-        List<KeyFeatureClient> GetAll();
-        bool Remove(int id);
     }
 }

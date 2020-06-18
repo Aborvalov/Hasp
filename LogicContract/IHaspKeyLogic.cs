@@ -3,13 +3,8 @@ using System.Collections.Generic;
 
 namespace LogicContract
 {
-    public interface IHaspKeyLogic
+    public interface IHaspKeyLogic : IEntitesLogic<HaspKey>
     {
-        bool Save(HaspKey haspKey);
-        HaspKey GetById(int id);
-        List<HaspKey> GetAll();
-        bool Remove(int id);
-        bool Update(HaspKey haspKey);       
         List<HaspKey> GetByClient(Client client);
         /// <summary>
         /// Поиск просроченных ключей.

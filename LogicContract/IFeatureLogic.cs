@@ -1,14 +1,8 @@
 ﻿using Entities;
-using System.Collections.Generic;
 
 namespace LogicContract
 {
-    public interface IFeatureLogic
+    public interface IFeatureLogic : IEntitesLogic<Feature>
     {
-        bool Save(Feature feature);
-        bool Update(Feature feature);
-        Feature GetById(int id);
-        bool Remove(int id);
-        List<Feature> GetAll();
     }
 }
