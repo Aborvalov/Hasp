@@ -19,9 +19,6 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            if(ContainsDb(entity))
-                throw new DuplicateException("Данная запись имеется в базе.");
-
             var keyFeatureClient = Db.KeyFeatureClients.Add(entity);
             Db.SaveChanges();
 
@@ -72,9 +69,6 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            if (ContainsDb(entity))
-                throw new DuplicateException("Данная запись имеется в базе.");
-
             var keyFeatureClient = GetById(entity.Id);
             if (keyFeatureClient == null)
                 throw new NullReferenceException("Объект не найден в базе, " + nameof(keyFeatureClient));
@@ -93,7 +87,7 @@ namespace DalDB
         /// </summary>
         /// <param name="entity">Связь (ключ-фича)-клиент.</param>
         /// <returns>Результат проверки.</returns>
-        private bool ContainsDb(KeyFeatureClient entity)
+        public bool ContainsDB(KeyFeatureClient entity)
         {
             KeyFeatureClient kfc = Db.KeyFeatureClients
                                    .SingleOrDefault(x =>

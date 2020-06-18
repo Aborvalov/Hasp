@@ -5,7 +5,7 @@ namespace DalContract
 {
     public interface IContractClientDAO : IContractEntitesDAO<Client>
     {
-        Client GetByNumberKey(int KeyInnerId);
+        Client GetByNumberKey(int keyInnerId);
         List<Client> GetByFeature(Feature feature);
     }
 }

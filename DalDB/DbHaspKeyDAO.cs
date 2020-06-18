@@ -2,18 +2,19 @@
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 
 namespace DalDB
 {
     public class DbHaspKeyDAO : IContractHaspKeyDAO
     {
-        private EntitesContext Db { get; }
+        private readonly EntitesContext db;
         private readonly DateTime date = DateTime.Now.Date;
 
         public DbHaspKeyDAO(EntitesContext db)
         {
-            this.Db = db ?? throw new ArgumentNullException(nameof(db));
+            this.db = db ?? throw new ArgumentNullException(nameof(db));
         }
                        
         public int Add(HaspKey entity)
@@ -21,21 +22,30 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            if (ContainsDB(entity))
-                throw new DuplicateException("Данный ключ имеется в базе.");
+            HaspKey haspKey = db.HaspKeys.Add(entity);
 
-            var haspKey = Db.HaspKeys.Add(entity);
-            Db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                return -1;
+            }
+            catch 
+            {
+                throw;
+            }
 
             return haspKey.Id;
         }
                
         public List<HaspKey> GetByActive()
         {
-            List<HaspKey> haspKeys = new List<HaspKey>();
+            var haspKeys = new List<HaspKey>();
             HaspKey hk;
 
-            var keyFeature = Db.KeyFeatures
+            var keyFeature = db.KeyFeatures
                                .Where(kf => kf.EndDate >= date)
                                .ToList();
 
@@ -48,28 +58,27 @@ namespace DalDB
             return haspKeys;
         }
 
-        public List<HaspKey> GetAll() => Db.HaspKeys.ToList();
+        public List<HaspKey> GetAll() => db.HaspKeys.ToList();
                
         public List<HaspKey> GetByPastDue()
         {
-            var keyFeature = Db.KeyFeatures.ToList();
-
-
-            var haspKeysPastDue = (from hk in GetAll()
-                                   join kf in keyFeature
-                                     on hk.Id equals kf.IdHaspKey
-                                  where kf.EndDate == (from kf_ in keyFeature
-                                                      where kf_.IdHaspKey == hk.Id
-                                                     select kf_)
-                                                      .Max(x => x.EndDate) &&
-                                        kf.EndDate < date
+            var keyFeatures = db.KeyFeatures.ToList();
+            
+            var haspKeysPastDue = (from haspKey in GetAll()
+                                   join keyFeature in keyFeatures
+                                     on haspKey.Id equals keyFeature.IdHaspKey
+                                  where keyFeature.EndDate == (from keyFea in keyFeatures
+                                                              where keyFea.IdHaspKey == haspKey.Id
+                                                             select keyFea)
+                                                              .Max(x => x.EndDate) &&
+                                        keyFeature.EndDate < date
                                   select new HaspKey
                                   {
-                                      Id       = hk.Id,
-                                      InnerId  = hk.InnerId,
-                                      Number   = hk.Number,
-                                      Location = hk.Location,
-                                      TypeKey  = hk.TypeKey,
+                                      Id       = haspKey.Id,
+                                      InnerId  = haspKey.InnerId,
+                                      Number   = haspKey.Number,
+                                      Location = haspKey.Location,
+                                      TypeKey  = haspKey.TypeKey,
                                   })
                                   .Distinct().ToList();
 
@@ -97,23 +106,22 @@ namespace DalDB
             if (client == null)
                 throw new ArgumentNullException(nameof(client));
 
-            var keyFeature = Db.KeyFeatures.ToList();
-            var keyFeatureCliet = Db.KeyFeatureClients.ToList();
-            var haspKey = GetAll();
+            var keyFeatures      = db.KeyFeatures.ToList();
+            var keyFeatureCliets = db.KeyFeatureClients.ToList();
 
-            var haspKeys = (from kfc in keyFeatureCliet
-                            join kf in keyFeature
-                              on kfc.IdKeyFeature equals kf.Id
-                            join hk in haspKey
-                              on kf.IdHaspKey equals hk.Id
-                            where kfc.IdClient == client.Id
+            var haspKeys = (from keyFeatureCk in keyFeatureCliets
+                            join keyFeat in keyFeatures
+                              on keyFeatureCk.IdKeyFeature equals keyFeat.Id
+                            join jaspKey in GetAll()
+                              on keyFeat.IdHaspKey equals jaspKey.Id
+                            where keyFeatureCk.IdClient == client.Id
                             select new HaspKey
                             {
-                                Id = hk.Id,
-                                InnerId = hk.InnerId,
-                                Number = hk.Number,
-                                Location = hk.Location,
-                                TypeKey = hk.TypeKey,
+                                Id       = jaspKey.Id,
+                                InnerId  = jaspKey.InnerId,
+                                Number   = jaspKey.Number,
+                                Location = jaspKey.Location,
+                                TypeKey  = jaspKey.TypeKey,
                             }) 
                          .Distinct().ToList();
 
@@ -136,7 +144,7 @@ namespace DalDB
             if (id < 1)
                 throw new ArgumentException("Неверное значение.",nameof(id));
 
-            var haspKey = Db.HaspKeys.SingleOrDefault(hs => hs.Id == id);
+            var haspKey = db.HaspKeys.SingleOrDefault(hs => hs.Id == id);
 
             return haspKey;
         }
@@ -148,40 +156,29 @@ namespace DalDB
 
             HaspKey haspKey = GetById(id);
             if (haspKey == null)
-                throw new NullReferenceException("Объект не найден в базе, " + nameof(haspKey));
-
-            List<KeyFeature> keyFeature = Db.KeyFeatures
-                                            .Where(kf => kf.IdHaspKey == id)
-                                            .ToList();
-
-            List<KeyFeatureClient> keyFeatureClients;
-
-            try
-            {
-                Db.HaspKeys.Remove(haspKey);
-
-                foreach (var kf in keyFeature)
-                {
-                    Db.KeyFeatures.Remove(kf);
-
-                    keyFeatureClients = Db.KeyFeatureClients
-                                          .Where(kfc => kfc.IdKeyFeature == kf.Id)
-                                          .ToList();
-
-                    foreach (var kfc in keyFeatureClients)
-                        Db.KeyFeatureClients.Remove(kfc);
-                }
-                
-                Db.SaveChanges();
-            }
-            catch (NullReferenceException)
-            {
                 return false;
-            }
-            catch
+
+            var keyFeature = db.KeyFeatures
+                               .Where(kf => kf.IdHaspKey == id)
+                               .ToList();
+
+            var keyFeatureClients = new List<KeyFeatureClient>();
+            
+            db.HaspKeys.Remove(haspKey);
+
+            foreach (var kf in keyFeature)
             {
-                throw;
+                db.KeyFeatures.Remove(kf);
+
+                keyFeatureClients = db.KeyFeatureClients
+                                      .Where(kefFeatureClient => kefFeatureClient.IdKeyFeature == kf.Id)
+                                      .ToList();
+
+                foreach (var kfc in keyFeatureClients)
+                    db.KeyFeatureClients.Remove(kfc);
             }
+                
+            db.SaveChanges();            
             
             return true;
         }
@@ -191,19 +188,28 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            if (ContainsDB(entity))
-                throw new DuplicateException("Данный ключ имеется в базе.");
-
             HaspKey haspKey = GetById(entity.Id);
             if (haspKey == null)
-                throw new NullReferenceException("Объект не найден в базе, " + nameof(haspKey));
+                return false;
 
             haspKey.InnerId  = entity.InnerId;
             haspKey.Number   = entity.Number;
             haspKey.TypeKey  = haspKey.TypeKey;
             haspKey.Location = haspKey.Location;
-            
-            Db.SaveChanges();
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                return false;
+            }
+            catch
+            {
+                throw;
+            }
+
             return true;
         }
         /// <summary>
@@ -211,9 +217,9 @@ namespace DalDB
         /// </summary>
         /// <param name="entity">HASP-ключ</param>
         /// <returns>Результат проверки.</returns>
-        private bool ContainsDB(HaspKey entity)
+        public bool ContainsDB(HaspKey entity)
         {
-            HaspKey key = Db.HaspKeys
+            HaspKey key = db.HaspKeys
                        .SingleOrDefault(hk =>
                                         hk.InnerId  == entity.InnerId &&
                                         hk.Number   == entity.Number &&

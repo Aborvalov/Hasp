@@ -9,7 +9,7 @@ namespace Logic
 {
     public class HaspKeyLogic : IHaspKeyLogic
     {
-        private IContractHaspKeyDAO haspKeyDAO { get; }
+        private readonly IContractHaspKeyDAO haspKeyDAO;
         public HaspKeyLogic(IContractHaspKeyDAO haspKeyDAO)
         {
             this.haspKeyDAO = haspKeyDAO ?? throw new ArgumentNullException(nameof(haspKeyDAO));
@@ -37,7 +37,7 @@ namespace Logic
             }
         }
 
-        public HaspKey Save(HaspKey haspKey)
+        public bool Save(HaspKey haspKey)
         {
             if (haspKey == null)
                 throw new ArgumentNullException(nameof(haspKey));
@@ -47,7 +47,10 @@ namespace Logic
             int id;
             try
             {
-                id = haspKeyDAO.Add(haspKey);
+                if (haspKeyDAO.ContainsDB(haspKey))
+                    id = haspKeyDAO.Add(haspKey);
+                else
+                    return false;
             }
             catch (ArgumentNullException)
             {
@@ -62,10 +65,10 @@ namespace Logic
                 throw new InvalidOperationException("Не удалсь создать HASP-ключ.", e);
             }
 
-            return GetById(id);
+            return id > 0;
         }
 
-        public HaspKey Update(HaspKey haspKey)
+        public bool Update(HaspKey haspKey)
         {
             if (haspKey == null)
                 throw new ArgumentNullException(nameof(haspKey));
@@ -75,7 +78,7 @@ namespace Logic
             try
             {
                 if (haspKeyDAO.Update(haspKey))
-                    return haspKey;
+                    return true;
                 else throw new InvalidOperationException("Не удалсь обновить HASP-ключ.");
             }
             catch (ArgumentNullException)

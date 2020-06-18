@@ -37,8 +37,6 @@ namespace Entities
             if (!(obj is HaspKey other))
                 return false;
 
-            if (ReferenceEquals(other, null))
-                return false;
             if (ReferenceEquals(this, other))
                 return true;
 

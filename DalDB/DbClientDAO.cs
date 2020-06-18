@@ -77,12 +77,12 @@ namespace DalDB
             return client;
         }
         
-        public Client GetByNumberKey(int KeyInnerId)
+        public Client GetByNumberKey(int keyInnerId)
         {
-            if (KeyInnerId < 1)
-                throw new ArgumentException("Неверное значение.", nameof(KeyInnerId));
+            if (keyInnerId < 1)
+                throw new ArgumentException("Неверное значение.", nameof(keyInnerId));
 
-            var haspKey = Db.HaspKeys.SingleOrDefault(hk => hk.InnerId == KeyInnerId);
+            var haspKey = Db.HaspKeys.SingleOrDefault(hk => hk.InnerId == keyInnerId);
             if (haspKey == null)
                 throw new ArgumentNullException(nameof(haspKey),"HASP-ключ с данным номерем не найдн.");
 
@@ -95,7 +95,7 @@ namespace DalDB
                               on kfc.IdKeyFeature equals kf.Id
                             join hk in haspKeys
                               on kf.IdHaspKey equals hk.Id
-                           where hk.InnerId == KeyInnerId
+                           where hk.InnerId == keyInnerId
                           select kfc.IdClient)
                            .Last();
 
@@ -174,7 +174,7 @@ namespace DalDB
         /// </summary>
         /// <param name="entity">Клиент.</param>
         /// <returns>Результат проверки.</returns>
-        private bool ContainsDB(Client entity)
+        public bool ContainsDB(Client entity)
         {
             Client client = Db.Clients
                        .SingleOrDefault(c => c.Name          == entity.Name &&

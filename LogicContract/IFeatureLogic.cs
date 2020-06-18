@@ -5,8 +5,8 @@ namespace LogicContract
 {
     public interface IFeatureLogic
     {
-        Feature Save(Feature feature);
-        Feature Update(Feature feature);
+        bool Save(Feature feature);
+        bool Update(Feature feature);
         Feature GetById(int id);
         bool Remove(int id);
         List<Feature> GetAll();

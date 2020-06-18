@@ -5,12 +5,12 @@ namespace LogicContract
 {
     public interface IClientLogic
     {
-        Client Save(Client client);
-        Client Update(Client client);
+        bool Save(Client client);
+        bool Update(Client client);
         Client GetById(int id);
         bool Remove(int id);
         List<Client> GetAll();       
         List<Client> GetByFeature(Feature feature);
-        Client GetByNumberKey(int KeyInnerId);
+        Client GetByNumberKey(int keyInnerId);
     }
 }

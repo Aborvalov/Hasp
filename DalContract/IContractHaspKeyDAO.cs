@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DalContract
 {
-    public interface IContractHaspKeyDAO : IContractEntitesDAO<HaspKey>
+    public interface IContractHaspKeyDAO  : IContractEntitesDAO<HaspKey>
     {
         List<HaspKey> GetByClient(Client client);
         /// <summary>

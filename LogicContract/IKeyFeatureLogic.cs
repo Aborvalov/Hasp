@@ -5,8 +5,8 @@ namespace LogicContract
 {
     public interface IKeyFeatureLogic
     {
-        KeyFeature Save(KeyFeature keyFeature);
-        KeyFeature Update(KeyFeature keyFeature);
+        bool Save(KeyFeature keyFeature);
+        bool Update(KeyFeature keyFeature);
         KeyFeature GetById(int id);
         bool Remove(int id);
         List<KeyFeature> GetAll();

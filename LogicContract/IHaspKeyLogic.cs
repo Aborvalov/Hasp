@@ -5,11 +5,11 @@ namespace LogicContract
 {
     public interface IHaspKeyLogic
     {
-        HaspKey Save(HaspKey haspKey);
+        bool Save(HaspKey haspKey);
         HaspKey GetById(int id);
         List<HaspKey> GetAll();
         bool Remove(int id);
-        HaspKey Update(HaspKey haspKey);       
+        bool Update(HaspKey haspKey);       
         List<HaspKey> GetByClient(Client client);
         /// <summary>
         /// Поиск просроченных ключей.

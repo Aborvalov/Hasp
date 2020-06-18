@@ -13,8 +13,6 @@ namespace Entities
         {
             if (!(obj is Feature other))
                 return false;
-            if (ReferenceEquals(other, null))
-                return false;
             if (ReferenceEquals(this, other))
                 return true;
             return Id.Equals(other.Id) &&

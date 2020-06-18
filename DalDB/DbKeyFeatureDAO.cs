@@ -100,7 +100,7 @@ namespace DalDB
         /// </summary>
         /// <param name="entity">Связь ключ-фича.</param>
         /// <returns>Результат проверки.</returns>
-        private bool ContainsDB(KeyFeature entity)
+        public bool ContainsDB(KeyFeature entity)
         {
             KeyFeature kf = Db.KeyFeatures
                        .SingleOrDefault(x =>

@@ -110,7 +110,7 @@ namespace DalDB
         /// </summary>
         /// <param name="entity">Функционал.</param>
         /// <returns>Результат проверки.</returns>
-        private bool ContainsDB(Feature entity)
+        public bool ContainsDB(Feature entity)
         {
             Feature feature = Db.Features
                        .SingleOrDefault(f =>
