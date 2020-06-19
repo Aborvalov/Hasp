@@ -12,7 +12,7 @@ namespace UnitTestDal
     {
         private const int erroneousId = -123;
         private IContractKeyFeatureDAO kfDAO;
-        private DateTime date = DateTime.Now.Date;
+        private readonly DateTime date = DateTime.Now.Date;
 
         [TestMethod]
         public void NullEntitesContextKeyFeature()
