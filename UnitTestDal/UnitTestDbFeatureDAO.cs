@@ -118,7 +118,7 @@ namespace UnitTestDal
                 featureDAO = new DbFeatureDAO(db);
                 getById = featureDAO.GetById(1);
             }
-            Assert.AreEqual(getById, null);
+            Assert.IsNull(getById);
         }
         [TestMethod]
         public void UpdateFeature()
@@ -137,7 +137,7 @@ namespace UnitTestDal
                     Description = "Test ______",
                 });                
             }
-            Assert.AreEqual(update, true);
+            Assert.IsTrue(update);
         }
         [TestMethod]
         public void UpdateNullFeature()
@@ -164,13 +164,12 @@ namespace UnitTestDal
                 ClearTable.Features(db);
                 featureDAO = new DbFeatureDAO(db);
                 featureDAO.Add(CreateNew());
-                Assert.AreEqual(featureDAO.Update(featureNoDB), false);                
+                Assert.IsFalse(featureDAO.Update(featureNoDB));                
             }
         }
         [TestMethod]
         public void RemoveFeature()
         {
-            bool removeExpected = true;
             bool remove;
             using (var db = new EntitesContext())
             {
@@ -187,7 +186,7 @@ namespace UnitTestDal
                 remove = featureDAO.Remove(1);
             }
 
-            Assert.AreEqual(remove, removeExpected);
+            Assert.IsTrue(remove);
         }
         /// <summary>
         /// Удаление неправильного id.
@@ -212,7 +211,7 @@ namespace UnitTestDal
                 ClearTable.Features(db);
                 featureDAO = new DbFeatureDAO(db);
                 featureDAO.Add(CreateNew());
-                Assert.AreEqual(featureDAO.Remove(1235), false);                
+                Assert.IsFalse(featureDAO.Remove(1235));
             }
         }
         [TestMethod]
@@ -224,7 +223,7 @@ namespace UnitTestDal
                 ClearTable.Features(db);
                 featureDAO = new DbFeatureDAO(db);
                 featureDAO.Add(feature);
-                Assert.AreEqual(featureDAO.ContainsDB(feature), true);
+                Assert.IsTrue(featureDAO.ContainsDB(feature));
             }
         }
         [TestMethod]
@@ -237,7 +236,7 @@ namespace UnitTestDal
                 featureDAO = new DbFeatureDAO(db);
                 featureDAO.Add(feature);
                 feature.Name = "adasdsa___";
-                Assert.AreEqual(featureDAO.ContainsDB(feature), false);
+                Assert.IsFalse(featureDAO.ContainsDB(feature));
             }
         }
         private Feature CreateNew()

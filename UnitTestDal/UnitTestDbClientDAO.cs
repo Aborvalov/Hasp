@@ -118,7 +118,7 @@ namespace UnitTestDal
                 getById = clientDAO.GetById(1);
             }
 
-            Assert.AreEqual(getById, null);
+            Assert.IsNull(getById);
         }
         [TestMethod]
         public void UpdateClient()
@@ -139,7 +139,7 @@ namespace UnitTestDal
                 });
             }
 
-            Assert.AreEqual(update, true);
+            Assert.IsTrue(update);
         }
         [TestMethod]
         public void UpdateNullClient()
@@ -171,13 +171,12 @@ namespace UnitTestDal
                 clientDAO = new DbClientDAO(db);
                 clientDAO.Add(CreateNew());
 
-                Assert.AreEqual(clientDAO.Update(clientNoDB), false);
+                Assert.IsFalse(clientDAO.Update(clientNoDB));
             }
         }
         [TestMethod]
         public void RemoveClient()
         {
-            bool removeExpected = true;
             bool remove;
             using (var db = new EntitesContext())
             {
@@ -192,7 +191,7 @@ namespace UnitTestDal
                 remove = clientDAO.Remove(1);
             }
 
-            Assert.AreEqual(remove, removeExpected);
+            Assert.IsTrue(remove);
         }
         /// <summary>
         /// Удаление неправильного id.
@@ -217,7 +216,7 @@ namespace UnitTestDal
                 ClearTable.Clients(db);
                 clientDAO = new DbClientDAO(db);
                 clientDAO.Add(CreateNew());
-                Assert.AreEqual(clientDAO.Remove(123), false);
+                Assert.IsFalse(clientDAO.Remove(123));
                 
             }
         }
@@ -275,7 +274,7 @@ namespace UnitTestDal
             {
                 ClearTable.HaspKeys(db);
                 clientDAO = new DbClientDAO(db);
-                Assert.AreEqual(clientDAO.GetByNumberKey(2), null);
+                Assert.IsNull(clientDAO.GetByNumberKey(2));
             }
         }
         [TestMethod]
@@ -311,7 +310,7 @@ namespace UnitTestDal
                 ClearTable.Clients(db);
                 clientDAO = new DbClientDAO(db);
                 clientDAO.Add(client);
-                Assert.AreEqual(clientDAO.ContainsDB(client), true);
+                Assert.IsTrue(clientDAO.ContainsDB(client));
             }
         }
         [TestMethod]
@@ -324,7 +323,7 @@ namespace UnitTestDal
                 clientDAO = new DbClientDAO(db);
                 clientDAO.Add(client);
                 client.Name = "asdasd";
-                Assert.AreEqual(clientDAO.ContainsDB(client), false);
+                Assert.IsFalse(clientDAO.ContainsDB(client));
             }
         }
         private Client CreateNew()

@@ -45,8 +45,8 @@ namespace UnitTestDal
         [TestMethod]
         public void GetAllKeyFeature()
         {
-            List<KeyFeature> getAll = new List<KeyFeature>();
-            List<KeyFeature> kfExpected = new List<KeyFeature>();
+            var getAll = new List<KeyFeature>();
+            var kfExpected = new List<KeyFeature>();
 
             for (int i = 1; i <= 10; i++)
                 kfExpected.Add(CreateNew(i, i, i));
@@ -67,8 +67,8 @@ namespace UnitTestDal
         [TestMethod]
         public void GetAllEmptyKeyFeature()
         {
-            List<KeyFeature> getAll = new List<KeyFeature>();
-            List<KeyFeature> kfExpected = new List<KeyFeature>();
+            var getAll = new List<KeyFeature>();
+            var kfExpected = new List<KeyFeature>();
 
             using (var db = new EntitesContext())
             {
@@ -122,7 +122,7 @@ namespace UnitTestDal
                 getById = kfDAO.GetById(1);
             }
 
-            Assert.AreEqual(getById, null);
+            Assert.IsNull(getById);
         }
         [TestMethod]
         public void UpdateKeyFeature()
@@ -144,7 +144,7 @@ namespace UnitTestDal
                 });
             }
 
-            Assert.AreEqual(update, true);
+            Assert.IsTrue(update);
         }
         [TestMethod]
         public void UpdateNullKeyFeature()
@@ -174,13 +174,12 @@ namespace UnitTestDal
                 ClearTable.KeyFeatures(db);
                 kfDAO = new DbKeyFeatureDAO(db);
                 kfDAO.Add(CreateNew());
-                Assert.AreEqual(kfDAO.Update(kfNoDB), false);                
+                Assert.IsFalse(kfDAO.Update(kfNoDB));
             }
         }
         [TestMethod]
         public void RemoveKeyFeature()
         {
-            bool removeExpected = true;
             bool remove;
             using (var db = new EntitesContext())
             {
@@ -195,7 +194,7 @@ namespace UnitTestDal
                 remove = kfDAO.Remove(1);
             }
 
-            Assert.AreEqual(remove, removeExpected);
+            Assert.IsTrue(remove);
         }
         /// <summary>
         /// Удаление неправильного id.
@@ -220,7 +219,7 @@ namespace UnitTestDal
                 ClearTable.KeyFeatures(db);
                 kfDAO = new DbKeyFeatureDAO(db);
                 kfDAO.Add(CreateNew());
-                Assert.AreEqual(kfDAO.Remove(123), false);
+                Assert.IsFalse(kfDAO.Remove(123));
             }
         }
         [TestMethod]
@@ -232,7 +231,7 @@ namespace UnitTestDal
                 ClearTable.KeyFeatures(db);
                 kfDAO = new DbKeyFeatureDAO(db);
                 kfDAO.Add(keyFeat);
-                Assert.AreEqual(kfDAO.ContainsDB(keyFeat), true);
+                Assert.IsTrue(kfDAO.ContainsDB(keyFeat));
             }
         }
         [TestMethod]
@@ -245,7 +244,7 @@ namespace UnitTestDal
                 kfDAO = new DbKeyFeatureDAO(db);
                 kfDAO.Add(keyFeat);
                 keyFeat.IdFeature = 3423;
-                Assert.AreEqual(kfDAO.ContainsDB(keyFeat), false);
+                Assert.IsFalse(kfDAO.ContainsDB(keyFeat));
             }
         }
         private KeyFeature CreateNew()

@@ -19,17 +19,20 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
-            using (var db = new EntitesContext())
-            {
+            //using (var db = new EntitesContext())
+            //{
 
-                IClientLogic clientLogic = new ClientLogic(new DbClientDAO(db));
+            //    IClientLogic clientLogic = new ClientLogic(new DbClientDAO(db));
 
-                var all = clientLogic.GetAll();
-            }
-
-
+            //    var all = clientLogic.GetAll();
+            //}
 
 
+            var str = AppDomain.CurrentDomain.BaseDirectory;
+            var str2 = System.IO.Directory.GetCurrentDirectory();
+            Console.WriteLine(str);
+            Console.WriteLine(str2);
+            Console.ReadKey();
 
 
 

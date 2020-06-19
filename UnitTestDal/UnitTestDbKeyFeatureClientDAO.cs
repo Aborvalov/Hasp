@@ -119,7 +119,7 @@ namespace UnitTestDal
                 getById = kfcDAO.GetById(1);
             }
 
-            Assert.AreEqual(getById, null);
+            Assert.IsNull(getById);
         }
         [TestMethod]
         public void UpdateKeyFeatureClient()
@@ -139,7 +139,7 @@ namespace UnitTestDal
                     Note         = "_________",
                 });
             }
-            Assert.AreEqual(update, true);
+            Assert.IsTrue(update);
         }
         [TestMethod]
         public void UpdateNullKeyFeatureClient()
@@ -170,13 +170,12 @@ namespace UnitTestDal
                 ClearTable.KeyFeatureClients(db);
                 kfcDAO = new DbKeyFeatureClientDAO(db);
                 kfcDAO.Add(CreateNew());
-                Assert.AreEqual(kfcDAO.Update(kfcNoDB), false);               
+                Assert.IsFalse(kfcDAO.Update(kfcNoDB));
             }
         }
         [TestMethod]
         public void RemoveKeyFeatureClient()
         {
-            bool removeExpected = true;
             bool remove;
             using (var db = new EntitesContext())
             {
@@ -189,7 +188,7 @@ namespace UnitTestDal
                 remove = kfcDAO.Remove(1);
             }
 
-            Assert.AreEqual(remove, removeExpected);
+            Assert.IsTrue(remove);
         }
         /// <summary>
         /// Удаление неправильного id.
@@ -214,7 +213,7 @@ namespace UnitTestDal
                 ClearTable.HaspKeys(db);
                 kfcDAO = new DbKeyFeatureClientDAO(db);
                 kfcDAO.Add(CreateNew());
-                Assert.AreEqual(kfcDAO.Remove(123), false);
+                Assert.IsFalse(kfcDAO.Remove(12));
             }
         }
         [TestMethod]
@@ -226,7 +225,7 @@ namespace UnitTestDal
                 ClearTable.KeyFeatureClients(db);
                 kfcDAO = new DbKeyFeatureClientDAO(db);
                 kfcDAO.Add(keyFeatCl);
-                Assert.AreEqual(kfcDAO.ContainsDB(keyFeatCl), true);
+                Assert.IsTrue(kfcDAO.ContainsDB(keyFeatCl));
             }
         }
         [TestMethod]
@@ -239,7 +238,7 @@ namespace UnitTestDal
                 kfcDAO = new DbKeyFeatureClientDAO(db);
                 kfcDAO.Add(keyFeatCl);
                 keyFeatCl.IdClient = 234;
-                Assert.AreEqual(kfcDAO.ContainsDB(keyFeatCl), false);
+                Assert.IsFalse(kfcDAO.ContainsDB(keyFeatCl));
             }
         }
         private KeyFeatureClient CreateNew()

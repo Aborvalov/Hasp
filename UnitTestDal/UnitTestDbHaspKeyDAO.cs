@@ -125,7 +125,7 @@ namespace UnitTestDal
             {
                 ClearTable.HaspKeys(db);
                 haspKeyDAO = new DbHaspKeyDAO(db);
-                Assert.AreEqual(haspKeyDAO.GetById(1), null);
+                Assert.IsNull(haspKeyDAO.GetById(1));
             }
         }
         [TestMethod]
@@ -148,7 +148,7 @@ namespace UnitTestDal
                 });
             }
 
-            Assert.AreEqual(update, true);
+            Assert.IsTrue(update);
         }
         [TestMethod]
         public void UpdateNullHaspKey()
@@ -176,7 +176,7 @@ namespace UnitTestDal
                 haspKey.InnerId = 12;
                 haspKeyDAO.Add(haspKey);
 
-                Assert.AreEqual(haspKeyDAO.Update(CreateNew(2)), false);
+                Assert.IsFalse(haspKeyDAO.Update(CreateNew(2)));
             }
         }
         /// <summary>
@@ -199,7 +199,7 @@ namespace UnitTestDal
                 ClearTable.HaspKeys(db);
                 haspKeyDAO = new DbHaspKeyDAO(db);
                 haspKeyDAO.Add(CreateNew());
-                Assert.AreEqual(haspKeyDAO.Update(keyNoDB), false);
+                Assert.IsFalse(haspKeyDAO.Update(keyNoDB));
             }
         }
         [TestMethod]
@@ -303,7 +303,6 @@ namespace UnitTestDal
         [TestMethod]
         public void RemoveHaspKey()
         {
-            bool removeExpected = true;
             bool remove;
             using (var db = new EntitesContext())
             {
@@ -320,7 +319,7 @@ namespace UnitTestDal
                 remove = haspKeyDAO.Remove(1);
             }
 
-            Assert.AreEqual(remove, removeExpected);
+            Assert.IsTrue(remove);
         }
         /// <summary>
         /// Удаление неправильного id.
@@ -345,7 +344,7 @@ namespace UnitTestDal
                 ClearTable.HaspKeys(db);
                 haspKeyDAO = new DbHaspKeyDAO(db);
                 haspKeyDAO.Add(CreateNew());
-                Assert.AreEqual(haspKeyDAO.Remove(123), false);
+                Assert.IsFalse(haspKeyDAO.Remove(123));
             }
         }
         [TestMethod]
@@ -357,7 +356,7 @@ namespace UnitTestDal
                 ClearTable.HaspKeys(db);
                 haspKeyDAO = new DbHaspKeyDAO(db);
                 haspKeyDAO.Add(key);
-                Assert.AreEqual(haspKeyDAO.ContainsDB(key), true);
+                Assert.IsTrue(haspKeyDAO.ContainsDB(key));
             }
         }
         [TestMethod]
@@ -370,7 +369,7 @@ namespace UnitTestDal
                 haspKeyDAO = new DbHaspKeyDAO(db);
                 haspKeyDAO.Add(key);
                 key.InnerId = 234;
-                Assert.AreEqual(haspKeyDAO.ContainsDB(key), false);
+                Assert.IsFalse(haspKeyDAO.ContainsDB(key));
             }
         }
         private HaspKey CreateNew()
