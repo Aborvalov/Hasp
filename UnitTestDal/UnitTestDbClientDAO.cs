@@ -10,6 +10,7 @@ namespace UnitTestDal
     [TestClass]
     public class UnitTestDbClientDAO
     {
+        private const int erroneousId = -123;
         private IContractClientDAO clientDAO;
         [TestMethod]
         public void NullEntitesContextClient()
@@ -100,7 +101,7 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 clientDAO = new DbClientDAO(db);
-                Assert.ThrowsException<ArgumentException>(() => clientDAO.GetById(-236));
+                Assert.ThrowsException<ArgumentException>(() => clientDAO.GetById(erroneousId));
             }
         }
         /// <summary>
@@ -202,7 +203,7 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 clientDAO = new DbClientDAO(db);
-                Assert.ThrowsException<ArgumentException>(() => clientDAO.Remove(-3453));
+                Assert.ThrowsException<ArgumentException>(() => clientDAO.Remove(erroneousId));
             }
         }
         /// <summary>
@@ -264,7 +265,7 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 clientDAO = new DbClientDAO(db);
-                Assert.ThrowsException<ArgumentException>(() => clientDAO.GetByNumberKey(-234));
+                Assert.ThrowsException<ArgumentException>(() => clientDAO.GetByNumberKey(erroneousId));
             }
         }
         [TestMethod]
@@ -281,6 +282,7 @@ namespace UnitTestDal
         public void GetByNumberKeyClient()
         {
             Client getByNumberKey;
+            Client actual = CreateListEntities.Clients()[0];
 
             using (var db = new EntitesContext())
             {
@@ -299,7 +301,7 @@ namespace UnitTestDal
                 getByNumberKey = clientDAO.GetByNumberKey(1);
             }
 
-            Assert.AreEqual(getByNumberKey, CreateListEntities.Clients()[0]);
+            Assert.AreEqual(getByNumberKey, actual);
         }
         [TestMethod]
         public void ContainsDBClient()

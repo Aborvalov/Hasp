@@ -10,6 +10,7 @@ namespace UnitTestDal
     [TestClass]
     public class UnitTestDbKeyFeatureClientDAO
     {
+        private const int erroneousId = -123;
         private IContractKeyFeatureClientDAO kfcDAO;
         public void NullEntitesContextKeyFeatureClient()
         {
@@ -101,7 +102,7 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 kfcDAO = new DbKeyFeatureClientDAO(db);
-                Assert.ThrowsException<ArgumentException>(() => kfcDAO.GetById(-4136));
+                Assert.ThrowsException<ArgumentException>(() => kfcDAO.GetById(erroneousId));
             }
         }
         /// <summary>
@@ -199,7 +200,7 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 kfcDAO = new DbKeyFeatureClientDAO(db);
-                Assert.ThrowsException<ArgumentException>(() => kfcDAO.Remove(-41036));
+                Assert.ThrowsException<ArgumentException>(() => kfcDAO.Remove(erroneousId));
             }
         }
         /// <summary>

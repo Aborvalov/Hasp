@@ -10,6 +10,7 @@ namespace UnitTestDal
     [TestClass]
     public class UnitTestDbHaspKeyDAO
     {
+        private const int erroneousId = -123;
         private IContractHaspKeyDAO haspKeyDAO;
         [TestMethod]
         public void NullEntitesContextHaspKey()
@@ -112,7 +113,7 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
-                Assert.ThrowsException<ArgumentException>(() => haspKeyDAO.GetById(-412536));
+                Assert.ThrowsException<ArgumentException>(() => haspKeyDAO.GetById(erroneousId));
             }
         }
         /// <summary>
@@ -330,7 +331,7 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
-                Assert.ThrowsException<ArgumentException>(() => haspKeyDAO.Remove(-412536));
+                Assert.ThrowsException<ArgumentException>(() => haspKeyDAO.Remove(erroneousId));
             }
         }
         /// <summary>

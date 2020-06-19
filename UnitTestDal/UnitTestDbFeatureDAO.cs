@@ -10,6 +10,7 @@ namespace UnitTestDal
     [TestClass]
     public class UnitTestDbFeatureDAO
     {
+        private const int erroneousId = -123;
         private IContractFeatureDAO featureDAO;
         [TestMethod]
         public void NullEntitesContextFeature()
@@ -102,7 +103,7 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 featureDAO = new DbFeatureDAO(db);
-                Assert.ThrowsException<ArgumentException>(() => featureDAO.GetById(-412536));
+                Assert.ThrowsException<ArgumentException>(() => featureDAO.GetById(erroneousId));
             }
         }
         /// <summary>
@@ -197,7 +198,7 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 featureDAO = new DbFeatureDAO(db);
-                Assert.ThrowsException<ArgumentException>(() => featureDAO.Remove(-412536));
+                Assert.ThrowsException<ArgumentException>(() => featureDAO.Remove(erroneousId));
             }
         }
         /// <summary>

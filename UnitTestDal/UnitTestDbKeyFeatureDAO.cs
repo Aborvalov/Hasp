@@ -4,13 +4,13 @@ using Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace UnitTestDal
 {
     [TestClass]
     public class UnitTestDbKeyFeatureDAO
     {
+        private const int erroneousId = -123;
         private IContractKeyFeatureDAO kfDAO;
         private DateTime date = DateTime.Now.Date;
 
@@ -104,7 +104,7 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 kfDAO = new DbKeyFeatureDAO(db);
-                Assert.ThrowsException<ArgumentException>(() => kfDAO.GetById(-456));
+                Assert.ThrowsException<ArgumentException>(() => kfDAO.GetById(erroneousId));
             }
         }
         /// <summary>
@@ -205,7 +205,7 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 kfDAO = new DbKeyFeatureDAO(db);
-                Assert.ThrowsException<ArgumentException>(() => kfDAO.Remove(-412536));
+                Assert.ThrowsException<ArgumentException>(() => kfDAO.Remove(erroneousId));
             }
         }
         /// <summary>
