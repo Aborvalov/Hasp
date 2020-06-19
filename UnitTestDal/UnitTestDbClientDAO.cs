@@ -44,24 +44,21 @@ namespace UnitTestDal
         [TestMethod]
         public void GetAllClient()
         {
-            var getAll = new List<Client>();
-            var clientExpected = new List<Client>();
-
-            for (int i = 1; i <= 10; i++)
-                clientExpected.Add(CreateNew(i, i.ToString() + "_eer cvc"));
+            List<Client> getAll;
+            var clients = CreateListEntities.Clients();
 
             using (var db = new EntitesContext())
             {
                 ClearTable.Clients(db);
                 clientDAO = new DbClientDAO(db);
 
-                for (int i = 1; i <= 10; i++)
-                    clientDAO.Add(CreateNew(i, i.ToString() + "_eer cvc"));
+                foreach(var cl in clients)
+                    clientDAO.Add(cl);
 
                 getAll = clientDAO.GetAll();               
             }
 
-            CollectionAssert.AreEqual(getAll, clientExpected);
+            CollectionAssert.AreEqual(getAll, clients);
         }
         public void GetAllEmptyHaspKey()
         {

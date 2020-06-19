@@ -46,22 +46,20 @@ namespace UnitTestDal
         public void GetAllFeature()
         {
             var getAll = new List<Feature>();
-            var featureExpected = new List<Feature>();
-            for (int i = 1; i <= 10; i++)
-                featureExpected.Add(CreateNew(i, i, i.ToString() + "_sd"));
+            var features = CreateListEntities.Features();
 
             using (var db = new EntitesContext())
             {
                 ClearTable.Features(db);
                 featureDAO = new DbFeatureDAO(db);
 
-                for (int i = 1; i <= 10; i++)
-                    featureDAO.Add(CreateNew(i, i, i.ToString() + "_sd"));
+                foreach(var feat in features)
+                    featureDAO.Add(feat);
 
                 getAll = featureDAO.GetAll();
             }
 
-            CollectionAssert.AreEqual(getAll, featureExpected);            
+            CollectionAssert.AreEqual(getAll, features);            
         }
         [TestMethod]
         public void GetAllEmptyFeature()

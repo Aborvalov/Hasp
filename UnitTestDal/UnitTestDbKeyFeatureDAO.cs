@@ -46,23 +46,20 @@ namespace UnitTestDal
         public void GetAllKeyFeature()
         {
             var getAll = new List<KeyFeature>();
-            var kfExpected = new List<KeyFeature>();
-
-            for (int i = 1; i <= 10; i++)
-                kfExpected.Add(CreateNew(i, i, i));
+            var keyFeats = CreateListEntities.KeyFeatures();
 
             using (var db = new EntitesContext())
             {
                 ClearTable.KeyFeatures(db);
                 kfDAO = new DbKeyFeatureDAO(db);
 
-                for (int i = 1; i <= 10; i++)
-                    kfDAO.Add(CreateNew(i, i, i));
+                foreach(var kf in keyFeats)
+                    kfDAO.Add(kf);
 
                 getAll = kfDAO.GetAll();                
             }
 
-            CollectionAssert.AreEqual(getAll, kfExpected);
+            CollectionAssert.AreEqual(getAll, keyFeats);
         }
         [TestMethod]
         public void GetAllEmptyKeyFeature()

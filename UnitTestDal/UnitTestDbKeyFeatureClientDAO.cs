@@ -44,22 +44,19 @@ namespace UnitTestDal
         public void GetAllKeyFeatureClient()
         {
             var getAll = new List<KeyFeatureClient>(); ;
-            var kfcExpected = new List<KeyFeatureClient>();
-
-            for (int i = 1; i <= 10; i++)
-                kfcExpected.Add(CreateNew(i, i, i));
+            var keyFeatCls = CreateListEntities.KeyFeatureClients();
 
             using (var db = new EntitesContext())
             {
                 ClearTable.KeyFeatureClients(db);
                 kfcDAO = new DbKeyFeatureClientDAO(db);
-                for (int i = 1; i <= 10; i++)
-                    kfcDAO.Add(CreateNew(i, i, i));
+                foreach(var kfc in keyFeatCls)
+                    kfcDAO.Add(kfc);
 
                 getAll = kfcDAO.GetAll();                
             }
 
-            CollectionAssert.AreEqual(getAll, kfcExpected);
+            CollectionAssert.AreEqual(getAll, keyFeatCls);
         }
         [TestMethod]
         public void GetAllEmptyKeyFeatureClient()

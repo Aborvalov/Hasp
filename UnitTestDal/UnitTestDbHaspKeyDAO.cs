@@ -55,23 +55,20 @@ namespace UnitTestDal
         public void GetAllHaspKey()
         {
             var getAll = new List<HaspKey>(); ;
-            var haspKeysExpected = new List<HaspKey>();
-
-            for (int i = 1; i <= 10; i++)
-                haspKeysExpected.Add(CreateNew(i, i));
+            var haspKeys = CreateListEntities.HaspKeys();
 
             using (var db = new EntitesContext())
             {
                 ClearTable.HaspKeys(db);
                 haspKeyDAO = new DbHaspKeyDAO(db);
 
-                for (int i = 1; i <= 10; i++)
-                    haspKeyDAO.Add(CreateNew(i, i));
+                foreach(var key in haspKeys)
+                    haspKeyDAO.Add(key);
 
                 getAll = haspKeyDAO.GetAll();
             }
 
-            CollectionAssert.AreEqual(getAll, haspKeysExpected);
+            CollectionAssert.AreEqual(getAll, haspKeys);
         }
         [TestMethod]
         public void GetAllEmptyHaspKey()
