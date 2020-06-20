@@ -165,9 +165,9 @@ namespace ConsoleAppTest
 
             HaspKey key = new HaspKey
             {
-                InnerId = 124,
+                InnerId = 1024,
                 Location = true,
-                Number = "12-34-df g",
+                Number = "12-0034-df g",
                 TypeKey = TypeKey.Pro,
             };
 
@@ -198,7 +198,7 @@ namespace ConsoleAppTest
 
 
                 test = new DbHaspKeyDAO(db);
-                var ff = test.GetAll();
+                //var ff = test.GetAll();
 
 
 
@@ -214,7 +214,7 @@ namespace ConsoleAppTest
                 //var pastDue = test.GetByPastDue().ToList();
                 //var ff = test.GetAll();
 
-                //int id = test.Add(key);                
+                int id = test.Add(key);                
                 /*
                  foreach(var str in test.GetAll())
                      Console.WriteLine(str.Id +"-"+'\t' + str.InnerId + "-"+'\t' + str.Number + "-"+ '\t' + str.TypeKey + "-"+ '\t' + str.Location);

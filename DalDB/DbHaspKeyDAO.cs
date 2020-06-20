@@ -21,8 +21,8 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            if (ContainsDB(entity))
-                throw new DuplicateException("Данный ключ имеется в базе.");
+            //if (ContainsDB(entity))
+             //   throw new DuplicateException("Данный ключ имеется в базе.");
 
             var haspKey = Db.HaspKeys.Add(entity);
             Db.SaveChanges();
