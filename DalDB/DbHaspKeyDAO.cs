@@ -16,14 +16,13 @@ namespace DalDB
         {
             this.db = db ?? throw new ArgumentNullException(nameof(db));
         }
-                       
+
         public int Add(HaspKey entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            if (ContainsDB(entity))
-                throw new DuplicateException("Данный ключ имеется в базе.");
+            var haspKey = db.HaspKeys.Add(entity);
 
             try
             {
@@ -33,14 +32,14 @@ namespace DalDB
             {
                 return -1;
             }
-            catch 
+            catch
             {
                 throw;
             }
 
             return haspKey.Id;
         }
-               
+
         public List<HaspKey> GetByActive()
         {
             var haspKeys = new List<HaspKey>();
@@ -59,27 +58,27 @@ namespace DalDB
         }
 
         public List<HaspKey> GetAll() => db.HaspKeys.ToList();
-               
+
         public List<HaspKey> GetByPastDue()
         {
             var keyFeatures = db.KeyFeatures;
-            
+
             var haspKeysPastDue = (from haspKey in GetAll()
                                    join keyFeature in keyFeatures
                                      on haspKey.Id equals keyFeature.IdHaspKey
-                                  where keyFeature.EndDate == (from keyFea in keyFeatures
-                                                              where keyFea.IdHaspKey == haspKey.Id
-                                                             select keyFea)
-                                                              .Max(x => x.EndDate) &&
-                                        keyFeature.EndDate < date
-                                  select new HaspKey
-                                  {
-                                      Id       = haspKey.Id,
-                                      InnerId  = haspKey.InnerId,
-                                      Number   = haspKey.Number,
-                                      IsHome = haspKey.IsHome,
-                                      TypeKey  = haspKey.TypeKey,
-                                  })
+                                   where keyFeature.EndDate == (from keyFea in keyFeatures
+                                                                where keyFea.IdHaspKey == haspKey.Id
+                                                                select keyFea)
+                                                               .Max(x => x.EndDate) &&
+                                         keyFeature.EndDate < date
+                                   select new HaspKey
+                                   {
+                                       Id = haspKey.Id,
+                                       InnerId = haspKey.InnerId,
+                                       Number = haspKey.Number,
+                                       IsHome = haspKey.IsHome,
+                                       TypeKey = haspKey.TypeKey,
+                                   })
                                   .Distinct().ToList();
 
             return haspKeysPastDue;
@@ -94,7 +93,6 @@ namespace DalDB
                                 from keyFeatures
                                 where IdHaspKey = hk.Id) and
                 EndDate < date()
-
             */
 
             #endregion
@@ -105,7 +103,7 @@ namespace DalDB
             if (client == null)
                 throw new ArgumentNullException(nameof(client));
 
-            var keyFeatures      = db.KeyFeatures.ToList();
+            var keyFeatures = db.KeyFeatures.ToList();
             var keyFeatureCliets = db.KeyFeatureClients.ToList();
 
             var haspKeys = (from keyFeatureClient in keyFeatureCliets
@@ -116,12 +114,12 @@ namespace DalDB
                             where keyFeatureClient.IdClient == client.Id
                             select new HaspKey
                             {
-                                Id       = haspKey.Id,
-                                InnerId  = haspKey.InnerId,
-                                Number   = haspKey.Number,
+                                Id = haspKey.Id,
+                                InnerId = haspKey.InnerId,
+                                Number = haspKey.Number,
                                 IsHome = haspKey.IsHome,
-                                TypeKey  = haspKey.TypeKey,
-                            }) 
+                                TypeKey = haspKey.TypeKey,
+                            })
                          .Distinct().ToList();
 
             return haspKeys;
@@ -139,7 +137,7 @@ namespace DalDB
         public HaspKey GetById(int id)
         {
             if (id < 1)
-                throw new ArgumentException("Неверное значение.",nameof(id));
+                throw new ArgumentException("Неверное значение.", nameof(id));
 
             var haspKey = db.HaspKeys.SingleOrDefault(hs => hs.Id == id);
 
@@ -158,7 +156,7 @@ namespace DalDB
             var keyFeature = db.KeyFeatures
                                .Where(kf => kf.IdHaspKey == id);
 
-            
+
             db.HaspKeys.Remove(haspKey);
 
             foreach (var kf in keyFeature)
@@ -171,12 +169,12 @@ namespace DalDB
                 foreach (var kfc in keyFeatureClients)
                     db.KeyFeatureClients.Remove(kfc);
             }
-                
-            db.SaveChanges();            
-            
+
+            db.SaveChanges();
+
             return true;
         }
-                
+
         public bool Update(HaspKey entity)
         {
             if (entity == null)
@@ -186,10 +184,10 @@ namespace DalDB
             if (haspKey == null)
                 return false;
 
-            haspKey.InnerId  = entity.InnerId;
-            haspKey.Number   = entity.Number;
-            haspKey.TypeKey  = haspKey.TypeKey;
-            haspKey.IsHome   = haspKey.IsHome;
+            haspKey.InnerId = entity.InnerId;
+            haspKey.Number = entity.Number;
+            haspKey.TypeKey = haspKey.TypeKey;
+            haspKey.IsHome = haspKey.IsHome;
 
             try
             {
@@ -215,10 +213,10 @@ namespace DalDB
         {
             var key = db.HaspKeys
                         .SingleOrDefault(hk =>
-                                         hk.InnerId  == entity.InnerId &&
-                                         hk.Number   == entity.Number &&
-                                         hk.TypeKey  == entity.TypeKey &&
-                                         hk.IsHome   == entity.IsHome );
+                                         hk.InnerId == entity.InnerId &&
+                                         hk.Number == entity.Number &&
+                                         hk.TypeKey == entity.TypeKey &&
+                                         hk.IsHome == entity.IsHome);
 
             return key != null;
         }
