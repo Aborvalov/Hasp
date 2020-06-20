@@ -8,53 +8,51 @@ namespace DalDB
 {
     public class DbClientDAO : IContractClientDAO
     {
-        private EntitesContext Db { get; }
+        private readonly EntitesContext db;
 
         public DbClientDAO(EntitesContext db)
         {
-            this.Db = db ?? throw new ArgumentNullException(nameof(db));
+            this.db = db ?? throw new ArgumentNullException(nameof(db));
         }
         public int Add(Client entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            if (ContainsDB(entity))
-                throw new DuplicateException("Данный клиент имеется в базе.");
+            var client = db.Clients.Add(entity);
 
-            var client = Db.Clients.Add(entity);
-            Db.SaveChanges();
-
+            db.SaveChanges();
+            
             return client.Id;
         }
 
-        public List<Client> GetAll() => Db.Clients.ToList();
+        public List<Client> GetAll() => db.Clients.ToList();
         
         public List<Client> GetByFeature(Feature feature)
         {
             if (feature == null)
                 throw new ArgumentNullException(nameof(feature));
 
-            var keyFeatures = Db.KeyFeatures.ToList();
-            var keyFeatureCliets = Db.KeyFeatureClients.ToList();
-            var clients = GetAll();
+            var keyFeatures      = db.KeyFeatures.ToList();
+            var keyFeatureCliets = db.KeyFeatureClients.ToList();
 
-            var clientFeature = (from kfc in keyFeatureCliets
-                                 join kf in keyFeatures
-                                   on kfc.IdKeyFeature equals kf.Id
-                                 join c in clients
-                                   on kfc.IdClient equals c.Id
-                                where kf.IdFeature == feature.Id
+            var clientFeature = (from keyFeatureClient in keyFeatureCliets
+                                 join keyFeature in keyFeatures
+                                   on keyFeatureClient.IdKeyFeature equals keyFeature.Id
+                                 join client in GetAll()
+                                   on keyFeatureClient.IdClient equals client.Id
+                                where keyFeature.IdFeature == feature.Id
                                select new Client
                                  {
-                                     Id            = c.Id,
-                                     Name          = c.Name,
-                                     Address       = c.Address,
-                                     ContactPerson = c.ContactPerson,
-                                     Phone         = c.Phone,
+                                     Id            = client.Id,
+                                     Name          = client.Name,
+                                     Address       = client.Address,
+                                     ContactPerson = client.ContactPerson,
+                                     Phone         = client.Phone,
                                  })
                                  .ToList();
 
+            return clientFeature;
             #region SQlзапрос
             /*
              select c.*
@@ -64,8 +62,6 @@ namespace DalDB
               where kf.IdFeature = 1
              */
             #endregion
-
-            return clientFeature;
         }
 
         public Client GetById(int id)
@@ -73,34 +69,33 @@ namespace DalDB
             if (id < 1)
                 throw new ArgumentException("Неверное значение.", nameof(id));
 
-            var client = Db.Clients.SingleOrDefault(c => c.Id == id);
+            var client = db.Clients.SingleOrDefault(c => c.Id == id);
             return client;
         }
         
-        public Client GetByNumberKey(int KeyInnerId)
+        public Client GetByNumberKey(int keyInnerId)
         {
-            if (KeyInnerId < 1)
-                throw new ArgumentException("Неверное значение.", nameof(KeyInnerId));
+            if (keyInnerId < 1)
+                throw new ArgumentException("Неверное значение.", nameof(keyInnerId));
 
-            var haspKey = Db.HaspKeys.SingleOrDefault(hk => hk.InnerId == KeyInnerId);
+            var haspKey = db.HaspKeys.SingleOrDefault(hk => hk.InnerId == keyInnerId);
             if (haspKey == null)
-                throw new ArgumentNullException(nameof(haspKey),"HASP-ключ с данным номерем не найдн.");
+                return null;
 
-            var keyFeatures = Db.KeyFeatures.ToList();
-            var keyFeatureCliets = Db.KeyFeatureClients.ToList();
-            var haspKeys = Db.HaspKeys.ToList();
+            var keyFeatures      = db.KeyFeatures.ToList();
+            var keyFeatureCliets = db.KeyFeatureClients.ToList();
+            var haspKeys         = db.HaspKeys.ToList();
 
-            int idClient = (from kfc in keyFeatureCliets
-                            join kf in keyFeatures
-                              on kfc.IdKeyFeature equals kf.Id
-                            join hk in haspKeys
-                              on kf.IdHaspKey equals hk.Id
-                           where hk.InnerId == KeyInnerId
-                          select kfc.IdClient)
+            int idClient = (from keyFeatureClient in keyFeatureCliets
+                            join keyFeature in keyFeatures
+                              on keyFeatureClient.IdKeyFeature equals keyFeature.Id
+                            join key in haspKeys
+                              on keyFeature.IdHaspKey equals key.Id
+                           where key.InnerId == keyInnerId
+                          select keyFeatureClient.IdClient)
                            .Last();
 
             return GetById(idClient);
-
             #region SQL запрос.
             /*
               select *
@@ -120,32 +115,20 @@ namespace DalDB
             if (id < 1)
                 throw new ArgumentException("Неверное значение.", nameof(id));
 
-            Client client = GetById(id);
+            var client = GetById(id);
             if (client == null)
-                throw new NullReferenceException("Объект не найден в базе, " + nameof(client));
-
-            List<KeyFeatureClient> keyFeatureClients = Db.KeyFeatureClients
-                                                         .Where(kfc => kfc.IdClient == id)
-                                                         .ToList();
-
-            try
-            {
-                Db.Clients.Remove(client);
-
-                foreach (var kfc in keyFeatureClients)
-                    Db.KeyFeatureClients.Remove(kfc);
-
-                Db.SaveChanges();
-            }
-            catch(NullReferenceException)
-            {
                 return false;
-            }
-            catch
-            {
-                throw;
-            }
-            
+
+            var keyFeatureClients = db.KeyFeatureClients
+                                      .Where(kfc => kfc.IdClient == id);
+
+            db.Clients.Remove(client);
+
+            foreach (var kfc in keyFeatureClients)
+                db.KeyFeatureClients.Remove(kfc);
+
+            db.SaveChanges();
+                        
             return true;
         }
 
@@ -154,19 +137,17 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            Client client = GetById(entity.Id);
+            var client = GetById(entity.Id);
             if (client == null)
-                throw new NullReferenceException("Объект не найден в базе, " + nameof(client));
-
-            if (ContainsDB(entity))
-                throw new DuplicateException("Нет изменений по данному клиенту.");
+                return false;
 
             client.Name          = entity.Name;
             client.Address       = entity.Address;
             client.ContactPerson = entity.ContactPerson;
             client.Phone         = entity.Phone;
 
-            Db.SaveChanges();
+            db.SaveChanges();
+           
             return true;
         }
         /// <summary>
@@ -174,9 +155,9 @@ namespace DalDB
         /// </summary>
         /// <param name="entity">Клиент.</param>
         /// <returns>Результат проверки.</returns>
-        private bool ContainsDB(Client entity)
+        public bool ContainsDB(Client entity)
         {
-            Client client = Db.Clients
+            var client = db.Clients
                        .SingleOrDefault(c => c.Name          == entity.Name &&
                                              c.Address       == entity.Address &&
                                              c.ContactPerson == entity.ContactPerson &&

@@ -7,7 +7,7 @@ namespace UnitTestDal
     internal static class CreateListEntities
     {
         private static DateTime date = DateTime.Now.Date;
-        static internal List<HaspKey> HaspKeys()
+        internal static List<HaspKey> HaspKeys()
         {
             return new List<HaspKey>
             {
@@ -15,19 +15,19 @@ namespace UnitTestDal
             {
                 InnerId  = 1,
                 Number   = "uz-2",
-                Location = true,
+                IsHome = true,
                 TypeKey  = TypeKey.Pro,
             },
             new HaspKey
             {
                 InnerId  = 2,
                 Number   = "uz-3",
-                Location = true,
+                IsHome = true,
                 TypeKey  = TypeKey.Pro,
             },
         };
         }
-        static internal List<Feature> Features()
+        internal static List<Feature> Features()
         {
             return new List<Feature>
             {
@@ -43,7 +43,7 @@ namespace UnitTestDal
                 },
             };
         }
-        static internal List<Client> Clients()
+        internal static List<Client> Clients()
         {
             return new List<Client>
             {
@@ -59,7 +59,7 @@ namespace UnitTestDal
                 },
         };
         }
-        static internal List<KeyFeature> KeyFeatures()
+        internal static List<KeyFeature> KeyFeatures()
         {
             return new List<KeyFeature>
             {
@@ -93,7 +93,7 @@ namespace UnitTestDal
                 },
             };
         }
-        static internal List<KeyFeatureClient> KeyFeatureClients()
+        internal static List<KeyFeatureClient> KeyFeatureClients()
         {
             return new List<KeyFeatureClient>
             {

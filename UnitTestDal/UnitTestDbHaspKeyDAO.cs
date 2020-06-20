@@ -4,13 +4,13 @@ using Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace UnitTestDal
 {
     [TestClass]
     public class UnitTestDbHaspKeyDAO
     {
+        private const int erroneousId = -123;
         private IContractHaspKeyDAO haspKeyDAO;
         [TestMethod]
         public void NullEntitesContextHaspKey()
@@ -22,12 +22,12 @@ namespace UnitTestDal
         {
             int idExpected = 1;
             int add;
-            
+
             using (var db = new EntitesContext())
             {
+                ClearTable.HaspKeys(db);
                 haspKeyDAO = new DbHaspKeyDAO(db);
                 add = haspKeyDAO.Add(CreateNew());
-                ClearTable.HaspKeys(db);
             }
             Assert.AreEqual(add, idExpected);
         }
@@ -45,30 +45,42 @@ namespace UnitTestDal
         {
             using (var db = new EntitesContext())
             {
+                ClearTable.HaspKeys(db);
                 haspKeyDAO = new DbHaspKeyDAO(db);
                 haspKeyDAO.Add(CreateNew());
-                Assert.ThrowsException<DuplicateException>(() => haspKeyDAO.Add(CreateNew()));
-                ClearTable.HaspKeys(db);
+                Assert.AreEqual(haspKeyDAO.Add(CreateNew()), -1);
             }
         }
         [TestMethod]
         public void GetAllHaspKey()
         {
-            List<HaspKey> getAll = new List<HaspKey>(); ;
-            List<HaspKey> haspKeysExpected = new List<HaspKey>();
-
-            for (int i = 1; i <= 10; i++)
-                haspKeysExpected.Add(CreateNew(i, i));
+            var getAll = new List<HaspKey>(); ;
+            var haspKeys = CreateListEntities.HaspKeys();
 
             using (var db = new EntitesContext())
             {
+                ClearTable.HaspKeys(db);
                 haspKeyDAO = new DbHaspKeyDAO(db);
 
-                for (int i = 1; i <= 10; i++)
-                    haspKeyDAO.Add(CreateNew(i, i));
+                foreach(var key in haspKeys)
+                    haspKeyDAO.Add(key);
 
                 getAll = haspKeyDAO.GetAll();
+            }
+
+            CollectionAssert.AreEqual(getAll, haspKeys);
+        }
+        [TestMethod]
+        public void GetAllEmptyHaspKey()
+        {
+            var getAll = new List<HaspKey>();
+            var haspKeysExpected = new List<HaspKey>();
+
+            using (var db = new EntitesContext())
+            {
                 ClearTable.HaspKeys(db);
+                haspKeyDAO = new DbHaspKeyDAO(db);
+                getAll = haspKeyDAO.GetAll();
             }
 
             CollectionAssert.AreEqual(getAll, haspKeysExpected);
@@ -81,10 +93,10 @@ namespace UnitTestDal
 
             using (var db = new EntitesContext())
             {
+                ClearTable.HaspKeys(db);
                 haspKeyDAO = new DbHaspKeyDAO(db);
                 haspKeyDAO.Add(CreateNew());
                 getById = haspKeyDAO.GetById(1);
-                ClearTable.HaspKeys(db);
             }
 
             Assert.AreEqual(getById, keyExpected);
@@ -98,7 +110,7 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
-                Assert.ThrowsException<ArgumentException>(() => haspKeyDAO.GetById(-412536));
+                Assert.ThrowsException<ArgumentException>(() => haspKeyDAO.GetById(erroneousId));
             }
         }
         /// <summary>
@@ -107,15 +119,12 @@ namespace UnitTestDal
         [TestMethod]
         public void GetByIdNoDBHaspKey()
         {
-            HaspKey getById;
-
             using (var db = new EntitesContext())
             {
+                ClearTable.HaspKeys(db);
                 haspKeyDAO = new DbHaspKeyDAO(db);
-                getById = haspKeyDAO.GetById(1);
+                Assert.IsNull(haspKeyDAO.GetById(1));
             }
-
-            Assert.AreEqual(getById, null);
         }
         [TestMethod]
         public void UpdateHaspKey()
@@ -123,21 +132,21 @@ namespace UnitTestDal
             bool update;
             using (var db = new EntitesContext())
             {
+                ClearTable.HaspKeys(db);
+
                 haspKeyDAO = new DbHaspKeyDAO(db);
                 haspKeyDAO.Add(CreateNew());
                 update = haspKeyDAO.Update(new HaspKey
                 {
-                    Id       = 1,
-                    InnerId  = 23,
-                    Number   = "u2322",
-                    Location = false,
-                    TypeKey  = TypeKey.Time,
+                    Id = 1,
+                    InnerId = 23,
+                    Number = "u2322",
+                    IsHome = false,
+                    TypeKey = TypeKey.Time,
                 });
-
-                ClearTable.HaspKeys(db);
             }
 
-            Assert.AreEqual(update, true);
+            Assert.IsTrue(update);
         }
         [TestMethod]
         public void UpdateNullHaspKey()
@@ -154,18 +163,18 @@ namespace UnitTestDal
         [TestMethod]
         public void UpdateDuplicateHaspKey()
         {
-            HaspKey haspKey = CreateNew();
+            var haspKey = CreateNew();
 
             using (var db = new EntitesContext())
             {
+                ClearTable.HaspKeys(db);
+
                 haspKeyDAO = new DbHaspKeyDAO(db);
                 haspKeyDAO.Add(haspKey);
+                haspKey.InnerId = 12;
+                haspKeyDAO.Add(haspKey);
 
-                HaspKey update = CreateNew(1);
-                
-                Assert.ThrowsException<DuplicateException>(
-                    () => haspKeyDAO.Update(update));
-                ClearTable.HaspKeys(db);
+                Assert.IsFalse(haspKeyDAO.Update(CreateNew(2)));
             }
         }
         /// <summary>
@@ -174,35 +183,37 @@ namespace UnitTestDal
         [TestMethod]
         public void UpdateNoDBHaspKey()
         {
-            HaspKey keyNoDB = new HaspKey
+            var keyNoDB = new HaspKey
             {
                 Id = 234,
                 InnerId = 1546,
                 Number = "uz-265",
-                Location = false,
+                IsHome = false,
                 TypeKey = TypeKey.NetTime,
             };
 
             using (var db = new EntitesContext())
             {
+                ClearTable.HaspKeys(db);
                 haspKeyDAO = new DbHaspKeyDAO(db);
                 haspKeyDAO.Add(CreateNew());
-                Assert.ThrowsException<NullReferenceException>(
-                    () => haspKeyDAO.Update(keyNoDB));
-                ClearTable.HaspKeys(db);
+                Assert.IsFalse(haspKeyDAO.Update(keyNoDB));
             }
         }
         [TestMethod]
         public void GetByActiveHaspKey()
         {
             List<HaspKey> GetByActive;
-            List<HaspKey> GetByActiveExpected = new List<HaspKey>
+            var GetByActiveExpected = new List<HaspKey>
             {
                 CreateNew(1),
             };
 
             using (var db = new EntitesContext())
             {
+                ClearTable.HaspKeys(db);
+                ClearTable.KeyFeatures(db);
+
                 haspKeyDAO = new DbHaspKeyDAO(db);
 
                 db.HaspKeys.AddRange(CreateListEntities.HaspKeys());
@@ -210,9 +221,6 @@ namespace UnitTestDal
                 db.SaveChanges();
 
                 GetByActive = haspKeyDAO.GetByActive();
-
-                ClearTable.HaspKeys(db);
-                ClearTable.KeyFeatures(db);
             }
 
             CollectionAssert.AreEqual(GetByActive, GetByActiveExpected);
@@ -221,19 +229,21 @@ namespace UnitTestDal
         public void GetByPastDueHaspKey()
         {
             List<HaspKey> GetByActive;
-            List<HaspKey> GetByActiveExpected = new List<HaspKey>
+            var GetByActiveExpected = new List<HaspKey>
             { new HaspKey
                 {
                     Id       = 2,
                     InnerId  = 2,
                     Number   = "uz-3",
-                    Location = true,
+                    IsHome = true,
                     TypeKey  = TypeKey.Pro,
                 }
             };
 
             using (var db = new EntitesContext())
             {
+                ClearTable.HaspKeys(db);
+                ClearTable.KeyFeatures(db);
                 haspKeyDAO = new DbHaspKeyDAO(db);
 
                 db.HaspKeys.AddRange(CreateListEntities.HaspKeys());
@@ -241,9 +251,6 @@ namespace UnitTestDal
                 db.SaveChanges();
 
                 GetByActive = haspKeyDAO.GetByPastDue();
-
-                ClearTable.HaspKeys(db);
-                ClearTable.KeyFeatures(db);
             }
 
             CollectionAssert.AreEqual(GetByActive, GetByActiveExpected);
@@ -252,30 +259,30 @@ namespace UnitTestDal
         public void GetByClientHaspKey()
         {
             List<HaspKey> getByClient;
-            List<HaspKey> getByClientExpected = new List<HaspKey>
+            var getByClientExpected = new List<HaspKey>
             {
                 CreateNew(1),
             };
 
-            Client client = new Client
+            var client = new Client
             {
-                Id   = 1,
+                Id = 1,
                 Name = "Ivanov Ivan",
             };
 
             using (var db = new EntitesContext())
             {
+                ClearTable.HaspKeys(db);
+                ClearTable.KeyFeatures(db);
+                ClearTable.KeyFeatureClients(db);
+
                 haspKeyDAO = new DbHaspKeyDAO(db);
-                db.HaspKeys.AddRange(CreateListEntities.HaspKeys());                
+                db.HaspKeys.AddRange(CreateListEntities.HaspKeys());
                 db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
                 db.KeyFeatureClients.AddRange(CreateListEntities.KeyFeatureClients());
                 db.SaveChanges();
 
                 getByClient = haspKeyDAO.GetByClient(client);
-
-                ClearTable.HaspKeys(db);
-                ClearTable.KeyFeatures(db);
-                ClearTable.KeyFeatureClients(db);
             }
 
             CollectionAssert.AreEqual(getByClient, getByClientExpected);
@@ -294,10 +301,13 @@ namespace UnitTestDal
         [TestMethod]
         public void RemoveHaspKey()
         {
-            bool removeExpected = true;
             bool remove;
             using (var db = new EntitesContext())
             {
+                ClearTable.HaspKeys(db);
+                ClearTable.KeyFeatures(db);
+                ClearTable.KeyFeatureClients(db);
+
                 haspKeyDAO = new DbHaspKeyDAO(db);
                 db.HaspKeys.AddRange(CreateListEntities.HaspKeys());
                 db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
@@ -305,13 +315,9 @@ namespace UnitTestDal
                 db.SaveChanges();
 
                 remove = haspKeyDAO.Remove(1);
-                
-                ClearTable.HaspKeys(db);
-                ClearTable.KeyFeatures(db);
-                ClearTable.KeyFeatureClients(db);
             }
 
-            Assert.AreEqual(remove, removeExpected);
+            Assert.IsTrue(remove);
         }
         /// <summary>
         /// Удаление неправильного id.
@@ -322,7 +328,7 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 haspKeyDAO = new DbHaspKeyDAO(db);
-                Assert.ThrowsException<ArgumentException>(() => haspKeyDAO.Remove(-412536));
+                Assert.ThrowsException<ArgumentException>(() => haspKeyDAO.Remove(erroneousId));
             }
         }
         /// <summary>
@@ -333,11 +339,35 @@ namespace UnitTestDal
         {
             using (var db = new EntitesContext())
             {
+                ClearTable.HaspKeys(db);
                 haspKeyDAO = new DbHaspKeyDAO(db);
                 haspKeyDAO.Add(CreateNew());
-                Assert.ThrowsException<NullReferenceException>(
-                    () => haspKeyDAO.Remove(123));
+                Assert.IsFalse(haspKeyDAO.Remove(123));
+            }
+        }
+        [TestMethod]
+        public void ContainsDBHaspKey()
+        {
+            var key = CreateNew();
+            using (var db = new EntitesContext())
+            {
                 ClearTable.HaspKeys(db);
+                haspKeyDAO = new DbHaspKeyDAO(db);
+                haspKeyDAO.Add(key);
+                Assert.IsTrue(haspKeyDAO.ContainsDB(key));
+            }
+        }
+        [TestMethod]
+        public void NoContainsDBHaspKey()
+        {
+            var key = CreateNew();
+            using (var db = new EntitesContext())
+            {
+                ClearTable.HaspKeys(db);
+                haspKeyDAO = new DbHaspKeyDAO(db);
+                haspKeyDAO.Add(key);
+                key.InnerId = 234;
+                Assert.IsFalse(haspKeyDAO.ContainsDB(key));
             }
         }
         private HaspKey CreateNew()
@@ -346,7 +376,7 @@ namespace UnitTestDal
             {
                 InnerId  = 1,
                 Number   = "uz-2",
-                Location = true,
+                IsHome = true,
                 TypeKey  = TypeKey.Pro,
             };
         }

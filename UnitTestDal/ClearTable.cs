@@ -2,9 +2,9 @@
 
 namespace UnitTestDal
 {
-    static internal class ClearTable
+    internal static class ClearTable
     {
-        static internal void HaspKeys(EntitesContext db)
+        internal static void HaspKeys(EntitesContext db)
         {
             db.Database.ExecuteSqlCommand("DROP TABLE HASPKeys");
             db.Database.ExecuteSqlCommand(@"CREATE TABLE HASPKeys (
@@ -19,7 +19,7 @@ namespace UnitTestDal
                                             ); ");
             db.SaveChanges();
         }
-        static internal void Features(EntitesContext db)
+        internal static void Features(EntitesContext db)
         {
             db.Database.ExecuteSqlCommand("DROP TABLE Features");
             db.Database.ExecuteSqlCommand(@"CREATE TABLE Features (
@@ -32,7 +32,7 @@ namespace UnitTestDal
                                             ); ");
             db.SaveChanges();
         }
-        static internal void Clients(EntitesContext db)
+        internal static void Clients(EntitesContext db)
         {
             db.Database.ExecuteSqlCommand("DROP TABLE Clients");
             db.Database.ExecuteSqlCommand(@"CREATE TABLE Clients (
@@ -46,7 +46,7 @@ namespace UnitTestDal
                                             ); ");
             db.SaveChanges();
         }
-        static internal void KeyFeatures(EntitesContext db)
+        internal static void KeyFeatures(EntitesContext db)
         {
             db.Database.ExecuteSqlCommand("DROP TABLE KeyFeatures");
             db.Database.ExecuteSqlCommand(@"CREATE TABLE KeyFeatures (
@@ -62,7 +62,7 @@ namespace UnitTestDal
                                             ); ");
             db.SaveChanges();
         }
-        static internal void KeyFeatureClients(EntitesContext db)
+        internal static void KeyFeatureClients(EntitesContext db)
         {
             db.Database.ExecuteSqlCommand("DROP TABLE KeyFeatureClients");
             db.Database.ExecuteSqlCommand(@"CREATE TABLE KeyFeatureClients (

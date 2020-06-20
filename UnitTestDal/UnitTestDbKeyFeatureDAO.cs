@@ -4,15 +4,15 @@ using Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace UnitTestDal
 {
     [TestClass]
     public class UnitTestDbKeyFeatureDAO
     {
+        private const int erroneousId = -123;
         private IContractKeyFeatureDAO kfDAO;
-        private DateTime date = DateTime.Now.Date;
+        private readonly DateTime date = DateTime.Now.Date;
 
         [TestMethod]
         public void NullEntitesContextKeyFeature()
@@ -27,11 +27,10 @@ namespace UnitTestDal
 
             using (var db = new EntitesContext())
             {
-                kfDAO = new DbKeyFeatureDAO(db);
-                add = kfDAO.Add(CreateNew());
                 ClearTable.KeyFeatures(db);
+                kfDAO = new DbKeyFeatureDAO(db);
+                add = kfDAO.Add(CreateNew());                
             }
-
             Assert.AreEqual(add, idExpected);
         }
         [TestMethod]
@@ -42,38 +41,39 @@ namespace UnitTestDal
                 kfDAO = new DbKeyFeatureDAO(db);
                 Assert.ThrowsException<ArgumentNullException>(() => kfDAO.Add(null));
             }
-        }
-        [TestMethod]
-        public void AddDuplicateKeyFeature()
-        {
-            using (var db = new EntitesContext())
-            {
-                kfDAO = new DbKeyFeatureDAO(db);
-                kfDAO.Add(CreateNew());
-                Assert.ThrowsException<DuplicateException>(() => kfDAO.Add(CreateNew()));
-                ClearTable.KeyFeatures(db);
-            }
-        }
+        }        
         [TestMethod]
         public void GetAllKeyFeature()
         {
-            List<KeyFeature> getAll = new List<KeyFeature>();
-            List<KeyFeature> kfExpected = new List<KeyFeature>();
-
-            for (int i = 1; i <= 10; i++)
-                kfExpected.Add(CreateNew(i, i, i));
+            var getAll = new List<KeyFeature>();
+            var keyFeats = CreateListEntities.KeyFeatures();
 
             using (var db = new EntitesContext())
             {
+                ClearTable.KeyFeatures(db);
                 kfDAO = new DbKeyFeatureDAO(db);
 
-                for (int i = 1; i <= 10; i++)
-                    kfDAO.Add(CreateNew(i, i, i));
+                foreach(var kf in keyFeats)
+                    kfDAO.Add(kf);
 
-                getAll = kfDAO.GetAll();
-                ClearTable.KeyFeatures(db);
+                getAll = kfDAO.GetAll();                
             }
 
+            CollectionAssert.AreEqual(getAll, keyFeats);
+        }
+        [TestMethod]
+        public void GetAllEmptyKeyFeature()
+        {
+            var getAll = new List<KeyFeature>();
+            var kfExpected = new List<KeyFeature>();
+
+            using (var db = new EntitesContext())
+            {
+                ClearTable.KeyFeatures(db);
+                kfDAO = new DbKeyFeatureDAO(db);
+
+                getAll = kfDAO.GetAll();
+            }
             CollectionAssert.AreEqual(getAll, kfExpected);
         }
         [TestMethod]
@@ -84,10 +84,10 @@ namespace UnitTestDal
 
             using (var db = new EntitesContext())
             {
+                ClearTable.KeyFeatures(db);
                 kfDAO = new DbKeyFeatureDAO(db);
                 kfDAO.Add(CreateNew());
-                getById = kfDAO.GetById(1);
-                ClearTable.KeyFeatures(db);
+                getById = kfDAO.GetById(1);                
             }
 
             Assert.AreEqual(getById, kfExpected);
@@ -101,7 +101,7 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 kfDAO = new DbKeyFeatureDAO(db);
-                Assert.ThrowsException<ArgumentException>(() => kfDAO.GetById(-456));
+                Assert.ThrowsException<ArgumentException>(() => kfDAO.GetById(erroneousId));
             }
         }
         /// <summary>
@@ -114,11 +114,12 @@ namespace UnitTestDal
 
             using (var db = new EntitesContext())
             {
+                ClearTable.KeyFeatures(db);
                 kfDAO = new DbKeyFeatureDAO(db);
                 getById = kfDAO.GetById(1);
             }
 
-            Assert.AreEqual(getById, null);
+            Assert.IsNull(getById);
         }
         [TestMethod]
         public void UpdateKeyFeature()
@@ -126,6 +127,7 @@ namespace UnitTestDal
             bool update;
             using (var db = new EntitesContext())
             {
+                ClearTable.KeyFeatures(db);
                 kfDAO = new DbKeyFeatureDAO(db);
                 kfDAO.Add(CreateNew());
 
@@ -137,11 +139,9 @@ namespace UnitTestDal
                     StartDate = date.AddDays(5),
                     EndDate   = date.AddDays(10),
                 });
-
-                ClearTable.KeyFeatures(db);
             }
 
-            Assert.AreEqual(update, true);
+            Assert.IsTrue(update);
         }
         [TestMethod]
         public void UpdateNullKeyFeature()
@@ -151,34 +151,14 @@ namespace UnitTestDal
                 kfDAO = new DbKeyFeatureDAO(db);
                 Assert.ThrowsException<ArgumentNullException>(() => kfDAO.Update(null));
             }
-        }
-        /// <summary>
-        /// Дублирование связки ключ-фича при обновлении.
-        /// </summary>
-        [TestMethod]
-        public void UpdateDuplicateKeyFeature()
-        {
-            KeyFeature kf = CreateNew();
-
-            using (var db = new EntitesContext())
-            {
-                kfDAO = new DbKeyFeatureDAO(db);
-                kfDAO.Add(kf);
-
-                KeyFeature update = CreateNew(1);
-
-                Assert.ThrowsException<DuplicateException>(
-                    () => kfDAO.Update(update));
-                ClearTable.KeyFeatures(db);
-            }
-        }
+        }        
         /// <summary>
         /// Обновление связи ключ-фича которой не существует в базе.
         /// </summary>
         [TestMethod]
         public void UpdateNoDBKeyFeature()
         {
-            KeyFeature kfNoDB = new KeyFeature
+            var kfNoDB = new KeyFeature
             {
                 Id        = 32,
                 IdFeature = 3,
@@ -188,32 +168,30 @@ namespace UnitTestDal
             };
             using (var db = new EntitesContext())
             {
+                ClearTable.KeyFeatures(db);
                 kfDAO = new DbKeyFeatureDAO(db);
                 kfDAO.Add(CreateNew());
-                Assert.ThrowsException<NullReferenceException>(
-                    () => kfDAO.Update(kfNoDB));
-                ClearTable.KeyFeatures(db);
+                Assert.IsFalse(kfDAO.Update(kfNoDB));
             }
         }
         [TestMethod]
         public void RemoveKeyFeature()
         {
-            bool removeExpected = true;
             bool remove;
             using (var db = new EntitesContext())
             {
+                ClearTable.KeyFeatures(db);
+                ClearTable.KeyFeatureClients(db);
+
                 kfDAO = new DbKeyFeatureDAO(db);
                 db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
                 db.KeyFeatureClients.AddRange(CreateListEntities.KeyFeatureClients());
                 db.SaveChanges();
 
                 remove = kfDAO.Remove(1);
-
-                ClearTable.KeyFeatures(db);
-                ClearTable.KeyFeatureClients(db);
             }
 
-            Assert.AreEqual(remove, removeExpected);
+            Assert.IsTrue(remove);
         }
         /// <summary>
         /// Удаление неправильного id.
@@ -224,7 +202,7 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 kfDAO = new DbKeyFeatureDAO(db);
-                Assert.ThrowsException<ArgumentException>(() => kfDAO.Remove(-412536));
+                Assert.ThrowsException<ArgumentException>(() => kfDAO.Remove(erroneousId));
             }
         }
         /// <summary>
@@ -235,14 +213,37 @@ namespace UnitTestDal
         {
             using (var db = new EntitesContext())
             {
+                ClearTable.KeyFeatures(db);
                 kfDAO = new DbKeyFeatureDAO(db);
                 kfDAO.Add(CreateNew());
-                Assert.ThrowsException<NullReferenceException>(
-                    () => kfDAO.Remove(123));
-                ClearTable.KeyFeatures(db);
+                Assert.IsFalse(kfDAO.Remove(123));
             }
         }
-
+        [TestMethod]
+        public void ContainsDBKeyFeature()
+        {
+            var keyFeat = CreateNew();
+            using (var db = new EntitesContext())
+            {
+                ClearTable.KeyFeatures(db);
+                kfDAO = new DbKeyFeatureDAO(db);
+                kfDAO.Add(keyFeat);
+                Assert.IsTrue(kfDAO.ContainsDB(keyFeat));
+            }
+        }
+        [TestMethod]
+        public void NoContainsDBKeyFeature()
+        {
+            var keyFeat = CreateNew();
+            using (var db = new EntitesContext())
+            {
+                ClearTable.KeyFeatures(db);
+                kfDAO = new DbKeyFeatureDAO(db);
+                kfDAO.Add(keyFeat);
+                keyFeat.IdFeature = 3423;
+                Assert.IsFalse(kfDAO.ContainsDB(keyFeat));
+            }
+        }
         private KeyFeature CreateNew()
         {
             return new KeyFeature

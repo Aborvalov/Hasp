@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
 {
@@ -14,7 +15,8 @@ namespace Entities
         /// <summary>
         /// Местонахождение (у нас / клиент).
         /// </summary>
-        public bool Location { get; set; }
+        [Column("Location")]
+        public bool IsHome { get; set; }
 
         bool IEquatable<HaspKey>.Equals(HaspKey other) => Equals(other);
         public override int GetHashCode()
@@ -24,7 +26,7 @@ namespace Entities
             int hashProductTypeKey  = TypeKey.GetHashCode();
             int hashProductId       = Id.GetHashCode();
             int hashProductInnerId  = InnerId.GetHashCode();
-            int hashProductLocation = Location.GetHashCode();
+            int hashProductLocation = IsHome.GetHashCode();
 
             return hashProductNumber ^ 
                    hashProductId ^
@@ -37,8 +39,6 @@ namespace Entities
             if (!(obj is HaspKey other))
                 return false;
 
-            if (ReferenceEquals(other, null))
-                return false;
             if (ReferenceEquals(this, other))
                 return true;
 
@@ -46,7 +46,7 @@ namespace Entities
                    InnerId.Equals(other.InnerId) &&
                    Number.Equals(other.Number) &&
                    TypeKey.Equals(other.TypeKey) &&
-                   Location.Equals(other.Location);
+                   IsHome.Equals(other.IsHome);
         }       
     }
 }

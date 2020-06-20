@@ -4,13 +4,13 @@ using Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace UnitTestDal
 {
     [TestClass]
     public class UnitTestDbKeyFeatureClientDAO
     {
+        private const int erroneousId = -123;
         private IContractKeyFeatureClientDAO kfcDAO;
         public void NullEntitesContextKeyFeatureClient()
         {
@@ -24,9 +24,9 @@ namespace UnitTestDal
 
             using (var db = new EntitesContext())
             {
-                kfcDAO = new DbKeyFeatureClientDAO(db);
-                add = kfcDAO.Add(CreateNew());
                 ClearTable.KeyFeatureClients(db);
+                kfcDAO = new DbKeyFeatureClientDAO(db);
+                add = kfcDAO.Add(CreateNew());                
             }
 
             Assert.AreEqual(idExpected, add);
@@ -39,35 +39,37 @@ namespace UnitTestDal
                 kfcDAO = new DbKeyFeatureClientDAO(db);
                 Assert.ThrowsException<ArgumentNullException>(() => kfcDAO.Add(null));
             }
-        }
-        [TestMethod]
-        public void AddDuplicateKeyFeatureClient()
-        {
-            using (var db = new EntitesContext())
-            {
-                kfcDAO = new DbKeyFeatureClientDAO(db);
-                kfcDAO.Add(CreateNew());
-                Assert.ThrowsException<DuplicateException>(() => kfcDAO.Add(CreateNew()));
-                ClearTable.KeyFeatureClients(db);
-            }
-        }
+        }        
         [TestMethod]
         public void GetAllKeyFeatureClient()
         {
-            List<KeyFeatureClient> getAll = new List<KeyFeatureClient>(); ;
-            List<KeyFeatureClient> kfcExpected = new List<KeyFeatureClient>();
-
-            for (int i = 1; i <= 10; i++)
-                kfcExpected.Add(CreateNew(i, i, i));
+            var getAll = new List<KeyFeatureClient>(); ;
+            var keyFeatCls = CreateListEntities.KeyFeatureClients();
 
             using (var db = new EntitesContext())
             {
-                kfcDAO = new DbKeyFeatureClientDAO(db);
-                for (int i = 1; i <= 10; i++)
-                    kfcDAO.Add(CreateNew(i, i, i));
-
-                getAll = kfcDAO.GetAll();
                 ClearTable.KeyFeatureClients(db);
+                kfcDAO = new DbKeyFeatureClientDAO(db);
+                foreach(var kfc in keyFeatCls)
+                    kfcDAO.Add(kfc);
+
+                getAll = kfcDAO.GetAll();                
+            }
+
+            CollectionAssert.AreEqual(getAll, keyFeatCls);
+        }
+        [TestMethod]
+        public void GetAllEmptyKeyFeatureClient()
+        {
+            var getAll = new List<KeyFeatureClient>(); ;
+            var kfcExpected = new List<KeyFeatureClient>();
+
+            using (var db = new EntitesContext())
+            {
+                ClearTable.KeyFeatureClients(db);
+                kfcDAO = new DbKeyFeatureClientDAO(db);
+                
+                getAll = kfcDAO.GetAll();
             }
 
             CollectionAssert.AreEqual(getAll, kfcExpected);
@@ -80,10 +82,10 @@ namespace UnitTestDal
 
             using (var db = new EntitesContext())
             {
+                ClearTable.KeyFeatureClients(db);
                 kfcDAO = new DbKeyFeatureClientDAO(db);
                 kfcDAO.Add(CreateNew());
-                getById = kfcDAO.GetById(1);
-                ClearTable.KeyFeatureClients(db);
+                getById = kfcDAO.GetById(1);                
             }
 
             Assert.AreEqual(getById, kfcExpected);
@@ -97,7 +99,7 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 kfcDAO = new DbKeyFeatureClientDAO(db);
-                Assert.ThrowsException<ArgumentException>(() => kfcDAO.GetById(-4136));
+                Assert.ThrowsException<ArgumentException>(() => kfcDAO.GetById(erroneousId));
             }
         }
         /// <summary>
@@ -110,11 +112,12 @@ namespace UnitTestDal
 
             using (var db = new EntitesContext())
             {
+                ClearTable.KeyFeatureClients(db);
                 kfcDAO = new DbKeyFeatureClientDAO(db);
                 getById = kfcDAO.GetById(1);
             }
 
-            Assert.AreEqual(getById, null);
+            Assert.IsNull(getById);
         }
         [TestMethod]
         public void UpdateKeyFeatureClient()
@@ -122,6 +125,7 @@ namespace UnitTestDal
             bool update;
             using (var db = new EntitesContext())
             {
+                ClearTable.KeyFeatureClients(db);
                 kfcDAO = new DbKeyFeatureClientDAO(db);
                 kfcDAO.Add(CreateNew());
                 update = kfcDAO.Update(new KeyFeatureClient
@@ -132,10 +136,8 @@ namespace UnitTestDal
                     Initiator    = "______",
                     Note         = "_________",
                 });
-
-                ClearTable.KeyFeatureClients(db);
             }
-            Assert.AreEqual(update, true);
+            Assert.IsTrue(update);
         }
         [TestMethod]
         public void UpdateNullKeyFeatureClient()
@@ -144,26 +146,6 @@ namespace UnitTestDal
             {
                 kfcDAO = new DbKeyFeatureClientDAO(db);
                 Assert.ThrowsException<ArgumentNullException>(() => kfcDAO.Update(null));
-            }
-        }
-        /// <summary>
-        /// Дублирование связи (ключ-фича)-клиент при обновлении.
-        /// </summary>
-        [TestMethod]
-        public void UpdateDuplicateKeyFeatureClient()
-        {
-            KeyFeatureClient kfc = CreateNew();
-
-            using (var db = new EntitesContext())
-            {
-                kfcDAO = new DbKeyFeatureClientDAO(db);
-                kfcDAO.Add(kfc);
-
-                KeyFeatureClient update = CreateNew(1);
-
-                Assert.ThrowsException<DuplicateException>(
-                    () => kfcDAO.Update(update));
-                ClearTable.KeyFeatureClients(db);
             }
         }
         /// <summary>
@@ -182,32 +164,29 @@ namespace UnitTestDal
             };
 
             using (var db = new EntitesContext())
-            { ClearTable.KeyFeatureClients(db); 
-
+            {
+                ClearTable.KeyFeatureClients(db);
                 kfcDAO = new DbKeyFeatureClientDAO(db);
                 kfcDAO.Add(CreateNew());
-                Assert.ThrowsException<NullReferenceException>(
-                    () => kfcDAO.Update(kfcNoDB));
-                ClearTable.KeyFeatureClients(db);
+                Assert.IsFalse(kfcDAO.Update(kfcNoDB));
             }
         }
         [TestMethod]
         public void RemoveKeyFeatureClient()
         {
-            bool removeExpected = true;
             bool remove;
             using (var db = new EntitesContext())
             {
+                ClearTable.KeyFeatureClients(db);
+
                 kfcDAO = new DbKeyFeatureClientDAO(db);
                 db.KeyFeatureClients.AddRange(CreateListEntities.KeyFeatureClients());
                 db.SaveChanges();
 
                 remove = kfcDAO.Remove(1);
-
-                ClearTable.KeyFeatureClients(db);
             }
 
-            Assert.AreEqual(remove, removeExpected);
+            Assert.IsTrue(remove);
         }
         /// <summary>
         /// Удаление неправильного id.
@@ -218,7 +197,7 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 kfcDAO = new DbKeyFeatureClientDAO(db);
-                Assert.ThrowsException<ArgumentException>(() => kfcDAO.Remove(-41036));
+                Assert.ThrowsException<ArgumentException>(() => kfcDAO.Remove(erroneousId));
             }
         }
         /// <summary>
@@ -229,14 +208,37 @@ namespace UnitTestDal
         {
             using (var db = new EntitesContext())
             {
+                ClearTable.HaspKeys(db);
                 kfcDAO = new DbKeyFeatureClientDAO(db);
                 kfcDAO.Add(CreateNew());
-                Assert.ThrowsException<NullReferenceException>(
-                    () => kfcDAO.Remove(123));
-                ClearTable.HaspKeys(db);
+                Assert.IsFalse(kfcDAO.Remove(12));
             }
         }
-
+        [TestMethod]
+        public void ContainsDBKeyFeatureClient()
+        {
+            var keyFeatCl = CreateNew();
+            using (var db = new EntitesContext())
+            {
+                ClearTable.KeyFeatureClients(db);
+                kfcDAO = new DbKeyFeatureClientDAO(db);
+                kfcDAO.Add(keyFeatCl);
+                Assert.IsTrue(kfcDAO.ContainsDB(keyFeatCl));
+            }
+        }
+        [TestMethod]
+        public void NoContainsDBKeyFeatureClient()
+        {
+            var keyFeatCl = CreateNew();
+            using (var db = new EntitesContext())
+            {
+                ClearTable.KeyFeatureClients(db);
+                kfcDAO = new DbKeyFeatureClientDAO(db);
+                kfcDAO.Add(keyFeatCl);
+                keyFeatCl.IdClient = 234;
+                Assert.IsFalse(kfcDAO.ContainsDB(keyFeatCl));
+            }
+        }
         private KeyFeatureClient CreateNew()
         {
             return new KeyFeatureClient

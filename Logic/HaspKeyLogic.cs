@@ -1,15 +1,15 @@
 ﻿using DalContract;
-using DalDB;
 using Entities;
 using LogicContract;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Logic
 {
     public class HaspKeyLogic : IHaspKeyLogic
     {
-        private IContractHaspKeyDAO haspKeyDAO { get; }
+        private readonly IContractHaspKeyDAO haspKeyDAO;
         public HaspKeyLogic(IContractHaspKeyDAO haspKeyDAO)
         {
             this.haspKeyDAO = haspKeyDAO ?? throw new ArgumentNullException(nameof(haspKeyDAO));
@@ -17,79 +17,44 @@ namespace Logic
         public bool Remove(int id)
         {
             if (id < 1)
-                throw new ArgumentException("Неверное значение.", nameof(id));
+                throw new ArgumentException(nameof(id));
 
-            try
-            {
-                return haspKeyDAO.Remove(id);
-            }
-            catch (ArgumentException)
-            {
-                throw;
-            }
-            catch (NullReferenceException)
-            {
-                throw;
-            }
-            catch (Exception e)
-            {
-                throw new InvalidOperationException("Не удалсь удвлить HASP-ключ.", e);
-            }
+            return haspKeyDAO.Remove(id);           
         }
 
-        public HaspKey Save(HaspKey haspKey)
+        public bool Save(HaspKey entity)
         {
-            if (haspKey == null)
-                throw new ArgumentNullException(nameof(haspKey));
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
 
-            CheckArgument(haspKey);
-
+            CheckArgument(entity);
+                        
             int id;
-            try
-            {
-                id = haspKeyDAO.Add(haspKey);
-            }
-            catch (ArgumentNullException)
-            {
-                throw;
-            }
-            catch (DuplicateException)
-            {
-                throw;
-            }
-            catch (Exception e)
-            {
-                throw new InvalidOperationException("Не удалсь создать HASP-ключ.", e);
-            }
+            if (!haspKeyDAO.ContainsDB(entity))
+                id = haspKeyDAO.Add(entity);
+            else
+                return false;
 
-            return GetById(id);
+            return id > 0;
         }
 
-        public HaspKey Update(HaspKey haspKey)
+        public bool Update(HaspKey entity)
         {
-            if (haspKey == null)
-                throw new ArgumentNullException(nameof(haspKey));
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
 
-            CheckArgument(haspKey);
+            CheckArgument(entity);
 
-            try
-            {
-                if (haspKeyDAO.Update(haspKey))
-                    return haspKey;
-                else throw new InvalidOperationException("Не удалсь обновить HASP-ключ.");
-            }
-            catch (ArgumentNullException)
-            {
-                throw;
-            }
-            catch (DuplicateException)
-            {
-                throw;
-            }
-            catch (Exception e)
-            {
-                throw new InvalidOperationException("Не удалсь обновить HASP-ключ.", e);
-            }            
+            var duplicate = GetAll().Where(key => key.Id      != entity.Id &&
+                                                  key.InnerId == entity.InnerId &&
+                                                  key.Number  == entity.Number &&
+                                                  key.TypeKey == entity.TypeKey &&
+                                                  key.IsHome  == entity.IsHome);
+
+            if (duplicate.Any())
+                return false;
+
+            return haspKeyDAO.Update(entity);                    
         }
         public List<HaspKey> GetByActive() => haspKeyDAO.GetByActive();
         public List<HaspKey> GetAll() => haspKeyDAO.GetAll();
@@ -97,13 +62,9 @@ namespace Logic
         public HaspKey GetById(int id)
         {
             if (id < 1)
-                throw new ArgumentException("Неверное значение.", nameof(id));
+                throw new ArgumentException(nameof(id));
 
-            HaspKey haspKey = haspKeyDAO.GetById(id);
-            if (haspKey == null)
-                throw new NullReferenceException("Объект не найден в базе, " + nameof(haspKey));
-
-            return haspKey;
+            return haspKeyDAO.GetById(id);
         }
 
         public List<HaspKey> GetByPastDue() => haspKeyDAO.GetByPastDue();
@@ -118,11 +79,11 @@ namespace Logic
         private void CheckArgument(HaspKey haspKey)
         {
             if (haspKey.InnerId < 0)
-                throw new ArgumentException("Неправильный внутренний номер ключа.", nameof(haspKey.InnerId));
+                throw new ArgumentException(nameof(haspKey.InnerId));
             if (string.IsNullOrWhiteSpace(haspKey.Number))
-                throw new ArgumentException("Неправильный номер ключа.", nameof(haspKey.Number));
+                throw new ArgumentException(nameof(haspKey.Number));
             if (!Enum.IsDefined(typeof(TypeKey), haspKey.TypeKey))
-                throw new ArgumentException("Неправильный тип ключа.", nameof(haspKey.TypeKey));
+                throw new ArgumentException(nameof(haspKey.TypeKey));
         }
     }
 }
