@@ -1,6 +1,6 @@
 ﻿using Entities;
 
-namespace UnitTestDal
+namespace Helper
 {
     public static class ClearTable
     {
@@ -77,6 +77,6 @@ namespace UnitTestDal
                                                 Initiator    STRING
                                             ); ");
             db.SaveChanges();
-        }        
+        }
     }
 }

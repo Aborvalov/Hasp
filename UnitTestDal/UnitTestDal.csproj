@@ -66,8 +66,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateListEntities.cs" />
-    <Compile Include="ClearTable.cs" />
     <Compile Include="UnitTestDbClientDAO.cs" />
     <Compile Include="UnitTestDbFeatureDAO.cs" />
     <Compile Include="UnitTestDbHaspKeyDAO.cs" />
@@ -96,6 +94,10 @@
     <ProjectReference Include="..\Entites\Entities.csproj">
       <Project>{22d9c86f-1103-47fc-bcd6-5e35fc54de22}</Project>
       <Name>Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Helper\Helper.csproj">
+      <Project>{cebf7308-e487-4aa0-88e3-7b26482fa58b}</Project>
+      <Name>Helper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

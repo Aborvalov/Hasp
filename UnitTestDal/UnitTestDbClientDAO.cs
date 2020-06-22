@@ -4,6 +4,7 @@ using Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using Helper;
 
 namespace UnitTestDal
 {

@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace UnitTestDal
+namespace Helper
 {
-    public static class CreateListEntities
+    public class CreateListEntities
     {
         private static DateTime date = DateTime.Now.Date;
         public static List<HaspKey> HaspKeys()
