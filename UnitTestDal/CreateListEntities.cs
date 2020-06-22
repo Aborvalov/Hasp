@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 namespace UnitTestDal
 {
-    internal static class CreateListEntities
+    public static class CreateListEntities
     {
         private static DateTime date = DateTime.Now.Date;
-        internal static List<HaspKey> HaspKeys()
+        public static List<HaspKey> HaspKeys()
         {
             return new List<HaspKey>
             {
@@ -27,7 +27,7 @@ namespace UnitTestDal
             },
         };
         }
-        internal static List<Feature> Features()
+        public static List<Feature> Features()
         {
             return new List<Feature>
             {
@@ -43,23 +43,25 @@ namespace UnitTestDal
                 },
             };
         }
-        internal static List<Client> Clients()
+        public static List<Client> Clients()
         {
             return new List<Client>
             {
                 new Client
                 {
-                    Id   = 1,
-                    Name = "Ivanov Ivan",
+                    Id      = 1,
+                    Name    = "Ivanov Ivan",
+                    Address = "Saratov ul.Lermontova 3.",
                 },
                 new Client
                 {
-                    Id = 2,
-                    Name = "Petrov FD",
+                    Id      = 2,
+                    Name    = "Petrov FD",
+                    Address = "Perm ul.Pushkina 8.",
                 },
         };
         }
-        internal static List<KeyFeature> KeyFeatures()
+        public static List<KeyFeature> KeyFeatures()
         {
             return new List<KeyFeature>
             {
@@ -93,7 +95,7 @@ namespace UnitTestDal
                 },
             };
         }
-        internal static List<KeyFeatureClient> KeyFeatureClients()
+        public static List<KeyFeatureClient> KeyFeatureClients()
         {
             return new List<KeyFeatureClient>
             {

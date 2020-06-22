@@ -1,51 +1,79 @@
-﻿using DalContract;
+﻿using System;
+using System.Collections.Generic;
 using DalDB;
 using Entities;
+using Logic;
+using LogicContract;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
+using UnitTestDal;
 
-namespace UnitTestDal
+namespace UnitTestLogic
 {
     [TestClass]
     [DeploymentItem("HASPKeyTest.db")]
-    public class UnitTestDbClientDAO
+    public class UnitTestClientLogic
     {
         private const int erroneousId = -123;
-        private IContractClientDAO clientDAO;
-
+        private IClientLogic clientL;
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
-        public void NullEntitesContextClient()
+        public void NullIContractClientDAO()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => clientDAO = new DbClientDAO(null));
+            Assert.ThrowsException<ArgumentNullException>(() => clientL = new ClientLogic(null));
         }
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
-        public void AddClient()
+        public void SaveClient()
         {
-            int idExpected = 1;
-            int add;
+            bool add;
 
             using (var db = new EntitesContext())
             {
                 ClearTable.Clients(db);
-                clientDAO = new DbClientDAO(db);
-                add = clientDAO.Add(CreateNew());               
+                clientL = new ClientLogic(new DbClientDAO(db));
+                add = clientL.Save(CreateNew());
             }
 
-            Assert.AreEqual(add, idExpected);
+            Assert.IsTrue(add);
         }
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
-        public void AddNullClient()
+        public void SaveDuplicateClient()
         {
+            bool add;
+            Client client = CreateNew();
             using (var db = new EntitesContext())
             {
-                clientDAO = new DbClientDAO(db);
-                Assert.ThrowsException<ArgumentNullException>(() => clientDAO.Add(null));
+                ClearTable.Clients(db);
+                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL.Save(client);
+                add = clientL.Save(client);
             }
-        }       
+
+            Assert.IsFalse(add);
+        }
+        [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
+        public void ErroneousArgumentSaveClient()
+        {
+            Client client = CreateNew();
+            using (var db = new EntitesContext())
+            {
+                ClearTable.Clients(db);
+                clientL = new ClientLogic(new DbClientDAO(db));
+
+                client.Name = null;
+                Assert.ThrowsException<ArgumentException>(() => clientL.Save(client));
+                client.Name = string.Empty;
+                Assert.ThrowsException<ArgumentException>(() => clientL.Save(client));
+
+                client.Name = "_____";
+                client.Address = null;
+                Assert.ThrowsException<ArgumentException>(() => clientL.Save(client));
+                client.Address = string.Empty;
+                Assert.ThrowsException<ArgumentException>(() => clientL.Save(client));
+            }
+        }
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void GetAllClient()
@@ -56,12 +84,12 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 ClearTable.Clients(db);
-                clientDAO = new DbClientDAO(db);
+                clientL = new ClientLogic(new DbClientDAO(db));
 
-                foreach(var cl in clients)
-                    clientDAO.Add(cl);
+                foreach (var cl in clients)
+                    clientL.Save(cl);
 
-                getAll = clientDAO.GetAll();               
+                getAll = clientL.GetAll();
             }
 
             CollectionAssert.AreEqual(getAll, clients);
@@ -76,8 +104,8 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 ClearTable.Clients(db);
-                clientDAO = new DbClientDAO(db);
-                getAll = clientDAO.GetAll();
+                clientL = new ClientLogic(new DbClientDAO(db));
+                getAll = clientL.GetAll();
             }
             CollectionAssert.AreEqual(getAll, clientExpected);
         }
@@ -91,9 +119,9 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 ClearTable.Clients(db);
-                clientDAO = new DbClientDAO(db);
-                clientDAO.Add(CreateNew());
-                getById = clientDAO.GetById(1);               
+                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL.Save(CreateNew());
+                getById = clientL.GetById(1);
             }
 
             Assert.AreEqual(getById, clientExpected);
@@ -107,8 +135,8 @@ namespace UnitTestDal
         {
             using (var db = new EntitesContext())
             {
-                clientDAO = new DbClientDAO(db);
-                Assert.ThrowsException<ArgumentException>(() => clientDAO.GetById(erroneousId));
+                clientL = new ClientLogic(new DbClientDAO(db));
+                Assert.ThrowsException<ArgumentException>(() => clientL.GetById(erroneousId));
             }
         }
         /// <summary>
@@ -123,8 +151,8 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 ClearTable.Clients(db);
-                clientDAO = new DbClientDAO(db);
-                getById = clientDAO.GetById(1);
+                clientL = new ClientLogic(new DbClientDAO(db));
+                getById = clientL.GetById(1);
             }
 
             Assert.IsNull(getById);
@@ -137,15 +165,15 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 ClearTable.Clients(db);
-                clientDAO = new DbClientDAO(db);
-                clientDAO.Add(CreateNew());
-                update = clientDAO.Update(new Client
+                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL.Save(CreateNew());
+                update = clientL.Update(new Client
                 {
-                    Id            = 1,
-                    Name          = "____",
-                    Address       = "____",
+                    Id = 1,
+                    Name = "____",
+                    Address = "____",
                     ContactPerson = "____",
-                    Phone         = "____",
+                    Phone = "____",
                 });
             }
 
@@ -157,10 +185,10 @@ namespace UnitTestDal
         {
             using (var db = new EntitesContext())
             {
-                clientDAO = new DbClientDAO(db);
-                Assert.ThrowsException<ArgumentNullException>(() => clientDAO.Update(null));
+                clientL = new ClientLogic(new DbClientDAO(db));
+                Assert.ThrowsException<ArgumentNullException>(() => clientL.Update(null));
             }
-        }        
+        }
         /// <summary>
         /// Обновление клиента которого не существует в базе.
         /// </summary>
@@ -170,20 +198,20 @@ namespace UnitTestDal
         {
             Client clientNoDB = new Client
             {
-                Id            = 234,
-                Name          = "______",
+                Id = 234,
+                Name = "______",
                 ContactPerson = "______",
-                Address       = "______",
-                Phone         = "______",
+                Address = "______",
+                Phone = "______",
             };
 
             using (var db = new EntitesContext())
             {
                 ClearTable.Clients(db);
-                clientDAO = new DbClientDAO(db);
-                clientDAO.Add(CreateNew());
+                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL.Save(CreateNew());
 
-                Assert.IsFalse(clientDAO.Update(clientNoDB));
+                Assert.IsFalse(clientL.Update(clientNoDB));
             }
         }
         [TestMethod]
@@ -196,12 +224,12 @@ namespace UnitTestDal
                 ClearTable.Clients(db);
                 ClearTable.KeyFeatureClients(db);
 
-                clientDAO = new DbClientDAO(db);
+                clientL = new ClientLogic(new DbClientDAO(db));
                 db.Clients.AddRange(CreateListEntities.Clients());
                 db.KeyFeatureClients.AddRange(CreateListEntities.KeyFeatureClients());
                 db.SaveChanges();
 
-                remove = clientDAO.Remove(1);
+                remove = clientL.Remove(1);
             }
 
             Assert.IsTrue(remove);
@@ -215,8 +243,8 @@ namespace UnitTestDal
         {
             using (var db = new EntitesContext())
             {
-                clientDAO = new DbClientDAO(db);
-                Assert.ThrowsException<ArgumentException>(() => clientDAO.Remove(erroneousId));
+                clientL = new ClientLogic(new DbClientDAO(db));
+                Assert.ThrowsException<ArgumentException>(() => clientL.Remove(erroneousId));
             }
         }
         /// <summary>
@@ -229,10 +257,10 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 ClearTable.Clients(db);
-                clientDAO = new DbClientDAO(db);
-                clientDAO.Add(CreateNew());
-                Assert.IsFalse(clientDAO.Remove(123));
-                
+                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL.Save(CreateNew());
+                Assert.IsFalse(clientL.Remove(123));
+
             }
         }
         [TestMethod]
@@ -248,18 +276,18 @@ namespace UnitTestDal
                 ClearTable.Clients(db);
                 ClearTable.KeyFeatureClients(db);
 
-                clientDAO = new DbClientDAO(db);
+                clientL = new ClientLogic(new DbClientDAO(db));
                 db.Features.AddRange(CreateListEntities.Features());
                 db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
                 db.Clients.AddRange(CreateListEntities.Clients());
                 db.KeyFeatureClients.AddRange(CreateListEntities.KeyFeatureClients());
                 db.SaveChanges();
 
-                getByFeature = clientDAO.GetByFeature(new Feature
+                getByFeature = clientL.GetByFeature(new Feature
                 {
-                    Id     = 1,
+                    Id = 1,
                     Number = 1,
-                    Name   = "qwe",
+                    Name = "qwe",
                 });
             }
 
@@ -271,8 +299,8 @@ namespace UnitTestDal
         {
             using (var db = new EntitesContext())
             {
-                clientDAO = new DbClientDAO(db);
-                Assert.ThrowsException<ArgumentNullException>(() => clientDAO.GetByFeature(null));
+                clientL = new ClientLogic(new DbClientDAO(db));
+                Assert.ThrowsException<ArgumentNullException>(() => clientL.GetByFeature(null));
             }
         }
         [TestMethod]
@@ -281,8 +309,8 @@ namespace UnitTestDal
         {
             using (var db = new EntitesContext())
             {
-                clientDAO = new DbClientDAO(db);
-                Assert.ThrowsException<ArgumentException>(() => clientDAO.GetByNumberKey(erroneousId));
+                clientL = new ClientLogic(new DbClientDAO(db));
+                Assert.ThrowsException<ArgumentException>(() => clientL.GetByNumberKey(erroneousId));
             }
         }
         [TestMethod]
@@ -292,8 +320,8 @@ namespace UnitTestDal
             using (var db = new EntitesContext())
             {
                 ClearTable.HaspKeys(db);
-                clientDAO = new DbClientDAO(db);
-                Assert.IsNull(clientDAO.GetByNumberKey(2));
+                clientL = new ClientLogic(new DbClientDAO(db));
+                Assert.IsNull(clientL.GetByNumberKey(2));
             }
         }
         [TestMethod]
@@ -310,65 +338,38 @@ namespace UnitTestDal
                 ClearTable.Clients(db);
                 ClearTable.KeyFeatureClients(db);
 
-                clientDAO = new DbClientDAO(db);
+                clientL = new ClientLogic(new DbClientDAO(db));
                 db.HaspKeys.AddRange(CreateListEntities.HaspKeys());
                 db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
                 db.Clients.AddRange(CreateListEntities.Clients());
                 db.KeyFeatureClients.AddRange(CreateListEntities.KeyFeatureClients());
                 db.SaveChanges();
 
-                getByNumberKey = clientDAO.GetByNumberKey(1);
+                getByNumberKey = clientL.GetByNumberKey(1);
             }
 
             Assert.AreEqual(getByNumberKey, actual);
-        }
-        [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
-        public void ContainsDBClient()
-        {
-            var client = CreateNew();
-            using (var db = new EntitesContext())
-            {
-                ClearTable.Clients(db);
-                clientDAO = new DbClientDAO(db);
-                clientDAO.Add(client);
-                Assert.IsTrue(clientDAO.ContainsDB(client));
-            }
-        }
-        [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
-        public void NoContainsDBClient()
-        {
-            var client = CreateNew();
-            using (var db = new EntitesContext())
-            {
-                ClearTable.Clients(db);
-                clientDAO = new DbClientDAO(db);
-                clientDAO.Add(client);
-                client.Name = "asdasd";
-                Assert.IsFalse(clientDAO.ContainsDB(client));
-            }
-        }
+        }  
         private Client CreateNew()
         {
             return new Client
             {
-                Name          = "OOO Forst 98",
-                Address       = "pr.Stroiteley 45",
+                Name = "OOO Forst 98",
+                Address = "pr.Stroiteley 45",
                 ContactPerson = "Ivanov Ivan",
-                Phone         = "8-123-432-12-21",
+                Phone = "8-123-432-12-21",
             };
         }
         private Client CreateNew(int id)
         {
             Client client = CreateNew();
-            client.Id     = id;
+            client.Id = id;
             return client;
         }
         private Client CreateNew(int id, string name)
         {
             Client client = CreateNew(id);
-            client.Name   = name;
+            client.Name = name;
             return client;
         }
     }
