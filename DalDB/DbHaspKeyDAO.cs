@@ -212,11 +212,10 @@ namespace DalDB
         public bool ContainsDB(HaspKey entity)
         {
             var key = db.HaspKeys
-                        .SingleOrDefault(hk =>
-                                         hk.InnerId == entity.InnerId &&
-                                         hk.Number == entity.Number &&
-                                         hk.TypeKey == entity.TypeKey &&
-                                         hk.IsHome == entity.IsHome);
+                        .SingleOrDefault(hk => hk.InnerId == entity.InnerId &&
+                                               hk.Number  == entity.Number &&
+                                               hk.TypeKey == entity.TypeKey &&
+                                               hk.IsHome  == entity.IsHome);
 
             return key != null;
         }
