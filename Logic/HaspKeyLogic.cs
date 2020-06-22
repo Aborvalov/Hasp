@@ -51,10 +51,7 @@ namespace Logic
                                                   key.TypeKey == entity.TypeKey &&
                                                   key.IsHome  == entity.IsHome);
 
-            if (duplicate.Any())
-                return false;
-
-            return haspKeyDAO.Update(entity);                    
+            return duplicate.Any() ? false : haspKeyDAO.Update(entity);
         }
         public List<HaspKey> GetByActive() => haspKeyDAO.GetByActive();
         public List<HaspKey> GetAll() => haspKeyDAO.GetAll();
