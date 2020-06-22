@@ -36,6 +36,22 @@ namespace UnitTestLogic
         }
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
+        public void SaveDuplicateFeature()
+        {
+            bool add;
+            Feature feature = CreateNew();
+            using (var db = new EntitesContext())
+            {
+                ClearTable.Features(db);
+                featureL = new FeatureLogic(new DbFeatureDAO(db));
+                featureL.Save(feature);
+                add = featureL.Save(feature);
+            }
+
+            Assert.IsFalse(add);
+        }
+        [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void ErroneousArgumentSaveFeature()
         {
             Feature feature = CreateNew();
@@ -58,7 +74,7 @@ namespace UnitTestLogic
         }
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
-        public void AddNullFeature()
+        public void SaveNullFeature()
         {
             using (var db = new EntitesContext())
             {

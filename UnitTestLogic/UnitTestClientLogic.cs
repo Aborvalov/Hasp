@@ -54,6 +54,16 @@ namespace UnitTestLogic
         }
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
+        public void SaveNullClient()
+        {
+            using (var db = new EntitesContext())
+            {
+                clientL = new ClientLogic(new DbClientDAO(db));
+                Assert.ThrowsException<ArgumentNullException>(() => clientL.Save(null));
+            }
+        }
+        [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void ErroneousArgumentSaveClient()
         {
             Client client = CreateNew();
