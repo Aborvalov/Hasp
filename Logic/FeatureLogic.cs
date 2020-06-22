@@ -44,7 +44,10 @@ namespace Logic
             else
                 return false;
 
-            return id > 0;
+            if (id < 1)
+                throw new InvalidOperationException("Не удалсь создать фичу.");
+            else
+                return true;
         }
 
         public bool Update(Feature entity)

@@ -35,7 +35,10 @@ namespace Logic
             else
                 return false;
 
-            return id > 0;
+            if (id < 1)
+                throw new InvalidOperationException("Не удалсь создать HASP-ключ.");
+            else
+                return true; ;
         }
 
         public bool Update(HaspKey entity)

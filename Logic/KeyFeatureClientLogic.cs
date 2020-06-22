@@ -43,7 +43,11 @@ namespace Logic
                 id = keyFeatureClientDAO.Add(entity);
             else
                 return false;
-            return id > 0;
+
+            if (id < 1)
+                throw new InvalidOperationException("Не удалсь создать связь (ключ-фича)-клиент.");
+            else
+                return true;
         }
         public bool Update(KeyFeatureClient entity)
         {

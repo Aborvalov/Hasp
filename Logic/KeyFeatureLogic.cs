@@ -46,7 +46,11 @@ namespace Logic
                 id = keyFeatureDAO.Add(entity);
             else
                 return false;
-            return id > 0;
+
+            if (id < 1)
+                throw new InvalidOperationException("Не удалсь создать связб ключ-фича.");
+            else
+                return true;
         }        
         public bool Update(KeyFeature entity)
         {
