@@ -70,7 +70,7 @@ namespace Logic
 
             CheckArgument(entity);
 
-            return clientDAO.Update(entity);
+            return !clientDAO.ContainsDB(entity) ? clientDAO.Update(entity) : false;
         }
 
         private void CheckArgument(Client client)

@@ -45,13 +45,7 @@ namespace Logic
 
             CheckArgument(entity);
 
-            var duplicate = GetAll().Where(key => key.Id      != entity.Id &&
-                                                  key.InnerId == entity.InnerId &&
-                                                  key.Number  == entity.Number &&
-                                                  key.TypeKey == entity.TypeKey &&
-                                                  key.IsHome  == entity.IsHome);
-
-            return duplicate.Any() ? false : haspKeyDAO.Update(entity);
+            return !haspKeyDAO.ContainsDB(entity) ? haspKeyDAO.Update(entity) : false;
         }
         public List<HaspKey> GetByActive() => haspKeyDAO.GetByActive();
         public List<HaspKey> GetAll() => haspKeyDAO.GetAll();
