@@ -190,7 +190,7 @@ namespace UnitTestLogic
             }
 
             Assert.IsTrue(update);
-        }
+        }        
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void UpdateNullHaspKey()

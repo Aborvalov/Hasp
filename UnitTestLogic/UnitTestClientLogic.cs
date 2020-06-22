@@ -191,6 +191,24 @@ namespace UnitTestLogic
         }
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
+        public void UpdateDuplicateClient()
+        {
+            bool update;
+            var client = CreateNew();
+            using (var db = new EntitesContext())
+            {
+                ClearTable.Clients(db);
+                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL.Save(client);
+                client.Address = "??????";
+                clientL.Save(client);
+                update = clientL.Update(CreateNew(2));
+            }
+
+            Assert.IsFalse(update);
+        }
+        [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void UpdateNullClient()
         {
             using (var db = new EntitesContext())

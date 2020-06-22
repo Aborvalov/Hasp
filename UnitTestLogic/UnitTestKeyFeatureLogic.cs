@@ -200,6 +200,23 @@ namespace UnitTestLogic
         }
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
+        public void UpdateDuplicateKeyKeyFeature()
+        {
+            bool update;
+            var keyFeature = CreateNew();
+            using (var db = new EntitesContext())
+            {
+                ClearTable.KeyFeatures(db);
+                keyFeatureL = new KeyFeatureLogic(new DbKeyFeatureDAO(db));
+                keyFeatureL.Save(keyFeature);
+                keyFeature.IdFeature = 111;
+                update = keyFeatureL.Update(CreateNew(2));
+            }
+
+            Assert.IsFalse(update);
+        }
+        [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void UpdateNullKeyFeature()
         {
             using (var db = new EntitesContext())
