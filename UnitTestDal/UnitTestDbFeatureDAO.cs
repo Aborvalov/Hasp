@@ -228,6 +228,7 @@ namespace UnitTestDal
             }
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void ContainsDBFeature()
         {
             var feature = CreateNew();
