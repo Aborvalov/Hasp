@@ -8,17 +8,19 @@ using System.Collections.Generic;
 namespace UnitTestDal
 {
     [TestClass]
+    [DeploymentItem("HASPKeyTest.db")]
     public class UnitTestDbFeatureDAO
     {
         private const int erroneousId = -123;
         private IContractFeatureDAO featureDAO;
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void NullEntitesContextFeature()
         {
             Assert.ThrowsException<ArgumentNullException>(() => featureDAO = new DbFeatureDAO(null));
         }
         [TestMethod]
-
+        [DeploymentItem("HASPKeyTest.db")]
         public void AddFeature()
         {
             int idExpected = 1;
@@ -34,6 +36,7 @@ namespace UnitTestDal
             Assert.AreEqual(add, idExpected);
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void AddNullFeature()
         {
             using (var db = new EntitesContext())
@@ -43,6 +46,7 @@ namespace UnitTestDal
             }
         }        
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void GetAllFeature()
         {
             var getAll = new List<Feature>();
@@ -62,6 +66,7 @@ namespace UnitTestDal
             CollectionAssert.AreEqual(getAll, features);            
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void GetAllEmptyFeature()
         {
             var getAll = new List<Feature>();
@@ -77,6 +82,7 @@ namespace UnitTestDal
             CollectionAssert.AreEqual(getAll, featureExpected);
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void GetByIdFeature()
         {
             Feature getById;
@@ -96,6 +102,7 @@ namespace UnitTestDal
         /// Поиск неправильного id.
         /// </summary>
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void GetByErroneousIdFeaturey()
         {
             using (var db = new EntitesContext())
@@ -108,6 +115,7 @@ namespace UnitTestDal
         /// Поиск id которого нет в базе.
         /// </summary>
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void GetByIdNoDBFeature()
         {
             Feature getById;
@@ -120,6 +128,7 @@ namespace UnitTestDal
             Assert.IsNull(getById);
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void UpdateFeature()
         {
             bool update;
@@ -139,6 +148,7 @@ namespace UnitTestDal
             Assert.IsTrue(update);
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void UpdateNullFeature()
         {
             using (var db = new EntitesContext())
@@ -148,6 +158,7 @@ namespace UnitTestDal
             }
         } 
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void UpdateNoDBFeature()
         {
             var featureNoDB = new Feature
@@ -167,6 +178,7 @@ namespace UnitTestDal
             }
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void RemoveFeature()
         {
             bool remove;
@@ -191,6 +203,7 @@ namespace UnitTestDal
         /// Удаление неправильного id.
         /// </summary>
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void RemoveErroneousIdFeature()
         {
             using (var db = new EntitesContext())
@@ -203,6 +216,7 @@ namespace UnitTestDal
         /// Удаление фичи которой не существует в базе.
         /// </summary>
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void RemoveNoDBFeature()
         {
             using (var db = new EntitesContext())
@@ -226,6 +240,7 @@ namespace UnitTestDal
             }
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void NoContainsDBFeature()
         {
             var feature = CreateNew();

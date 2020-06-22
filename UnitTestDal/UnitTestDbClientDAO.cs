@@ -8,16 +8,20 @@ using System.Collections.Generic;
 namespace UnitTestDal
 {
     [TestClass]
+    [DeploymentItem("HASPKeyTest.db")]
     public class UnitTestDbClientDAO
     {
         private const int erroneousId = -123;
         private IContractClientDAO clientDAO;
+
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void NullEntitesContextClient()
         {
             Assert.ThrowsException<ArgumentNullException>(() => clientDAO = new DbClientDAO(null));
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void AddClient()
         {
             int idExpected = 1;
@@ -33,6 +37,7 @@ namespace UnitTestDal
             Assert.AreEqual(add, idExpected);
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void AddNullClient()
         {
             using (var db = new EntitesContext())
@@ -42,6 +47,7 @@ namespace UnitTestDal
             }
         }       
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void GetAllClient()
         {
             List<Client> getAll;
@@ -60,6 +66,8 @@ namespace UnitTestDal
 
             CollectionAssert.AreEqual(getAll, clients);
         }
+        [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void GetAllEmptyHaspKey()
         {
             var getAll = new List<Client>();
@@ -74,6 +82,7 @@ namespace UnitTestDal
             CollectionAssert.AreEqual(getAll, clientExpected);
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void GetByIdClient()
         {
             Client getById;
@@ -93,6 +102,7 @@ namespace UnitTestDal
         /// Поиск неправильного id.
         /// </summary>
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void GetByErroneousIdClient()
         {
             using (var db = new EntitesContext())
@@ -105,6 +115,7 @@ namespace UnitTestDal
         /// Поиск id которого нет в базе.
         /// </summary>
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void GetByIdNoDBClient()
         {
             Client getById;
@@ -119,6 +130,7 @@ namespace UnitTestDal
             Assert.IsNull(getById);
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void UpdateClient()
         {
             bool update;
@@ -140,6 +152,7 @@ namespace UnitTestDal
             Assert.IsTrue(update);
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void UpdateNullClient()
         {
             using (var db = new EntitesContext())
@@ -152,6 +165,7 @@ namespace UnitTestDal
         /// Обновление клиента которого не существует в базе.
         /// </summary>
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void UpdateNoDBClient()
         {
             Client clientNoDB = new Client
@@ -173,6 +187,7 @@ namespace UnitTestDal
             }
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void RemoveClient()
         {
             bool remove;
@@ -195,6 +210,7 @@ namespace UnitTestDal
         /// Удаление неправильного id.
         /// </summary>
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void RemoveErroneousIdClient()
         {
             using (var db = new EntitesContext())
@@ -207,6 +223,7 @@ namespace UnitTestDal
         /// Удаление фичи которой не существует в базе.
         /// </summary>
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void RemoveNoDBClient()
         {
             using (var db = new EntitesContext())
@@ -219,6 +236,7 @@ namespace UnitTestDal
             }
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void GetByFeatureClient()
         {
             List<Client> getByFeature;
@@ -248,6 +266,7 @@ namespace UnitTestDal
             CollectionAssert.AreEqual(getByFeature, CreateListEntities.Clients());
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void GetByNullFeatureClient()
         {
             using (var db = new EntitesContext())
@@ -257,6 +276,7 @@ namespace UnitTestDal
             }
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void GetByErroneousNumberKeyClient()
         {
             using (var db = new EntitesContext())
@@ -266,6 +286,7 @@ namespace UnitTestDal
             }
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void GetByNumberKeyNoDBClient()
         {
             using (var db = new EntitesContext())
@@ -276,6 +297,7 @@ namespace UnitTestDal
             }
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void GetByNumberKeyClient()
         {
             Client getByNumberKey;
@@ -301,6 +323,7 @@ namespace UnitTestDal
             Assert.AreEqual(getByNumberKey, actual);
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void ContainsDBClient()
         {
             var client = CreateNew();
@@ -313,6 +336,7 @@ namespace UnitTestDal
             }
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void NoContainsDBClient()
         {
             var client = CreateNew();

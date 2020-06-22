@@ -44,10 +44,7 @@ namespace Logic
             else
                 return false;
 
-            if (id < 1)
-                throw new InvalidOperationException("Не удалсь создать связь (ключ-фича)-клиент.");
-            else
-                return true;
+            return id > 0;
         }
         public bool Update(KeyFeatureClient entity)
         {

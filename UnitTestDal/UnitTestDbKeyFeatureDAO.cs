@@ -8,6 +8,7 @@ using System.Collections.Generic;
 namespace UnitTestDal
 {
     [TestClass]
+    [DeploymentItem("HASPKeyTest.db")]
     public class UnitTestDbKeyFeatureDAO
     {
         private const int erroneousId = -123;
@@ -15,11 +16,13 @@ namespace UnitTestDal
         private readonly DateTime date = DateTime.Now.Date;
 
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void NullEntitesContextKeyFeature()
         {
             Assert.ThrowsException<ArgumentNullException>(() => kfDAO = new DbKeyFeatureDAO(null));
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void AddKeyFeature()
         {
             int idExpected = 1;
@@ -34,6 +37,7 @@ namespace UnitTestDal
             Assert.AreEqual(add, idExpected);
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void AddNullKeyFeature()
         {
             using (var db = new EntitesContext())
@@ -43,6 +47,7 @@ namespace UnitTestDal
             }
         }        
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void GetAllKeyFeature()
         {
             var getAll = new List<KeyFeature>();
@@ -62,6 +67,7 @@ namespace UnitTestDal
             CollectionAssert.AreEqual(getAll, keyFeats);
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void GetAllEmptyKeyFeature()
         {
             var getAll = new List<KeyFeature>();
@@ -77,6 +83,7 @@ namespace UnitTestDal
             CollectionAssert.AreEqual(getAll, kfExpected);
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void GetByIdKeyFeature()
         {
             KeyFeature getById;
@@ -96,6 +103,7 @@ namespace UnitTestDal
         /// Поиск неправильного id.
         /// </summary>
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void GetByErroneousIdKeyFeaturey()
         {
             using (var db = new EntitesContext())
@@ -108,6 +116,7 @@ namespace UnitTestDal
         /// Поиск id которого нет в базе.
         /// </summary>
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void GetByIdNoDBKeyFeature()
         {
             KeyFeature getById;
@@ -122,6 +131,7 @@ namespace UnitTestDal
             Assert.IsNull(getById);
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void UpdateKeyFeature()
         {
             bool update;
@@ -144,6 +154,7 @@ namespace UnitTestDal
             Assert.IsTrue(update);
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void UpdateNullKeyFeature()
         {
             using (var db = new EntitesContext())
@@ -156,6 +167,7 @@ namespace UnitTestDal
         /// Обновление связи ключ-фича которой не существует в базе.
         /// </summary>
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void UpdateNoDBKeyFeature()
         {
             var kfNoDB = new KeyFeature
@@ -175,6 +187,7 @@ namespace UnitTestDal
             }
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void RemoveKeyFeature()
         {
             bool remove;
@@ -197,6 +210,7 @@ namespace UnitTestDal
         /// Удаление неправильного id.
         /// </summary>
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void RemoveErroneousIdKeyFeature()
         {
             using (var db = new EntitesContext())
@@ -209,6 +223,7 @@ namespace UnitTestDal
         /// Удаление связи ключ-фича которой не существует в базе.
         /// </summary>
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void RemoveNoDBKeyFeature()
         {
             using (var db = new EntitesContext())
@@ -220,6 +235,7 @@ namespace UnitTestDal
             }
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void ContainsDBKeyFeature()
         {
             var keyFeat = CreateNew();
@@ -232,6 +248,7 @@ namespace UnitTestDal
             }
         }
         [TestMethod]
+        [DeploymentItem("HASPKeyTest.db")]
         public void NoContainsDBKeyFeature()
         {
             var keyFeat = CreateNew();
