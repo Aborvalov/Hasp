@@ -13,7 +13,8 @@ namespace UnitTestLogic
     /// Summary description for UnitTestKeyFeatureClient
     /// </summary>
     [TestClass]
-    public class UnitTestKeyFeatureClient
+    [DeploymentItem("HASPKeyTest.db")]
+    public class UnitTestKeyFeatureClientLogic
     {
         private const int erroneousId = -123;
         private IKeyFeatureClientLogic keyFeatureClientL;
@@ -80,11 +81,13 @@ namespace UnitTestLogic
                 keyFeatureClient.Initiator = string.Empty;
                 Assert.ThrowsException<ArgumentException>(() => keyFeatureClientL.Save(keyFeatureClient));
 
+                keyFeatureClient.Initiator = "____";
                 keyFeatureClient.IdClient = 0;
                 Assert.ThrowsException<ArgumentException>(() => keyFeatureClientL.Save(keyFeatureClient));
                 keyFeatureClient.IdClient = -2;
                 Assert.ThrowsException<ArgumentException>(() => keyFeatureClientL.Save(keyFeatureClient));
 
+                keyFeatureClient.IdClient = 2;
                 keyFeatureClient.IdKeyFeature = 0;
                 Assert.ThrowsException<ArgumentException>(() => keyFeatureClientL.Save(keyFeatureClient));
                 keyFeatureClient.IdKeyFeature = -2;

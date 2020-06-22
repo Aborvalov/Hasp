@@ -13,7 +13,8 @@ namespace UnitTestLogic
     /// Summary description for UnitTestHaspKey
     /// </summary>
     [TestClass]
-    public class UnitTestHaspKey
+    [DeploymentItem("HASPKeyTest.db")]
+    public class UnitTestHaspKeyLogic
     {
         private const int erroneousId = -123;
         private IHaspKeyLogic haspKeyL;
@@ -76,11 +77,13 @@ namespace UnitTestLogic
                 haspKey.InnerId = -1456;                        
                 Assert.ThrowsException<ArgumentException>(() => haspKeyL.Save(haspKey));
 
+                haspKey.InnerId = 234;
                 haspKey.Number = null;
                 Assert.ThrowsException<ArgumentException>(() => haspKeyL.Save(haspKey));
                 haspKey.Number = string.Empty;
                 Assert.ThrowsException<ArgumentException>(() => haspKeyL.Save(haspKey));
 
+                haspKey.Number = "____";
                 haspKey.TypeKey = (TypeKey)12;
                 Assert.ThrowsException<ArgumentException>(() => haspKeyL.Save(haspKey));
             }

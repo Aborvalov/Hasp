@@ -9,6 +9,7 @@ using Helper;
 namespace UnitTestLogic
 {
     [TestClass]
+    [DeploymentItem("HASPKeyTest.db")]
     public class UnitTestFeatureLogic
     {
         private const int erroneousId = -123;
