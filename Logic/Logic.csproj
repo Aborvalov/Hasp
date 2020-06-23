@@ -55,10 +55,6 @@
       <Project>{d96a2fbb-3e83-418a-a550-294b05858f59}</Project>
       <Name>DalContract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DalDB\DalDB.csproj">
-      <Project>{C26090DB-C11E-4340-9A73-DC8CA832860C}</Project>
-      <Name>DalDB</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Entites\Entities.csproj">
       <Project>{22d9c86f-1103-47fc-bcd6-5e35fc54de22}</Project>
       <Name>Entities</Name>
