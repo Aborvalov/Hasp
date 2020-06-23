@@ -23,9 +23,14 @@ namespace HASPKey
             bindingSource1.DataSource = entities;
         }
 
-        //public void BindTo(Entity entity)
-        //{
-        //    bindingSource1.DataSource = entity ?? throw new ArgumentNullException(nameof(entity));
-        //}
+        private void ВыходToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        public void BindTo(Entity entity)
+        {
+            bindingSource1.DataSource = entity ?? throw new ArgumentNullException(nameof(entity));
+        }
     }
 }
