@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Helper
+namespace HelperForUnitTest
 {
     public class CreateListEntities
     {

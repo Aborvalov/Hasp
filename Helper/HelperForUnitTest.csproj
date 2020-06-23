@@ -8,8 +8,8 @@
     <ProjectGuid>{CEBF7308-E487-4AA0-88E3-7B26482FA58B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Helper</RootNamespace>
-    <AssemblyName>Helper</AssemblyName>
+    <RootNamespace>HelperForUnitTest</RootNamespace>
+    <AssemblyName>HelperForUnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

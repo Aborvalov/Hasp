@@ -5,7 +5,7 @@ using Entities;
 using Logic;
 using LogicContract;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Helper;
+using HelperForUnitTest;
 
 namespace UnitTestLogic
 {

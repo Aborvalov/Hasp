@@ -1,6 +1,6 @@
 ﻿using Entities;
 
-namespace Helper
+namespace HelperForUnitTest
 {
     public static class ClearTable
     {

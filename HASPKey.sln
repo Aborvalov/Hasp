@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestLogic", "UnitTestLogic\UnitTestLogic.csproj", "{6DB0CFED-C4AE-4621-A22A-3B69159B342D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helper", "Helper\Helper.csproj", "{CEBF7308-E487-4AA0-88E3-7B26482FA58B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelperForUnitTest", "Helper\HelperForUnitTest.csproj", "{CEBF7308-E487-4AA0-88E3-7B26482FA58B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{D391A2F4-F2F7-4F0B-AFEA-12DE2406B05D}"
 EndProject
