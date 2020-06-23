@@ -7,7 +7,6 @@ namespace Entities
     /// </summary>
     public class HomeModel : KeyFeatureClient
     {
-        public int IdKeyFeatureClient { get; set; }
         /// <summary>
         /// Порядковый номер.
         /// </summary>
