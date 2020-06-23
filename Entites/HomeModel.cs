@@ -5,7 +5,7 @@ namespace Entities
     /// <summary>
     /// Связка (ключ-фича)-клиент, таблица KeyFeatureClient.
     /// </summary>
-    public class HomeModel
+    public class HomeModel : KeyFeatureClient
     {
         public int IdKeyFeatureClient { get; set; }
         /// <summary>
@@ -16,5 +16,13 @@ namespace Entities
         public string Feature { get; set; }
         public string Client { get; set; }
         public DateTime EndDate { get; set; }
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }
