@@ -6,7 +6,7 @@ namespace Model
     /// <summary>
     /// Связка (ключ-фича)-клиент, таблица KeyFeatureClient.
     /// </summary>
-    public class Home : KeyFeatureClient
+    public class HomeView : KeyFeatureClient
     {
         /// <summary>
         /// Порядковый номер.

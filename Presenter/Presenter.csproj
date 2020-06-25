@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IViewHome.cs" />
-    <Compile Include="PresenterHame.cs" />
+    <Compile Include="PresenterHome.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

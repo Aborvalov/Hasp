@@ -16,7 +16,7 @@ namespace Presenter
         /// <summary>
         /// Ввод нового значения.
         /// </summary>
-        Home ValueInput { get; }
+        HomeView ValueInput { get; }
         /// <summary>
         /// Событие ввода.
         /// </summary>

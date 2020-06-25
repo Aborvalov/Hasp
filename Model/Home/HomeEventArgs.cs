@@ -4,8 +4,8 @@ namespace Model
 {
     public class HomeEventArgs : EventArgs
     {
-        public Home Home { get; set; }
-        public HomeEventArgs(Home home)
+        public HomeView Home { get; set; }
+        public HomeEventArgs(HomeView home)
         {
             this.Home = home;
         }

@@ -8,14 +8,18 @@ namespace Model
 {
     public class HomeModel : IHomeModel
     {
-        private List<Home> homes = null;
+        private List<HomeView> homes = null;
         private readonly DateTime date = DateTime.Now.Date;
-        public event EventHandler<HomeEventArgs> ProjectUpdated = delegate { };
+        public event EventHandler<HomeEventArgs> HomeUpdated = delegate { };
+        private readonly IFactoryLogic logic;
 
-        public HomeModel() => homes = GetHomes();       
-        private List<Home> GetHomes()
+        public HomeModel(IFactoryLogic factoryLogic)
         {
-            var logic = new Logics();
+            logic = factoryLogic;
+            homes = GetHomes();
+        }
+        private List<HomeView> GetHomes()
+        {
             List<KeyFeatureClient> keyFeatureClients;
             List<KeyFeature> keyFeatures;
             List<Client> clients;
@@ -40,7 +44,7 @@ namespace Model
                             on keyFeat.IdFeature equals feature.Id
                        join key in haspKeys 
                             on keyFeat.IdHaspKey equals key.Id
-                       select new Home
+                       select new HomeView
                        {
                            Id           = keyFeatCl.Id,
                            IdKeyFeature = keyFeatCl.IdKeyFeature,
@@ -55,16 +59,16 @@ namespace Model
 
             return item.ToList();
         }
-        public Home GetById(int Id) => homes.SingleOrDefault(x => x.Id == Id);
+        public HomeView GetById(int Id) => homes.SingleOrDefault(x => x.Id == Id);
 
-        public List<Home> GetAll() => homes;
+        public List<HomeView> GetAll() => homes;
 
-        public void UpdateHome(Home project)
+        public void UpdateHome(HomeView project)
         {
             if (project == null)
                 throw new ArgumentNullException(nameof(project));
 
-            ProjectUpdated(this, new HomeEventArgs(project)); 
+            HomeUpdated(this, new HomeEventArgs(project)); 
         }
     }
 }
