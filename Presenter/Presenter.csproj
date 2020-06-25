@@ -4,16 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{77C069C5-75C2-4DC0-B576-55A894ED471D}</ProjectGuid>
+    <ProjectGuid>{CC3588FA-A420-486F-B886-1E569220987B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Logic</RootNamespace>
-    <AssemblyName>Logic</AssemblyName>
+    <RootNamespace>Presenter</RootNamespace>
+    <AssemblyName>Presenter</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,30 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientLogic.cs" />
-    <Compile Include="FeatureLogic.cs" />
-    <Compile Include="HaspKeyLogic.cs" />
-    <Compile Include="KeyFeatureClientLogic.cs" />
-    <Compile Include="KeyFeatureLogic.cs" />
-    <Compile Include="Logics.cs" />
+    <Compile Include="IViewHome.cs" />
+    <Compile Include="PresenterHame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DalContract\DalContract.csproj">
-      <Project>{d96a2fbb-3e83-418a-a550-294b05858f59}</Project>
-      <Name>DalContract</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DalDB\DalDB.csproj">
-      <Project>{c26090db-c11e-4340-9a73-dc8ca832860c}</Project>
-      <Name>DalDB</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Entites\Entities.csproj">
       <Project>{22d9c86f-1103-47fc-bcd6-5e35fc54de22}</Project>
       <Name>Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LogicContract\LogicContract.csproj">
-      <Project>{4bf66fdd-c19d-4467-a441-0a01b4ad9b3d}</Project>
-      <Name>LogicContract</Name>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{3af74fc5-74be-45f6-ad0a-d317975cf11f}</Project>
+      <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

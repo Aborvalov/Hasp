@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace HASPKey
 {
-    public partial class Form1 : DevExpress.XtraEditors.XtraForm
+    public partial class Home : DevExpress.XtraEditors.XtraForm
     {
-        public Form1()
+        public Home()
         {
             InitializeComponent();
             var entities = new BindingList<Entity>

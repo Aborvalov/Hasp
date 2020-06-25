@@ -1,13 +1,13 @@
-﻿using Entities;
+﻿using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HASPKey
+namespace Presenter
 {
-    public interface IViewKeyFeatureClient
+    public interface IViewHome
     {
         /// <summary>
         /// Вывод списка ключей-фич клиента.
@@ -16,10 +16,11 @@ namespace HASPKey
         /// <summary>
         /// Ввод нового значения.
         /// </summary>
-        KeyFeatureClient ValueInput { get; }
+        Home ValueInput { get; }
         /// <summary>
         /// Событие ввода.
         /// </summary>
         event EventHandler<EventArgs> SetKeyFeatureClient;
+
     }
 }

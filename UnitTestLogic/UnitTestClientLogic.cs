@@ -15,11 +15,12 @@ namespace UnitTestLogic
     {
         private const int erroneousId = -123;
         private IClientLogic clientL;
+        private IClientLogic Get(EntitesContext db) => new ClientLogic(new DbClientDAO(db));
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void NullIContractClientDAO()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => clientL = new ClientLogic(null));
+            Assert.ThrowsException<ArgumentNullException>(() => clientL = Get(null));
         }
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
@@ -30,7 +31,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Clients(db);
-                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL = Get(db);
                 add = clientL.Save(CreateNew());
             }
 
@@ -45,7 +46,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Clients(db);
-                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL = Get(db);
                 clientL.Save(client);
                 add = clientL.Save(client);
             }
@@ -58,7 +59,7 @@ namespace UnitTestLogic
         {
             using (var db = new EntitesContext())
             {
-                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL = Get(db);
                 Assert.ThrowsException<ArgumentNullException>(() => clientL.Save(null));
             }
         }
@@ -70,7 +71,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Clients(db);
-                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL = Get(db);
 
                 client.Name = null;
                 Assert.ThrowsException<ArgumentException>(() => clientL.Save(client));
@@ -94,7 +95,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Clients(db);
-                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL = Get(db);
 
                 foreach (var cl in clients)
                     clientL.Save(cl);
@@ -114,7 +115,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Clients(db);
-                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL = Get(db);
                 getAll = clientL.GetAll();
             }
             CollectionAssert.AreEqual(getAll, clientExpected);
@@ -129,7 +130,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Clients(db);
-                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL = Get(db);
                 clientL.Save(CreateNew());
                 getById = clientL.GetById(1);
             }
@@ -145,7 +146,7 @@ namespace UnitTestLogic
         {
             using (var db = new EntitesContext())
             {
-                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL = Get(db);
                 Assert.ThrowsException<ArgumentException>(() => clientL.GetById(erroneousId));
             }
         }
@@ -161,7 +162,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Clients(db);
-                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL = Get(db);
                 getById = clientL.GetById(1);
             }
 
@@ -175,7 +176,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Clients(db);
-                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL = Get(db);
                 clientL.Save(CreateNew());
                 update = clientL.Update(new Client
                 {
@@ -198,7 +199,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Clients(db);
-                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL = Get(db);
                 clientL.Save(client);
                 client.Address = "??????";
                 clientL.Save(client);
@@ -213,7 +214,7 @@ namespace UnitTestLogic
         {
             using (var db = new EntitesContext())
             {
-                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL = Get(db);
                 Assert.ThrowsException<ArgumentNullException>(() => clientL.Update(null));
             }
         }
@@ -236,7 +237,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Clients(db);
-                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL = Get(db);
                 clientL.Save(CreateNew());
 
                 Assert.IsFalse(clientL.Update(clientNoDB));
@@ -252,7 +253,7 @@ namespace UnitTestLogic
                 ClearTable.Clients(db);
                 ClearTable.KeyFeatureClients(db);
 
-                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL = Get(db);
                 db.Clients.AddRange(CreateListEntities.Clients());
                 db.KeyFeatureClients.AddRange(CreateListEntities.KeyFeatureClients());
                 db.SaveChanges();
@@ -271,7 +272,7 @@ namespace UnitTestLogic
         {
             using (var db = new EntitesContext())
             {
-                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL = Get(db);
                 Assert.ThrowsException<ArgumentException>(() => clientL.Remove(erroneousId));
             }
         }
@@ -285,7 +286,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Clients(db);
-                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL = Get(db);
                 clientL.Save(CreateNew());
                 Assert.IsFalse(clientL.Remove(123));
 
@@ -304,7 +305,7 @@ namespace UnitTestLogic
                 ClearTable.Clients(db);
                 ClearTable.KeyFeatureClients(db);
 
-                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL = Get(db);
                 db.Features.AddRange(CreateListEntities.Features());
                 db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
                 db.Clients.AddRange(CreateListEntities.Clients());
@@ -327,7 +328,7 @@ namespace UnitTestLogic
         {
             using (var db = new EntitesContext())
             {
-                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL = Get(db);
                 Assert.ThrowsException<ArgumentNullException>(() => clientL.GetByFeature(null));
             }
         }
@@ -337,7 +338,7 @@ namespace UnitTestLogic
         {
             using (var db = new EntitesContext())
             {
-                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL = Get(db);
                 Assert.ThrowsException<ArgumentException>(() => clientL.GetByNumberKey(erroneousId));
             }
         }
@@ -348,7 +349,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.HaspKeys(db);
-                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL = Get(db);
                 Assert.IsNull(clientL.GetByNumberKey(2));
             }
         }
@@ -366,7 +367,7 @@ namespace UnitTestLogic
                 ClearTable.Clients(db);
                 ClearTable.KeyFeatureClients(db);
 
-                clientL = new ClientLogic(new DbClientDAO(db));
+                clientL = Get(db);
                 db.HaspKeys.AddRange(CreateListEntities.HaspKeys());
                 db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
                 db.Clients.AddRange(CreateListEntities.Clients());

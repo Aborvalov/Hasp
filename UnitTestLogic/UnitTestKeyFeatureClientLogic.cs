@@ -18,11 +18,12 @@ namespace UnitTestLogic
     {
         private const int erroneousId = -123;
         private IKeyFeatureClientLogic keyFeatureClientL;
+        private IKeyFeatureClientLogic Get(EntitesContext db) => new KeyFeatureClientLogic(new DbKeyFeatureClientDAO(db));
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void NullEntitesContextKeyFeatureClient()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => keyFeatureClientL = new KeyFeatureClientLogic(null));
+            Assert.ThrowsException<ArgumentNullException>(() => keyFeatureClientL = Get(null));
         }
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
@@ -33,7 +34,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.KeyFeatureClients(db);
-                keyFeatureClientL = new KeyFeatureClientLogic(new DbKeyFeatureClientDAO(db));
+                keyFeatureClientL = Get(db);
                 add = keyFeatureClientL.Save(CreateNew());
             }
 
@@ -45,7 +46,7 @@ namespace UnitTestLogic
         {
             using (var db = new EntitesContext())
             {
-                keyFeatureClientL = new KeyFeatureClientLogic(new DbKeyFeatureClientDAO(db));
+                keyFeatureClientL = Get(db);
                 Assert.ThrowsException<ArgumentNullException>(() => keyFeatureClientL.Save(null));
             }
         }
@@ -58,7 +59,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.KeyFeatureClients(db);
-                keyFeatureClientL = new KeyFeatureClientLogic(new DbKeyFeatureClientDAO(db));
+                keyFeatureClientL = Get(db);
                 keyFeatureClientL.Save(keyFeatureClient);
                 add = keyFeatureClientL.Save(keyFeatureClient);
             }
@@ -74,7 +75,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.KeyFeatureClients(db);
-                keyFeatureClientL = new KeyFeatureClientLogic(new DbKeyFeatureClientDAO(db));
+                keyFeatureClientL = Get(db);
 
                 keyFeatureClient.Initiator = null;
                 Assert.ThrowsException<ArgumentException>(() => keyFeatureClientL.Save(keyFeatureClient));
@@ -104,7 +105,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.KeyFeatureClients(db);
-                keyFeatureClientL = new KeyFeatureClientLogic(new DbKeyFeatureClientDAO(db));
+                keyFeatureClientL = Get(db);
                 foreach (var kfc in keyFeatCls)
                     keyFeatureClientL.Save(kfc);
 
@@ -123,7 +124,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.KeyFeatureClients(db);
-                keyFeatureClientL = new KeyFeatureClientLogic(new DbKeyFeatureClientDAO(db));
+                keyFeatureClientL = Get(db);
 
                 getAll = keyFeatureClientL.GetAll();
             }
@@ -140,7 +141,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.KeyFeatureClients(db);
-                keyFeatureClientL = new KeyFeatureClientLogic(new DbKeyFeatureClientDAO(db));
+                keyFeatureClientL = Get(db);
                 keyFeatureClientL.Save(CreateNew());
                 getById = keyFeatureClientL.GetById(1);
             }
@@ -156,7 +157,7 @@ namespace UnitTestLogic
         {
             using (var db = new EntitesContext())
             {
-                keyFeatureClientL = new KeyFeatureClientLogic(new DbKeyFeatureClientDAO(db));
+                keyFeatureClientL = Get(db);
                 Assert.ThrowsException<ArgumentException>(() => keyFeatureClientL.GetById(erroneousId));
             }
         }
@@ -172,7 +173,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.KeyFeatureClients(db);
-                keyFeatureClientL = new KeyFeatureClientLogic(new DbKeyFeatureClientDAO(db));
+                keyFeatureClientL = Get(db);
                 getById = keyFeatureClientL.GetById(1);
             }
 
@@ -186,7 +187,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.KeyFeatureClients(db);
-                keyFeatureClientL = new KeyFeatureClientLogic(new DbKeyFeatureClientDAO(db));
+                keyFeatureClientL = Get(db);
                 keyFeatureClientL.Save(CreateNew());
                 update = keyFeatureClientL.Update(new KeyFeatureClient
                 {
@@ -208,7 +209,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.KeyFeatureClients(db);
-                keyFeatureClientL = new KeyFeatureClientLogic(new DbKeyFeatureClientDAO(db));
+                keyFeatureClientL = Get(db);
                 keyFeatureClientL.Save(keyFeatureClient);
                 keyFeatureClient.Initiator = "?????";
                 update = keyFeatureClientL.Update(CreateNew(2));
@@ -221,7 +222,7 @@ namespace UnitTestLogic
         {
             using (var db = new EntitesContext())
             {
-                keyFeatureClientL = new KeyFeatureClientLogic(new DbKeyFeatureClientDAO(db));
+                keyFeatureClientL = Get(db);
                 Assert.ThrowsException<ArgumentNullException>(() => keyFeatureClientL.Update(null));
             }
         }
@@ -244,7 +245,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.KeyFeatureClients(db);
-                keyFeatureClientL = new KeyFeatureClientLogic(new DbKeyFeatureClientDAO(db));
+                keyFeatureClientL = Get(db);
                 keyFeatureClientL.Save(CreateNew());
                 Assert.IsFalse(keyFeatureClientL.Update(kfcNoDB));
             }
@@ -258,7 +259,7 @@ namespace UnitTestLogic
             {
                 ClearTable.KeyFeatureClients(db);
 
-                keyFeatureClientL = new KeyFeatureClientLogic(new DbKeyFeatureClientDAO(db));
+                keyFeatureClientL = Get(db);
                 db.KeyFeatureClients.AddRange(CreateListEntities.KeyFeatureClients());
                 db.SaveChanges();
 
@@ -276,7 +277,7 @@ namespace UnitTestLogic
         {
             using (var db = new EntitesContext())
             {
-                keyFeatureClientL = new KeyFeatureClientLogic(new DbKeyFeatureClientDAO(db));
+                keyFeatureClientL = Get(db);
                 Assert.ThrowsException<ArgumentException>(() => keyFeatureClientL.Remove(erroneousId));
             }
         }
@@ -290,7 +291,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.HaspKeys(db);
-                keyFeatureClientL = new KeyFeatureClientLogic(new DbKeyFeatureClientDAO(db));
+                keyFeatureClientL = Get(db);
                 keyFeatureClientL.Save(CreateNew());
                 Assert.IsFalse(keyFeatureClientL.Remove(12));
             }

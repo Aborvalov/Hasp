@@ -14,12 +14,12 @@ namespace UnitTestLogic
     {
         private const int erroneousId = -123;
         private IFeatureLogic featureL;
-
+        private IFeatureLogic Get(EntitesContext db) => new FeatureLogic(new DbFeatureDAO(db));
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void NullEntitesContextFeature()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => featureL = new FeatureLogic(null));
+            Assert.ThrowsException<ArgumentNullException>(() => featureL = Get(null));
         }
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
@@ -29,7 +29,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Features(db);
-                featureL = new FeatureLogic(new DbFeatureDAO(db));
+                featureL = Get(db);
                 add = featureL.Save(CreateNew());
             }
 
@@ -44,7 +44,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Features(db);
-                featureL = new FeatureLogic(new DbFeatureDAO(db));
+                featureL = Get(db);
                 featureL.Save(feature);
                 add = featureL.Save(feature);
             }
@@ -59,7 +59,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Features(db);
-                featureL = new FeatureLogic(new DbFeatureDAO(db));
+                featureL = Get(db);
 
                 feature.Name = null;
                 Assert.ThrowsException<ArgumentException>(() => featureL.Save(feature));
@@ -79,7 +79,7 @@ namespace UnitTestLogic
         {
             using (var db = new EntitesContext())
             {
-                featureL = new FeatureLogic(new DbFeatureDAO(db));
+                featureL = Get(db);
                 Assert.ThrowsException<ArgumentNullException>(() => featureL.Save(null));
             }
         }
@@ -93,7 +93,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Features(db);
-                featureL = new FeatureLogic(new DbFeatureDAO(db));
+                featureL = Get(db);
 
                 foreach (var feat in features)
                     featureL.Save(feat);
@@ -113,7 +113,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Features(db);
-                featureL = new FeatureLogic(new DbFeatureDAO(db));
+                featureL = Get(db);
                 getAll = featureL.GetAll();
             }
 
@@ -129,7 +129,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Features(db);
-                featureL = new FeatureLogic(new DbFeatureDAO(db));
+                featureL = Get(db);
                 featureL.Save(CreateNew());
                 getById = featureL.GetById(1);
             }
@@ -145,7 +145,7 @@ namespace UnitTestLogic
         {
             using (var db = new EntitesContext())
             {
-                featureL = new FeatureLogic(new DbFeatureDAO(db));
+                featureL = Get(db);
                 Assert.ThrowsException<ArgumentException>(() => featureL.GetById(erroneousId));
             }
         }
@@ -160,7 +160,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Features(db);
-                featureL = new FeatureLogic(new DbFeatureDAO(db));
+                featureL = Get(db);
                 getById = featureL.GetById(1);
             }
             Assert.IsNull(getById);
@@ -173,7 +173,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Features(db);
-                featureL = new FeatureLogic(new DbFeatureDAO(db));
+                featureL = Get(db);
                 featureL.Save(CreateNew());
                 update = featureL.Update(new Feature
                 {
@@ -194,7 +194,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Features(db);
-                featureL = new FeatureLogic(new DbFeatureDAO(db));
+                featureL = Get(db);
                 featureL.Save(faeture);
                 faeture.Number = 111;
                 featureL.Save(faeture);
@@ -208,7 +208,7 @@ namespace UnitTestLogic
         {
             using (var db = new EntitesContext())
             {
-                featureL = new FeatureLogic(new DbFeatureDAO(db));
+                featureL = Get(db);
                 Assert.ThrowsException<ArgumentNullException>(() => featureL.Update(null));
             }
         }
@@ -227,7 +227,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Features(db);
-                featureL = new FeatureLogic(new DbFeatureDAO(db));
+                featureL = Get(db);
                 featureL.Save(CreateNew());
                 Assert.IsFalse(featureL.Update(featureNoDB));
             }
@@ -243,7 +243,7 @@ namespace UnitTestLogic
                 ClearTable.KeyFeatures(db);
                 ClearTable.KeyFeatureClients(db);
 
-                featureL = new FeatureLogic(new DbFeatureDAO(db));
+                featureL = Get(db);
                 db.Features.AddRange(CreateListEntities.Features());
                 db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
                 db.KeyFeatureClients.AddRange(CreateListEntities.KeyFeatureClients());
@@ -263,7 +263,7 @@ namespace UnitTestLogic
         {
             using (var db = new EntitesContext())
             {
-                featureL = new FeatureLogic(new DbFeatureDAO(db));
+                featureL = Get(db);
                 Assert.ThrowsException<ArgumentException>(() => featureL.Remove(erroneousId));
             }
         }
@@ -277,7 +277,7 @@ namespace UnitTestLogic
             using (var db = new EntitesContext())
             {
                 ClearTable.Features(db);
-                featureL = new FeatureLogic(new DbFeatureDAO(db));
+                featureL = Get(db);
                 featureL.Save(CreateNew());
                 Assert.IsFalse(featureL.Remove(1235));
             }

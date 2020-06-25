@@ -3,7 +3,6 @@ using Entities;
 using LogicContract;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Logic
 {
