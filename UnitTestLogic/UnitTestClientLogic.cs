@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using DalDB;
-using Entities;
+﻿using Entities;
+using HelperForUnitTest;
 using Logic;
 using LogicContract;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using HelperForUnitTest;
+using System;
+using System.Collections.Generic;
 
 namespace UnitTestLogic
 {
@@ -15,7 +14,7 @@ namespace UnitTestLogic
     {
         private const int erroneousId = -123;
         private IClientLogic clientL;
-        private IClientLogic Get(EntitesContext db) => new ClientLogic(new DbClientDAO(db));
+        private IClientLogic Get(EntitesContext db) => new Logics().CreateClient(db);
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void NullIContractClientDAO()

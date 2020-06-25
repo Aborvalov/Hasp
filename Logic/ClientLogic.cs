@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Logic
 {
-    public class ClientLogic : IClientLogic
+    internal class ClientLogic : IClientLogic
     {
         private readonly IContractClientDAO clientDAO;
         public ClientLogic(IContractClientDAO clientDAO)

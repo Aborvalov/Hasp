@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Logic
 {
-    public class KeyFeatureClientLogic : IKeyFeatureClientLogic
+    internal class KeyFeatureClientLogic : IKeyFeatureClientLogic
     {
         private readonly IContractKeyFeatureClientDAO keyFeatureClientDAO;
         public KeyFeatureClientLogic(IContractKeyFeatureClientDAO keyFeatureClientDAO)

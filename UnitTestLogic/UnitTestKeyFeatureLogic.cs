@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using DalDB;
-using Entities;
+﻿using Entities;
+using HelperForUnitTest;
 using Logic;
 using LogicContract;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using HelperForUnitTest;
+using System;
+using System.Collections.Generic;
 
 namespace UnitTestLogic
 {
@@ -18,7 +17,7 @@ namespace UnitTestLogic
     {
         private const int erroneousId = -123;
         private IKeyFeatureLogic keyFeatureL;
-        private IKeyFeatureLogic Get(EntitesContext db) => new KeyFeatureLogic(new DbKeyFeatureDAO(db));
+        private IKeyFeatureLogic Get(EntitesContext db) => new Logics().CreateKeyFeature(db);
         private readonly DateTime date = DateTime.Now.Date;
 
         [TestMethod]

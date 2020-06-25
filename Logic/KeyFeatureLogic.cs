@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Logic
 {
-    public class KeyFeatureLogic : IKeyFeatureLogic
+    internal class KeyFeatureLogic : IKeyFeatureLogic
     {
         private readonly IContractKeyFeatureDAO keyFeatureDAO;
         private readonly DateTime date = DateTime.Now.Date;

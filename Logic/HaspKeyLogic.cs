@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Logic
 {
-    public class HaspKeyLogic : IHaspKeyLogic
+    internal class HaspKeyLogic : IHaspKeyLogic
     {
         private readonly IContractHaspKeyDAO haspKeyDAO;
         public HaspKeyLogic(IContractHaspKeyDAO haspKeyDAO)

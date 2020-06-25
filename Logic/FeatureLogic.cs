@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Logic
 {
-    public class FeatureLogic : IFeatureLogic
+    internal class FeatureLogic : IFeatureLogic
     {
         private readonly IContractFeatureDAO featureDAO;
         public FeatureLogic(IContractFeatureDAO featureDAO)

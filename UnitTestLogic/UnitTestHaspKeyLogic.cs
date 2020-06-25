@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using DalDB;
-using Entities;
+﻿using Entities;
+using HelperForUnitTest;
 using Logic;
 using LogicContract;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using HelperForUnitTest;
+using System;
+using System.Collections.Generic;
 
 namespace UnitTestLogic
 {
@@ -18,7 +17,7 @@ namespace UnitTestLogic
     {
         private const int erroneousId = -123;
         private IHaspKeyLogic haspKeyL;
-        private IHaspKeyLogic Get(EntitesContext db) => new HaspKeyLogic(new DbHaspKeyDAO(db));
+        private IHaspKeyLogic Get(EntitesContext db) => new Logics().CreateHaspKey(db);
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void NullEntitesContextHaspKey()
