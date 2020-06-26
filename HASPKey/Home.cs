@@ -13,7 +13,7 @@ namespace HASPKey
 {
     public partial class Home : DevExpress.XtraEditors.XtraForm, IHomeView
     {
-        private IPresenterHome presenter;
+        private readonly IPresenterHome presenter;
 
         public Home()
         {
