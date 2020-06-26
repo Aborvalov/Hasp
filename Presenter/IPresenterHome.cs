@@ -1,10 +1,10 @@
-﻿using Model;
+﻿using ModelEntities;
 using System.Collections.Generic;
 
 namespace Presenter
 {
     public interface IPresenterHome
     {
-       List<HomeView> HomeViews();
+       List<Home> HomeViews();
     }
 }

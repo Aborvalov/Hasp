@@ -2,12 +2,12 @@
 using System;
 using System.ComponentModel;
 
-namespace Model
+namespace ModelEntities
 {
     /// <summary>
     /// Связка (ключ-фича)-клиент, таблица KeyFeatureClient.
     /// </summary>
-    public class HomeView : KeyFeatureClient
+    public class Home : KeyFeatureClient
     {
         private static int i = 1;
         /// <summary>

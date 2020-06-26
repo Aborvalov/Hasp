@@ -114,7 +114,7 @@
             // 
             // bindingHome
             // 
-            this.bindingHome.DataSource = typeof(Model.HomeView);
+            this.bindingHome.DataSource = typeof(ModelEntities.Home);
             // 
             // BtnAddKeyFeatCln
             // 

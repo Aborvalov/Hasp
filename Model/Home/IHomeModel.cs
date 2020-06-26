@@ -1,12 +1,12 @@
-﻿using System;
+﻿using ModelEntities;
 using System.Collections.Generic;
 
 namespace Model
 {
     public interface IHomeModel
     {
-        void UpdateHome(HomeView home);
-        List<HomeView> GetAll();
-        HomeView GetById(int Id);
+        void UpdateHome(Home home);
+        List<Home> GetAll();
+        Home GetById(int Id);
     }
 }

@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Model;
 using Presenter;
 using View;
 
@@ -23,9 +22,9 @@ namespace HASPKey
         }
         private void ВыходToolStripMenuItem_Click(object sender, EventArgs e)
             =>  this.Close();
-        public void Build(List<HomeView> homes)
-            => bindingHome.DataSource = homes != null ? new BindingList<HomeView>(homes) 
-                                                      : new BindingList<HomeView>();
+        public void Build(List<ModelEntities.Home> homes)
+            => bindingHome.DataSource = homes != null ? new BindingList<ModelEntities.Home>(homes) 
+                                                      : new BindingList<ModelEntities.Home>();
 
         private void КлючToolStripMenuItem_Click(object sender, EventArgs e)
         {

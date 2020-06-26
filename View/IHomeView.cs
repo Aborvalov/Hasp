@@ -1,10 +1,10 @@
-﻿using Model;
+﻿using ModelEntities;
 using System.Collections.Generic;
 
 namespace View
 {
     public interface IHomeView
     {
-        void Build(List<HomeView> homes);
+        void Build(List<Home> homes);
     }
 }

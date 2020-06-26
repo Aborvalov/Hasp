@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{698D2AC3-FC9E-47D6-87B7-A5835BD507EE}</ProjectGuid>
+    <ProjectGuid>{C5312C7B-ADE7-462E-B945-3EA7E1EFB4A0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>View</RootNamespace>
-    <AssemblyName>View</AssemblyName>
+    <RootNamespace>ModelEntities</RootNamespace>
+    <AssemblyName>ModelEntities</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,13 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IHomeView.cs" />
+    <Compile Include="Home.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ModelEntities\ModelEntities.csproj">
-      <Project>{c5312c7b-ade7-462e-b945-3ea7e1efb4a0}</Project>
-      <Name>ModelEntities</Name>
+    <ProjectReference Include="..\Entites\Entities.csproj">
+      <Project>{22d9c86f-1103-47fc-bcd6-5e35fc54de22}</Project>
+      <Name>Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

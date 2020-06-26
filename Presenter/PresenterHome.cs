@@ -1,6 +1,6 @@
 ﻿using Logic;
 using Model;
-using Presenter;
+using ModelEntities;
 using System.Collections.Generic;
 using View;
 
@@ -18,6 +18,6 @@ namespace Presenter
 
             homeView.Build(HomeViews());
         }
-        public List<HomeView> HomeViews() => homeModel.GetAll();
+        public List<Home> HomeViews() => homeModel.GetAll();
     }
 }

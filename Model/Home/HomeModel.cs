@@ -1,5 +1,6 @@
 ﻿using Entities;
 using Logic;
+using ModelEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace Model
 {
     public class HomeModel : IHomeModel
     {
-        private List<HomeView> homes = null;
+        private List<Home> homes = null;
         private readonly DateTime date = DateTime.Now.Date;
         private readonly IFactoryLogic logic;
 
@@ -17,7 +18,7 @@ namespace Model
             logic = factoryLogic;
             homes = GetHomes();
         }
-        private List<HomeView> GetHomes()
+        private List<Home> GetHomes()
         {
             List<KeyFeatureClient> keyFeatureClients;
             List<KeyFeature> keyFeatures;
@@ -43,7 +44,7 @@ namespace Model
                             on keyFeat.IdFeature equals feature.Id
                        join key in haspKeys 
                             on keyFeat.IdHaspKey equals key.Id
-                       select new HomeView
+                       select new Home
                        {
                            Id           = keyFeatCl.Id,
                            IdKeyFeature = keyFeatCl.IdKeyFeature,
@@ -58,11 +59,11 @@ namespace Model
 
             return item.ToList();
         }
-        public HomeView GetById(int Id) => homes.SingleOrDefault(x => x.Id == Id);
+        public Home GetById(int Id) => homes.SingleOrDefault(x => x.Id == Id);
 
-        public List<HomeView> GetAll() => homes;
+        public List<Home> GetAll() => homes;
 
-        public void UpdateHome(HomeView project)
+        public void UpdateHome(Home project)
         {
             if (project == null)
                 throw new ArgumentNullException(nameof(project));
