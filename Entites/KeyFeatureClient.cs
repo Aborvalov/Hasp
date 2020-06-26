@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entities
 {
-    [DisplayColumn("City", "PostalCode", false)]
     public class KeyFeatureClient
     {
         [Browsable(false)]
