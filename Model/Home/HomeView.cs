@@ -9,11 +9,12 @@ namespace Model
     /// </summary>
     public class HomeView : KeyFeatureClient
     {
+        private static int i = 1;
         /// <summary>
         /// Порядковый номер.
         /// </summary>         
         [DisplayName("№ п/п")]
-        public int SerialNumber { get; set; }
+        public int SerialNumber { get; set; } = i++;
         [DisplayName("Номер ключа")]
         public string NumberKey { get; set; }
         [DisplayName("Функциональность")]
