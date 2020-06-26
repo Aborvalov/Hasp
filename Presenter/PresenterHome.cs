@@ -14,7 +14,7 @@ namespace Presenter
         public PresenterHome(IHomeView homeView)
         {
             homeModel = new HomeModel(new Logics());
-            this.homeView = homeView;
+            this.homeView = homeView ?? throw new System.ArgumentNullException(nameof(homeView));
 
             homeView.Build(HomeViews());
         }

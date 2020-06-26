@@ -62,8 +62,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Home\HomeModel.cs" />
-    <Compile Include="Home\IHomeModel.cs" />
+    <Compile Include="HomeModel.cs" />
+    <Compile Include="IHomeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

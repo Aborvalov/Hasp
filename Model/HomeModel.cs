@@ -15,7 +15,7 @@ namespace Model
 
         public HomeModel(IFactoryLogic factoryLogic)
         {
-            logic = factoryLogic;
+            logic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
             homes = GetHomes();
         }
         private List<Home> GetHomes()
