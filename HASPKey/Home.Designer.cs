@@ -130,7 +130,7 @@
             this.ключToolStripMenuItem.Name = "ключToolStripMenuItem";
             this.ключToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ключToolStripMenuItem.Text = "Ключ";
-            this.ключToolStripMenuItem.Click += new System.EventHandler(this.ключToolStripMenuItem_Click);
+            this.ключToolStripMenuItem.Click += new System.EventHandler(this.КлючToolStripMenuItem_Click);
             // 
             // serialNumberDataGridViewTextBoxColumn
             // 

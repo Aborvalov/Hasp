@@ -83,7 +83,6 @@
     <Compile Include="Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
-    <Compile Include="IHomeView.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Home.resx">
@@ -118,13 +117,17 @@
       <Project>{22d9c86f-1103-47fc-bcd6-5e35fc54de22}</Project>
       <Name>Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Logic\Logic.csproj">
-      <Project>{77c069c5-75c2-4dc0-b576-55a894ed471d}</Project>
-      <Name>Logic</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{3af74fc5-74be-45f6-ad0a-d317975cf11f}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Presenter\Presenter.csproj">
+      <Project>{cc3588fa-a420-486f-b886-1e569220987b}</Project>
+      <Name>Presenter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\View\View.csproj">
+      <Project>{698d2ac3-fc9e-47d6-87b7-a5835bd507ee}</Project>
+      <Name>View</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

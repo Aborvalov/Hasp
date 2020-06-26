@@ -8,6 +8,5 @@ namespace Model
         void UpdateHome(HomeView home);
         List<HomeView> GetAll();
         HomeView GetById(int Id);
-        event EventHandler<HomeEventArgs> HomeUpdated;
     }
 }

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CC3588FA-A420-486F-B886-1E569220987B}</ProjectGuid>
+    <ProjectGuid>{698D2AC3-FC9E-47D6-87B7-A5835BD507EE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Presenter</RootNamespace>
-    <AssemblyName>Presenter</AssemblyName>
+    <RootNamespace>View</RootNamespace>
+    <AssemblyName>View</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,26 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IPresenterHome.cs" />
-    <Compile Include="PresenterHome.cs" />
+    <Compile Include="IHomeView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Entites\Entities.csproj">
-      <Project>{22d9c86f-1103-47fc-bcd6-5e35fc54de22}</Project>
-      <Name>Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Logic\Logic.csproj">
-      <Project>{77c069c5-75c2-4dc0-b576-55a894ed471d}</Project>
-      <Name>Logic</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{3af74fc5-74be-45f6-ad0a-d317975cf11f}</Project>
       <Name>Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\View\View.csproj">
-      <Project>{698d2ac3-fc9e-47d6-87b7-a5835bd507ee}</Project>
-      <Name>View</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

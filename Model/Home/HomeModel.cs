@@ -10,7 +10,6 @@ namespace Model
     {
         private List<HomeView> homes = null;
         private readonly DateTime date = DateTime.Now.Date;
-        public event EventHandler<HomeEventArgs> HomeUpdated = delegate { };
         private readonly IFactoryLogic logic;
 
         public HomeModel(IFactoryLogic factoryLogic)
@@ -68,7 +67,15 @@ namespace Model
             if (project == null)
                 throw new ArgumentNullException(nameof(project));
 
-            HomeUpdated(this, new HomeEventArgs(project)); 
+
+            /*
+             * 
+             * 
+             * 
+             * */
+
+
+            homes = GetHomes();
         }
     }
 }

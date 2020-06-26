@@ -1,7 +1,7 @@
 ﻿using Model;
 using System.Collections.Generic;
 
-namespace HASPKey
+namespace View
 {
     public interface IHomeView
     {

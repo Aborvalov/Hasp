@@ -62,7 +62,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Home\HomeEventArgs.cs" />
     <Compile Include="Home\HomeModel.cs" />
     <Compile Include="Home\IHomeModel.cs" />
     <Compile Include="Home\HomeView.cs" />
