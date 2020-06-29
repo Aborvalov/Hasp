@@ -9,23 +9,21 @@ namespace Model
 {
     public class HomeModel : IHomeModel
     {
-        private List<Home> homes = null;
         private readonly DateTime date = DateTime.Now.Date;
         private readonly IFactoryLogic logic;
 
         public HomeModel(IFactoryLogic factoryLogic)
         {
             logic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
-            homes = GetHomes();
         }
-        private List<Home> GetHomes()
+        public List<ModelViewHome> GetAll()
         {
             List<KeyFeatureClient> keyFeatureClients;
             List<KeyFeature> keyFeatures;
             List<Client> clients;
             List<Feature> features;
             List<HaspKey> haspKeys;
-
+            int i = 1;
             using (var db = new EntitesContext())
             {
                 keyFeatureClients = logic.CreateKeyFeatureClient(db).GetAll();
@@ -36,17 +34,18 @@ namespace Model
             }
 
             var item = from keyFeatCl in keyFeatureClients
-                       join keyFeat in keyFeatures 
+                       join keyFeat in keyFeatures
                             on keyFeatCl.IdKeyFeature equals keyFeat.Id
-                       join cl in clients 
+                       join cl in clients
                             on keyFeatCl.IdClient equals cl.Id
-                       join feature in features 
+                       join feature in features
                             on keyFeat.IdFeature equals feature.Id
-                       join key in haspKeys 
+                       join key in haspKeys
                             on keyFeat.IdHaspKey equals key.Id
-                       select new Home
+                       select new ModelViewHome
                        {
                            Id           = keyFeatCl.Id,
+                           SerialNumber = i++,
                            IdKeyFeature = keyFeatCl.IdKeyFeature,
                            IdClient     = keyFeatCl.IdClient,
                            Client       = cl.Name + " - " + cl.Address,
@@ -59,11 +58,9 @@ namespace Model
 
             return item.ToList();
         }
-        public Home GetById(int Id) => homes.SingleOrDefault(x => x.Id == Id);
-
-        public List<Home> GetAll() => homes;
-
-        public void UpdateHome(Home project)
+        public ModelViewHome GetById(int Id) => GetAll().SingleOrDefault(x => x.Id == Id);
+             
+        public void UpdateHome(ModelViewHome project)
         {
             if (project == null)
                 throw new ArgumentNullException(nameof(project));
@@ -76,7 +73,6 @@ namespace Model
              * */
 
 
-            homes = GetHomes();
         }
     }
 }

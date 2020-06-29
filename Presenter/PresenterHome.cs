@@ -12,12 +12,12 @@ namespace Presenter
         private readonly IHomeView homeView;
 
         public PresenterHome(IHomeView homeView)
-        {
-            homeModel = new HomeModel(new Logics());
+        {            
             this.homeView = homeView ?? throw new System.ArgumentNullException(nameof(homeView));
 
-            homeView.Build(HomeViews());
+            homeModel = new HomeModel(new Logics());
+            Views();
         }
-        public List<Home> HomeViews() => homeModel.GetAll();
+        public void Views() => homeView.Build(homeModel.GetAll());
     }
 }

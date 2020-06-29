@@ -5,8 +5,8 @@ namespace Model
 {
     public interface IHomeModel
     {
-        void UpdateHome(Home home);
-        List<Home> GetAll();
-        Home GetById(int Id);
+        void UpdateHome(ModelViewHome home);
+        List<ModelViewHome> GetAll();
+        ModelViewHome GetById(int Id);
     }
 }

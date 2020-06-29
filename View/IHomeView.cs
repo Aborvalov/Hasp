@@ -5,6 +5,6 @@ namespace View
 {
     public interface IHomeView
     {
-        void Build(List<Home> homes);
+        void Build(List<ModelViewHome> homes);
     }
 }

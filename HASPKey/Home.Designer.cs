@@ -33,16 +33,16 @@
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.редактированиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ключToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HomeView = new System.Windows.Forms.DataGridView();
-            this.bindingHome = new System.Windows.Forms.BindingSource(this.components);
             this.BtnAddKeyFeatCln = new DevExpress.XtraEditors.SimpleButton();
-            this.ключToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serialNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numberKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.featureDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clientDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingHome = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HomeView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHome)).BeginInit();
@@ -83,6 +83,13 @@
             this.редактированиеToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
             this.редактированиеToolStripMenuItem.Text = "Редактирование";
             // 
+            // ключToolStripMenuItem
+            // 
+            this.ключToolStripMenuItem.Name = "ключToolStripMenuItem";
+            this.ключToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.ключToolStripMenuItem.Text = "Ключ";
+            this.ключToolStripMenuItem.Click += new System.EventHandler(this.КлючToolStripMenuItem_Click);
+            // 
             // справкаToolStripMenuItem
             // 
             this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
@@ -112,10 +119,6 @@
             this.HomeView.Size = new System.Drawing.Size(594, 321);
             this.HomeView.TabIndex = 3;
             // 
-            // bindingHome
-            // 
-            this.bindingHome.DataSource = typeof(ModelEntities.Home);
-            // 
             // BtnAddKeyFeatCln
             // 
             this.BtnAddKeyFeatCln.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -124,13 +127,6 @@
             this.BtnAddKeyFeatCln.Size = new System.Drawing.Size(75, 23);
             this.BtnAddKeyFeatCln.TabIndex = 5;
             this.BtnAddKeyFeatCln.Text = "Add";
-            // 
-            // ключToolStripMenuItem
-            // 
-            this.ключToolStripMenuItem.Name = "ключToolStripMenuItem";
-            this.ключToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.ключToolStripMenuItem.Text = "Ключ";
-            this.ключToolStripMenuItem.Click += new System.EventHandler(this.КлючToolStripMenuItem_Click);
             // 
             // serialNumberDataGridViewTextBoxColumn
             // 
@@ -173,6 +169,10 @@
             this.endDateDataGridViewTextBoxColumn.ReadOnly = true;
             this.endDateDataGridViewTextBoxColumn.Width = 131;
             // 
+            // bindingHome
+            // 
+            this.bindingHome.DataSource = typeof(ModelEntities.ModelViewHome);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -183,7 +183,7 @@
             this.Controls.Add(this.HomeView);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Home";
-            this.Text = "Hasp ключ";
+            this.Text = "Hasp";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HomeView)).EndInit();

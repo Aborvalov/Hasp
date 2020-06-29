@@ -5,6 +5,6 @@ namespace Presenter
 {
     public interface IPresenterHome
     {
-       List<Home> HomeViews();
+       void Views();
     }
 }

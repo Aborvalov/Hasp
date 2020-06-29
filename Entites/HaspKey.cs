@@ -1,21 +1,27 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
 {
     public class HaspKey : IEquatable<HaspKey>
     {
+        [Browsable(false)]
         public int Id { get; set; }
         /// <summary>
         /// Внутренний идентификатор.
         /// </summary>
+        [Browsable(false)]
         public int InnerId { get; set; }
+        [Browsable(false)]
         public string Number { get; set; }
+        [DisplayName("Тип ключа")]
         public TypeKey TypeKey { get; set; }
         /// <summary>
         /// Местонахождение (у нас / клиент).
         /// </summary>
         [Column("Location")]
+        [DisplayName("У клиента")]
         public bool IsHome { get; set; }
 
         bool IEquatable<HaspKey>.Equals(HaspKey other) => Equals(other);
