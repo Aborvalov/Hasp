@@ -2,7 +2,6 @@
 using Model;
 using ModelEntities;
 using System;
-using System.Collections.Generic;
 using View;
 
 namespace Presenter
@@ -28,7 +27,7 @@ namespace Presenter
 
         public void Remove(int id)
         {
-            if (haspKeyModel.Remove(id))
+            if (id > 0 && haspKeyModel.Remove(id))
                 View();
             else
                 this.entitesView.MessageError("Не удалось удалить Hasp-ключ.");

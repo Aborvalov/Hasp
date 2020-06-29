@@ -114,7 +114,7 @@
             this.buttonAdd.TabIndex = 4;
             this.buttonAdd.Text = "Добавить";
             this.buttonAdd.UseVisualStyleBackColor = true;
-            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            this.buttonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
             // 
             // buttonSave
             // 
@@ -135,7 +135,7 @@
             this.buttonDelete.TabIndex = 6;
             this.buttonDelete.Text = "Удалить";
             this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            this.buttonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
             // 
             // panelFiltr
             // 
@@ -193,6 +193,7 @@
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.dgvHaspKey);
             this.Name = "HaspKeyView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hasp ключ";
             ((System.ComponentModel.ISupportInitialize)(this.dgvHaspKey)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHaspKey)).EndInit();

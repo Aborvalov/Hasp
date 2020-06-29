@@ -47,21 +47,24 @@ namespace HASPKey
 
         private void RadioButtonActive_CheckedChanged(object sender, EventArgs e) => presenterHaspKey.GetByActive();
 
-        private void buttonAdd_Click(object sender, EventArgs e)
+        private void ButtonAdd_Click(object sender, EventArgs e)
         {
             
         }
 
-        private void buttonDelete_Click(object sender, EventArgs e)
+        private void ButtonDelete_Click(object sender, EventArgs e)
         {
+            string caption = "Удалить ключ";
+            string message = "Вы уверены, что хотите удалить Hasp-ключ?";
+            DialogResult result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            var row = dgvHaspKey.CurrentRow.DataBoundItem as ModelViewHaspKey;
-            presenterHaspKey.Remove(row.Id);
+            if (result == DialogResult.Yes)
+            {
+                var row = dgvHaspKey.CurrentRow.DataBoundItem as ModelViewHaspKey;
+                presenterHaspKey.Remove(row.Id);
+            }            
         }
 
-        public void MessageError(string error)
-        {
-            throw new NotImplementedException();
-        }
+        public void MessageError(string error) => MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 }
