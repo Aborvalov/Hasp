@@ -48,12 +48,12 @@ namespace Model
                            SerialNumber = i++,
                            IdKeyFeature = keyFeatCl.IdKeyFeature,
                            IdClient     = keyFeatCl.IdClient,
-                           Client       = cl.Name + " - " + cl.Address,
+                           Client       = cl.Name + " - " + cl.Address ,
                            Initiator    = keyFeatCl.Initiator,
                            EndDate      = keyFeat.EndDate,
                            Note         = keyFeatCl.Note,
                            Feature      = feature.Name,
-                           NumberKey    = key.InnerId.ToString() + " - " + key.Number,
+                           NumberKey    = key.InnerId.ToString() + " - \"" + key.Number + "\"",
                        };            
 
             return item.ToList();

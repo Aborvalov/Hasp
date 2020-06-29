@@ -42,6 +42,13 @@
             this.radioButtonPastDue = new System.Windows.Forms.RadioButton();
             this.radioButtonAll = new System.Windows.Forms.RadioButton();
             this.radioButtonActive = new System.Windows.Forms.RadioButton();
+            this.LInnerNumber = new System.Windows.Forms.Label();
+            this.tbInnerNumber = new System.Windows.Forms.TextBox();
+            this.tbNumber = new System.Windows.Forms.TextBox();
+            this.labelNumber = new System.Windows.Forms.Label();
+            this.labelType = new System.Windows.Forms.Label();
+            this.comboBoxTypeKey = new System.Windows.Forms.ComboBox();
+            this.checkBoxIsHome = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHaspKey)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHaspKey)).BeginInit();
             this.panelFiltr.SuspendLayout();
@@ -66,7 +73,7 @@
             this.dgvHaspKey.Name = "dgvHaspKey";
             this.dgvHaspKey.ReadOnly = true;
             this.dgvHaspKey.RowHeadersVisible = false;
-            this.dgvHaspKey.Size = new System.Drawing.Size(431, 516);
+            this.dgvHaspKey.Size = new System.Drawing.Size(431, 475);
             this.dgvHaspKey.TabIndex = 0;
             // 
             // serialNumberDataGridViewTextBoxColumn
@@ -96,7 +103,7 @@
             // 
             this.isHomeDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.isHomeDataGridViewCheckBoxColumn.DataPropertyName = "IsHome";
-            this.isHomeDataGridViewCheckBoxColumn.HeaderText = "У клиента";
+            this.isHomeDataGridViewCheckBoxColumn.HeaderText = "В компании";
             this.isHomeDataGridViewCheckBoxColumn.Name = "isHomeDataGridViewCheckBoxColumn";
             this.isHomeDataGridViewCheckBoxColumn.ReadOnly = true;
             this.isHomeDataGridViewCheckBoxColumn.Width = 80;
@@ -125,6 +132,7 @@
             this.buttonSave.TabIndex = 5;
             this.buttonSave.Text = "Сохранить";
             this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
             // buttonDelete
             // 
@@ -182,16 +190,89 @@
             this.radioButtonActive.UseVisualStyleBackColor = true;
             this.radioButtonActive.CheckedChanged += new System.EventHandler(this.RadioButtonActive_CheckedChanged);
             // 
+            // LInnerNumber
+            // 
+            this.LInnerNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.LInnerNumber.AutoSize = true;
+            this.LInnerNumber.Location = new System.Drawing.Point(10, 523);
+            this.LInnerNumber.Name = "LInnerNumber";
+            this.LInnerNumber.Size = new System.Drawing.Size(100, 13);
+            this.LInnerNumber.TabIndex = 8;
+            this.LInnerNumber.Text = "Внутренний номер";
+            // 
+            // tbInnerNumber
+            // 
+            this.tbInnerNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbInnerNumber.Location = new System.Drawing.Point(12, 539);
+            this.tbInnerNumber.Name = "tbInnerNumber";
+            this.tbInnerNumber.Size = new System.Drawing.Size(98, 21);
+            this.tbInnerNumber.TabIndex = 9;
+            // 
+            // tbNumber
+            // 
+            this.tbNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbNumber.Location = new System.Drawing.Point(114, 539);
+            this.tbNumber.Name = "tbNumber";
+            this.tbNumber.Size = new System.Drawing.Size(100, 21);
+            this.tbNumber.TabIndex = 10;
+            // 
+            // labelNumber
+            // 
+            this.labelNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelNumber.AutoSize = true;
+            this.labelNumber.Location = new System.Drawing.Point(112, 523);
+            this.labelNumber.Name = "labelNumber";
+            this.labelNumber.Size = new System.Drawing.Size(38, 13);
+            this.labelNumber.TabIndex = 11;
+            this.labelNumber.Text = "Номер";
+            // 
+            // labelType
+            // 
+            this.labelType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelType.AutoSize = true;
+            this.labelType.Location = new System.Drawing.Point(215, 523);
+            this.labelType.Name = "labelType";
+            this.labelType.Size = new System.Drawing.Size(61, 13);
+            this.labelType.TabIndex = 12;
+            this.labelType.Text = "Тип ключа";
+            // 
+            // comboBoxTypeKey
+            // 
+            this.comboBoxTypeKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.comboBoxTypeKey.FormattingEnabled = true;
+            this.comboBoxTypeKey.Location = new System.Drawing.Point(218, 539);
+            this.comboBoxTypeKey.Name = "comboBoxTypeKey";
+            this.comboBoxTypeKey.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxTypeKey.TabIndex = 13;
+            // 
+            // checkBoxIsHome
+            // 
+            this.checkBoxIsHome.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBoxIsHome.AutoSize = true;
+            this.checkBoxIsHome.Location = new System.Drawing.Point(345, 541);
+            this.checkBoxIsHome.Name = "checkBoxIsHome";
+            this.checkBoxIsHome.Size = new System.Drawing.Size(90, 17);
+            this.checkBoxIsHome.TabIndex = 14;
+            this.checkBoxIsHome.Text = "Нахождение";
+            this.checkBoxIsHome.UseVisualStyleBackColor = true;
+            // 
             // HaspKeyView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(455, 592);
+            this.Controls.Add(this.dgvHaspKey);
+            this.Controls.Add(this.checkBoxIsHome);
+            this.Controls.Add(this.comboBoxTypeKey);
+            this.Controls.Add(this.labelType);
+            this.Controls.Add(this.labelNumber);
+            this.Controls.Add(this.tbNumber);
+            this.Controls.Add(this.tbInnerNumber);
+            this.Controls.Add(this.LInnerNumber);
             this.Controls.Add(this.panelFiltr);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonAdd);
-            this.Controls.Add(this.dgvHaspKey);
             this.Name = "HaspKeyView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hasp ключ";
@@ -200,6 +281,7 @@
             this.panelFiltr.ResumeLayout(false);
             this.panelFiltr.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -207,10 +289,6 @@
 
         private System.Windows.Forms.DataGridView dgvHaspKey;
         private System.Windows.Forms.BindingSource bindingHaspKey;
-        private System.Windows.Forms.DataGridViewTextBoxColumn serialNumberDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn viewNumberDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn typeKeyDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn isHomeDataGridViewCheckBoxColumn;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonDelete;
@@ -218,5 +296,16 @@
         private System.Windows.Forms.RadioButton radioButtonPastDue;
         private System.Windows.Forms.RadioButton radioButtonAll;
         private System.Windows.Forms.RadioButton radioButtonActive;
+        private System.Windows.Forms.DataGridViewTextBoxColumn serialNumberDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn viewNumberDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typeKeyDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isHomeDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.Label LInnerNumber;
+        private System.Windows.Forms.TextBox tbInnerNumber;
+        private System.Windows.Forms.TextBox tbNumber;
+        private System.Windows.Forms.Label labelNumber;
+        private System.Windows.Forms.Label labelType;
+        private System.Windows.Forms.ComboBox comboBoxTypeKey;
+        private System.Windows.Forms.CheckBox checkBoxIsHome;
     }
 }

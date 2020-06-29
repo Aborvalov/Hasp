@@ -21,7 +21,7 @@ namespace Entities
         /// Местонахождение (у нас / клиент).
         /// </summary>
         [Column("Location")]
-        [DisplayName("У клиента")]
+        [DisplayName("В компании")]
         public bool IsHome { get; set; }
 
         bool IEquatable<HaspKey>.Equals(HaspKey other) => Equals(other);
