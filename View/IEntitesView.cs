@@ -8,5 +8,7 @@ namespace View
         bool Add(T entity);
         bool Update(T entity);
         bool Remove(int id);
+        void MessageError(string error);
+
     }
 }

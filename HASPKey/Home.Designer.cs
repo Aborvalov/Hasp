@@ -36,7 +36,6 @@
             this.ключToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HomeView = new System.Windows.Forms.DataGridView();
-            this.BtnAddKeyFeatCln = new DevExpress.XtraEditors.SimpleButton();
             this.serialNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numberKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.featureDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -116,17 +115,8 @@
             this.HomeView.Name = "HomeView";
             this.HomeView.ReadOnly = true;
             this.HomeView.RowHeadersVisible = false;
-            this.HomeView.Size = new System.Drawing.Size(594, 321);
+            this.HomeView.Size = new System.Drawing.Size(594, 345);
             this.HomeView.TabIndex = 3;
-            // 
-            // BtnAddKeyFeatCln
-            // 
-            this.BtnAddKeyFeatCln.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.BtnAddKeyFeatCln.Location = new System.Drawing.Point(12, 365);
-            this.BtnAddKeyFeatCln.Name = "BtnAddKeyFeatCln";
-            this.BtnAddKeyFeatCln.Size = new System.Drawing.Size(75, 23);
-            this.BtnAddKeyFeatCln.TabIndex = 5;
-            this.BtnAddKeyFeatCln.Text = "Add";
             // 
             // serialNumberDataGridViewTextBoxColumn
             // 
@@ -178,7 +168,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(617, 395);
-            this.Controls.Add(this.BtnAddKeyFeatCln);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.HomeView);
             this.MainMenuStrip = this.menuStrip1;
@@ -201,7 +190,6 @@
         private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
         private System.Windows.Forms.DataGridView HomeView;
         private System.Windows.Forms.BindingSource bindingHome;
-        private DevExpress.XtraEditors.SimpleButton BtnAddKeyFeatCln;
         private System.Windows.Forms.ToolStripMenuItem ключToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn serialNumberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberKeyDataGridViewTextBoxColumn;

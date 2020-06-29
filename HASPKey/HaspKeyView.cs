@@ -40,10 +40,28 @@ namespace HASPKey
             throw new NotImplementedException();
         }
 
-        private void button1_Click(object sender, EventArgs e) => presenterHaspKey.GetByActive();
+        private void RadioButtonAll_CheckedChanged(object sender, EventArgs e) => presenterHaspKey.View();
 
-        private void button2_Click(object sender, EventArgs e) => presenterHaspKey.GetByPastDue();
+        private void RadioButtonPastDue_CheckedChanged(object sender, EventArgs e) => presenterHaspKey.GetByPastDue();
 
-        private void button3_Click(object sender, EventArgs e) => presenterHaspKey.View();
+
+        private void RadioButtonActive_CheckedChanged(object sender, EventArgs e) => presenterHaspKey.GetByActive();
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+
+            var row = dgvHaspKey.CurrentRow.DataBoundItem as ModelViewHaspKey;
+            presenterHaspKey.Remove(row.Id);
+        }
+
+        public void MessageError(string error)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

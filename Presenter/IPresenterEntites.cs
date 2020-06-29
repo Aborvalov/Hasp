@@ -9,8 +9,8 @@ namespace Presenter
     public interface IPresenterEntites<T>
     {
         void View();
-        bool Add(T entity);
-        bool Update(T entity);
-        bool Remove(int id);
+        void Add(T entity);
+        void Update(T entity);
+        void Remove(int id);
     }
 }
