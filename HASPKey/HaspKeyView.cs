@@ -27,7 +27,7 @@ namespace HASPKey
 
         public void Add(ModelViewHaspKey entity) => presenterHaspKey.Add(entity);
 
-        public void Build(List<ModelViewHaspKey> homes) => bindingHaspKey.DataSource = homes != null ? new BindingList<ModelViewHaspKey>(homes)
+        public void Build(List<ModelViewHaspKey> entity) => bindingHaspKey.DataSource = entity != null ? new BindingList<ModelViewHaspKey>(entity)
                                                       : new BindingList<ModelViewHaspKey>();
 
         public void Remove(int id) => presenterHaspKey.Remove(id);
@@ -42,35 +42,15 @@ namespace HASPKey
         private void RadioButtonActive_CheckedChanged(object sender, EventArgs e) => presenterHaspKey.GetByActive();
 
         private void ButtonAdd_Click(object sender, EventArgs e)
-        {            
+        {
+            DefaultView();
             if (size)
             {
                 dgvHaspKey.Height = dgvHaspKey.Size.Height - sizeH;
                 size = !size;
-                haspKey = new ModelViewHaspKey();
             }
+            haspKey = new ModelViewHaspKey();
         }
-
-        private void ButtonDelete_Click(object sender, EventArgs e)
-        {
-            var row = dgvHaspKey.CurrentRow.DataBoundItem as ModelViewHaspKey;
-            if (row.Id == 0)
-            {
-                bindingHaspKey.RemoveCurrent();
-                return;
-            }
-
-            string caption = "Удалить ключ";
-            string message = "Вы уверены, что хотите удалить Hasp-ключ?";
-            DialogResult result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-                Remove(row.Id);
-                DefaultView();
-            }
-        }
-
         public void MessageError(string error) => MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         private void ButtonSave_Click(object sender, EventArgs e)
@@ -100,24 +80,25 @@ namespace HASPKey
             {
                 dgvHaspKey.Height = dgvHaspKey.Size.Height - sizeH;
                 size = !size;
-
-                haspKey = new ModelViewHaspKey();
-                
-                var row = dgvHaspKey.CurrentRow.DataBoundItem as ModelViewHaspKey;
-
-                haspKey.Id = row.Id;
-                tbInnerNumber.Text = row.InnerId.ToString();
-                tbNumber.Text = row.Number;
-                comboBoxTypeKey.SelectedIndex = (int)row.TypeKey;
-                checkBoxIsHome.Checked = row.IsHome;
             }
+
+            haspKey = new ModelViewHaspKey();                
+            var row = dgvHaspKey.CurrentRow.DataBoundItem as ModelViewHaspKey;
+
+            haspKey.Id = row.Id;
+            tbInnerNumber.Text = row.InnerId.ToString();
+            tbNumber.Text = row.Number;
+            comboBoxTypeKey.SelectedIndex = (int)row.TypeKey;
+            checkBoxIsHome.Checked = row.IsHome;            
         }
 
         private void DefaultView()
         {
-            dgvHaspKey.Height = dgvHaspKey.Size.Height + sizeH;
-            size = !size;
-
+            if (size)
+            {
+                dgvHaspKey.Height = dgvHaspKey.Size.Height + sizeH;
+                size = !size;
+            }
             tbInnerNumber.Text = string.Empty;
             tbNumber.Text = string.Empty;
             comboBoxTypeKey.SelectedIndex = -1;
@@ -147,6 +128,25 @@ namespace HASPKey
             }
 
             return true;
+        }
+        private void ButtonDelete_Click(object sender, EventArgs e)
+        {
+            var row = dgvHaspKey.CurrentRow.DataBoundItem as ModelViewHaspKey;
+            if (row.Id == 0)
+            {
+                bindingHaspKey.RemoveCurrent();
+                return;
+            }
+
+            string caption = "Удалить ключ";
+            string message = "Вы уверены, что хотите удалить Hasp-ключ?";
+            DialogResult result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                Remove(row.Id);
+                DefaultView();
+            }
         }
     }
 }

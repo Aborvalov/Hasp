@@ -39,8 +39,8 @@ namespace HASPKey
             {
                 dgvFeature.Height = dgvFeature.Size.Height - sizeH;
                 size = !size;
-                feature = new ModelViewFeature();
             }
+            feature = new ModelViewFeature();
         }
 
         private void DgvFeature_DoubleClick(object sender, EventArgs e)
@@ -49,27 +49,16 @@ namespace HASPKey
             {
                 dgvFeature.Height = dgvFeature.Size.Height - sizeH;
                 size = !size;
-
-                feature = new ModelViewFeature();
-
-                var row = dgvFeature.CurrentRow.DataBoundItem as ModelViewFeature;
-
-                feature.Id = row.Id;
-                tbNumber.Text = row.Number.ToString();
-                tbName.Text = row.Name;
-                tbDescription.Text = row.Description;
             }
-        }
-        private void DefaultView()
-        {
-            dgvFeature.Height = dgvFeature.Size.Height + sizeH;
-            size = !size;
 
-            tbNumber.Text = string.Empty;
-            tbName.Text = string.Empty;
-            tbDescription.Text = string.Empty;
-        }
+            feature = new ModelViewFeature();
+            var row = dgvFeature.CurrentRow.DataBoundItem as ModelViewFeature;
 
+            feature.Id = row.Id;
+            tbNumber.Text = row.Number.ToString();
+            tbName.Text = row.Name;
+            tbDescription.Text = row.Description;
+        }        
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             if (!size)
@@ -130,6 +119,17 @@ namespace HASPKey
                 Remove(row.Id);
                 DefaultView();
             }
+        }
+        private void DefaultView()
+        {
+            if (!size)
+            {
+                dgvFeature.Height = dgvFeature.Size.Height + sizeH;
+                size = !size;
+            }
+            tbNumber.Text = string.Empty;
+            tbName.Text = string.Empty;
+            tbDescription.Text = string.Empty;
         }
     }
 }
