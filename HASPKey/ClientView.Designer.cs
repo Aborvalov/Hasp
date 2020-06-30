@@ -71,7 +71,7 @@
             this.dgvClient.Name = "dgvClient";
             this.dgvClient.ReadOnly = true;
             this.dgvClient.RowHeadersVisible = false;
-            this.dgvClient.Size = new System.Drawing.Size(582, 326);
+            this.dgvClient.Size = new System.Drawing.Size(581, 492);
             this.dgvClient.TabIndex = 0;
             this.dgvClient.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvClient_CellDoubleClick);
             // 
@@ -118,8 +118,9 @@
             // 
             // labelName
             // 
+            this.labelName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(10, 341);
+            this.labelName.Location = new System.Drawing.Point(10, 507);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(80, 13);
             this.labelName.TabIndex = 1;
@@ -127,8 +128,9 @@
             // 
             // labelAddress
             // 
+            this.labelAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelAddress.AutoSize = true;
-            this.labelAddress.Location = new System.Drawing.Point(175, 341);
+            this.labelAddress.Location = new System.Drawing.Point(175, 507);
             this.labelAddress.Name = "labelAddress";
             this.labelAddress.Size = new System.Drawing.Size(38, 13);
             this.labelAddress.TabIndex = 2;
@@ -136,8 +138,9 @@
             // 
             // labelPhone
             // 
+            this.labelPhone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelPhone.AutoSize = true;
-            this.labelPhone.Location = new System.Drawing.Point(333, 341);
+            this.labelPhone.Location = new System.Drawing.Point(333, 507);
             this.labelPhone.Name = "labelPhone";
             this.labelPhone.Size = new System.Drawing.Size(51, 13);
             this.labelPhone.TabIndex = 3;
@@ -145,8 +148,9 @@
             // 
             // labelContactPerson
             // 
+            this.labelContactPerson.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelContactPerson.AutoSize = true;
-            this.labelContactPerson.Location = new System.Drawing.Point(463, 341);
+            this.labelContactPerson.Location = new System.Drawing.Point(463, 507);
             this.labelContactPerson.Name = "labelContactPerson";
             this.labelContactPerson.Size = new System.Drawing.Size(95, 13);
             this.labelContactPerson.TabIndex = 4;
@@ -154,28 +158,32 @@
             // 
             // tbName
             // 
-            this.tbName.Location = new System.Drawing.Point(13, 357);
+            this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbName.Location = new System.Drawing.Point(13, 523);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(159, 21);
             this.tbName.TabIndex = 5;
             // 
             // tbAddress
             // 
-            this.tbAddress.Location = new System.Drawing.Point(178, 357);
+            this.tbAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbAddress.Location = new System.Drawing.Point(178, 523);
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(149, 21);
             this.tbAddress.TabIndex = 6;
             // 
             // tbPhone
             // 
-            this.tbPhone.Location = new System.Drawing.Point(333, 357);
+            this.tbPhone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbPhone.Location = new System.Drawing.Point(333, 523);
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(119, 21);
             this.tbPhone.TabIndex = 7;
             // 
             // tbContactPerson
             // 
-            this.tbContactPerson.Location = new System.Drawing.Point(458, 357);
+            this.tbContactPerson.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbContactPerson.Location = new System.Drawing.Point(458, 523);
             this.tbContactPerson.Name = "tbContactPerson";
             this.tbContactPerson.Size = new System.Drawing.Size(136, 21);
             this.tbContactPerson.TabIndex = 8;
@@ -183,7 +191,7 @@
             // buttonAdd
             // 
             this.buttonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonAdd.Location = new System.Drawing.Point(12, 384);
+            this.buttonAdd.Location = new System.Drawing.Point(12, 550);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 9;
@@ -194,7 +202,7 @@
             // buttonDelete
             // 
             this.buttonDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDelete.Location = new System.Drawing.Point(519, 384);
+            this.buttonDelete.Location = new System.Drawing.Point(518, 550);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonDelete.TabIndex = 10;
@@ -205,7 +213,7 @@
             // buttonSave
             // 
             this.buttonSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonSave.Location = new System.Drawing.Point(274, 384);
+            this.buttonSave.Location = new System.Drawing.Point(273, 550);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 11;
@@ -217,7 +225,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(606, 412);
+            this.ClientSize = new System.Drawing.Size(605, 578);
             this.Controls.Add(this.dgvClient);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonDelete);
