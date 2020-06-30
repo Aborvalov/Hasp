@@ -71,6 +71,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FeatureView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FeatureView.Designer.cs">
+      <DependentUpon>FeatureView.cs</DependentUpon>
+    </Compile>
     <Compile Include="HaspKeyView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FeatureView.resx">
+      <DependentUpon>FeatureView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HaspKeyView.resx">
       <DependentUpon>HaspKeyView.cs</DependentUpon>
     </EmbeddedResource>
@@ -105,6 +114,7 @@
     <None Include="Properties\DataSources\Entities.Feature.datasource" />
     <None Include="Properties\DataSources\Entity.datasource" />
     <None Include="Properties\DataSources\Model.HomeView.datasource" />
+    <None Include="Properties\DataSources\ModelEntities.ModelViewFeature.datasource" />
     <None Include="Properties\DataSources\ModelEntities.ModelViewHaspKey.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

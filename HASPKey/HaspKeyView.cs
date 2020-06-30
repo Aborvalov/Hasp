@@ -65,7 +65,10 @@ namespace HASPKey
             DialogResult result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
+            {
                 Remove(row.Id);
+                DefaultView();
+            }
         }
 
         public void MessageError(string error) => MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -73,8 +76,7 @@ namespace HASPKey
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             if (!size)
-            {
-                           
+            {                           
                 if (!CheckInputData(out int innNumber))
                     return;
 
@@ -136,7 +138,7 @@ namespace HASPKey
                 erroeMess += '\u2022' + " Не выбран тип ключа." + '\n';
 
             if (string.IsNullOrWhiteSpace(tbNumber.Text))
-                erroeMess += '\u2022' + " Не заполнено поля \"Номер\"." + '\n';
+                erroeMess += '\u2022' + " Не заполнено поля \"Номер\", не должно быть пустым." + '\n';
 
             if (erroeMess != string.Empty)
             {

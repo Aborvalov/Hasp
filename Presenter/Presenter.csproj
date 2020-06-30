@@ -44,6 +44,7 @@
     <Compile Include="IPresenterEntites.cs" />
     <Compile Include="IPresenterHaspKey.cs" />
     <Compile Include="IPresenterHome.cs" />
+    <Compile Include="PresenterFeature.cs" />
     <Compile Include="PresenterHaspKey.cs" />
     <Compile Include="PresenterHome.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

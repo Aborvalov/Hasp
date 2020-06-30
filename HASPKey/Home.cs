@@ -31,5 +31,11 @@ namespace HASPKey
             HaspKeyView haspKey = new HaspKeyView();
             haspKey.ShowDialog();
         }
+
+        private void ФичаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FeatureView feature = new FeatureView();
+            feature.ShowDialog();
+        }
     }
 }
