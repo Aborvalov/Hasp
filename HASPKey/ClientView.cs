@@ -14,10 +14,12 @@ namespace HASPKey
         private readonly IPresenterClient presenterClient;
         private bool size = true;
         private const int sizeH = 40;
-        private ModelViewClient client = null;
+        private ModelViewClient clientForDB = null;
         private bool search = false;
         internal ModelViewClient SearchIdClient {get; private set;}
 
+        private readonly int labelFeatureHeight;
+        private readonly int labelFeatureWidth;
         public ClientView(bool search)
         {
             InitializeComponent();
@@ -27,6 +29,10 @@ namespace HASPKey
 
             if (this.search)
                 dgvClient.Height = dgvClient.Size.Height + 28;
+
+            labelFeature.Text = string.Empty;
+            labelFeatureHeight = labelFeature.Location.Y;
+            labelFeatureWidth = labelFeature.Location.X;
         }
 
         public void Add(ModelViewClient entity) => presenterClient.Add(entity);
@@ -48,7 +54,7 @@ namespace HASPKey
                 dgvClient.Height = dgvClient.Size.Height - sizeH;
                 size = !size;
             }
-            client = new ModelViewClient();
+            clientForDB = new ModelViewClient();
         }
 
         private void DgvClient_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -66,10 +72,10 @@ namespace HASPKey
                 size = !size;
             }
 
-            client = new ModelViewClient();
+            clientForDB = new ModelViewClient();
             var row = dgvClient.CurrentRow.DataBoundItem as ModelViewClient;
 
-            client.Id = row.Id;
+            clientForDB.Id = row.Id;
             tbName.Text = row.Name;
             tbAddress.Text = row.Address;
             tbContactPerson.Text = row.ContactPerson;
@@ -82,15 +88,15 @@ namespace HASPKey
                 if (!CheckInputData())
                     return;
 
-                client.Name = tbName.Text;
-                client.Address = tbAddress.Text;
-                client.Phone = tbPhone.Text;
-                client.ContactPerson = tbContactPerson.Text;
+                clientForDB.Name = tbName.Text;
+                clientForDB.Address = tbAddress.Text;
+                clientForDB.Phone = tbPhone.Text;
+                clientForDB.ContactPerson = tbContactPerson.Text;
 
-                if (client.Id < 1)
-                    Add(client);
+                if (clientForDB.Id < 1)
+                    Add(clientForDB);
                 else
-                    Update(client);
+                    Update(clientForDB);
 
                 DefaultView();
             }
@@ -142,6 +148,12 @@ namespace HASPKey
                 Remove(row.Id);
                 DefaultView();
             }
+        }
+
+        private void ButtonSearchByFeature_Click(object sender, EventArgs e)
+        {
+            labelFeature.Location = new System.Drawing.Point(labelFeatureWidth, labelFeatureHeight);
+
         }
     }
 }

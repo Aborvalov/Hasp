@@ -47,6 +47,8 @@
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonSearchByFeature = new System.Windows.Forms.Button();
+            this.labelFeature = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingClient)).BeginInit();
             this.SuspendLayout();
@@ -67,11 +69,11 @@
             this.phoneDataGridViewTextBoxColumn,
             this.contactPersonDataGridViewTextBoxColumn});
             this.dgvClient.DataSource = this.bindingClient;
-            this.dgvClient.Location = new System.Drawing.Point(12, 12);
+            this.dgvClient.Location = new System.Drawing.Point(12, 47);
             this.dgvClient.Name = "dgvClient";
             this.dgvClient.ReadOnly = true;
             this.dgvClient.RowHeadersVisible = false;
-            this.dgvClient.Size = new System.Drawing.Size(582, 492);
+            this.dgvClient.Size = new System.Drawing.Size(582, 457);
             this.dgvClient.TabIndex = 0;
             this.dgvClient.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvClient_CellDoubleClick);
             // 
@@ -221,11 +223,32 @@
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
+            // buttonSearchByFeature
+            // 
+            this.buttonSearchByFeature.Location = new System.Drawing.Point(12, 5);
+            this.buttonSearchByFeature.Name = "buttonSearchByFeature";
+            this.buttonSearchByFeature.Size = new System.Drawing.Size(96, 23);
+            this.buttonSearchByFeature.TabIndex = 12;
+            this.buttonSearchByFeature.Text = "Поиск по фиче";
+            this.buttonSearchByFeature.UseVisualStyleBackColor = true;
+            this.buttonSearchByFeature.Click += new System.EventHandler(this.ButtonSearchByFeature_Click);
+            // 
+            // labelFeature
+            // 
+            this.labelFeature.AutoSize = true;
+            this.labelFeature.Location = new System.Drawing.Point(12, 31);
+            this.labelFeature.Name = "labelFeature";
+            this.labelFeature.Size = new System.Drawing.Size(67, 13);
+            this.labelFeature.TabIndex = 13;
+            this.labelFeature.Text = "labelFeature";
+            // 
             // ClientView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(605, 578);
+            this.Controls.Add(this.labelFeature);
+            this.Controls.Add(this.buttonSearchByFeature);
             this.Controls.Add(this.dgvClient);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonDelete);
@@ -268,5 +291,7 @@
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button buttonSearchByFeature;
+        private System.Windows.Forms.Label labelFeature;
     }
 }
