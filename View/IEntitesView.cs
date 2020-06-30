@@ -5,9 +5,9 @@ namespace View
     public interface IEntitesView<T>
     {
         void Build(List<T> entity);
-        bool Add(T entity);
-        bool Update(T entity);
-        bool Remove(int id);
+        void Add(T entity);
+        void Update(T entity);
+        void Remove(int id);
         void MessageError(string error);
 
     }

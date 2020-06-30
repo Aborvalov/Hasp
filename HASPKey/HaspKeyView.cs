@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Entities;
+﻿using Entities;
 using ModelEntities;
 using Presenter;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
 using View;
 
 namespace HASPKey
@@ -19,6 +14,7 @@ namespace HASPKey
         private readonly IPresenterHaspKey presenterHaspKey;
         private bool size = true;
         private const int sizeH = 40;
+        private ModelViewHaspKey haspKey = null;
 
         public HaspKeyView()
         {
@@ -29,23 +25,14 @@ namespace HASPKey
             comboBoxTypeKey.SelectedIndex = -1;
         }
 
-        public bool Add(ModelViewHaspKey entity)
-        {
-            throw new NotImplementedException();
-        }
+        public void Add(ModelViewHaspKey entity) => presenterHaspKey.Add(entity);
 
         public void Build(List<ModelViewHaspKey> homes) => bindingHaspKey.DataSource = homes != null ? new BindingList<ModelViewHaspKey>(homes)
                                                       : new BindingList<ModelViewHaspKey>();
 
-        public bool Remove(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public void Remove(int id) => presenterHaspKey.Remove(id);
 
-        public bool Update(ModelViewHaspKey entity)
-        {           
-            throw new NotImplementedException();
-        }
+        public void Update(ModelViewHaspKey entity) => presenterHaspKey.Update(entity);
 
         private void RadioButtonAll_CheckedChanged(object sender, EventArgs e) => presenterHaspKey.View();
 
@@ -60,8 +47,8 @@ namespace HASPKey
             {
                 dgvHaspKey.Height = dgvHaspKey.Size.Height - sizeH;
                 size = !size;
+                haspKey = new ModelViewHaspKey();
             }
-
         }
 
         private void ButtonDelete_Click(object sender, EventArgs e)
@@ -78,7 +65,7 @@ namespace HASPKey
             DialogResult result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
-                presenterHaspKey.Remove(row.Id);
+                Remove(row.Id);
         }
 
         public void MessageError(string error) => MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -87,51 +74,77 @@ namespace HASPKey
         {
             if (!size)
             {
-                ModelViewHaspKey haspKey = new ModelViewHaspKey();
-
-                string innerNumber = tbInnerNumber.Text;
-                string erroeMess = string.Empty;
-                bool isInt = Int32.TryParse(tbInnerNumber.Text, out int innNumber);
-
-                if (isInt)
-                    haspKey.InnerId = Convert.ToInt32(innerNumber);
-                else
-                {
-                    erroeMess = '\u2022' + " Неверное значение внутреннего ключа, должно быть числом." + '\n';
-                    tbInnerNumber.Text = string.Empty;
-                }
-
-                if (comboBoxTypeKey.SelectedItem == null)
-                    erroeMess += '\u2022' + " Не выбран тип ключа." + '\n';
-
-                if (string.IsNullOrWhiteSpace(tbNumber.Text))
-                    erroeMess += '\u2022' + " Не заполнено поля \"Номер\"." + '\n';
-
-                if (erroeMess != string.Empty)
-                {
-                    MessageError(erroeMess.Trim());
+                           
+                if (!CheckInputData(out int innNumber))
                     return;
-                }
 
-
+                haspKey.InnerId = innNumber;
                 haspKey.Number = tbNumber.Text.Trim();
                 haspKey.TypeKey = (TypeKey)comboBoxTypeKey.SelectedItem;
                 haspKey.IsHome = checkBoxIsHome.Checked;
 
-                presenterHaspKey.Add(haspKey);
+                if(haspKey.Id < 1)
+                    Add(haspKey);                
+                else
+                    Update(haspKey);
 
+                DefaultView();
+            }
+        }
 
-                dgvHaspKey.Height = dgvHaspKey.Size.Height + sizeH;
+        private void DgvHaspKey_DoubleClick(object sender, EventArgs e)
+        {
+            if (size)
+            {
+                dgvHaspKey.Height = dgvHaspKey.Size.Height - sizeH;
                 size = !size;
 
+                haspKey = new ModelViewHaspKey();
+                
+                var row = dgvHaspKey.CurrentRow.DataBoundItem as ModelViewHaspKey;
 
-                tbInnerNumber.Text = string.Empty;
-                tbNumber.Text = string.Empty;
-                comboBoxTypeKey.SelectedIndex = -1;
-                checkBoxIsHome.Checked = false;
-
-                presenterHaspKey.View();
+                haspKey.Id = row.Id;
+                tbInnerNumber.Text = row.InnerId.ToString();
+                tbNumber.Text = row.Number;
+                comboBoxTypeKey.SelectedIndex = (int)row.TypeKey;
+                checkBoxIsHome.Checked = row.IsHome;
             }
+        }
+
+        private void DefaultView()
+        {
+            dgvHaspKey.Height = dgvHaspKey.Size.Height + sizeH;
+            size = !size;
+
+            tbInnerNumber.Text = string.Empty;
+            tbNumber.Text = string.Empty;
+            comboBoxTypeKey.SelectedIndex = -1;
+            checkBoxIsHome.Checked = false;
+        }
+        private bool CheckInputData(out int innNumber)
+        {
+            string erroeMess = string.Empty;
+            bool isInt = Int32.TryParse(tbInnerNumber.Text, out innNumber);
+
+            if (!isInt)
+            {
+                erroeMess = '\u2022' + " Неверное значение внутреннего ключа, должно быть числом." + '\n';
+                tbInnerNumber.Text = string.Empty;
+            }
+
+            if (comboBoxTypeKey.SelectedItem == null)
+                erroeMess += '\u2022' + " Не выбран тип ключа." + '\n';
+
+            if (string.IsNullOrWhiteSpace(tbNumber.Text))
+                erroeMess += '\u2022' + " Не заполнено поля \"Номер\"." + '\n';
+
+            if (erroeMess != string.Empty)
+            {
+                MessageError(erroeMess.Trim());
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -186,8 +186,8 @@ namespace DalDB
 
             haspKey.InnerId = entity.InnerId;
             haspKey.Number = entity.Number;
-            haspKey.TypeKey = haspKey.TypeKey;
-            haspKey.IsHome = haspKey.IsHome;
+            haspKey.TypeKey = entity.TypeKey;
+            haspKey.IsHome = entity.IsHome;
 
             try
             {

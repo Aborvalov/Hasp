@@ -75,6 +75,7 @@
             this.dgvHaspKey.RowHeadersVisible = false;
             this.dgvHaspKey.Size = new System.Drawing.Size(431, 475);
             this.dgvHaspKey.TabIndex = 0;
+            this.dgvHaspKey.DoubleClick += new System.EventHandler(this.DgvHaspKey_DoubleClick);
             // 
             // serialNumberDataGridViewTextBoxColumn
             // 

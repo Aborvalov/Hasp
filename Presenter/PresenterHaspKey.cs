@@ -19,7 +19,13 @@ namespace Presenter
             View();
         }
 
-        public void Add(ModelViewHaspKey entity) => haspKeyModel.Add(entity);
+        public void Add(ModelViewHaspKey entity)
+        {
+            if (haspKeyModel.Add(entity))
+                View();
+            else
+                this.entitesView.MessageError("Не удалось создать Hasp-ключ.");
+        }
 
         public void GetByActive() => this.entitesView.Build(haspKeyModel.GetByActive());
                
@@ -33,7 +39,13 @@ namespace Presenter
                 this.entitesView.MessageError("Не удалось удалить Hasp-ключ.");
         }
 
-        public void Update(ModelViewHaspKey entity) => haspKeyModel.Update(entity);
+        public void Update(ModelViewHaspKey entity)
+        {
+            if (haspKeyModel.Update(entity))
+                View();
+            else
+                this.entitesView.MessageError("Не удалось обновить Hasp-ключ.");
+        }
 
         public void View() => this.entitesView.Build(haspKeyModel.GetAll());
     }

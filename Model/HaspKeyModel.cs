@@ -103,10 +103,19 @@ namespace Model
 
         public bool Update(ModelViewHaspKey entity)
         {
+            HaspKey haspKey = new HaspKey
+            {
+                Id      = entity.Id,
+                InnerId = entity.InnerId,
+                Number  = entity.Number,
+                TypeKey = entity.TypeKey,
+                IsHome  = entity.IsHome,
+            };
+
             using (var db = new EntitesContext())
             {
                 keyLogic = logic.CreateHaspKey(db);
-                return keyLogic.Update(entity);
+                return keyLogic.Update(haspKey);
             }
         }
 
