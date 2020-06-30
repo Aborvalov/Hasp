@@ -50,6 +50,7 @@
             this.comboBoxTypeKey = new System.Windows.Forms.ComboBox();
             this.checkBoxIsHome = new System.Windows.Forms.CheckBox();
             this.buttonSearchByClient = new System.Windows.Forms.Button();
+            this.labelClient = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHaspKey)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHaspKey)).BeginInit();
             this.panelFiltr.SuspendLayout();
@@ -261,19 +262,31 @@
             // buttonSearchByClient
             // 
             this.buttonSearchByClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSearchByClient.Location = new System.Drawing.Point(334, 12);
+            this.buttonSearchByClient.Location = new System.Drawing.Point(334, 4);
             this.buttonSearchByClient.Name = "buttonSearchByClient";
             this.buttonSearchByClient.Size = new System.Drawing.Size(109, 23);
             this.buttonSearchByClient.TabIndex = 15;
             this.buttonSearchByClient.Text = "Поиск по клиенту";
             this.buttonSearchByClient.UseVisualStyleBackColor = true;
-            this.buttonSearchByClient.Click += new System.EventHandler(this.buttonSearchByClient_Click);
+            this.buttonSearchByClient.Click += new System.EventHandler(this.ButtonSearchByClient_Click);
+            // 
+            // labelClient
+            // 
+            this.labelClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelClient.AutoSize = true;
+            this.labelClient.Location = new System.Drawing.Point(438, 30);
+            this.labelClient.Name = "labelClient";
+            this.labelClient.Size = new System.Drawing.Size(34, 13);
+            this.labelClient.TabIndex = 16;
+            this.labelClient.Text = "Client";
+            this.labelClient.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // HaspKeyView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(455, 592);
+            this.Controls.Add(this.labelClient);
             this.Controls.Add(this.buttonSearchByClient);
             this.Controls.Add(this.dgvHaspKey);
             this.Controls.Add(this.checkBoxIsHome);
@@ -322,5 +335,6 @@
         private System.Windows.Forms.ComboBox comboBoxTypeKey;
         private System.Windows.Forms.CheckBox checkBoxIsHome;
         private System.Windows.Forms.Button buttonSearchByClient;
+        private System.Windows.Forms.Label labelClient;
     }
 }

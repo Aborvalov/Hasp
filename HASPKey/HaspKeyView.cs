@@ -15,7 +15,8 @@ namespace HASPKey
         private bool size = true;
         private const int sizeH = 40;
         private ModelViewHaspKey haspKey = null;
-
+        private readonly int labelClientHeight;
+        private readonly int labelClientWidth;
         public HaspKeyView()
         {
             InitializeComponent();
@@ -23,6 +24,10 @@ namespace HASPKey
             dgvHaspKey.Height = dgvHaspKey.Size.Height + sizeH;
             comboBoxTypeKey.DataSource = Enum.GetValues(typeof(Entities.TypeKey));
             comboBoxTypeKey.SelectedIndex = -1;
+
+            labelClient.Text = string.Empty;
+            labelClientHeight = labelClient.Location.Y;
+            labelClientWidth = labelClient.Location.X;
         }
 
         public void Add(ModelViewHaspKey entity) => presenterHaspKey.Add(entity);
@@ -34,13 +39,21 @@ namespace HASPKey
 
         public void Update(ModelViewHaspKey entity) => presenterHaspKey.Update(entity);
 
-        private void RadioButtonAll_CheckedChanged(object sender, EventArgs e) => presenterHaspKey.View();
-
-        private void RadioButtonPastDue_CheckedChanged(object sender, EventArgs e) => presenterHaspKey.GetByPastDue();
-
-
-        private void RadioButtonActive_CheckedChanged(object sender, EventArgs e) => presenterHaspKey.GetByActive();
-
+        private void RadioButtonAll_CheckedChanged(object sender, EventArgs e)
+        {
+            presenterHaspKey.View();
+            labelClient.Text = string.Empty;
+        }
+        private void RadioButtonPastDue_CheckedChanged(object sender, EventArgs e)
+        {
+            presenterHaspKey.GetByPastDue();
+            labelClient.Text = string.Empty;
+        }
+        private void RadioButtonActive_CheckedChanged(object sender, EventArgs e)
+        {
+            presenterHaspKey.GetByActive();
+            labelClient.Text = string.Empty;
+        }
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             DefaultView();
@@ -103,6 +116,7 @@ namespace HASPKey
             tbNumber.Text = string.Empty;
             comboBoxTypeKey.SelectedIndex = -1;
             checkBoxIsHome.Checked = false;
+            labelClient.Text = string.Empty;
         }
         private bool CheckInputData(out int innNumber)
         {
@@ -149,17 +163,24 @@ namespace HASPKey
             }
         }
 
-        private void buttonSearchByClient_Click(object sender, EventArgs e)
+        private void ButtonSearchByClient_Click(object sender, EventArgs e)
         {
             radioButtonActive.Checked = false;
             radioButtonAll.Checked = false;
             radioButtonPastDue.Checked = false;
 
+            labelClient.Location = new System.Drawing.Point(labelClientWidth, labelClientHeight);
+
             ClientView client = new ClientView(true);
             client.ShowDialog();
 
             if (client.SearchIdClient != null)
+            {
                 presenterHaspKey.GetByClient(client.SearchIdClient);
+                
+                labelClient.Text = client.SearchIdClient.Name;
+                labelClient.Location = new System.Drawing.Point(labelClient.Location.X - labelClient.Width, labelClientHeight);
+            }
         }
     }
 }

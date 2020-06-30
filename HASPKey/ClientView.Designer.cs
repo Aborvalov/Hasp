@@ -213,7 +213,7 @@
             // buttonSave
             // 
             this.buttonSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonSave.Location = new System.Drawing.Point(273, 550);
+            this.buttonSave.Location = new System.Drawing.Point(265, 550);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 11;
