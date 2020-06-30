@@ -262,7 +262,7 @@
             // buttonSearchByClient
             // 
             this.buttonSearchByClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSearchByClient.Location = new System.Drawing.Point(334, 4);
+            this.buttonSearchByClient.Location = new System.Drawing.Point(334, 9);
             this.buttonSearchByClient.Name = "buttonSearchByClient";
             this.buttonSearchByClient.Size = new System.Drawing.Size(109, 23);
             this.buttonSearchByClient.TabIndex = 15;
@@ -274,7 +274,8 @@
             // 
             this.labelClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelClient.AutoSize = true;
-            this.labelClient.Location = new System.Drawing.Point(438, 30);
+            this.labelClient.BackColor = System.Drawing.Color.Transparent;
+            this.labelClient.Location = new System.Drawing.Point(444, 31);
             this.labelClient.Name = "labelClient";
             this.labelClient.Size = new System.Drawing.Size(34, 13);
             this.labelClient.TabIndex = 16;
@@ -286,7 +287,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(455, 592);
-            this.Controls.Add(this.labelClient);
             this.Controls.Add(this.buttonSearchByClient);
             this.Controls.Add(this.dgvHaspKey);
             this.Controls.Add(this.checkBoxIsHome);
@@ -300,6 +300,7 @@
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonAdd);
+            this.Controls.Add(this.labelClient);
             this.Name = "HaspKeyView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hasp ключ";

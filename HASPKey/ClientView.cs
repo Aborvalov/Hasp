@@ -15,17 +15,17 @@ namespace HASPKey
         private bool size = true;
         private const int sizeH = 40;
         private ModelViewClient client = null;
-        private bool Search = false;
+        private bool search = false;
         internal ModelViewClient SearchIdClient {get; private set;}
 
         public ClientView(bool search)
         {
             InitializeComponent();
-            this.Search = search;
+            this.search = search;
             presenterClient = new PresenterClient(this);
             dgvClient.Height = dgvClient.Size.Height + sizeH;
 
-            if (this.Search)
+            if (this.search)
                 dgvClient.Height = dgvClient.Size.Height + 28;
         }
 
@@ -53,7 +53,7 @@ namespace HASPKey
 
         private void DgvClient_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.Search)
+            if (this.search)
             {
                 this.SearchIdClient = dgvClient.CurrentRow.DataBoundItem as ModelViewClient;
                 this.Close();
@@ -73,8 +73,7 @@ namespace HASPKey
             tbName.Text = row.Name;
             tbAddress.Text = row.Address;
             tbContactPerson.Text = row.ContactPerson;
-            tbPhone.Text = row.Phone;
-            
+            tbPhone.Text = row.Phone;            
         }
         private void ButtonSave_Click(object sender, EventArgs e)
         {
