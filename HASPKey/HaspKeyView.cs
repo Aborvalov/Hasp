@@ -85,37 +85,53 @@ namespace HASPKey
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            HaspKey haspKey = new HaspKey();
-
-            string innerNumber = tbInnerNumber.Text;
-            int innNumber;
-
-            bool isInt = Int32.TryParse(tbInnerNumber.Text, out innNumber);
-
-            if (isInt)
-                haspKey.InnerId = Convert.ToInt32(innerNumber);
-            else
-            {
-                MessageError("Неверное значение внутреннего ключа, должно быть числом.");
-                tbInnerNumber.Text = string.Empty;
-            }
-
-            haspKey.Number = tbNumber.Text;
-            haspKey.TypeKey = (TypeKey)comboBoxTypeKey.SelectedItem;
-            haspKey.IsHome = checkBoxIsHome.Checked;
-
             if (!size)
             {
+                ModelViewHaspKey haspKey = new ModelViewHaspKey();
+
+                string innerNumber = tbInnerNumber.Text;
+                string erroeMess = string.Empty;
+                bool isInt = Int32.TryParse(tbInnerNumber.Text, out int innNumber);
+
+                if (isInt)
+                    haspKey.InnerId = Convert.ToInt32(innerNumber);
+                else
+                {
+                    erroeMess = '\u2022' + " Неверное значение внутреннего ключа, должно быть числом." + '\n';
+                    tbInnerNumber.Text = string.Empty;
+                }
+
+                if (comboBoxTypeKey.SelectedItem == null)
+                    erroeMess += '\u2022' + " Не выбран тип ключа." + '\n';
+
+                if (string.IsNullOrWhiteSpace(tbNumber.Text))
+                    erroeMess += '\u2022' + " Не заполнено поля \"Номер\"." + '\n';
+
+                if (erroeMess != string.Empty)
+                {
+                    MessageError(erroeMess.Trim());
+                    return;
+                }
+
+
+                haspKey.Number = tbNumber.Text.Trim();
+                haspKey.TypeKey = (TypeKey)comboBoxTypeKey.SelectedItem;
+                haspKey.IsHome = checkBoxIsHome.Checked;
+
+                presenterHaspKey.Add(haspKey);
+
+
                 dgvHaspKey.Height = dgvHaspKey.Size.Height + sizeH;
                 size = !size;
+
+
+                tbInnerNumber.Text = string.Empty;
+                tbNumber.Text = string.Empty;
+                comboBoxTypeKey.SelectedIndex = -1;
+                checkBoxIsHome.Checked = false;
+
+                presenterHaspKey.View();
             }
-
-            tbInnerNumber.Text = string.Empty;
-            tbNumber.Text = string.Empty;
-            comboBoxTypeKey.SelectedIndex = -1;
-            checkBoxIsHome.Checked = false;
-
-            presenterHaspKey.View();
         }
     }
 }

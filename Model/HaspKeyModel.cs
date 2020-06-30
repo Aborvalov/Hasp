@@ -18,10 +18,18 @@ namespace Model
         }
         public bool Add(ModelViewHaspKey entity)
         {
+            HaspKey haspKey = new HaspKey
+            {
+                InnerId = entity.InnerId,
+                Number  = entity.Number,
+                TypeKey = entity.TypeKey,
+                IsHome  = entity.IsHome,
+            };
+
             using (var db = new EntitesContext())
             {
-                keyLogic = logic.CreateHaspKey(db);
-                return keyLogic.Save(entity);
+                keyLogic = logic.CreateHaspKey(db);                
+                return keyLogic.Save(haspKey);
             }
         }
 
