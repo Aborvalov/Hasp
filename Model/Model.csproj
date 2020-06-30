@@ -63,9 +63,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientModel.cs" />
     <Compile Include="FeatureModel.cs" />
     <Compile Include="HaspKeyModel.cs" />
     <Compile Include="HomeModel.cs" />
+    <Compile Include="IClientModel.cs" />
     <Compile Include="IEntitesModel.cs" />
     <Compile Include="IHaspKeyModel.cs" />
     <Compile Include="IHomeModel.cs" />

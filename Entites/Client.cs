@@ -1,11 +1,18 @@
-﻿namespace Entities
+﻿using System.ComponentModel;
+
+namespace Entities
 {
     public class Client
     {
+        [Browsable(false)]
         public int Id { get; set; }
+        [DisplayName("Наименование")]
         public string Name { get; set; }
+        [DisplayName("Адрес")]
         public string Address { get; set; }
+        [DisplayName("Телефон")]
         public string Phone { get; set; }
+        [DisplayName("Контактное лицо")]
         public string ContactPerson { get; set; }
 
         public override bool Equals(object obj)

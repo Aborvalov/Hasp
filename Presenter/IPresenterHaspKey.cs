@@ -5,15 +5,7 @@ namespace Presenter
 {
     public interface IPresenterHaspKey : IPresenterEntites<ModelViewHaspKey>
     {
-        
-        
-        //void GetByClient(Client client);
-
-
-
-
-
-
+        void GetByClient(ModelViewClient client);
         /// <summary>
         /// Поиск просроченных ключей.
         /// </summary>

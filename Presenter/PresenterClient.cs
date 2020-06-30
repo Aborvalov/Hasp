@@ -1,0 +1,59 @@
+﻿using Logic;
+using Model;
+using ModelEntities;
+using System;
+using System.Collections.Generic;
+using View;
+
+namespace Presenter
+{
+    public class PresenterClient : IPresenterClient
+    {
+        private readonly IClientModel clientModel;
+        private readonly IEntitesView<ModelViewClient> entitesView;
+
+        public PresenterClient(IEntitesView<ModelViewClient> entitesView)
+        {
+            this.entitesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
+
+            clientModel = new ClientModel(new Logics());
+            View();
+        }
+        public void Add(ModelViewClient entity)
+        {
+            if (clientModel.Add(entity))
+                View();
+            else
+                this.entitesView.MessageError("Не удалось создать клиента.");
+        }
+
+        public void GetByFeature(ModelViewFeature feature) => this.entitesView.Build(clientModel.GetByFeature(feature));
+
+        public void GetByNumberKey(int keyInnerId)
+        {
+            var client = new List<ModelViewClient>
+            {
+                clientModel.GetByNumberKey(keyInnerId)
+            };
+            entitesView.Build(client);
+        }
+
+        public void Remove(int id)
+        {
+            if (id > 0 && clientModel.Remove(id))
+                View();
+            else
+                this.entitesView.MessageError("Не удалось удалить клиента.");
+        }
+
+        public void Update(ModelViewClient entity)
+        {
+            if (clientModel.Update(entity))
+                View();
+            else
+                this.entitesView.MessageError("Не удалось обновить клиента.");
+        }
+
+        public void View() => this.entitesView.Build(clientModel.GetAll());
+    }
+}

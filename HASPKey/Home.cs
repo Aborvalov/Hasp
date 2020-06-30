@@ -37,5 +37,11 @@ namespace HASPKey
             FeatureView feature = new FeatureView();
             feature.ShowDialog();
         }
+
+        private void КлиентToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClientView client = new ClientView();
+            client.ShowDialog();
+        }
     }
 }

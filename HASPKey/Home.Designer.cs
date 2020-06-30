@@ -34,6 +34,7 @@
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.редактированиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ключToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.фичаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HomeView = new System.Windows.Forms.DataGridView();
             this.serialNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,7 +43,7 @@
             this.clientDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingHome = new System.Windows.Forms.BindingSource(this.components);
-            this.фичаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.клиентToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HomeView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHome)).BeginInit();
@@ -79,7 +80,8 @@
             // 
             this.редактированиеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ключToolStripMenuItem,
-            this.фичаToolStripMenuItem});
+            this.фичаToolStripMenuItem,
+            this.клиентToolStripMenuItem});
             this.редактированиеToolStripMenuItem.Name = "редактированиеToolStripMenuItem";
             this.редактированиеToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
             this.редактированиеToolStripMenuItem.Text = "Редактирование";
@@ -90,6 +92,13 @@
             this.ключToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ключToolStripMenuItem.Text = "Ключ";
             this.ключToolStripMenuItem.Click += new System.EventHandler(this.КлючToolStripMenuItem_Click);
+            // 
+            // фичаToolStripMenuItem
+            // 
+            this.фичаToolStripMenuItem.Name = "фичаToolStripMenuItem";
+            this.фичаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.фичаToolStripMenuItem.Text = "Фича";
+            this.фичаToolStripMenuItem.Click += new System.EventHandler(this.ФичаToolStripMenuItem_Click);
             // 
             // справкаToolStripMenuItem
             // 
@@ -165,12 +174,12 @@
             // 
             this.bindingHome.DataSource = typeof(ModelEntities.ModelViewHome);
             // 
-            // фичаToolStripMenuItem
+            // клиентToolStripMenuItem
             // 
-            this.фичаToolStripMenuItem.Name = "фичаToolStripMenuItem";
-            this.фичаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.фичаToolStripMenuItem.Text = "Фича";
-            this.фичаToolStripMenuItem.Click += new System.EventHandler(this.ФичаToolStripMenuItem_Click);
+            this.клиентToolStripMenuItem.Name = "клиентToolStripMenuItem";
+            this.клиентToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.клиентToolStripMenuItem.Text = "Клиент";
+            this.клиентToolStripMenuItem.Click += new System.EventHandler(this.КлиентToolStripMenuItem_Click);
             // 
             // Home
             // 
@@ -207,6 +216,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clientDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn endDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.ToolStripMenuItem фичаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem клиентToolStripMenuItem;
     }
 }
 

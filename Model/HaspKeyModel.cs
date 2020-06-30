@@ -56,7 +56,7 @@ namespace Model
             return Convert(haspKeys);
         }
 
-        public List<ModelViewHaspKey> GetByClient(Client client)
+        public List<ModelViewHaspKey> GetByClient(ModelViewClient client)
         {
             List<HaspKey> haspKeys;
             using (var db = new EntitesContext())
@@ -70,14 +70,14 @@ namespace Model
 
         public ModelViewHaspKey GetById(int id)
         {
-            HaspKey haspKeys;
+            HaspKey haspKey;
             using (var db = new EntitesContext())
             {
                 keyLogic = logic.CreateHaspKey(db);
-                haspKeys = keyLogic.GetById(id);
+                haspKey = keyLogic.GetById(id);
             }
             
-            return new ModelViewHaspKey(haspKeys);
+            return new ModelViewHaspKey(haspKey);
         }
 
         public List<ModelViewHaspKey> GetByPastDue()
@@ -125,8 +125,10 @@ namespace Model
             int i = 1;
             foreach (var key in haspKeys)
             {
-                var keyModel = new ModelViewHaspKey(key);
-                keyModel.SerialNumber = i++;
+                var keyModel = new ModelViewHaspKey(key)
+                {
+                    SerialNumber = i++
+                };
                 viewHaspKeys.Add(keyModel);
             }
 

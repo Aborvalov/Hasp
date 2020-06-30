@@ -28,7 +28,9 @@ namespace Presenter
         }
 
         public void GetByActive() => this.entitesView.Build(haspKeyModel.GetByActive());
-               
+
+        public void GetByClient(ModelViewClient client) => this.entitesView.Build(haspKeyModel.GetByClient(client));
+
         public void GetByPastDue() => this.entitesView.Build(haspKeyModel.GetByPastDue());
 
         public void Remove(int id)

@@ -5,7 +5,7 @@ namespace Model
 {
     public interface IHaspKeyModel : IEntitesModel<ModelViewHaspKey>
     {
-        List<ModelViewHaspKey> GetByClient(Entities.Client client);
+        List<ModelViewHaspKey> GetByClient(ModelViewClient client);
         /// <summary>
         /// Поиск просроченных ключей.
         /// </summary>

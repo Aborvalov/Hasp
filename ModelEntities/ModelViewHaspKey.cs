@@ -1,12 +1,13 @@
-﻿using System.ComponentModel;
+﻿using Entities;
+using System.ComponentModel;
 
 namespace ModelEntities
 {
-    public class ModelViewHaspKey : Entities.HaspKey
+    public class ModelViewHaspKey : HaspKey
     {
         public ModelViewHaspKey()
         { }
-        public ModelViewHaspKey(Entities.HaspKey haspKey)
+        public ModelViewHaspKey(HaspKey haspKey)
         {
             Id = haspKey.Id;
             InnerId = haspKey.InnerId;
