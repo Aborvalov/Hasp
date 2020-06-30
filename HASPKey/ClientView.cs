@@ -15,12 +15,18 @@ namespace HASPKey
         private bool size = true;
         private const int sizeH = 40;
         private ModelViewClient client = null;
+        private bool Search = false;
+        internal ModelViewClient SearchIdClient {get; private set;}
 
-        public ClientView()
+        public ClientView(bool search)
         {
             InitializeComponent();
+            this.Search = search;
             presenterClient = new PresenterClient(this);
             dgvClient.Height = dgvClient.Size.Height + sizeH;
+
+            if (this.Search)
+                dgvClient.Height = dgvClient.Size.Height + 28;
         }
 
         public void Add(ModelViewClient entity) => presenterClient.Add(entity);
@@ -47,6 +53,13 @@ namespace HASPKey
 
         private void DgvClient_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (this.Search)
+            {
+                this.SearchIdClient = dgvClient.CurrentRow.DataBoundItem as ModelViewClient;
+                this.Close();
+                return;
+            }
+
             if (size)
             {
                 dgvClient.Height = dgvClient.Size.Height - sizeH;

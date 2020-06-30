@@ -148,5 +148,18 @@ namespace HASPKey
                 DefaultView();
             }
         }
+
+        private void buttonSearchByClient_Click(object sender, EventArgs e)
+        {
+            radioButtonActive.Checked = false;
+            radioButtonAll.Checked = false;
+            radioButtonPastDue.Checked = false;
+
+            ClientView client = new ClientView(true);
+            client.ShowDialog();
+
+            if (client.SearchIdClient != null)
+                presenterHaspKey.GetByClient(client.SearchIdClient);
+        }
     }
 }

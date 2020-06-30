@@ -49,6 +49,7 @@
             this.labelType = new System.Windows.Forms.Label();
             this.comboBoxTypeKey = new System.Windows.Forms.ComboBox();
             this.checkBoxIsHome = new System.Windows.Forms.CheckBox();
+            this.buttonSearchByClient = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHaspKey)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHaspKey)).BeginInit();
             this.panelFiltr.SuspendLayout();
@@ -257,11 +258,23 @@
             this.checkBoxIsHome.Text = "Нахождение";
             this.checkBoxIsHome.UseVisualStyleBackColor = true;
             // 
+            // buttonSearchByClient
+            // 
+            this.buttonSearchByClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSearchByClient.Location = new System.Drawing.Point(334, 12);
+            this.buttonSearchByClient.Name = "buttonSearchByClient";
+            this.buttonSearchByClient.Size = new System.Drawing.Size(109, 23);
+            this.buttonSearchByClient.TabIndex = 15;
+            this.buttonSearchByClient.Text = "Поиск по клиенту";
+            this.buttonSearchByClient.UseVisualStyleBackColor = true;
+            this.buttonSearchByClient.Click += new System.EventHandler(this.buttonSearchByClient_Click);
+            // 
             // HaspKeyView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(455, 592);
+            this.Controls.Add(this.buttonSearchByClient);
             this.Controls.Add(this.dgvHaspKey);
             this.Controls.Add(this.checkBoxIsHome);
             this.Controls.Add(this.comboBoxTypeKey);
@@ -308,5 +321,6 @@
         private System.Windows.Forms.Label labelType;
         private System.Windows.Forms.ComboBox comboBoxTypeKey;
         private System.Windows.Forms.CheckBox checkBoxIsHome;
+        private System.Windows.Forms.Button buttonSearchByClient;
     }
 }

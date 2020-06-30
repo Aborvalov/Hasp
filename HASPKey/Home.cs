@@ -40,7 +40,7 @@ namespace HASPKey
 
         private void КлиентToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ClientView client = new ClientView();
+            ClientView client = new ClientView(false);
             client.ShowDialog();
         }
     }
