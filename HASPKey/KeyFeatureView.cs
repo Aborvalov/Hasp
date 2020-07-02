@@ -19,6 +19,7 @@ namespace HASPKey
         private bool size = true;
         private int sizeH = 40;
         private ModelViewKeyFeature feature = null;
+        public event Action DateUpdate;
 
         public KeyFeatureView()
         {
@@ -27,18 +28,26 @@ namespace HASPKey
             dgvKeyFeture.Height = dgvKeyFeture.Size.Height + sizeH;
         }
 
-        public void Add(ModelViewKeyFeature entity) => presenterKeyFeature.Add(entity);
+        public void Add(ModelViewKeyFeature entity)
+        {
+            presenterKeyFeature.Add(entity);
+            DateUpdate?.Invoke();
+        }
 
-        public void Build(List<ModelViewKeyFeature> entity) => bindingKeyFeature.DataSource = entity != null ? new BindingList<ModelViewKeyFeature>(entity)
+            public void Build(List<ModelViewKeyFeature> entity) => bindingKeyFeature.DataSource = entity != null ? new BindingList<ModelViewKeyFeature>(entity)
                                                       : new BindingList<ModelViewKeyFeature>();
 
         public void MessageError(string error) => MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         public void Remove(int id) => presenterKeyFeature.Remove(id);
 
-        public void Update(ModelViewKeyFeature entity) => presenterKeyFeature.Update(entity);
+        public void Update(ModelViewKeyFeature entity)
+        {
+            presenterKeyFeature.Update(entity);
+            DateUpdate?.Invoke();
+        }
 
-        private void Button1Delete_Click(object sender, EventArgs e)
+            private void Button1Delete_Click(object sender, EventArgs e)
         {
             var row = dgvKeyFeture.CurrentRow.DataBoundItem as ModelViewKeyFeature;
             if (row.Id == 0)

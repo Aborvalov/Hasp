@@ -11,7 +11,7 @@ namespace Presenter
     {
         private readonly IClientModel clientModel;
         private readonly IEntitesView<ModelViewClient> entitesView;
-
+        
         public PresenterClient(IEntitesView<ModelViewClient> entitesView)
         {
             this.entitesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));

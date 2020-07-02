@@ -48,7 +48,8 @@ namespace Model
                            SerialNumber = i++,
                            IdKeyFeature = keyFeatCl.IdKeyFeature,
                            IdClient     = keyFeatCl.IdClient,
-                           Client       = cl.Name + " - " + cl.Address ,
+                           Client       = cl.Name + (cl.Address == string.Empty || cl.Address == null 
+                                                    ? string.Empty : " - " + cl.Address) ,
                            Initiator    = keyFeatCl.Initiator,
                            EndDate      = keyFeat.EndDate,
                            Note         = keyFeatCl.Note,

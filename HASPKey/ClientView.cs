@@ -16,6 +16,7 @@ namespace HASPKey
         private const int sizeH = 40;
         private ModelViewClient clientForDB = null;
         private bool search = false;
+        public event Action DateUpdate;
         internal ModelViewClient SearchIdClient { get; private set; }
 
         public ClientView(bool search)
@@ -33,7 +34,11 @@ namespace HASPKey
         public ClientView() : this(false)
         { }
 
-        public void Add(ModelViewClient entity) => presenterClient.Add(entity);
+        public void Add(ModelViewClient entity)
+        {
+            presenterClient.Add(entity);
+            DateUpdate?.Invoke();
+        }
 
         public void Build(List<ModelViewClient> entity) => bindingClient.DataSource = entity != null ? new BindingList<ModelViewClient>(entity)
                                                       : new BindingList<ModelViewClient>();
@@ -42,7 +47,11 @@ namespace HASPKey
 
         public void Remove(int id) => presenterClient.Remove(id);
 
-        public void Update(ModelViewClient entity) => presenterClient.Update(entity);
+        public void Update(ModelViewClient entity)
+        {
+            presenterClient.Update(entity);
+            DateUpdate?.Invoke();
+        }
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {

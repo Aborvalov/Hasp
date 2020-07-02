@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace View
 {
@@ -10,5 +11,6 @@ namespace View
         void Remove(int id);
         void MessageError(string error);
 
+        event Action DateUpdate;
     }
 }

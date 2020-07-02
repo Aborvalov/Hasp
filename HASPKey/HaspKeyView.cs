@@ -17,6 +17,7 @@ namespace HASPKey
         private ModelViewHaspKey haspKey = null;
         private readonly int labelClientHeight;
         private readonly int labelClientWidth;
+        public event Action DateUpdate;
         public HaspKeyView()
         {
             InitializeComponent();
@@ -30,16 +31,24 @@ namespace HASPKey
             labelClientWidth = labelClient.Location.X;
         }
 
-        public void Add(ModelViewHaspKey entity) => presenterHaspKey.Add(entity);
+        public void Add(ModelViewHaspKey entity)
+        {
+            presenterHaspKey.Add(entity);
+            DateUpdate?.Invoke();
+        }
 
         public void Build(List<ModelViewHaspKey> entity) => bindingHaspKey.DataSource = entity != null ? new BindingList<ModelViewHaspKey>(entity)
                                                       : new BindingList<ModelViewHaspKey>();
 
         public void Remove(int id) => presenterHaspKey.Remove(id);
 
-        public void Update(ModelViewHaspKey entity) => presenterHaspKey.Update(entity);
+        public void Update(ModelViewHaspKey entity)
+        {
+            presenterHaspKey.Update(entity);
+            DateUpdate?.Invoke();
+        }
 
-        private void RadioButtonAll_CheckedChanged(object sender, EventArgs e)
+            private void RadioButtonAll_CheckedChanged(object sender, EventArgs e)
         {
             presenterHaspKey.View();
             labelClient.Text = string.Empty;

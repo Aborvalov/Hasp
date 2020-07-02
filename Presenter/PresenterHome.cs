@@ -17,5 +17,6 @@ namespace Presenter
             Views();
         }
         public void Views() => homeView.Build(homeModel.GetAll());
+
     }
 }

@@ -15,6 +15,7 @@ namespace HASPKey
         private int sizeH = 40;
         private ModelViewFeature feature = null;
         private bool search = false;
+        public event Action DateUpdate;
         internal ModelViewFeature SearchIdFeature { get; private set; }
 
         public FeatureView(bool search)
@@ -30,16 +31,24 @@ namespace HASPKey
         public FeatureView() : this(false)
         { }
 
-        public void Add(ModelViewFeature entity) => presenterFeature.Add(entity);
+        public void Add(ModelViewFeature entity)
+        {
+            presenterFeature.Add(entity);
+            DateUpdate?.Invoke();
+        }
 
-        public void Build(List<ModelViewFeature> entity) => bindingFeature.DataSource = entity != null ? new BindingList<ModelViewFeature>(entity)
+            public void Build(List<ModelViewFeature> entity) => bindingFeature.DataSource = entity != null ? new BindingList<ModelViewFeature>(entity)
                                                       : new BindingList<ModelViewFeature>();
 
         public void MessageError(string error) => MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         public void Remove(int id) => presenterFeature.Remove(id);
 
-        public void Update(ModelViewFeature entity) => presenterFeature.Update(entity);
+        public void Update(ModelViewFeature entity)
+        {
+            presenterFeature.Update(entity);
+            DateUpdate?.Invoke();
+        }
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
