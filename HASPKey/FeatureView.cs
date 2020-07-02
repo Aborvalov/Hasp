@@ -37,7 +37,8 @@ namespace HASPKey
             DateUpdate?.Invoke();
         }
 
-            public void Build(List<ModelViewFeature> entity) => bindingFeature.DataSource = entity != null ? new BindingList<ModelViewFeature>(entity)
+        public void Build(List<ModelViewFeature> entity) 
+        => bindingFeature.DataSource = entity != null ? new BindingList<ModelViewFeature>(entity)
                                                       : new BindingList<ModelViewFeature>();
 
         public void MessageError(string error) => MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);

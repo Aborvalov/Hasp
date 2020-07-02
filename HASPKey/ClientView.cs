@@ -40,8 +40,9 @@ namespace HASPKey
             DateUpdate?.Invoke();
         }
 
-        public void Build(List<ModelViewClient> entity) => bindingClient.DataSource = entity != null ? new BindingList<ModelViewClient>(entity)
-                                                      : new BindingList<ModelViewClient>();
+        public void Build(List<ModelViewClient> entity)
+        => bindingClient.DataSource = entity != null ? new BindingList<ModelViewClient>(entity)
+                                                     : new BindingList<ModelViewClient>();
 
         public void MessageError(string error) => MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
 

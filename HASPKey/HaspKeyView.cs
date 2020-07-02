@@ -18,6 +18,7 @@ namespace HASPKey
         private readonly int labelClientHeight;
         private readonly int labelClientWidth;
         public event Action DateUpdate;
+
         public HaspKeyView()
         {
             InitializeComponent();
@@ -37,7 +38,8 @@ namespace HASPKey
             DateUpdate?.Invoke();
         }
 
-        public void Build(List<ModelViewHaspKey> entity) => bindingHaspKey.DataSource = entity != null ? new BindingList<ModelViewHaspKey>(entity)
+        public void Build(List<ModelViewHaspKey> entity) 
+        => bindingHaspKey.DataSource = entity != null ? new BindingList<ModelViewHaspKey>(entity)
                                                       : new BindingList<ModelViewHaspKey>();
 
         public void Remove(int id)

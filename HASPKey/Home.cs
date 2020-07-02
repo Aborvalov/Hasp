@@ -18,8 +18,8 @@ namespace HASPKey
         private void ВыходToolStripMenuItem_Click(object sender, EventArgs e)
             =>  this.Close();
         public void Build(List<ModelEntities.ModelViewHome> homes)
-            => bindingHome.DataSource = homes != null ? new BindingList<ModelEntities.ModelViewHome>(homes) 
-                                                      : new BindingList<ModelEntities.ModelViewHome>();
+        => bindingHome.DataSource = homes != null ? new BindingList<ModelEntities.ModelViewHome>(homes) 
+                                                  : new BindingList<ModelEntities.ModelViewHome>();
 
         private void КлючToolStripMenuItem_Click(object sender, EventArgs e)
         {
