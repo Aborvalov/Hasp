@@ -42,7 +42,11 @@ namespace HASPKey
 
         public void MessageError(string error) => MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-        public void Remove(int id) => presenterFeature.Remove(id);
+        public void Remove(int id)
+        {
+            presenterFeature.Remove(id);
+            DateUpdate?.Invoke();
+        }
 
         public void Update(ModelViewFeature entity)
         {

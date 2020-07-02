@@ -21,12 +21,12 @@ namespace Presenter
         public void Add(ModelViewKeyFeature entity)
         {
             if (entity == null)
-                this.entitesView.MessageError("Не удалось создать связь ключа и функциональности.");
+                entitesView.MessageError("Не удалось создать связь ключа и функциональности.");
 
             if (keyFeatureModel.Add(entity))
                 View();
             else
-                this.entitesView.MessageError("Не удалось создать связь ключа и функциональности.");
+                entitesView.MessageError("Не удалось создать связь ключа и функциональности.");
         }
 
         public void Remove(int id)
@@ -40,14 +40,14 @@ namespace Presenter
         public void Update(ModelViewKeyFeature entity)
         {
             if (entity == null)
-                this.entitesView.MessageError("Не удалось обновить связь ключа и функциональности.");
+                entitesView.MessageError("Не удалось обновить связь ключа и функциональности.");
 
             if (keyFeatureModel.Update(entity))
                 View();
             else
-                this.entitesView.MessageError("Не удалось обновить связь ключа и функциональности.");
+                entitesView.MessageError("Не удалось обновить связь ключа и функциональности.");
         }
 
-        public void View() => this.entitesView.Build(keyFeatureModel.GetAll());
+        public void View() => entitesView.Build(keyFeatureModel.GetAll());
     }
 }

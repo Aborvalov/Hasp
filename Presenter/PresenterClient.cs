@@ -22,18 +22,18 @@ namespace Presenter
         public void Add(ModelViewClient entity)
         {
             if (entity == null)
-                this.entitesView.MessageError("Не удалось создать клиента.");
+                entitesView.MessageError("Не удалось создать клиента.");
 
             if (clientModel.Add(entity))
                 View();
             else
-                this.entitesView.MessageError("Не удалось создать клиента.");
+                entitesView.MessageError("Не удалось создать клиента.");
         }
 
         public void GetByFeature(ModelViewFeature feature)
         {
             if (feature == null)
-                this.entitesView.MessageError("Данноя функциональность пуста.");
+                entitesView.MessageError("Данноя функциональность пуста.");
 
             entitesView.Build(clientModel.GetByFeature(feature));
         }
@@ -58,20 +58,20 @@ namespace Presenter
             if (id > 0 && clientModel.Remove(id))
                 View();
             else
-                this.entitesView.MessageError("Не удалось удалить клиента.");
+                entitesView.MessageError("Не удалось удалить клиента.");
         }
 
         public void Update(ModelViewClient entity)
         {
             if (entity == null)
-                this.entitesView.MessageError("Не удалось обновить клиента.");
+                entitesView.MessageError("Не удалось обновить клиента.");
 
             if (clientModel.Update(entity))
                 View();
             else
-                this.entitesView.MessageError("Не удалось обновить клиента.");
+                entitesView.MessageError("Не удалось обновить клиента.");
         }
 
-        public void View() => this.entitesView.Build(clientModel.GetAll());
+        public void View() => entitesView.Build(clientModel.GetAll());
     }
 }

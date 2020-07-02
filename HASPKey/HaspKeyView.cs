@@ -40,7 +40,11 @@ namespace HASPKey
         public void Build(List<ModelViewHaspKey> entity) => bindingHaspKey.DataSource = entity != null ? new BindingList<ModelViewHaspKey>(entity)
                                                       : new BindingList<ModelViewHaspKey>();
 
-        public void Remove(int id) => presenterHaspKey.Remove(id);
+        public void Remove(int id)
+        {
+            presenterHaspKey.Remove(id);
+            DateUpdate?.Invoke();
+        }
 
         public void Update(ModelViewHaspKey entity)
         {

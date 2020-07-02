@@ -21,12 +21,12 @@ namespace Presenter
         public void Add(ModelViewFeature entity)
         {
             if (entity == null)
-              this.entitesView.MessageError("Не удалось создать Hasp-ключ.");
+              entitesView.MessageError("Не удалось создать Hasp-ключ.");
 
                 if (featureModel.Add(entity))
                 View();
             else
-                this.entitesView.MessageError("Не удалось создать Hasp-ключ.");
+                entitesView.MessageError("Не удалось создать Hasp-ключ.");
         }
 
         public void Remove(int id)
@@ -34,20 +34,20 @@ namespace Presenter
             if (id > 0 && featureModel.Remove(id))
                 View();
             else
-                this.entitesView.MessageError("Не удалось удалить Hasp-ключ.");
+                entitesView.MessageError("Не удалось удалить Hasp-ключ.");
         }
 
         public void Update(ModelViewFeature entity)
         {
             if (entity == null)
-                this.entitesView.MessageError("Не удалось обновить Hasp-ключ.");
+                entitesView.MessageError("Не удалось обновить Hasp-ключ.");
 
             if (featureModel.Update(entity))
                 View();
             else
-                this.entitesView.MessageError("Не удалось обновить Hasp-ключ.");
+                entitesView.MessageError("Не удалось обновить Hasp-ключ.");
         }
 
-        public void View() => this.entitesView.Build(featureModel.GetAll());
+        public void View() => entitesView.Build(featureModel.GetAll());
     }
 }

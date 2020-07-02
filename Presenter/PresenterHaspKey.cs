@@ -22,45 +22,45 @@ namespace Presenter
         public void Add(ModelViewHaspKey entity)
         {
             if (entity == null)
-                this.entitesView.MessageError("Не удалось создать Hasp-ключ.");
+                entitesView.MessageError("Не удалось создать Hasp-ключ.");
 
             if (haspKeyModel.Add(entity))
                 View();
             else
-                this.entitesView.MessageError("Не удалось создать Hasp-ключ.");
+                entitesView.MessageError("Не удалось создать Hasp-ключ.");
         }
 
-        public void GetByActive() => this.entitesView.Build(haspKeyModel.GetByActive());
+        public void GetByActive() => entitesView.Build(haspKeyModel.GetByActive());
 
         public void GetByClient(ModelViewClient client)
         {
             if (client == null)
-                this.entitesView.MessageError("Данный клиент имеет пустые значения.");
+                entitesView.MessageError("Данный клиент имеет пустые значения.");
 
             entitesView.Build(haspKeyModel.GetByClient(client));
         }
 
-        public void GetByPastDue() => this.entitesView.Build(haspKeyModel.GetByPastDue());
+        public void GetByPastDue() => entitesView.Build(haspKeyModel.GetByPastDue());
 
         public void Remove(int id)
         {
             if (id > 0 && haspKeyModel.Remove(id))
                 View();
             else
-                this.entitesView.MessageError("Не удалось удалить Hasp-ключ.");
+                entitesView.MessageError("Не удалось удалить Hasp-ключ.");
         }
 
         public void Update(ModelViewHaspKey entity)
         {
             if (entity == null)
-                this.entitesView.MessageError("Не удалось обновить Hasp-ключ.");
+                entitesView.MessageError("Не удалось обновить Hasp-ключ.");
 
             if (haspKeyModel.Update(entity))
                 View();
             else
-                this.entitesView.MessageError("Не удалось обновить Hasp-ключ.");
+                entitesView.MessageError("Не удалось обновить Hasp-ключ.");
         }
 
-        public void View() => this.entitesView.Build(haspKeyModel.GetAll());
+        public void View() => entitesView.Build(haspKeyModel.GetAll());
     }
 }
