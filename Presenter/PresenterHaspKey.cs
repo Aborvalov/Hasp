@@ -21,6 +21,9 @@ namespace Presenter
 
         public void Add(ModelViewHaspKey entity)
         {
+            if (entity == null)
+                this.entitesView.MessageError("Не удалось создать Hasp-ключ.");
+
             if (haspKeyModel.Add(entity))
                 View();
             else
@@ -29,7 +32,13 @@ namespace Presenter
 
         public void GetByActive() => this.entitesView.Build(haspKeyModel.GetByActive());
 
-        public void GetByClient(ModelViewClient client) => this.entitesView.Build(haspKeyModel.GetByClient(client));
+        public void GetByClient(ModelViewClient client)
+        {
+            if (client == null)
+                this.entitesView.MessageError("Данный клиент имеет пустые значения.");
+
+            entitesView.Build(haspKeyModel.GetByClient(client));
+        }
 
         public void GetByPastDue() => this.entitesView.Build(haspKeyModel.GetByPastDue());
 
@@ -43,6 +52,9 @@ namespace Presenter
 
         public void Update(ModelViewHaspKey entity)
         {
+            if (entity == null)
+                this.entitesView.MessageError("Не удалось обновить Hasp-ключ.");
+
             if (haspKeyModel.Update(entity))
                 View();
             else

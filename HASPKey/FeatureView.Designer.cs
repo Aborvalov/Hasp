@@ -63,8 +63,9 @@
             this.dgvFeature.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvFeature.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvFeature.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            FeatureView featureView = this;
             this.dgvFeature.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.serialNumberDataGridViewTextBoxColumn,
+            featureView.serialNumberDataGridViewTextBoxColumn,
             this.numberDataGridViewTextBoxColumn,
             this.nameDataGridViewTextBoxColumn,
             this.descriptionDataGridViewTextBoxColumn});

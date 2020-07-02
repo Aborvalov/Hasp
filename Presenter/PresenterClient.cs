@@ -21,13 +21,22 @@ namespace Presenter
         }
         public void Add(ModelViewClient entity)
         {
+            if (entity == null)
+                this.entitesView.MessageError("Не удалось создать клиента.");
+
             if (clientModel.Add(entity))
                 View();
             else
                 this.entitesView.MessageError("Не удалось создать клиента.");
         }
 
-        public void GetByFeature(ModelViewFeature feature) => this.entitesView.Build(clientModel.GetByFeature(feature));
+        public void GetByFeature(ModelViewFeature feature)
+        {
+            if (feature == null)
+                this.entitesView.MessageError("Данноя функциональность пуста.");
+
+            entitesView.Build(clientModel.GetByFeature(feature));
+        }
 
         public void GetByNumberKey(int keyInnerId)
         {
@@ -54,6 +63,9 @@ namespace Presenter
 
         public void Update(ModelViewClient entity)
         {
+            if (entity == null)
+                this.entitesView.MessageError("Не удалось обновить клиента.");
+
             if (clientModel.Update(entity))
                 View();
             else

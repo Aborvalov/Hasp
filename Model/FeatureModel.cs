@@ -19,6 +19,9 @@ namespace Model
 
         public bool Add(ModelViewFeature entity)
         {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
             Feature feature = new Feature
             {
                 Name = entity.Name,
@@ -67,6 +70,9 @@ namespace Model
 
         public bool Update(ModelViewFeature entity)
         {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
             Feature feature = new Feature
             {
                 Id = entity.Id,

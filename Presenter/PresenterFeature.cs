@@ -20,7 +20,10 @@ namespace Presenter
         }
         public void Add(ModelViewFeature entity)
         {
-            if (featureModel.Add(entity))
+            if (entity == null)
+              this.entitesView.MessageError("Не удалось создать Hasp-ключ.");
+
+                if (featureModel.Add(entity))
                 View();
             else
                 this.entitesView.MessageError("Не удалось создать Hasp-ключ.");
@@ -36,6 +39,9 @@ namespace Presenter
 
         public void Update(ModelViewFeature entity)
         {
+            if (entity == null)
+                this.entitesView.MessageError("Не удалось обновить Hasp-ключ.");
+
             if (featureModel.Update(entity))
                 View();
             else

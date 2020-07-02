@@ -20,6 +20,9 @@ namespace Presenter
         }
         public void Add(ModelViewKeyFeature entity)
         {
+            if (entity == null)
+                this.entitesView.MessageError("Не удалось создать связь ключа и функциональности.");
+
             if (keyFeatureModel.Add(entity))
                 View();
             else
@@ -36,6 +39,9 @@ namespace Presenter
 
         public void Update(ModelViewKeyFeature entity)
         {
+            if (entity == null)
+                this.entitesView.MessageError("Не удалось обновить связь ключа и функциональности.");
+
             if (keyFeatureModel.Update(entity))
                 View();
             else

@@ -19,6 +19,9 @@ namespace Model
         }
         public bool Add(ModelViewKeyFeature entity)
         {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
             KeyFeature keyFeature = new KeyFeature
             {
                 IdFeature = entity.IdFeature,
@@ -85,6 +88,9 @@ namespace Model
 
         public bool Update(ModelViewKeyFeature entity)
         {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
             KeyFeature keyFeature = new KeyFeature
             {
                 Id = entity.Id,
@@ -102,6 +108,9 @@ namespace Model
         }
         private List<ModelViewKeyFeature> Convert(List<KeyFeature> keyFeature)
         {
+            if (keyFeature == null)
+                throw new ArgumentNullException(nameof(keyFeature));
+
             var view = new List<ModelViewKeyFeature>();
             int i = 1;
 

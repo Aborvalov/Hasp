@@ -18,6 +18,9 @@ namespace Model
         }
         public bool Add(ModelViewHaspKey entity)
         {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
             HaspKey haspKey = new HaspKey
             {
                 InnerId = entity.InnerId,
@@ -58,6 +61,9 @@ namespace Model
 
         public List<ModelViewHaspKey> GetByClient(ModelViewClient client)
         {
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+
             List<HaspKey> haspKeys;
             using (var db = new EntitesContext())
             {
@@ -103,6 +109,9 @@ namespace Model
 
         public bool Update(ModelViewHaspKey entity)
         {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
             HaspKey haspKey = new HaspKey
             {
                 Id      = entity.Id,
