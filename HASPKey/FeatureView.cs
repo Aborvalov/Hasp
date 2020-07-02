@@ -14,13 +14,21 @@ namespace HASPKey
         private bool size = true;
         private int sizeH = 40;
         private ModelViewFeature feature = null;
+        private bool search = false;
+        internal ModelViewFeature SearchIdFeature { get; private set; }
 
-        public FeatureView()
+        public FeatureView(bool search)
         {
             InitializeComponent();
             presenterFeature = new PresenterFeature(this);
             dgvFeature.Height = dgvFeature.Size.Height + sizeH;
+            this.search = search;
+            
+            if (this.search)
+                dgvFeature.Height = dgvFeature.Size.Height + 28;
         }
+        public FeatureView() : this(false)
+        { }
 
         public void Add(ModelViewFeature entity) => presenterFeature.Add(entity);
 
@@ -35,6 +43,7 @@ namespace HASPKey
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
+            DefaultView();
             if (size)
             {
                 dgvFeature.Height = dgvFeature.Size.Height - sizeH;
@@ -45,6 +54,13 @@ namespace HASPKey
 
         private void DgvFeature_DoubleClick(object sender, EventArgs e)
         {
+            if (this.search)
+            {
+                this.SearchIdFeature = dgvFeature.CurrentRow.DataBoundItem as ModelViewFeature;
+                this.Close();
+                return;
+            }
+
             if (size)
             {
                 dgvFeature.Height = dgvFeature.Size.Height - sizeH;
@@ -78,7 +94,6 @@ namespace HASPKey
                 DefaultView();
             }
         }
-
         private bool CheckInputData(out int number)
         {
             string erroeMess = string.Empty;

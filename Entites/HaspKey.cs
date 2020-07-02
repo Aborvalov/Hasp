@@ -11,9 +11,9 @@ namespace Entities
         /// <summary>
         /// Внутренний идентификатор.
         /// </summary>
-        [Browsable(false)]
+        [DisplayName("Внутренний номер")]
         public int InnerId { get; set; }
-        [Browsable(false)]
+        [DisplayName("Номер")]
         public string Number { get; set; }
         [DisplayName("Тип ключа")]
         public TypeKey TypeKey { get; set; }

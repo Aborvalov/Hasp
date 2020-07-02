@@ -49,6 +49,7 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonSearchByFeature = new System.Windows.Forms.Button();
             this.labelFeature = new System.Windows.Forms.Label();
+            this.buttonAll = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingClient)).BeginInit();
             this.SuspendLayout();
@@ -242,11 +243,22 @@
             this.labelFeature.TabIndex = 13;
             this.labelFeature.Text = "labelFeature";
             // 
+            // buttonAll
+            // 
+            this.buttonAll.Location = new System.Drawing.Point(559, 12);
+            this.buttonAll.Name = "buttonAll";
+            this.buttonAll.Size = new System.Drawing.Size(34, 23);
+            this.buttonAll.TabIndex = 14;
+            this.buttonAll.Text = "Все";
+            this.buttonAll.UseVisualStyleBackColor = true;
+            this.buttonAll.Click += new System.EventHandler(this.buttonAll_Click);
+            // 
             // ClientView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(605, 578);
+            this.Controls.Add(this.buttonAll);
             this.Controls.Add(this.labelFeature);
             this.Controls.Add(this.buttonSearchByFeature);
             this.Controls.Add(this.dgvClient);
@@ -293,5 +305,6 @@
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonSearchByFeature;
         private System.Windows.Forms.Label labelFeature;
+        private System.Windows.Forms.Button buttonAll;
     }
 }

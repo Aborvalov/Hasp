@@ -16,10 +16,8 @@ namespace HASPKey
         private const int sizeH = 40;
         private ModelViewClient clientForDB = null;
         private bool search = false;
-        internal ModelViewClient SearchIdClient {get; private set;}
+        internal ModelViewClient SearchIdClient { get; private set; }
 
-        private readonly int labelFeatureHeight;
-        private readonly int labelFeatureWidth;
         public ClientView(bool search)
         {
             InitializeComponent();
@@ -31,9 +29,9 @@ namespace HASPKey
                 dgvClient.Height = dgvClient.Size.Height + 28;
 
             labelFeature.Text = string.Empty;
-            labelFeatureHeight = labelFeature.Location.Y;
-            labelFeatureWidth = labelFeature.Location.X;
         }
+        public ClientView() : this(false)
+        { }
 
         public void Add(ModelViewClient entity) => presenterClient.Add(entity);
 
@@ -151,9 +149,22 @@ namespace HASPKey
         }
 
         private void ButtonSearchByFeature_Click(object sender, EventArgs e)
-        {
-            labelFeature.Location = new System.Drawing.Point(labelFeatureWidth, labelFeatureHeight);
+        {            
+            FeatureView feature = new FeatureView(true);
+            feature.ShowDialog();
 
+            if (feature.SearchIdFeature != null)
+            {
+                presenterClient.GetByFeature(feature.SearchIdFeature);
+
+                labelFeature.Text = feature.SearchIdFeature.Name;
+            }
+        }
+
+        private void buttonAll_Click(object sender, EventArgs e)
+        {
+            labelFeature.Text = string.Empty;
+            presenterClient.View();
         }
     }
 }

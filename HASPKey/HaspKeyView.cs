@@ -107,7 +107,7 @@ namespace HASPKey
 
         private void DefaultView()
         {
-            if (size)
+            if (!size)
             {
                 dgvHaspKey.Height = dgvHaspKey.Size.Height + sizeH;
                 size = !size;
