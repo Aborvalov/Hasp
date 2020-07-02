@@ -76,6 +76,8 @@ namespace Model
                 clientLogic = logic.CreateClient(db);
                 client = clientLogic.GetByNumberKey(keyInnerId);
             }
+            if (client == null)
+                return null;
             return new ModelViewClient(client);
         }
 

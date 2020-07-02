@@ -31,11 +31,17 @@ namespace Presenter
 
         public void GetByNumberKey(int keyInnerId)
         {
-            var client = new List<ModelViewClient>
+            var client = clientModel.GetByNumberKey(keyInnerId);
+            if (client == null)
             {
-                clientModel.GetByNumberKey(keyInnerId)
+                entitesView.Build(new List<ModelViewClient>());
+                return;
+            }
+            var clients = new List<ModelViewClient>
+            {
+                client
             };
-            entitesView.Build(client);
+            entitesView.Build(clients);
         }
 
         public void Remove(int id)

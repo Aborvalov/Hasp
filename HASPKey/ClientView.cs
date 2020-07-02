@@ -110,6 +110,8 @@ namespace HASPKey
             tbAddress.Text = string.Empty;
             tbContactPerson.Text = string.Empty;
             tbPhone.Text = string.Empty;
+            labelFeature.Text = string.Empty;
+            tbInnerIdHaspKey.Text = string.Empty;
         }
         private bool CheckInputData()
         {
@@ -149,7 +151,8 @@ namespace HASPKey
         }
 
         private void ButtonSearchByFeature_Click(object sender, EventArgs e)
-        {            
+        {
+            DefaultView();
             FeatureView feature = new FeatureView(true);
             feature.ShowDialog();
 
@@ -161,10 +164,27 @@ namespace HASPKey
             }
         }
 
-        private void buttonAll_Click(object sender, EventArgs e)
+        private void ButtonAll_Click(object sender, EventArgs e)
         {
-            labelFeature.Text = string.Empty;
+            DefaultView();
             presenterClient.View();
+        }
+
+        private void TbInnerIdHaspKey_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {                
+                presenterClient.GetByNumberKey(Int32.Parse(tbInnerIdHaspKey.Text));
+                DefaultView();
+            }
+        }
+
+        private void TbInnerIdHaspKey_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

@@ -51,6 +51,8 @@
             this.buttonSearchByFeature = new System.Windows.Forms.Button();
             this.labelFeature = new System.Windows.Forms.Label();
             this.buttonAll = new System.Windows.Forms.Button();
+            this.labelSearchInnerId = new System.Windows.Forms.Label();
+            this.tbInnerIdHaspKey = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingClient)).BeginInit();
             this.SuspendLayout();
@@ -236,7 +238,7 @@
             // 
             // buttonSearchByFeature
             // 
-            this.buttonSearchByFeature.Location = new System.Drawing.Point(12, 5);
+            this.buttonSearchByFeature.Location = new System.Drawing.Point(13, 18);
             this.buttonSearchByFeature.Name = "buttonSearchByFeature";
             this.buttonSearchByFeature.Size = new System.Drawing.Size(96, 23);
             this.buttonSearchByFeature.TabIndex = 12;
@@ -247,7 +249,7 @@
             // labelFeature
             // 
             this.labelFeature.AutoSize = true;
-            this.labelFeature.Location = new System.Drawing.Point(12, 31);
+            this.labelFeature.Location = new System.Drawing.Point(9, 0);
             this.labelFeature.Name = "labelFeature";
             this.labelFeature.Size = new System.Drawing.Size(67, 13);
             this.labelFeature.TabIndex = 13;
@@ -256,19 +258,39 @@
             // buttonAll
             // 
             this.buttonAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAll.Location = new System.Drawing.Point(559, 12);
+            this.buttonAll.Location = new System.Drawing.Point(560, 18);
             this.buttonAll.Name = "buttonAll";
             this.buttonAll.Size = new System.Drawing.Size(34, 23);
             this.buttonAll.TabIndex = 14;
             this.buttonAll.Text = "Все";
             this.buttonAll.UseVisualStyleBackColor = true;
-            this.buttonAll.Click += new System.EventHandler(this.buttonAll_Click);
+            this.buttonAll.Click += new System.EventHandler(this.ButtonAll_Click);
+            // 
+            // labelSearchInnerId
+            // 
+            this.labelSearchInnerId.AutoSize = true;
+            this.labelSearchInnerId.Location = new System.Drawing.Point(151, -1);
+            this.labelSearchInnerId.Name = "labelSearchInnerId";
+            this.labelSearchInnerId.Size = new System.Drawing.Size(196, 13);
+            this.labelSearchInnerId.TabIndex = 15;
+            this.labelSearchInnerId.Text = "Поиск по внутреннему номеру ключа";
+            // 
+            // tbInnerIdHaspKey
+            // 
+            this.tbInnerIdHaspKey.Location = new System.Drawing.Point(154, 19);
+            this.tbInnerIdHaspKey.Name = "tbInnerIdHaspKey";
+            this.tbInnerIdHaspKey.Size = new System.Drawing.Size(100, 21);
+            this.tbInnerIdHaspKey.TabIndex = 16;
+            this.tbInnerIdHaspKey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbInnerIdHaspKey_KeyDown);
+            this.tbInnerIdHaspKey.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbInnerIdHaspKey_KeyPress);
             // 
             // ClientView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(605, 578);
+            this.Controls.Add(this.tbInnerIdHaspKey);
+            this.Controls.Add(this.labelSearchInnerId);
             this.Controls.Add(this.buttonAll);
             this.Controls.Add(this.labelFeature);
             this.Controls.Add(this.buttonSearchByFeature);
@@ -317,5 +339,7 @@
         private System.Windows.Forms.Button buttonSearchByFeature;
         private System.Windows.Forms.Label labelFeature;
         private System.Windows.Forms.Button buttonAll;
+        private System.Windows.Forms.Label labelSearchInnerId;
+        private System.Windows.Forms.TextBox tbInnerIdHaspKey;
     }
 }
