@@ -73,7 +73,7 @@
             this.dgvKeyFeture.Name = "dgvKeyFeture";
             this.dgvKeyFeture.ReadOnly = true;
             this.dgvKeyFeture.RowHeadersVisible = false;
-            this.dgvKeyFeture.Size = new System.Drawing.Size(776, 368);
+            this.dgvKeyFeture.Size = new System.Drawing.Size(604, 368);
             this.dgvKeyFeture.TabIndex = 0;
             // 
             // bindingKeyFeature
@@ -82,7 +82,8 @@
             // 
             // button1Delete
             // 
-            this.button1Delete.Location = new System.Drawing.Point(713, 415);
+            this.button1Delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1Delete.Location = new System.Drawing.Point(541, 415);
             this.button1Delete.Name = "button1Delete";
             this.button1Delete.Size = new System.Drawing.Size(75, 23);
             this.button1Delete.TabIndex = 1;
@@ -142,7 +143,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(628, 450);
             this.Controls.Add(this.button1Delete);
             this.Controls.Add(this.dgvKeyFeture);
             this.Name = "KeyFeatureView";
