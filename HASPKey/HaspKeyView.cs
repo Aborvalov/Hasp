@@ -169,6 +169,8 @@ namespace HASPKey
             radioButtonAll.Checked = false;
             radioButtonPastDue.Checked = false;
 
+            DefaultView();
+
             labelClient.Location = new System.Drawing.Point(labelClientWidth, labelClientHeight);
 
             ClientView client = new ClientView(true);

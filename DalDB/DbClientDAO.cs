@@ -86,14 +86,22 @@ namespace DalDB
             var keyFeatureCliets = db.KeyFeatureClients.ToList();
             var haspKeys         = db.HaspKeys.ToList();
 
-            int idClient = (from keyFeatureClient in keyFeatureCliets
+            int idClient = 0;
+            try
+            {
+                idClient = (from keyFeatureClient in keyFeatureCliets
                             join keyFeature in keyFeatures
                               on keyFeatureClient.IdKeyFeature equals keyFeature.Id
                             join key in haspKeys
                               on keyFeature.IdHaspKey equals key.Id
-                           where key.InnerId == keyInnerId
-                          select keyFeatureClient.IdClient)
+                            where key.InnerId == keyInnerId
+                            select keyFeatureClient.IdClient)
                            .Last();
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }            
 
             return GetById(idClient);
             #region SQL запрос.

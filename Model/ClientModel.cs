@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Entities;
+﻿using Entities;
 using Logic;
 using LogicContract;
 using ModelEntities;
+using System;
+using System.Collections.Generic;
 
 namespace Model
 {
@@ -78,7 +75,8 @@ namespace Model
             }
             if (client == null)
                 return null;
-            return new ModelViewClient(client);
+            return new ModelViewClient(client)
+                       { SerialNumber = 1};
         }
 
         public bool Remove(int id)
