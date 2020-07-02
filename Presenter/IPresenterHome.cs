@@ -1,7 +1,4 @@
-﻿using ModelEntities;
-using System.Collections.Generic;
-
-namespace Presenter
+﻿namespace Presenter
 {
     public interface IPresenterHome
     {

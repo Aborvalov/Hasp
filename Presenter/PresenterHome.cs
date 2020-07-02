@@ -1,7 +1,5 @@
 ﻿using Logic;
 using Model;
-using ModelEntities;
-using System.Collections.Generic;
 using View;
 
 namespace Presenter
