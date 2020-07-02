@@ -71,6 +71,7 @@
     <Compile Include="IEntitesModel.cs" />
     <Compile Include="IHaspKeyModel.cs" />
     <Compile Include="IHomeModel.cs" />
+    <Compile Include="KeyFeatureModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

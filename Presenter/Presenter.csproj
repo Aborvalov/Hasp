@@ -49,6 +49,7 @@
     <Compile Include="PresenterFeature.cs" />
     <Compile Include="PresenterHaspKey.cs" />
     <Compile Include="PresenterHome.cs" />
+    <Compile Include="PresenterKeyFeature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

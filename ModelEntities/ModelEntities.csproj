@@ -47,6 +47,7 @@
     <Compile Include="ModelViewFeature.cs" />
     <Compile Include="ModelViewHaspKey.cs" />
     <Compile Include="ModelViewHome.cs" />
+    <Compile Include="ModelViewKeyFeature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

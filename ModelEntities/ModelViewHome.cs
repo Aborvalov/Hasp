@@ -24,10 +24,7 @@ namespace ModelEntities
         [DisplayName("Срок действия")]
         public DateTime EndDate { get; set; }
 
-        public override bool Equals(object obj)
-        {
-            return base.Equals(obj);
-        }
+        public override bool Equals(object obj)=> base.Equals(obj);        
         public override int GetHashCode()
         {
             int hashProductNumberKey = NumberKey == null ? 0 : NumberKey.GetHashCode();
