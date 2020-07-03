@@ -21,18 +21,10 @@ namespace Model
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            HaspKey haspKey = new HaspKey
-            {
-                InnerId = entity.InnerId,
-                Number  = entity.Number,
-                TypeKey = entity.TypeKey,
-                IsHome  = entity.IsHome,
-            };
-
             using (var db = new EntitesContext())
             {
                 keyLogic = logic.CreateHaspKey(db);                
-                return keyLogic.Save(haspKey);
+                return keyLogic.Save(entity.HaspKey);
             }
         }
 
@@ -111,20 +103,11 @@ namespace Model
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
-
-            HaspKey haspKey = new HaspKey
-            {
-                Id      = entity.Id,
-                InnerId = entity.InnerId,
-                Number  = entity.Number,
-                TypeKey = entity.TypeKey,
-                IsHome  = entity.IsHome,
-            };
-
+                       
             using (var db = new EntitesContext())
             {
                 keyLogic = logic.CreateHaspKey(db);
-                return keyLogic.Update(haspKey);
+                return keyLogic.Update(entity.HaspKey);
             }
         }
 

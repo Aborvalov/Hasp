@@ -4,8 +4,7 @@ using System.ComponentModel;
 namespace ModelEntities
 {
     public class ModelViewHaspKey
-    {
-        public HaspKey HaspKey { get; private set; }
+    {       
         private int id;
         private int innerId;
         private string number;
@@ -21,6 +20,8 @@ namespace ModelEntities
             IsHome = haspKey.IsHome;
             TypeKey = haspKey.TypeKey;
         }
+        [Browsable(false)]
+        public HaspKey HaspKey { get; private set; } = new HaspKey();
         /// <summary>
         /// Порядковый номер.
         /// </summary>         
