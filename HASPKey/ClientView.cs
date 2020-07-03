@@ -170,11 +170,11 @@ namespace HASPKey
             FeatureView feature = new FeatureView(true);
             feature.ShowDialog();
 
-            if (feature.SearchIdFeature != null)
+            if (feature.SearchFeature != null)
             {
-                presenterClient.GetByFeature(feature.SearchIdFeature);
+                presenterClient.GetByFeature(feature.SearchFeature);
 
-                labelFeature.Text = feature.SearchIdFeature.Name;
+                labelFeature.Text = feature.SearchFeature.Name;
             }
         }
 

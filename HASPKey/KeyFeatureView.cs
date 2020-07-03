@@ -17,7 +17,7 @@ namespace HASPKey
     {
         private readonly IPresenterEntites<ModelViewKeyFeature> presenterKeyFeature;
         private bool size = true;
-        private int sizeH = 40;
+        private int sizeH = 55;
         private ModelViewKeyFeature keyFeature = null;
         public event Action DateUpdate;
 
@@ -25,11 +25,12 @@ namespace HASPKey
         {
             InitializeComponent();
             presenterKeyFeature = new PresenterKeyFeature(this);
-            //dgvKeyFeture.Height = dgvKeyFeture.Size.Height + sizeH;
-            dtpEndDate.MinDate = DateTime.Now.Date;
+            dgvKeyFeture.Height = dgvKeyFeture.Size.Height + sizeH;
+           
+            DefaultView();
 
-            labelStartDate.Visible = false;
-            dtpStartDate.Visible = false;
+            ToolTip t = new ToolTip();
+            t.SetToolTip(buttonSelectFeature, "Выбрать функциональность");
         }
 
         public void Add(ModelViewKeyFeature entity)
@@ -56,7 +57,7 @@ namespace HASPKey
             DateUpdate?.Invoke();
         }
 
-            private void Button1Delete_Click(object sender, EventArgs e)
+        private void Button1Delete_Click(object sender, EventArgs e)
         {
             var row = dgvKeyFeture.CurrentRow.DataBoundItem as ModelViewKeyFeature;
             if (row.Id == 0)
@@ -86,56 +87,72 @@ namespace HASPKey
 
             dtpEndDate.MinDate = DateTime.Now.Date;
             labelStartDate.Visible = false;
+            labelEndDate.Visible = false;
             dtpStartDate.Visible = false;
+            dtpEndDate.Visible = false;
+            labelSelectFeature.Text = string.Empty;
+            labelSelectKey.Text = string.Empty;
         }
 
-        private void dgvKeyFeture_DoubleClick(object sender, EventArgs e)
+        private void DgvKeyFeture_DoubleClick(object sender, EventArgs e)
         {
             DefaultView();
             if (size)
             {
                 dgvKeyFeture.Height = dgvKeyFeture.Size.Height - sizeH;
                 size = !size;
+                labelStartDate.Visible = true;
+                labelEndDate.Visible = true;
+                dtpStartDate.Visible = true;
+                dtpEndDate.Visible = true;
             }
-
-            labelStartDate.Visible = true;
-            dtpStartDate.Visible = true;
-
+                        
             keyFeature = new ModelViewKeyFeature();
             var row = dgvKeyFeture.CurrentRow.DataBoundItem as ModelViewKeyFeature;
 
             keyFeature.Id = row.Id;
+            keyFeature.IdFeature = row.IdFeature;
+            keyFeature.IdHaspKey = row.IdHaspKey;
             dtpStartDate.Value = row.StartDate;
             dtpEndDate.MinDate = new DateTime(1753, 1, 1);
             dtpEndDate.Value = row.EndDate;
+            labelSelectFeature.Text = row.Feature;
+            labelSelectKey.Text = row.NumberKey;
         }
 
-        private void dtpStartDate_ValueChanged(object sender, EventArgs e)
+        private void DtpStartDate_ValueChanged(object sender, EventArgs e)
         {
             dtpEndDate.MinDate = dtpStartDate.Value;
         }
 
-        private void buttonAdd_Click(object sender, EventArgs e)
+        private void ButtonAdd_Click(object sender, EventArgs e)
         {
             DefaultView();
             if (size)
             {
-                dgvKeyFeture.Height = dgvKeyFeture.Size.Height - sizeH;
+                dgvKeyFeture.Height = dgvKeyFeture.Size.Height - sizeH;               
+                labelEndDate.Visible = true;
+                dtpEndDate.Visible = true;
                 size = !size;
             }
-
+            
             keyFeature = new ModelViewKeyFeature();
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void ButtonSave_Click(object sender, EventArgs e)
         {
-            if (!size)
+            if (!size && keyFeature != null)
             {
+                if (!CheckInputData())
+                    return;
 
                 keyFeature.EndDate = dtpEndDate.Value.Date;
 
                 if (keyFeature.Id < 1)
+                {
                     Add(keyFeature);
+                    dgvKeyFeture.Height = dgvKeyFeture.Size.Height - 20;
+                }
                 else
                 {
                     keyFeature.StartDate = dtpStartDate.Value.Date;
@@ -143,6 +160,48 @@ namespace HASPKey
                 }
 
                 DefaultView();
+            }
+        }
+        private bool CheckInputData()
+        {
+            string erroeMess = string.Empty;
+
+            if (keyFeature.IdFeature < 1)
+                erroeMess += '\u2022' + " Не выбрана функциональность." + '\n';
+            if (keyFeature.IdHaspKey < 1)
+                erroeMess += '\u2022' + " Не выбран hasp ключ." + '\n';
+            if (dtpStartDate.Value.Date > dtpEndDate.Value.Date)
+                erroeMess += '\u2022' + " Дата окончания действия меньше даты начала действия." + '\n';
+
+            if (erroeMess != string.Empty)
+            {
+                MessageError(erroeMess.Trim());
+                return false;
+            }
+
+            return true;
+        }
+        private void ButtonSelectFeature_Click(object sender, EventArgs e)
+        {
+            FeatureView feature = new FeatureView(true);
+            feature.ShowDialog();
+
+            if (feature.SearchFeature != null)
+            {
+                keyFeature.IdFeature = feature.SearchFeature.Id;
+                labelSelectFeature.Text = feature.SearchFeature.Name;
+            }
+        }
+
+        private void ButtonSelectKey_Click(object sender, EventArgs e)
+        {
+            HaspKeyView haspKey = new HaspKeyView(true);
+            haspKey.ShowDialog();
+
+            if (haspKey.SearchHaspKey != null)
+            {
+                keyFeature.IdHaspKey = haspKey.SearchHaspKey.Id;
+                labelSelectKey.Text = haspKey.SearchHaspKey.InnerId + " - \"" + haspKey.SearchHaspKey.Number + "\"";
             }
         }
     }

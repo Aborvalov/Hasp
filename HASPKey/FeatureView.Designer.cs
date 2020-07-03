@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bindingFeature = new System.Windows.Forms.BindingSource(this.components);
             this.dgvFeature = new System.Windows.Forms.DataGridView();
             this.serialNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,21 +63,20 @@
             this.dgvFeature.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvFeature.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvFeature.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            FeatureView featureView = this;
             this.dgvFeature.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            featureView.serialNumberDataGridViewTextBoxColumn,
+            this.serialNumberDataGridViewTextBoxColumn,
             this.numberDataGridViewTextBoxColumn,
             this.nameDataGridViewTextBoxColumn,
             this.descriptionDataGridViewTextBoxColumn});
             this.dgvFeature.DataSource = this.bindingFeature;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvFeature.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFeature.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvFeature.Location = new System.Drawing.Point(12, 12);
             this.dgvFeature.Name = "dgvFeature";
             this.dgvFeature.ReadOnly = true;
@@ -170,8 +169,10 @@
             // 
             this.tbDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbDescription.Location = new System.Drawing.Point(256, 351);
+            this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
-            this.tbDescription.Size = new System.Drawing.Size(169, 21);
+            this.tbDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbDescription.Size = new System.Drawing.Size(161, 21);
             this.tbDescription.TabIndex = 6;
             // 
             // ButtonAdd

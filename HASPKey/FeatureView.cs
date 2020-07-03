@@ -16,20 +16,19 @@ namespace HASPKey
         private ModelViewFeature feature = null;
         private bool search = false;
         public event Action DateUpdate;
-        internal ModelViewFeature SearchIdFeature { get; private set; }
+        internal ModelViewFeature SearchFeature { get; private set; } = null;
 
-        public FeatureView(bool search)
+        public FeatureView(bool search) :this()
+        { 
+            this.search = search;            
+            dgvFeature.Height = dgvFeature.Size.Height + 28;
+        }
+        public FeatureView() 
         {
             InitializeComponent();
             presenterFeature = new PresenterFeature(this);
             dgvFeature.Height = dgvFeature.Size.Height + sizeH;
-            this.search = search;
-            
-            if (this.search)
-                dgvFeature.Height = dgvFeature.Size.Height + 28;
         }
-        public FeatureView() : this(false)
-        { }
 
         public void Add(ModelViewFeature entity)
         {
@@ -68,10 +67,10 @@ namespace HASPKey
 
         private void DgvFeature_DoubleClick(object sender, EventArgs e)
         {
-            if (this.search)
+            if (search)
             {
-                this.SearchIdFeature = dgvFeature.CurrentRow.DataBoundItem as ModelViewFeature;
-                this.Close();
+                SearchFeature = dgvFeature.CurrentRow.DataBoundItem as ModelViewFeature;
+                Close();
                 return;
             }
 

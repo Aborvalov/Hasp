@@ -45,6 +45,10 @@
             this.labelStartDate = new System.Windows.Forms.Label();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonSelectFeature = new System.Windows.Forms.Button();
+            this.labelSelectFeature = new System.Windows.Forms.Label();
+            this.buttonSelectKey = new System.Windows.Forms.Button();
+            this.labelSelectKey = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKeyFeture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingKeyFeature)).BeginInit();
             this.SuspendLayout();
@@ -79,9 +83,9 @@
             this.dgvKeyFeture.Name = "dgvKeyFeture";
             this.dgvKeyFeture.ReadOnly = true;
             this.dgvKeyFeture.RowHeadersVisible = false;
-            this.dgvKeyFeture.Size = new System.Drawing.Size(604, 368);
+            this.dgvKeyFeture.Size = new System.Drawing.Size(604, 450);
             this.dgvKeyFeture.TabIndex = 0;
-            this.dgvKeyFeture.DoubleClick += new System.EventHandler(this.dgvKeyFeture_DoubleClick);
+            this.dgvKeyFeture.DoubleClick += new System.EventHandler(this.DgvKeyFeture_DoubleClick);
             // 
             // serialNumberDataGridViewTextBoxColumn
             // 
@@ -138,7 +142,7 @@
             // button1Delete
             // 
             this.button1Delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1Delete.Location = new System.Drawing.Point(544, 425);
+            this.button1Delete.Location = new System.Drawing.Point(541, 509);
             this.button1Delete.Name = "button1Delete";
             this.button1Delete.Size = new System.Drawing.Size(75, 23);
             this.button1Delete.TabIndex = 1;
@@ -148,15 +152,17 @@
             // 
             // dtpEndDate
             // 
-            this.dtpEndDate.Location = new System.Drawing.Point(338, 427);
+            this.dtpEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dtpEndDate.Location = new System.Drawing.Point(393, 470);
             this.dtpEndDate.Name = "dtpEndDate";
-            this.dtpEndDate.Size = new System.Drawing.Size(200, 21);
+            this.dtpEndDate.Size = new System.Drawing.Size(138, 21);
             this.dtpEndDate.TabIndex = 2;
             // 
             // labelEndDate
             // 
+            this.labelEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelEndDate.AutoSize = true;
-            this.labelEndDate.Location = new System.Drawing.Point(335, 411);
+            this.labelEndDate.Location = new System.Drawing.Point(390, 454);
             this.labelEndDate.Name = "labelEndDate";
             this.labelEndDate.Size = new System.Drawing.Size(141, 13);
             this.labelEndDate.TabIndex = 3;
@@ -164,16 +170,18 @@
             // 
             // dtpStartDate
             // 
-            this.dtpStartDate.Location = new System.Drawing.Point(338, 385);
+            this.dtpStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dtpStartDate.Location = new System.Drawing.Point(249, 470);
             this.dtpStartDate.Name = "dtpStartDate";
-            this.dtpStartDate.Size = new System.Drawing.Size(200, 21);
+            this.dtpStartDate.Size = new System.Drawing.Size(138, 21);
             this.dtpStartDate.TabIndex = 4;
-            this.dtpStartDate.ValueChanged += new System.EventHandler(this.dtpStartDate_ValueChanged);
+            this.dtpStartDate.ValueChanged += new System.EventHandler(this.DtpStartDate_ValueChanged);
             // 
             // labelStartDate
             // 
+            this.labelStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelStartDate.AutoSize = true;
-            this.labelStartDate.Location = new System.Drawing.Point(335, 372);
+            this.labelStartDate.Location = new System.Drawing.Point(246, 457);
             this.labelStartDate.Name = "labelStartDate";
             this.labelStartDate.Size = new System.Drawing.Size(123, 13);
             this.labelStartDate.TabIndex = 5;
@@ -181,29 +189,78 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(12, 425);
+            this.buttonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonAdd.Location = new System.Drawing.Point(10, 509);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 6;
             this.buttonAdd.Text = "Довавить";
             this.buttonAdd.UseVisualStyleBackColor = true;
-            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            this.buttonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(198, 425);
+            this.buttonSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.buttonSave.Location = new System.Drawing.Point(277, 509);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 7;
             this.buttonSave.Text = "Сохранить";
             this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
+            // 
+            // buttonSelectFeature
+            // 
+            this.buttonSelectFeature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonSelectFeature.Location = new System.Drawing.Point(122, 468);
+            this.buttonSelectFeature.Name = "buttonSelectFeature";
+            this.buttonSelectFeature.Size = new System.Drawing.Size(109, 23);
+            this.buttonSelectFeature.TabIndex = 8;
+            this.buttonSelectFeature.Text = "Выбрать функц...";
+            this.buttonSelectFeature.UseVisualStyleBackColor = true;
+            this.buttonSelectFeature.Click += new System.EventHandler(this.ButtonSelectFeature_Click);
+            // 
+            // labelSelectFeature
+            // 
+            this.labelSelectFeature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelSelectFeature.AutoSize = true;
+            this.labelSelectFeature.Location = new System.Drawing.Point(123, 494);
+            this.labelSelectFeature.Name = "labelSelectFeature";
+            this.labelSelectFeature.Size = new System.Drawing.Size(96, 13);
+            this.labelSelectFeature.TabIndex = 9;
+            this.labelSelectFeature.Text = "labelSelectFeature";
+            // 
+            // buttonSelectKey
+            // 
+            this.buttonSelectKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonSelectKey.Location = new System.Drawing.Point(12, 468);
+            this.buttonSelectKey.Name = "buttonSelectKey";
+            this.buttonSelectKey.Size = new System.Drawing.Size(104, 23);
+            this.buttonSelectKey.TabIndex = 10;
+            this.buttonSelectKey.Text = "Выбрать ключ";
+            this.buttonSelectKey.UseVisualStyleBackColor = true;
+            this.buttonSelectKey.Click += new System.EventHandler(this.ButtonSelectKey_Click);
+            // 
+            // labelSelectKey
+            // 
+            this.labelSelectKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelSelectKey.AutoSize = true;
+            this.labelSelectKey.Location = new System.Drawing.Point(12, 494);
+            this.labelSelectKey.Name = "labelSelectKey";
+            this.labelSelectKey.Size = new System.Drawing.Size(76, 13);
+            this.labelSelectKey.TabIndex = 11;
+            this.labelSelectKey.Text = "labelSelectKey";
             // 
             // KeyFeatureView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(628, 450);
+            this.ClientSize = new System.Drawing.Size(628, 535);
+            this.Controls.Add(this.dgvKeyFeture);
+            this.Controls.Add(this.labelSelectKey);
+            this.Controls.Add(this.buttonSelectKey);
+            this.Controls.Add(this.labelSelectFeature);
+            this.Controls.Add(this.buttonSelectFeature);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.labelStartDate);
@@ -211,7 +268,6 @@
             this.Controls.Add(this.labelEndDate);
             this.Controls.Add(this.dtpEndDate);
             this.Controls.Add(this.button1Delete);
-            this.Controls.Add(this.dgvKeyFeture);
             this.Name = "KeyFeatureView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Связь ключ-функциональность";
@@ -239,5 +295,9 @@
         private System.Windows.Forms.Label labelStartDate;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button buttonSelectFeature;
+        private System.Windows.Forms.Label labelSelectFeature;
+        private System.Windows.Forms.Button buttonSelectKey;
+        private System.Windows.Forms.Label labelSelectKey;
     }
 }

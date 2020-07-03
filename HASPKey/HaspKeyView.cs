@@ -18,6 +18,8 @@ namespace HASPKey
         private readonly int labelClientHeight;
         private readonly int labelClientWidth;
         public event Action DateUpdate;
+        private bool search = false;
+        internal ModelViewHaspKey SearchHaspKey { get; private set; } = null;
 
         public HaspKeyView()
         {
@@ -30,6 +32,11 @@ namespace HASPKey
             labelClient.Text = string.Empty;
             labelClientHeight = labelClient.Location.Y;
             labelClientWidth = labelClient.Location.X;
+        }
+        public HaspKeyView(bool search) : this()
+        {
+            this.search = search;
+            dgvHaspKey.Height = dgvHaspKey.Size.Height + 28;
         }
 
         public void Add(ModelViewHaspKey entity)
@@ -104,6 +111,12 @@ namespace HASPKey
 
         private void DgvHaspKey_DoubleClick(object sender, EventArgs e)
         {
+            if (search)
+            {
+                SearchHaspKey = dgvHaspKey.CurrentRow.DataBoundItem as ModelViewHaspKey;
+                Close();
+                return;
+            }
             if (size)
             {
                 dgvHaspKey.Height = dgvHaspKey.Size.Height - sizeH;
