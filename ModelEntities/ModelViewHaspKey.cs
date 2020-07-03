@@ -16,10 +16,7 @@ namespace ModelEntities
             TypeKey = haspKey.TypeKey;
         }
         [Browsable(false)]
-        public HaspKey HaspKey { get; private set; } = new HaspKey();
-        /// <summary>
-        /// Порядковый номер.
-        /// </summary>         
+        public HaspKey HaspKey { get; private set; } = new HaspKey();        
         [DisplayName("№ п/п")]
         public int SerialNumber { get; set; }
         [Browsable(false)]

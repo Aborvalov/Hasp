@@ -15,10 +15,8 @@ namespace ModelEntities
             Description = feature.Description;            
         }
         public Feature Feature { get; private set; } = new Feature();
-
         [DisplayName("№ п/п")]
-        public int SerialNumber { get; set; }
-        
+        public int SerialNumber { get; set; }        
         [Browsable(false)]
         public int Id
         {

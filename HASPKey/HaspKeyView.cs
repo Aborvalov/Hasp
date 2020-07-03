@@ -15,8 +15,8 @@ namespace HASPKey
         private bool size = true;
         private const int sizeH = 40;
         private ModelViewHaspKey haspKey = null;
-        private readonly int labelClientHeight;
-        private readonly int labelClientWidth;
+        private int labelClientHeight;
+        private int labelClientWidth;
         public event Action DateUpdate;
         private bool search = false;
         internal ModelViewHaspKey SearchHaspKey { get; private set; } = null;
@@ -214,6 +214,11 @@ namespace HASPKey
                 labelClient.Text = client.SearchIdClient.Name;
                 labelClient.Location = new System.Drawing.Point(labelClient.Location.X - labelClient.Width, labelClientHeight);
             }
+        }
+        private void HaspKeyView_ResizeEnd(object sender, EventArgs e)
+        {
+            labelClientHeight = labelClient.Location.Y;
+            labelClientWidth = labelClient.Location.X;
         }
     }
 }

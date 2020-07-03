@@ -8,9 +8,6 @@ namespace ModelEntities
     /// </summary>
     public class ModelViewMain
     {
-        /// <summary>
-        /// Порядковый номер.
-        /// </summary>         
         [DisplayName("№ п/п")]
         public int SerialNumber { get; set; }
         [DisplayName("Номер ключа")]

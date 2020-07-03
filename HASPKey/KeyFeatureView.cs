@@ -216,6 +216,6 @@ namespace HASPKey
                 keyFeature.IdHaspKey = haspKey.SearchHaspKey.Id;
                 labelSelectKey.Text = haspKey.SearchHaspKey.InnerId + " - \"" + haspKey.SearchHaspKey.Number + "\"";
             }
-        }
+        }    
     }
 }

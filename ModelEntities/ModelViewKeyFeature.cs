@@ -16,7 +16,7 @@ namespace ModelEntities
             StartDate = keyFeat.StartDate;
             EndDate = keyFeat.EndDate;
         }
-        public KeyFeature KeyFeature { get; private set; }
+        public KeyFeature KeyFeature { get; private set; } = new KeyFeature();
         [DisplayName("№ п/п")]
         public int SerialNumber { get; set; }
         [DisplayName("Номер ключа")]
