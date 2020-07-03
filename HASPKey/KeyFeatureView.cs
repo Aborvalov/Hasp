@@ -173,6 +173,17 @@ namespace HASPKey
             if (dtpStartDate.Value.Date > dtpEndDate.Value.Date)
                 erroeMess += '\u2022' + " Дата окончания действия меньше даты начала действия." + '\n';
 
+            foreach (DataGridViewRow row in dgvKeyFeture.Rows)
+            {
+                var item = row.DataBoundItem as ModelViewKeyFeature;
+                if (item.IdHaspKey == keyFeature.IdHaspKey &&
+                   item.IdFeature == keyFeature.IdFeature)
+                {
+                    erroeMess += '\u2022' + " Данная функциональность есьт у ключа." + '\n';
+                    break;
+                }
+            }
+
             if (erroeMess != string.Empty)
             {
                 MessageError(erroeMess.Trim());
