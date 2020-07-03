@@ -60,7 +60,7 @@ namespace Model
             using (var db = new EntitesContext())
             {
                 keyLogic = logic.CreateHaspKey(db);
-                haspKeys = keyLogic.GetByClient(client);
+                haspKeys = keyLogic.GetByClient(client.Client);
             }
 
             return Convert(haspKeys);

@@ -49,7 +49,7 @@ namespace Model
             using (var db = new EntitesContext())
             {
                 clientLogic = logic.CreateClient(db);
-                clients = clientLogic.GetByFeature(feature);
+                clients = clientLogic.GetByFeature(feature.Feature);
             }
             return Convert(clients);
         }

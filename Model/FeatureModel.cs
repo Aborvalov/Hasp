@@ -21,18 +21,11 @@ namespace Model
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
-
-            Feature feature = new Feature
-            {
-                Name = entity.Name,
-                Number = entity.Number,
-                Description = entity.Description,
-            };
-
+            
             using (var db = new EntitesContext())
             {
                 featLogic = logic.CreateFeature(db);
-                return featLogic.Save(feature);
+                return featLogic.Save(entity.Feature);
             }
         }
 
@@ -73,18 +66,10 @@ namespace Model
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            Feature feature = new Feature
-            {
-                Id = entity.Id,
-                Name = entity.Name,
-                Number = entity.Number,
-                Description = entity.Description,
-            };
-
             using (var db = new EntitesContext())
             {
                 featLogic = logic.CreateFeature(db);
-                return featLogic.Update(feature);
+                return featLogic.Update(entity.Feature);
             }
         }
         private List<ModelViewFeature> Convert(List<Feature> Features)

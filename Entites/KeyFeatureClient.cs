@@ -1,19 +1,11 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-
-namespace Entities
+﻿namespace Entities
 {
     public class KeyFeatureClient
     {
-        [Browsable(false)]
         public int Id { get; set; }
-        [Browsable(false)]
         public int IdKeyFeature { get; set; }
-        [Browsable(false)]
         public int IdClient { get; set; }
-        [Browsable(false)]
         public string Note { get; set; }
-        [Browsable(false)]
         public string Initiator { get; set; }
 
         public override bool Equals(object obj)

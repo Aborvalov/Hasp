@@ -23,18 +23,10 @@ namespace Model
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            KeyFeature keyFeature = new KeyFeature
-            {
-                IdFeature = entity.IdFeature,
-                IdHaspKey = entity.IdHaspKey,
-                StartDate = startDate,
-                EndDate = entity.EndDate,
-            };
-
             using (var db = new EntitesContext())
             {
                 keyFeatureLogic = logic.CreateKeyFeature(db);
-                return keyFeatureLogic.Save(keyFeature);
+                return keyFeatureLogic.Save(entity.KeyFeature);
             }
         }
 
@@ -92,19 +84,10 @@ namespace Model
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            KeyFeature keyFeature = new KeyFeature
-            {
-                Id = entity.Id,
-                IdFeature = entity.IdFeature,
-                IdHaspKey = entity.IdHaspKey,
-                StartDate = entity.StartDate,
-                EndDate = entity.EndDate,
-            };
-
             using (var db = new EntitesContext())
             {
                 keyFeatureLogic = logic.CreateKeyFeature(db);
-                return keyFeatureLogic.Update(keyFeature);
+                return keyFeatureLogic.Update(entity.KeyFeature);
             }
         }
         private List<ModelViewKeyFeature> Convert(List<KeyFeature> keyFeature)

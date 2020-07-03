@@ -5,8 +5,6 @@ namespace Model
 {
     public interface IMainModel
     {
-        void UpdateHome(ModelViewMain home);
         List<ModelViewMain> GetAll();
-        ModelViewMain GetById(int Id);
     }
 }

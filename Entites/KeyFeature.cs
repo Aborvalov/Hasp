@@ -1,19 +1,13 @@
 ﻿using System;
-using System.ComponentModel;
 
 namespace Entities
 {
     public class KeyFeature
     {
-        [Browsable(false)]
         public int Id { get; set; }
-        [Browsable(false)]
         public int IdHaspKey { get; set; }
-        [Browsable(false)]
         public int IdFeature { get; set; }
-        [DisplayName("Начало действия")]
         public DateTime StartDate { get; set; }
-        [DisplayName("Окончание действия")]
         public DateTime EndDate { get; set; }
 
         public override bool Equals(object obj)

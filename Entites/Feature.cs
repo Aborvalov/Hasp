@@ -1,16 +1,10 @@
-﻿using System.ComponentModel;
-
-namespace Entities
+﻿namespace Entities
 {
     public class Feature
     {
-        [Browsable(false)]
         public int Id { get; set; }
-        [DisplayName("Номер")]
         public int Number { get; set; }
-        [DisplayName("Наименование")]
         public string Name { get; set; }
-        [DisplayName("Описание")]
         public string Description { get; set; }
 
         public override bool Equals(object obj)

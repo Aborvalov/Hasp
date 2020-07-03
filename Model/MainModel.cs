@@ -45,36 +45,15 @@ namespace Model
                        where keyFeat.EndDate >= date
                        select new ModelViewMain
                        {
-                           Id           = keyFeatCl.Id,
-                           SerialNumber = i++,
-                           IdKeyFeature = keyFeatCl.IdKeyFeature,
-                           IdClient     = keyFeatCl.IdClient,
+                           SerialNumber = i++,                           
                            Client       = cl.Name + (cl.Address == string.Empty || cl.Address == null 
-                                                    ? string.Empty : " - " + cl.Address) ,
-                           Initiator    = keyFeatCl.Initiator,
+                                                    ? string.Empty : " - " + cl.Address) ,                          
                            EndDate      = keyFeat.EndDate,
-                           Note         = keyFeatCl.Note,
                            Feature      = feature.Name,
                            NumberKey    = key.InnerId.ToString() + " - \"" + key.Number + "\"",
                        };            
 
             return item.ToList();
-        }
-        public ModelViewMain GetById(int Id) => GetAll().SingleOrDefault(x => x.Id == Id);
-             
-        public void UpdateHome(ModelViewMain project)
-        {
-            if (project == null)
-                throw new ArgumentNullException(nameof(project));
-
-
-            /*
-             * 
-             * 
-             * 
-             * */
-
-
-        }
+        }       
     }
 }
