@@ -24,11 +24,8 @@ namespace ModelEntities
         /// </summary>         
         [DisplayName("№ п/п")]
         public int SerialNumber { get; set; }
-        private int id;
 
-      
-        
-        
+        private int id;        
         [Browsable(false)]
         public int Id
         {
