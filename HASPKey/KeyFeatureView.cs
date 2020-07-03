@@ -176,10 +176,12 @@ namespace HASPKey
             foreach (DataGridViewRow row in dgvKeyFeture.Rows)
             {
                 var item = row.DataBoundItem as ModelViewKeyFeature;
-                if (item.IdHaspKey == keyFeature.IdHaspKey &&
-                   item.IdFeature == keyFeature.IdFeature)
+                if (item.Id != keyFeature.Id &&
+                    item.IdHaspKey == keyFeature.IdHaspKey &&
+                    item.IdFeature == keyFeature.IdFeature &&
+                    item.EndDate >= dtpStartDate.Value.Date)
                 {
-                    erroeMess += '\u2022' + " Данная функциональность есьт у ключа." + '\n';
+                    erroeMess += '\u2022' + " Данный ключ имеет действующую выбранную функциональность." + '\n';
                     break;
                 }
             }

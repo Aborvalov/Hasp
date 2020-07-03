@@ -42,6 +42,7 @@ namespace Model
                             on keyFeat.IdFeature equals feature.Id
                        join key in haspKeys
                             on keyFeat.IdHaspKey equals key.Id
+                       where keyFeat.EndDate >= date
                        select new ModelViewHome
                        {
                            Id           = keyFeatCl.Id,
