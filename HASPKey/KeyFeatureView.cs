@@ -18,14 +18,18 @@ namespace HASPKey
         private readonly IPresenterEntites<ModelViewKeyFeature> presenterKeyFeature;
         private bool size = true;
         private int sizeH = 40;
-        private ModelViewKeyFeature feature = null;
+        private ModelViewKeyFeature keyFeature = null;
         public event Action DateUpdate;
 
         public KeyFeatureView()
         {
             InitializeComponent();
             presenterKeyFeature = new PresenterKeyFeature(this);
-            dgvKeyFeture.Height = dgvKeyFeture.Size.Height + sizeH;
+            //dgvKeyFeture.Height = dgvKeyFeture.Size.Height + sizeH;
+            dtpEndDate.MinDate = DateTime.Now.Date;
+
+            labelStartDate.Visible = false;
+            dtpStartDate.Visible = false;
         }
 
         public void Add(ModelViewKeyFeature entity)
@@ -78,6 +82,67 @@ namespace HASPKey
             {
                 dgvKeyFeture.Height = dgvKeyFeture.Size.Height + sizeH;
                 size = !size;
+            }
+
+            dtpEndDate.MinDate = DateTime.Now.Date;
+            labelStartDate.Visible = false;
+            dtpStartDate.Visible = false;
+        }
+
+        private void dgvKeyFeture_DoubleClick(object sender, EventArgs e)
+        {
+            DefaultView();
+            if (size)
+            {
+                dgvKeyFeture.Height = dgvKeyFeture.Size.Height - sizeH;
+                size = !size;
+            }
+
+            labelStartDate.Visible = true;
+            dtpStartDate.Visible = true;
+
+            keyFeature = new ModelViewKeyFeature();
+            var row = dgvKeyFeture.CurrentRow.DataBoundItem as ModelViewKeyFeature;
+
+            keyFeature.Id = row.Id;
+            dtpStartDate.Value = row.StartDate;
+            dtpEndDate.MinDate = new DateTime(1753, 1, 1);
+            dtpEndDate.Value = row.EndDate;
+        }
+
+        private void dtpStartDate_ValueChanged(object sender, EventArgs e)
+        {
+            dtpEndDate.MinDate = dtpStartDate.Value;
+        }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            DefaultView();
+            if (size)
+            {
+                dgvKeyFeture.Height = dgvKeyFeture.Size.Height - sizeH;
+                size = !size;
+            }
+
+            keyFeature = new ModelViewKeyFeature();
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            if (!size)
+            {
+
+                keyFeature.EndDate = dtpEndDate.Value.Date;
+
+                if (keyFeature.Id < 1)
+                    Add(keyFeature);
+                else
+                {
+                    keyFeature.StartDate = dtpStartDate.Value.Date;
+                    Update(keyFeature);
+                }
+
+                DefaultView();
             }
         }
     }

@@ -87,6 +87,9 @@ namespace UnitTestLogic
                 keyFeature.IdHaspKey = 12;                
                 keyFeature.EndDate = date.AddDays(-45);
                 Assert.ThrowsException<ArgumentException>(() => keyFeatureL.Save(keyFeature));
+                               
+                keyFeature.StartDate = keyFeature.EndDate.AddDays(-45);
+                Assert.ThrowsException<ArgumentException>(() => keyFeatureL.Save(keyFeature));
             }
         }
         [TestMethod]

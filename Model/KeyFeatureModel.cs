@@ -12,6 +12,7 @@ namespace Model
     {
         private readonly IFactoryLogic logic;
         private IKeyFeatureLogic keyFeatureLogic;
+        private readonly DateTime startDate = DateTime.Now.Date;
 
         public KeyFeatureModel(IFactoryLogic factoryLogic)
         {
@@ -26,7 +27,7 @@ namespace Model
             {
                 IdFeature = entity.IdFeature,
                 IdHaspKey = entity.IdHaspKey,
-                StartDate = entity.StartDate,
+                StartDate = startDate,
                 EndDate = entity.EndDate,
             };
 

@@ -75,6 +75,7 @@ namespace HASPKey
                 return;
             }
 
+            DefaultView();
             if (size)
             {
                 dgvFeature.Height = dgvFeature.Size.Height - sizeH;

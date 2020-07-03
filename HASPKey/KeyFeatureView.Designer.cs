@@ -31,14 +31,20 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvKeyFeture = new System.Windows.Forms.DataGridView();
-            this.bindingKeyFeature = new System.Windows.Forms.BindingSource(this.components);
-            this.button1Delete = new System.Windows.Forms.Button();
             this.serialNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numberKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.featureDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.startDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingKeyFeature = new System.Windows.Forms.BindingSource(this.components);
+            this.button1Delete = new System.Windows.Forms.Button();
+            this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
+            this.labelEndDate = new System.Windows.Forms.Label();
+            this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
+            this.labelStartDate = new System.Windows.Forms.Label();
+            this.buttonAdd = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKeyFeture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingKeyFeature)).BeginInit();
             this.SuspendLayout();
@@ -75,21 +81,7 @@
             this.dgvKeyFeture.RowHeadersVisible = false;
             this.dgvKeyFeture.Size = new System.Drawing.Size(604, 368);
             this.dgvKeyFeture.TabIndex = 0;
-            // 
-            // bindingKeyFeature
-            // 
-            this.bindingKeyFeature.DataSource = typeof(ModelEntities.ModelViewKeyFeature);
-            // 
-            // button1Delete
-            // 
-            this.button1Delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1Delete.Location = new System.Drawing.Point(541, 415);
-            this.button1Delete.Name = "button1Delete";
-            this.button1Delete.Size = new System.Drawing.Size(75, 23);
-            this.button1Delete.TabIndex = 1;
-            this.button1Delete.Text = "Удалить";
-            this.button1Delete.UseVisualStyleBackColor = true;
-            this.button1Delete.Click += new System.EventHandler(this.Button1Delete_Click);
+            this.dgvKeyFeture.DoubleClick += new System.EventHandler(this.dgvKeyFeture_DoubleClick);
             // 
             // serialNumberDataGridViewTextBoxColumn
             // 
@@ -139,11 +131,85 @@
             this.endDateDataGridViewTextBoxColumn.ReadOnly = true;
             this.endDateDataGridViewTextBoxColumn.Width = 80;
             // 
+            // bindingKeyFeature
+            // 
+            this.bindingKeyFeature.DataSource = typeof(ModelEntities.ModelViewKeyFeature);
+            // 
+            // button1Delete
+            // 
+            this.button1Delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1Delete.Location = new System.Drawing.Point(544, 425);
+            this.button1Delete.Name = "button1Delete";
+            this.button1Delete.Size = new System.Drawing.Size(75, 23);
+            this.button1Delete.TabIndex = 1;
+            this.button1Delete.Text = "Удалить";
+            this.button1Delete.UseVisualStyleBackColor = true;
+            this.button1Delete.Click += new System.EventHandler(this.Button1Delete_Click);
+            // 
+            // dtpEndDate
+            // 
+            this.dtpEndDate.Location = new System.Drawing.Point(338, 427);
+            this.dtpEndDate.Name = "dtpEndDate";
+            this.dtpEndDate.Size = new System.Drawing.Size(200, 21);
+            this.dtpEndDate.TabIndex = 2;
+            // 
+            // labelEndDate
+            // 
+            this.labelEndDate.AutoSize = true;
+            this.labelEndDate.Location = new System.Drawing.Point(335, 411);
+            this.labelEndDate.Name = "labelEndDate";
+            this.labelEndDate.Size = new System.Drawing.Size(141, 13);
+            this.labelEndDate.TabIndex = 3;
+            this.labelEndDate.Text = "Дата окончания действия";
+            // 
+            // dtpStartDate
+            // 
+            this.dtpStartDate.Location = new System.Drawing.Point(338, 385);
+            this.dtpStartDate.Name = "dtpStartDate";
+            this.dtpStartDate.Size = new System.Drawing.Size(200, 21);
+            this.dtpStartDate.TabIndex = 4;
+            this.dtpStartDate.ValueChanged += new System.EventHandler(this.dtpStartDate_ValueChanged);
+            // 
+            // labelStartDate
+            // 
+            this.labelStartDate.AutoSize = true;
+            this.labelStartDate.Location = new System.Drawing.Point(335, 372);
+            this.labelStartDate.Name = "labelStartDate";
+            this.labelStartDate.Size = new System.Drawing.Size(123, 13);
+            this.labelStartDate.TabIndex = 5;
+            this.labelStartDate.Text = "Дата начала действия";
+            // 
+            // buttonAdd
+            // 
+            this.buttonAdd.Location = new System.Drawing.Point(12, 425);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(75, 23);
+            this.buttonAdd.TabIndex = 6;
+            this.buttonAdd.Text = "Довавить";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Location = new System.Drawing.Point(198, 425);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 7;
+            this.buttonSave.Text = "Сохранить";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            // 
             // KeyFeatureView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(628, 450);
+            this.Controls.Add(this.buttonSave);
+            this.Controls.Add(this.buttonAdd);
+            this.Controls.Add(this.labelStartDate);
+            this.Controls.Add(this.dtpStartDate);
+            this.Controls.Add(this.labelEndDate);
+            this.Controls.Add(this.dtpEndDate);
             this.Controls.Add(this.button1Delete);
             this.Controls.Add(this.dgvKeyFeture);
             this.Name = "KeyFeatureView";
@@ -152,6 +218,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvKeyFeture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingKeyFeature)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -166,5 +233,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn typeKeyDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn startDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn endDateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DateTimePicker dtpEndDate;
+        private System.Windows.Forms.Label labelEndDate;
+        private System.Windows.Forms.DateTimePicker dtpStartDate;
+        private System.Windows.Forms.Label labelStartDate;
+        private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.Button buttonSave;
     }
 }

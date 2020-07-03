@@ -66,6 +66,8 @@ namespace Logic
                 throw new ArgumentException(nameof(entity.IdFeature));
             if (entity.EndDate < DateTime.Now.Date)
                 throw new ArgumentException(nameof(entity.EndDate));
+            if (entity.EndDate < entity.StartDate)
+                throw new ArgumentException(nameof(entity.EndDate) + ", " +nameof(entity.StartDate));
         }
     }
 }
