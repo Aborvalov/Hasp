@@ -5,27 +5,27 @@ namespace ModelEntities
 {
     public class ModelViewHaspKey
     {
-        public HaspKey haspKey { get; private set; }
+        public HaspKey HaspKey { get; private set; }
+        private int id;
+        private int innerId;
+        private string number;
+        private TypeKey typeKey;
+        private bool isHome;
         public ModelViewHaspKey()
         { }
         public ModelViewHaspKey(HaspKey haspKey) : this()
         {
-            this.haspKey = haspKey;
             Id = haspKey.Id;
             InnerId = haspKey.InnerId;
             Number = haspKey.Number;
             IsHome = haspKey.IsHome;
             TypeKey = haspKey.TypeKey;
-            InnerId = haspKey.InnerId;
-            Number = haspKey.Number;
         }
         /// <summary>
         /// Порядковый номер.
         /// </summary>         
         [DisplayName("№ п/п")]
-        public int SerialNumber { get; set; }
-
-        private int id;        
+        public int SerialNumber { get; set; }                
         [Browsable(false)]
         public int Id
         {
@@ -33,25 +33,55 @@ namespace ModelEntities
             set
             {
                 id = value;
-                haspKey.Id = value;
+                HaspKey.Id = value;
             }
         }
-
-
         /// <summary>
         /// Внутренний идентификатор.
         /// </summary>
         [DisplayName("Внутренний номер")]
-        public int InnerId { get; set; }
+        public int InnerId
+        {
+            get { return innerId; }
+            set
+            {
+                innerId = value;
+                HaspKey.InnerId = value;
+            }
+        }
         [DisplayName("Номер")]
-        public string Number { get; set; }
+        public string Number
+        {
+            get { return number; }
+            set
+            {
+                number = value;
+                HaspKey.Number = value;
+            }
+        }
         [DisplayName("Тип ключа")]
-        public TypeKey TypeKey { get; set; }
+        public TypeKey TypeKey
+        {
+            get { return typeKey; }
+            set
+            {
+                typeKey = value;
+                HaspKey.TypeKey = value;
+            }
+        }
         /// <summary>
         /// Местонахождение (у нас / клиент).
         /// </summary>
         [DisplayName("В компании")]
-        public bool IsHome { get; set; }
+        public bool IsHome
+        {
+            get { return isHome; }
+            set
+            {
+                isHome = value;
+                HaspKey.IsHome = value;
+            }
+        }
 
 
 
