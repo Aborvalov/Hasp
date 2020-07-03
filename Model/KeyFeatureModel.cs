@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Model
 {
-    public class KeyFeatureModel : IEntitesModel<ModelViewKeyFeature>
+    public class KeyFeatureModel : IEntitiesModel<ModelViewKeyFeature>
     {
         private readonly IFactoryLogic logic;
         private IKeyFeatureLogic keyFeatureLogic;

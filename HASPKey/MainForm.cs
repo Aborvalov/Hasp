@@ -6,43 +6,43 @@ using View;
 
 namespace HASPKey
 {
-    public partial class Home : DevExpress.XtraEditors.XtraForm, IHomeView
+    public partial class MainForm : DevExpress.XtraEditors.XtraForm, IMainView
     {
-        private readonly IPresenterHome presenter;
+        private readonly IPresenterMain presenter;
 
-        public Home()
+        public MainForm()
         {
             InitializeComponent();
-            presenter = new PresenterHome(this);
+            presenter = new PresenterMain(this);
         }
         private void ВыходToolStripMenuItem_Click(object sender, EventArgs e)
             =>  this.Close();
-        public void Build(List<ModelEntities.ModelViewHome> homes)
-        => bindingHome.DataSource = homes != null ? new BindingList<ModelEntities.ModelViewHome>(homes) 
-                                                  : new BindingList<ModelEntities.ModelViewHome>();
+        public void Bind(List<ModelEntities.ModelViewMain> homes)
+        => bindingHome.DataSource = homes != null ? new BindingList<ModelEntities.ModelViewMain>(homes) 
+                                                  : new BindingList<ModelEntities.ModelViewMain>();
 
-        private void КлючToolStripMenuItem_Click(object sender, EventArgs e)
+        private void KeyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HaspKeyView haspKey = new HaspKeyView();
             haspKey.DateUpdate += presenter.Views;
             haspKey.ShowDialog();
         }
 
-        private void ФичаToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FeatureToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FeatureView feature = new FeatureView();
             feature.DateUpdate += presenter.Views;
             feature.ShowDialog();
         }
         
-        private void КлиентToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ClientToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ClientView client = new ClientView();
             client.DateUpdate += presenter.Views;
             client.ShowDialog();
         }
 
-        private void СвязьКлючфункциональностьToolStripMenuItem_Click(object sender, EventArgs e)
+        private void KeyFeatureToolStripMenuItem_Click(object sender, EventArgs e)
         {
             KeyFeatureView keyFeatureView = new KeyFeatureView();
             keyFeatureView.DateUpdate += presenter.Views;

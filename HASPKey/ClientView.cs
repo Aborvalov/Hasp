@@ -9,7 +9,7 @@ using View;
 namespace HASPKey
 {
     public partial class ClientView : DevExpress.XtraEditors.XtraForm,
-        IEntitesView<ModelViewClient>
+        IEntitiesView<ModelViewClient>
     {
         private readonly IPresenterClient presenterClient;
         private bool size = true;
@@ -40,7 +40,7 @@ namespace HASPKey
             DateUpdate?.Invoke();
         }
 
-        public void Build(List<ModelViewClient> entity)
+        public void Bind(List<ModelViewClient> entity)
         => bindingClient.DataSource = entity != null ? new BindingList<ModelViewClient>(entity)
                                                      : new BindingList<ModelViewClient>();
 

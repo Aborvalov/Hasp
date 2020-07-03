@@ -6,12 +6,12 @@ using View;
 
 namespace Presenter
 {
-    public class PresenterFeature : IPresenterEntites<ModelViewFeature>
+    public class PresenterFeature : IPresenterEntities<ModelViewFeature>
     {
-        private readonly IEntitesModel<ModelViewFeature> featureModel;
-        private readonly IEntitesView<ModelViewFeature> entitesView;
+        private readonly IEntitiesModel<ModelViewFeature> featureModel;
+        private readonly IEntitiesView<ModelViewFeature> entitesView;
 
-        public PresenterFeature(IEntitesView<ModelViewFeature> entitesView)
+        public PresenterFeature(IEntitiesView<ModelViewFeature> entitesView)
         {
             this.entitesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
 
@@ -48,6 +48,6 @@ namespace Presenter
                 entitesView.MessageError("Не удалось обновить Hasp-ключ.");
         }
 
-        public void View() => entitesView.Build(featureModel.GetAll());
+        public void View() => entitesView.Bind(featureModel.GetAll());
     }
 }

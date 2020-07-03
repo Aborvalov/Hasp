@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace View
 {
-    public interface IEntitesView<T>
+    public interface IEntitiesView<T>
     {
-        void Build(List<T> entity);
+        void Bind(List<T> entity);
         void Add(T entity);
         void Update(T entity);
         void Remove(int id);

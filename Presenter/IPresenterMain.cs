@@ -1,6 +1,6 @@
 ﻿namespace Presenter
 {
-    public interface IPresenterHome
+    public interface IPresenterMain
     {
        void Views();
     }

@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvHaspKey = new System.Windows.Forms.DataGridView();
-            this.serialNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.innerIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,7 +69,6 @@
             this.dgvHaspKey.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvHaspKey.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvHaspKey.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.serialNumberDataGridViewTextBoxColumn,
             this.innerIdDataGridViewTextBoxColumn,
             this.numberDataGridViewTextBoxColumn,
             this.typeKeyDataGridViewTextBoxColumn,
@@ -83,22 +82,16 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvHaspKey.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvHaspKey.EnableHeadersVisualStyles = false;
             this.dgvHaspKey.Location = new System.Drawing.Point(12, 45);
             this.dgvHaspKey.Name = "dgvHaspKey";
             this.dgvHaspKey.ReadOnly = true;
             this.dgvHaspKey.RowHeadersVisible = false;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            this.dgvHaspKey.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvHaspKey.Size = new System.Drawing.Size(421, 475);
             this.dgvHaspKey.TabIndex = 0;
             this.dgvHaspKey.DoubleClick += new System.EventHandler(this.DgvHaspKey_DoubleClick);
-            // 
-            // serialNumberDataGridViewTextBoxColumn
-            // 
-            this.serialNumberDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.serialNumberDataGridViewTextBoxColumn.DataPropertyName = "SerialNumber";
-            this.serialNumberDataGridViewTextBoxColumn.HeaderText = "№ п/п";
-            this.serialNumberDataGridViewTextBoxColumn.Name = "serialNumberDataGridViewTextBoxColumn";
-            this.serialNumberDataGridViewTextBoxColumn.ReadOnly = true;
-            this.serialNumberDataGridViewTextBoxColumn.Width = 65;
             // 
             // innerIdDataGridViewTextBoxColumn
             // 
@@ -265,6 +258,8 @@
             // comboBoxTypeKey
             // 
             this.comboBoxTypeKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.comboBoxTypeKey.BackColor = System.Drawing.SystemColors.Window;
+            this.comboBoxTypeKey.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTypeKey.FormattingEnabled = true;
             this.comboBoxTypeKey.Location = new System.Drawing.Point(218, 539);
             this.comboBoxTypeKey.Name = "comboBoxTypeKey";

@@ -2,7 +2,7 @@
 
 namespace Presenter
 {
-    public interface IPresenterClient : IPresenterEntites<ModelViewClient>
+    public interface IPresenterClient : IPresenterEntities<ModelViewClient>
     {
         void GetByFeature(ModelViewFeature feature);
         void GetByNumberKey(int keyInnerId);

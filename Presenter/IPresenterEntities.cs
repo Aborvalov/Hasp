@@ -1,6 +1,6 @@
 ﻿namespace Presenter
 {
-    public interface IPresenterEntites<T>
+    public interface IPresenterEntities<T>
     {
         void View();
         void Add(T entity);

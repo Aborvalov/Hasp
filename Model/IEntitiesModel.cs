@@ -2,7 +2,7 @@
 
 namespace Model
 {
-    public interface IEntitesModel<T>
+    public interface IEntitiesModel<T>
     {
         bool Add(T entity);
         bool Update(T entity);

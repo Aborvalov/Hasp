@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace View
 {
-    public interface IHomeView
+    public interface IMainView
     {
-        void Build(List<ModelViewHome> homes);
+        void Bind(List<ModelViewMain> homes);
     }
 }

@@ -7,7 +7,7 @@ namespace ModelEntities
     /// <summary>
     /// Связка (ключ-фича)-клиент, таблица KeyFeatureClient.
     /// </summary>
-    public class ModelViewHome : KeyFeatureClient
+    public class ModelViewMain : KeyFeatureClient
     {
         private static int i = 1;
         /// <summary>

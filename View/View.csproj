@@ -41,8 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IEntitesView.cs" />
-    <Compile Include="IHomeView.cs" />
+    <Compile Include="IEntitiesView.cs" />
+    <Compile Include="IMainView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

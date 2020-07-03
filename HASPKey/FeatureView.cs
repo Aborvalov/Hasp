@@ -8,9 +8,9 @@ using View;
 
 namespace HASPKey
 {
-    public partial class FeatureView : DevExpress.XtraEditors.XtraForm, IEntitesView<ModelViewFeature>
+    public partial class FeatureView : DevExpress.XtraEditors.XtraForm, IEntitiesView<ModelViewFeature>
     {
-        private readonly IPresenterEntites<ModelViewFeature> presenterFeature;
+        private readonly IPresenterEntities<ModelViewFeature> presenterFeature;
         private bool size = true;
         private int sizeH = 40;
         private ModelViewFeature feature = null;
@@ -36,7 +36,7 @@ namespace HASPKey
             DateUpdate?.Invoke();
         }
 
-        public void Build(List<ModelViewFeature> entity) 
+        public void Bind(List<ModelViewFeature> entity) 
         => bindingFeature.DataSource = entity != null ? new BindingList<ModelViewFeature>(entity)
                                                       : new BindingList<ModelViewFeature>();
 

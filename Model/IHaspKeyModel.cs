@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Model
 {
-    public interface IHaspKeyModel : IEntitesModel<ModelViewHaspKey>
+    public interface IHaspKeyModel : IEntitiesModel<ModelViewHaspKey>
     {
         List<ModelViewHaspKey> GetByClient(ModelViewClient client);
         /// <summary>

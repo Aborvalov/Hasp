@@ -9,9 +9,9 @@ namespace Presenter
     public class PresenterHaspKey : IPresenterHaspKey
     {
         private readonly IHaspKeyModel haspKeyModel;
-        private readonly IEntitesView<ModelViewHaspKey> entitesView;
+        private readonly IEntitiesView<ModelViewHaspKey> entitesView;
 
-        public PresenterHaspKey(IEntitesView<ModelViewHaspKey> entitesView)
+        public PresenterHaspKey(IEntitiesView<ModelViewHaspKey> entitesView)
         {
             this.entitesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
 
@@ -30,17 +30,17 @@ namespace Presenter
                 entitesView.MessageError("Не удалось создать Hasp-ключ.");
         }
 
-        public void GetByActive() => entitesView.Build(haspKeyModel.GetByActive());
+        public void GetByActive() => entitesView.Bind(haspKeyModel.GetByActive());
 
         public void GetByClient(ModelViewClient client)
         {
             if (client == null)
                 entitesView.MessageError("Данный клиент имеет пустые значения.");
 
-            entitesView.Build(haspKeyModel.GetByClient(client));
+            entitesView.Bind(haspKeyModel.GetByClient(client));
         }
 
-        public void GetByPastDue() => entitesView.Build(haspKeyModel.GetByPastDue());
+        public void GetByPastDue() => entitesView.Bind(haspKeyModel.GetByPastDue());
 
         public void Remove(int id)
         {
@@ -61,6 +61,6 @@ namespace Presenter
                 entitesView.MessageError("Не удалось обновить Hasp-ключ.");
         }
 
-        public void View() => entitesView.Build(haspKeyModel.GetAll());
+        public void View() => entitesView.Bind(haspKeyModel.GetAll());
     }
 }

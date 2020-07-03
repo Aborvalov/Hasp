@@ -6,12 +6,12 @@ using View;
 
 namespace Presenter
 {
-    public class PresenterKeyFeature : IPresenterEntites<ModelViewKeyFeature>
+    public class PresenterKeyFeature : IPresenterEntities<ModelViewKeyFeature>
     {
-        private readonly IEntitesModel<ModelViewKeyFeature> keyFeatureModel;
-        private readonly IEntitesView<ModelViewKeyFeature> entitesView;
+        private readonly IEntitiesModel<ModelViewKeyFeature> keyFeatureModel;
+        private readonly IEntitiesView<ModelViewKeyFeature> entitesView;
 
-        public PresenterKeyFeature(IEntitesView<ModelViewKeyFeature> entitesView)
+        public PresenterKeyFeature(IEntitiesView<ModelViewKeyFeature> entitesView)
         {
             this.entitesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
 
@@ -48,6 +48,6 @@ namespace Presenter
                 entitesView.MessageError("Не удалось обновить связь ключа и функциональности.");
         }
 
-        public void View() => entitesView.Build(keyFeatureModel.GetAll());
+        public void View() => entitesView.Bind(keyFeatureModel.GetAll());
     }
 }

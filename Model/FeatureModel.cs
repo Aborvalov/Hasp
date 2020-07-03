@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Model
 {
-    public class FeatureModel : IEntitesModel<ModelViewFeature>
+    public class FeatureModel : IEntitiesModel<ModelViewFeature>
     {
         private readonly IFactoryLogic logic;
         private IFeatureLogic featLogic;

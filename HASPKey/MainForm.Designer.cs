@@ -1,6 +1,6 @@
 ﻿namespace HASPKey
 {
-    partial class Home
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -34,9 +34,10 @@
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.редактированиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ключToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ФункциональностьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.клиентToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.KeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FeatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.KeyFeatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HomeView = new System.Windows.Forms.DataGridView();
             this.serialNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,7 +46,6 @@
             this.clientDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingHome = new System.Windows.Forms.BindingSource(this.components);
-            this.связьКлючфункциональностьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HomeView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHome)).BeginInit();
@@ -81,34 +81,41 @@
             // редактированиеToolStripMenuItem
             // 
             this.редактированиеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ключToolStripMenuItem,
-            this.ФункциональностьToolStripMenuItem,
-            this.клиентToolStripMenuItem,
-            this.связьКлючфункциональностьToolStripMenuItem});
+            this.KeyToolStripMenuItem,
+            this.FeatureToolStripMenuItem,
+            this.ClientToolStripMenuItem,
+            this.KeyFeatureToolStripMenuItem});
             this.редактированиеToolStripMenuItem.Name = "редактированиеToolStripMenuItem";
             this.редактированиеToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
             this.редактированиеToolStripMenuItem.Text = "Редактирование";
             // 
-            // ключToolStripMenuItem
+            // KeyToolStripMenuItem
             // 
-            this.ключToolStripMenuItem.Name = "ключToolStripMenuItem";
-            this.ключToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
-            this.ключToolStripMenuItem.Text = "Ключ";
-            this.ключToolStripMenuItem.Click += new System.EventHandler(this.КлючToolStripMenuItem_Click);
+            this.KeyToolStripMenuItem.Name = "KeyToolStripMenuItem";
+            this.KeyToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.KeyToolStripMenuItem.Text = "Ключ";
+            this.KeyToolStripMenuItem.Click += new System.EventHandler(this.KeyToolStripMenuItem_Click);
             // 
-            // ФункциональностьToolStripMenuItem
+            // FeatureToolStripMenuItem
             // 
-            this.ФункциональностьToolStripMenuItem.Name = "ФункциональностьToolStripMenuItem";
-            this.ФункциональностьToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
-            this.ФункциональностьToolStripMenuItem.Text = "Функциональность";
-            this.ФункциональностьToolStripMenuItem.Click += new System.EventHandler(this.ФичаToolStripMenuItem_Click);
+            this.FeatureToolStripMenuItem.Name = "FeatureToolStripMenuItem";
+            this.FeatureToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.FeatureToolStripMenuItem.Text = "Функциональность";
+            this.FeatureToolStripMenuItem.Click += new System.EventHandler(this.FeatureToolStripMenuItem_Click);
             // 
-            // клиентToolStripMenuItem
+            // ClientToolStripMenuItem
             // 
-            this.клиентToolStripMenuItem.Name = "клиентToolStripMenuItem";
-            this.клиентToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
-            this.клиентToolStripMenuItem.Text = "Клиент";
-            this.клиентToolStripMenuItem.Click += new System.EventHandler(this.КлиентToolStripMenuItem_Click);
+            this.ClientToolStripMenuItem.Name = "ClientToolStripMenuItem";
+            this.ClientToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.ClientToolStripMenuItem.Text = "Клиент";
+            this.ClientToolStripMenuItem.Click += new System.EventHandler(this.ClientToolStripMenuItem_Click);
+            // 
+            // KeyFeatureToolStripMenuItem
+            // 
+            this.KeyFeatureToolStripMenuItem.Name = "KeyFeatureToolStripMenuItem";
+            this.KeyFeatureToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.KeyFeatureToolStripMenuItem.Text = "Связь ключ-функциональность";
+            this.KeyFeatureToolStripMenuItem.Click += new System.EventHandler(this.KeyFeatureToolStripMenuItem_Click);
             // 
             // справкаToolStripMenuItem
             // 
@@ -191,16 +198,9 @@
             // 
             // bindingHome
             // 
-            this.bindingHome.DataSource = typeof(ModelEntities.ModelViewHome);
+            this.bindingHome.DataSource = typeof(ModelEntities.ModelViewMain);
             // 
-            // связьКлючфункциональностьToolStripMenuItem
-            // 
-            this.связьКлючфункциональностьToolStripMenuItem.Name = "связьКлючфункциональностьToolStripMenuItem";
-            this.связьКлючфункциональностьToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
-            this.связьКлючфункциональностьToolStripMenuItem.Text = "Связь ключ-функциональность";
-            this.связьКлючфункциональностьToolStripMenuItem.Click += new System.EventHandler(this.СвязьКлючфункциональностьToolStripMenuItem_Click);
-            // 
-            // Home
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -208,7 +208,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.HomeView);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Home";
+            this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hasp";
             this.menuStrip1.ResumeLayout(false);
@@ -228,15 +228,15 @@
         private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
         private System.Windows.Forms.DataGridView HomeView;
         private System.Windows.Forms.BindingSource bindingHome;
-        private System.Windows.Forms.ToolStripMenuItem ключToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem KeyToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn serialNumberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberKeyDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn featureDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn clientDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn endDateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.ToolStripMenuItem ФункциональностьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem клиентToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem связьКлючфункциональностьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem FeatureToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ClientToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem KeyFeatureToolStripMenuItem;
     }
 }
 

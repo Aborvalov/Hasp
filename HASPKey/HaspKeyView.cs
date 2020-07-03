@@ -9,7 +9,7 @@ using View;
 
 namespace HASPKey
 {
-    public partial class HaspKeyView : DevExpress.XtraEditors.XtraForm, IEntitesView<ModelViewHaspKey>
+    public partial class HaspKeyView : DevExpress.XtraEditors.XtraForm, IEntitiesView<ModelViewHaspKey>
     {
         private readonly IPresenterHaspKey presenterHaspKey;
         private bool size = true;
@@ -45,7 +45,7 @@ namespace HASPKey
             DateUpdate?.Invoke();
         }
 
-        public void Build(List<ModelViewHaspKey> entity) 
+        public void Bind(List<ModelViewHaspKey> entity) 
         => bindingHaspKey.DataSource = entity != null ? new BindingList<ModelViewHaspKey>(entity)
                                                       : new BindingList<ModelViewHaspKey>();
 

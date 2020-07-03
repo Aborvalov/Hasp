@@ -10,9 +10,9 @@ namespace Presenter
     public class PresenterClient : IPresenterClient
     {
         private readonly IClientModel clientModel;
-        private readonly IEntitesView<ModelViewClient> entitesView;
+        private readonly IEntitiesView<ModelViewClient> entitesView;
         
-        public PresenterClient(IEntitesView<ModelViewClient> entitesView)
+        public PresenterClient(IEntitiesView<ModelViewClient> entitesView)
         {
             this.entitesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
 
@@ -35,7 +35,7 @@ namespace Presenter
             if (feature == null)
                 entitesView.MessageError("Данноя функциональность пуста.");
 
-            entitesView.Build(clientModel.GetByFeature(feature));
+            entitesView.Bind(clientModel.GetByFeature(feature));
         }
 
         public void GetByNumberKey(int keyInnerId)
@@ -43,14 +43,14 @@ namespace Presenter
             var client = clientModel.GetByNumberKey(keyInnerId);
             if (client == null)
             {
-                entitesView.Build(new List<ModelViewClient>());
+                entitesView.Bind(new List<ModelViewClient>());
                 return;
             }
             var clients = new List<ModelViewClient>
             {
                 client
             };
-            entitesView.Build(clients);
+            entitesView.Bind(clients);
         }
 
         public void Remove(int id)
@@ -72,6 +72,6 @@ namespace Presenter
                 entitesView.MessageError("Не удалось обновить клиента.");
         }
 
-        public void View() => entitesView.Build(clientModel.GetAll());
+        public void View() => entitesView.Bind(clientModel.GetAll());
     }
 }

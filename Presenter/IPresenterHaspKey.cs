@@ -2,7 +2,7 @@
 
 namespace Presenter
 {
-    public interface IPresenterHaspKey : IPresenterEntites<ModelViewHaspKey>
+    public interface IPresenterHaspKey : IPresenterEntities<ModelViewHaspKey>
     {
         void GetByClient(ModelViewClient client);
         /// <summary>

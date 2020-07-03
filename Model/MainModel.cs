@@ -7,16 +7,16 @@ using System.Linq;
 
 namespace Model
 {
-    public class HomeModel : IHomeModel
+    public class MainModel : IMainModel
     {
         private readonly DateTime date = DateTime.Now.Date;
         private readonly IFactoryLogic logic;
 
-        public HomeModel(IFactoryLogic factoryLogic)
+        public MainModel(IFactoryLogic factoryLogic)
         {
             logic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
         }
-        public List<ModelViewHome> GetAll()
+        public List<ModelViewMain> GetAll()
         {
             List<KeyFeatureClient> keyFeatureClients;
             List<KeyFeature> keyFeatures;
@@ -43,7 +43,7 @@ namespace Model
                        join key in haspKeys
                             on keyFeat.IdHaspKey equals key.Id
                        where keyFeat.EndDate >= date
-                       select new ModelViewHome
+                       select new ModelViewMain
                        {
                            Id           = keyFeatCl.Id,
                            SerialNumber = i++,
@@ -60,9 +60,9 @@ namespace Model
 
             return item.ToList();
         }
-        public ModelViewHome GetById(int Id) => GetAll().SingleOrDefault(x => x.Id == Id);
+        public ModelViewMain GetById(int Id) => GetAll().SingleOrDefault(x => x.Id == Id);
              
-        public void UpdateHome(ModelViewHome project)
+        public void UpdateHome(ModelViewMain project)
         {
             if (project == null)
                 throw new ArgumentNullException(nameof(project));
