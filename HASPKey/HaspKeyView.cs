@@ -83,6 +83,7 @@ namespace HASPKey
             {
                 dgvHaspKey.Height = dgvHaspKey.Size.Height - sizeH;
                 size = !size;
+                buttonAdd.Enabled = false;
             }
             haspKey = new ModelViewHaspKey();
         }
@@ -140,11 +141,13 @@ namespace HASPKey
                 dgvHaspKey.Height = dgvHaspKey.Size.Height + sizeH;
                 size = !size;
             }
+
             tbInnerNumber.Text = string.Empty;
             tbNumber.Text = string.Empty;
             comboBoxTypeKey.SelectedIndex = -1;
             checkBoxIsHome.Checked = false;
             labelClient.Text = string.Empty;
+            buttonAdd.Enabled = true;
         }
         private bool CheckInputData(out int innNumber)
         {

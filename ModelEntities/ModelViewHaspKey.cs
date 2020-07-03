@@ -4,12 +4,7 @@ using System.ComponentModel;
 namespace ModelEntities
 {
     public class ModelViewHaspKey
-    {       
-        private int id;
-        private int innerId;
-        private string number;
-        private TypeKey typeKey;
-        private bool isHome;
+    {   
         public ModelViewHaspKey()
         { }
         public ModelViewHaspKey(HaspKey haspKey) : this()
@@ -22,6 +17,11 @@ namespace ModelEntities
         }
         [Browsable(false)]
         public HaspKey HaspKey { get; private set; } = new HaspKey();
+        private int id;
+        private int innerId;
+        private string number;
+        private TypeKey typeKey;
+        private bool isHome;
         /// <summary>
         /// Порядковый номер.
         /// </summary>         
@@ -83,10 +83,33 @@ namespace ModelEntities
                 HaspKey.IsHome = value;
             }
         }
+        public override int GetHashCode()
+        {
+            int hashProductNumber = Number == null ? 0 : Number.GetHashCode();
 
+            int hashProductTypeKey = TypeKey.GetHashCode();
+            int hashProductId = Id.GetHashCode();
+            int hashProductInnerId = InnerId.GetHashCode();
+            int hashProductLocation = IsHome.GetHashCode();
 
+            return hashProductNumber ^
+                   hashProductId ^
+                   hashProductInnerId ^
+                   hashProductTypeKey ^
+                   hashProductLocation;
+        }
+        public override bool Equals(object obj)
+        {
+            if (!(obj is ModelViewHaspKey other))
+                return false;
 
-        //public override bool Equals(object obj) => base.Equals(obj);
-        //public override int GetHashCode() => base.GetHashCode();
+            return ReferenceEquals(this, other)
+                ? true
+                : Id.Equals(other.Id) &&
+                   InnerId.Equals(other.InnerId) &&
+                   Number.Equals(other.Number) &&
+                   TypeKey.Equals(other.TypeKey) &&
+                   IsHome.Equals(other.IsHome);
+        }
     }
 }
