@@ -11,11 +11,14 @@ namespace Model
     {
         private readonly DateTime date = DateTime.Now.Date;
         private readonly IFactoryLogic logic;
-
+        private readonly EntitesContext db;
+        
         public MainModel(IFactoryLogic factoryLogic)
         {
             logic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
+            db = new EntitesContext();
         }
+        public void Dispose() => db.Dispose();
         public List<ModelViewMain> GetAll()
         {
             List<KeyFeatureClient> keyFeatureClients;
@@ -24,15 +27,13 @@ namespace Model
             List<Feature> features;
             List<HaspKey> haspKeys;
             int i = 1;
-            using (var db = new EntitesContext())
-            {
-                keyFeatureClients = logic.CreateKeyFeatureClient(db).GetAll();
-                keyFeatures       = logic.CreateKeyFeature(db).GetAll();
-                clients           = logic.CreateClient(db).GetAll();
-                features          = logic.CreateFeature(db).GetAll();
-                haspKeys          = logic.CreateHaspKey(db).GetByActive();
-            }
-
+            
+            keyFeatureClients = logic.CreateKeyFeatureClient(db).GetAll();
+            keyFeatures       = logic.CreateKeyFeature(db).GetAll();
+            clients           = logic.CreateClient(db).GetAll();
+            features          = logic.CreateFeature(db).GetAll();
+            haspKeys          = logic.CreateHaspKey(db).GetByActive();
+            
             var item = from keyFeatCl in keyFeatureClients
                        join keyFeat in keyFeatures
                             on keyFeatCl.IdKeyFeature equals keyFeat.Id

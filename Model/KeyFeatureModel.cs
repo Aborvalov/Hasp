@@ -10,51 +10,35 @@ namespace Model
 {
     public class KeyFeatureModel : IEntitiesModel<ModelViewKeyFeature>
     {
-        private readonly IFactoryLogic logic;
+        private readonly EntitesContext db;
         private IKeyFeatureLogic keyFeatureLogic;
+        private IFactoryLogic factoryLogic;
         private readonly DateTime startDate = DateTime.Now.Date;
 
         public KeyFeatureModel(IFactoryLogic factoryLogic)
         {
-            logic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
+            if (factoryLogic == null)
+                throw new ArgumentNullException(nameof(factoryLogic));
+
+            db = new EntitesContext();
+            this.factoryLogic = factoryLogic;
+            keyFeatureLogic = factoryLogic.CreateKeyFeature(db);
         }
         public bool Add(ModelViewKeyFeature entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            using (var db = new EntitesContext())
-            {
-                keyFeatureLogic = logic.CreateKeyFeature(db);
-                return keyFeatureLogic.Save(entity.KeyFeature);
-            }
+            return keyFeatureLogic.Save(entity.KeyFeature);
         }
 
-        public List<ModelViewKeyFeature> GetAll()
-        {
-            List<KeyFeature> keyFeature;
-            using (var db = new EntitesContext())
-            {
-                keyFeatureLogic = logic.CreateKeyFeature(db);
-                keyFeature = keyFeatureLogic.GetAll();
-            }
+        public List<ModelViewKeyFeature> GetAll() => Convert(keyFeatureLogic.GetAll());
 
-            return Convert(keyFeature);
-        }
         public ModelViewKeyFeature GetById(int id)
         {
-            KeyFeature keyFeature;
-            var keys = new List<HaspKey>();
-            var feats = new List<Feature>();
-
-            using (var db = new EntitesContext())
-            {
-                keyFeatureLogic = logic.CreateKeyFeature(db);
-                keyFeature = keyFeatureLogic.GetById(id);
-
-                keys = logic.CreateHaspKey(db).GetAll();
-                feats = logic.CreateFeature(db).GetAll();
-            }
+            var keyFeature = keyFeatureLogic.GetById(id);
+            var keys = factoryLogic.CreateHaspKey(db).GetAll();
+            var feats = factoryLogic.CreateFeature(db).GetAll();
             
             var key = keys.FirstOrDefault(x => x.Id == keyFeature.IdHaspKey) ?? new HaspKey();
             var feat = feats.FirstOrDefault(x => x.Id == keyFeature.IdFeature) ?? new Feature();
@@ -70,25 +54,14 @@ namespace Model
             return viewKeyFeat;
         }
 
-        public bool Remove(int id)
-        {
-            using (var db = new EntitesContext())
-            {
-                keyFeatureLogic = logic.CreateKeyFeature(db);
-               return keyFeatureLogic.Remove(id);
-            }
-        }
+        public bool Remove(int id) => keyFeatureLogic.Remove(id);
 
         public bool Update(ModelViewKeyFeature entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            using (var db = new EntitesContext())
-            {
-                keyFeatureLogic = logic.CreateKeyFeature(db);
-                return keyFeatureLogic.Update(entity.KeyFeature);
-            }
+            return keyFeatureLogic.Update(entity.KeyFeature);
         }
         private List<ModelViewKeyFeature> Convert(List<KeyFeature> keyFeature)
         {
@@ -98,14 +71,8 @@ namespace Model
             var view = new List<ModelViewKeyFeature>();
             int i = 1;
 
-            var keys = new List<HaspKey>();
-            var feats = new List<Feature>();
-
-            using (var db = new EntitesContext())
-            {
-                keys = logic.CreateHaspKey(db).GetAll();
-                feats = logic.CreateFeature(db).GetAll();
-            }
+           var  keys = factoryLogic.CreateHaspKey(db).GetAll();
+           var  feats = factoryLogic.CreateFeature(db).GetAll();
 
             foreach (var keyFeat in keyFeature)
             {

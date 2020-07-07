@@ -14,6 +14,9 @@ namespace Model
 
         public FeatureModel(IFactoryLogic factoryLogic)
         {
+            if (factoryLogic == null)
+                throw new ArgumentNullException(nameof(factoryLogic));
+
             db = new EntitesContext();            
             featLogic = factoryLogic.CreateFeature(db);
         }

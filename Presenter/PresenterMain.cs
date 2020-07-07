@@ -16,6 +16,9 @@ namespace Presenter
             homeModel = new MainModel(new Logics());
             Views();
         }
+
+        public void Dispose() => homeModel.Dispose();
+
         public void Views() => homeView.Bind(homeModel.GetAll());
 
     }

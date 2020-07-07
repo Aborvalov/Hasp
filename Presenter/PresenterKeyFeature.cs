@@ -57,9 +57,6 @@ namespace Presenter
 
         public void Display() => entitiesView.Bind(keyFeatureModel.GetAll());
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+        public void Dispose() => keyFeatureModel.Dispose();
     }
 }

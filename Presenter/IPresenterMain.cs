@@ -1,6 +1,8 @@
-﻿namespace Presenter
+﻿using System;
+
+namespace Presenter
 {
-    public interface IPresenterMain
+    public interface IPresenterMain : IDisposable
     {
        void Views();
     }

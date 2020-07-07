@@ -9,98 +9,57 @@ namespace Model
 {
     public class ClientModel : IClientModel
     {
-        private readonly IFactoryLogic logic;
         private IClientLogic clientLogic;
+        private readonly EntitesContext db;
         public ClientModel(IFactoryLogic factoryLogic)
         {
-            logic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
+            if (factoryLogic == null)
+                throw new ArgumentNullException(nameof(factoryLogic));
+
+            db = new EntitesContext();
+            clientLogic = factoryLogic.CreateClient(db);
         }
         public bool Add(ModelViewClient entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
-
-            using (var db = new EntitesContext())
-            {
-                clientLogic = logic.CreateClient(db);
-                return clientLogic.Save(entity.Client);
-            }
+            return clientLogic.Save(entity.Client);
         }
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+        public void Dispose() => db.Dispose();
 
-        public List<ModelViewClient> GetAll()
-        {
-            List<Client> clients;
-            using (var db = new EntitesContext())
-            {
-                clientLogic = logic.CreateClient(db);
-                clients = clientLogic.GetAll();
-            }
-            return Convert(clients);
-        }
+        public List<ModelViewClient> GetAll() => Convert(clientLogic.GetAll());
         
         public List<ModelViewClient> GetByFeature(ModelViewFeature feature)
         {
             if (feature == null)
                 throw new ArgumentNullException(nameof(feature));
-
-            List<Client> clients;
-            using (var db = new EntitesContext())
-            {
-                clientLogic = logic.CreateClient(db);
-                clients = clientLogic.GetByFeature(feature.Feature);
-            }
-            return Convert(clients);
+                        
+            return Convert(clientLogic.GetByFeature(feature.Feature));
         }
 
-        public ModelViewClient GetById(int id)
-        {
-            Client client;
-            using (var db = new EntitesContext())
-            {
-                clientLogic = logic.CreateClient(db);
-                client = clientLogic.GetById(id);
-            }
-            return new ModelViewClient(client);
-        }
+        public ModelViewClient GetById(int id) => 
+            new ModelViewClient(clientLogic.GetById(id))
+                { SerialNumber = 1 };
 
         public ModelViewClient GetByNumberKey(int keyInnerId)
         {
-            Client client;
-            using (var db = new EntitesContext())
-            {
-                clientLogic = logic.CreateClient(db);
-                client = clientLogic.GetByNumberKey(keyInnerId);
-            }
+            Client client = clientLogic.GetByNumberKey(keyInnerId);
+
             if (client == null)
                 return null;
             return new ModelViewClient(client)
                        { SerialNumber = 1};
         }
 
-        public bool Remove(int id)
-        {
-            using (var db = new EntitesContext())
-            {
-                clientLogic = logic.CreateClient(db);
-                return clientLogic.Remove(id);
-            }
-        }
+        public bool Remove(int id) => clientLogic.Remove(id);
 
         public bool Update(ModelViewClient entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            using (var db = new EntitesContext())
-            {
-                clientLogic = logic.CreateClient(db);
-                return clientLogic.Update(entity.Client);
-            }
+            return clientLogic.Update(entity.Client);
         }
         private List<ModelViewClient> Convert(List<Client> clients)
         {

@@ -8,7 +8,7 @@ using View;
 
 namespace HASPKey
 {
-    public partial class FeatureView : DevExpress.XtraEditors.XtraForm, IEntitiesView<ModelViewFeature> 
+    public partial class FeatureView : DevExpress.XtraEditors.XtraForm, IEntitiesView<ModelViewFeature>
     {
         private readonly IPresenterEntities<ModelViewFeature> presenterFeature;
         private bool size = true;
@@ -33,7 +33,7 @@ namespace HASPKey
         {
             InitializeComponent();
             presenterFeature = new PresenterFeature(this);
-            dgvFeature.Height = dgvFeature.Size.Height + sizeH;
+            dgvFeature.Height = dgvFeature.Size.Height + sizeH;            
         }
 
         public void Add(ModelViewFeature entity)
@@ -189,6 +189,6 @@ namespace HASPKey
             tbNumber.Text = row.Number.ToString();
             tbName.Text = row.Name;
             tbDescription.Text = row.Description;
-        }
+        }        
     }
 }
