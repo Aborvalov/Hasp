@@ -78,8 +78,10 @@ namespace Model
             int i = 1;
             foreach (var feat in Features)
             {
-                var featModel = new ModelViewFeature(feat);
-                featModel.SerialNumber = i++;
+                var featModel = new ModelViewFeature(feat)
+                {
+                    SerialNumber = i++
+                };
                 viewFeatures.Add(featModel);
             }
 

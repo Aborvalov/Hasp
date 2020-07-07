@@ -9,14 +9,18 @@ namespace Presenter
     public class PresenterFeature : IPresenterEntities<ModelViewFeature>
     {
         private readonly IEntitiesModel<ModelViewFeature> featureModel;
-        private readonly IEntitiesView<ModelViewFeature> entitesView;
+        private readonly IEntitiesView<ModelViewFeature> entitiesView;
+
+        private const string errorAdd = "Не удалось создать функциональность.";
+        private const string errorUpdate = "Не удалось обновить функциональность.";
+        private const string errorDelete = "Не удалось удалить функциональность.";
 
         public PresenterFeature(IEntitiesView<ModelViewFeature> entitesView)
         {
-            this.entitesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
+            this.entitiesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
 
             featureModel = new FeatureModel(new Logics());
-            View();
+            Display();
         }
 
         public ModelViewFeature Entities { get; set; } = null;
@@ -24,33 +28,33 @@ namespace Presenter
         public void Add(ModelViewFeature entity)
         {
             if (entity == null)
-              entitesView.MessageError("Не удалось создать Hasp-ключ.");
+              entitiesView.MessageError(errorAdd);
 
                 if (featureModel.Add(entity))
-                View();
+                Display();
             else
-                entitesView.MessageError("Не удалось создать Hasp-ключ.");
+                entitiesView.MessageError(errorAdd);
         }
 
         public void Remove(int id)
         {
             if (id > 0 && featureModel.Remove(id))
-                View();
+                Display();
             else
-                entitesView.MessageError("Не удалось удалить Hasp-ключ.");
+                entitiesView.MessageError(errorDelete);
         }
 
         public void Update(ModelViewFeature entity)
         {
             if (entity == null)
-                entitesView.MessageError("Не удалось обновить Hasp-ключ.");
+                entitiesView.MessageError(errorUpdate);
 
             if (featureModel.Update(entity))
-                View();
+                Display();
             else
-                entitesView.MessageError("Не удалось обновить Hasp-ключ.");
+                entitiesView.MessageError(errorUpdate);
         }
 
-        public void View() => entitesView.Bind(featureModel.GetAll());
+        public void Display() => entitiesView.Bind(featureModel.GetAll());
     }
 }

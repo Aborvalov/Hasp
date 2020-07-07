@@ -9,14 +9,19 @@ namespace Presenter
     public class PresenterHaspKey : IPresenterHaspKey
     {
         private readonly IHaspKeyModel haspKeyModel;
-        private readonly IEntitiesView<ModelViewHaspKey> entitesView;
-       
+        private readonly IEntitiesView<ModelViewHaspKey> entitiesView;
+
+        private const string errorAdd = "Не удалось создать Hasp-ключ.";
+        private const string errorUpdate = "Не удалось обновить Hasp-ключ.";
+        private const string errorDelete = "Не удалось удалить Hasp-ключ.";
+        private const string errorEmptyСдшуте = "Данный клиент имеет пустые значения.";
+               
         public PresenterHaspKey(IEntitiesView<ModelViewHaspKey> entitesView)
         {
-            this.entitesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
+            this.entitiesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
 
             haspKeyModel = new HaspKeyModel(new Logics());
-            View();
+            Display();
         }
 
         public ModelViewHaspKey Entities { get; set; } = null;
@@ -24,45 +29,45 @@ namespace Presenter
         public void Add(ModelViewHaspKey entity)
         {
             if (entity == null)
-                entitesView.MessageError("Не удалось создать Hasp-ключ.");
+                entitiesView.MessageError(errorAdd);
 
             if (haspKeyModel.Add(entity))
-                View();
+                Display();
             else
-                entitesView.MessageError("Не удалось создать Hasp-ключ.");
+                entitiesView.MessageError(errorAdd);
         }
 
-        public void GetByActive() => entitesView.Bind(haspKeyModel.GetByActive());
+        public void GetByActive() => entitiesView.Bind(haspKeyModel.GetByActive());
 
         public void GetByClient(ModelViewClient client)
         {
             if (client == null)
-                entitesView.MessageError("Данный клиент имеет пустые значения.");
+                entitiesView.MessageError(errorEmptyСдшуте);
 
-            entitesView.Bind(haspKeyModel.GetByClient(client));
+            entitiesView.Bind(haspKeyModel.GetByClient(client));
         }
 
-        public void GetByPastDue() => entitesView.Bind(haspKeyModel.GetByPastDue());
+        public void GetByPastDue() => entitiesView.Bind(haspKeyModel.GetByPastDue());
 
         public void Remove(int id)
         {
             if (id > 0 && haspKeyModel.Remove(id))
-                View();
+                Display();
             else
-                entitesView.MessageError("Не удалось удалить Hasp-ключ.");
+                entitiesView.MessageError(errorDelete);
         }
 
         public void Update(ModelViewHaspKey entity)
         {
             if (entity == null)
-                entitesView.MessageError("Не удалось обновить Hasp-ключ.");
+                entitiesView.MessageError(errorUpdate);
 
             if (haspKeyModel.Update(entity))
-                View();
+                Display();
             else
-                entitesView.MessageError("Не удалось обновить Hasp-ключ.");
+                entitiesView.MessageError(errorUpdate);
         }
 
-        public void View() => entitesView.Bind(haspKeyModel.GetAll());
+        public void Display() => entitiesView.Bind(haspKeyModel.GetAll());
     }
 }

@@ -66,7 +66,7 @@ namespace HASPKey
 
             private void RadioButtonAll_CheckedChanged(object sender, EventArgs e)
         {
-            presenterHaspKey.View();
+            presenterHaspKey.Display();
             labelClient.Text = string.Empty;
         }
         private void RadioButtonPastDue_CheckedChanged(object sender, EventArgs e)

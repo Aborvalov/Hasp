@@ -9,14 +9,18 @@ namespace Presenter
     public class PresenterKeyFeature : IPresenterEntities<ModelViewKeyFeature>
     {
         private readonly IEntitiesModel<ModelViewKeyFeature> keyFeatureModel;
-        private readonly IEntitiesView<ModelViewKeyFeature> entitesView;
+        private readonly IEntitiesView<ModelViewKeyFeature> entitiesView;
+
+        private const string errorAdd = "Не удалось создать связь ключа и функциональности.";
+        private const string errorUpdate = "Не удалось обновить связь ключа и функциональности.";
+        private const string errorDelete = "Не удалось удалить связь ключа и функциональности.";
 
         public PresenterKeyFeature(IEntitiesView<ModelViewKeyFeature> entitesView)
         {
-            this.entitesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
+            this.entitiesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
 
             keyFeatureModel = new KeyFeatureModel(new Logics());
-            View();
+            Display();
         }
 
         public ModelViewKeyFeature Entities { get; set; } = null;
@@ -24,33 +28,33 @@ namespace Presenter
         public void Add(ModelViewKeyFeature entity)
         {
             if (entity == null)
-                entitesView.MessageError("Не удалось создать связь ключа и функциональности.");
+                entitiesView.MessageError(errorAdd);
 
             if (keyFeatureModel.Add(entity))
-                View();
+                Display();
             else
-                entitesView.MessageError("Не удалось создать связь ключа и функциональности.");
+                entitiesView.MessageError(errorAdd);
         }
 
         public void Remove(int id)
         {
             if (id > 0 && keyFeatureModel.Remove(id))
-                View();
+                Display();
             else
-                this.entitesView.MessageError("Не удалось удалить связь ключа и функциональности.");
+                this.entitiesView.MessageError(errorDelete);
         }
 
         public void Update(ModelViewKeyFeature entity)
         {
             if (entity == null)
-                entitesView.MessageError("Не удалось обновить связь ключа и функциональности.");
+                entitiesView.MessageError(errorUpdate);
 
             if (keyFeatureModel.Update(entity))
-                View();
+                Display();
             else
-                entitesView.MessageError("Не удалось обновить связь ключа и функциональности.");
+                entitiesView.MessageError(errorUpdate);
         }
 
-        public void View() => entitesView.Bind(keyFeatureModel.GetAll());
+        public void Display() => entitiesView.Bind(keyFeatureModel.GetAll());
     }
 }

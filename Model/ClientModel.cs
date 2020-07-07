@@ -17,18 +17,13 @@ namespace Model
         }
         public bool Add(ModelViewClient entity)
         {
-            Client client = new Client
-            {
-                Name = entity.Name,
-                Address = entity.Address,
-                ContactPerson = entity.ContactPerson,
-                Phone = entity.Phone,                
-            };
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
 
             using (var db = new EntitesContext())
             {
                 clientLogic = logic.CreateClient(db);
-                return clientLogic.Save(client);
+                return clientLogic.Save(entity.Client);
             }
         }
 
@@ -45,6 +40,9 @@ namespace Model
         
         public List<ModelViewClient> GetByFeature(ModelViewFeature feature)
         {
+            if (feature == null)
+                throw new ArgumentNullException(nameof(feature));
+
             List<Client> clients;
             using (var db = new EntitesContext())
             {
@@ -90,19 +88,13 @@ namespace Model
 
         public bool Update(ModelViewClient entity)
         {
-            Client client = new Client
-            {
-                Id = entity.Id,
-                Name = entity.Name,
-                Address = entity.Address,
-                ContactPerson = entity.ContactPerson,
-                Phone = entity.Phone,
-            };
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
 
             using (var db = new EntitesContext())
             {
                 clientLogic = logic.CreateClient(db);
-                return clientLogic.Update(client);
+                return clientLogic.Update(entity.Client);
             }
         }
         private List<ModelViewClient> Convert(List<Client> clients)

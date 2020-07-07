@@ -201,7 +201,7 @@ namespace HASPKey
         private void ButtonAll_Click(object sender, EventArgs e)
         {
             DefaultView();
-            presenterClient.View();
+            presenterClient.Display();
         }
         private void TbInnerIdHaspKey_KeyDown(object sender, KeyEventArgs e)
         {

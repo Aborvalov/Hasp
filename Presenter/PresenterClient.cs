@@ -10,14 +10,19 @@ namespace Presenter
     public class PresenterClient : IPresenterClient
     {
         private readonly IClientModel clientModel;
-        private readonly IEntitiesView<ModelViewClient> entitesView;
-        
+        private readonly IEntitiesView<ModelViewClient> entitшesView;
+
+        private const string errorAdd = "Не удалось создать клиента.";
+        private const string errorUpdate = "Не удалось обновить клиента.";
+        private const string errorDelete = "Не удалось удалить клиента.";
+        private const string errorEmptyFeature = "Данноя функциональность пуста.";
+
         public PresenterClient(IEntitiesView<ModelViewClient> entitesView)
         {
-            this.entitesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
+            this.entitшesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
 
             clientModel = new ClientModel(new Logics());
-            View();
+            Display();
         }
 
         public ModelViewClient Entities { get; set; } = null;
@@ -25,20 +30,20 @@ namespace Presenter
         public void Add(ModelViewClient entity)
         {
             if (entity == null)
-                entitesView.MessageError("Не удалось создать клиента.");
+                entitшesView.MessageError(errorAdd);
 
             if (clientModel.Add(entity))
-                View();
+                Display();
             else
-                entitesView.MessageError("Не удалось создать клиента.");
+                entitшesView.MessageError(errorAdd);
         }
 
         public void GetByFeature(ModelViewFeature feature)
         {
             if (feature == null)
-                entitesView.MessageError("Данноя функциональность пуста.");
+                entitшesView.MessageError(errorEmptyFeature);
 
-            entitesView.Bind(clientModel.GetByFeature(feature));
+            entitшesView.Bind(clientModel.GetByFeature(feature));
         }
 
         public void GetByNumberKey(int keyInnerId)
@@ -46,35 +51,35 @@ namespace Presenter
             var client = clientModel.GetByNumberKey(keyInnerId);
             if (client == null)
             {
-                entitesView.Bind(new List<ModelViewClient>());
+                entitшesView.Bind(new List<ModelViewClient>());
                 return;
             }
             var clients = new List<ModelViewClient>
             {
                 client
             };
-            entitesView.Bind(clients);
+            entitшesView.Bind(clients);
         }
 
         public void Remove(int id)
         {
             if (id > 0 && clientModel.Remove(id))
-                View();
+                Display();
             else
-                entitesView.MessageError("Не удалось удалить клиента.");
+                entitшesView.MessageError(errorDelete);
         }
 
         public void Update(ModelViewClient entity)
         {
             if (entity == null)
-                entitesView.MessageError("Не удалось обновить клиента.");
+                entitшesView.MessageError(errorUpdate);
 
             if (clientModel.Update(entity))
-                View();
+                Display();
             else
-                entitesView.MessageError("Не удалось обновить клиента.");
+                entitшesView.MessageError(errorUpdate);
         }
 
-        public void View() => entitesView.Bind(clientModel.GetAll());
+        public void Display() => entitшesView.Bind(clientModel.GetAll());
     }
 }
