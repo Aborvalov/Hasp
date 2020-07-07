@@ -13,7 +13,7 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            presenterFeature.Display();
+            presenterFeature.Dispose();
 
             if (disposing && (components != null))
             {
@@ -32,6 +32,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FeatureView));
             this.bindingFeature = new System.Windows.Forms.BindingSource(this.components);
             this.dgvFeature = new System.Windows.Forms.DataGridView();
             this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -226,6 +227,7 @@
             this.Controls.Add(this.labelDescription);
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.labelNumber);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FeatureView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Функциональность";
