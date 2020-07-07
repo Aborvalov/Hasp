@@ -17,11 +17,8 @@ namespace Model
 
         public KeyFeatureModel(IFactoryLogic factoryLogic)
         {
-            if (factoryLogic == null)
-                throw new ArgumentNullException(nameof(factoryLogic));
-
             db = new EntitesContext();
-            this.factoryLogic = factoryLogic;
+            this.factoryLogic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
             keyFeatureLogic = factoryLogic.CreateKeyFeature(db);
         }
         public bool Add(ModelViewKeyFeature entity)
