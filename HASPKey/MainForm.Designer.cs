@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,6 +46,7 @@
             this.clientDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingHome = new System.Windows.Forms.BindingSource(this.components);
+            this.Headline = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HomeView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHome)).BeginInit();
@@ -140,19 +141,19 @@
             this.clientDataGridViewTextBoxColumn,
             this.endDateDataGridViewTextBoxColumn});
             this.HomeView.DataSource = this.bindingHome;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.HomeView.DefaultCellStyle = dataGridViewCellStyle1;
-            this.HomeView.Location = new System.Drawing.Point(12, 38);
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.HomeView.DefaultCellStyle = dataGridViewCellStyle4;
+            this.HomeView.Location = new System.Drawing.Point(12, 46);
             this.HomeView.Name = "HomeView";
             this.HomeView.ReadOnly = true;
             this.HomeView.RowHeadersVisible = false;
-            this.HomeView.Size = new System.Drawing.Size(594, 345);
+            this.HomeView.Size = new System.Drawing.Size(594, 337);
             this.HomeView.TabIndex = 3;
             // 
             // serialNumberDataGridViewTextBoxColumn
@@ -200,17 +201,29 @@
             // 
             this.bindingHome.DataSource = typeof(ModelEntities.ModelViewMain);
             // 
+            // Headline
+            // 
+            this.Headline.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.Headline.AutoSize = true;
+            this.Headline.Location = new System.Drawing.Point(234, 30);
+            this.Headline.Name = "Headline";
+            this.Headline.Size = new System.Drawing.Size(150, 13);
+            this.Headline.TabIndex = 4;
+            this.Headline.Text = "Действующие HASP-ключи.";
+            this.Headline.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(617, 395);
+            this.Controls.Add(this.Headline);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.HomeView);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Hasp";
+            this.Text = "HASP-ключи";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HomeView)).EndInit();
@@ -237,6 +250,7 @@
         private System.Windows.Forms.ToolStripMenuItem FeatureToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ClientToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem KeyFeatureToolStripMenuItem;
+        private System.Windows.Forms.Label Headline;
     }
 }
 

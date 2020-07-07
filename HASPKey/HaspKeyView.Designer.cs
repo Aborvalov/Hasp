@@ -93,6 +93,8 @@
             this.dgvHaspKey.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvHaspKey.Size = new System.Drawing.Size(421, 475);
             this.dgvHaspKey.TabIndex = 0;
+            this.dgvHaspKey.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvHaspKey_CellClick);
+            this.dgvHaspKey.SelectionChanged += new System.EventHandler(this.DgvHaspKey_SelectionChanged);
             this.dgvHaspKey.DoubleClick += new System.EventHandler(this.DgvHaspKey_DoubleClick);
             // 
             // dataGridViewTextBoxColumn1
@@ -333,8 +335,7 @@
             this.Controls.Add(this.labelClient);
             this.Name = "HaspKeyView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Hasp ключ";          
-            this.ResizeEnd += new System.EventHandler(this.HaspKeyView_ResizeEnd);
+            this.Text = "Hasp-ключ";
             ((System.ComponentModel.ISupportInitialize)(this.dgvHaspKey)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHaspKey)).EndInit();
             this.panelFiltr.ResumeLayout(false);

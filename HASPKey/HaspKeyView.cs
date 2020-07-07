@@ -14,9 +14,6 @@ namespace HASPKey
         private readonly IPresenterHaspKey presenterHaspKey;
         private bool size = true;
         private const int sizeH = 40;
-        private ModelViewHaspKey haspKey = null;
-        private int labelClientHeight;
-        private int labelClientWidth;
         public event Action DateUpdate;
         private bool search = false;
         internal ModelViewHaspKey SearchHaspKey { get; private set; } = null;
@@ -26,12 +23,10 @@ namespace HASPKey
             InitializeComponent();
             presenterHaspKey = new PresenterHaspKey(this);
             dgvHaspKey.Height = dgvHaspKey.Size.Height + sizeH;
-            comboBoxTypeKey.DataSource = Enum.GetValues(typeof(Entities.TypeKey));
+            comboBoxTypeKey.DataSource = Enum.GetValues(typeof(TypeKey));
             comboBoxTypeKey.SelectedIndex = -1;
 
             labelClient.Text = string.Empty;
-            labelClientHeight = labelClient.Location.Y;
-            labelClientWidth = labelClient.Location.X;
         }
         public HaspKeyView(bool search) : this()
         {
@@ -85,7 +80,7 @@ namespace HASPKey
                 size = !size;
                 buttonAdd.Enabled = false;
             }
-            haspKey = new ModelViewHaspKey();
+            presenterHaspKey.HaspKey = new ModelViewHaspKey();
         }
         public void MessageError(string error) => MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -96,15 +91,15 @@ namespace HASPKey
                 if (!CheckInputData(out int innNumber))
                     return;
 
-                haspKey.InnerId = innNumber;
-                haspKey.Number = tbNumber.Text.Trim();
-                haspKey.TypeKey = (TypeKey)comboBoxTypeKey.SelectedItem;
-                haspKey.IsHome = checkBoxIsHome.Checked;
+                presenterHaspKey.HaspKey.InnerId = innNumber;
+                presenterHaspKey.HaspKey.Number = tbNumber.Text.Trim();
+                presenterHaspKey.HaspKey.TypeKey = (TypeKey)comboBoxTypeKey.SelectedItem;
+                presenterHaspKey.HaspKey.IsHome = checkBoxIsHome.Checked;
 
-                if(haspKey.Id < 1)
-                    Add(haspKey);                
+                if(presenterHaspKey.HaspKey.Id < 1)
+                    Add(presenterHaspKey.HaspKey);                
                 else
-                    Update(haspKey);
+                    Update(presenterHaspKey.HaspKey);
 
                 DefaultView();
             }
@@ -124,14 +119,8 @@ namespace HASPKey
                 size = !size;
             }
 
-            haspKey = new ModelViewHaspKey();                
-            var row = dgvHaspKey.CurrentRow.DataBoundItem as ModelViewHaspKey;
-
-            haspKey.Id = row.Id;
-            tbInnerNumber.Text = row.InnerId.ToString();
-            tbNumber.Text = row.Number;
-            comboBoxTypeKey.SelectedIndex = (int)row.TypeKey;
-            checkBoxIsHome.Checked = row.IsHome;            
+            presenterHaspKey.HaspKey = new ModelViewHaspKey();
+            FillInputItem();
         }
 
         private void DefaultView()
@@ -200,25 +189,40 @@ namespace HASPKey
             radioButtonAll.Checked = false;
             radioButtonPastDue.Checked = false;
 
-            DefaultView();
-
-            labelClient.Location = new System.Drawing.Point(labelClientWidth, labelClientHeight);
-
             ClientView client = new ClientView(true);
             client.ShowDialog();
 
             if (client.SearchIdClient != null)
             {
+                DefaultView();
                 presenterHaspKey.GetByClient(client.SearchIdClient);
                 
                 labelClient.Text = client.SearchIdClient.Name;
-                labelClient.Location = new System.Drawing.Point(labelClient.Location.X - labelClient.Width, labelClientHeight);
+                labelClient.Location = new System.Drawing.Point((this.Width - 25) - labelClient.Width, labelClient.Location.Y);
             }
         }
-        private void HaspKeyView_ResizeEnd(object sender, EventArgs e)
+
+        private void DgvHaspKey_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            labelClientHeight = labelClient.Location.Y;
-            labelClientWidth = labelClient.Location.X;
+            if (!size)
+                FillInputItem();
+        }
+
+        private void DgvHaspKey_SelectionChanged(object sender, EventArgs e)
+        {
+            if (!size)
+                FillInputItem();
+        }
+
+        private void FillInputItem()
+        {
+            var row = dgvHaspKey.CurrentRow.DataBoundItem as ModelViewHaspKey;
+
+            presenterHaspKey.HaspKey.Id = row.Id;
+            tbInnerNumber.Text = row.InnerId.ToString();
+            tbNumber.Text = row.Number;
+            comboBoxTypeKey.SelectedIndex = (int)row.TypeKey;
+            checkBoxIsHome.Checked = row.IsHome;
         }
     }
 }

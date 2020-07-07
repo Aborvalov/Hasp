@@ -10,7 +10,7 @@ namespace Presenter
     {
         private readonly IHaspKeyModel haspKeyModel;
         private readonly IEntitiesView<ModelViewHaspKey> entitesView;
-
+       
         public PresenterHaspKey(IEntitiesView<ModelViewHaspKey> entitesView)
         {
             this.entitesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
@@ -18,6 +18,8 @@ namespace Presenter
             haspKeyModel = new HaspKeyModel(new Logics());
             View();
         }
+
+        public ModelViewHaspKey HaspKey { get; set; } = null;
 
         public void Add(ModelViewHaspKey entity)
         {

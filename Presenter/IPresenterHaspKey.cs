@@ -15,5 +15,6 @@ namespace Presenter
         /// </summary>
         /// <returns>Список действующих ключей.</returns>
         void GetByActive();
+        ModelViewHaspKey HaspKey { get; set; }
     }
 }
