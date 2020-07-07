@@ -16,6 +16,7 @@ namespace Presenter
         private const string errorUpdate = "Не удалось обновить клиента.";
         private const string errorDelete = "Не удалось удалить клиента.";
         private const string errorEmptyFeature = "Данноя функциональность пуста.";
+        private const string errorInnerId = "Некорректный номер ключа.";
 
         public PresenterClient(IEntitiesView<ModelViewClient> entitesView)
         {
@@ -30,7 +31,10 @@ namespace Presenter
         public void Add(ModelViewClient entity)
         {
             if (entity == null)
+            { 
                 entitшesView.MessageError(errorAdd);
+                return;
+            }
 
             if (clientModel.Add(entity))
                 Display();
@@ -41,13 +45,20 @@ namespace Presenter
         public void GetByFeature(ModelViewFeature feature)
         {
             if (feature == null)
+            {
                 entitшesView.MessageError(errorEmptyFeature);
-
+                return;
+            }
             entitшesView.Bind(clientModel.GetByFeature(feature));
         }
 
         public void GetByNumberKey(int keyInnerId)
         {
+            if (keyInnerId < 1)
+            {
+                entitшesView.MessageError(errorInnerId);
+                return;
+            }
             var client = clientModel.GetByNumberKey(keyInnerId);
             if (client == null)
             {
@@ -72,7 +83,10 @@ namespace Presenter
         public void Update(ModelViewClient entity)
         {
             if (entity == null)
+            {
                 entitшesView.MessageError(errorUpdate);
+                return;
+            }
 
             if (clientModel.Update(entity))
                 Display();
@@ -81,7 +95,6 @@ namespace Presenter
         }
 
         public void Display() => entitшesView.Bind(clientModel.GetAll());
-
         public void Dispose() => clientModel.Dispose();
     }
 }

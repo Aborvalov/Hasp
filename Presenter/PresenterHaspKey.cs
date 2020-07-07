@@ -29,7 +29,10 @@ namespace Presenter
         public void Add(ModelViewHaspKey entity)
         {
             if (entity == null)
+            {
                 entitiesView.MessageError(errorAdd);
+                return;
+            }
 
             if (haspKeyModel.Add(entity))
                 Display();
@@ -42,8 +45,10 @@ namespace Presenter
         public void GetByClient(ModelViewClient client)
         {
             if (client == null)
+            {
                 entitiesView.MessageError(errorEmptyСдшуте);
-
+                return;
+            }
             entitiesView.Bind(haspKeyModel.GetByClient(client));
         }
 
@@ -60,7 +65,10 @@ namespace Presenter
         public void Update(ModelViewHaspKey entity)
         {
             if (entity == null)
+            {
                 entitiesView.MessageError(errorUpdate);
+                return;
+            }
 
             if (haspKeyModel.Update(entity))
                 Display();

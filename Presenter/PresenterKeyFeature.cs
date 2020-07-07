@@ -28,7 +28,10 @@ namespace Presenter
         public void Add(ModelViewKeyFeature entity)
         {
             if (entity == null)
+            {
                 entitiesView.MessageError(errorAdd);
+                return;
+            }
 
             if (keyFeatureModel.Add(entity))
                 Display();
@@ -47,7 +50,10 @@ namespace Presenter
         public void Update(ModelViewKeyFeature entity)
         {
             if (entity == null)
+            {
                 entitiesView.MessageError(errorUpdate);
+                return;
+            }
 
             if (keyFeatureModel.Update(entity))
                 Display();
