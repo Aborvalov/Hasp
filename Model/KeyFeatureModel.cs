@@ -124,5 +124,10 @@ namespace Model
             }
             return view;
         }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

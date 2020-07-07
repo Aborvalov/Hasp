@@ -1,6 +1,8 @@
-﻿namespace Presenter
+﻿using System;
+
+namespace Presenter
 {
-    public interface IPresenterEntities<T>
+    public interface IPresenterEntities<T> : IDisposable
     {
         void Display();
         void Add(T entity);

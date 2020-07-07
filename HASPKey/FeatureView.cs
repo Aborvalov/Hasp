@@ -8,7 +8,7 @@ using View;
 
 namespace HASPKey
 {
-    public partial class FeatureView : DevExpress.XtraEditors.XtraForm, IEntitiesView<ModelViewFeature>
+    public partial class FeatureView : DevExpress.XtraEditors.XtraForm, IEntitiesView<ModelViewFeature> 
     {
         private readonly IPresenterEntities<ModelViewFeature> presenterFeature;
         private bool size = true;
@@ -24,7 +24,7 @@ namespace HASPKey
         private const string errorNumber = "\u2022 Неверное значение номера, должно быть числом. \n";
         private const string erroremptyName = "\u2022 Не заполнено поля \"Наименование\", не должно быть пустым. \n";
                
-        public FeatureView(bool search) :this()
+        public FeatureView(bool search) : this()
         { 
             this.search = search;            
             dgvFeature.Height = dgvFeature.Size.Height + 28;

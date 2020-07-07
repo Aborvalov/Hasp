@@ -9,68 +9,37 @@ namespace Model
 {
     public class FeatureModel : IEntitiesModel<ModelViewFeature>
     {
-        private readonly IFactoryLogic logic;
         private IFeatureLogic featLogic;
+        private readonly EntitesContext db;
 
         public FeatureModel(IFactoryLogic factoryLogic)
         {
-            logic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
+            db = new EntitesContext();            
+            featLogic = factoryLogic.CreateFeature(db);
         }
 
         public bool Add(ModelViewFeature entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
-            
-            using (var db = new EntitesContext())
-            {
-                featLogic = logic.CreateFeature(db);
-                return featLogic.Save(entity.Feature);
-            }
+
+            return featLogic.Save(entity.Feature);
         }
 
-        public List<ModelViewFeature> GetAll()
-        {
-            List<Feature> features;
-            using (var db = new EntitesContext())
-            {
-                featLogic = logic.CreateFeature(db);
-               features = featLogic.GetAll();
-            }
+        public void Dispose() => db.Dispose();
 
-            return Convert(features);
-        }
+        public List<ModelViewFeature> GetAll() => Convert(featLogic.GetAll());
 
-        public ModelViewFeature GetById(int id)
-        {
-            Feature feature;
-            using (var db = new EntitesContext())
-            {
-                featLogic = logic.CreateFeature(db);
-                feature = featLogic.GetById(id);
-            }
-            return new ModelViewFeature(feature);
-        }
+        public ModelViewFeature GetById(int id) => new ModelViewFeature(featLogic.GetById(id));
 
-        public bool Remove(int id)
-        {
-            using (var db = new EntitesContext())
-            {
-                featLogic = logic.CreateFeature(db);
-                return featLogic.Remove(id);
-            }
-        }
+        public bool Remove(int id) => featLogic.Remove(id);
 
         public bool Update(ModelViewFeature entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            using (var db = new EntitesContext())
-            {
-                featLogic = logic.CreateFeature(db);
-                return featLogic.Update(entity.Feature);
-            }
+            return featLogic.Update(entity.Feature);
         }
         private List<ModelViewFeature> Convert(List<Feature> Features)
         {

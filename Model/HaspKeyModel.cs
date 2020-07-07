@@ -28,6 +28,11 @@ namespace Model
             }
         }
 
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<ModelViewHaspKey> GetAll()
         {
             List<HaspKey> haspKeys;            

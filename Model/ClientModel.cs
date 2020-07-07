@@ -27,6 +27,11 @@ namespace Model
             }
         }
 
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<ModelViewClient> GetAll()
         {
             List<Client> clients;

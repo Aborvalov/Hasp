@@ -81,5 +81,10 @@ namespace Presenter
         }
 
         public void Display() => entitшesView.Bind(clientModel.GetAll());
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

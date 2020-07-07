@@ -56,5 +56,7 @@ namespace Presenter
         }
 
         public void Display() => entitiesView.Bind(featureModel.GetAll());
+
+        public void Dispose() => featureModel.Dispose();
     }
 }
