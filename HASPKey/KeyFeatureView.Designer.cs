@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvKeyFeture = new System.Windows.Forms.DataGridView();
             this.serialNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numberKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -71,20 +71,22 @@
             this.startDateDataGridViewTextBoxColumn,
             this.endDateDataGridViewTextBoxColumn});
             this.dgvKeyFeture.DataSource = this.bindingKeyFeature;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvKeyFeture.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvKeyFeture.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvKeyFeture.Location = new System.Drawing.Point(12, 1);
             this.dgvKeyFeture.Name = "dgvKeyFeture";
             this.dgvKeyFeture.ReadOnly = true;
             this.dgvKeyFeture.RowHeadersVisible = false;
             this.dgvKeyFeture.Size = new System.Drawing.Size(604, 450);
             this.dgvKeyFeture.TabIndex = 0;
+            this.dgvKeyFeture.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvKeyFeture_CellClick);
+            this.dgvKeyFeture.SelectionChanged += new System.EventHandler(this.DgvKeyFeture_SelectionChanged);
             this.dgvKeyFeture.DoubleClick += new System.EventHandler(this.DgvKeyFeture_DoubleClick);
             // 
             // serialNumberDataGridViewTextBoxColumn
@@ -200,7 +202,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonSave.Location = new System.Drawing.Point(94, 509);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
@@ -224,7 +226,7 @@
             // 
             this.labelSelectFeature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelSelectFeature.AutoSize = true;
-            this.labelSelectFeature.Location = new System.Drawing.Point(123, 494);
+            this.labelSelectFeature.Location = new System.Drawing.Point(123, 492);
             this.labelSelectFeature.Name = "labelSelectFeature";
             this.labelSelectFeature.Size = new System.Drawing.Size(96, 13);
             this.labelSelectFeature.TabIndex = 9;
@@ -245,7 +247,7 @@
             // 
             this.labelSelectKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelSelectKey.AutoSize = true;
-            this.labelSelectKey.Location = new System.Drawing.Point(12, 494);
+            this.labelSelectKey.Location = new System.Drawing.Point(12, 492);
             this.labelSelectKey.Name = "labelSelectKey";
             this.labelSelectKey.Size = new System.Drawing.Size(76, 13);
             this.labelSelectKey.TabIndex = 11;
@@ -270,7 +272,7 @@
             this.Controls.Add(this.button1Delete);
             this.Name = "KeyFeatureView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Связь ключ-функциональность";           
+            this.Text = "Связь ключ-функциональность";
             ((System.ComponentModel.ISupportInitialize)(this.dgvKeyFeture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingKeyFeature)).EndInit();
             this.ResumeLayout(false);

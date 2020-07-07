@@ -18,6 +18,9 @@ namespace Presenter
             keyFeatureModel = new KeyFeatureModel(new Logics());
             View();
         }
+
+        public ModelViewKeyFeature Entities { get; set; } = null;
+
         public void Add(ModelViewKeyFeature entity)
         {
             if (entity == null)

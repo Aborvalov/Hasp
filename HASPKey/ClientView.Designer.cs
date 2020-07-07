@@ -88,7 +88,9 @@
             this.dgvClient.RowHeadersVisible = false;
             this.dgvClient.Size = new System.Drawing.Size(582, 457);
             this.dgvClient.TabIndex = 0;
+            this.dgvClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvClient_CellClick);
             this.dgvClient.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvClient_CellDoubleClick);
+            this.dgvClient.SelectionChanged += new System.EventHandler(this.DgvClient_SelectionChanged);
             // 
             // serialNumberDataGridViewTextBoxColumn
             // 
@@ -227,7 +229,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonSave.Location = new System.Drawing.Point(97, 550);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
@@ -249,7 +251,7 @@
             // labelFeature
             // 
             this.labelFeature.AutoSize = true;
-            this.labelFeature.Location = new System.Drawing.Point(9, 0);
+            this.labelFeature.Location = new System.Drawing.Point(115, 23);
             this.labelFeature.Name = "labelFeature";
             this.labelFeature.Size = new System.Drawing.Size(67, 13);
             this.labelFeature.TabIndex = 13;
@@ -269,7 +271,7 @@
             // labelSearchInnerId
             // 
             this.labelSearchInnerId.AutoSize = true;
-            this.labelSearchInnerId.Location = new System.Drawing.Point(151, -1);
+            this.labelSearchInnerId.Location = new System.Drawing.Point(281, 0);
             this.labelSearchInnerId.Name = "labelSearchInnerId";
             this.labelSearchInnerId.Size = new System.Drawing.Size(196, 13);
             this.labelSearchInnerId.TabIndex = 15;
@@ -277,7 +279,7 @@
             // 
             // tbInnerIdHaspKey
             // 
-            this.tbInnerIdHaspKey.Location = new System.Drawing.Point(154, 19);
+            this.tbInnerIdHaspKey.Location = new System.Drawing.Point(284, 20);
             this.tbInnerIdHaspKey.Name = "tbInnerIdHaspKey";
             this.tbInnerIdHaspKey.Size = new System.Drawing.Size(100, 21);
             this.tbInnerIdHaspKey.TabIndex = 16;
@@ -292,7 +294,6 @@
             this.Controls.Add(this.tbInnerIdHaspKey);
             this.Controls.Add(this.labelSearchInnerId);
             this.Controls.Add(this.buttonAll);
-            this.Controls.Add(this.labelFeature);
             this.Controls.Add(this.buttonSearchByFeature);
             this.Controls.Add(this.dgvClient);
             this.Controls.Add(this.buttonSave);
@@ -306,6 +307,7 @@
             this.Controls.Add(this.labelPhone);
             this.Controls.Add(this.labelAddress);
             this.Controls.Add(this.labelName);
+            this.Controls.Add(this.labelFeature);
             this.Name = "ClientView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Клиетны";

@@ -19,7 +19,7 @@ namespace Presenter
             View();
         }
 
-        public ModelViewHaspKey HaspKey { get; set; } = null;
+        public ModelViewHaspKey Entities { get; set; } = null;
 
         public void Add(ModelViewHaspKey entity)
         {

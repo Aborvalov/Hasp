@@ -12,12 +12,18 @@ namespace HASPKey
     {
         private readonly IPresenterEntities<ModelViewFeature> presenterFeature;
         private bool size = true;
-        private int sizeH = 40;
-        private ModelViewFeature feature = null;
+        private int sizeH = 40;       
         private bool search = false;
         public event Action DateUpdate;
         internal ModelViewFeature SearchFeature { get; private set; } = null;
-
+        
+        private const string error = "Ошибка";
+        private const string emptyFeature = "Функциональность не найдена.";
+        private const string caption = "Удалить фичу";
+        private const string message = "Вы уверены, что хотите удалить фичу?";
+        private const string errorNumber = "\u2022 Неверное значение номера, должно быть числом. \n";
+        private const string erroremptyName = "\u2022 Не заполнено поля \"Наименование\", не должно быть пустым. \n";
+               
         public FeatureView(bool search) :this()
         { 
             this.search = search;            
@@ -40,7 +46,7 @@ namespace HASPKey
         => bindingFeature.DataSource = entity != null ? new BindingList<ModelViewFeature>(entity)
                                                       : new BindingList<ModelViewFeature>();
 
-        public void MessageError(string error) => MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        public void MessageError(string errorText) => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         public void Remove(int id)
         {
@@ -62,68 +68,66 @@ namespace HASPKey
                 dgvFeature.Height = dgvFeature.Size.Height - sizeH;
                 size = !size;
             }
-            feature = new ModelViewFeature();
+            presenterFeature.Entities = new ModelViewFeature();
         }
 
         private void DgvFeature_DoubleClick(object sender, EventArgs e)
         {
+            if (!(dgvFeature.CurrentRow.DataBoundItem is ModelViewFeature row))
+            {
+                MessageError(emptyFeature);
+                return;
+            }
             if (search)
             {
-                SearchFeature = dgvFeature.CurrentRow.DataBoundItem as ModelViewFeature;
+                SearchFeature = row;
                 Close();
                 return;
             }
-
-            DefaultView();
+                        
             if (size)
             {
+                DefaultView();
                 dgvFeature.Height = dgvFeature.Size.Height - sizeH;
                 size = !size;
+                FillInputItem(row);
             }
+        }       
 
-            feature = new ModelViewFeature();
-            var row = dgvFeature.CurrentRow.DataBoundItem as ModelViewFeature;
-
-            feature.Id = row.Id;
-            tbNumber.Text = row.Number.ToString();
-            tbName.Text = row.Name;
-            tbDescription.Text = row.Description;
-        }        
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            if (!size)
-            {
-                if (!CheckInputData(out int number))
-                    return;
+            if (size)
+                return;
+          
+            if (!CheckInputData(out int number))
+                return;
 
-                feature.Number = number;
-                feature.Name = tbName.Text;
-                feature.Description = tbDescription.Text;
+            presenterFeature.Entities.Number = number;
+            presenterFeature.Entities.Name = tbName.Text;
+            presenterFeature.Entities.Description = tbDescription.Text;
 
-                if (feature.Id < 1)
-                    Add(feature);
-                else
-                    Update(feature);
+            if (presenterFeature.Entities.Id < 1)
+                Add(presenterFeature.Entities);
+            else
+                Update(presenterFeature.Entities);
 
-                DefaultView();
-            }
+            DefaultView();           
         }
         private bool CheckInputData(out int number)
         {
-            string erroeMess = string.Empty;
-            bool isInt = Int32.TryParse(tbNumber.Text, out number);
-
-            if (!isInt)
+            string errorMess = string.Empty;
+           
+            if (!int.TryParse(tbNumber.Text, out number))
             {
-                erroeMess = '\u2022' + " Неверное значение номера, должно быть числом." + '\n';
+                errorMess = errorNumber;
                 tbNumber.Text = string.Empty;
             }
             if (string.IsNullOrWhiteSpace(tbName.Text))
-                erroeMess += '\u2022' + " Не заполнено поля \"Наименование\", не должно быть пустым." + '\n';
+                errorMess += erroremptyName;
 
-            if (erroeMess != string.Empty)
+            if (errorMess != string.Empty)
             {
-                MessageError(erroeMess.Trim());
+                MessageError(errorMess.Trim());
                 return false;
             }
 
@@ -132,18 +136,18 @@ namespace HASPKey
 
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
-            var row = dgvFeature.CurrentRow.DataBoundItem as ModelViewFeature;
+            if (!(dgvFeature.CurrentRow.DataBoundItem is ModelViewFeature row))
+            {
+                MessageError(emptyFeature);
+                return;
+            }
             if (row.Id == 0)
             {
                 bindingFeature.RemoveCurrent();
                 return;
             }
-
-            string caption = "Удалить фичу";
-            string message = "Вы уверены, что хотите удалить фичу?";
-            DialogResult result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
+            
+            if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Remove(row.Id);
                 DefaultView();
@@ -159,6 +163,32 @@ namespace HASPKey
             tbNumber.Text = string.Empty;
             tbName.Text = string.Empty;
             tbDescription.Text = string.Empty;
+        }
+
+        private void DgvFeature_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!size)
+                FillInputItem();
+        }
+
+        private void DgvFeature_SelectionChanged(object sender, EventArgs e)
+        {
+            if (!size)
+                FillInputItem();
+        }
+        private void FillInputItem() => FillInputItem(dgvFeature.CurrentRow.DataBoundItem as ModelViewFeature);
+        private void FillInputItem(ModelViewFeature row)
+        {
+            if (row == null)
+                return;
+
+            presenterFeature.Entities = new ModelViewFeature
+            {
+                Id = row.Id
+            };
+            tbNumber.Text = row.Number.ToString();
+            tbName.Text = row.Name;
+            tbDescription.Text = row.Description;
         }
     }
 }

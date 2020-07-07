@@ -19,6 +19,9 @@ namespace Presenter
             clientModel = new ClientModel(new Logics());
             View();
         }
+
+        public ModelViewClient Entities { get; set; } = null;
+
         public void Add(ModelViewClient entity)
         {
             if (entity == null)

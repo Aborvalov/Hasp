@@ -32,10 +32,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bindingFeature = new System.Windows.Forms.BindingSource(this.components);
             this.dgvFeature = new System.Windows.Forms.DataGridView();
-            this.serialNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.serialNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelNumber = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
             this.labelDescription = new System.Windows.Forms.Label();
@@ -64,7 +64,6 @@
             this.dgvFeature.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvFeature.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFeature.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-           // this.serialNumberDataGridViewTextBoxColumn,
             this.numberDataGridViewTextBoxColumn,
             this.nameDataGridViewTextBoxColumn,
             this.descriptionDataGridViewTextBoxColumn});
@@ -83,17 +82,9 @@
             this.dgvFeature.RowHeadersVisible = false;
             this.dgvFeature.Size = new System.Drawing.Size(500, 320);
             this.dgvFeature.TabIndex = 0;
+            this.dgvFeature.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvFeature_CellClick);
+            this.dgvFeature.SelectionChanged += new System.EventHandler(this.DgvFeature_SelectionChanged);
             this.dgvFeature.DoubleClick += new System.EventHandler(this.DgvFeature_DoubleClick);
-            // 
-            // serialNumberDataGridViewTextBoxColumn
-            // 
-            this.serialNumberDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.serialNumberDataGridViewTextBoxColumn.DataPropertyName = "SerialNumber";
-            this.serialNumberDataGridViewTextBoxColumn.FillWeight = 131.9797F;
-            this.serialNumberDataGridViewTextBoxColumn.HeaderText = "№ п/п";
-            this.serialNumberDataGridViewTextBoxColumn.Name = "serialNumberDataGridViewTextBoxColumn";
-            this.serialNumberDataGridViewTextBoxColumn.ReadOnly = true;
-            this.serialNumberDataGridViewTextBoxColumn.Width = 65;
             // 
             // numberDataGridViewTextBoxColumn
             // 
@@ -118,6 +109,16 @@
             this.descriptionDataGridViewTextBoxColumn.HeaderText = "Описание";
             this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
             this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // serialNumberDataGridViewTextBoxColumn
+            // 
+            this.serialNumberDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.serialNumberDataGridViewTextBoxColumn.DataPropertyName = "SerialNumber";
+            this.serialNumberDataGridViewTextBoxColumn.FillWeight = 131.9797F;
+            this.serialNumberDataGridViewTextBoxColumn.HeaderText = "№ п/п";
+            this.serialNumberDataGridViewTextBoxColumn.Name = "serialNumberDataGridViewTextBoxColumn";
+            this.serialNumberDataGridViewTextBoxColumn.ReadOnly = true;
+            this.serialNumberDataGridViewTextBoxColumn.Width = 65;
             // 
             // labelNumber
             // 
@@ -199,7 +200,7 @@
             // 
             // ButtonSave
             // 
-            this.ButtonSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.ButtonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ButtonSave.Location = new System.Drawing.Point(93, 378);
             this.ButtonSave.Name = "ButtonSave";
             this.ButtonSave.Size = new System.Drawing.Size(75, 23);
@@ -225,7 +226,7 @@
             this.Controls.Add(this.labelNumber);
             this.Name = "FeatureView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Фича";
+            this.Text = "Функциональность";
             ((System.ComponentModel.ISupportInitialize)(this.bindingFeature)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFeature)).EndInit();
             this.ResumeLayout(false);

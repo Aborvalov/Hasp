@@ -14,11 +14,17 @@ namespace HASPKey
         private readonly IPresenterClient presenterClient;
         private bool size = true;
         private const int sizeH = 40;
-        private ModelViewClient clientForDB = null;
         private bool search = false;
         public event Action DateUpdate;
         internal ModelViewClient SearchIdClient { get; private set; }
 
+        private const string caption = "Удалить клиента";
+        private const string message = "Вы уверены, что хотите удалить клиента?";
+        private const string error = "Ошибка";
+        private const string emptyClient = "Данная клиент не найден.";
+        private const string errorEmptyName = "\u2022 Не заполнено поля \"Наименование\", не должно быть пустым. \n";
+        private const string errorEmptyAddress = "\u2022 Не заполнено поля \"Адрес\", не должно быть пустым. \n";
+                
         public ClientView(bool search)
         {
             InitializeComponent();
@@ -44,7 +50,7 @@ namespace HASPKey
         => bindingClient.DataSource = entity != null ? new BindingList<ModelViewClient>(entity)
                                                      : new BindingList<ModelViewClient>();
 
-        public void MessageError(string error) => MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        public void MessageError(string errorText) => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         public void Remove(int id)
         {
@@ -66,11 +72,16 @@ namespace HASPKey
                 dgvClient.Height = dgvClient.Size.Height - sizeH;
                 size = !size;
             }
-            clientForDB = new ModelViewClient();
+            presenterClient.Entities = new ModelViewClient();
         }
 
         private void DgvClient_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (!(dgvClient.CurrentRow.DataBoundItem is ModelViewClient row))
+            {
+                MessageError(emptyClient);
+                return;
+            }
             if (this.search)
             {
                 this.SearchIdClient = dgvClient.CurrentRow.DataBoundItem as ModelViewClient;
@@ -84,31 +95,37 @@ namespace HASPKey
                 size = !size;
             }
 
-            clientForDB = new ModelViewClient();
-            var row = dgvClient.CurrentRow.DataBoundItem as ModelViewClient;
-
-            clientForDB.Id = row.Id;
+            FillInputItem(row);
+        }
+        private void FillInputItem() => FillInputItem(dgvClient.CurrentRow.DataBoundItem as ModelViewClient);
+        private void FillInputItem(ModelViewClient row)
+        {
+            presenterClient.Entities = new ModelViewClient
+            {
+                Id = row.Id
+            };
             tbName.Text = row.Name;
             tbAddress.Text = row.Address;
             tbContactPerson.Text = row.ContactPerson;
-            tbPhone.Text = row.Phone;            
+            tbPhone.Text = row.Phone;
         }
+
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             if (!size)
             {
-                if (!CheckInputData())
+                if (CheckInputData())
                     return;
 
-                clientForDB.Name = tbName.Text;
-                clientForDB.Address = tbAddress.Text;
-                clientForDB.Phone = tbPhone.Text;
-                clientForDB.ContactPerson = tbContactPerson.Text;
+                presenterClient.Entities.Name = tbName.Text;
+                presenterClient.Entities.Address = tbAddress.Text;
+                presenterClient.Entities.Phone = tbPhone.Text;
+                presenterClient.Entities.ContactPerson = tbContactPerson.Text;
 
-                if (clientForDB.Id < 1)
-                    Add(clientForDB);
+                if (presenterClient.Entities.Id < 1)
+                    Add(presenterClient.Entities);
                 else
-                    Update(clientForDB);
+                    Update(presenterClient.Entities);
 
                 DefaultView();
             }
@@ -129,15 +146,15 @@ namespace HASPKey
         }
         private bool CheckInputData()
         {
-            string erroeMess = string.Empty;
+            string errorMess = string.Empty;
             if (string.IsNullOrWhiteSpace(tbName.Text))
-                erroeMess += '\u2022' + " Не заполнено поля \"Наименование\", не должно быть пустым." + '\n';
+                errorMess += errorEmptyName;
             if (string.IsNullOrWhiteSpace(tbAddress.Text))
-                erroeMess += '\u2022' + " Не заполнено поля \"Адрес\", не должно быть пустым." + '\n';
+                errorMess += errorEmptyAddress;
 
-            if (erroeMess != string.Empty)
+            if (errorMess != string.Empty)
             {
-                MessageError(erroeMess.Trim());
+                MessageError(errorMess.Trim());
                 return false;
             }
 
@@ -146,18 +163,18 @@ namespace HASPKey
 
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
-            var row = dgvClient.CurrentRow.DataBoundItem as ModelViewClient;
+            if (!(dgvClient.CurrentRow.DataBoundItem is ModelViewClient row))
+            {
+                MessageError(emptyClient);
+                return;
+            }
             if (row.Id == 0)
             {
                 bindingClient.RemoveCurrent();
                 return;
             }
 
-            string caption = "Удалить клиента";
-            string message = "Вы уверены, что хотите удалить клиента?";
-            DialogResult result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
+            if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Remove(row.Id);
                 DefaultView();
@@ -167,14 +184,17 @@ namespace HASPKey
         private void ButtonSearchByFeature_Click(object sender, EventArgs e)
         {
             DefaultView();
-            FeatureView feature = new FeatureView(true);
-            feature.ShowDialog();
 
-            if (feature.SearchFeature != null)
+            using (FeatureView feature = new FeatureView(true))
             {
-                presenterClient.GetByFeature(feature.SearchFeature);
+                feature.ShowDialog();
 
-                labelFeature.Text = feature.SearchFeature.Name;
+                if (feature.SearchFeature != null)
+                {
+                    presenterClient.GetByFeature(feature.SearchFeature);
+
+                    labelFeature.Text = feature.SearchFeature.Name;
+                }
             }
         }
 
@@ -183,22 +203,30 @@ namespace HASPKey
             DefaultView();
             presenterClient.View();
         }
-
         private void TbInnerIdHaspKey_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {                
-                presenterClient.GetByNumberKey(Int32.Parse(tbInnerIdHaspKey.Text));
+                presenterClient.GetByNumberKey(int.Parse(tbInnerIdHaspKey.Text));
                 DefaultView();
             }
         }
-
         private void TbInnerIdHaspKey_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
+        }
+        private void DgvClient_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!size)
+                FillInputItem();
+        }
+        private void DgvClient_SelectionChanged(object sender, EventArgs e)
+        {
+            if (!size)
+                FillInputItem();
         }
     }
 }

@@ -18,6 +18,9 @@ namespace Presenter
             featureModel = new FeatureModel(new Logics());
             View();
         }
+
+        public ModelViewFeature Entities { get; set; } = null;
+
         public void Add(ModelViewFeature entity)
         {
             if (entity == null)

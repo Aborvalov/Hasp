@@ -17,7 +17,15 @@ namespace HASPKey
         public event Action DateUpdate;
         private bool search = false;
         internal ModelViewHaspKey SearchHaspKey { get; private set; } = null;
-
+        
+        private const string error = "Ошибка";
+        private const string caption = "Удалить ключ";
+        private const string emptyHaspKey = "Данный ключ не найден.";
+        private const string message = "Вы уверены, что хотите удалить Hasp-ключ?";
+        private const string errorHaspKey = "\u2022 Неверное значение внутреннего ключа, должно быть числом. \n";
+        private const string errorEmptyTypeKey =  "\u2022 Не выбран тип ключа. \n";
+        private const string errorEmptyNumber = "\u2022 Не заполнено поля \"Номер\", не должно быть пустым. \n";
+        
         public HaspKeyView()
         {
             InitializeComponent();
@@ -78,11 +86,11 @@ namespace HASPKey
             {
                 dgvHaspKey.Height = dgvHaspKey.Size.Height - sizeH;
                 size = !size;
+                presenterHaspKey.Entities = new ModelViewHaspKey();
                 buttonAdd.Enabled = false;
-            }
-            presenterHaspKey.HaspKey = new ModelViewHaspKey();
+            }            
         }
-        public void MessageError(string error) => MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        public void MessageError(string errorText) => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
@@ -91,15 +99,15 @@ namespace HASPKey
                 if (!CheckInputData(out int innNumber))
                     return;
 
-                presenterHaspKey.HaspKey.InnerId = innNumber;
-                presenterHaspKey.HaspKey.Number = tbNumber.Text.Trim();
-                presenterHaspKey.HaspKey.TypeKey = (TypeKey)comboBoxTypeKey.SelectedItem;
-                presenterHaspKey.HaspKey.IsHome = checkBoxIsHome.Checked;
+                presenterHaspKey.Entities.InnerId = innNumber;
+                presenterHaspKey.Entities.Number = tbNumber.Text.Trim();
+                presenterHaspKey.Entities.TypeKey = (TypeKey)comboBoxTypeKey.SelectedItem;
+                presenterHaspKey.Entities.IsHome = checkBoxIsHome.Checked;
 
-                if(presenterHaspKey.HaspKey.Id < 1)
-                    Add(presenterHaspKey.HaspKey);                
+                if(presenterHaspKey.Entities.Id < 1)
+                    Add(presenterHaspKey.Entities);                
                 else
-                    Update(presenterHaspKey.HaspKey);
+                    Update(presenterHaspKey.Entities);
 
                 DefaultView();
             }
@@ -119,7 +127,7 @@ namespace HASPKey
                 size = !size;
             }
 
-            presenterHaspKey.HaspKey = new ModelViewHaspKey();
+            presenterHaspKey.Entities = new ModelViewHaspKey();
             FillInputItem();
         }
 
@@ -140,24 +148,23 @@ namespace HASPKey
         }
         private bool CheckInputData(out int innNumber)
         {
-            string erroeMess = string.Empty;
-            bool isInt = Int32.TryParse(tbInnerNumber.Text, out innNumber);
-
-            if (!isInt)
+            string errorMess = string.Empty;
+            
+            if (!int.TryParse(tbInnerNumber.Text, out innNumber))
             {
-                erroeMess = '\u2022' + " Неверное значение внутреннего ключа, должно быть числом." + '\n';
+                errorMess = errorHaspKey;
                 tbInnerNumber.Text = string.Empty;
             }
 
             if (comboBoxTypeKey.SelectedItem == null)
-                erroeMess += '\u2022' + " Не выбран тип ключа." + '\n';
+                errorMess += errorEmptyTypeKey;
 
             if (string.IsNullOrWhiteSpace(tbNumber.Text))
-                erroeMess += '\u2022' + " Не заполнено поля \"Номер\", не должно быть пустым." + '\n';
+                errorMess += errorEmptyNumber;
 
-            if (erroeMess != string.Empty)
+            if (errorMess != string.Empty)
             {
-                MessageError(erroeMess.Trim());
+                MessageError(errorMess.Trim());
                 return false;
             }
 
@@ -165,18 +172,19 @@ namespace HASPKey
         }
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
-            var row = dgvHaspKey.CurrentRow.DataBoundItem as ModelViewHaspKey;
+            if (!(dgvHaspKey.CurrentRow.DataBoundItem is ModelViewHaspKey row))
+            {
+                MessageError(emptyHaspKey);
+                return;
+            }
+
             if (row.Id == 0)
             {
                 bindingHaspKey.RemoveCurrent();
                 return;
             }
-
-            string caption = "Удалить ключ";
-            string message = "Вы уверены, что хотите удалить Hasp-ключ?";
-            DialogResult result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
+            
+            if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Remove(row.Id);
                 DefaultView();
@@ -189,16 +197,18 @@ namespace HASPKey
             radioButtonAll.Checked = false;
             radioButtonPastDue.Checked = false;
 
-            ClientView client = new ClientView(true);
-            client.ShowDialog();
-
-            if (client.SearchIdClient != null)
+            using (ClientView client = new ClientView(true))
             {
-                DefaultView();
-                presenterHaspKey.GetByClient(client.SearchIdClient);
-                
-                labelClient.Text = client.SearchIdClient.Name;
-                labelClient.Location = new System.Drawing.Point((this.Width - 25) - labelClient.Width, labelClient.Location.Y);
+                client.ShowDialog();
+
+                if (client.SearchIdClient != null)
+                {
+                    DefaultView();
+                    presenterHaspKey.GetByClient(client.SearchIdClient);
+
+                    labelClient.Text = client.SearchIdClient.Name;
+                    labelClient.Location = new System.Drawing.Point((this.Width - 25) - labelClient.Width, labelClient.Location.Y);
+                }
             }
         }
 
@@ -216,9 +226,13 @@ namespace HASPKey
 
         private void FillInputItem()
         {
-            var row = dgvHaspKey.CurrentRow.DataBoundItem as ModelViewHaspKey;
+            if (!(dgvHaspKey.CurrentRow.DataBoundItem is ModelViewHaspKey row))
+            {
+                MessageError(emptyHaspKey);
+                return;
+            }
 
-            presenterHaspKey.HaspKey.Id = row.Id;
+            presenterHaspKey.Entities.Id = row.Id;
             tbInnerNumber.Text = row.InnerId.ToString();
             tbNumber.Text = row.Number;
             comboBoxTypeKey.SelectedIndex = (int)row.TypeKey;

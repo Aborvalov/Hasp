@@ -14,7 +14,6 @@ namespace Presenter
         /// Поиск действующих ключей.
         /// </summary>
         /// <returns>Список действующих ключей.</returns>
-        void GetByActive();
-        ModelViewHaspKey HaspKey { get; set; }
+        void GetByActive();        
     }
 }
