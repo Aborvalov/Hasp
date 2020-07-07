@@ -23,7 +23,7 @@ namespace HASPKey
         private const string message = "Вы уверены, что хотите удалить фичу?";
         private const string errorNumber = "\u2022 Неверное значение номера, должно быть числом. \n";
         private const string erroremptyName = "\u2022 Не заполнено поля \"Наименование\", не должно быть пустым. \n";
-               
+                
         public FeatureView(bool search) : this()
         { 
             this.search = search;            
