@@ -35,7 +35,6 @@ namespace Presenter
                 return;
             }
 
-            FillModel();
             if (featureModel.Add(entity))
             {
                 entitiesView.DataChange();
@@ -64,7 +63,6 @@ namespace Presenter
                 return;
             }
 
-            FillModel();
             if (featureModel.Update(entity))
             {
                 entitiesView.DataChange();

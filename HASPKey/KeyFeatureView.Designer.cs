@@ -33,7 +33,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KeyFeatureView));
-            this.dgvKeyFeture = new System.Windows.Forms.DataGridView();
+            this.dgvKeyFeature = new System.Windows.Forms.DataGridView();
             this.serialNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numberKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.featureDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,28 +52,28 @@
             this.labelSelectFeature = new System.Windows.Forms.Label();
             this.buttonSelectKey = new System.Windows.Forms.Button();
             this.labelSelectKey = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvKeyFeture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvKeyFeature)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingKeyFeature)).BeginInit();
             this.SuspendLayout();
             // 
-            // dgvKeyFeture
+            // dgvKeyFeature
             // 
-            this.dgvKeyFeture.AllowUserToAddRows = false;
-            this.dgvKeyFeture.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgvKeyFeature.AllowUserToAddRows = false;
+            this.dgvKeyFeature.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvKeyFeture.AutoGenerateColumns = false;
-            this.dgvKeyFeture.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvKeyFeture.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgvKeyFeture.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvKeyFeture.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvKeyFeature.AutoGenerateColumns = false;
+            this.dgvKeyFeature.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvKeyFeature.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvKeyFeature.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvKeyFeature.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.serialNumberDataGridViewTextBoxColumn,
             this.numberKeyDataGridViewTextBoxColumn,
             this.featureDataGridViewTextBoxColumn,
             this.typeKeyDataGridViewTextBoxColumn,
             this.startDateDataGridViewTextBoxColumn,
             this.endDateDataGridViewTextBoxColumn});
-            this.dgvKeyFeture.DataSource = this.bindingKeyFeature;
+            this.dgvKeyFeature.DataSource = this.bindingKeyFeature;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F);
@@ -81,16 +81,16 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvKeyFeture.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvKeyFeture.Location = new System.Drawing.Point(12, 1);
-            this.dgvKeyFeture.Name = "dgvKeyFeture";
-            this.dgvKeyFeture.ReadOnly = true;
-            this.dgvKeyFeture.RowHeadersVisible = false;
-            this.dgvKeyFeture.Size = new System.Drawing.Size(604, 450);
-            this.dgvKeyFeture.TabIndex = 0;
-            this.dgvKeyFeture.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvKeyFeture_CellClick);
-            this.dgvKeyFeture.SelectionChanged += new System.EventHandler(this.DgvKeyFeture_SelectionChanged);
-            this.dgvKeyFeture.DoubleClick += new System.EventHandler(this.DgvKeyFeture_DoubleClick);
+            this.dgvKeyFeature.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvKeyFeature.Location = new System.Drawing.Point(12, 1);
+            this.dgvKeyFeature.Name = "dgvKeyFeature";
+            this.dgvKeyFeature.ReadOnly = true;
+            this.dgvKeyFeature.RowHeadersVisible = false;
+            this.dgvKeyFeature.Size = new System.Drawing.Size(604, 450);
+            this.dgvKeyFeature.TabIndex = 0;
+            this.dgvKeyFeature.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvKeyFeture_CellClick);
+            this.dgvKeyFeature.SelectionChanged += new System.EventHandler(this.DgvKeyFeture_SelectionChanged);
+            this.dgvKeyFeature.DoubleClick += new System.EventHandler(this.DgvKeyFeture_DoubleClick);
             // 
             // serialNumberDataGridViewTextBoxColumn
             // 
@@ -162,6 +162,7 @@
             this.dtpEndDate.Name = "dtpEndDate";
             this.dtpEndDate.Size = new System.Drawing.Size(138, 21);
             this.dtpEndDate.TabIndex = 2;
+            this.dtpEndDate.ValueChanged += new System.EventHandler(this.DtpEndDate_ValueChanged);
             // 
             // labelEndDate
             // 
@@ -261,7 +262,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(628, 535);
-            this.Controls.Add(this.dgvKeyFeture);
+            this.Controls.Add(this.dgvKeyFeature);
             this.Controls.Add(this.labelSelectKey);
             this.Controls.Add(this.buttonSelectKey);
             this.Controls.Add(this.labelSelectFeature);
@@ -278,7 +279,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Связь ключ-функциональность";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvKeyFeture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvKeyFeature)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingKeyFeature)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -288,7 +289,7 @@
         #endregion
 
         private System.Windows.Forms.BindingSource bindingKeyFeature;
-        private System.Windows.Forms.DataGridView dgvKeyFeture;
+        private System.Windows.Forms.DataGridView dgvKeyFeature;
         private System.Windows.Forms.Button button1Delete;
         private System.Windows.Forms.DataGridViewTextBoxColumn serialNumberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberKeyDataGridViewTextBoxColumn;

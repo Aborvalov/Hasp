@@ -105,6 +105,7 @@ namespace HASPKey
                 dgvFeature.Height = dgvFeature.Size.Height - sizeH;
                 size = !size;
                 presenterFeature.FillInputItem(row);
+                ButtonAdd.Enabled = false;
             }
         }       
 

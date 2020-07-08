@@ -38,7 +38,6 @@ namespace Presenter
                 return;
             }
 
-            FillModel();
             if (clientModel.Add(entity))
             {
                 entitiesView.DataChange();

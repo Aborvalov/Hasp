@@ -92,8 +92,9 @@ namespace HASPKey
             {
                 dgvClient.Height = dgvClient.Size.Height - sizeH;
                 size = !size;
-            }
-            presenterClient.Entities = new ModelViewClient();
+                buttonAdd.Enabled = false;
+                presenterClient.Entities = new ModelViewClient();
+            }            
         }
 
         private void DgvClient_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -116,6 +117,7 @@ namespace HASPKey
                 dgvClient.Height = dgvClient.Size.Height - sizeH;
                 size = !size;
                 presenterClient.FillInputItem(row);
+                buttonAdd.Enabled = false;
             }
         }
        
@@ -140,6 +142,7 @@ namespace HASPKey
             tbPhone.Text = string.Empty;
             labelFeature.Text = string.Empty;
             tbInnerIdHaspKey.Text = string.Empty;
+            buttonAdd.Enabled = true;
         }
         
         private void ButtonDelete_Click(object sender, EventArgs e)

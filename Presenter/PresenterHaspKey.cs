@@ -39,7 +39,10 @@ namespace Presenter
             }
 
             if (haspKeyModel.Add(entity))
+            {
+                entitiesView.DataChange();
                 Display();
+            }
             else
                 entitiesView.MessageError(errorAdd);
         }
