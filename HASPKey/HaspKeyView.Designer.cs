@@ -57,6 +57,7 @@
             this.checkBoxIsHome = new System.Windows.Forms.CheckBox();
             this.buttonSearchByClient = new System.Windows.Forms.Button();
             this.labelClient = new System.Windows.Forms.Label();
+            this.Headline = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHaspKey)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHaspKey)).BeginInit();
             this.panelFiltr.SuspendLayout();
@@ -88,13 +89,13 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvHaspKey.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvHaspKey.EnableHeadersVisualStyles = false;
-            this.dgvHaspKey.Location = new System.Drawing.Point(12, 45);
+            this.dgvHaspKey.Location = new System.Drawing.Point(12, 57);
             this.dgvHaspKey.Name = "dgvHaspKey";
             this.dgvHaspKey.ReadOnly = true;
             this.dgvHaspKey.RowHeadersVisible = false;
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
             this.dgvHaspKey.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvHaspKey.Size = new System.Drawing.Size(421, 475);
+            this.dgvHaspKey.Size = new System.Drawing.Size(421, 463);
             this.dgvHaspKey.TabIndex = 0;
             this.dgvHaspKey.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvHaspKey_CellClick);
             this.dgvHaspKey.SelectionChanged += new System.EventHandler(this.DgvHaspKey_SelectionChanged);
@@ -322,11 +323,22 @@
             this.labelClient.Text = "Client";
             this.labelClient.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // Headline
+            // 
+            this.Headline.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.Headline.AutoSize = true;
+            this.Headline.Location = new System.Drawing.Point(166, 42);
+            this.Headline.Name = "Headline";
+            this.Headline.Size = new System.Drawing.Size(115, 13);
+            this.Headline.TabIndex = 17;
+            this.Headline.Text = "Список HASP-ключей";
+            // 
             // HaspKeyView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(445, 592);
+            this.Controls.Add(this.Headline);
             this.Controls.Add(this.buttonSearchByClient);
             this.Controls.Add(this.dgvHaspKey);
             this.Controls.Add(this.checkBoxIsHome);
@@ -380,5 +392,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeKeyDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isHomeDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.Label Headline;
     }
 }

@@ -48,6 +48,7 @@
             this.ButtonAdd = new System.Windows.Forms.Button();
             this.ButtonDelete = new System.Windows.Forms.Button();
             this.ButtonSave = new System.Windows.Forms.Button();
+            this.Headline = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bindingFeature)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFeature)).BeginInit();
             this.SuspendLayout();
@@ -79,11 +80,11 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvFeature.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvFeature.Location = new System.Drawing.Point(12, 12);
+            this.dgvFeature.Location = new System.Drawing.Point(12, 25);
             this.dgvFeature.Name = "dgvFeature";
             this.dgvFeature.ReadOnly = true;
             this.dgvFeature.RowHeadersVisible = false;
-            this.dgvFeature.Size = new System.Drawing.Size(500, 320);
+            this.dgvFeature.Size = new System.Drawing.Size(500, 307);
             this.dgvFeature.TabIndex = 0;
             this.dgvFeature.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvFeature_CellClick);
             this.dgvFeature.SelectionChanged += new System.EventHandler(this.DgvFeature_SelectionChanged);
@@ -216,11 +217,22 @@
             this.ButtonSave.UseVisualStyleBackColor = true;
             this.ButtonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
+            // Headline
+            // 
+            this.Headline.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.Headline.AutoSize = true;
+            this.Headline.Location = new System.Drawing.Point(187, 9);
+            this.Headline.Name = "Headline";
+            this.Headline.Size = new System.Drawing.Size(149, 13);
+            this.Headline.TabIndex = 10;
+            this.Headline.Text = "Список функциональностей";
+            // 
             // FeatureView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(524, 405);
+            this.Controls.Add(this.Headline);
             this.Controls.Add(this.dgvFeature);
             this.Controls.Add(this.ButtonSave);
             this.Controls.Add(this.ButtonDelete);
@@ -260,5 +272,6 @@
         private System.Windows.Forms.Button ButtonAdd;
         private System.Windows.Forms.Button ButtonDelete;
         private System.Windows.Forms.Button ButtonSave;
+        private System.Windows.Forms.Label Headline;
     }
 }

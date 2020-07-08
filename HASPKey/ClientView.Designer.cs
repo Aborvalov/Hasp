@@ -56,6 +56,7 @@
             this.buttonAll = new System.Windows.Forms.Button();
             this.labelSearchInnerId = new System.Windows.Forms.Label();
             this.tbInnerIdHaspKey = new System.Windows.Forms.TextBox();
+            this.Headline = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingClient)).BeginInit();
             this.SuspendLayout();
@@ -85,11 +86,11 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvClient.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvClient.Location = new System.Drawing.Point(12, 47);
+            this.dgvClient.Location = new System.Drawing.Point(12, 58);
             this.dgvClient.Name = "dgvClient";
             this.dgvClient.ReadOnly = true;
             this.dgvClient.RowHeadersVisible = false;
-            this.dgvClient.Size = new System.Drawing.Size(582, 457);
+            this.dgvClient.Size = new System.Drawing.Size(582, 446);
             this.dgvClient.TabIndex = 0;
             this.dgvClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvClient_CellClick);
             this.dgvClient.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvClient_CellDoubleClick);
@@ -247,7 +248,7 @@
             // 
             // buttonSearchByFeature
             // 
-            this.buttonSearchByFeature.Location = new System.Drawing.Point(13, 18);
+            this.buttonSearchByFeature.Location = new System.Drawing.Point(13, 13);
             this.buttonSearchByFeature.Name = "buttonSearchByFeature";
             this.buttonSearchByFeature.Size = new System.Drawing.Size(96, 23);
             this.buttonSearchByFeature.TabIndex = 12;
@@ -258,7 +259,7 @@
             // labelFeature
             // 
             this.labelFeature.AutoSize = true;
-            this.labelFeature.Location = new System.Drawing.Point(115, 23);
+            this.labelFeature.Location = new System.Drawing.Point(115, 18);
             this.labelFeature.Name = "labelFeature";
             this.labelFeature.Size = new System.Drawing.Size(67, 13);
             this.labelFeature.TabIndex = 13;
@@ -267,7 +268,7 @@
             // buttonAll
             // 
             this.buttonAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAll.Location = new System.Drawing.Point(518, 18);
+            this.buttonAll.Location = new System.Drawing.Point(518, 13);
             this.buttonAll.Name = "buttonAll";
             this.buttonAll.Size = new System.Drawing.Size(75, 23);
             this.buttonAll.TabIndex = 14;
@@ -277,6 +278,7 @@
             // 
             // labelSearchInnerId
             // 
+            this.labelSearchInnerId.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelSearchInnerId.AutoSize = true;
             this.labelSearchInnerId.Location = new System.Drawing.Point(281, 0);
             this.labelSearchInnerId.Name = "labelSearchInnerId";
@@ -286,18 +288,30 @@
             // 
             // tbInnerIdHaspKey
             // 
-            this.tbInnerIdHaspKey.Location = new System.Drawing.Point(284, 20);
+            this.tbInnerIdHaspKey.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tbInnerIdHaspKey.Location = new System.Drawing.Point(284, 15);
             this.tbInnerIdHaspKey.Name = "tbInnerIdHaspKey";
             this.tbInnerIdHaspKey.Size = new System.Drawing.Size(100, 21);
             this.tbInnerIdHaspKey.TabIndex = 16;
             this.tbInnerIdHaspKey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbInnerIdHaspKey_KeyDown);
             this.tbInnerIdHaspKey.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbInnerIdHaspKey_KeyPress);
             // 
+            // Headline
+            // 
+            this.Headline.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.Headline.AutoSize = true;
+            this.Headline.Location = new System.Drawing.Point(256, 43);
+            this.Headline.Name = "Headline";
+            this.Headline.Size = new System.Drawing.Size(94, 13);
+            this.Headline.TabIndex = 17;
+            this.Headline.Text = "Список клиентов";
+            // 
             // ClientView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(605, 578);
+            this.Controls.Add(this.Headline);
             this.Controls.Add(this.tbInnerIdHaspKey);
             this.Controls.Add(this.labelSearchInnerId);
             this.Controls.Add(this.buttonAll);
@@ -352,5 +366,6 @@
         private System.Windows.Forms.Button buttonAll;
         private System.Windows.Forms.Label labelSearchInnerId;
         private System.Windows.Forms.TextBox tbInnerIdHaspKey;
+        private System.Windows.Forms.Label Headline;
     }
 }

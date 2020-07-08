@@ -208,11 +208,11 @@
             // 
             this.Headline.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.Headline.AutoSize = true;
-            this.Headline.Location = new System.Drawing.Point(234, 30);
+            this.Headline.Location = new System.Drawing.Point(235, 30);
             this.Headline.Name = "Headline";
-            this.Headline.Size = new System.Drawing.Size(150, 13);
+            this.Headline.Size = new System.Drawing.Size(146, 13);
             this.Headline.TabIndex = 4;
-            this.Headline.Text = "Действующие HASP-ключи.";
+            this.Headline.Text = "Действующие HASP-ключи";
             this.Headline.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // MainForm

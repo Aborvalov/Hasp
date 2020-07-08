@@ -52,6 +52,7 @@
             this.labelSelectFeature = new System.Windows.Forms.Label();
             this.buttonSelectKey = new System.Windows.Forms.Button();
             this.labelSelectKey = new System.Windows.Forms.Label();
+            this.Headline = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKeyFeature)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingKeyFeature)).BeginInit();
             this.SuspendLayout();
@@ -82,11 +83,11 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvKeyFeature.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvKeyFeature.Location = new System.Drawing.Point(12, 1);
+            this.dgvKeyFeature.Location = new System.Drawing.Point(12, 27);
             this.dgvKeyFeature.Name = "dgvKeyFeature";
             this.dgvKeyFeature.ReadOnly = true;
             this.dgvKeyFeature.RowHeadersVisible = false;
-            this.dgvKeyFeature.Size = new System.Drawing.Size(604, 450);
+            this.dgvKeyFeature.Size = new System.Drawing.Size(604, 424);
             this.dgvKeyFeature.TabIndex = 0;
             this.dgvKeyFeature.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvKeyFeture_CellClick);
             this.dgvKeyFeature.SelectionChanged += new System.EventHandler(this.DgvKeyFeture_SelectionChanged);
@@ -257,11 +258,22 @@
             this.labelSelectKey.TabIndex = 11;
             this.labelSelectKey.Text = "labelSelectKey";
             // 
+            // Headline
+            // 
+            this.Headline.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.Headline.AutoSize = true;
+            this.Headline.Location = new System.Drawing.Point(199, 9);
+            this.Headline.Name = "Headline";
+            this.Headline.Size = new System.Drawing.Size(233, 13);
+            this.Headline.TabIndex = 12;
+            this.Headline.Text = "Список отношений ключ-функциональность";
+            // 
             // KeyFeatureView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(628, 535);
+            this.Controls.Add(this.Headline);
             this.Controls.Add(this.dgvKeyFeature);
             this.Controls.Add(this.labelSelectKey);
             this.Controls.Add(this.buttonSelectKey);
@@ -307,5 +319,6 @@
         private System.Windows.Forms.Label labelSelectFeature;
         private System.Windows.Forms.Button buttonSelectKey;
         private System.Windows.Forms.Label labelSelectKey;
+        private System.Windows.Forms.Label Headline;
     }
 }
