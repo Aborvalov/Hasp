@@ -4,6 +4,7 @@ using Presenter;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using View;
 
@@ -31,7 +32,9 @@ namespace HASPKey
             InitializeComponent();
             presenterHaspKey = new PresenterHaspKey(this);
             dgvHaspKey.Height = dgvHaspKey.Size.Height + sizeH;
+            
             comboBoxTypeKey.DataSource = Enum.GetValues(typeof(TypeKey));
+
             comboBoxTypeKey.SelectedIndex = -1;
 
             labelClient.Text = string.Empty;
