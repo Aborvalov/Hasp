@@ -338,6 +338,7 @@
             this.Controls.Add(this.labelClient);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "HaspKeyView";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hasp-ключ";
             ((System.ComponentModel.ISupportInitialize)(this.dgvHaspKey)).EndInit();

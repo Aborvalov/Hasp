@@ -275,6 +275,7 @@
             this.Controls.Add(this.button1Delete);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "KeyFeatureView";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Связь ключ-функциональность";
             ((System.ComponentModel.ISupportInitialize)(this.dgvKeyFeture)).EndInit();

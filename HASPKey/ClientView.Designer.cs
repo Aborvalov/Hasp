@@ -313,6 +313,7 @@
             this.Controls.Add(this.labelFeature);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ClientView";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Клиетны";
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).EndInit();
