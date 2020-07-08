@@ -9,14 +9,18 @@ namespace Presenter
     public class PresenterHaspKey : IPresenterHaspKey
     {
         private readonly IHaspKeyModel haspKeyModel;
-        private readonly IEntitiesView<ModelViewHaspKey> entitiesView;
+        private readonly IHaspKeyView entitiesView;
 
         private const string errorAdd = "Не удалось создать Hasp-ключ.";
         private const string errorUpdate = "Не удалось обновить Hasp-ключ.";
         private const string errorDelete = "Не удалось удалить Hasp-ключ.";
         private const string errorEmptyСдшуте = "Данный клиент имеет пустые значения.";
-               
-        public PresenterHaspKey(IEntitiesView<ModelViewHaspKey> entitesView)
+        private const string errorHaspKey = "\u2022 Неверное значение внутреннего ключа, должно быть числом. \n";
+        private const string errorEmptyTypeKey = "\u2022 Не выбран тип ключа. \n";
+        private const string errorEmptyNumber = "\u2022 Не заполнено поля \"Номер\", не должно быть пустым. \n";
+
+
+        public PresenterHaspKey(IHaspKeyView entitesView)
         {
             this.entitiesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
 
@@ -57,7 +61,10 @@ namespace Presenter
         public void Remove(int id)
         {
             if (id > 0 && haspKeyModel.Remove(id))
+            {
+                entitiesView.DataChange();
                 Display();
+            }
             else
                 entitiesView.MessageError(errorDelete);
         }
@@ -71,7 +78,10 @@ namespace Presenter
             }
 
             if (haspKeyModel.Update(entity))
+            {
+                entitiesView.DataChange();
                 Display();
+            }
             else
                 entitiesView.MessageError(errorUpdate);
         }
@@ -82,7 +92,53 @@ namespace Presenter
 
         public void FillInputItem(ModelViewHaspKey row)
         {
-            throw new NotImplementedException();
+            if (row == null)
+                return;
+            Entities = new ModelViewHaspKey
+            {
+                Id = row.Id
+            };
+            entitiesView.InnerNumber = row.InnerId.ToString();
+            entitiesView.Number = row.Number;
+            entitiesView.TypeKey = row.TypeKey;
+            entitiesView.IsHome = row.IsHome;
+        }
+
+        public void FillModel()
+        {
+            if (!CheckInputData(out int innNumber))
+                return;
+
+            Entities.InnerId = innNumber;
+            Entities.Number = entitiesView.Number;
+            Entities.TypeKey = entitiesView.TypeKey;
+            Entities.IsHome = entitiesView.IsHome;
+
+            if (Entities.Id < 1)
+                Add(Entities);
+            else
+                Update(Entities);
+        }
+        private bool CheckInputData(out int innNumber)
+        {
+            string errorMess = string.Empty;
+
+            if (!int.TryParse(entitiesView.InnerNumber, out innNumber))
+            {
+                errorMess = errorHaspKey;
+                entitiesView.InnerNumber = string.Empty;
+            }  
+
+            if (string.IsNullOrWhiteSpace(entitiesView.Number))
+                errorMess += errorEmptyNumber;
+
+            if (errorMess != string.Empty)
+            {
+                entitiesView.MessageError(errorMess.Trim());
+                return false;
+            }
+
+            return true;
         }
     }
 }

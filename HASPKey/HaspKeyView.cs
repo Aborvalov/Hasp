@@ -10,7 +10,7 @@ using View;
 
 namespace HASPKey
 {
-    public partial class HaspKeyView : DevExpress.XtraEditors.XtraForm, IEntitiesView<ModelViewHaspKey>
+    public partial class HaspKeyView : DevExpress.XtraEditors.XtraForm, IHaspKeyView
     {
         private readonly IPresenterHaspKey presenterHaspKey;
         private bool size = true;
@@ -23,10 +23,48 @@ namespace HASPKey
         private const string caption = "Удалить ключ";
         private const string emptyHaspKey = "Данный ключ не найден.";
         private const string message = "Вы уверены, что хотите удалить Hasp-ключ?";
-        private const string errorHaspKey = "\u2022 Неверное значение внутреннего ключа, должно быть числом. \n";
-        private const string errorEmptyTypeKey =  "\u2022 Не выбран тип ключа. \n";
-        private const string errorEmptyNumber = "\u2022 Не заполнено поля \"Номер\", не должно быть пустым. \n";
         
+
+        private string innerNumber;
+        public string InnerNumber
+        {
+            get { return innerNumber; }
+            set
+            {
+                innerNumber = value;
+                tbInnerNumber.Text = value;
+            }
+        }
+        private string number;
+        public string Number
+        {
+            get { return number; }
+            set
+            {
+                number = value;
+                tbNumber.Text = value;
+            }
+        }
+        private TypeKey typeKey;
+        public TypeKey TypeKey
+        {
+            get { return typeKey; }
+            set
+            {
+                typeKey = value;
+                comboBoxTypeKey.SelectedIndex = (int)value;
+            }
+        }
+        private bool isHome;
+        public bool IsHome
+        {
+            get { return isHome; }
+            set
+            {
+                isHome = value;
+                checkBoxIsHome.Checked = value;
+            }
+        }                     
         public HaspKeyView()
         {
             InitializeComponent();
@@ -45,29 +83,13 @@ namespace HASPKey
             dgvHaspKey.Height = dgvHaspKey.Size.Height + 28;
         }
 
-        public void Add(ModelViewHaspKey entity)
-        {
-            presenterHaspKey.Add(entity);
-            DateUpdate?.Invoke();
-        }
-
         public void Bind(List<ModelViewHaspKey> entity) 
         => bindingHaspKey.DataSource = entity != null ? new BindingList<ModelViewHaspKey>(entity)
                                                       : new BindingList<ModelViewHaspKey>();
 
-        public void Remove(int id)
-        {
-            presenterHaspKey.Remove(id);
-            DateUpdate?.Invoke();
-        }
+        public void DataChange() => DateUpdate?.Invoke();
 
-        public void Update(ModelViewHaspKey entity)
-        {
-            presenterHaspKey.Update(entity);
-            DateUpdate?.Invoke();
-        }
-
-            private void RadioButtonAll_CheckedChanged(object sender, EventArgs e)
+        private void RadioButtonAll_CheckedChanged(object sender, EventArgs e)
         {
             presenterHaspKey.Display();
             labelClient.Text = string.Empty;
@@ -98,20 +120,8 @@ namespace HASPKey
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             if (!size)
-            {                           
-                if (!CheckInputData(out int innNumber))
-                    return;
-
-                presenterHaspKey.Entities.InnerId = innNumber;
-                presenterHaspKey.Entities.Number = tbNumber.Text.Trim();
-                presenterHaspKey.Entities.TypeKey = (TypeKey)comboBoxTypeKey.SelectedItem;
-                presenterHaspKey.Entities.IsHome = checkBoxIsHome.Checked;
-
-                if(presenterHaspKey.Entities.Id < 1)
-                    Add(presenterHaspKey.Entities);                
-                else
-                    Update(presenterHaspKey.Entities);
-
+            {  
+                presenterHaspKey.FillModel();
                 DefaultView();
             }
         }
@@ -149,30 +159,7 @@ namespace HASPKey
             labelClient.Text = string.Empty;
             buttonAdd.Enabled = true;
         }
-        private bool CheckInputData(out int innNumber)
-        {
-            string errorMess = string.Empty;
-            
-            if (!int.TryParse(tbInnerNumber.Text, out innNumber))
-            {
-                errorMess = errorHaspKey;
-                tbInnerNumber.Text = string.Empty;
-            }
-
-            if (comboBoxTypeKey.SelectedItem == null)
-                errorMess += errorEmptyTypeKey;
-
-            if (string.IsNullOrWhiteSpace(tbNumber.Text))
-                errorMess += errorEmptyNumber;
-
-            if (errorMess != string.Empty)
-            {
-                MessageError(errorMess.Trim());
-                return false;
-            }
-
-            return true;
-        }
+        
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
             if (!(dgvHaspKey.CurrentRow.DataBoundItem is ModelViewHaspKey row))
@@ -189,7 +176,7 @@ namespace HASPKey
             
             if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                Remove(row.Id);
+                presenterHaspKey.Remove(row.Id);
                 DefaultView();
             }
         }
@@ -215,33 +202,22 @@ namespace HASPKey
             }
         }
 
-        private void DgvHaspKey_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvHaspKey_CellClick(object sender, DataGridViewCellEventArgs e) => FillDate();
+
+        private void DgvHaspKey_SelectionChanged(object sender, EventArgs e) => FillDate();
+
+        private void FillDate()
         {
             if (!size)
-                FillInputItem();
-        }
-
-        private void DgvHaspKey_SelectionChanged(object sender, EventArgs e)
-        {
-            if (!size)
-                FillInputItem();
-        }
-
-        private void FillInputItem()
-        {
-            if (!(dgvHaspKey.CurrentRow.DataBoundItem is ModelViewHaspKey row))
             {
-                MessageError(emptyHaspKey);
-                return;
+                if (!(dgvHaspKey.CurrentRow.DataBoundItem is ModelViewHaspKey row))
+                {
+                    MessageError(emptyHaspKey);
+                    return;
+                }
+                presenterHaspKey.FillInputItem(row);
             }
-
-            presenterHaspKey.Entities.Id = row.Id;
-            tbInnerNumber.Text = row.InnerId.ToString();
-            tbNumber.Text = row.Number;
-            comboBoxTypeKey.SelectedIndex = (int)row.TypeKey;
-            checkBoxIsHome.Checked = row.IsHome;
         }
-
         private void TbInnerNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -249,5 +225,13 @@ namespace HASPKey
                 e.Handled = true;
             }
         }
+
+        private void TbInnerNumber_TextChanged(object sender, EventArgs e) => InnerNumber = tbInnerNumber.Text;
+
+        private void TbNumber_TextChanged(object sender, EventArgs e) => Number = tbNumber.Text;
+
+        private void ComboBoxTypeKey_SelectionChangeCommitted(object sender, EventArgs e) => TypeKey = (TypeKey)comboBoxTypeKey.SelectedItem;
+
+        private void CheckBoxIsHome_CheckedChanged(object sender, EventArgs e) => IsHome = checkBoxIsHome.Checked;
     }
 }

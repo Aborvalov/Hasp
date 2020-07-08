@@ -65,9 +65,7 @@ namespace HASPKey
             dgvFeature.Height = dgvFeature.Size.Height + sizeH;            
         }
 
-        public void Add() => DateUpdate?.Invoke();        
-        public void Update(ModelViewFeature entity) => DateUpdate?.Invoke();
-        public void Remove() => DateUpdate?.Invoke();
+        public void DataChange() => DateUpdate?.Invoke();    
 
         public void Bind(List<ModelViewFeature> entity) 
         => bindingFeature.DataSource = entity != null ? new BindingList<ModelViewFeature>(entity)
@@ -82,8 +80,9 @@ namespace HASPKey
             {
                 dgvFeature.Height = dgvFeature.Size.Height - sizeH;
                 size = !size;
-            }
-            presenterFeature.Entities = new ModelViewFeature();
+                ButtonAdd.Enabled = false;
+                presenterFeature.Entities = new ModelViewFeature();
+            }            
         }
 
         private void DgvFeature_DoubleClick(object sender, EventArgs e)
@@ -114,8 +113,7 @@ namespace HASPKey
             if (size)
                 return;
 
-            presenterFeature.FillModel();
-            DateUpdate?.Invoke();
+            presenterFeature.FillModel();            
             DefaultView();           
         }        
 
@@ -133,7 +131,10 @@ namespace HASPKey
             }
 
             if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
                 presenterFeature.Remove(row.Id);
+                DefaultView();
+            }
         }
         private void DefaultView()
         {
@@ -145,6 +146,7 @@ namespace HASPKey
             tbNumber.Text = string.Empty;
             tbName.Text = string.Empty;
             tbDescription.Text = string.Empty;
+            ButtonAdd.Enabled = true;
         }
 
         private void DgvFeature_CellClick(object sender, DataGridViewCellEventArgs e)=> FillDate();

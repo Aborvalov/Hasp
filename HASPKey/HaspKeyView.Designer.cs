@@ -243,6 +243,7 @@
             this.tbInnerNumber.Name = "tbInnerNumber";
             this.tbInnerNumber.Size = new System.Drawing.Size(98, 21);
             this.tbInnerNumber.TabIndex = 9;
+            this.tbInnerNumber.TextChanged += new System.EventHandler(this.TbInnerNumber_TextChanged);
             this.tbInnerNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbInnerNumber_KeyPress);
             // 
             // tbNumber
@@ -252,6 +253,7 @@
             this.tbNumber.Name = "tbNumber";
             this.tbNumber.Size = new System.Drawing.Size(100, 21);
             this.tbNumber.TabIndex = 10;
+            this.tbNumber.TextChanged += new System.EventHandler(this.TbNumber_TextChanged);
             // 
             // labelNumber
             // 
@@ -283,6 +285,7 @@
             this.comboBoxTypeKey.Name = "comboBoxTypeKey";
             this.comboBoxTypeKey.Size = new System.Drawing.Size(121, 21);
             this.comboBoxTypeKey.TabIndex = 13;
+            this.comboBoxTypeKey.SelectionChangeCommitted += new System.EventHandler(this.ComboBoxTypeKey_SelectionChangeCommitted);
             // 
             // checkBoxIsHome
             // 
@@ -294,6 +297,7 @@
             this.checkBoxIsHome.TabIndex = 14;
             this.checkBoxIsHome.Text = "Нахождение";
             this.checkBoxIsHome.UseVisualStyleBackColor = true;
+            this.checkBoxIsHome.CheckedChanged += new System.EventHandler(this.CheckBoxIsHome_CheckedChanged);
             // 
             // buttonSearchByClient
             // 

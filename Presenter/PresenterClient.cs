@@ -10,17 +10,19 @@ namespace Presenter
     public class PresenterClient : IPresenterClient
     {
         private readonly IClientModel clientModel;
-        private readonly IEntitiesView<ModelViewClient> entitшesView;
+        private readonly IClientView entitiesView;
 
         private const string errorAdd = "Не удалось создать клиента.";
         private const string errorUpdate = "Не удалось обновить клиента.";
         private const string errorDelete = "Не удалось удалить клиента.";
         private const string errorEmptyFeature = "Данноя функциональность пуста.";
         private const string errorInnerId = "Некорректный номер ключа.";
+        private const string errorEmptyName = "\u2022 Не заполнено поля \"Наименование\", не должно быть пустым. \n";
+        private const string errorEmptyAddress = "\u2022 Не заполнено поля \"Адрес\", не должно быть пустым. \n";
 
-        public PresenterClient(IEntitiesView<ModelViewClient> entitesView)
+        public PresenterClient(IClientView entitesView)
         {
-            this.entitшesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
+            this.entitiesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
 
             clientModel = new ClientModel(new Logics());
             Display();
@@ -32,74 +34,125 @@ namespace Presenter
         {
             if (entity == null)
             { 
-                entitшesView.MessageError(errorAdd);
+                entitiesView.MessageError(errorAdd);
                 return;
             }
 
+            FillModel();
             if (clientModel.Add(entity))
+            {
+                entitiesView.DataChange();
                 Display();
+            }
             else
-                entitшesView.MessageError(errorAdd);
+                entitiesView.MessageError(errorAdd);
         }
 
         public void GetByFeature(ModelViewFeature feature)
         {
             if (feature == null)
             {
-                entitшesView.MessageError(errorEmptyFeature);
+                entitiesView.MessageError(errorEmptyFeature);
                 return;
             }
-            entitшesView.Bind(clientModel.GetByFeature(feature));
+            entitiesView.Bind(clientModel.GetByFeature(feature));
         }
 
         public void GetByNumberKey(int keyInnerId)
         {
             if (keyInnerId < 1)
             {
-                entitшesView.MessageError(errorInnerId);
+                entitiesView.MessageError(errorInnerId);
                 return;
             }
             var client = clientModel.GetByNumberKey(keyInnerId);
             if (client == null)
             {
-                entitшesView.Bind(new List<ModelViewClient>());
+                entitiesView.Bind(new List<ModelViewClient>());
                 return;
             }
             var clients = new List<ModelViewClient>
             {
                 client
             };
-            entitшesView.Bind(clients);
+            entitiesView.Bind(clients);
         }
 
         public void Remove(int id)
         {
             if (id > 0 && clientModel.Remove(id))
+            {
+                entitiesView.DataChange();
                 Display();
+            }
             else
-                entitшesView.MessageError(errorDelete);
+                entitiesView.MessageError(errorDelete);
         }
 
         public void Update(ModelViewClient entity)
         {
             if (entity == null)
             {
-                entitшesView.MessageError(errorUpdate);
+                entitiesView.MessageError(errorUpdate);
                 return;
             }
 
             if (clientModel.Update(entity))
+            {
+                entitiesView.DataChange();
                 Display();
+            }
             else
-                entitшesView.MessageError(errorUpdate);
+                entitiesView.MessageError(errorUpdate);
         }
 
-        public void Display() => entitшesView.Bind(clientModel.GetAll());
+        public void Display() => entitiesView.Bind(clientModel.GetAll());
         public void Dispose() => clientModel.Dispose();
-
+              
         public void FillInputItem(ModelViewClient row)
         {
-            throw new NotImplementedException();
+            if (row == null)
+                return;
+
+            Entities = new ModelViewClient
+            {
+                Id = row.Id
+            };
+            entitiesView.NameClient = row.Name;
+            entitiesView.Address = row.Address;
+            entitiesView.ContactPerson = row.ContactPerson;
+            entitiesView.Phone = row.Phone;
+        }
+        public void FillModel()
+        {
+            if (!CheckInputData())
+                return;
+
+            Entities.Name = entitiesView.NameClient;
+            Entities.Address = entitiesView.Address;
+            Entities.Phone = entitiesView.Phone;
+            Entities.ContactPerson = entitiesView.ContactPerson;
+
+            if (Entities.Id < 1)
+                Add(Entities);
+            else
+                Update(Entities);
+        }
+        private bool CheckInputData()
+        {
+            string errorMess = string.Empty;
+            if (string.IsNullOrWhiteSpace(entitiesView.NameClient))
+                errorMess += errorEmptyName;
+            if (string.IsNullOrWhiteSpace(entitiesView.Address))
+                errorMess += errorEmptyAddress;
+
+            if (errorMess != string.Empty)
+            {
+                entitiesView.MessageError(errorMess.Trim());
+                return false;
+            }
+
+            return true;
         }
     }
 }

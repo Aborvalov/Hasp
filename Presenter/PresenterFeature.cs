@@ -38,8 +38,8 @@ namespace Presenter
             FillModel();
             if (featureModel.Add(entity))
             {
-                entitiesView.Add();
-               Display();
+                entitiesView.DataChange();
+                Display();
             }
             else
                 entitiesView.MessageError(errorAdd);
@@ -49,7 +49,7 @@ namespace Presenter
         {
             if (id > 0 && featureModel.Remove(id))
             {
-                entitiesView.Remove();
+                entitiesView.DataChange();
                 Display();
             }
             else
@@ -67,7 +67,7 @@ namespace Presenter
             FillModel();
             if (featureModel.Update(entity))
             {
-                entitiesView.Update();
+                entitiesView.DataChange();
                 Display();
             }
             else

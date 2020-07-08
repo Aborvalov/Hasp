@@ -1,5 +1,4 @@
-﻿using Entities;
-using ModelEntities;
+﻿using ModelEntities;
 
 namespace View
 {

@@ -183,6 +183,7 @@
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(159, 21);
             this.tbName.TabIndex = 5;
+            this.tbName.TextChanged += new System.EventHandler(this.TbName_TextChanged);
             // 
             // tbAddress
             // 
@@ -191,6 +192,7 @@
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(149, 21);
             this.tbAddress.TabIndex = 6;
+            this.tbAddress.TextChanged += new System.EventHandler(this.TbAddress_TextChanged);
             // 
             // tbPhone
             // 
@@ -199,6 +201,7 @@
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(119, 21);
             this.tbPhone.TabIndex = 7;
+            this.tbPhone.TextChanged += new System.EventHandler(this.TbPhone_TextChanged);
             // 
             // tbContactPerson
             // 
@@ -207,6 +210,7 @@
             this.tbContactPerson.Name = "tbContactPerson";
             this.tbContactPerson.Size = new System.Drawing.Size(136, 21);
             this.tbContactPerson.TabIndex = 8;
+            this.tbContactPerson.TextChanged += new System.EventHandler(this.TbContactPerson_TextChanged);
             // 
             // buttonAdd
             // 
