@@ -24,7 +24,6 @@ namespace HASPKey
         private const string emptyHaspKey = "Данный ключ не найден.";
         private const string message = "Вы уверены, что хотите удалить Hasp-ключ?";
         
-
         private string innerNumber;
         public string InnerNumber
         {

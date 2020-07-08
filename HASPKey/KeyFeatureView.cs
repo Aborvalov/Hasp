@@ -21,7 +21,6 @@ namespace HASPKey
         private const string caption = "Удалить связку ключ-функциональность";
         private const string message = "Вы уверены, что хотите удалить связь ключ-функциональность?";
         
-
         private DateTime startDate;
         public DateTime StartDate
         {
@@ -142,9 +141,7 @@ namespace HASPKey
             buttonAdd.Enabled = false;
             presenterKeyFeature.FillInputItem(row);
         }
-
-
-
+               
         private void DtpStartDate_ValueChanged(object sender, EventArgs e)
         {
             dtpEndDate.MinDate = dtpStartDate.Value;
@@ -167,10 +164,9 @@ namespace HASPKey
                 dtpEndDate.Visible = true;
                 size = !size;
                 buttonAdd.Enabled = false;
-                presenterKeyFeature.FillInputItem(row);
+                presenterKeyFeature.Entities = new ModelViewKeyFeature();
             }
         }
-
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             if (size)
