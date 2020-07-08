@@ -128,20 +128,24 @@ namespace HASPKey
 
         private void DgvHaspKey_DoubleClick(object sender, EventArgs e)
         {
+            if (!(dgvHaspKey.CurrentRow.DataBoundItem is ModelViewHaspKey row))
+            {
+                MessageError(emptyHaspKey);
+                return;
+            }
             if (search)
             {
-                SearchHaspKey = dgvHaspKey.CurrentRow.DataBoundItem as ModelViewHaspKey;
+                SearchHaspKey = row;
                 Close();
                 return;
             }
             if (size)
             {
+                DefaultView();
                 dgvHaspKey.Height = dgvHaspKey.Size.Height - sizeH;
                 size = !size;
-            }
-
-            presenterHaspKey.Entities = new ModelViewHaspKey();
-            FillInputItem();
+                presenterHaspKey.FillInputItem(row);
+            }            
         }
 
         private void DefaultView()
