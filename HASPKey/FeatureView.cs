@@ -8,7 +8,7 @@ using View;
 
 namespace HASPKey
 {
-    public partial class FeatureView : DevExpress.XtraEditors.XtraForm, IEntitiesView<ModelViewFeature>
+    public partial class FeatureView : DevExpress.XtraEditors.XtraForm, IFeatureView
     {
         private readonly IPresenterEntities<ModelViewFeature> presenterFeature;
         private bool size = true;
@@ -21,9 +21,38 @@ namespace HASPKey
         private const string emptyFeature = "Функциональность не найдена.";
         private const string caption = "Удалить фичу";
         private const string message = "Вы уверены, что хотите удалить фичу?";
-        private const string errorNumber = "\u2022 Неверное значение номера, должно быть числом. \n";
-        private const string erroremptyName = "\u2022 Не заполнено поля \"Наименование\", не должно быть пустым. \n";
-                
+
+        private string number;
+        public string Number
+        {
+            get { return number; }
+            set
+            {
+                number = value;
+                tbNumber.Text = value;
+            }
+        }
+        private string nameFeture;
+        public string NameFeature
+        {
+            get { return nameFeture; }
+            set
+            {
+                nameFeture = value;
+                tbName.Text = value;
+            }
+        }
+        private string description;
+        public string Description
+        {
+            get { return description; }
+            set
+            {
+                description = value;
+                tbDescription.Text = value;
+            }
+        }        
+
         public FeatureView(bool search) : this()
         { 
             this.search = search;            
@@ -36,29 +65,15 @@ namespace HASPKey
             dgvFeature.Height = dgvFeature.Size.Height + sizeH;            
         }
 
-        public void Add(ModelViewFeature entity)
-        {
-            presenterFeature.Add(entity);
-            DateUpdate?.Invoke();
-        }
+        public void Add() => DateUpdate?.Invoke();        
+        public void Update(ModelViewFeature entity) => DateUpdate?.Invoke();
+        public void Remove() => DateUpdate?.Invoke();
 
         public void Bind(List<ModelViewFeature> entity) 
         => bindingFeature.DataSource = entity != null ? new BindingList<ModelViewFeature>(entity)
                                                       : new BindingList<ModelViewFeature>();
 
-        public void MessageError(string errorText) => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-        public void Remove(int id)
-        {
-            presenterFeature.Remove(id);
-            DateUpdate?.Invoke();
-        }
-
-        public void Update(ModelViewFeature entity)
-        {
-            presenterFeature.Update(entity);
-            DateUpdate?.Invoke();
-        }
+        public void MessageError(string errorText) => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);              
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
@@ -90,7 +105,7 @@ namespace HASPKey
                 DefaultView();
                 dgvFeature.Height = dgvFeature.Size.Height - sizeH;
                 size = !size;
-                FillInputItem(row);
+                presenterFeature.FillInputItem(row);
             }
         }       
 
@@ -98,41 +113,11 @@ namespace HASPKey
         {
             if (size)
                 return;
-          
-            if (!CheckInputData(out int number))
-                return;
 
-            presenterFeature.Entities.Number = number;
-            presenterFeature.Entities.Name = tbName.Text;
-            presenterFeature.Entities.Description = tbDescription.Text;
-
-            if (presenterFeature.Entities.Id < 1)
-                Add(presenterFeature.Entities);
-            else
-                Update(presenterFeature.Entities);
-
+            presenterFeature.FillModel();
+            DateUpdate?.Invoke();
             DefaultView();           
-        }
-        private bool CheckInputData(out int number)
-        {
-            string errorMess = string.Empty;
-           
-            if (!int.TryParse(tbNumber.Text, out number))
-            {
-                errorMess = errorNumber;
-                tbNumber.Text = string.Empty;
-            }
-            if (string.IsNullOrWhiteSpace(tbName.Text))
-                errorMess += erroremptyName;
-
-            if (errorMess != string.Empty)
-            {
-                MessageError(errorMess.Trim());
-                return false;
-            }
-
-            return true;
-        }
+        }        
 
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
@@ -146,12 +131,9 @@ namespace HASPKey
                 bindingFeature.RemoveCurrent();
                 return;
             }
-            
+
             if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                Remove(row.Id);
-                DefaultView();
-            }
+                presenterFeature.Remove(row.Id);
         }
         private void DefaultView()
         {
@@ -165,30 +147,34 @@ namespace HASPKey
             tbDescription.Text = string.Empty;
         }
 
-        private void DgvFeature_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvFeature_CellClick(object sender, DataGridViewCellEventArgs e)=> FillDate();
+        private void DgvFeature_SelectionChanged(object sender, EventArgs e) => FillDate();
+
+        private void FillDate()
         {
             if (!size)
-                FillInputItem();
-        }
-
-        private void DgvFeature_SelectionChanged(object sender, EventArgs e)
-        {
-            if (!size)
-                FillInputItem();
-        }
-        private void FillInputItem() => FillInputItem(dgvFeature.CurrentRow.DataBoundItem as ModelViewFeature);
-        private void FillInputItem(ModelViewFeature row)
-        {
-            if (row == null)
-                return;
-
-            presenterFeature.Entities = new ModelViewFeature
             {
-                Id = row.Id
-            };
-            tbNumber.Text = row.Number.ToString();
-            tbName.Text = row.Name;
-            tbDescription.Text = row.Description;
-        }        
+                if (!(dgvFeature.CurrentRow.DataBoundItem is ModelViewFeature row))
+                {
+                    MessageError(emptyFeature);
+                    return;
+                }
+                presenterFeature.FillInputItem(row);
+            }
+        }
+
+        private void TbNumber_TextChanged(object sender, EventArgs e) => Number = tbNumber.Text;
+
+        private void TbName_TextChanged(object sender, EventArgs e) => NameFeature = tbName.Text;
+
+        private void TbDescription_TextChanged(object sender, EventArgs e) => Description = tbDescription.Text;
+               
+        private void TbNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

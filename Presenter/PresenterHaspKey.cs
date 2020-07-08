@@ -79,5 +79,10 @@ namespace Presenter
         public void Display() => entitiesView.Bind(haspKeyModel.GetAll());
 
         public void Dispose() => haspKeyModel.Dispose();
+
+        public void FillInputItem(ModelViewHaspKey row)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

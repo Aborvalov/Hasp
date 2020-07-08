@@ -160,6 +160,8 @@
             this.tbNumber.Name = "tbNumber";
             this.tbNumber.Size = new System.Drawing.Size(114, 21);
             this.tbNumber.TabIndex = 4;
+            this.tbNumber.TextChanged += new System.EventHandler(this.TbNumber_TextChanged);
+            this.tbNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbNumber_KeyPress);
             // 
             // tbName
             // 
@@ -168,6 +170,7 @@
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(121, 21);
             this.tbName.TabIndex = 5;
+            this.tbName.TextChanged += new System.EventHandler(this.TbName_TextChanged);
             // 
             // tbDescription
             // 
@@ -178,6 +181,7 @@
             this.tbDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbDescription.Size = new System.Drawing.Size(161, 21);
             this.tbDescription.TabIndex = 6;
+            this.tbDescription.TextChanged += new System.EventHandler(this.TbDescription_TextChanged);
             // 
             // ButtonAdd
             // 

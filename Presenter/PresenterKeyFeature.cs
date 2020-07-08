@@ -64,5 +64,10 @@ namespace Presenter
         public void Display() => entitiesView.Bind(keyFeatureModel.GetAll());
 
         public void Dispose() => keyFeatureModel.Dispose();
+
+        public void FillInputItem(ModelViewKeyFeature row)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

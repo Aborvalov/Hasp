@@ -241,5 +241,13 @@ namespace HASPKey
             comboBoxTypeKey.SelectedIndex = (int)row.TypeKey;
             checkBoxIsHome.Checked = row.IsHome;
         }
+
+        private void TbInnerNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

@@ -96,5 +96,10 @@ namespace Presenter
 
         public void Display() => entitшesView.Bind(clientModel.GetAll());
         public void Dispose() => clientModel.Dispose();
+
+        public void FillInputItem(ModelViewClient row)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
