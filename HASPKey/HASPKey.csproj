@@ -89,12 +89,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalendarCell.cs" />
+    <Compile Include="CalendarColumn.cs" />
+    <Compile Include="CalendarEditingControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ClientView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ClientView.Designer.cs">
       <DependentUpon>ClientView.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataGridViewCalendarColumn.cs" />
     <Compile Include="EditKeyFeatureView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +168,7 @@
     <None Include="Properties\DataSources\Model.HomeView.datasource" />
     <None Include="Properties\DataSources\ModelEntities.ModelViewClient.datasource" />
     <None Include="Properties\DataSources\ModelEntities.ModelViewFeature.datasource" />
+    <None Include="Properties\DataSources\ModelEntities.ModelViewFeatureForEditKeyFeat.datasource" />
     <None Include="Properties\DataSources\ModelEntities.ModelViewHaspKey.datasource" />
     <None Include="Properties\DataSources\ModelEntities.ModelViewKeyFeature.datasource" />
     <None Include="Properties\Settings.settings">

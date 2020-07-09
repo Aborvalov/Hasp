@@ -1,23 +1,24 @@
 ﻿using Entities;
 using System.ComponentModel;
+using System;
 
 namespace ModelEntities
 {
-    public class ModelViewFeature
+    public class ModelViewFeatureForEditKeyFeat
     {
-        public ModelViewFeature()
+        public ModelViewFeatureForEditKeyFeat()
         { }
-        public ModelViewFeature(Feature feature) : this()
+        public ModelViewFeatureForEditKeyFeat(Feature feature) : this()
         {
             Id = feature.Id;
             Name = feature.Name;
             Number = feature.Number;
-            Description = feature.Description;            
+            Description = feature.Description;
         }
         [Browsable(false)]
         public Feature Feature { get; private set; } = new Feature();
         [DisplayName("№ п/п")]
-        public int SerialNumber { get; set; }        
+        public int SerialNumber { get; set; }
         [Browsable(false)]
         public int Id
         {
@@ -42,6 +43,13 @@ namespace ModelEntities
             get { return Feature.Description; }
             set { Feature.Description = value; }
         }
+       
+        [DisplayName("Начало действие")]
+        public DateTime StartDate { get; set; }
+        [DisplayName("Окончание действия")]
+        public DateTime EndDate { get; set; }
+        [DisplayName("Выбран")]
+        public bool Selected { get; set; }
 
         public override bool Equals(object obj) => Feature.Equals(obj);
         public override int GetHashCode() => Feature.GetHashCode();

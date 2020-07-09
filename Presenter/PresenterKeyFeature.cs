@@ -12,7 +12,7 @@ namespace Presenter
         private readonly IEntitiesModel<ModelViewKeyFeature> keyFeatureModel;
         private readonly IEntitiesModel<ModelViewHaspKey> keyModel;
         private readonly IEntitiesModel<ModelViewFeature> featureModel;
-        private readonly IEntitiesView<ModelViewKeyFeature> entitiesView;
+        private readonly IKeyFeatureView entitiesView;
 
         private const string errorAdd = "Не удалось создать связь ключа и функциональности.";
         private const string errorUpdate = "Не удалось обновить связь ключа и функциональности.";
@@ -22,7 +22,7 @@ namespace Presenter
         private const string errorDate = "\u2022 Дата окончания действия меньше даты начала действия. \n";
         private const string errorKeyFeature = "\u2022 Данный ключ имеет действующую выбранную функциональность. \n";
 
-        public PresenterKeyFeature(IEntitiesView<ModelViewKeyFeature> entitesView)
+        public PresenterKeyFeature(IKeyFeatureView entitesView)
         {
             this.entitiesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
 

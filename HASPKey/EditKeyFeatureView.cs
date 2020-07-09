@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModelEntities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,5 +17,15 @@ namespace HASPKey
         {
             InitializeComponent();
         }
+
+        public EditKeyFeatureView(List<ModelViewFeatureForEditKeyFeat> entity) : this()
+        {
+            Bind(entity);
+        }
+
+
+        public void Bind(List<ModelViewFeatureForEditKeyFeat> entity)
+           => bindingFeature.DataSource = entity != null ? new BindingList<ModelViewFeatureForEditKeyFeat>(entity)
+                                                         : new BindingList<ModelViewFeatureForEditKeyFeat>();
     }
 }

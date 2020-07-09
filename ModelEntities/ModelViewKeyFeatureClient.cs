@@ -3,7 +3,6 @@ using System.ComponentModel;
 
 namespace ModelEntities
 {
-
     public class ModelViewKeyFeatureClient
     {
         public ModelViewKeyFeatureClient()

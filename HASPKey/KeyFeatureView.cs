@@ -8,7 +8,7 @@ using View;
 
 namespace HASPKey
 {
-    public partial class KeyFeatureView : DevExpress.XtraEditors.XtraForm, IEntitiesView<ModelViewKeyFeature>
+    public partial class KeyFeatureView : DevExpress.XtraEditors.XtraForm, IKeyFeatureView
     {
         private readonly IPresenterEntities<ModelViewKeyFeature> presenterKeyFeature;       
         public event Action DataUpdated;
@@ -67,13 +67,35 @@ namespace HASPKey
                 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
-            if (!(dgvKeyFeature.CurrentRow.DataBoundItem is ModelViewKeyFeature row))
+            ModelViewFeatureForEditKeyFeat item = new ModelViewFeatureForEditKeyFeat(new Entities.Feature
             {
-                MessageError(emptyKeyFeature);
-                return;
-            }
+                Id = 2,
+                Description = "dsfdsf",
+                Name = "test",
+                Number = 1,
+            })
+            {
+                EndDate = DateTime.Now.Date.AddDays(30),
+                StartDate = DateTime.Now.Date,
+                Selected = true,
+                SerialNumber = 1,                
+            };
 
-            presenterKeyFeature.Entities = new ModelViewKeyFeature();            
+            var tt = new List<ModelViewFeatureForEditKeyFeat>();
+            tt.Add(item);
+            EditKeyFeatureView editKeyFeatureView = new EditKeyFeatureView(tt);
+            editKeyFeatureView.Show();
+
+
+
+
+            //if (!(dgvKeyFeature.CurrentRow.DataBoundItem is ModelViewKeyFeature row))
+            //{
+            //    MessageError(emptyKeyFeature);
+            //    return;
+            //}
+
+            //presenterKeyFeature.Entities = new ModelViewKeyFeature();            
         }       
     }
 }
