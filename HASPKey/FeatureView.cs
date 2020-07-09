@@ -22,35 +22,20 @@ namespace HASPKey
         private const string caption = "Удалить фичу";
         private const string message = "Вы уверены, что хотите удалить фичу?";
 
-        private string number;
         public string Number
         {
-            get { return number; }
-            set
-            {
-                number = value;
-                tbNumber.Text = value;
-            }
-        }
-        private string nameFeture;
+            get { return tbNumber.Text; }
+            set { tbNumber.Text = value; }
+        }      
         public string NameFeature
         {
-            get { return nameFeture; }
-            set
-            {
-                nameFeture = value;
-                tbName.Text = value;
-            }
-        }
-        private string description;
+            get { return tbName.Text; }
+            set { tbName.Text = value; }
+        }        
         public string Description
         {
-            get { return description; }
-            set
-            {
-                description = value;
-                tbDescription.Text = value;
-            }
+            get { return tbDescription.Text; }
+            set { tbDescription.Text = value; }
         }        
 
         public FeatureView(bool search) : this()

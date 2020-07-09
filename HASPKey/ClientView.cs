@@ -21,46 +21,26 @@ namespace HASPKey
         private const string message = "Вы уверены, что хотите удалить клиента?";
         private const string error = "Ошибка";
         private const string emptyClient = "Данная клиент не найден.";
-       
-        private string nameClient;
+              
         public string NameClient
         {
-            get { return nameClient; }
-            set
-            {
-                nameClient = value;
-                tbName.Text = value;
-            }
-        }
-        private string address;
+            get { return tbName.Text; }
+            set { tbName.Text = value; }
+        }       
         public string Address
         {
-            get { return address; }
-            set
-            {
-                address = value;
-                tbAddress.Text = value;
-            }
-        }
-        private string phone;
+            get { return tbAddress.Text; }
+            set { tbAddress.Text = value; }
+        }       
         public string Phone
         {
-            get { return phone; }
-            set
-            {
-                phone = value;
-                tbPhone.Text = value;
-            }
+            get { return tbPhone.Text; }
+            set { tbPhone.Text = value; }
         }
-        private string contactPerson;
         public string ContactPerson
         {
-            get { return contactPerson; }
-            set
-            {
-                contactPerson = value;
-                tbContactPerson.Text = value;
-            }
+            get { return tbContactPerson.Text; }
+            set { tbContactPerson.Text = value;}
         }
         public ClientView(bool search)
         {

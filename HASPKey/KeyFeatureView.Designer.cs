@@ -41,7 +41,7 @@
             this.startDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingKeyFeature = new System.Windows.Forms.BindingSource(this.components);
-            this.button1Delete = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.labelEndDate = new System.Windows.Forms.Label();
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
@@ -145,20 +145,20 @@
             // 
             this.bindingKeyFeature.DataSource = typeof(ModelEntities.ModelViewKeyFeature);
             // 
-            // button1Delete
+            // buttonDelete
             // 
-            this.button1Delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1Delete.Location = new System.Drawing.Point(541, 509);
-            this.button1Delete.Name = "button1Delete";
-            this.button1Delete.Size = new System.Drawing.Size(75, 23);
-            this.button1Delete.TabIndex = 1;
-            this.button1Delete.Text = "Удалить";
-            this.button1Delete.UseVisualStyleBackColor = true;
-            this.button1Delete.Click += new System.EventHandler(this.Button1Delete_Click);
+            this.buttonDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDelete.Location = new System.Drawing.Point(541, 509);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelete.TabIndex = 1;
+            this.buttonDelete.Text = "Удалить";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.Button1Delete_Click);
             // 
             // dtpEndDate
             // 
-            this.dtpEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dtpEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpEndDate.Location = new System.Drawing.Point(393, 470);
             this.dtpEndDate.Name = "dtpEndDate";
             this.dtpEndDate.Size = new System.Drawing.Size(138, 21);
@@ -167,7 +167,7 @@
             // 
             // labelEndDate
             // 
-            this.labelEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labelEndDate.AutoSize = true;
             this.labelEndDate.Location = new System.Drawing.Point(390, 454);
             this.labelEndDate.Name = "labelEndDate";
@@ -177,7 +177,7 @@
             // 
             // dtpStartDate
             // 
-            this.dtpStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dtpStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpStartDate.Location = new System.Drawing.Point(249, 470);
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.Size = new System.Drawing.Size(138, 21);
@@ -186,7 +186,7 @@
             // 
             // labelStartDate
             // 
-            this.labelStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labelStartDate.AutoSize = true;
             this.labelStartDate.Location = new System.Drawing.Point(246, 457);
             this.labelStartDate.Name = "labelStartDate";
@@ -285,7 +285,7 @@
             this.Controls.Add(this.dtpStartDate);
             this.Controls.Add(this.labelEndDate);
             this.Controls.Add(this.dtpEndDate);
-            this.Controls.Add(this.button1Delete);
+            this.Controls.Add(this.buttonDelete);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "KeyFeatureView";
             this.ShowIcon = false;
@@ -302,7 +302,7 @@
 
         private System.Windows.Forms.BindingSource bindingKeyFeature;
         private System.Windows.Forms.DataGridView dgvKeyFeature;
-        private System.Windows.Forms.Button button1Delete;
+        private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.DataGridViewTextBoxColumn serialNumberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberKeyDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn featureDataGridViewTextBoxColumn;
