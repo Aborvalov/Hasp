@@ -43,7 +43,6 @@
             this.bindingKeyFeature = new System.Windows.Forms.BindingSource(this.components);
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
-            this.buttonSave = new System.Windows.Forms.Button();
             this.Headline = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKeyFeature)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingKeyFeature)).BeginInit();
@@ -81,8 +80,6 @@
             this.dgvKeyFeature.RowHeadersVisible = false;
             this.dgvKeyFeature.Size = new System.Drawing.Size(604, 476);
             this.dgvKeyFeature.TabIndex = 0;
-            this.dgvKeyFeature.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvKeyFeture_CellClick);
-            this.dgvKeyFeature.SelectionChanged += new System.EventHandler(this.DgvKeyFeture_SelectionChanged);
             this.dgvKeyFeature.DoubleClick += new System.EventHandler(this.DgvKeyFeture_DoubleClick);
             // 
             // serialNumberDataGridViewTextBoxColumn
@@ -159,17 +156,6 @@
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
             // 
-            // buttonSave
-            // 
-            this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonSave.Location = new System.Drawing.Point(94, 509);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave.TabIndex = 7;
-            this.buttonSave.Text = "Сохранить";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
-            // 
             // Headline
             // 
             this.Headline.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -187,7 +173,6 @@
             this.ClientSize = new System.Drawing.Size(628, 535);
             this.Controls.Add(this.Headline);
             this.Controls.Add(this.dgvKeyFeature);
-            this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.buttonDelete);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -214,7 +199,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn startDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn endDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button buttonAdd;
-        private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Label Headline;
     }
 }
