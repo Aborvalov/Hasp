@@ -14,7 +14,7 @@ namespace HASPKey
         private bool size = true;
         private const int sizeH = 40;
         private bool search = false;
-        public event Action DateUpdate;
+        public event Action DataUpdated;
         internal ModelViewClient SearchIdClient { get; private set; }
 
         private const string caption = "Удалить клиента";
@@ -57,7 +57,7 @@ namespace HASPKey
         public ClientView() : this(false)
         { }
 
-        public void DataChange() => DateUpdate?.Invoke();
+        public void DataChange() => DataUpdated?.Invoke();
 
         public void Bind(List<ModelViewClient> entity)
         => bindingClient.DataSource = entity != null ? new BindingList<ModelViewClient>(entity)
@@ -105,8 +105,12 @@ namespace HASPKey
         {
             if (size)
                 return;
-
-            presenterClient.FillModel();
+            /*
+             * 
+             * 
+             * 
+             * */
+            presenterClient.FillModel(null);
             DefaultView();
         }
         private void DefaultView()

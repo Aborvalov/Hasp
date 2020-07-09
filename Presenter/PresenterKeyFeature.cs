@@ -149,5 +149,10 @@ namespace Presenter
 
             return true;
         }
+
+        public void FillModel(ModelViewKeyFeature item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

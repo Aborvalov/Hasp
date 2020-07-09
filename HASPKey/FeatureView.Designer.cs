@@ -49,8 +49,10 @@
             this.ButtonDelete = new System.Windows.Forms.Button();
             this.ButtonSave = new System.Windows.Forms.Button();
             this.Headline = new System.Windows.Forms.Label();
+            this.bindingItem = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingFeature)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFeature)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingItem)).BeginInit();
             this.SuspendLayout();
             // 
             // bindingFeature
@@ -157,32 +159,32 @@
             // tbNumber
             // 
             this.tbNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbNumber.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingItem, "Number", true));
             this.tbNumber.Location = new System.Drawing.Point(12, 351);
             this.tbNumber.Name = "tbNumber";
             this.tbNumber.Size = new System.Drawing.Size(114, 21);
             this.tbNumber.TabIndex = 4;
-            this.tbNumber.TextChanged += new System.EventHandler(this.TbNumber_TextChanged);
             this.tbNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbNumber_KeyPress);
             // 
             // tbName
             // 
             this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingItem, "Name", true));
             this.tbName.Location = new System.Drawing.Point(130, 351);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(121, 21);
             this.tbName.TabIndex = 5;
-            this.tbName.TextChanged += new System.EventHandler(this.TbName_TextChanged);
             // 
             // tbDescription
             // 
             this.tbDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbDescription.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingItem, "Description", true));
             this.tbDescription.Location = new System.Drawing.Point(256, 351);
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbDescription.Size = new System.Drawing.Size(161, 21);
             this.tbDescription.TabIndex = 6;
-            this.tbDescription.TextChanged += new System.EventHandler(this.TbDescription_TextChanged);
             // 
             // ButtonAdd
             // 
@@ -227,6 +229,10 @@
             this.Headline.TabIndex = 10;
             this.Headline.Text = "Список функциональностей";
             // 
+            // bindingItem
+            // 
+            this.bindingItem.DataSource = typeof(ModelEntities.ModelViewFeature);
+            // 
             // FeatureView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -250,6 +256,7 @@
             this.Text = "Функциональность";
             ((System.ComponentModel.ISupportInitialize)(this.bindingFeature)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFeature)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingItem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -273,5 +280,6 @@
         private System.Windows.Forms.Button ButtonDelete;
         private System.Windows.Forms.Button ButtonSave;
         private System.Windows.Forms.Label Headline;
+        private System.Windows.Forms.BindingSource bindingItem;
     }
 }

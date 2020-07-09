@@ -24,28 +24,28 @@ namespace HASPKey
         private void KeyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HaspKeyView haspKey = new HaspKeyView();
-            haspKey.DateUpdate += presenter.Views;
+            haspKey.DataUpdated += presenter.Views;
             haspKey.ShowDialog();
         }
 
         private void FeatureToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FeatureView feature = new FeatureView();
-            feature.DateUpdate += presenter.Views;
+            feature.DataUpdated += presenter.Views;
             feature.ShowDialog();
         }
         
         private void ClientToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ClientView client = new ClientView();
-            client.DateUpdate += presenter.Views;
+            client.DataUpdated += presenter.Views;
             client.ShowDialog();
         }
 
         private void KeyFeatureToolStripMenuItem_Click(object sender, EventArgs e)
         {
             KeyFeatureView keyFeatureView = new KeyFeatureView();
-            keyFeatureView.DateUpdate += presenter.Views;
+            keyFeatureView.DataUpdated += presenter.Views;
             keyFeatureView.ShowDialog();
         }
     }

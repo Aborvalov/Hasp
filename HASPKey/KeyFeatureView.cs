@@ -13,7 +13,7 @@ namespace HASPKey
         private readonly IPresenterEntities<ModelViewKeyFeature> presenterKeyFeature;
         private bool size = true;
         private int sizeH = 55;
-        public event Action DateUpdate;
+        public event Action DataUpdated;
         
         private const string error = "Ошибка";
         private const string selectFeature = "Выбрать функциональность";
@@ -79,7 +79,7 @@ namespace HASPKey
                                                          : new BindingList<ModelViewKeyFeature>();
 
         public void MessageError(string errorText) => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-        public void DataChange() => DateUpdate?.Invoke();
+        public void DataChange() => DataUpdated?.Invoke();
 
         private void Button1Delete_Click(object sender, EventArgs e)
         {
@@ -174,8 +174,13 @@ namespace HASPKey
                         
             if (presenterKeyFeature.Entities.Id < 1)
                 dgvKeyFeature.Height = dgvKeyFeature.Size.Height - 20;
-
-            presenterKeyFeature.FillModel();
+            /*
+             * 
+             * 
+             * 
+             * 
+             * */
+            presenterKeyFeature.FillModel(null);
             DefaultView();            
         }
         

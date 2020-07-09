@@ -14,7 +14,7 @@ namespace Presenter
         private const string errorAdd = "Не удалось создать Hasp-ключ.";
         private const string errorUpdate = "Не удалось обновить Hasp-ключ.";
         private const string errorDelete = "Не удалось удалить Hasp-ключ.";
-        private const string errorEmptyСдшуте = "Данный клиент имеет пустые значения.";
+        private const string errorEmptyClient = "Данный клиент имеет пустые значения.";
         private const string errorHaspKey = "\u2022 Неверное значение внутреннего ключа, должно быть числом. \n";
         private const string errorEmptyTypeKey = "\u2022 Не выбран тип ключа. \n";
         private const string errorEmptyNumber = "\u2022 Не заполнено поля \"Номер\", не должно быть пустым. \n";
@@ -52,7 +52,7 @@ namespace Presenter
         {
             if (client == null)
             {
-                entitiesView.MessageError(errorEmptyСдшуте);
+                entitiesView.MessageError(errorEmptyClient);
                 return;
             }
             entitiesView.Bind(haspKeyModel.GetByClient(client));
@@ -141,6 +141,11 @@ namespace Presenter
             }
 
             return true;
+        }
+
+        public void FillModel(ModelViewHaspKey item)
+        {
+            throw new NotImplementedException();
         }
     }
 }

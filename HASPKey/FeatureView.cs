@@ -14,30 +14,14 @@ namespace HASPKey
         private bool size = true;
         private int sizeH = 40;       
         private bool search = false;
-        public event Action DateUpdate;
+        public event Action DataUpdated;
         internal ModelViewFeature SearchFeature { get; private set; } = null;
         
         private const string error = "Ошибка";
         private const string emptyFeature = "Функциональность не найдена.";
         private const string caption = "Удалить фичу";
         private const string message = "Вы уверены, что хотите удалить фичу?";
-
-        public string Number
-        {
-            get { return tbNumber.Text; }
-            set { tbNumber.Text = value; }
-        }      
-        public string NameFeature
-        {
-            get { return tbName.Text; }
-            set { tbName.Text = value; }
-        }        
-        public string Description
-        {
-            get { return tbDescription.Text; }
-            set { tbDescription.Text = value; }
-        }        
-
+        
         public FeatureView(bool search) : this()
         { 
             this.search = search;            
@@ -50,11 +34,14 @@ namespace HASPKey
             dgvFeature.Height = dgvFeature.Size.Height + sizeH;            
         }
 
-        public void DataChange() => DateUpdate?.Invoke();    
+        public void DataChange() => DataUpdated?.Invoke();    
 
         public void Bind(List<ModelViewFeature> entity) 
         => bindingFeature.DataSource = entity != null ? new BindingList<ModelViewFeature>(entity)
                                                       : new BindingList<ModelViewFeature>();
+
+        public void BindItem(ModelViewFeature entity)
+        => bindingItem.DataSource = entity ?? new ModelViewFeature();
 
         public void MessageError(string errorText) => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);              
 
@@ -66,7 +53,8 @@ namespace HASPKey
                 dgvFeature.Height = dgvFeature.Size.Height - sizeH;
                 size = !size;
                 ButtonAdd.Enabled = false;
-                presenterFeature.Entities = new ModelViewFeature();
+                bindingItem.DataSource = new ModelViewFeature();
+                tbNumber.Text = string.Empty;
             }            
         }
 
@@ -99,7 +87,7 @@ namespace HASPKey
             if (size)
                 return;
 
-            presenterFeature.FillModel();            
+            presenterFeature.FillModel(bindingItem.DataSource as ModelViewFeature);            
             DefaultView();           
         }        
 
@@ -129,6 +117,7 @@ namespace HASPKey
                 dgvFeature.Height = dgvFeature.Size.Height + sizeH;
                 size = !size;
             }
+            bindingItem.DataSource = new ModelViewFeature();
             tbNumber.Text = string.Empty;
             tbName.Text = string.Empty;
             tbDescription.Text = string.Empty;
@@ -150,12 +139,6 @@ namespace HASPKey
                 presenterFeature.FillInputItem(row);
             }
         }
-
-        private void TbNumber_TextChanged(object sender, EventArgs e) => Number = tbNumber.Text;
-
-        private void TbName_TextChanged(object sender, EventArgs e) => NameFeature = tbName.Text;
-
-        private void TbDescription_TextChanged(object sender, EventArgs e) => Description = tbDescription.Text;
                
         private void TbNumber_KeyPress(object sender, KeyPressEventArgs e)
         {

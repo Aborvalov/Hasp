@@ -75,32 +75,24 @@ namespace Presenter
         public void Display() => entitiesView.Bind(featureModel.GetAll());
 
         public void Dispose() => featureModel.Dispose();
-
-        public void FillModel()
+       
+        public void FillModel(ModelViewFeature item)
         {
-            if (!CheckInputData(out int number))
+            Entities = item ?? throw new ArgumentNullException(nameof(item));
+            if (!CheckInputData())
                 return;
-
-            Entities.Number = number;
-            Entities.Name = entitiesView.NameFeature;
-            Entities.Description = entitiesView.Description;
 
             if (Entities.Id < 1)
                 Add(Entities);
             else
                 Update(Entities);
         }
-
-        private bool CheckInputData(out int number)
+       
+         private bool CheckInputData()
         {
             string errorMess = string.Empty;
-
-            if (!int.TryParse(entitiesView.Number, out number))
-            {
-                errorMess = errorNumber;
-                entitiesView.Number = string.Empty;
-            }
-            if (string.IsNullOrWhiteSpace(entitiesView.NameFeature))
+                                  
+            if (string.IsNullOrWhiteSpace(Entities.Name))
                 errorMess += erroremptyName;
 
             if (errorMess != string.Empty)
@@ -112,18 +104,13 @@ namespace Presenter
             return true;
         }
        
-        public void FillInputItem(ModelViewFeature row)
+        public void FillInputItem(ModelViewFeature item)
         {
-            if (row == null)
+            if (item == null)
                 return;
 
-            Entities = new ModelViewFeature
-            {
-                Id = row.Id
-            };
-            entitiesView.Number = row.Number.ToString();
-            entitiesView.NameFeature = row.Name;
-            entitiesView.Description = row.Description;
+            Entities = item;
+            entitiesView.BindItem(item);
         }
     }
 }

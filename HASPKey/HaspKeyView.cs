@@ -15,7 +15,7 @@ namespace HASPKey
         private readonly IPresenterHaspKey presenterHaspKey;
         private bool size = true;
         private const int sizeH = 40;
-        public event Action DateUpdate;
+        public event Action DataUpdated;
         private bool search = false;
         internal ModelViewHaspKey SearchHaspKey { get; private set; } = null;
         
@@ -86,7 +86,7 @@ namespace HASPKey
         => bindingHaspKey.DataSource = entity != null ? new BindingList<ModelViewHaspKey>(entity)
                                                       : new BindingList<ModelViewHaspKey>();
 
-        public void DataChange() => DateUpdate?.Invoke();
+        public void DataChange() => DataUpdated?.Invoke();
 
         private void RadioButtonAll_CheckedChanged(object sender, EventArgs e)
         {
@@ -120,7 +120,15 @@ namespace HASPKey
         {
             if (!size)
             {  
-                presenterHaspKey.FillModel();
+                /*
+                 * 
+                 * 
+                 * 
+                 * 
+                 * 
+                 * 
+                 * */
+                presenterHaspKey.FillModel(null);
                 DefaultView();
             }
         }

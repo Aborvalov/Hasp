@@ -153,5 +153,10 @@ namespace Presenter
 
             return true;
         }
+
+        public void FillModel(ModelViewClient item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
