@@ -11,10 +11,7 @@ namespace HASPKey
 
         public override DataGridViewCell CellTemplate
         {
-            get
-            {
-                return base.CellTemplate;
-            }
+            get{ return base.CellTemplate;}
             set
             {
                 if (value != null &&

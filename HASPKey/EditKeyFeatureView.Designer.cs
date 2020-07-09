@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.buttonSave = new System.Windows.Forms.Button();
             this.bindingFeature = new System.Windows.Forms.BindingSource(this.components);
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvFeature = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,13 +49,24 @@
             this.startDateDataGridViewTextBoxColumn = new HASPKey.DataGridViewCalendarColumn();
             this.endDateDataGridViewTextBoxColumn = new HASPKey.DataGridViewCalendarColumn();
             this.selectedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dgvHaspKey = new System.Windows.Forms.DataGridView();
+            this.HeadlineFeature = new System.Windows.Forms.Label();
+            this.HeadliheHaspKey = new System.Windows.Forms.Label();
+            this.bindingHaspKey = new System.Windows.Forms.BindingSource(this.components);
+            this.serialNumberDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.innerIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numberDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isHomeDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingFeature)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFeature)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHaspKey)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingHaspKey)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(161, 439);
+            this.buttonSave.Location = new System.Drawing.Point(583, 86);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 0;
@@ -66,14 +77,14 @@
             // 
             this.bindingFeature.DataSource = typeof(ModelEntities.ModelViewFeatureForEditKeyFeat);
             // 
-            // dataGridView1
+            // dgvFeature
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvFeature.AllowUserToAddRows = false;
+            this.dgvFeature.AutoGenerateColumns = false;
+            this.dgvFeature.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvFeature.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvFeature.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFeature.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.serialNumberDataGridViewTextBoxColumn,
             this.numberDataGridViewTextBoxColumn,
             this.nameDataGridViewTextBoxColumn,
@@ -81,12 +92,13 @@
             this.startDateDataGridViewTextBoxColumn,
             this.endDateDataGridViewTextBoxColumn,
             this.selectedDataGridViewCheckBoxColumn});
-            this.dataGridView1.DataSource = this.bindingFeature;
-            this.dataGridView1.Location = new System.Drawing.Point(4, 153);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(756, 281);
-            this.dataGridView1.TabIndex = 5;
+            this.dgvFeature.DataSource = this.bindingFeature;
+            this.dgvFeature.Location = new System.Drawing.Point(5, 181);
+            this.dgvFeature.Name = "dgvFeature";
+            this.dgvFeature.RowHeadersVisible = false;
+            this.dgvFeature.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFeature.Size = new System.Drawing.Size(756, 281);
+            this.dgvFeature.TabIndex = 5;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -219,20 +231,109 @@
             this.selectedDataGridViewCheckBoxColumn.Name = "selectedDataGridViewCheckBoxColumn";
             this.selectedDataGridViewCheckBoxColumn.Width = 70;
             // 
+            // dgvHaspKey
+            // 
+            this.dgvHaspKey.AllowUserToAddRows = false;
+            this.dgvHaspKey.AutoGenerateColumns = false;
+            this.dgvHaspKey.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvHaspKey.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvHaspKey.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvHaspKey.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.serialNumberDataGridViewTextBoxColumn1,
+            this.innerIdDataGridViewTextBoxColumn,
+            this.numberDataGridViewTextBoxColumn1,
+            this.typeKeyDataGridViewTextBoxColumn,
+            this.isHomeDataGridViewCheckBoxColumn});
+            this.dgvHaspKey.DataSource = this.bindingHaspKey;
+            this.dgvHaspKey.Location = new System.Drawing.Point(5, 25);
+            this.dgvHaspKey.Name = "dgvHaspKey";
+            this.dgvHaspKey.ReadOnly = true;
+            this.dgvHaspKey.RowHeadersVisible = false;
+            this.dgvHaspKey.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvHaspKey.Size = new System.Drawing.Size(509, 137);
+            this.dgvHaspKey.TabIndex = 6;
+            // 
+            // HeadlineFeature
+            // 
+            this.HeadlineFeature.AutoSize = true;
+            this.HeadlineFeature.Location = new System.Drawing.Point(285, 165);
+            this.HeadlineFeature.Name = "HeadlineFeature";
+            this.HeadlineFeature.Size = new System.Drawing.Size(194, 13);
+            this.HeadlineFeature.TabIndex = 7;
+            this.HeadlineFeature.Text = "Список функциональностей у ключа";
+            // 
+            // HeadliheHaspKey
+            // 
+            this.HeadliheHaspKey.AutoSize = true;
+            this.HeadliheHaspKey.Location = new System.Drawing.Point(215, 9);
+            this.HeadliheHaspKey.Name = "HeadliheHaspKey";
+            this.HeadliheHaspKey.Size = new System.Drawing.Size(85, 13);
+            this.HeadliheHaspKey.TabIndex = 8;
+            this.HeadliheHaspKey.Text = "Список ключей";
+            // 
+            // bindingHaspKey
+            // 
+            this.bindingHaspKey.DataSource = typeof(ModelEntities.ModelViewHaspKey);
+            // 
+            // serialNumberDataGridViewTextBoxColumn1
+            // 
+            this.serialNumberDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.serialNumberDataGridViewTextBoxColumn1.DataPropertyName = "SerialNumber";
+            this.serialNumberDataGridViewTextBoxColumn1.HeaderText = "№ п/п";
+            this.serialNumberDataGridViewTextBoxColumn1.Name = "serialNumberDataGridViewTextBoxColumn1";
+            this.serialNumberDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.serialNumberDataGridViewTextBoxColumn1.Width = 65;
+            // 
+            // innerIdDataGridViewTextBoxColumn
+            // 
+            this.innerIdDataGridViewTextBoxColumn.DataPropertyName = "InnerId";
+            this.innerIdDataGridViewTextBoxColumn.HeaderText = "Внутренний номер";
+            this.innerIdDataGridViewTextBoxColumn.Name = "innerIdDataGridViewTextBoxColumn";
+            this.innerIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // numberDataGridViewTextBoxColumn1
+            // 
+            this.numberDataGridViewTextBoxColumn1.DataPropertyName = "Number";
+            this.numberDataGridViewTextBoxColumn1.HeaderText = "Номер";
+            this.numberDataGridViewTextBoxColumn1.Name = "numberDataGridViewTextBoxColumn1";
+            this.numberDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // typeKeyDataGridViewTextBoxColumn
+            // 
+            this.typeKeyDataGridViewTextBoxColumn.DataPropertyName = "TypeKey";
+            this.typeKeyDataGridViewTextBoxColumn.HeaderText = "Тип ключа";
+            this.typeKeyDataGridViewTextBoxColumn.Name = "typeKeyDataGridViewTextBoxColumn";
+            this.typeKeyDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // isHomeDataGridViewCheckBoxColumn
+            // 
+            this.isHomeDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.isHomeDataGridViewCheckBoxColumn.DataPropertyName = "IsHome";
+            this.isHomeDataGridViewCheckBoxColumn.HeaderText = "В компании";
+            this.isHomeDataGridViewCheckBoxColumn.Name = "isHomeDataGridViewCheckBoxColumn";
+            this.isHomeDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.isHomeDataGridViewCheckBoxColumn.Width = 75;
+            // 
             // EditKeyFeatureView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 467);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.HeadliheHaspKey);
+            this.Controls.Add(this.HeadlineFeature);
+            this.Controls.Add(this.dgvHaspKey);
+            this.Controls.Add(this.dgvFeature);
             this.Controls.Add(this.buttonSave);
             this.Name = "EditKeyFeatureView";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Редактирование отношений ключ-функциональность";
             ((System.ComponentModel.ISupportInitialize)(this.bindingFeature)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFeature)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHaspKey)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingHaspKey)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -246,7 +347,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private CalendarColumn calendarColumn2;
         private CalendarColumn calendarColumn3;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvFeature;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
@@ -258,5 +359,14 @@
         private DataGridViewCalendarColumn startDateDataGridViewTextBoxColumn;
         private DataGridViewCalendarColumn endDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn selectedDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridView dgvHaspKey;
+        private System.Windows.Forms.BindingSource bindingHaspKey;
+        private System.Windows.Forms.Label HeadlineFeature;
+        private System.Windows.Forms.Label HeadliheHaspKey;
+        private System.Windows.Forms.DataGridViewTextBoxColumn serialNumberDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn innerIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typeKeyDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isHomeDataGridViewCheckBoxColumn;
     }
 }
