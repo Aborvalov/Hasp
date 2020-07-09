@@ -58,9 +58,11 @@
             this.buttonSearchByClient = new System.Windows.Forms.Button();
             this.labelClient = new System.Windows.Forms.Label();
             this.Headline = new System.Windows.Forms.Label();
+            this.bindingItem = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHaspKey)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHaspKey)).BeginInit();
             this.panelFiltr.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingItem)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvHaspKey
@@ -240,6 +242,7 @@
             // tbInnerNumber
             // 
             this.tbInnerNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbInnerNumber.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingItem, "InnerId", true));
             this.tbInnerNumber.Location = new System.Drawing.Point(12, 539);
             this.tbInnerNumber.Name = "tbInnerNumber";
             this.tbInnerNumber.Size = new System.Drawing.Size(98, 21);
@@ -250,6 +253,7 @@
             // tbNumber
             // 
             this.tbNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbNumber.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingItem, "Number", true));
             this.tbNumber.Location = new System.Drawing.Point(114, 539);
             this.tbNumber.Name = "tbNumber";
             this.tbNumber.Size = new System.Drawing.Size(100, 21);
@@ -280,6 +284,7 @@
             // 
             this.comboBoxTypeKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.comboBoxTypeKey.BackColor = System.Drawing.SystemColors.Window;
+            this.comboBoxTypeKey.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingItem, "TypeKey", true));
             this.comboBoxTypeKey.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTypeKey.FormattingEnabled = true;
             this.comboBoxTypeKey.Location = new System.Drawing.Point(218, 539);
@@ -292,6 +297,7 @@
             // 
             this.checkBoxIsHome.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBoxIsHome.AutoSize = true;
+            this.checkBoxIsHome.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.bindingItem, "IsHome", true));
             this.checkBoxIsHome.Location = new System.Drawing.Point(345, 541);
             this.checkBoxIsHome.Name = "checkBoxIsHome";
             this.checkBoxIsHome.Size = new System.Drawing.Size(90, 17);
@@ -333,6 +339,10 @@
             this.Headline.TabIndex = 17;
             this.Headline.Text = "Список HASP-ключей";
             // 
+            // bindingItem
+            // 
+            this.bindingItem.DataSource = typeof(ModelEntities.ModelViewHaspKey);
+            // 
             // HaspKeyView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -362,6 +372,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingHaspKey)).EndInit();
             this.panelFiltr.ResumeLayout(false);
             this.panelFiltr.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingItem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -393,5 +404,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn typeKeyDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isHomeDataGridViewCheckBoxColumn;
         private System.Windows.Forms.Label Headline;
+        private System.Windows.Forms.BindingSource bindingItem;
     }
 }

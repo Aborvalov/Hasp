@@ -57,8 +57,10 @@
             this.labelSearchInnerId = new System.Windows.Forms.Label();
             this.tbInnerIdHaspKey = new System.Windows.Forms.TextBox();
             this.Headline = new System.Windows.Forms.Label();
+            this.bindingItem = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingClient)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingItem)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvClient
@@ -180,38 +182,38 @@
             // tbName
             // 
             this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingItem, "Name", true));
             this.tbName.Location = new System.Drawing.Point(13, 523);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(159, 21);
-            this.tbName.TabIndex = 5;
-            this.tbName.TextChanged += new System.EventHandler(this.TbName_TextChanged);
+            this.tbName.TabIndex = 5;            
             // 
             // tbAddress
             // 
             this.tbAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbAddress.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingItem, "Address", true));
             this.tbAddress.Location = new System.Drawing.Point(178, 523);
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(149, 21);
-            this.tbAddress.TabIndex = 6;
-            this.tbAddress.TextChanged += new System.EventHandler(this.TbAddress_TextChanged);
+            this.tbAddress.TabIndex = 6;           
             // 
             // tbPhone
             // 
             this.tbPhone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbPhone.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingItem, "Phone", true));
             this.tbPhone.Location = new System.Drawing.Point(333, 523);
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(119, 21);
-            this.tbPhone.TabIndex = 7;
-            this.tbPhone.TextChanged += new System.EventHandler(this.TbPhone_TextChanged);
+            this.tbPhone.TabIndex = 7;            
             // 
             // tbContactPerson
             // 
             this.tbContactPerson.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbContactPerson.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingItem, "ContactPerson", true));
             this.tbContactPerson.Location = new System.Drawing.Point(458, 523);
             this.tbContactPerson.Name = "tbContactPerson";
             this.tbContactPerson.Size = new System.Drawing.Size(136, 21);
-            this.tbContactPerson.TabIndex = 8;
-            this.tbContactPerson.TextChanged += new System.EventHandler(this.TbContactPerson_TextChanged);
+            this.tbContactPerson.TabIndex = 8;            
             // 
             // buttonAdd
             // 
@@ -306,6 +308,10 @@
             this.Headline.TabIndex = 17;
             this.Headline.Text = "Список клиентов";
             // 
+            // bindingItem
+            // 
+            this.bindingItem.DataSource = typeof(ModelEntities.ModelViewClient);
+            // 
             // ClientView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -336,6 +342,7 @@
             this.Text = "Клиетны";
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingClient)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingItem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -367,5 +374,6 @@
         private System.Windows.Forms.Label labelSearchInnerId;
         private System.Windows.Forms.TextBox tbInnerIdHaspKey;
         private System.Windows.Forms.Label Headline;
+        private System.Windows.Forms.BindingSource bindingItem;
     }
 }

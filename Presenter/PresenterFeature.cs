@@ -9,7 +9,7 @@ namespace Presenter
     public class PresenterFeature : IPresenterEntities<ModelViewFeature>
     {
         private readonly IEntitiesModel<ModelViewFeature> featureModel;
-        private readonly IFeatureView entitiesView;
+        private readonly IEntitiesView<ModelViewFeature> entitiesView;
 
         private const string errorAdd = "Не удалось создать функциональность.";
         private const string errorUpdate = "Не удалось обновить функциональность.";
@@ -17,7 +17,7 @@ namespace Presenter
         private const string errorNumber = "\u2022 Неверное значение номера, должно быть числом. \n";
         private const string erroremptyName = "\u2022 Не заполнено поля \"Наименование\", не должно быть пустым. \n";
 
-        public PresenterFeature(IFeatureView entitesView)
+        public PresenterFeature(IEntitiesView<ModelViewFeature> entitesView)
         {
             this.entitiesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
 
@@ -105,11 +105,8 @@ namespace Presenter
         }
        
         public void FillInputItem(ModelViewFeature item)
-        {
-            if (item == null)
-                return;
-
-            Entities = item;
+        {            
+            Entities = item ?? throw new ArgumentNullException(nameof(item));
             entitiesView.BindItem(item);
         }
     }

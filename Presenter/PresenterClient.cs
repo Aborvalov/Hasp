@@ -10,7 +10,7 @@ namespace Presenter
     public class PresenterClient : IPresenterClient
     {
         private readonly IClientModel clientModel;
-        private readonly IClientView entitiesView;
+        private readonly IEntitiesView<ModelViewClient> entitiesView;
 
         private const string errorAdd = "Не удалось создать клиента.";
         private const string errorUpdate = "Не удалось обновить клиента.";
@@ -20,7 +20,7 @@ namespace Presenter
         private const string errorEmptyName = "\u2022 Не заполнено поля \"Наименование\", не должно быть пустым. \n";
         private const string errorEmptyAddress = "\u2022 Не заполнено поля \"Адрес\", не должно быть пустым. \n";
 
-        public PresenterClient(IClientView entitesView)
+        public PresenterClient(IEntitiesView<ModelViewClient> entitesView)
         {
             this.entitiesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
 
@@ -108,29 +108,17 @@ namespace Presenter
         public void Display() => entitiesView.Bind(clientModel.GetAll());
         public void Dispose() => clientModel.Dispose();
               
-        public void FillInputItem(ModelViewClient row)
+        public void FillInputItem(ModelViewClient item)
         {
-            if (row == null)
-                return;
-
-            Entities = new ModelViewClient
-            {
-                Id = row.Id
-            };
-            entitiesView.NameClient = row.Name;
-            entitiesView.Address = row.Address;
-            entitiesView.ContactPerson = row.ContactPerson;
-            entitiesView.Phone = row.Phone;
+            Entities = item ?? throw new ArgumentNullException(nameof(item));
+            entitiesView.BindItem(item);
         }
-        public void FillModel()
+        public void FillModel(ModelViewClient item)
         {
+            Entities = item ?? throw new ArgumentNullException(nameof(item));
+
             if (!CheckInputData())
                 return;
-
-            Entities.Name = entitiesView.NameClient;
-            Entities.Address = entitiesView.Address;
-            Entities.Phone = entitiesView.Phone;
-            Entities.ContactPerson = entitiesView.ContactPerson;
 
             if (Entities.Id < 1)
                 Add(Entities);
@@ -140,9 +128,9 @@ namespace Presenter
         private bool CheckInputData()
         {
             string errorMess = string.Empty;
-            if (string.IsNullOrWhiteSpace(entitiesView.NameClient))
+            if (string.IsNullOrWhiteSpace(Entities.Name))
                 errorMess += errorEmptyName;
-            if (string.IsNullOrWhiteSpace(entitiesView.Address))
+            if (string.IsNullOrWhiteSpace(Entities.Address))
                 errorMess += errorEmptyAddress;
 
             if (errorMess != string.Empty)
@@ -152,11 +140,6 @@ namespace Presenter
             }
 
             return true;
-        }
-
-        public void FillModel(ModelViewClient item)
-        {
-            throw new NotImplementedException();
         }
     }
 }

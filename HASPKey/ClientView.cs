@@ -8,7 +8,7 @@ using View;
 
 namespace HASPKey
 {
-    public partial class ClientView : DevExpress.XtraEditors.XtraForm, IClientView
+    public partial class ClientView : DevExpress.XtraEditors.XtraForm, IEntitiesView<ModelViewClient>
     {
         private readonly IPresenterClient presenterClient;
         private bool size = true;
@@ -21,27 +21,7 @@ namespace HASPKey
         private const string message = "Вы уверены, что хотите удалить клиента?";
         private const string error = "Ошибка";
         private const string emptyClient = "Данная клиент не найден.";
-              
-        public string NameClient
-        {
-            get { return tbName.Text; }
-            set { tbName.Text = value; }
-        }       
-        public string Address
-        {
-            get { return tbAddress.Text; }
-            set { tbAddress.Text = value; }
-        }       
-        public string Phone
-        {
-            get { return tbPhone.Text; }
-            set { tbPhone.Text = value; }
-        }
-        public string ContactPerson
-        {
-            get { return tbContactPerson.Text; }
-            set { tbContactPerson.Text = value;}
-        }
+        
         public ClientView(bool search)
         {
             InitializeComponent();
@@ -60,10 +40,13 @@ namespace HASPKey
         public void DataChange() => DataUpdated?.Invoke();
 
         public void Bind(List<ModelViewClient> entity)
-        => bindingClient.DataSource = entity != null ? new BindingList<ModelViewClient>(entity)
-                                                     : new BindingList<ModelViewClient>();
+            => bindingClient.DataSource = entity != null ? new BindingList<ModelViewClient>(entity)
+                                                         : new BindingList<ModelViewClient>();
+        public void BindItem(ModelViewClient entity)
+           => bindingItem.DataSource = entity ?? new ModelViewClient();
 
-        public void MessageError(string errorText) => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        public void MessageError(string errorText)
+            => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
        
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
@@ -73,7 +56,6 @@ namespace HASPKey
                 dgvClient.Height = dgvClient.Size.Height - sizeH;
                 size = !size;
                 buttonAdd.Enabled = false;
-                presenterClient.Entities = new ModelViewClient();
             }            
         }
 
@@ -105,12 +87,8 @@ namespace HASPKey
         {
             if (size)
                 return;
-            /*
-             * 
-             * 
-             * 
-             * */
-            presenterClient.FillModel(null);
+            
+            presenterClient.FillModel(bindingItem.DataSource as ModelViewClient);
             DefaultView();
         }
         private void DefaultView()
@@ -120,10 +98,9 @@ namespace HASPKey
                 dgvClient.Height = dgvClient.Size.Height + sizeH;
                 size = !size;
             }
-            tbName.Text = string.Empty;
-            tbAddress.Text = string.Empty;
-            tbContactPerson.Text = string.Empty;
-            tbPhone.Text = string.Empty;
+
+            bindingItem.DataSource = new ModelViewClient();
+            presenterClient.FillInputItem(bindingItem.DataSource as ModelViewClient);
             labelFeature.Text = string.Empty;
             tbInnerIdHaspKey.Text = string.Empty;
             buttonAdd.Enabled = true;
@@ -198,14 +175,6 @@ namespace HASPKey
                 }
                 presenterClient.FillInputItem(row);
             }
-        }
-
-        private void TbName_TextChanged(object sender, EventArgs e) => NameClient = tbName.Text;
-
-        private void TbAddress_TextChanged(object sender, EventArgs e) => Address = tbAddress.Text;
-
-        private void TbPhone_TextChanged(object sender, EventArgs e) => Phone = tbPhone.Text;
-
-        private void TbContactPerson_TextChanged(object sender, EventArgs e) => ContactPerson = tbContactPerson.Text;
+        }        
     }
 }

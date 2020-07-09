@@ -8,7 +8,7 @@ using View;
 
 namespace HASPKey
 {
-    public partial class FeatureView : DevExpress.XtraEditors.XtraForm, IFeatureView
+    public partial class FeatureView : DevExpress.XtraEditors.XtraForm, IEntitiesView<ModelViewFeature>
     {
         private readonly IPresenterEntities<ModelViewFeature> presenterFeature;
         private bool size = true;
@@ -37,13 +37,14 @@ namespace HASPKey
         public void DataChange() => DataUpdated?.Invoke();    
 
         public void Bind(List<ModelViewFeature> entity) 
-        => bindingFeature.DataSource = entity != null ? new BindingList<ModelViewFeature>(entity)
-                                                      : new BindingList<ModelViewFeature>();
+            => bindingFeature.DataSource = entity != null ? new BindingList<ModelViewFeature>(entity)
+                                                          : new BindingList<ModelViewFeature>();
 
         public void BindItem(ModelViewFeature entity)
-        => bindingItem.DataSource = entity ?? new ModelViewFeature();
+            => bindingItem.DataSource = entity ?? new ModelViewFeature();
 
-        public void MessageError(string errorText) => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);              
+        public void MessageError(string errorText)
+            => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);              
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
@@ -52,9 +53,7 @@ namespace HASPKey
             {
                 dgvFeature.Height = dgvFeature.Size.Height - sizeH;
                 size = !size;
-                ButtonAdd.Enabled = false;
-                bindingItem.DataSource = new ModelViewFeature();
-                tbNumber.Text = string.Empty;
+                ButtonAdd.Enabled = false;               
             }            
         }
 
@@ -87,7 +86,7 @@ namespace HASPKey
             if (size)
                 return;
 
-            presenterFeature.FillModel(bindingItem.DataSource as ModelViewFeature);            
+            presenterFeature.FillModel(bindingItem.DataSource as ModelViewFeature);
             DefaultView();           
         }        
 
@@ -117,10 +116,10 @@ namespace HASPKey
                 dgvFeature.Height = dgvFeature.Size.Height + sizeH;
                 size = !size;
             }
+            
             bindingItem.DataSource = new ModelViewFeature();
-            tbNumber.Text = string.Empty;
-            tbName.Text = string.Empty;
-            tbDescription.Text = string.Empty;
+            presenterFeature.FillInputItem(bindingItem.DataSource as ModelViewFeature);
+            tbNumber.Text = string.Empty;           
             ButtonAdd.Enabled = true;
         }
 
