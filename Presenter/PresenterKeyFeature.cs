@@ -3,6 +3,7 @@ using Model;
 using ModelEntities;
 using System;
 using View;
+using System.Linq;
 
 namespace Presenter
 {
@@ -11,7 +12,7 @@ namespace Presenter
         private readonly IEntitiesModel<ModelViewKeyFeature> keyFeatureModel;
         private readonly IEntitiesModel<ModelViewHaspKey> keyModel;
         private readonly IEntitiesModel<ModelViewFeature> featureModel;
-        private readonly IKeyFeatureView entitiesView;
+        private readonly IEntitiesView<ModelViewKeyFeature> entitiesView;
 
         private const string errorAdd = "Не удалось создать связь ключа и функциональности.";
         private const string errorUpdate = "Не удалось обновить связь ключа и функциональности.";
@@ -21,7 +22,7 @@ namespace Presenter
         private const string errorDate = "\u2022 Дата окончания действия меньше даты начала действия. \n";
         private const string errorKeyFeature = "\u2022 Данный ключ имеет действующую выбранную функциональность. \n";
 
-        public PresenterKeyFeature(IKeyFeatureView entitesView)
+        public PresenterKeyFeature(IEntitiesView<ModelViewKeyFeature> entitesView)
         {
             this.entitiesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
 
@@ -79,7 +80,8 @@ namespace Presenter
                 entitiesView.MessageError(errorUpdate);
         }
 
-        public void Display() => entitiesView.Bind(keyFeatureModel.GetAll());
+        public void Display()
+            => entitiesView.Bind(keyFeatureModel.GetAll().OrderBy(x => x.IdHaspKey).ToList());
 
         public void Dispose()
         {
@@ -97,21 +99,21 @@ namespace Presenter
                 IdHaspKey = row.IdHaspKey
             };
             
-            entitiesView.StartDate = row.StartDate;
-            entitiesView.EndDate = row.EndDate;
-            entitiesView.HaspKey = keyModel.GetById(row.IdHaspKey);
-            entitiesView.Feature = featureModel.GetById(row.IdFeature);            
+            //entitiesView.StartDate = row.StartDate;
+            //entitiesView.EndDate = row.EndDate;
+            //entitiesView.HaspKey = keyModel.GetById(row.IdHaspKey);
+            //entitiesView.Feature = featureModel.GetById(row.IdFeature);            
         }
 
-        public void FillModel()
+        public void FillModel(ModelViewKeyFeature item)
         {
             if (!CheckInputData())
                 return;
 
-            Entities.StartDate = entitiesView.StartDate;
-            Entities.EndDate = entitiesView.EndDate;
-            Entities.IdFeature = entitiesView.Feature.Id;
-            Entities.IdHaspKey = entitiesView.HaspKey.Id;
+            //Entities.StartDate = entitiesView.StartDate;
+            //Entities.EndDate = entitiesView.EndDate;
+            //Entities.IdFeature = entitiesView.Feature.Id;
+            //Entities.IdHaspKey = entitiesView.HaspKey.Id;
 
             if (Entities.Id < 1)
                 Add(Entities);
@@ -122,24 +124,24 @@ namespace Presenter
         {
             string errorMess = string.Empty;
 
-            if(entitiesView.Feature == null)
-                errorMess += errorEmptyFeature;
-            if (entitiesView.HaspKey == null)
-                errorMess += errorEmptyHaspKey;
-            if (entitiesView.StartDate > entitiesView.EndDate)
-                errorMess += errorDate;
+            //if(entitiesView.Feature == null)
+            //    errorMess += errorEmptyFeature;
+            //if (entitiesView.HaspKey == null)
+            //    errorMess += errorEmptyHaspKey;
+            //if (entitiesView.StartDate > entitiesView.EndDate)
+            //    errorMess += errorDate;
 
-            foreach (var row in keyFeatureModel.GetAll())
-            {                
-                if (row.Id != Entities.Id &&
-                    row.IdHaspKey == entitiesView.HaspKey.Id &&
-                    row.IdFeature == entitiesView.Feature.Id &&
-                    row.EndDate >= entitiesView.StartDate)
-                {
-                    errorMess += errorKeyFeature;
-                    break;
-                }
-            }
+            //foreach (var row in keyFeatureModel.GetAll())
+            //{                
+            //    if (row.Id != Entities.Id &&
+            //        row.IdHaspKey == entitiesView.HaspKey.Id &&
+            //        row.IdFeature == entitiesView.Feature.Id &&
+            //        row.EndDate >= entitiesView.StartDate)
+            //    {
+            //        errorMess += errorKeyFeature;
+            //        break;
+            //    }
+            //}
 
             if (errorMess != string.Empty)
             {
@@ -148,11 +150,6 @@ namespace Presenter
             }
 
             return true;
-        }
-
-        public void FillModel(ModelViewKeyFeature item)
-        {
-            throw new NotImplementedException();
         }
     }
 }
