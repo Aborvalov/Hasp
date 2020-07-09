@@ -69,7 +69,7 @@ namespace HASPKey
         {
             ModelViewFeatureForEditKeyFeat item = new ModelViewFeatureForEditKeyFeat(new Entities.Feature
             {
-                Id = 2,
+                Id = 1,
                 Description = "dsfdsf",
                 Name = "test",
                 Number = 1,
@@ -80,7 +80,16 @@ namespace HASPKey
                 Selected = true,
                 SerialNumber = 1,                
             };
-
+            ModelViewFeatureForEditKeyFeat item2 = new ModelViewFeatureForEditKeyFeat(new Entities.Feature
+            {
+                Id = 2,
+                Name = "____",
+                Number = 2,
+            })
+            {
+                Selected = false,
+                SerialNumber = 2,
+            };
 
             ModelViewHaspKey key = new ModelViewHaspKey
             {
@@ -98,6 +107,7 @@ namespace HASPKey
             var tk = new List<ModelViewHaspKey>();
 
             tf.Add(item);
+            tf.Add(item2);
             tk.Add(key);
             EditKeyFeatureView editKeyFeatureView = new EditKeyFeatureView(tf,tk);
             editKeyFeatureView.Show();
