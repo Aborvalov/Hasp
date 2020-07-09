@@ -18,14 +18,18 @@ namespace HASPKey
             InitializeComponent();
         }
 
-        public EditKeyFeatureView(List<ModelViewFeatureForEditKeyFeat> entity) : this()
+        public EditKeyFeatureView(List<ModelViewFeatureForEditKeyFeat> feature, List<ModelViewHaspKey> key) : this()
         {
-            Bind(entity);
+            BindFeature(feature);
+            BindKey(key);
         }
 
 
-        public void Bind(List<ModelViewFeatureForEditKeyFeat> entity)
+        public void BindFeature(List<ModelViewFeatureForEditKeyFeat> entity)
            => bindingFeature.DataSource = entity != null ? new BindingList<ModelViewFeatureForEditKeyFeat>(entity)
                                                          : new BindingList<ModelViewFeatureForEditKeyFeat>();
+        public void BindKey(List<ModelViewHaspKey> entity)
+          => bindingHaspKey.DataSource = entity != null ? new BindingList<ModelViewHaspKey>(entity)
+                                                        : new BindingList<ModelViewHaspKey>();
     }
 }

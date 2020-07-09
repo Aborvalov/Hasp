@@ -81,9 +81,25 @@ namespace HASPKey
                 SerialNumber = 1,                
             };
 
-            var tt = new List<ModelViewFeatureForEditKeyFeat>();
-            tt.Add(item);
-            EditKeyFeatureView editKeyFeatureView = new EditKeyFeatureView(tt);
+
+            ModelViewHaspKey key = new ModelViewHaspKey
+            {
+                Id = 1,
+                InnerId = 2,
+                IsHome = true,
+                Number = "sdf",
+                TypeKey = Entities.TypeKey.Pro,
+                SerialNumber = 1,
+            };
+
+
+
+            var tf = new List<ModelViewFeatureForEditKeyFeat>();
+            var tk = new List<ModelViewHaspKey>();
+
+            tf.Add(item);
+            tk.Add(key);
+            EditKeyFeatureView editKeyFeatureView = new EditKeyFeatureView(tf,tk);
             editKeyFeatureView.Show();
 
 
