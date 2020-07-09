@@ -95,6 +95,12 @@
     <Compile Include="ClientView.Designer.cs">
       <DependentUpon>ClientView.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditKeyFeatureView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditKeyFeatureView.Designer.cs">
+      <DependentUpon>EditKeyFeatureView.cs</DependentUpon>
+    </Compile>
     <Compile Include="FeatureView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +129,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ClientView.resx">
       <DependentUpon>ClientView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditKeyFeatureView.resx">
+      <DependentUpon>EditKeyFeatureView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FeatureView.resx">
       <DependentUpon>FeatureView.cs</DependentUpon>

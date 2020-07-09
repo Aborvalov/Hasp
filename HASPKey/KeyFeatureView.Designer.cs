@@ -74,11 +74,11 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvKeyFeature.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvKeyFeature.Location = new System.Drawing.Point(12, 27);
+            this.dgvKeyFeature.Location = new System.Drawing.Point(10, 27);
             this.dgvKeyFeature.Name = "dgvKeyFeature";
             this.dgvKeyFeature.ReadOnly = true;
             this.dgvKeyFeature.RowHeadersVisible = false;
-            this.dgvKeyFeature.Size = new System.Drawing.Size(604, 476);
+            this.dgvKeyFeature.Size = new System.Drawing.Size(612, 476);
             this.dgvKeyFeature.TabIndex = 0;
             this.dgvKeyFeature.DoubleClick += new System.EventHandler(this.DgvKeyFeture_DoubleClick);
             // 
@@ -137,7 +137,7 @@
             // buttonDelete
             // 
             this.buttonDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDelete.Location = new System.Drawing.Point(541, 509);
+            this.buttonDelete.Location = new System.Drawing.Point(547, 509);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonDelete.TabIndex = 1;
