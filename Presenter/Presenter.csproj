@@ -44,8 +44,10 @@
     <Compile Include="IPresenterClient.cs" />
     <Compile Include="IPresenterEntities.cs" />
     <Compile Include="IPresenterHaspKey.cs" />
+    <Compile Include="IPresenterKeyFeature.cs" />
     <Compile Include="IPresenterMain.cs" />
     <Compile Include="PresenterClient.cs" />
+    <Compile Include="PresenterEditKeyFeature.cs" />
     <Compile Include="PresenterFeature.cs" />
     <Compile Include="PresenterHaspKey.cs" />
     <Compile Include="PresenterMain.cs" />

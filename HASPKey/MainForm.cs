@@ -44,9 +44,13 @@ namespace HASPKey
 
         private void KeyFeatureToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            KeyFeatureView keyFeatureView = new KeyFeatureView();
-            keyFeatureView.DataUpdated += presenter.Views;
-            keyFeatureView.ShowDialog();
+            //KeyFeatureView keyFeatureView = new KeyFeatureView();
+            //keyFeatureView.DataUpdated += presenter.Views;
+            //keyFeatureView.ShowDialog();
+
+
+            EditKeyFeatureView editKeyFeatureView = new EditKeyFeatureView();
+            editKeyFeatureView.ShowDialog();
         }
     }
 }

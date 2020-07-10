@@ -124,28 +124,9 @@ namespace HASPKey
             labelClient.Text = string.Empty;
             buttonAdd.Enabled = true;
         }
-        
-        private void ButtonDelete_Click(object sender, EventArgs e)
-        {
-            if (!(dgvHaspKey.CurrentRow.DataBoundItem is ModelViewHaspKey row))
-            {
-                MessageError(emptyHaspKey);
-                return;
-            }
 
-            if (row.Id == 0)
-            {
-                bindingHaspKey.RemoveCurrent();
-                return;
-            }
-            
-            if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                presenterHaspKey.Remove(row.Id);
-                DefaultView();
-            }
-        }
-
+        private void ButtonDelete_Click(object sender, EventArgs e) => DeleteItem();
+       
         private void ButtonSearchByClient_Click(object sender, EventArgs e)
         {
             radioButtonActive.Checked = false;
@@ -188,6 +169,32 @@ namespace HASPKey
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void dgvHaspKey_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+                DeleteItem();
+        }
+        private void DeleteItem()
+        {
+            if (!(dgvHaspKey.CurrentRow.DataBoundItem is ModelViewHaspKey row))
+            {
+                MessageError(emptyHaspKey);
+                return;
+            }
+
+            if (row.Id == 0)
+            {
+                bindingHaspKey.RemoveCurrent();
+                return;
+            }
+
+            if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                presenterHaspKey.Remove(row.Id);
+                DefaultView();
             }
         }
     }

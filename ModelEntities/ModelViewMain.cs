@@ -16,7 +16,7 @@ namespace ModelEntities
         public string Feature { get; set; }
         [DisplayName("Клиент")]
         public string Client { get; set; }
-        [DisplayName("Срок действия")]
+        [DisplayName("Окончание действия")]
         public DateTime EndDate { get; set; }
     }
 }

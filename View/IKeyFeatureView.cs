@@ -4,17 +4,15 @@ using System.Collections.Generic;
 
 namespace View
 {
-    /*
-     * 
-     * 
-     * 
-     * 
-     * 
-     */
-    public interface IKeyFeatureView : IEntitiesView<ModelViewKeyFeature>
+    public interface IKeyFeatureView
     {
-        void Bind(List<ModelViewKeyFeature> entity);        
+        List<ModelViewKeyFeature> KeyFeatyre { get; set; }
+        void BindFeature(List<ModelViewFeatureForEditKeyFeat> feature);
+        void BindKey(List<ModelViewHaspKey> key);
+
         void DataChange();       
         event Action DataUpdated;
+
+        void MessageError(string error);
     }
 }

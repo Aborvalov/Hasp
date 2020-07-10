@@ -13,6 +13,7 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
+            presenterEntities.Dispose();
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -41,16 +42,6 @@
             this.startDateDataGridViewTextBoxColumn = new HASPKey.DataGridViewCalendarColumn();
             this.endDateDataGridViewTextBoxColumn = new HASPKey.DataGridViewCalendarColumn();
             this.selectedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewCalendarColumn1 = new HASPKey.DataGridViewCalendarColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.calendarColumn1 = new HASPKey.CalendarColumn();
-            this.calendarColumn2 = new HASPKey.CalendarColumn();
-            this.calendarColumn3 = new HASPKey.CalendarColumn();
             this.dgvHaspKey = new System.Windows.Forms.DataGridView();
             this.serialNumberDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.innerIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,6 +51,19 @@
             this.bindingHaspKey = new System.Windows.Forms.BindingSource(this.components);
             this.HeadlineFeature = new System.Windows.Forms.Label();
             this.HeadliheHaspKey = new System.Windows.Forms.Label();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewCalendarColumn1 = new HASPKey.DataGridViewCalendarColumn();
+            this.dataGridViewCalendarColumn2 = new HASPKey.DataGridViewCalendarColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.calendarColumn1 = new HASPKey.CalendarColumn();
+            this.calendarColumn2 = new HASPKey.CalendarColumn();
+            this.calendarColumn3 = new HASPKey.CalendarColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingFeature)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFeature)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHaspKey)).BeginInit();
@@ -68,7 +72,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(583, 86);
+            this.buttonSave.Location = new System.Drawing.Point(623, 139);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 0;
@@ -103,12 +107,12 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvFeature.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvFeature.Location = new System.Drawing.Point(5, 181);
+            this.dgvFeature.Location = new System.Drawing.Point(5, 309);
             this.dgvFeature.Name = "dgvFeature";
             this.dgvFeature.RowHeadersVisible = false;
             this.dgvFeature.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvFeature.Size = new System.Drawing.Size(756, 281);
-            this.dgvFeature.TabIndex = 5;
+            this.dgvFeature.Size = new System.Drawing.Size(756, 153);
+            this.dgvFeature.TabIndex = 5;            
             // 
             // serialNumberDataGridViewTextBoxColumn
             // 
@@ -166,81 +170,6 @@
             this.selectedDataGridViewCheckBoxColumn.Name = "selectedDataGridViewCheckBoxColumn";
             this.selectedDataGridViewCheckBoxColumn.Width = 70;
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Number";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Номер";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 105;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Наименование";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 104;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Description";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Описание";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Width = 105;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "Description";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Описание";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "StartDate";
-            this.dataGridViewTextBoxColumn5.HeaderText = "Начало действие";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
-            // dataGridViewCalendarColumn1
-            // 
-            this.dataGridViewCalendarColumn1.DataPropertyName = "EndDate";
-            this.dataGridViewCalendarColumn1.HeaderText = "Окончание действия";
-            this.dataGridViewCalendarColumn1.Name = "dataGridViewCalendarColumn1";
-            this.dataGridViewCalendarColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewCalendarColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "EndDate";
-            this.dataGridViewTextBoxColumn6.HeaderText = "Окончание действия";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            // 
-            // calendarColumn1
-            // 
-            this.calendarColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.calendarColumn1.DataPropertyName = "SerialNumber";
-            this.calendarColumn1.HeaderText = "№ п/п";
-            this.calendarColumn1.Name = "calendarColumn1";
-            this.calendarColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.calendarColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.calendarColumn1.Width = 65;
-            // 
-            // calendarColumn2
-            // 
-            this.calendarColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.calendarColumn2.DataPropertyName = "StartDate";
-            this.calendarColumn2.HeaderText = "Начало действие";
-            this.calendarColumn2.Name = "calendarColumn2";
-            this.calendarColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.calendarColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // calendarColumn3
-            // 
-            this.calendarColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.calendarColumn3.DataPropertyName = "EndDate";
-            this.calendarColumn3.HeaderText = "Окончание действия";
-            this.calendarColumn3.Name = "calendarColumn3";
-            this.calendarColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.calendarColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
             // dgvHaspKey
             // 
             this.dgvHaspKey.AllowUserToAddRows = false;
@@ -268,8 +197,11 @@
             this.dgvHaspKey.ReadOnly = true;
             this.dgvHaspKey.RowHeadersVisible = false;
             this.dgvHaspKey.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvHaspKey.Size = new System.Drawing.Size(509, 137);
+            this.dgvHaspKey.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvHaspKey.Size = new System.Drawing.Size(509, 261);
             this.dgvHaspKey.TabIndex = 6;
+            this.dgvHaspKey.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvHaspKey_CellClick);
+            this.dgvHaspKey.SelectionChanged += new System.EventHandler(this.DgvHaspKey_SelectionChanged);
             // 
             // serialNumberDataGridViewTextBoxColumn1
             // 
@@ -317,7 +249,7 @@
             // HeadlineFeature
             // 
             this.HeadlineFeature.AutoSize = true;
-            this.HeadlineFeature.Location = new System.Drawing.Point(285, 165);
+            this.HeadlineFeature.Location = new System.Drawing.Point(286, 294);
             this.HeadlineFeature.Name = "HeadlineFeature";
             this.HeadlineFeature.Size = new System.Drawing.Size(194, 13);
             this.HeadlineFeature.TabIndex = 7;
@@ -331,6 +263,118 @@
             this.HeadliheHaspKey.Size = new System.Drawing.Size(85, 13);
             this.HeadliheHaspKey.TabIndex = 8;
             this.HeadliheHaspKey.Text = "Список ключей";
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Number";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Номер";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 105;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Наименование";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 104;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Description";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Описание";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 105;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Description";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Описание";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 139;
+            // 
+            // dataGridViewCalendarColumn1
+            // 
+            this.dataGridViewCalendarColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewCalendarColumn1.DataPropertyName = "StartDate";
+            this.dataGridViewCalendarColumn1.HeaderText = "Начало действие";
+            this.dataGridViewCalendarColumn1.Name = "dataGridViewCalendarColumn1";
+            this.dataGridViewCalendarColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewCalendarColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // dataGridViewCalendarColumn2
+            // 
+            this.dataGridViewCalendarColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewCalendarColumn2.DataPropertyName = "EndDate";
+            this.dataGridViewCalendarColumn2.HeaderText = "Окончание действия";
+            this.dataGridViewCalendarColumn2.Name = "dataGridViewCalendarColumn2";
+            this.dataGridViewCalendarColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewCalendarColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "StartDate";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Начало действие";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 65;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "EndDate";
+            this.dataGridViewTextBoxColumn6.HeaderText = "Окончание действия";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.Width = 122;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "Number";
+            this.dataGridViewTextBoxColumn7.HeaderText = "Номер";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.Width = 122;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "TypeKey";
+            this.dataGridViewTextBoxColumn8.HeaderText = "Тип ключа";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn8.Width = 122;
+            // 
+            // calendarColumn1
+            // 
+            this.calendarColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.calendarColumn1.DataPropertyName = "SerialNumber";
+            this.calendarColumn1.HeaderText = "№ п/п";
+            this.calendarColumn1.Name = "calendarColumn1";
+            this.calendarColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.calendarColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.calendarColumn1.Width = 65;
+            // 
+            // calendarColumn2
+            // 
+            this.calendarColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.calendarColumn2.DataPropertyName = "StartDate";
+            this.calendarColumn2.HeaderText = "Начало действие";
+            this.calendarColumn2.Name = "calendarColumn2";
+            this.calendarColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.calendarColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // calendarColumn3
+            // 
+            this.calendarColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.calendarColumn3.DataPropertyName = "EndDate";
+            this.calendarColumn3.HeaderText = "Окончание действия";
+            this.calendarColumn3.Name = "calendarColumn3";
+            this.calendarColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.calendarColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // EditKeyFeatureView
             // 
@@ -370,6 +414,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private DataGridViewCalendarColumn dataGridViewCalendarColumn1;
+        private System.Windows.Forms.DataGridView dgvHaspKey;
+        private System.Windows.Forms.BindingSource bindingHaspKey;
+        private System.Windows.Forms.Label HeadlineFeature;
+        private System.Windows.Forms.Label HeadliheHaspKey;
+        private DataGridViewCalendarColumn dataGridViewCalendarColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn serialNumberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
@@ -377,10 +428,6 @@
         private DataGridViewCalendarColumn startDateDataGridViewTextBoxColumn;
         private DataGridViewCalendarColumn endDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn selectedDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.DataGridView dgvHaspKey;
-        private System.Windows.Forms.BindingSource bindingHaspKey;
-        private System.Windows.Forms.Label HeadlineFeature;
-        private System.Windows.Forms.Label HeadliheHaspKey;
         private System.Windows.Forms.DataGridViewTextBoxColumn serialNumberDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn innerIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn1;

@@ -64,8 +64,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientModel.cs" />
+    <Compile Include="FeatureFor__Model.cs" />
     <Compile Include="FeatureModel.cs" />
     <Compile Include="HaspKeyModel.cs" />
+    <Compile Include="IFeatureFor__Model.cs" />
     <Compile Include="MainModel.cs" />
     <Compile Include="IClientModel.cs" />
     <Compile Include="IEntitiesModel.cs" />

@@ -43,13 +43,13 @@
             this.labelName = new System.Windows.Forms.Label();
             this.labelDescription = new System.Windows.Forms.Label();
             this.tbNumber = new System.Windows.Forms.TextBox();
+            this.bindingItem = new System.Windows.Forms.BindingSource(this.components);
             this.tbName = new System.Windows.Forms.TextBox();
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.ButtonAdd = new System.Windows.Forms.Button();
             this.ButtonDelete = new System.Windows.Forms.Button();
             this.ButtonSave = new System.Windows.Forms.Button();
             this.Headline = new System.Windows.Forms.Label();
-            this.bindingItem = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingFeature)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFeature)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingItem)).BeginInit();
@@ -91,6 +91,7 @@
             this.dgvFeature.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvFeature_CellClick);
             this.dgvFeature.SelectionChanged += new System.EventHandler(this.DgvFeature_SelectionChanged);
             this.dgvFeature.DoubleClick += new System.EventHandler(this.DgvFeature_DoubleClick);
+            this.dgvFeature.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvFeature_KeyDown);
             // 
             // numberDataGridViewTextBoxColumn
             // 
@@ -166,6 +167,10 @@
             this.tbNumber.TabIndex = 4;
             this.tbNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbNumber_KeyPress);
             // 
+            // bindingItem
+            // 
+            this.bindingItem.DataSource = typeof(ModelEntities.ModelViewFeature);
+            // 
             // tbName
             // 
             this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -228,10 +233,6 @@
             this.Headline.Size = new System.Drawing.Size(149, 13);
             this.Headline.TabIndex = 10;
             this.Headline.Text = "Список функциональностей";
-            // 
-            // bindingItem
-            // 
-            this.bindingItem.DataSource = typeof(ModelEntities.ModelViewFeature);
             // 
             // FeatureView
             // 

@@ -105,26 +105,8 @@ namespace HASPKey
             tbInnerIdHaspKey.Text = string.Empty;
             buttonAdd.Enabled = true;
         }
-        
-        private void ButtonDelete_Click(object sender, EventArgs e)
-        {
-            if (!(dgvClient.CurrentRow.DataBoundItem is ModelViewClient row))
-            {
-                MessageError(emptyClient);
-                return;
-            }
-            if (row.Id == 0)
-            {
-                bindingClient.RemoveCurrent();
-                return;
-            }
 
-            if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                presenterClient.Remove(row.Id);
-                DefaultView();
-            }
-        }
+        private void ButtonDelete_Click(object sender, EventArgs e) => DeleteItem();
 
         private void ButtonSearchByFeature_Click(object sender, EventArgs e)
         {
@@ -175,6 +157,31 @@ namespace HASPKey
                 }
                 presenterClient.FillInputItem(row);
             }
-        }        
+        }
+
+        private void dgvClient_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+                DeleteItem();
+        }
+        private void DeleteItem()
+        {
+            if (!(dgvClient.CurrentRow.DataBoundItem is ModelViewClient row))
+            {
+                MessageError(emptyClient);
+                return;
+            }
+            if (row.Id == 0)
+            {
+                bindingClient.RemoveCurrent();
+                return;
+            }
+
+            if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                presenterClient.Remove(row.Id);
+                DefaultView();
+            }
+        }
     }
 }

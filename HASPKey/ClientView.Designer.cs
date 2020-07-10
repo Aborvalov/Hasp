@@ -45,6 +45,7 @@
             this.labelPhone = new System.Windows.Forms.Label();
             this.labelContactPerson = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
+            this.bindingItem = new System.Windows.Forms.BindingSource(this.components);
             this.tbAddress = new System.Windows.Forms.TextBox();
             this.tbPhone = new System.Windows.Forms.TextBox();
             this.tbContactPerson = new System.Windows.Forms.TextBox();
@@ -57,7 +58,6 @@
             this.labelSearchInnerId = new System.Windows.Forms.Label();
             this.tbInnerIdHaspKey = new System.Windows.Forms.TextBox();
             this.Headline = new System.Windows.Forms.Label();
-            this.bindingItem = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingItem)).BeginInit();
@@ -97,6 +97,7 @@
             this.dgvClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvClient_CellClick);
             this.dgvClient.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvClient_CellDoubleClick);
             this.dgvClient.SelectionChanged += new System.EventHandler(this.DgvClient_SelectionChanged);
+            this.dgvClient.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvClient_KeyDown);
             // 
             // serialNumberDataGridViewTextBoxColumn
             // 
@@ -186,7 +187,11 @@
             this.tbName.Location = new System.Drawing.Point(13, 523);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(159, 21);
-            this.tbName.TabIndex = 5;            
+            this.tbName.TabIndex = 5;
+            // 
+            // bindingItem
+            // 
+            this.bindingItem.DataSource = typeof(ModelEntities.ModelViewClient);
             // 
             // tbAddress
             // 
@@ -195,7 +200,7 @@
             this.tbAddress.Location = new System.Drawing.Point(178, 523);
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(149, 21);
-            this.tbAddress.TabIndex = 6;           
+            this.tbAddress.TabIndex = 6;
             // 
             // tbPhone
             // 
@@ -204,7 +209,7 @@
             this.tbPhone.Location = new System.Drawing.Point(333, 523);
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(119, 21);
-            this.tbPhone.TabIndex = 7;            
+            this.tbPhone.TabIndex = 7;
             // 
             // tbContactPerson
             // 
@@ -213,7 +218,7 @@
             this.tbContactPerson.Location = new System.Drawing.Point(458, 523);
             this.tbContactPerson.Name = "tbContactPerson";
             this.tbContactPerson.Size = new System.Drawing.Size(136, 21);
-            this.tbContactPerson.TabIndex = 8;            
+            this.tbContactPerson.TabIndex = 8;
             // 
             // buttonAdd
             // 
@@ -307,10 +312,6 @@
             this.Headline.Size = new System.Drawing.Size(94, 13);
             this.Headline.TabIndex = 17;
             this.Headline.Text = "Список клиентов";
-            // 
-            // bindingItem
-            // 
-            this.bindingItem.DataSource = typeof(ModelEntities.ModelViewClient);
             // 
             // ClientView
             // 

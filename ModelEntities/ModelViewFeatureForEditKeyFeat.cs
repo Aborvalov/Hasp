@@ -1,10 +1,11 @@
 ﻿using Entities;
 using System.ComponentModel;
 using System;
+using System.Runtime.CompilerServices;
 
 namespace ModelEntities
 {
-    public class ModelViewFeatureForEditKeyFeat
+    public class ModelViewFeatureForEditKeyFeat : INotifyPropertyChanged
     {
         public ModelViewFeatureForEditKeyFeat()
         { }
@@ -43,13 +44,49 @@ namespace ModelEntities
             get { return Feature.Description; }
             set { Feature.Description = value; }
         }
-       
+        [Browsable(false)]
+        public int IdKey { get; set; }
+
+
+
+
+        private DateTime? startDate;
         [DisplayName("Начало действие")]
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate
+        {
+            get { return startDate; }
+            set
+            {
+                startDate = value;
+                OnPropertyChanged();
+            }
+        }
+        private DateTime? endDate;
         [DisplayName("Окончание действия")]
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate
+        {
+            get { return endDate; }
+            set
+            {
+                endDate = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool selected;
         [DisplayName("Выбран")]
-        public bool Selected { get; set; }
+        public bool Selected
+        {
+            get { return selected; }
+            set
+            {
+                selected = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName]string prop = "")
+            =>PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
 
         public override bool Equals(object obj) => Feature.Equals(obj);
         public override int GetHashCode() => Feature.GetHashCode();

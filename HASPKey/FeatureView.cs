@@ -88,27 +88,9 @@ namespace HASPKey
 
             presenterFeature.FillModel(bindingItem.DataSource as ModelViewFeature);
             DefaultView();           
-        }        
-
-        private void ButtonDelete_Click(object sender, EventArgs e)
-        {
-            if (!(dgvFeature.CurrentRow.DataBoundItem is ModelViewFeature row))
-            {
-                MessageError(emptyFeature);
-                return;
-            }
-            if (row.Id == 0)
-            {
-                bindingFeature.RemoveCurrent();
-                return;
-            }
-
-            if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                presenterFeature.Remove(row.Id);
-                DefaultView();
-            }
         }
+
+        private void ButtonDelete_Click(object sender, EventArgs e) => DeleteIrem();
         private void DefaultView()
         {
             if (!size)
@@ -144,6 +126,32 @@ namespace HASPKey
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void dgvFeature_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+                DeleteIrem();
+        }
+
+        private void DeleteIrem()
+        {
+            if (!(dgvFeature.CurrentRow.DataBoundItem is ModelViewFeature row))
+            {
+                MessageError(emptyFeature);
+                return;
+            }
+            if (row.Id == 0)
+            {
+                bindingFeature.RemoveCurrent();
+                return;
+            }
+
+            if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                presenterFeature.Remove(row.Id);
+                DefaultView();
             }
         }
     }

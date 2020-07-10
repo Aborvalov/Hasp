@@ -50,6 +50,7 @@
             this.radioButtonActive = new System.Windows.Forms.RadioButton();
             this.LInnerNumber = new System.Windows.Forms.Label();
             this.tbInnerNumber = new System.Windows.Forms.TextBox();
+            this.bindingItem = new System.Windows.Forms.BindingSource(this.components);
             this.tbNumber = new System.Windows.Forms.TextBox();
             this.labelNumber = new System.Windows.Forms.Label();
             this.labelType = new System.Windows.Forms.Label();
@@ -58,7 +59,6 @@
             this.buttonSearchByClient = new System.Windows.Forms.Button();
             this.labelClient = new System.Windows.Forms.Label();
             this.Headline = new System.Windows.Forms.Label();
-            this.bindingItem = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHaspKey)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHaspKey)).BeginInit();
             this.panelFiltr.SuspendLayout();
@@ -102,6 +102,7 @@
             this.dgvHaspKey.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvHaspKey_CellClick);
             this.dgvHaspKey.SelectionChanged += new System.EventHandler(this.DgvHaspKey_SelectionChanged);
             this.dgvHaspKey.DoubleClick += new System.EventHandler(this.DgvHaspKey_DoubleClick);
+            this.dgvHaspKey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvHaspKey_KeyDown);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -249,6 +250,10 @@
             this.tbInnerNumber.TabIndex = 9;
             this.tbInnerNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbInnerNumber_KeyPress);
             // 
+            // bindingItem
+            // 
+            this.bindingItem.DataSource = typeof(ModelEntities.ModelViewHaspKey);
+            // 
             // tbNumber
             // 
             this.tbNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -334,10 +339,6 @@
             this.Headline.Size = new System.Drawing.Size(115, 13);
             this.Headline.TabIndex = 17;
             this.Headline.Text = "Список HASP-ключей";
-            // 
-            // bindingItem
-            // 
-            this.bindingItem.DataSource = typeof(ModelEntities.ModelViewHaspKey);
             // 
             // HaspKeyView
             // 

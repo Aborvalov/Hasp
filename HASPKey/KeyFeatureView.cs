@@ -8,7 +8,7 @@ using View;
 
 namespace HASPKey
 {
-    public partial class KeyFeatureView : DevExpress.XtraEditors.XtraForm, IKeyFeatureView
+    public partial class KeyFeatureView : DevExpress.XtraEditors.XtraForm, IEntitiesView<ModelViewKeyFeature>
     {
         private readonly IPresenterEntities<ModelViewKeyFeature> presenterKeyFeature;       
         public event Action DataUpdated;
@@ -21,7 +21,7 @@ namespace HASPKey
         public KeyFeatureView()
         {
             InitializeComponent();
-            presenterKeyFeature = new PresenterKeyFeature(this);  
+            presenterKeyFeature = new PresenterKeyFeature(null);  
         }
                
         public void Bind(List<ModelViewKeyFeature> entity) 

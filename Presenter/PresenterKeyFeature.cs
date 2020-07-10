@@ -81,7 +81,8 @@ namespace Presenter
         }
 
         public void Display()
-            => entitiesView.Bind(keyFeatureModel.GetAll().OrderBy(x => x.IdHaspKey).ToList());
+        { }
+        //=> entitiesView.Bind(keyFeatureModel.GetAll().OrderBy(x => x.IdHaspKey).ToList());
 
         public void Dispose()
         {

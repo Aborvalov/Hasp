@@ -18,7 +18,7 @@ namespace HASPKey
             {
                 val = value;
                 chType = 1;
-                DateTime t = DateTime.Now;
+                DateTime? t = null;
                 try { t = (DateTime)val; }
                 catch (Exception) { }
                 chType = 0;
