@@ -26,12 +26,11 @@ namespace Presenter
             keyModel = new HaspKeyModel(new Logics());
             featureModel = new FeatureFor__Model(new Logics());
 
+            entitiesView.Entities = keyFeatureModel.GetAll();
+            
             DisplayHaspKey();
         }
 
-
-               
-        public ModelViewKeyFeature Entities { get; set; }
 
         public void DisplayHaspKey() => entitiesView.BindKey(keyModel.GetAll());
         public void DisplayFeatureAtKey(int idKey)
@@ -95,6 +94,8 @@ namespace Presenter
             }
 
             DisplayFeatureAtKey(keyFeatModel[0].IdKey);
+            entitiesView.Entities = keyFeatureModel.GetAll();
+            entitiesView.EmptuFeatureAsKey();
             entitiesView.DataChange();
         }
 
@@ -107,7 +108,7 @@ namespace Presenter
             bool error = true;
             foreach (var i in item)
             {
-                error = CheckInputData(i, numverRow);
+                error &= CheckInputData(i, numverRow);
                 numverRow++;
             }
 

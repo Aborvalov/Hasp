@@ -18,13 +18,14 @@ namespace HASPKey
         public event Action DataUpdated;
         public string NumberHaspKey { get; set; }
         private IPresenterKeyFeature presenterEntities;
+        public List<ModelViewKeyFeature> Entities { get; set; }
 
         private const string error = "Ошибка";
         private const string errorString = "Неправильно заполнена дата, окончание действия меньше начала.";
         private const string emptyKey = "Данный ключ не найден.";
         private const string caption = "Внести изменеия";
         private const string message = "Вы уверены, что хотите внести изменеия?";
-
+        private const string headlineFeature = "Список функциональностей у ключа - ";
         public EditKeyFeatureView()
         {
             InitializeComponent();
@@ -39,7 +40,7 @@ namespace HASPKey
             bindingFeature.DataSource = feature != null ? new BindingList<ModelViewFeatureForEditKeyFeat>(feature)
                                                             : new BindingList<ModelViewFeatureForEditKeyFeat>();
 
-            HeadlineFeature.Text = "Список функциональностей у ключа - " + NumberHaspKey;
+            HeadlineFeature.Text = headlineFeature + NumberHaspKey;
         }
         public void BindKey(List<ModelViewHaspKey> key) 
             => bindingHaspKey.DataSource = key != null ? new BindingList<ModelViewHaspKey>(key)
@@ -63,10 +64,9 @@ namespace HASPKey
         {
             var item = (bindingFeature.DataSource as BindingList<ModelViewFeatureForEditKeyFeat>).ToList();
 
-            DefaultRow();
-
-            if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                if (presenterEntities.CheckInputData(item))
+            DefaultRow();            
+            if (presenterEntities.CheckInputData(item))
+                if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     presenterEntities.Edit(item);
                 else
                     MessageError(errorString);
@@ -92,5 +92,25 @@ namespace HASPKey
             if (item.IdKeyFeaure == 0)
                 dgvFeature[6,e.RowIndex].Value = true;
         }
+
+        private void EditKeyFeatureView_Load(object sender, EventArgs e) => EmptuFeatureAsKey();
+        
+        public void EmptuFeatureAsKey()
+        {
+            for (int i = 0; i < dgvHaspKey.RowCount; i++)
+                dgvHaspKey.Rows[i].DefaultCellStyle.BackColor = Color.White;
+
+            for (int i = 0; i < bindingHaspKey.Count; i++)
+            {
+
+                if (!(bindingHaspKey[i] is ModelViewHaspKey item))
+                    return;
+                if (Entities
+                    .LastOrDefault(x => x.IdHaspKey == item.Id &&
+                                        x.EndDate >= DateTime.Now.Date) == null)
+                    dgvHaspKey.Rows[i].DefaultCellStyle.BackColor = Color.Wheat;
+            }
+        }
+
     }
 }
