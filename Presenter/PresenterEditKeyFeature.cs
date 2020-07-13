@@ -63,18 +63,25 @@ namespace Presenter
                         .Where(x => x.IdKeyFeaure != 0 && !x.Selected)
                         .Select(item => item.IdKeyFeaure);
 
+            var add = keyFeatModel
+                     .Where(x => x.IdKeyFeaure == 0 && x.Selected)
+                     .ToList();
+
+            var update = keyFeatModel
+                        .Where(x => x.IdKeyFeaure != 0 && x.Selected)
+                        .ToList();
+
+
+
+
+
             if (delete.Any())
             {
                 featureModel.Remove(delete, out error);
                 if (error != string.Empty)
                     entitiesView.MessageError(error);
             }
-
-
-
-            var add = keyFeatModel
-                     .Where(x => x.IdKeyFeaure == 0 && x.Selected)
-                     .ToList();
+            
             if (add.Any())
             {
                 error = string.Empty;
@@ -83,11 +90,6 @@ namespace Presenter
                     entitiesView.MessageError(error);
             }
 
-
-
-            var update = keyFeatModel
-                        .Where(x => x.IdKeyFeaure != 0 && x.Selected)
-                        .ToList();
             if (update.Any())
             {
                 error = string.Empty;
@@ -97,6 +99,14 @@ namespace Presenter
             }
 
             DisplayFeatureAtKey(keyFeatModel[0].IdKey);
+        }
+
+        private bool CheckInputData(List<ModelViewFeatureForEditKeyFeat> item)
+        {
+
+
+
+            return true;
         }
     }
 }
