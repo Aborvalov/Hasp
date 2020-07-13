@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Entities;
+﻿using Entities;
 using Logic;
 using LogicContract;
 using ModelEntities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Model
 {
