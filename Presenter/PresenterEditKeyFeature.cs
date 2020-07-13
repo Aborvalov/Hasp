@@ -41,7 +41,10 @@ namespace Presenter
                 
         public void DisplayHaspKey() => entitiesView.BindKey(keyModel.GetAll());
         public void DisplayFeatureAtKey(int idKey)
-            => entitiesView.BindFeature(featureModel.GetAll(idKey));
+        {
+            entitiesView.NumberHaspKey = keyModel.GetById(idKey).InnerId.ToString();
+            entitiesView.BindFeature(featureModel.GetAll(idKey));            
+        }
 
         public void Dispose()
         {
@@ -99,14 +102,26 @@ namespace Presenter
             }
 
             DisplayFeatureAtKey(keyFeatModel[0].IdKey);
+            entitiesView.DataChange();
         }
 
-        private bool CheckInputData(List<ModelViewFeatureForEditKeyFeat> item)
+        public bool CheckInputData(List<ModelViewFeatureForEditKeyFeat> item)
         {
+            int numverRow = 0;
+            bool error = true;
+            foreach (var i in item)
+            {
+                if (i.StartDate != null &&
+                    i.EndDate != null &&
+                    i.StartDate.Value.Date > i.EndDate.Value.Date)
+                {
+                    entitiesView.ErrorRow(numverRow);
+                    error = false;
+                }
+                numverRow++;
+            }
 
-
-
-            return true;
+            return error;
         }
     }
 }

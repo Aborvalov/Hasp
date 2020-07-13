@@ -17,9 +17,11 @@ namespace HASPKey
     {
         public event Action DataUpdated;
         public List<ModelViewKeyFeature> KeyFeatyre { get; set; }
+        public string NumberHaspKey { get; set; }
         IPresenterKeyFeature presenterEntities;
 
         private const string error = "Ошибка";
+        private const string errorString = "Неправильно заполнены поля.";
         private const string emptyKey = "Данный ключ не найден.";
         private const string caption = "Удалить связку ключ-функциональность";
         private const string message = "Вы уверены, что хотите удалить связь ключ-функциональность?";
@@ -41,10 +43,14 @@ namespace HASPKey
 
         public void DataChange() => DataUpdated?.Invoke();
         public void MessageError(string errorText) => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-        
+
         public void BindFeature(List<ModelViewFeatureForEditKeyFeat> feature)
-           => bindingFeature.DataSource = feature != null ? new BindingList<ModelViewFeatureForEditKeyFeat>(feature)
-                                                          : new BindingList<ModelViewFeatureForEditKeyFeat>();
+        {
+            bindingFeature.DataSource = feature != null ? new BindingList<ModelViewFeatureForEditKeyFeat>(feature)
+                                                            : new BindingList<ModelViewFeatureForEditKeyFeat>();
+
+            HeadlineFeature.Text = "Список функциональностей у ключа - " + NumberHaspKey;
+        }
         public void BindKey(List<ModelViewHaspKey> key)
           => bindingHaspKey.DataSource = key != null ? new BindingList<ModelViewHaspKey>(key)
                                                      : new BindingList<ModelViewHaspKey>();
@@ -67,7 +73,22 @@ namespace HASPKey
         {
             var item = (bindingFeature.DataSource as BindingList<ModelViewFeatureForEditKeyFeat>).ToList();
 
-            presenterEntities.Edit(item);            
+            DefaultRow();
+
+            if (presenterEntities.CheckInputData(item))
+                presenterEntities.Edit(item);
+            else
+                MessageError(errorString);
         }
+
+        public void ErrorRow(int numberRow)
+            =>dgvFeature.Rows[numberRow].DefaultCellStyle.BackColor = Color.Red;
+
+        private void DefaultRow()
+        {
+            foreach (DataGridViewRow row in dgvFeature.Rows)
+                row.DefaultCellStyle.BackColor = Color.White;
+        }
+        
     }
 }

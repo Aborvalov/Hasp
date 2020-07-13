@@ -13,5 +13,6 @@ namespace Presenter
         void DisplayHaspKey();
         void DisplayFeatureAtKey(int idKey);
         void Edit(List<ModelViewFeatureForEditKeyFeat> keyFeatModel);
+        bool CheckInputData(List<ModelViewFeatureForEditKeyFeat> item);
     }
 }
