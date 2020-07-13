@@ -91,7 +91,7 @@
             this.dgvFeature.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvFeature_CellClick);
             this.dgvFeature.SelectionChanged += new System.EventHandler(this.DgvFeature_SelectionChanged);
             this.dgvFeature.DoubleClick += new System.EventHandler(this.DgvFeature_DoubleClick);
-            this.dgvFeature.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvFeature_KeyDown);
+            this.dgvFeature.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgvFeature_KeyDown);
             // 
             // numberDataGridViewTextBoxColumn
             // 

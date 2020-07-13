@@ -109,8 +109,8 @@ namespace HASPKey
             tf.Add(item);
             tf.Add(item2);
             tk.Add(key);
-            EditKeyFeatureView editKeyFeatureView = new EditKeyFeatureView(tf,tk);
-            editKeyFeatureView.Show();
+            //EditKeyFeatureView editKeyFeatureView = new EditKeyFeatureView(tf,tk);
+            //editKeyFeatureView.Show();
 
 
 

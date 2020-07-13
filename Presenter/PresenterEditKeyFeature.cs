@@ -30,15 +30,9 @@ namespace Presenter
         }
 
 
-
-
-
-
-
-
-
+               
         public ModelViewKeyFeature Entities { get; set; }
-                
+
         public void DisplayHaspKey() => entitiesView.BindKey(keyModel.GetAll());
         public void DisplayFeatureAtKey(int idKey)
         {
@@ -58,26 +52,25 @@ namespace Presenter
         {
             if (keyFeatModel == null)
                 throw new ArgumentNullException(nameof(keyFeatModel));
-
-
-
+                       
             string error = string.Empty;
             var delete = keyFeatModel
                         .Where(x => x.IdKeyFeaure != 0 && !x.Selected)
                         .Select(item => item.IdKeyFeaure);
 
             var add = keyFeatModel
-                     .Where(x => x.IdKeyFeaure == 0 && x.Selected)
+                     .Where(x => x.IdKeyFeaure == 0 && 
+                                 x.Selected &&
+                                 x.StartDate != null &&
+                                 x.EndDate != null)
                      .ToList();
 
             var update = keyFeatModel
-                        .Where(x => x.IdKeyFeaure != 0 && x.Selected)
+                        .Where(x => x.IdKeyFeaure != 0 && 
+                                    x.StartDate != null &&
+                                    x.EndDate != null)
                         .ToList();
-
-
-
-
-
+                       
             if (delete.Any())
             {
                 featureModel.Remove(delete, out error);
@@ -107,21 +100,33 @@ namespace Presenter
 
         public bool CheckInputData(List<ModelViewFeatureForEditKeyFeat> item)
         {
+            if (item == null)
+                throw new ArgumentNullException(nameof(item));
+
             int numverRow = 0;
             bool error = true;
             foreach (var i in item)
             {
-                if (i.StartDate != null &&
-                    i.EndDate != null &&
-                    i.StartDate.Value.Date > i.EndDate.Value.Date)
-                {
-                    entitiesView.ErrorRow(numverRow);
-                    error = false;
-                }
+                error = CheckInputData(i, numverRow);
                 numverRow++;
             }
 
             return error;
+        }
+        public bool CheckInputData(ModelViewFeatureForEditKeyFeat item, int numverRow)
+        {
+            if (item == null)
+                throw new ArgumentNullException(nameof(item));
+
+            if (item.StartDate != null &&
+                item.EndDate != null &&
+                item.StartDate.Value.Date > item.EndDate.Value.Date)
+            {
+                entitiesView.ErrorRow(numverRow);
+                return false;
+            }
+
+            return true;
         }
     }
 }

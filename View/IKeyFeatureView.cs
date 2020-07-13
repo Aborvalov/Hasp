@@ -5,8 +5,7 @@ using System.Collections.Generic;
 namespace View
 {
     public interface IKeyFeatureView
-    {
-        List<ModelViewKeyFeature> KeyFeatyre { get; set; }
+    {        
         void BindFeature(List<ModelViewFeatureForEditKeyFeat> feature);
         void BindKey(List<ModelViewHaspKey> key);
         string NumberHaspKey { get; set; }

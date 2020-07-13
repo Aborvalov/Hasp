@@ -129,7 +129,7 @@ namespace HASPKey
             }
         }
 
-        private void dgvFeature_KeyDown(object sender, KeyEventArgs e)
+        private void DgvFeature_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
                 DeleteIrem();

@@ -16,31 +16,21 @@ namespace HASPKey
     public partial class EditKeyFeatureView : DevExpress.XtraEditors.XtraForm, IKeyFeatureView
     {
         public event Action DataUpdated;
-        public List<ModelViewKeyFeature> KeyFeatyre { get; set; }
         public string NumberHaspKey { get; set; }
-        IPresenterKeyFeature presenterEntities;
+        private IPresenterKeyFeature presenterEntities;
 
         private const string error = "Ошибка";
-        private const string errorString = "Неправильно заполнены поля.";
+        private const string errorString = "Неправильно заполнена дата, окончание действия меньше начала.";
         private const string emptyKey = "Данный ключ не найден.";
-        private const string caption = "Удалить связку ключ-функциональность";
-        private const string message = "Вы уверены, что хотите удалить связь ключ-функциональность?";
+        private const string caption = "Внести изменеия";
+        private const string message = "Вы уверены, что хотите внести изменеия?";
 
         public EditKeyFeatureView()
         {
             InitializeComponent();
-
             presenterEntities = new PresenterEditKeyFeature(this);
         }
-
-        public EditKeyFeatureView(List<ModelViewFeatureForEditKeyFeat> feature, List<ModelViewHaspKey> key) : this()
-        {
-            BindFeature(feature);
-            BindKey(key);
-        }
-
-
-
+              
         public void DataChange() => DataUpdated?.Invoke();
         public void MessageError(string errorText) => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -51,9 +41,9 @@ namespace HASPKey
 
             HeadlineFeature.Text = "Список функциональностей у ключа - " + NumberHaspKey;
         }
-        public void BindKey(List<ModelViewHaspKey> key)
-          => bindingHaspKey.DataSource = key != null ? new BindingList<ModelViewHaspKey>(key)
-                                                     : new BindingList<ModelViewHaspKey>();
+        public void BindKey(List<ModelViewHaspKey> key) 
+            => bindingHaspKey.DataSource = key != null ? new BindingList<ModelViewHaspKey>(key)
+                                                       : new BindingList<ModelViewHaspKey>();
 
         private void DgvHaspKey_CellClick(object sender, DataGridViewCellEventArgs e) => FillFeatureAtKey();
 
@@ -75,10 +65,11 @@ namespace HASPKey
 
             DefaultRow();
 
-            if (presenterEntities.CheckInputData(item))
-                presenterEntities.Edit(item);
-            else
-                MessageError(errorString);
+            if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (presenterEntities.CheckInputData(item))
+                    presenterEntities.Edit(item);
+                else
+                    MessageError(errorString);
         }
 
         public void ErrorRow(int numberRow)
@@ -86,9 +77,20 @@ namespace HASPKey
 
         private void DefaultRow()
         {
-            foreach (DataGridViewRow row in dgvFeature.Rows)
-                row.DefaultCellStyle.BackColor = Color.White;
+            for (int i = 0; i < dgvFeature.RowCount; i++)
+                DefaultRow(i);
         }
-        
+        public void DefaultRow(int numberRow)
+           => dgvFeature.Rows[numberRow].DefaultCellStyle.BackColor = Color.White;
+
+        private void DgvFeature_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            DefaultRow(e.RowIndex);
+            var item = dgvFeature.CurrentRow.DataBoundItem as ModelViewFeatureForEditKeyFeat;
+            presenterEntities.CheckInputData(item, e.RowIndex);
+
+            if (item.IdKeyFeaure == 0)
+                dgvFeature[6,e.RowIndex].Value = true;
+        }
     }
 }

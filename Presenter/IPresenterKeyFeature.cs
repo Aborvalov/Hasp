@@ -14,5 +14,6 @@ namespace Presenter
         void DisplayFeatureAtKey(int idKey);
         void Edit(List<ModelViewFeatureForEditKeyFeat> keyFeatModel);
         bool CheckInputData(List<ModelViewFeatureForEditKeyFeat> item);
+        bool CheckInputData(ModelViewFeatureForEditKeyFeat item, int numverRow);
     }
 }
