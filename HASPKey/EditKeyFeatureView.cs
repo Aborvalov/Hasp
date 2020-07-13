@@ -62,23 +62,12 @@ namespace HASPKey
             }            
             presenterEntities.DisplayFeatureAtKey(row.Id);
         }
-
         
-
-        private void Delete()
-        {
-            if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                ;
-            }
-        }
-
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             var item = (bindingFeature.DataSource as BindingList<ModelViewFeatureForEditKeyFeat>).ToList();
 
-            presenterEntities.Edit(item);
-            
+            presenterEntities.Edit(item);            
         }
     }
 }

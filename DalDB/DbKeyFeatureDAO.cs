@@ -86,13 +86,13 @@ namespace DalDB
         /// <returns>Результат проверки.</returns>
         public bool ContainsDB(KeyFeature entity)
         {
-            var kf = db.KeyFeatures
+            var keyFeature = db.KeyFeatures
                        .SingleOrDefault(x =>
                                         x.IdHaspKey == entity.IdHaspKey &&
                                         x.IdFeature == entity.IdFeature &&
                                         x.StartDate == entity.StartDate &&
                                         x.EndDate   == entity.EndDate);
-            return kf != null;
+            return keyFeature != null;
         }
     }
 }

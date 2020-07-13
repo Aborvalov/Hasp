@@ -19,6 +19,7 @@ namespace Model
         private readonly DateTime date = DateTime.Now.Date;
 
         private const string errorAdd = "Не удалось создать запись с данной функциональностью: ";
+        private const string errorUpdate = "Не удалось обновить запись с данной функциональностью: ";
         private const string errorDelete = "Не удалось удалить запись: ";
 
 
@@ -37,6 +38,9 @@ namespace Model
 
         public bool Add(List<ModelViewFeatureForEditKeyFeat> keyFeat, out string error)
         {
+            if (keyFeat == null)
+                throw new ArgumentNullException(nameof(keyFeat));
+
             error = string.Empty;
 
             foreach (var item in keyFeat)
@@ -91,7 +95,7 @@ namespace Model
                 var itemKeyFeature = listKeyFeat
                                      .LastOrDefault(x => x.IdFeature == item.Id &&
                                                          x.EndDate >= date);
-                
+
                 if (itemKeyFeature != null)
                 {
                     model.Selected = true;
@@ -107,6 +111,9 @@ namespace Model
 
         public bool Remove(IEnumerable<int> idFeatureKey, out string error)
         {
+            if (idFeatureKey == null)
+                throw new ArgumentNullException(nameof(idFeatureKey));
+
             error = string.Empty;
 
             foreach (var id in idFeatureKey)
@@ -114,6 +121,38 @@ namespace Model
                     error += errorDelete + id.ToString() + '\n';
             
             return error == string.Empty;                 
+        }
+
+        public bool Update(List<ModelViewFeatureForEditKeyFeat> keyFeat, out string error)
+        {
+            if (keyFeat == null)
+                throw new ArgumentNullException(nameof(keyFeat));
+
+            error = string.Empty;
+            var all = GetAll(keyFeat[0].IdKey);
+            foreach (var item in keyFeat)
+            {
+                if (all
+                    .Where(x => x.IdKeyFeaure == item.IdKeyFeaure &&
+                                   x.Selected == item.Selected &&
+                                   x.EndDate == item.EndDate)
+                    .Any())
+                    break;
+                
+                var keyFeature = new KeyFeature()
+                {
+                    Id = item.IdKeyFeaure,
+                    IdFeature = item.IdFeature,
+                    IdHaspKey = item.IdKey,
+                    StartDate = (DateTime)item.StartDate,
+                    EndDate = (DateTime)item.EndDate,
+                };
+
+                if (!this.keyFeature.Update(keyFeature))
+                    error += errorUpdate + item.Feature.Name + '\n';                
+            }
+
+            return error == string.Empty;
         }
     }
 }

@@ -11,7 +11,6 @@ namespace Model
 
         bool Remove(IEnumerable<int> idFeatureKey, out string error);
         bool Add(List<ModelViewFeatureForEditKeyFeat> keyFeat, out string error);
-
-
+        bool Update(List<ModelViewFeatureForEditKeyFeat> keyFeat, out string error);
     }
 }
