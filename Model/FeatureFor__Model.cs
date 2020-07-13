@@ -16,6 +16,14 @@ namespace Model
         private IFeatureLogic featLogic;
         private IKeyFeatureLogic keyFeature;
         private ModelViewFeatureForEditKeyFeat model;
+        private readonly DateTime date = DateTime.Now.Date;
+
+        private const string errorAdd = "Не удалось создать запись с данной функциональностью: ";
+        private const string errorDelete = "Не удалось удалить запись: ";
+
+
+
+
 
         public FeatureFor__Model(IFactoryLogic factoryLogic)
         {
@@ -27,8 +35,26 @@ namespace Model
             keyFeature = factoryLogic.CreateKeyFeature(db);
         }
 
+        public bool Add(List<ModelViewFeatureForEditKeyFeat> keyFeat, out string error)
+        {
+            error = string.Empty;
 
+            foreach (var item in keyFeat)
+            {
+                var keyFeature = new KeyFeature()
+                {
+                    IdFeature = item.IdFeature,
+                    IdHaspKey = item.IdKey,
+                    StartDate = (DateTime)item.StartDate,
+                    EndDate = (DateTime)item.EndDate,
+                };
 
+                if (!this.keyFeature.Save(keyFeature))
+                    error += errorAdd + item.Feature + '\n';
+            }
+
+            return error == string.Empty;
+        }
 
         public void Dispose() => db.Dispose();
 
@@ -59,22 +85,35 @@ namespace Model
                 model = new ModelViewFeatureForEditKeyFeat(item)
                 {
                     SerialNumber = i++,
+                    IdKey = idKey,
                 };
 
                 var itemKeyFeature = listKeyFeat
-                                     .LastOrDefault(x => x.IdFeature == item.Id);
+                                     .LastOrDefault(x => x.IdFeature == item.Id &&
+                                                         x.EndDate >= date);
                 
                 if (itemKeyFeature != null)
                 {
                     model.Selected = true;
                     model.StartDate = itemKeyFeature.StartDate;
                     model.EndDate = itemKeyFeature.EndDate;
-                    model.IdKey = idKey;
+                    model.IdKeyFeaure = itemKeyFeature.Id;                 
                 }                
 
                 viewFeature.Add(model);
             }
             return viewFeature;
+        }
+
+        public bool Remove(IEnumerable<int> idFeatureKey, out string error)
+        {
+            error = string.Empty;
+
+            foreach (var id in idFeatureKey)
+                if (!keyFeature.Remove(id))
+                    error += errorDelete + id.ToString() + '\n';
+            
+            return error == string.Empty;                 
         }
     }
 }

@@ -21,7 +21,8 @@ namespace HASPKey
 
         private const string error = "Ошибка";
         private const string emptyKey = "Данный ключ не найден.";
-
+        private const string caption = "Удалить связку ключ-функциональность";
+        private const string message = "Вы уверены, что хотите удалить связь ключ-функциональность?";
 
         public EditKeyFeatureView()
         {
@@ -60,6 +61,24 @@ namespace HASPKey
                 return;
             }            
             presenterEntities.DisplayFeatureAtKey(row.Id);
+        }
+
+        
+
+        private void Delete()
+        {
+            if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                ;
+            }
+        }
+
+        private void ButtonSave_Click(object sender, EventArgs e)
+        {
+            var item = (bindingFeature.DataSource as BindingList<ModelViewFeatureForEditKeyFeat>).ToList();
+
+            presenterEntities.Edit(item);
+            
         }
     }
 }

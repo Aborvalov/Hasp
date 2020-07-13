@@ -12,5 +12,6 @@ namespace Presenter
         ModelViewKeyFeature Entities { get; set; }
         void DisplayHaspKey();
         void DisplayFeatureAtKey(int idKey);
+        void Edit(List<ModelViewFeatureForEditKeyFeat> keyFeatModel);
     }
 }

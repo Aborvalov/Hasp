@@ -5,13 +5,13 @@ using System.Runtime.CompilerServices;
 
 namespace ModelEntities
 {
-    public class ModelViewFeatureForEditKeyFeat : INotifyPropertyChanged
+    public class ModelViewFeatureForEditKeyFeat
     {
         public ModelViewFeatureForEditKeyFeat()
         { }
         public ModelViewFeatureForEditKeyFeat(Feature feature) : this()
         {
-            Id = feature.Id;
+            IdFeature = feature.Id;
             Name = feature.Name;
             Number = feature.Number;
             Description = feature.Description;
@@ -21,7 +21,7 @@ namespace ModelEntities
         [DisplayName("№ п/п")]
         public int SerialNumber { get; set; }
         [Browsable(false)]
-        public int Id
+        public int IdFeature
         {
             get { return Feature.Id; }
             set { Feature.Id = value; }
@@ -46,47 +46,16 @@ namespace ModelEntities
         }
         [Browsable(false)]
         public int IdKey { get; set; }
+        [Browsable(false)]
+        public int IdKeyFeaure { get; set; }
 
 
-
-
-        private DateTime? startDate;
         [DisplayName("Начало действие")]
-        public DateTime? StartDate
-        {
-            get { return startDate; }
-            set
-            {
-                startDate = value;
-                OnPropertyChanged();
-            }
-        }
-        private DateTime? endDate;
+        public DateTime? StartDate { get; set; }
         [DisplayName("Окончание действия")]
-        public DateTime? EndDate
-        {
-            get { return endDate; }
-            set
-            {
-                endDate = value;
-                OnPropertyChanged();
-            }
-        }
-        private bool selected;
+        public DateTime? EndDate { get; set; }
         [DisplayName("Выбран")]
-        public bool Selected
-        {
-            get { return selected; }
-            set
-            {
-                selected = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName]string prop = "")
-            =>PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        public bool Selected { get; set; }
 
         public override bool Equals(object obj) => Feature.Equals(obj);
         public override int GetHashCode() => Feature.GetHashCode();

@@ -18,6 +18,10 @@ namespace Presenter
         private readonly IKeyFeatureView entitiesView;
 
 
+        private const string errorDelete = "Не удалось удалить связь ключа и функциональности.";
+
+
+
         public PresenterEditKeyFeature(IKeyFeatureView entitesView)
         {
             this.entitiesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
@@ -38,12 +42,7 @@ namespace Presenter
 
 
         public ModelViewKeyFeature Entities { get; set; }
-
-        public void Add(ModelViewKeyFeature entity)
-        {
-            throw new NotImplementedException();
-        }
-
+                
         public void DisplayHaspKey() => entitiesView.BindKey(keyModel.GetAll());
         public void DisplayFeatureAtKey(int idKey)
             => entitiesView.BindFeature(featureModel.GetAll(idKey));
@@ -54,8 +53,38 @@ namespace Presenter
             keyModel.Dispose();
             featureModel.Dispose();            
         }
-        
+                
+
+        public void Edit(List<ModelViewFeatureForEditKeyFeat> keyFeatModel)
+        {
+            if (keyFeatModel == null)
+                throw new ArgumentNullException(nameof(keyFeatModel));
+
+            string error = string.Empty;
+            var delete = keyFeatModel
+                        .Where(x => x.IdKeyFeaure != 0 && !x.Selected)
+                        .Select(item => item.IdKeyFeaure);
+
+            featureModel.Remove(delete, out error);
+            if(error != string.Empty)
+                entitiesView.MessageError(error);
+
+            var add = keyFeatModel
+                     .Where(x => x.IdKeyFeaure == 0 && x.Selected)
+                     .ToList();
+            error = string.Empty;
+            featureModel.Add(add, out error);
+            if (error != string.Empty)
+                entitiesView.MessageError(error);
 
 
+
+
+
+
+
+
+            DisplayFeatureAtKey(keyFeatModel[0].IdKey);
+        }
     }
 }
