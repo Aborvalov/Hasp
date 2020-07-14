@@ -16,16 +16,7 @@ namespace ModelEntities
             StartDate = keyFeat.StartDate;
             EndDate = keyFeat.EndDate;
         }
-        public KeyFeature KeyFeature { get; private set; } = new KeyFeature();
-        [DisplayName("№ п/п")]
-        public int SerialNumber { get; set; }
-        [DisplayName("Номер ключа")]
-        public string NumberKey { get; set; }
-        [DisplayName("Функциональность")]
-        public string Feature { get; set; }
-        [DisplayName("Тип ключа")]
-        public TypeKey TypeKey { get; set; }
-        [Browsable(false)]
+        public KeyFeature KeyFeature { get; private set; } = new KeyFeature();        
         public int Id
         {
             get { return KeyFeature.Id; }
@@ -56,21 +47,7 @@ namespace ModelEntities
             set { KeyFeature.EndDate = value; }
         }
 
-
         public override bool Equals(object obj) => KeyFeature.Equals(obj);
-        public override int GetHashCode()
-        {
-            int hashProductNumberKey = NumberKey == null ? 0 : NumberKey.GetHashCode();
-            int hashProductFeature = Feature == null ? 0 : Feature.GetHashCode();
-
-            int hashProductTypeKey = TypeKey.GetHashCode();
-            int hashProductSerialNumber = SerialNumber.GetHashCode();
-
-            return KeyFeature.GetHashCode() ^
-                   hashProductNumberKey ^
-                   hashProductFeature ^
-                   hashProductTypeKey ^
-                   hashProductSerialNumber;
-        }
+        public override int GetHashCode() => KeyFeature.GetHashCode();
     }
 }

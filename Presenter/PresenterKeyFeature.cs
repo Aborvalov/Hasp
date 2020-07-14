@@ -2,25 +2,19 @@
 using Model;
 using ModelEntities;
 using System;
-using View;
+using System.Collections.Generic;
 using System.Linq;
+using View;
 
 namespace Presenter
 {
-    public class PresenterKeyFeature : IPresenterEntities<ModelViewKeyFeature>
+    public class PresenterKeyFeature : IPresenterKeyFeature
     {
-        private readonly IEntitiesModel<ModelViewKeyFeature> keyFeatureModel;
+        private readonly IKeyFeatureModel keyFeatureModel;
         private readonly IEntitiesModel<ModelViewHaspKey> keyModel;
-        private readonly IEntitiesModel<ModelViewFeature> featureModel;
+        private readonly IFeatureForModelKeyFeatureModel featureModel;
         private readonly IKeyFeatureView entitiesView;
-
-        private const string errorAdd = "Не удалось создать связь ключа и функциональности.";
-        private const string errorUpdate = "Не удалось обновить связь ключа и функциональности.";
-        private const string errorDelete = "Не удалось удалить связь ключа и функциональности.";
-        private const string errorEmptyFeature = "\u2022 Не выбрана функциональность. \n";
-        private const string errorEmptyHaspKey = "\u2022 Не выбран hasp ключ. \n";
-        private const string errorDate = "\u2022 Дата окончания действия меньше даты начала действия. \n";
-        private const string errorKeyFeature = "\u2022 Данный ключ имеет действующую выбранную функциональность. \n";
+        private List<ModelViewKeyFeature> keyFeatures;
 
         public PresenterKeyFeature(IKeyFeatureView entitesView)
         {
@@ -28,129 +22,111 @@ namespace Presenter
 
             keyFeatureModel = new KeyFeatureModel(new Logics());
             keyModel = new HaspKeyModel(new Logics());
-            featureModel = new FeatureModel(new Logics());
+            featureModel = new FeatureForMpdelJeyFeatureModel(new Logics());
 
-            Display();
+            keyFeatures = keyFeatureModel.GetAll();
+            
+            DisplayHaspKey();
         }
 
-        public ModelViewKeyFeature Entities { get; set; } = null;
 
-        public void Add(ModelViewKeyFeature entity)
+        public void DisplayHaspKey() => entitiesView.BindKey(keyModel.GetAll());
+        public void DisplayFeatureAtKey(int idKey)
         {
-            if (entity == null)
-            {
-                entitiesView.MessageError(errorAdd);
-                return;
-            }
-
-            if (keyFeatureModel.Add(entity))
-            {
-                entitiesView.DataChange();
-                Display();
-            }
-            else
-                entitiesView.MessageError(errorAdd);
+            entitiesView.NumberHaspKey = keyModel.GetById(idKey).InnerId.ToString();
+            entitiesView.BindFeature(featureModel.GetAll(idKey));            
         }
-
-        public void Remove(int id)
-        {
-            if (id > 0 && keyFeatureModel.Remove(id))
-            {
-                entitiesView.DataChange();
-                Display();
-            }
-            else
-                this.entitiesView.MessageError(errorDelete);
-        }
-
-        public void Update(ModelViewKeyFeature entity)
-        {
-            if (entity == null)
-            {
-                entitiesView.MessageError(errorUpdate);
-                return;
-            }
-
-            if (keyFeatureModel.Update(entity))
-            {
-                entitiesView.DataChange();
-                Display();
-            }
-            else
-                entitiesView.MessageError(errorUpdate);
-        }
-
-        public void Display()
-        { }
-        //=> entitiesView.Bind(keyFeatureModel.GetAll().OrderBy(x => x.IdHaspKey).ToList());
-
         public void Dispose()
         {
             keyFeatureModel.Dispose();
             keyModel.Dispose();
-            featureModel.Dispose();
-        }
+            featureModel.Dispose();            
+        }       
+        public void Edit(List<ModelViewFeatureForKeyFeat> keyFeatModel)
+        {
+            if (keyFeatModel == null)
+                throw new ArgumentNullException(nameof(keyFeatModel));
+                       
+            string error = string.Empty;
+            var delete = keyFeatModel
+                        .Where(x => x.IdKeyFeaure != 0 && !x.Selected)
+                        .Select(item => item.IdKeyFeaure);
 
-        public void FillInputItem(ModelViewKeyFeature row)
-        {            
-            Entities = new ModelViewKeyFeature
+            var add = keyFeatModel
+                     .Where(x => x.IdKeyFeaure == 0 && 
+                                 x.Selected &&
+                                 x.StartDate != null &&
+                                 x.EndDate != null)
+                     .ToList();
+
+            var update = keyFeatModel
+                        .Where(x => x.IdKeyFeaure != 0 && 
+                                    x.StartDate != null &&
+                                    x.EndDate != null)
+                        .ToList();
+                       
+            if (delete.Any())
             {
-                Id = row.Id,
-                IdFeature = row.IdFeature,
-                IdHaspKey = row.IdHaspKey
-            };
+                featureModel.Remove(delete, out error);
+                if (error != string.Empty)
+                    entitiesView.MessageError(error);
+            }
             
-            //entitiesView.StartDate = row.StartDate;
-            //entitiesView.EndDate = row.EndDate;
-            //entitiesView.HaspKey = keyModel.GetById(row.IdHaspKey);
-            //entitiesView.Feature = featureModel.GetById(row.IdFeature);            
-        }
-
-        public void FillModel(ModelViewKeyFeature item)
-        {
-            if (!CheckInputData())
-                return;
-
-            //Entities.StartDate = entitiesView.StartDate;
-            //Entities.EndDate = entitiesView.EndDate;
-            //Entities.IdFeature = entitiesView.Feature.Id;
-            //Entities.IdHaspKey = entitiesView.HaspKey.Id;
-
-            if (Entities.Id < 1)
-                Add(Entities);
-            else
-                Update(Entities);
-        }
-        private bool CheckInputData()
-        {
-            string errorMess = string.Empty;
-
-            //if(entitiesView.Feature == null)
-            //    errorMess += errorEmptyFeature;
-            //if (entitiesView.HaspKey == null)
-            //    errorMess += errorEmptyHaspKey;
-            //if (entitiesView.StartDate > entitiesView.EndDate)
-            //    errorMess += errorDate;
-
-            //foreach (var row in keyFeatureModel.GetAll())
-            //{                
-            //    if (row.Id != Entities.Id &&
-            //        row.IdHaspKey == entitiesView.HaspKey.Id &&
-            //        row.IdFeature == entitiesView.Feature.Id &&
-            //        row.EndDate >= entitiesView.StartDate)
-            //    {
-            //        errorMess += errorKeyFeature;
-            //        break;
-            //    }
-            //}
-
-            if (errorMess != string.Empty)
+            if (add.Any())
             {
-                entitiesView.MessageError(errorMess.Trim());
+                error = string.Empty;
+                featureModel.Add(add, out error);
+                if (error != string.Empty)
+                    entitiesView.MessageError(error);
+            }
+
+            if (update.Any())
+            {
+                error = string.Empty;
+                featureModel.Update(update, out error);
+                if (error != string.Empty)
+                    entitiesView.MessageError(error);
+            }
+
+            DisplayFeatureAtKey(keyFeatModel[0].IdKey);
+            keyFeatures = keyFeatureModel.GetAll();
+            entitiesView.EmptyFeatureAsKey();
+            entitiesView.DataChange();
+        }
+
+        public bool CheckInputData(List<ModelViewFeatureForKeyFeat> item)
+        {
+            if (item == null)
+                throw new ArgumentNullException(nameof(item));
+
+            int numverRow = 0;
+            bool error = true;
+            foreach (var i in item)
+            {
+                error &= CheckInputData(i, numverRow);
+                numverRow++;
+            }
+
+            return error;
+        }
+        public bool CheckInputData(ModelViewFeatureForKeyFeat item, int numverRow)
+        {
+            if (item == null)
+                throw new ArgumentNullException(nameof(item));
+
+            if (item.StartDate != null &&
+                item.EndDate != null &&
+                item.StartDate.Value.Date > item.EndDate.Value.Date)
+            {
+                entitiesView.ErrorRow(numverRow);
                 return false;
             }
 
             return true;
         }
+        public bool CheckKey(ModelViewHaspKey item) 
+            => keyFeatures
+                    .LastOrDefault(x => x.IdHaspKey == item.Id &&
+                                        x.EndDate >= DateTime.Now.Date) == null;
     }
 }

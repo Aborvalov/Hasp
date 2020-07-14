@@ -101,11 +101,11 @@
       <DependentUpon>ClientView.cs</DependentUpon>
     </Compile>
     <Compile Include="DataGridViewCalendarColumn.cs" />
-    <Compile Include="EditKeyFeatureView.cs">
+    <Compile Include="KeyFeatureView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditKeyFeatureView.Designer.cs">
-      <DependentUpon>EditKeyFeatureView.cs</DependentUpon>
+    <Compile Include="KeyFeatureView.Designer.cs">
+      <DependentUpon>KeyFeatureView.cs</DependentUpon>
     </Compile>
     <Compile Include="FeatureView.cs">
       <SubType>Form</SubType>
@@ -125,19 +125,13 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="KeyFeatureView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="KeyFeatureView.Designer.cs">
-      <DependentUpon>KeyFeatureView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ClientView.resx">
       <DependentUpon>ClientView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditKeyFeatureView.resx">
-      <DependentUpon>EditKeyFeatureView.cs</DependentUpon>
+    <EmbeddedResource Include="KeyFeatureView.resx">
+      <DependentUpon>KeyFeatureView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FeatureView.resx">
       <DependentUpon>FeatureView.cs</DependentUpon>
@@ -147,9 +141,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="KeyFeatureView.resx">
-      <DependentUpon>KeyFeatureView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

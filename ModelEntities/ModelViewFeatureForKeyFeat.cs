@@ -1,15 +1,14 @@
 ﻿using Entities;
-using System.ComponentModel;
 using System;
-using System.Runtime.CompilerServices;
+using System.ComponentModel;
 
 namespace ModelEntities
 {
-    public class ModelViewFeatureForEditKeyFeat
+    public class ModelViewFeatureForKeyFeat
     {
-        public ModelViewFeatureForEditKeyFeat()
+        public ModelViewFeatureForKeyFeat()
         { }
-        public ModelViewFeatureForEditKeyFeat(Feature feature) : this()
+        public ModelViewFeatureForKeyFeat(Feature feature) : this()
         {
             IdFeature = feature.Id;
             Name = feature.Name;
@@ -48,7 +47,6 @@ namespace ModelEntities
         public int IdKey { get; set; }
         [Browsable(false)]
         public int IdKeyFeaure { get; set; }
-
 
         [DisplayName("Начало действие")]
         public DateTime? StartDate { get; set; }

@@ -3,125 +3,109 @@ using Presenter;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using View;
 
 namespace HASPKey
 {
-    public partial class KeyFeatureView : DevExpress.XtraEditors.XtraForm, IEntitiesView<ModelViewKeyFeature>
+    public partial class KeyFeatureView : DevExpress.XtraEditors.XtraForm, IKeyFeatureView
     {
-        private readonly IPresenterEntities<ModelViewKeyFeature> presenterKeyFeature;       
         public event Action DataUpdated;
+        public string NumberHaspKey { get; set; }
+        private IPresenterKeyFeature presenterEntities;
         
         private const string error = "Ошибка";
-        private const string emptyKeyFeature = "Данная завпись не найдена.";
-        private const string caption = "Удалить связку ключ-функциональность";
-        private const string message = "Вы уверены, что хотите удалить связь ключ-функциональность?";
-               
+        private const string errorString = "Неправильно заполнена дата, окончание действия меньше начала.";
+        private const string emptyKey = "Данный ключ не найден.";
+        private const string caption = "Внести изменеия";
+        private const string message = "Вы уверены, что хотите внести изменеия?";
+        private const string headlineFeature = "Список функциональностей у ключа - ";
         public KeyFeatureView()
         {
             InitializeComponent();
-            presenterKeyFeature = new PresenterKeyFeature(null);  
+            presenterEntities = new PresenterKeyFeature(this);
         }
-               
-        public void Bind(List<ModelViewKeyFeature> entity) 
-            => bindingKeyFeature.DataSource = entity != null ? new BindingList<ModelViewKeyFeature>(entity)
-                                                             : new BindingList<ModelViewKeyFeature>();
-
-        public void BindItem(ModelViewKeyFeature entity)
-        {
-            throw new NotImplementedException();
-        }
-        
-        public void MessageError(string errorText) => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+              
         public void DataChange() => DataUpdated?.Invoke();
+        public void MessageError(string errorText) => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-        private void Button1Delete_Click(object sender, EventArgs e)
+        public void BindFeature(List<ModelViewFeatureForKeyFeat> feature)
         {
-            if (!(dgvKeyFeature.CurrentRow.DataBoundItem is ModelViewKeyFeature row))
+            bindingFeature.DataSource = feature != null ? new BindingList<ModelViewFeatureForKeyFeat>(feature)
+                                                            : new BindingList<ModelViewFeatureForKeyFeat>();
+
+            HeadlineFeature.Text = headlineFeature + NumberHaspKey;
+        }
+        public void BindKey(List<ModelViewHaspKey> key) 
+            => bindingHaspKey.DataSource = key != null ? new BindingList<ModelViewHaspKey>(key)
+                                                       : new BindingList<ModelViewHaspKey>();
+
+        private void DgvHaspKey_CellClick(object sender, DataGridViewCellEventArgs e) => FillFeatureAtKey();
+
+        private void DgvHaspKey_SelectionChanged(object sender, EventArgs e) => FillFeatureAtKey();
+
+        private void FillFeatureAtKey()
+        {
+            if (!(dgvHaspKey.CurrentRow.DataBoundItem is ModelViewHaspKey row))
             {
-                MessageError(emptyKeyFeature);
+                MessageError(emptyKey);
                 return;
             }            
-            if (row.Id == 0)
+            presenterEntities.DisplayFeatureAtKey(row.Id);
+        }
+        
+        private void ButtonSave_Click(object sender, EventArgs e)
+        {
+            var item = (bindingFeature.DataSource as BindingList<ModelViewFeatureForKeyFeat>).ToList();
+
+            DefaultRow();
+            if (presenterEntities.CheckInputData(item))
             {
-                bindingKeyFeature.RemoveCurrent();
-                return;
+                if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    presenterEntities.Edit(item);
             }
-            
-            if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            else
+                MessageError(errorString);
+        }
+
+        public void ErrorRow(int numberRow)
+            =>dgvFeature.Rows[numberRow].DefaultCellStyle.BackColor = Color.Red;
+
+        private void DefaultRow()
+        {
+            for (int i = 0; i < dgvFeature.RowCount; i++)
+                DefaultRow(i);
+        }
+        public void DefaultRow(int numberRow)
+           => dgvFeature.Rows[numberRow].DefaultCellStyle.BackColor = Color.White;
+
+        private void DgvFeature_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            DefaultRow(e.RowIndex);
+            var item = dgvFeature.CurrentRow.DataBoundItem as ModelViewFeatureForKeyFeat;
+            presenterEntities.CheckInputData(item, e.RowIndex);
+
+            if (item.IdKeyFeaure == 0)
+                dgvFeature[6,e.RowIndex].Value = true;
+        }
+
+        private void EditKeyFeatureView_Load(object sender, EventArgs e) => EmptyFeatureAsKey();
+        
+        public void EmptyFeatureAsKey()
+        {            
+            for (int i = 0; i < bindingHaspKey.Count; i++)
             {
-                presenterKeyFeature.Remove(row.Id);
+                if (!(bindingHaspKey[i] is ModelViewHaspKey item))
+                    return;
+
+                if(presenterEntities.CheckKey(item))
+                    dgvHaspKey.Rows[i].DefaultCellStyle.BackColor = Color.Wheat;
+                else
+                    dgvHaspKey.Rows[i].DefaultCellStyle.BackColor = Color.White;
             }
         }
-               
-        private void DgvKeyFeture_DoubleClick(object sender, EventArgs e)
-        {
-            if (!(dgvKeyFeature.CurrentRow.DataBoundItem is ModelViewKeyFeature row))
-            {
-                MessageError(emptyKeyFeature);
-                return;
-            }
-            presenterKeyFeature.FillInputItem(row);
-        }
-                
-        private void ButtonAdd_Click(object sender, EventArgs e)
-        {
-            ModelViewFeatureForEditKeyFeat item = new ModelViewFeatureForEditKeyFeat(new Entities.Feature
-            {
-                Id = 1,
-                Description = "dsfdsf",
-                Name = "test",
-                Number = 1,
-            })
-            {
-                EndDate = DateTime.Now.Date.AddDays(30),
-                StartDate = DateTime.Now.Date,
-                Selected = true,
-                SerialNumber = 1,                
-            };
-            ModelViewFeatureForEditKeyFeat item2 = new ModelViewFeatureForEditKeyFeat(new Entities.Feature
-            {
-                Id = 2,
-                Name = "____",
-                Number = 2,
-            })
-            {
-                Selected = false,
-                SerialNumber = 2,
-            };
 
-            ModelViewHaspKey key = new ModelViewHaspKey
-            {
-                Id = 1,
-                InnerId = 2,
-                IsHome = true,
-                Number = "sdf",
-                TypeKey = Entities.TypeKey.Pro,
-                SerialNumber = 1,
-            };
-
-
-
-            var tf = new List<ModelViewFeatureForEditKeyFeat>();
-            var tk = new List<ModelViewHaspKey>();
-
-            tf.Add(item);
-            tf.Add(item2);
-            tk.Add(key);
-            //EditKeyFeatureView editKeyFeatureView = new EditKeyFeatureView(tf,tk);
-            //editKeyFeatureView.Show();
-
-
-
-
-            //if (!(dgvKeyFeature.CurrentRow.DataBoundItem is ModelViewKeyFeature row))
-            //{
-            //    MessageError(emptyKeyFeature);
-            //    return;
-            //}
-
-            //presenterKeyFeature.Entities = new ModelViewKeyFeature();            
-        }       
     }
 }

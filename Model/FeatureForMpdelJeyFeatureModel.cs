@@ -8,12 +8,12 @@ using System.Linq;
 
 namespace Model
 {
-    public class FeatureFor__Model : IFeatureFor__Model
+    public class FeatureForMpdelJeyFeatureModel : IFeatureForModelKeyFeatureModel
     {
         private readonly EntitesContext db;
         private IFeatureLogic featLogic;
         private IKeyFeatureLogic keyFeature;
-        private ModelViewFeatureForEditKeyFeat model;
+        private ModelViewFeatureForKeyFeat model;
         private readonly DateTime date = DateTime.Now.Date;
 
         private const string errorAdd = "Не удалось создать запись с данной функциональностью: ";
@@ -21,10 +21,7 @@ namespace Model
         private const string errorDelete = "Не удалось удалить запись: ";
 
 
-
-
-
-        public FeatureFor__Model(IFactoryLogic factoryLogic)
+        public FeatureForMpdelJeyFeatureModel(IFactoryLogic factoryLogic)
         {
             if (factoryLogic == null)
                 throw new ArgumentNullException(nameof(factoryLogic));
@@ -34,7 +31,7 @@ namespace Model
             keyFeature = factoryLogic.CreateKeyFeature(db);
         }
 
-        public bool Add(List<ModelViewFeatureForEditKeyFeat> keyFeat, out string error)
+        public bool Add(List<ModelViewFeatureForKeyFeat> keyFeat, out string error)
         {
             if (keyFeat == null)
                 throw new ArgumentNullException(nameof(keyFeat));
@@ -60,13 +57,13 @@ namespace Model
 
         public void Dispose() => db.Dispose();
 
-        public List<ModelViewFeatureForEditKeyFeat> GetAll()
+        public List<ModelViewFeatureForKeyFeat> GetAll()
         {
-            var viewFeature = new List<ModelViewFeatureForEditKeyFeat>();
+            var viewFeature = new List<ModelViewFeatureForKeyFeat>();
             int i = 1;
             foreach (var item in featLogic.GetAll())
             {
-                var model = new ModelViewFeatureForEditKeyFeat(item)
+                var model = new ModelViewFeatureForKeyFeat(item)
                 {
                     SerialNumber = i++,
                 };
@@ -75,16 +72,16 @@ namespace Model
             return viewFeature;
         }
 
-        public List<ModelViewFeatureForEditKeyFeat> GetAll(int idKey)
+        public List<ModelViewFeatureForKeyFeat> GetAll(int idKey)
         {
             var listKeyFeat = keyFeature.GetAll()
                               .Where(x => x.IdHaspKey == idKey);
 
-            var viewFeature = new List<ModelViewFeatureForEditKeyFeat>();
+            var viewFeature = new List<ModelViewFeatureForKeyFeat>();
             int i = 1;
             foreach (var item in featLogic.GetAll())
             {
-                model = new ModelViewFeatureForEditKeyFeat(item)
+                model = new ModelViewFeatureForKeyFeat(item)
                 {
                     SerialNumber = i++,
                     IdKey = idKey,
@@ -121,7 +118,7 @@ namespace Model
             return error == string.Empty;                 
         }
 
-        public bool Update(List<ModelViewFeatureForEditKeyFeat> keyFeat, out string error)
+        public bool Update(List<ModelViewFeatureForKeyFeat> keyFeat, out string error)
         {
             if (keyFeat == null)
                 throw new ArgumentNullException(nameof(keyFeat));
