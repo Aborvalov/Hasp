@@ -10,7 +10,7 @@ namespace Presenter
 {
     public class PresenterKeyFeature : IPresenterKeyFeature
     {
-        private readonly IKeyFeatureModel keyFeatureModel;
+        //private readonly IKeyFeatureModel keyFeatureModel;
         private readonly IEntitiesModel<ModelViewHaspKey> keyModel;
         private readonly IFeatureForModelsKeyFeatureModel featureModel;
         private readonly IKeyFeatureView entitiesView;
@@ -20,11 +20,11 @@ namespace Presenter
         {
             this.entitiesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
 
-            keyFeatureModel = new KeyFeatureModel(new Logics());
+            //keyFeatureModel = new KeyFeatureModel(new Logics());
             keyModel = new HaspKeyModel(new Logics());
             featureModel = new FeatureForMpdelsKeyFeatureModel(new Logics());
 
-            keyFeatures = keyFeatureModel.GetAll();
+            keyFeatures = featureModel.GetAllKeyFeature();
             
             DisplayHaspKey();
         }
@@ -38,7 +38,7 @@ namespace Presenter
         }
         public void Dispose()
         {
-            keyFeatureModel.Dispose();
+            //keyFeatureModel.Dispose();
             keyModel.Dispose();
             featureModel.Dispose();            
         }       
@@ -90,7 +90,7 @@ namespace Presenter
             }
 
             DisplayFeatureAtKey(keyFeatModel[0].IdKey);
-            keyFeatures = keyFeatureModel.GetAll();
+            keyFeatures = featureModel.GetAllKeyFeature();
             entitiesView.EmptyFeatureAsKey();
             entitiesView.DataChange();
         }

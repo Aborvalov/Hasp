@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Model
 {
-    public interface IKeyFeatureModel : IDisposable
+    public interface IKeyFeatureModel_ : IDisposable
     {
         List<ModelViewKeyFeature> GetAll();
         ModelViewKeyFeature GetById(int id);
