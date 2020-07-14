@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Model
 {
-    public class FeatureForMpdelJeyFeatureModel : IFeatureForModelKeyFeatureModel
+    public class FeatureForMpdelsKeyFeatureModel : IFeatureForModelsKeyFeatureModel
     {
         private readonly EntitesContext db;
         private IFeatureLogic featLogic;
@@ -20,8 +20,7 @@ namespace Model
         private const string errorUpdate = "Не удалось обновить запись с данной функциональностью: ";
         private const string errorDelete = "Не удалось удалить запись: ";
 
-
-        public FeatureForMpdelJeyFeatureModel(IFactoryLogic factoryLogic)
+        public FeatureForMpdelsKeyFeatureModel(IFactoryLogic factoryLogic)
         {
             if (factoryLogic == null)
                 throw new ArgumentNullException(nameof(factoryLogic));
@@ -44,8 +43,8 @@ namespace Model
                 {
                     IdFeature = item.IdFeature,
                     IdHaspKey = item.IdKey,
-                    StartDate = (DateTime)item.StartDate,
-                    EndDate = (DateTime)item.EndDate,
+                    StartDate = item.StartDate ?? DateTime.MinValue,
+                    EndDate = item.EndDate ?? DateTime.MinValue,
                 };
 
                 if (!this.keyFeature.Save(keyFeature))

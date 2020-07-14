@@ -12,7 +12,7 @@ namespace Presenter
     {
         private readonly IKeyFeatureModel keyFeatureModel;
         private readonly IEntitiesModel<ModelViewHaspKey> keyModel;
-        private readonly IFeatureForModelKeyFeatureModel featureModel;
+        private readonly IFeatureForModelsKeyFeatureModel featureModel;
         private readonly IKeyFeatureView entitiesView;
         private List<ModelViewKeyFeature> keyFeatures;
 
@@ -22,7 +22,7 @@ namespace Presenter
 
             keyFeatureModel = new KeyFeatureModel(new Logics());
             keyModel = new HaspKeyModel(new Logics());
-            featureModel = new FeatureForMpdelJeyFeatureModel(new Logics());
+            featureModel = new FeatureForMpdelsKeyFeatureModel(new Logics());
 
             keyFeatures = keyFeatureModel.GetAll();
             
