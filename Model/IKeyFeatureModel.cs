@@ -9,8 +9,7 @@ namespace Model
     {
         List<ModelViewKeyFeature> GetAll();
         List<ModelViewKeyFeature> GetAll(int idKey);
-        List<KeyFeature> GetAllKeyFeature();
-       
+        List<KeyFeature> GetAllKeyFeature();       
         bool Remove(IEnumerable<int> idFeatureKey, out string error);
         bool Add(List<ModelViewKeyFeature> keyFeat, out string error);
         bool Update(List<ModelViewKeyFeature> keyFeat, out string error);

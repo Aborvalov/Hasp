@@ -90,7 +90,6 @@ namespace Presenter
             entitiesView.EmptyFeatureAsKey();
             entitiesView.DataChange();
         }
-
         public bool CheckInputData(List<ModelViewKeyFeature> item)
         {
             if (item == null)

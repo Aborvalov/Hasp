@@ -29,12 +29,13 @@ namespace HASPKey
         }
               
         public void DataChange() => DataUpdated?.Invoke();
-        public void MessageError(string errorText) => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        public void MessageError(string errorText)
+            => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         public void BindFeature(List<ModelViewKeyFeature> feature)
         {
             bindingFeature.DataSource = feature != null ? new BindingList<ModelViewKeyFeature>(feature)
-                                                            : new BindingList<ModelViewKeyFeature>();
+                                                        : new BindingList<ModelViewKeyFeature>();
 
             HeadlineFeature.Text = headlineFeature + NumberHaspKey;
         }
@@ -42,9 +43,11 @@ namespace HASPKey
             => bindingHaspKey.DataSource = key != null ? new BindingList<ModelViewHaspKey>(key)
                                                        : new BindingList<ModelViewHaspKey>();
 
-        private void DgvHaspKey_CellClick(object sender, DataGridViewCellEventArgs e) => FillFeatureAtKey();
+        private void DgvHaspKey_CellClick(object sender, DataGridViewCellEventArgs e)
+            => FillFeatureAtKey();
 
-        private void DgvHaspKey_SelectionChanged(object sender, EventArgs e) => FillFeatureAtKey();
+        private void DgvHaspKey_SelectionChanged(object sender, EventArgs e)
+            => FillFeatureAtKey();
 
         private void FillFeatureAtKey()
         {
@@ -91,7 +94,8 @@ namespace HASPKey
                 dgvFeature[6,e.RowIndex].Value = true;
         }
 
-        private void EditKeyFeatureView_Load(object sender, EventArgs e) => EmptyFeatureAsKey();
+        private void EditKeyFeatureView_Load(object sender, EventArgs e)
+            => EmptyFeatureAsKey();
         
         public void EmptyFeatureAsKey()
         {            
