@@ -5,10 +5,7 @@ namespace HASPKey
 {
     public class CalendarEditingControl : DateTimePicker, IDataGridViewEditingControl
     {
-        DataGridView dataGridView;
-        private bool valueChanged = false;
         int chType = 0;
-        int rowIndex;
         private DateTime? val = null;
 
         public DateTime? NValue
@@ -24,7 +21,6 @@ namespace HASPKey
                 chType = 0;
             }
         }
-
 
         public CalendarEditingControl()
         {
@@ -46,11 +42,11 @@ namespace HASPKey
             }
             set
             {
-                if (value is String)
+                if (value is string)
                 {
                     try
                     {
-                        this.Value = DateTime.Parse((String)value);
+                        this.Value = DateTime.Parse((string)value);
                     }
                     catch
                     {
@@ -61,10 +57,8 @@ namespace HASPKey
         }
 
         public object GetEditingControlFormattedValue(
-            DataGridViewDataErrorContexts context)
-        {
-            return EditingControlFormattedValue;
-        }
+            DataGridViewDataErrorContexts context) 
+            => EditingControlFormattedValue;
         public void ApplyCellStyleToEditingControl(
             DataGridViewCellStyle dataGridViewCellStyle)
         {
@@ -73,11 +67,7 @@ namespace HASPKey
             this.CalendarMonthBackground = dataGridViewCellStyle.BackColor;
         }
 
-        public int EditingControlRowIndex
-        {
-            get{return rowIndex;}
-            set{rowIndex = value;}
-        }
+        public int EditingControlRowIndex { get; set; }
 
         public bool EditingControlWantsInputKey(
             Keys key, bool dataGridViewWantsInputKey)
@@ -107,17 +97,9 @@ namespace HASPKey
         {
             get{ return false; }
         }
-        public DataGridView EditingControlDataGridView
-        {
-            get{ return dataGridView; }
-            set{ dataGridView = value; }
-        }
+        public DataGridView EditingControlDataGridView { get; set; }
 
-        public bool EditingControlValueChanged
-        {
-            get{ return valueChanged; }
-            set{ valueChanged = value; }
-        }
+        public bool EditingControlValueChanged { get; set; } = false;
         public Cursor EditingPanelCursor
         {
             get{return base.Cursor;}
@@ -125,7 +107,7 @@ namespace HASPKey
 
         protected override void OnValueChanged(EventArgs eventargs)
         {
-            valueChanged = true;
+            EditingControlValueChanged = true;
             this.EditingControlDataGridView.NotifyCurrentCellDirty(true);
             base.OnValueChanged(eventargs);
         }
