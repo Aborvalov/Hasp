@@ -129,7 +129,8 @@ namespace Model
                 if (all
                     .Where(x => x.IdKeyFeaure == item.IdKeyFeaure &&
                                    x.Selected == item.Selected &&
-                                   x.EndDate == item.EndDate)
+                                   x.EndDate == item.EndDate &&
+                                   x.StartDate == item.StartDate)
                     .Any())
                     break;
                 

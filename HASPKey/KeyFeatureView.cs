@@ -111,5 +111,12 @@ namespace HASPKey
             }
         }
 
+        private void DgvFeature_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Delete)
+            {
+                dgvFeature.Rows[dgvFeature.CurrentCell.RowIndex].Cells[dgvFeature.CurrentCell.ColumnIndex].Value = null;
+            }
+        }
     }
 }

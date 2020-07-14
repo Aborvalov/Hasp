@@ -138,7 +138,8 @@ namespace Presenter
 
             return item.IdKeyFeaure == 0 &&
                    item.StartDate != null &&
-                   item.EndDate != null;
+                   item.EndDate != null &&
+                   item.StartDate.Value.Date < item.EndDate.Value.Date;
         }
     }
 }
