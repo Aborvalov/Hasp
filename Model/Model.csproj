@@ -64,17 +64,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientModel.cs" />
-    <Compile Include="FeatureForMpdelsKeyFeatureModel.cs" />
+    <Compile Include="KeyFeatureModel.cs" />
     <Compile Include="FeatureModel.cs" />
     <Compile Include="HaspKeyModel.cs" />
-    <Compile Include="IFeatureForModelsKeyFeatureModel.cs" />
     <Compile Include="IKeyFeatureModel.cs" />
     <Compile Include="MainModel.cs" />
     <Compile Include="IClientModel.cs" />
     <Compile Include="IEntitiesModel.cs" />
     <Compile Include="IHaspKeyModel.cs" />
     <Compile Include="IMainModel.cs" />
-    <Compile Include="KeyFeatureModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

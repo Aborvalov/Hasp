@@ -45,10 +45,9 @@
   <ItemGroup>
     <Compile Include="ModelViewClient.cs" />
     <Compile Include="ModelViewFeature.cs" />
-    <Compile Include="ModelViewFeatureForKeyFeat.cs" />
+    <Compile Include="ModelViewKeyFeature.cs" />
     <Compile Include="ModelViewHaspKey.cs" />
     <Compile Include="ModelViewMain.cs" />
-    <Compile Include="ModelViewKeyFeature.cs" />
     <Compile Include="ModelViewKeyFeatureClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

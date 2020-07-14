@@ -83,7 +83,7 @@
             // 
             // bindingFeature
             // 
-            this.bindingFeature.DataSource = typeof(ModelEntities.ModelViewFeatureForKeyFeat);
+            this.bindingFeature.DataSource = typeof(ModelEntities.ModelViewKeyFeature);
             // 
             // dgvFeature
             // 

@@ -31,10 +31,10 @@ namespace HASPKey
         public void DataChange() => DataUpdated?.Invoke();
         public void MessageError(string errorText) => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-        public void BindFeature(List<ModelViewFeatureForKeyFeat> feature)
+        public void BindFeature(List<ModelViewKeyFeature> feature)
         {
-            bindingFeature.DataSource = feature != null ? new BindingList<ModelViewFeatureForKeyFeat>(feature)
-                                                            : new BindingList<ModelViewFeatureForKeyFeat>();
+            bindingFeature.DataSource = feature != null ? new BindingList<ModelViewKeyFeature>(feature)
+                                                            : new BindingList<ModelViewKeyFeature>();
 
             HeadlineFeature.Text = headlineFeature + NumberHaspKey;
         }
@@ -58,7 +58,7 @@ namespace HASPKey
         
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            var item = (bindingFeature.DataSource as BindingList<ModelViewFeatureForKeyFeat>).ToList();
+            var item = (bindingFeature.DataSource as BindingList<ModelViewKeyFeature>).ToList();
 
             DefaultRow();
             if (presenterEntities.CheckInputData(item))
@@ -84,7 +84,7 @@ namespace HASPKey
         private void DgvFeature_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             DefaultRow(e.RowIndex);
-            var item = dgvFeature.CurrentRow.DataBoundItem as ModelViewFeatureForKeyFeat;
+            var item = dgvFeature.CurrentRow.DataBoundItem as ModelViewKeyFeature;
             presenterEntities.CheckInputData(item, e.RowIndex);
 
             if (item.IdKeyFeaure == 0)

@@ -8,9 +8,9 @@ namespace Presenter
     {        
         void DisplayHaspKey();
         void DisplayFeatureAtKey(int idKey);
-        void Edit(List<ModelViewFeatureForKeyFeat> keyFeatModel);
-        bool CheckInputData(List<ModelViewFeatureForKeyFeat> item);
-        bool CheckInputData(ModelViewFeatureForKeyFeat item, int numverRow);
+        void Edit(List<ModelViewKeyFeature> keyFeatModel);
+        bool CheckInputData(List<ModelViewKeyFeature> item);
+        bool CheckInputData(ModelViewKeyFeature item, int numverRow);
         bool CheckKey(ModelViewHaspKey item);
     }
 }

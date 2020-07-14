@@ -8,46 +8,54 @@ namespace ModelEntities
     {
         public ModelViewKeyFeature()
         { }
-        public ModelViewKeyFeature(KeyFeature keyFeat) : this()
-        {            
-            Id = keyFeat.Id;
-            IdFeature = keyFeat.IdFeature;
-            IdHaspKey = keyFeat.IdHaspKey;
-            StartDate = keyFeat.StartDate;
-            EndDate = keyFeat.EndDate;
-        }
-        public KeyFeature KeyFeature { get; private set; } = new KeyFeature();        
-        public int Id
+        public ModelViewKeyFeature(Feature feature) : this()
         {
-            get { return KeyFeature.Id; }
-            set { KeyFeature.Id = value; }
+            IdFeature = feature.Id;
+            Name = feature.Name;
+            Number = feature.Number;
+            Description = feature.Description;
         }
         [Browsable(false)]
-        public int IdHaspKey
-        {
-            get { return KeyFeature.IdHaspKey; }
-            set { KeyFeature.IdHaspKey = value; }
-        }
+        public Feature Feature { get; private set; } = new Feature();
+        [DisplayName("№ п/п")]
+        public int SerialNumber { get; set; }
         [Browsable(false)]
         public int IdFeature
         {
-            get { return KeyFeature.IdFeature; }
-            set { KeyFeature.IdFeature = value; }
+            get { return Feature.Id; }
+            set { Feature.Id = value; }
         }
-        [DisplayName("Начало действия")]
-        public DateTime StartDate
+        [DisplayName("Номер")]
+        public int Number
         {
-            get { return KeyFeature.StartDate; }
-            set { KeyFeature.StartDate = value; }
+            get { return Feature.Number; }
+            set { Feature.Number = value; }
         }
-        [DisplayName("Окончание действия")]
-        public DateTime EndDate
+        [DisplayName("Наименование")]
+        public string Name
         {
-            get { return KeyFeature.EndDate; }
-            set { KeyFeature.EndDate = value; }
+            get { return Feature.Name; }
+            set { Feature.Name = value; }
         }
+        [DisplayName("Описание")]
+        public string Description
+        {
+            get { return Feature.Description; }
+            set { Feature.Description = value; }
+        }
+        [Browsable(false)]
+        public int IdKey { get; set; }
+        [Browsable(false)]
+        public int IdKeyFeaure { get; set; }
 
-        public override bool Equals(object obj) => KeyFeature.Equals(obj);
-        public override int GetHashCode() => KeyFeature.GetHashCode();
+        [DisplayName("Начало действие")]
+        public DateTime? StartDate { get; set; }
+        [DisplayName("Окончание действия")]
+        public DateTime? EndDate { get; set; }
+        [DisplayName("Выбран")]
+        public bool Selected { get; set; }
+
+        public override bool Equals(object obj) => Feature.Equals(obj);
+        public override int GetHashCode() => Feature.GetHashCode();
     }
 }

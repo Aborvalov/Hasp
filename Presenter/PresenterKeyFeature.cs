@@ -1,4 +1,5 @@
-﻿using Logic;
+﻿using Entities;
+using Logic;
 using Model;
 using ModelEntities;
 using System;
@@ -10,25 +11,21 @@ namespace Presenter
 {
     public class PresenterKeyFeature : IPresenterKeyFeature
     {
-        //private readonly IKeyFeatureModel keyFeatureModel;
         private readonly IEntitiesModel<ModelViewHaspKey> keyModel;
-        private readonly IFeatureForModelsKeyFeatureModel featureModel;
+        private readonly IKeyFeatureModel featureModel;
         private readonly IKeyFeatureView entitiesView;
-        private List<ModelViewKeyFeature> keyFeatures;
+        private List<KeyFeature> keyFeatures;
 
         public PresenterKeyFeature(IKeyFeatureView entitesView)
         {
             this.entitiesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
 
-            //keyFeatureModel = new KeyFeatureModel(new Logics());
             keyModel = new HaspKeyModel(new Logics());
-            featureModel = new FeatureForMpdelsKeyFeatureModel(new Logics());
-
+            featureModel = new KeyFeatureModel(new Logics());
             keyFeatures = featureModel.GetAllKeyFeature();
             
             DisplayHaspKey();
         }
-
 
         public void DisplayHaspKey() => entitiesView.BindKey(keyModel.GetAll());
         public void DisplayFeatureAtKey(int idKey)
@@ -38,11 +35,10 @@ namespace Presenter
         }
         public void Dispose()
         {
-            //keyFeatureModel.Dispose();
             keyModel.Dispose();
             featureModel.Dispose();            
         }       
-        public void Edit(List<ModelViewFeatureForKeyFeat> keyFeatModel)
+        public void Edit(List<ModelViewKeyFeature> keyFeatModel)
         {
             if (keyFeatModel == null)
                 throw new ArgumentNullException(nameof(keyFeatModel));
@@ -95,7 +91,7 @@ namespace Presenter
             entitiesView.DataChange();
         }
 
-        public bool CheckInputData(List<ModelViewFeatureForKeyFeat> item)
+        public bool CheckInputData(List<ModelViewKeyFeature> item)
         {
             if (item == null)
                 throw new ArgumentNullException(nameof(item));
@@ -110,7 +106,7 @@ namespace Presenter
 
             return error;
         }
-        public bool CheckInputData(ModelViewFeatureForKeyFeat item, int numverRow)
+        public bool CheckInputData(ModelViewKeyFeature item, int numverRow)
         {
             if (item == null)
                 throw new ArgumentNullException(nameof(item));
@@ -125,9 +121,14 @@ namespace Presenter
 
             return true;
         }
-        public bool CheckKey(ModelViewHaspKey item) 
-            => keyFeatures
+        public bool CheckKey(ModelViewHaspKey item)
+        {
+            if (item == null)
+                throw new ArgumentNullException(nameof(item));
+
+            return keyFeatures
                     .LastOrDefault(x => x.IdHaspKey == item.Id &&
                                         x.EndDate >= DateTime.Now.Date) == null;
+        }
     }
 }

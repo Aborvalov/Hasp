@@ -6,7 +6,7 @@ namespace View
 {
     public interface IKeyFeatureView
     {
-        void BindFeature(List<ModelViewFeatureForKeyFeat> feature);
+        void BindFeature(List<ModelViewKeyFeature> feature);
         void BindKey(List<ModelViewHaspKey> key);
         string NumberHaspKey { get; set; }
 

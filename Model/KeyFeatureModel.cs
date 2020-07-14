@@ -11,52 +11,145 @@ namespace Model
     public class KeyFeatureModel : IKeyFeatureModel
     {
         private readonly EntitesContext db;
+        private IFeatureLogic featLogic;
         private IKeyFeatureLogic keyFeatureLogic;
-        private IFactoryLogic factoryLogic;
-        
+        private readonly IFactoryLogic factoryLogic;
+        private ModelViewKeyFeature model;
+        private readonly DateTime date = DateTime.Now.Date;
+
+        private const string errorAdd = "Не удалось создать запись с данной функциональностью: ";
+        private const string errorUpdate = "Не удалось обновить запись с данной функциональностью: ";
+        private const string errorDelete = "Не удалось удалить запись: ";
+
         public KeyFeatureModel(IFactoryLogic factoryLogic)
         {
-            db = new EntitesContext();
             this.factoryLogic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
-            keyFeatureLogic = factoryLogic.CreateKeyFeature(db);
+
+            db = new EntitesContext();
+            featLogic = this.factoryLogic.CreateFeature(db);
+            keyFeatureLogic = this.factoryLogic.CreateKeyFeature(db);
         }
-        
-        public List<ModelViewKeyFeature> GetAll() => Convert(keyFeatureLogic.GetAll());
 
-        public ModelViewKeyFeature GetById(int id)
+        public bool Add(List<ModelViewKeyFeature> keyFeat, out string error)
         {
-            var keyFeature = keyFeatureLogic.GetById(id);
-            var keys = factoryLogic.CreateHaspKey(db).GetAll();
-            var feats = factoryLogic.CreateFeature(db).GetAll();
-            
-            var key = keys.FirstOrDefault(x => x.Id == keyFeature.IdHaspKey) ?? new HaspKey();
-            var feat = feats.FirstOrDefault(x => x.Id == keyFeature.IdFeature) ?? new Feature();
+            if (keyFeat == null)
+                throw new ArgumentNullException(nameof(keyFeat));
 
-            var viewKeyFeat = new ModelViewKeyFeature(keyFeature);
-            return viewKeyFeat;
-        }
-       
-        private List<ModelViewKeyFeature> Convert(List<KeyFeature> keyFeature)
-        {
-            if (keyFeature == null)
-                throw new ArgumentNullException(nameof(keyFeature));
+            error = string.Empty;
 
-            var view = new List<ModelViewKeyFeature>();
-           
-            var  keys = factoryLogic.CreateHaspKey(db).GetAll();
-            var  feats = factoryLogic.CreateFeature(db).GetAll();
-           
-             foreach (var keyFeat in keyFeature)
-             {
-                 var key = keys.FirstOrDefault(x => x.Id == keyFeat.IdHaspKey) ?? new HaspKey ();
-                 var feat = feats.FirstOrDefault(x => x.Id == keyFeat.IdFeature) ?? new  Feature();
-           
-                 var viewKeyFeat = new ModelViewKeyFeature(keyFeat);
-                 view.Add(viewKeyFeat);
-             }
-             return view;
+            foreach (var item in keyFeat)
+            {
+                var keyFeature = new KeyFeature()
+                {
+                    IdFeature = item.IdFeature,
+                    IdHaspKey = item.IdKey,
+                    StartDate = item.StartDate ?? DateTime.MinValue,
+                    EndDate = item.EndDate ?? DateTime.MinValue,
+                };
+
+                if (!this.keyFeatureLogic.Save(keyFeature))
+                    error += errorAdd + item.Feature + '\n';
+            }
+
+            return error == string.Empty;
         }
 
         public void Dispose() => db.Dispose();
+
+        public List<ModelViewKeyFeature> GetAll()
+        {
+            var viewFeature = new List<ModelViewKeyFeature>();
+            int i = 1;
+            foreach (var item in featLogic.GetAll())
+            {
+                var model = new ModelViewKeyFeature(item)
+                {
+                    SerialNumber = i++,
+                };
+                viewFeature.Add(model);
+            }
+            return viewFeature;
+        }
+
+        public List<ModelViewKeyFeature> GetAll(int idKey)
+        {
+            var listKeyFeat = keyFeatureLogic.GetAll()
+                              .Where(x => x.IdHaspKey == idKey);
+
+            var viewFeature = new List<ModelViewKeyFeature>();
+            int i = 1;
+            foreach (var item in featLogic.GetAll())
+            {
+                model = new ModelViewKeyFeature(item)
+                {
+                    SerialNumber = i++,
+                    IdKey = idKey,
+                };
+
+                var itemKeyFeature = listKeyFeat
+                                     .LastOrDefault(x => x.IdFeature == item.Id &&
+                                                         x.EndDate >= date);
+
+                if (itemKeyFeature != null)
+                {
+                    model.Selected = true;
+                    model.StartDate = itemKeyFeature.StartDate;
+                    model.EndDate = itemKeyFeature.EndDate;
+                    model.IdKeyFeaure = itemKeyFeature.Id;                 
+                }                
+
+                viewFeature.Add(model);
+            }
+            return viewFeature;
+        }
+
+        public bool Remove(IEnumerable<int> idFeatureKey, out string error)
+        {
+            if (idFeatureKey == null)
+                throw new ArgumentNullException(nameof(idFeatureKey));
+
+            error = string.Empty;
+
+            foreach (var id in idFeatureKey)
+                if (!keyFeatureLogic.Remove(id))
+                    error += errorDelete + id.ToString() + '\n';
+            
+            return error == string.Empty;                 
+        }
+
+        public bool Update(List<ModelViewKeyFeature> keyFeat, out string error)
+        {
+            if (keyFeat == null)
+                throw new ArgumentNullException(nameof(keyFeat));
+
+            error = string.Empty;
+            var all = GetAll(keyFeat[0].IdKey);
+            foreach (var item in keyFeat)
+            {
+                if (all
+                    .Where(x => x.IdKeyFeaure == item.IdKeyFeaure &&
+                                   x.Selected == item.Selected &&
+                                   x.EndDate == item.EndDate)
+                    .Any())
+                    break;
+                
+                var keyFeature = new KeyFeature()
+                {
+                    Id = item.IdKeyFeaure,
+                    IdFeature = item.IdFeature,
+                    IdHaspKey = item.IdKey,
+                    StartDate = (DateTime)item.StartDate,
+                    EndDate = (DateTime)item.EndDate,
+                };
+
+                if (!this.keyFeatureLogic.Update(keyFeature))
+                    error += errorUpdate + item.Feature.Name + '\n';                
+            }
+
+            return error == string.Empty;
+        }
+
+        public List<KeyFeature> GetAllKeyFeature() 
+            => keyFeatureLogic.GetAll();
     }
 }
