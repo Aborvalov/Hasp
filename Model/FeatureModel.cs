@@ -33,7 +33,8 @@ namespace Model
 
         public List<ModelViewFeature> GetAll() => Convert(featLogic.GetAll());
 
-        public ModelViewFeature GetById(int id) => new ModelViewFeature(featLogic.GetById(id));
+        public ModelViewFeature GetById(int id) 
+            => new ModelViewFeature(featLogic.GetById(id));
 
         public bool Remove(int id) => featLogic.Remove(id);
 

@@ -112,7 +112,8 @@ namespace Presenter
 
             if (item.StartDate != null &&
                 item.EndDate != null &&
-                item.StartDate.Value.Date > item.EndDate.Value.Date)
+                item.StartDate.Value.Date > item.EndDate.Value.Date &&
+                (item.Selected || item.IdKeyFeaure == 0))
             {
                 entitiesView.ErrorRow(numverRow);
                 return false;
@@ -128,6 +129,16 @@ namespace Presenter
             return keyFeatures
                     .LastOrDefault(x => x.IdHaspKey == item.Id &&
                                         x.EndDate >= DateTime.Now.Date) == null;
+        }
+
+        public bool CheckSelected(ModelViewKeyFeature item)
+        {
+            if (item == null)
+                throw new ArgumentNullException(nameof(item));
+
+            return item.IdKeyFeaure == 0 &&
+                   item.StartDate != null &&
+                   item.EndDate != null;
         }
     }
 }

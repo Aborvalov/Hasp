@@ -12,5 +12,6 @@ namespace Presenter
         bool CheckInputData(List<ModelViewKeyFeature> item);
         bool CheckInputData(ModelViewKeyFeature item, int numverRow);
         bool CheckKey(ModelViewHaspKey item);
+        bool CheckSelected(ModelViewKeyFeature item);
     }
 }

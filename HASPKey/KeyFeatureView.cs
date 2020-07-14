@@ -90,8 +90,8 @@ namespace HASPKey
             var item = dgvFeature.CurrentRow.DataBoundItem as ModelViewKeyFeature;
             presenterEntities.CheckInputData(item, e.RowIndex);
 
-            if (item.IdKeyFeaure == 0)
-                dgvFeature[6,e.RowIndex].Value = true;
+            if (presenterEntities.CheckSelected(item))
+                dgvFeature[6, e.RowIndex].Value = true;
         }
 
         private void EditKeyFeatureView_Load(object sender, EventArgs e)

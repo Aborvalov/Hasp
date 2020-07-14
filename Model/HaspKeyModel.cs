@@ -32,7 +32,8 @@ namespace Model
 
         public List<ModelViewHaspKey> GetAll() => Convert(keyLogic.GetAll());
 
-        public List<ModelViewHaspKey> GetByActive() => Convert(keyLogic.GetByActive());
+        public List<ModelViewHaspKey> GetByActive() 
+            => Convert(keyLogic.GetByActive());
 
         public List<ModelViewHaspKey> GetByClient(ModelViewClient client)
         {
@@ -42,7 +43,8 @@ namespace Model
             return Convert(keyLogic.GetByClient(client.Client));
         }
 
-        public ModelViewHaspKey GetById(int id) => new ModelViewHaspKey(keyLogic.GetById(id));
+        public ModelViewHaspKey GetById(int id) 
+            => new ModelViewHaspKey(keyLogic.GetById(id));
         
         public List<ModelViewHaspKey> GetByPastDue() => Convert(keyLogic.GetByPastDue());
 
