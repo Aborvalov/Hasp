@@ -36,10 +36,7 @@ namespace HASPKey
                 
         public object EditingControlFormattedValue
         {
-            get
-            {
-                return this.Value.ToShortDateString();
-            }
+            get => this.Value.ToShortDateString();           
             set
             {
                 if (value is string)

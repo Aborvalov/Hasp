@@ -27,17 +27,17 @@ namespace HASPKey
 
         public override Type EditType
         {
-            get { return typeof(CalendarEditingControl); }
+            get => typeof(CalendarEditingControl);
         }
 
         public override Type ValueType
         {
-            get{ return typeof(DateTime);}
+            get => typeof(DateTime);
         }
 
         public override object DefaultNewRowValue
         {
-            get{return null; }
+            get => null;
         }
     }
 }
