@@ -62,7 +62,8 @@ namespace Presenter
             var update = keyFeatModel
                         .Where(x => x.IdKeyFeaure != 0 && 
                                     x.StartDate != null &&
-                                    x.EndDate != null)
+                                    x.EndDate != null &&
+                                    x.Selected)
                         .ToList();
                        
             if (delete.Any())
