@@ -17,12 +17,15 @@ namespace HASPKey
                 dataGridViewCellStyle);
             CalendarEditingControl ctl =
                 DataGridView.EditingControl as CalendarEditingControl;
-            
+
+            ctl.MinDate = DateTime.Now.Date;
             if (this.Value == null)
                 ctl.NValue = (DateTime?)this.DefaultNewRowValue;
             else
-                try { ctl.NValue = (DateTime)this.Value; }
-                catch (Exception) { ctl.NValue = (DateTime?)this.DefaultNewRowValue; }
+                try
+                { ctl.NValue = (DateTime)this.Value; }
+                catch (Exception)
+                { ctl.NValue = (DateTime?)this.DefaultNewRowValue; }
         }
 
         public override Type EditType

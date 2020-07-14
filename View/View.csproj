@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IEntitiesView.cs" />
+    <Compile Include="IKeyFeatureClientView.cs" />
     <Compile Include="IKeyFeatureView.cs" />
     <Compile Include="IMainView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
