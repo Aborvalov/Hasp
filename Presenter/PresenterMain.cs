@@ -20,6 +20,5 @@ namespace Presenter
         public void Dispose() => homeModel.Dispose();
 
         public void Views() => homeView.Bind(homeModel.GetAll());
-
     }
 }
