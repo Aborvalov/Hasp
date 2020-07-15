@@ -87,7 +87,8 @@ namespace Model
 
                 keyFeatureClient.Last().Feature = item.Name;
                 keyFeatureClient.Last().TypeKey = item.TypeKey;
-               keyFeatureClient.Last().NumberKey = item.InnerId.ToString() + " - \"" + item.Number + "\"";
+                keyFeatureClient.Last().NumberKey = item.InnerId.ToString() + " - \"" + item.Number + "\"";
+                keyFeatureClient.Last().EndDate = item.EndDate;
             }
 
 

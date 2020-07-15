@@ -35,8 +35,6 @@
             this.DataGridViewKeyFeature = new System.Windows.Forms.DataGridView();
             this.HeaderlineClient = new System.Windows.Forms.Label();
             this.HeaderlineKey = new System.Windows.Forms.Label();
-            this.bindingKeyFeatureClient = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingClient = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,15 +44,20 @@
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingKeyFeatureClient = new System.Windows.Forms.BindingSource(this.components);
             this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phoneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contactPersonDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingClient = new System.Windows.Forms.BindingSource(this.components);
             this.numberKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.featureDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.noteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.initiatorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.noteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.selectedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewKeyFeature)).BeginInit();
@@ -108,8 +111,9 @@
             this.numberKeyDataGridViewTextBoxColumn,
             this.typeKeyDataGridViewTextBoxColumn,
             this.featureDataGridViewTextBoxColumn,
-            this.noteDataGridViewTextBoxColumn,
+            this.endDateDataGridViewTextBoxColumn,
             this.initiatorDataGridViewTextBoxColumn,
+            this.noteDataGridViewTextBoxColumn,
             this.selectedDataGridViewCheckBoxColumn});
             this.DataGridViewKeyFeature.DataSource = this.bindingKeyFeatureClient;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -143,14 +147,6 @@
             this.HeaderlineKey.Size = new System.Drawing.Size(235, 13);
             this.HeaderlineKey.TabIndex = 3;
             this.HeaderlineKey.Text = "Список ключей доступных данному клиенту";
-            // 
-            // bindingKeyFeatureClient
-            // 
-            this.bindingKeyFeatureClient.DataSource = typeof(ModelEntities.ModelViewKeyFeatureClient);
-            // 
-            // bindingClient
-            // 
-            this.bindingClient.DataSource = typeof(ModelEntities.ModelViewClient);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -224,6 +220,24 @@
             this.dataGridViewTextBoxColumn9.ReadOnly = true;
             this.dataGridViewTextBoxColumn9.Width = 106;
             // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "Initiator";
+            this.dataGridViewTextBoxColumn10.HeaderText = "Инициатор";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.Width = 79;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "Note";
+            this.dataGridViewTextBoxColumn11.HeaderText = "Прочие";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.Width = 79;
+            // 
+            // bindingKeyFeatureClient
+            // 
+            this.bindingKeyFeatureClient.DataSource = typeof(ModelEntities.ModelViewKeyFeatureClient);
+            // 
             // nameDataGridViewTextBoxColumn1
             // 
             this.nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
@@ -252,6 +266,10 @@
             this.contactPersonDataGridViewTextBoxColumn.Name = "contactPersonDataGridViewTextBoxColumn";
             this.contactPersonDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // bindingClient
+            // 
+            this.bindingClient.DataSource = typeof(ModelEntities.ModelViewClient);
+            // 
             // numberKeyDataGridViewTextBoxColumn
             // 
             this.numberKeyDataGridViewTextBoxColumn.DataPropertyName = "NumberKey";
@@ -273,17 +291,24 @@
             this.featureDataGridViewTextBoxColumn.Name = "featureDataGridViewTextBoxColumn";
             this.featureDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // noteDataGridViewTextBoxColumn
+            // endDateDataGridViewTextBoxColumn
             // 
-            this.noteDataGridViewTextBoxColumn.DataPropertyName = "Note";
-            this.noteDataGridViewTextBoxColumn.HeaderText = "Прочие";
-            this.noteDataGridViewTextBoxColumn.Name = "noteDataGridViewTextBoxColumn";
+            this.endDateDataGridViewTextBoxColumn.DataPropertyName = "EndDate";
+            this.endDateDataGridViewTextBoxColumn.HeaderText = "Окончание действия";
+            this.endDateDataGridViewTextBoxColumn.Name = "endDateDataGridViewTextBoxColumn";
+            this.endDateDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // initiatorDataGridViewTextBoxColumn
             // 
             this.initiatorDataGridViewTextBoxColumn.DataPropertyName = "Initiator";
             this.initiatorDataGridViewTextBoxColumn.HeaderText = "Инициатор";
             this.initiatorDataGridViewTextBoxColumn.Name = "initiatorDataGridViewTextBoxColumn";
+            // 
+            // noteDataGridViewTextBoxColumn
+            // 
+            this.noteDataGridViewTextBoxColumn.DataPropertyName = "Note";
+            this.noteDataGridViewTextBoxColumn.HeaderText = "Прочие";
+            this.noteDataGridViewTextBoxColumn.Name = "noteDataGridViewTextBoxColumn";
             // 
             // selectedDataGridViewCheckBoxColumn
             // 
@@ -334,11 +359,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.Label HeaderlineClient;
         private System.Windows.Forms.Label HeaderlineKey;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberKeyDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeKeyDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn featureDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn noteDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn endDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn initiatorDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn noteDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn selectedDataGridViewCheckBoxColumn;
     }
 }

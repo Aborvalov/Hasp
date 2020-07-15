@@ -1,4 +1,5 @@
 ﻿using Entities;
+using System;
 using System.ComponentModel;
 
 namespace ModelEntities
@@ -55,7 +56,9 @@ namespace ModelEntities
         {
             get => KeyFeatureClient.Initiator; 
             set => KeyFeatureClient.Initiator = value;
-        }
+        }        
+        [DisplayName("Окончание действия")]
+        public DateTime? EndDate { get; set; }
         [DisplayName("Выбран")]
         public bool Selected { get; set; }
 
