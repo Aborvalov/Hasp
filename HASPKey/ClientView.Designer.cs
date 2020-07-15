@@ -299,7 +299,6 @@
             // 
             // Headline
             // 
-            this.Headline.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.Headline.AutoSize = true;
             this.Headline.Location = new System.Drawing.Point(15, 42);
             this.Headline.Name = "Headline";
