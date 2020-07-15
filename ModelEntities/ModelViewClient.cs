@@ -15,6 +15,7 @@ namespace ModelEntities
             Phone = client.Phone;
             ContactPerson = client.ContactPerson;
         }
+        [Browsable(false)]
         public Client Client { get; private set; } = new Client();        
         [Browsable(false)]
         public int Id

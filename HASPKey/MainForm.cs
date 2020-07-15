@@ -55,5 +55,12 @@ namespace HASPKey
             foreach (DataGridViewRow row in DataGridViewHomeView.Rows)
                 row.HeaderCell.Value = (row.Index + 1).ToString();
         }
+
+        private void KeyFeatureClientToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            KeyFeatureClientView keyFeatureClientView = new KeyFeatureClientView();
+            keyFeatureClientView.DataUpdated += presenter.Views;
+            keyFeatureClientView.ShowDialog();
+        }
     }
 }

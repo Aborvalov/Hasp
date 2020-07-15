@@ -7,11 +7,10 @@ namespace Model
 {
     public interface IKeyFeatureModel : IDisposable
     {
-        List<ModelViewKeyFeature> GetAll();
-        List<ModelViewKeyFeature> GetAll(int idKey);
+        List<ModelViewKeyFeature> GetAllFeatureAtKey(int idKey);
         List<KeyFeature> GetAllKeyFeature();       
-        bool Remove(IEnumerable<int> idFeatureKey, out string error);
-        bool Add(List<ModelViewKeyFeature> keyFeat, out string error);
-        bool Update(List<ModelViewKeyFeature> keyFeat, out string error);
+        bool Remove(IEnumerable<int> idkeyfeature, out string error);
+        bool Add(IEnumerable<ModelViewKeyFeature> keyFeat, out string error);
+        bool Update(IEnumerable<ModelViewKeyFeature> keyFeat, out string error);
     }
 }

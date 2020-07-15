@@ -86,7 +86,7 @@ namespace DalDB
 
             /*
              *
-            select * 
+            select * // Distinct
             from HaspKeys as hk inner join KeyFeatures as kf
                  on hk.Id = kf.IdHaspKey
             where EndDate = (select max(EndDate)

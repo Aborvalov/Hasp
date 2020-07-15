@@ -16,9 +16,9 @@ namespace Presenter
         private readonly IKeyFeatureView entitiesView;
         private List<KeyFeature> keyFeatures;
 
-        public PresenterKeyFeature(IKeyFeatureView entitesView)
+        public PresenterKeyFeature(IKeyFeatureView entitiesView)
         {
-            this.entitiesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
+            this.entitiesView = entitiesView ?? throw new ArgumentNullException(nameof(entitiesView));
 
             keyModel = new HaspKeyModel(new Logics());
             featureModel = new KeyFeatureModel(new Logics());
@@ -31,7 +31,7 @@ namespace Presenter
         public void DisplayFeatureAtKey(int idKey)
         {
             entitiesView.NumberHaspKey = keyModel.GetById(idKey).InnerId.ToString();
-            entitiesView.BindFeature(featureModel.GetAll(idKey));            
+            entitiesView.BindFeature(featureModel.GetAllFeatureAtKey(idKey));            
         }
         public void Dispose()
         {
@@ -56,15 +56,14 @@ namespace Presenter
         private void Update(List<ModelViewKeyFeature> keyFeatModel)
         {
             var update = keyFeatModel
-                                    .Where(x => x.IdKeyFeature != 0 &&
-                                                x.StartDate != null &&
-                                                x.EndDate != null &&
-                                                x.Selected)
-                                    .ToList();
+                            .Where(x => x.IdKeyFeature != 0 &&
+                                        x.StartDate != null &&
+                                        x.EndDate != null &&
+                                        x.Selected);
             if (update.Any())
             {
                 featureModel.Update(update, out string error);
-                if (error != string.Empty)
+                if (!string.IsNullOrEmpty(error))
                     entitiesView.MessageError(error);
             }
         }
@@ -72,15 +71,14 @@ namespace Presenter
         private void Add(List<ModelViewKeyFeature> keyFeatModel)
         {
             var add = keyFeatModel
-                    .Where(x => x.IdKeyFeature == 0 &&
-                                x.Selected &&
-                                x.StartDate != null &&
-                                x.EndDate != null)
-                    .ToList();
+                        .Where(x => x.IdKeyFeature == 0 &&
+                                    x.Selected &&
+                                    x.StartDate != null &&
+                                    x.EndDate != null);
             if (add.Any())
             {
                 featureModel.Add(add, out string error);
-                if (error != string.Empty)
+                if (!string.IsNullOrEmpty(error))
                     entitiesView.MessageError(error);
             }
         }
@@ -94,7 +92,7 @@ namespace Presenter
             if (delete.Any())
             {
                 featureModel.Remove(delete, out string error);
-                if (error != string.Empty)
+                if (!string.IsNullOrEmpty(error))
                     entitiesView.MessageError(error);
             }
         }

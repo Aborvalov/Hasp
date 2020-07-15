@@ -49,6 +49,7 @@
             this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingHome = new System.Windows.Forms.BindingSource(this.components);
             this.Headline = new System.Windows.Forms.Label();
+            this.KeyFeatureClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewHomeView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHome)).BeginInit();
@@ -87,7 +88,8 @@
             this.KeyToolStripMenuItem,
             this.FeatureToolStripMenuItem,
             this.ClientToolStripMenuItem,
-            this.KeyFeatureToolStripMenuItem});
+            this.KeyFeatureToolStripMenuItem,
+            this.KeyFeatureClientToolStripMenuItem});
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
             this.EditToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
             this.EditToolStripMenuItem.Text = "Редактирование";
@@ -201,6 +203,13 @@
             this.Headline.Text = "Действующие HASP-ключи";
             this.Headline.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // KeyFeatureClientToolStripMenuItem
+            // 
+            this.KeyFeatureClientToolStripMenuItem.Name = "KeyFeatureClientToolStripMenuItem";
+            this.KeyFeatureClientToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.KeyFeatureClientToolStripMenuItem.Text = "Связь ключ-клиент";
+            this.KeyFeatureClientToolStripMenuItem.Click += new System.EventHandler(this.KeyFeatureClientToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -241,6 +250,7 @@
         private System.Windows.Forms.ToolStripMenuItem ClientToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem KeyFeatureToolStripMenuItem;
         private System.Windows.Forms.Label Headline;
+        private System.Windows.Forms.ToolStripMenuItem KeyFeatureClientToolStripMenuItem;
     }
 }
 

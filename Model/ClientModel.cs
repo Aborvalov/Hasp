@@ -19,6 +19,7 @@ namespace Model
             db = new EntitesContext();
             clientLogic = factoryLogic.CreateClient(db);
         }
+
         public bool Add(ModelViewClient entity)
         {
             if (entity == null)

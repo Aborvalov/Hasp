@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModelEntities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,9 @@ namespace View
         void DataChange();
         event Action DataUpdated;
         void MessageError(string errorText);
+        void BindClient(List<ModelViewClient> client);
+        void BindKey(List<ModelViewKeyFeatureClient> keyClient);
+        string NameClient { get; set; }
+
     }
 }

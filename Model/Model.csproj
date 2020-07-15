@@ -64,6 +64,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientModel.cs" />
+    <Compile Include="IKeyFeatureClientModel.cs" />
+    <Compile Include="KeyFeatureClientModel.cs" />
     <Compile Include="KeyFeatureModel.cs" />
     <Compile Include="FeatureModel.cs" />
     <Compile Include="HaspKeyModel.cs" />

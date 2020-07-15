@@ -30,7 +30,7 @@ namespace Model
             keyFeatureLogic = this.factoryLogic.CreateKeyFeature(db);
         }
 
-        public bool Add(List<ModelViewKeyFeature> keyFeat, out string error)
+        public bool Add(IEnumerable<ModelViewKeyFeature> keyFeat, out string error)
         {
             if (keyFeat == null)
                 throw new ArgumentNullException(nameof(keyFeat));
@@ -51,20 +51,12 @@ namespace Model
                     error += errorAdd + item.Feature + '\n';
             }
 
-            return error == string.Empty;
+            return string.IsNullOrEmpty(error);
         }
 
         public void Dispose() => db.Dispose();
-
-        public List<ModelViewKeyFeature> GetAll()
-        {
-            var viewFeature = new List<ModelViewKeyFeature>();
-            foreach (var item in featLogic.GetAll())
-                viewFeature.Add(new ModelViewKeyFeature(item));
-            return viewFeature;
-        }
-
-        public List<ModelViewKeyFeature> GetAll(int idKey)
+               
+        public List<ModelViewKeyFeature> GetAllFeatureAtKey(int idKey)
         {
             var listKeyFeat = keyFeatureLogic.GetAll()
                               .Where(x => x.IdHaspKey == idKey);
@@ -104,25 +96,25 @@ namespace Model
             foreach (var id in idFeatureKey)
                 if (!keyFeatureLogic.Remove(id))
                     error += errorDelete + id.ToString() + '\n';
-            
-            return error == string.Empty;                 
+
+            return string.IsNullOrEmpty(error);
         }
 
-        public bool Update(List<ModelViewKeyFeature> keyFeat, out string error)
+        public bool Update(IEnumerable<ModelViewKeyFeature> keyFeat, out string error)
         {
             if (keyFeat == null)
                 throw new ArgumentNullException(nameof(keyFeat));
 
             error = string.Empty;
-            var all = GetAll(keyFeat[0].IdKey);
+            var allFeatureAtKey = GetAllFeatureAtKey(keyFeat.First().IdKey);
             foreach (var item in keyFeat)
             {
-                if (all
+                if (allFeatureAtKey
                     .Any(x => x.IdKeyFeature == item.IdKeyFeature &&
-                                   x.Selected == item.Selected &&
-                                   x.EndDate == item.EndDate &&
-                                   x.StartDate == item.StartDate))
-                    break;
+                              x.Selected == item.Selected &&
+                              x.EndDate == item.EndDate &&
+                              x.StartDate == item.StartDate))
+                    continue;
                 
                 var keyFeature = new KeyFeature()
                 {
@@ -137,7 +129,7 @@ namespace Model
                     error += errorUpdate + item.Feature.Name + '\n';                
             }
 
-            return error == string.Empty;
+            return string.IsNullOrEmpty(error);
         }
 
         public List<KeyFeature> GetAllKeyFeature() 

@@ -15,12 +15,16 @@ namespace ModelEntities
             Initiator = keyFeatureClient.Initiator;
             Note = keyFeatureClient.Note;
         }
+        [Browsable(false)]
         public KeyFeatureClient KeyFeatureClient { get; private set; }
+            = new KeyFeatureClient();
         [DisplayName("Номер ключа")]
         public string NumberKey { get; set; }
+        [DisplayName("Тип ключа")]
+        public TypeKey TypeKey { get; set; }
         [DisplayName("Функциональность")]
         public string Feature { get; set; }
-        [DisplayName("Клиент")]
+        [Browsable(false)]
         public string Client { get; set; }
         [Browsable(false)]
         public int Id           
@@ -52,6 +56,8 @@ namespace ModelEntities
             get => KeyFeatureClient.Initiator; 
             set => KeyFeatureClient.Initiator = value;
         }
+        [DisplayName("Выбран")]
+        public bool Selected { get; set; }
 
         public override int GetHashCode() => KeyFeatureClient.GetHashCode();
         public override bool Equals(object obj) => KeyFeatureClient.Equals(obj);
