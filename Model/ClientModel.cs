@@ -39,8 +39,7 @@ namespace Model
         }
 
         public ModelViewClient GetById(int id) => 
-            new ModelViewClient(clientLogic.GetById(id))
-                { SerialNumber = 1 };
+            new ModelViewClient(clientLogic.GetById(id));
 
         public ModelViewClient GetByNumberKey(int keyInnerId)
         {
@@ -48,8 +47,7 @@ namespace Model
 
             if (client == null)
                 return null;
-            return new ModelViewClient(client)
-                       { SerialNumber = 1};
+            return new ModelViewClient(client);
         }
 
         public bool Remove(int id) => clientLogic.Remove(id);
@@ -63,16 +61,9 @@ namespace Model
         }
         private List<ModelViewClient> Convert(List<Client> clients)
         {
-            var viewClients = new List<ModelViewClient>();
-            int i = 1;
+            var viewClients = new List<ModelViewClient>();           
             foreach (var cl in clients)
-            {
-                var clintModel = new ModelViewClient(cl)
-                {
-                    SerialNumber = i++
-                };
-                viewClients.Add(clintModel);
-            }
+                viewClients.Add(new ModelViewClient(cl));
             return viewClients;
         }
     }

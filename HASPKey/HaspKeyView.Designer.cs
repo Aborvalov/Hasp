@@ -34,12 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HaspKeyView));
-            this.dgvHaspKey = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.innerIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.typeKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isHomeDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.DataGridViewHaspKey = new System.Windows.Forms.DataGridView();
             this.bindingHaspKey = new System.Windows.Forms.BindingSource(this.components);
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
@@ -59,29 +54,32 @@
             this.buttonSearchByClient = new System.Windows.Forms.Button();
             this.labelClient = new System.Windows.Forms.Label();
             this.Headline = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvHaspKey)).BeginInit();
+            this.innerIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isHomeDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewHaspKey)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHaspKey)).BeginInit();
             this.panelFiltr.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingItem)).BeginInit();
             this.SuspendLayout();
             // 
-            // dgvHaspKey
+            // DataGridViewHaspKey
             // 
-            this.dgvHaspKey.AllowUserToAddRows = false;
-            this.dgvHaspKey.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.DataGridViewHaspKey.AllowUserToAddRows = false;
+            this.DataGridViewHaspKey.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvHaspKey.AutoGenerateColumns = false;
-            this.dgvHaspKey.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvHaspKey.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgvHaspKey.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvHaspKey.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
+            this.DataGridViewHaspKey.AutoGenerateColumns = false;
+            this.DataGridViewHaspKey.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DataGridViewHaspKey.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.DataGridViewHaspKey.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridViewHaspKey.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.innerIdDataGridViewTextBoxColumn,
             this.numberDataGridViewTextBoxColumn,
             this.typeKeyDataGridViewTextBoxColumn,
             this.isHomeDataGridViewCheckBoxColumn});
-            this.dgvHaspKey.DataSource = this.bindingHaspKey;
+            this.DataGridViewHaspKey.DataSource = this.bindingHaspKey;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F);
@@ -89,64 +87,20 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvHaspKey.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvHaspKey.EnableHeadersVisualStyles = false;
-            this.dgvHaspKey.Location = new System.Drawing.Point(12, 57);
-            this.dgvHaspKey.Name = "dgvHaspKey";
-            this.dgvHaspKey.ReadOnly = true;
-            this.dgvHaspKey.RowHeadersVisible = false;
+            this.DataGridViewHaspKey.DefaultCellStyle = dataGridViewCellStyle1;
+            this.DataGridViewHaspKey.EnableHeadersVisualStyles = false;
+            this.DataGridViewHaspKey.Location = new System.Drawing.Point(12, 57);
+            this.DataGridViewHaspKey.Name = "DataGridViewHaspKey";
+            this.DataGridViewHaspKey.ReadOnly = true;
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            this.dgvHaspKey.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvHaspKey.Size = new System.Drawing.Size(421, 463);
-            this.dgvHaspKey.TabIndex = 0;
-            this.dgvHaspKey.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvHaspKey_CellClick);
-            this.dgvHaspKey.SelectionChanged += new System.EventHandler(this.DgvHaspKey_SelectionChanged);
-            this.dgvHaspKey.DoubleClick += new System.EventHandler(this.DgvHaspKey_DoubleClick);
-            this.dgvHaspKey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvHaspKey_KeyDown);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "SerialNumber";
-            this.dataGridViewTextBoxColumn1.FillWeight = 164.9746F;
-            this.dataGridViewTextBoxColumn1.HeaderText = "№ п/п";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 65;
-            // 
-            // innerIdDataGridViewTextBoxColumn
-            // 
-            this.innerIdDataGridViewTextBoxColumn.DataPropertyName = "InnerId";
-            this.innerIdDataGridViewTextBoxColumn.FillWeight = 83.75635F;
-            this.innerIdDataGridViewTextBoxColumn.HeaderText = "Внутренний номер";
-            this.innerIdDataGridViewTextBoxColumn.Name = "innerIdDataGridViewTextBoxColumn";
-            this.innerIdDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // numberDataGridViewTextBoxColumn
-            // 
-            this.numberDataGridViewTextBoxColumn.DataPropertyName = "Number";
-            this.numberDataGridViewTextBoxColumn.FillWeight = 83.75635F;
-            this.numberDataGridViewTextBoxColumn.HeaderText = "Номер";
-            this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
-            this.numberDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // typeKeyDataGridViewTextBoxColumn
-            // 
-            this.typeKeyDataGridViewTextBoxColumn.DataPropertyName = "TypeKey";
-            this.typeKeyDataGridViewTextBoxColumn.FillWeight = 83.75635F;
-            this.typeKeyDataGridViewTextBoxColumn.HeaderText = "Тип ключа";
-            this.typeKeyDataGridViewTextBoxColumn.Name = "typeKeyDataGridViewTextBoxColumn";
-            this.typeKeyDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // isHomeDataGridViewCheckBoxColumn
-            // 
-            this.isHomeDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.isHomeDataGridViewCheckBoxColumn.DataPropertyName = "IsHome";
-            this.isHomeDataGridViewCheckBoxColumn.FillWeight = 83.75635F;
-            this.isHomeDataGridViewCheckBoxColumn.HeaderText = "В компании";
-            this.isHomeDataGridViewCheckBoxColumn.Name = "isHomeDataGridViewCheckBoxColumn";
-            this.isHomeDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.isHomeDataGridViewCheckBoxColumn.Width = 80;
+            this.DataGridViewHaspKey.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.DataGridViewHaspKey.Size = new System.Drawing.Size(421, 463);
+            this.DataGridViewHaspKey.TabIndex = 0;
+            this.DataGridViewHaspKey.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewHaspKey_CellClick);
+            this.DataGridViewHaspKey.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewHaspKey_DataBindingComplete);
+            this.DataGridViewHaspKey.SelectionChanged += new System.EventHandler(this.DataGridViewHaspKey_SelectionChanged);
+            this.DataGridViewHaspKey.DoubleClick += new System.EventHandler(this.DataGridViewHaspKey_DoubleClick);
+            this.DataGridViewHaspKey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DataGridViewHaspKey_KeyDown);
             // 
             // bindingHaspKey
             // 
@@ -340,6 +294,40 @@
             this.Headline.TabIndex = 17;
             this.Headline.Text = "Список HASP-ключей";
             // 
+            // innerIdDataGridViewTextBoxColumn
+            // 
+            this.innerIdDataGridViewTextBoxColumn.DataPropertyName = "InnerId";
+            this.innerIdDataGridViewTextBoxColumn.FillWeight = 83.75635F;
+            this.innerIdDataGridViewTextBoxColumn.HeaderText = "Внутренний номер";
+            this.innerIdDataGridViewTextBoxColumn.Name = "innerIdDataGridViewTextBoxColumn";
+            this.innerIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // numberDataGridViewTextBoxColumn
+            // 
+            this.numberDataGridViewTextBoxColumn.DataPropertyName = "Number";
+            this.numberDataGridViewTextBoxColumn.FillWeight = 83.75635F;
+            this.numberDataGridViewTextBoxColumn.HeaderText = "Номер";
+            this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
+            this.numberDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // typeKeyDataGridViewTextBoxColumn
+            // 
+            this.typeKeyDataGridViewTextBoxColumn.DataPropertyName = "TypeKey";
+            this.typeKeyDataGridViewTextBoxColumn.FillWeight = 83.75635F;
+            this.typeKeyDataGridViewTextBoxColumn.HeaderText = "Тип ключа";
+            this.typeKeyDataGridViewTextBoxColumn.Name = "typeKeyDataGridViewTextBoxColumn";
+            this.typeKeyDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // isHomeDataGridViewCheckBoxColumn
+            // 
+            this.isHomeDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.isHomeDataGridViewCheckBoxColumn.DataPropertyName = "IsHome";
+            this.isHomeDataGridViewCheckBoxColumn.FillWeight = 83.75635F;
+            this.isHomeDataGridViewCheckBoxColumn.HeaderText = "В компании";
+            this.isHomeDataGridViewCheckBoxColumn.Name = "isHomeDataGridViewCheckBoxColumn";
+            this.isHomeDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.isHomeDataGridViewCheckBoxColumn.Width = 80;
+            // 
             // HaspKeyView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -347,7 +335,7 @@
             this.ClientSize = new System.Drawing.Size(445, 592);
             this.Controls.Add(this.Headline);
             this.Controls.Add(this.buttonSearchByClient);
-            this.Controls.Add(this.dgvHaspKey);
+            this.Controls.Add(this.DataGridViewHaspKey);
             this.Controls.Add(this.checkBoxIsHome);
             this.Controls.Add(this.comboBoxTypeKey);
             this.Controls.Add(this.labelType);
@@ -365,7 +353,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hasp-ключ";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvHaspKey)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewHaspKey)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHaspKey)).EndInit();
             this.panelFiltr.ResumeLayout(false);
             this.panelFiltr.PerformLayout();
@@ -377,7 +365,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvHaspKey;
+        private System.Windows.Forms.DataGridView DataGridViewHaspKey;
         private System.Windows.Forms.BindingSource bindingHaspKey;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonSave;
@@ -395,12 +383,11 @@
         private System.Windows.Forms.CheckBox checkBoxIsHome;
         private System.Windows.Forms.Button buttonSearchByClient;
         private System.Windows.Forms.Label labelClient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.Label Headline;
+        private System.Windows.Forms.BindingSource bindingItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn innerIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeKeyDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isHomeDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.Label Headline;
-        private System.Windows.Forms.BindingSource bindingItem;
     }
 }

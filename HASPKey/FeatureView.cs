@@ -25,13 +25,13 @@ namespace HASPKey
         public FeatureView(bool search) : this()
         { 
             this.search = search;            
-            dgvFeature.Height = dgvFeature.Size.Height + 28;
+            DataGridViewFeature.Height = DataGridViewFeature.Size.Height + 28;
         }
         public FeatureView() 
         {
             InitializeComponent();
             presenterFeature = new PresenterFeature(this);
-            dgvFeature.Height = dgvFeature.Size.Height + sizeH;            
+            DataGridViewFeature.Height = DataGridViewFeature.Size.Height + sizeH;            
         }
 
         public void DataChange() => DataUpdated?.Invoke();    
@@ -51,15 +51,15 @@ namespace HASPKey
             DefaultView();
             if (size)
             {
-                dgvFeature.Height = dgvFeature.Size.Height - sizeH;
+                DataGridViewFeature.Height = DataGridViewFeature.Size.Height - sizeH;
                 size = !size;
                 ButtonAdd.Enabled = false;               
             }            
         }
 
-        private void DgvFeature_DoubleClick(object sender, EventArgs e)
+        private void DataGridViewFeatureFeature_DoubleClick(object sender, EventArgs e)
         {
-            if (!(dgvFeature.CurrentRow.DataBoundItem is ModelViewFeature row))
+            if (!(DataGridViewFeature.CurrentRow.DataBoundItem is ModelViewFeature row))
             {
                 MessageError(emptyFeature);
                 return;
@@ -74,7 +74,7 @@ namespace HASPKey
             if (size)
             {
                 DefaultView();
-                dgvFeature.Height = dgvFeature.Size.Height - sizeH;
+                DataGridViewFeature.Height = DataGridViewFeature.Size.Height - sizeH;
                 size = !size;
                 presenterFeature.FillInputItem(row);
                 ButtonAdd.Enabled = false;
@@ -95,7 +95,7 @@ namespace HASPKey
         {
             if (!size)
             {
-                dgvFeature.Height = dgvFeature.Size.Height + sizeH;
+                DataGridViewFeature.Height = DataGridViewFeature.Size.Height + sizeH;
                 size = !size;
             }
             
@@ -105,14 +105,14 @@ namespace HASPKey
             ButtonAdd.Enabled = true;
         }
 
-        private void DgvFeature_CellClick(object sender, DataGridViewCellEventArgs e)=> FillDate();
-        private void DgvFeature_SelectionChanged(object sender, EventArgs e) => FillDate();
+        private void DataGridViewFeatureFeature_CellClick(object sender, DataGridViewCellEventArgs e)=> FillDate();
+        private void DataGridViewFeatureFeature_SelectionChanged(object sender, EventArgs e) => FillDate();
 
         private void FillDate()
         {
             if (!size)
             {
-                if (!(dgvFeature.CurrentRow.DataBoundItem is ModelViewFeature row))
+                if (!(DataGridViewFeature.CurrentRow.DataBoundItem is ModelViewFeature row))
                 {
                     MessageError(emptyFeature);
                     return;
@@ -129,7 +129,7 @@ namespace HASPKey
             }
         }
 
-        private void DgvFeature_KeyDown(object sender, KeyEventArgs e)
+        private void DataGridViewFeatureFeature_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
                 DeleteIrem();
@@ -137,7 +137,7 @@ namespace HASPKey
 
         private void DeleteIrem()
         {
-            if (!(dgvFeature.CurrentRow.DataBoundItem is ModelViewFeature row))
+            if (!(DataGridViewFeature.CurrentRow.DataBoundItem is ModelViewFeature row))
             {
                 MessageError(emptyFeature);
                 return;
@@ -153,6 +153,12 @@ namespace HASPKey
                 presenterFeature.Remove(row.Id);
                 DefaultView();
             }
+        }
+
+        private void DataGridViewFeature_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow row in DataGridViewFeature.Rows)
+                row.HeaderCell.Value = (row.Index + 1).ToString();
         }
     }
 }

@@ -27,10 +27,10 @@ namespace HASPKey
             InitializeComponent();
             this.search = search;
             presenterClient = new PresenterClient(this);
-            dgvClient.Height = dgvClient.Size.Height + sizeH;
+            DataGridViewClient.Height = DataGridViewClient.Size.Height + sizeH;
 
             if (this.search)
-                dgvClient.Height = dgvClient.Size.Height + 28;
+                DataGridViewClient.Height = DataGridViewClient.Size.Height + 28;
 
             labelFeature.Text = string.Empty;
         }
@@ -53,22 +53,22 @@ namespace HASPKey
             DefaultView();
             if (size)
             {
-                dgvClient.Height = dgvClient.Size.Height - sizeH;
+                DataGridViewClient.Height = DataGridViewClient.Size.Height - sizeH;
                 size = !size;
                 buttonAdd.Enabled = false;
             }            
         }
 
-        private void DgvClient_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DataGridViewClient_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (!(dgvClient.CurrentRow.DataBoundItem is ModelViewClient row))
+            if (!(DataGridViewClient.CurrentRow.DataBoundItem is ModelViewClient row))
             {
                 MessageError(emptyClient);
                 return;
             }
             if (this.search)
             {
-                this.SearchIdClient = dgvClient.CurrentRow.DataBoundItem as ModelViewClient;
+                this.SearchIdClient = row;
                 this.Close();
                 return;
             }
@@ -76,7 +76,7 @@ namespace HASPKey
             if (size)
             {
                 DefaultView();
-                dgvClient.Height = dgvClient.Size.Height - sizeH;
+                DataGridViewClient.Height = DataGridViewClient.Size.Height - sizeH;
                 size = !size;
                 presenterClient.FillInputItem(row);
                 buttonAdd.Enabled = false;
@@ -95,7 +95,7 @@ namespace HASPKey
         {
             if (!size)
             {
-                dgvClient.Height = dgvClient.Size.Height + sizeH;
+                DataGridViewClient.Height = DataGridViewClient.Size.Height + sizeH;
                 size = !size;
             }
 
@@ -144,13 +144,13 @@ namespace HASPKey
                 e.Handled = true;
             }
         }
-        private void DgvClient_CellClick(object sender, DataGridViewCellEventArgs e) => FillDate();
-        private void DgvClient_SelectionChanged(object sender, EventArgs e) => FillDate();
+        private void DataGridViewClient_CellClick(object sender, DataGridViewCellEventArgs e) => FillDate();
+        private void DataGridViewClient_SelectionChanged(object sender, EventArgs e) => FillDate();
         private void FillDate()
         {
             if (!size)
             {
-                if (!(dgvClient.CurrentRow.DataBoundItem is ModelViewClient row))
+                if (!(DataGridViewClient.CurrentRow.DataBoundItem is ModelViewClient row))
                 {
                     MessageError(emptyClient);
                     return;
@@ -159,14 +159,14 @@ namespace HASPKey
             }
         }
 
-        private void dgvClient_KeyDown(object sender, KeyEventArgs e)
+        private void DataGridViewClient_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
                 DeleteItem();
         }
         private void DeleteItem()
         {
-            if (!(dgvClient.CurrentRow.DataBoundItem is ModelViewClient row))
+            if (!(DataGridViewClient.CurrentRow.DataBoundItem is ModelViewClient row))
             {
                 MessageError(emptyClient);
                 return;
@@ -182,6 +182,12 @@ namespace HASPKey
                 presenterClient.Remove(row.Id);
                 DefaultView();
             }
+        }
+
+        private void DataGridViewClient_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow row in DataGridViewClient.Rows)
+                row.HeaderCell.Value = (row.Index + 1).ToString();
         }
     }
 }

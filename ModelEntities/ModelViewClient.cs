@@ -15,38 +15,36 @@ namespace ModelEntities
             Phone = client.Phone;
             ContactPerson = client.ContactPerson;
         }
-        public Client Client { get; private set; } = new Client();
-        [DisplayName("№ п/п")]
-        public int SerialNumber { get; set; }
+        public Client Client { get; private set; } = new Client();        
         [Browsable(false)]
         public int Id
         {
-            get { return Client.Id; }
-            set { Client.Id = value; }
+            get => Client.Id; 
+            set => Client.Id = value; 
         }
         [DisplayName("Наименование")]
         public string Name
         {
-            get { return Client.Name; }
-            set { Client.Name = value; }
+            get => Client.Name;
+            set => Client.Name = value;
         }
         [DisplayName("Адрес")]
         public string Address
         {
-            get { return Client.Address; }
-            set { Client.Address = value; }
+            get => Client.Address; 
+            set => Client.Address = value; 
         }
         [DisplayName("Телефон")]
         public string Phone
         {
-            get { return Client.Phone; }
-            set { Client.Phone = value; }
+            get => Client.Phone; 
+            set => Client.Phone = value;
         }
         [DisplayName("Контактное лицо")]
         public string ContactPerson
         {
-            get { return Client.ContactPerson; }
-            set { Client.ContactPerson = value; }
+            get => Client.ContactPerson;
+            set => Client.ContactPerson = value; 
         }
         public override bool Equals(object obj) => Client.Equals(obj);
         public override int GetHashCode() => Client.GetHashCode();

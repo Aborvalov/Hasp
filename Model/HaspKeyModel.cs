@@ -61,15 +61,8 @@ namespace Model
         private List<ModelViewHaspKey> Convert(List<HaspKey> haspKeys)
         {
             var viewHaspKeys = new List<ModelViewHaspKey>();
-            int i = 1;
             foreach (var key in haspKeys)
-            {
-                var keyModel = new ModelViewHaspKey(key)
-                {
-                    SerialNumber = i++
-                };
-                viewHaspKeys.Add(keyModel);
-            }
+                viewHaspKeys.Add(new ModelViewHaspKey(key));
 
             return viewHaspKeys;
         }

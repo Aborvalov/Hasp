@@ -47,16 +47,9 @@ namespace Model
         }
         private List<ModelViewFeature> Convert(List<Feature> Features)
         {
-            var viewFeatures = new List<ModelViewFeature>();
-            int i = 1;
+            var viewFeatures = new List<ModelViewFeature>(); ;
             foreach (var feat in Features)
-            {
-                var featModel = new ModelViewFeature(feat)
-                {
-                    SerialNumber = i++
-                };
-                viewFeatures.Add(featModel);
-            }
+                viewFeatures.Add(new ModelViewFeature(feat));
 
             return viewFeatures;
         }

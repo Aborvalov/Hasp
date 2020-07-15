@@ -16,9 +16,8 @@ namespace ModelEntities
             TypeKey = haspKey.TypeKey;
         }
         [Browsable(false)]
-        public HaspKey HaspKey { get; private set; } = new HaspKey();        
-        [DisplayName("№ п/п")]
-        public int SerialNumber { get; set; }
+        public HaspKey HaspKey { get; private set; } = new HaspKey();       
+        
         [Browsable(false)]
         public int Id
         {
@@ -31,20 +30,20 @@ namespace ModelEntities
         [DisplayName("Внутренний номер")]
         public int InnerId
         {
-            get { return HaspKey.InnerId; }
-            set { HaspKey.InnerId = value; }
+            get => HaspKey.InnerId; 
+            set => HaspKey.InnerId = value;
         }
         [DisplayName("Номер")]
         public string Number
         {
-            get { return HaspKey.Number; }
-            set { HaspKey.Number = value; }
+            get => HaspKey.Number; 
+            set => HaspKey.Number = value;
         }
         [DisplayName("Тип ключа")]
         public TypeKey TypeKey
         {
-            get { return HaspKey.TypeKey; }
-            set { HaspKey.TypeKey = value;}
+            get => HaspKey.TypeKey; 
+            set => HaspKey.TypeKey = value;
         }
         /// <summary>
         /// Местонахождение (у нас / клиент).
@@ -52,8 +51,8 @@ namespace ModelEntities
         [DisplayName("В компании")]
         public bool IsHome
         {
-            get { return HaspKey.IsHome; }
-            set {HaspKey.IsHome = value; }
+            get => HaspKey.IsHome; 
+            set => HaspKey.IsHome = value; 
         }
         public override int GetHashCode() => HaspKey.GetHashCode();
         public override bool Equals(object obj) => HaspKey.Equals(obj);

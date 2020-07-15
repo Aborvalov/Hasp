@@ -34,7 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FeatureView));
             this.bindingFeature = new System.Windows.Forms.BindingSource(this.components);
-            this.dgvFeature = new System.Windows.Forms.DataGridView();
+            this.DataGridViewFeature = new System.Windows.Forms.DataGridView();
             this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,7 +51,7 @@
             this.ButtonSave = new System.Windows.Forms.Button();
             this.Headline = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bindingFeature)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFeature)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewFeature)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingItem)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,21 +59,21 @@
             // 
             this.bindingFeature.DataSource = typeof(ModelEntities.ModelViewFeature);
             // 
-            // dgvFeature
+            // DataGridViewFeature
             // 
-            this.dgvFeature.AllowUserToAddRows = false;
-            this.dgvFeature.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.DataGridViewFeature.AllowUserToAddRows = false;
+            this.DataGridViewFeature.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvFeature.AutoGenerateColumns = false;
-            this.dgvFeature.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvFeature.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgvFeature.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFeature.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DataGridViewFeature.AutoGenerateColumns = false;
+            this.DataGridViewFeature.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DataGridViewFeature.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.DataGridViewFeature.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridViewFeature.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.numberDataGridViewTextBoxColumn,
             this.nameDataGridViewTextBoxColumn,
             this.descriptionDataGridViewTextBoxColumn});
-            this.dgvFeature.DataSource = this.bindingFeature;
+            this.DataGridViewFeature.DataSource = this.bindingFeature;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F);
@@ -81,17 +81,17 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvFeature.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvFeature.Location = new System.Drawing.Point(12, 25);
-            this.dgvFeature.Name = "dgvFeature";
-            this.dgvFeature.ReadOnly = true;
-            this.dgvFeature.RowHeadersVisible = false;
-            this.dgvFeature.Size = new System.Drawing.Size(500, 307);
-            this.dgvFeature.TabIndex = 0;
-            this.dgvFeature.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvFeature_CellClick);
-            this.dgvFeature.SelectionChanged += new System.EventHandler(this.DgvFeature_SelectionChanged);
-            this.dgvFeature.DoubleClick += new System.EventHandler(this.DgvFeature_DoubleClick);
-            this.dgvFeature.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgvFeature_KeyDown);
+            this.DataGridViewFeature.DefaultCellStyle = dataGridViewCellStyle1;
+            this.DataGridViewFeature.Location = new System.Drawing.Point(12, 25);
+            this.DataGridViewFeature.Name = "DataGridViewFeature";
+            this.DataGridViewFeature.ReadOnly = true;
+            this.DataGridViewFeature.Size = new System.Drawing.Size(500, 307);
+            this.DataGridViewFeature.TabIndex = 0;
+            this.DataGridViewFeature.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewFeatureFeature_CellClick);
+            this.DataGridViewFeature.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewFeature_DataBindingComplete);
+            this.DataGridViewFeature.SelectionChanged += new System.EventHandler(this.DataGridViewFeatureFeature_SelectionChanged);
+            this.DataGridViewFeature.DoubleClick += new System.EventHandler(this.DataGridViewFeatureFeature_DoubleClick);
+            this.DataGridViewFeature.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DataGridViewFeatureFeature_KeyDown);
             // 
             // numberDataGridViewTextBoxColumn
             // 
@@ -216,7 +216,7 @@
             // ButtonSave
             // 
             this.ButtonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ButtonSave.Location = new System.Drawing.Point(93, 378);
+            this.ButtonSave.Location = new System.Drawing.Point(93, 377);
             this.ButtonSave.Name = "ButtonSave";
             this.ButtonSave.Size = new System.Drawing.Size(75, 23);
             this.ButtonSave.TabIndex = 9;
@@ -228,7 +228,7 @@
             // 
             this.Headline.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.Headline.AutoSize = true;
-            this.Headline.Location = new System.Drawing.Point(187, 9);
+            this.Headline.Location = new System.Drawing.Point(12, 9);
             this.Headline.Name = "Headline";
             this.Headline.Size = new System.Drawing.Size(149, 13);
             this.Headline.TabIndex = 10;
@@ -240,7 +240,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(524, 405);
             this.Controls.Add(this.Headline);
-            this.Controls.Add(this.dgvFeature);
+            this.Controls.Add(this.DataGridViewFeature);
             this.Controls.Add(this.ButtonSave);
             this.Controls.Add(this.ButtonDelete);
             this.Controls.Add(this.ButtonAdd);
@@ -256,7 +256,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Функциональность";
             ((System.ComponentModel.ISupportInitialize)(this.bindingFeature)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFeature)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewFeature)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingItem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -266,7 +266,7 @@
         #endregion
 
         private System.Windows.Forms.BindingSource bindingFeature;
-        private System.Windows.Forms.DataGridView dgvFeature;
+        private System.Windows.Forms.DataGridView DataGridViewFeature;
         private System.Windows.Forms.DataGridViewTextBoxColumn serialNumberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;

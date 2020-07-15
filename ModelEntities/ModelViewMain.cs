@@ -8,8 +8,6 @@ namespace ModelEntities
     /// </summary>
     public class ModelViewMain
     {
-        [DisplayName("№ п/п")]
-        public int SerialNumber { get; set; }
         [DisplayName("Номер ключа")]
         public string NumberKey { get; set; }
         [DisplayName("Функциональность")]

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows.Forms;
 using View;
 
 namespace HASPKey
@@ -47,6 +48,12 @@ namespace HASPKey
             KeyFeatureView keyFeatureView = new KeyFeatureView();
             keyFeatureView.DataUpdated += presenter.Views;
             keyFeatureView.ShowDialog();
+        }
+
+        private void DataGridViewHomeView_DataBindingComplete(object sender, System.Windows.Forms.DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow row in DataGridViewHomeView.Rows)
+                row.HeaderCell.Value = (row.Index + 1).ToString();
         }
     }
 }

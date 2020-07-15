@@ -14,11 +14,14 @@ namespace HASPKey
     {
         public event Action DataUpdated;
         public string NumberHaspKey { get; set; }
-        private IPresenterKeyFeature presenterEntities;
-        
+        private readonly IPresenterKeyFeature presenterEntities;
+        private bool change = false;
+
+
         private const string error = "Ошибка";
         private const string errorString = "Неправильно заполнена дата, окончание действия меньше начала.";
         private const string emptyKey = "Данный ключ не найден.";
+        private const string emptyFeature = "Данная функциональность не найдена.";
         private const string caption = "Внести изменеия";
         private const string message = "Вы уверены, что хотите внести изменеия?";
         private const string headlineFeature = "Список действующих функциональностей у ключа - ";
@@ -43,55 +46,70 @@ namespace HASPKey
             => bindingHaspKey.DataSource = key != null ? new BindingList<ModelViewHaspKey>(key)
                                                        : new BindingList<ModelViewHaspKey>();
 
-        private void DgvHaspKey_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void  DataGridViewHaspKey_CellClick(object sender, DataGridViewCellEventArgs e)
             => FillFeatureAtKey();
 
-        private void DgvHaspKey_SelectionChanged(object sender, EventArgs e)
+        private void DataGridViewHaspKey_SelectionChanged(object sender, EventArgs e)
             => FillFeatureAtKey();
 
         private void FillFeatureAtKey()
         {
-            if (!(dgvHaspKey.CurrentRow.DataBoundItem is ModelViewHaspKey row))
+            if (!(DataGridViewHaspKey.CurrentRow.DataBoundItem is ModelViewHaspKey row))
             {
                 MessageError(emptyKey);
                 return;
-            }            
+            }
+            if (change)
+                Save();
             presenterEntities.DisplayFeatureAtKey(row.Id);
         }
         
-        private void ButtonSave_Click(object sender, EventArgs e)
+        private void ButtonSave_Click(object sender, EventArgs e) => Save();
+
+        private void Save()
         {
             var item = (bindingFeature.DataSource as BindingList<ModelViewKeyFeature>).ToList();
 
-            DefaultRow();
+            DefaultColorRow();
             if (presenterEntities.CheckInputData(item))
             {
                 if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     presenterEntities.Edit(item);
+                change = false;
             }
             else
                 MessageError(errorString);
         }
 
         public void ErrorRow(int numberRow)
-            =>dgvFeature.Rows[numberRow].DefaultCellStyle.BackColor = Color.Red;
+            =>DataGridViewFeature.Rows[numberRow].DefaultCellStyle.BackColor = Color.Red;
 
-        private void DefaultRow()
+        private void DefaultColorRow()
         {
-            for (int i = 0; i < dgvFeature.RowCount; i++)
-                DefaultRow(i);
+            for (int i = 0; i < DataGridViewFeature.RowCount; i++)
+                DefaultColorRow(i);
         }
-        public void DefaultRow(int numberRow)
-           => dgvFeature.Rows[numberRow].DefaultCellStyle.BackColor = Color.White;
+        public void DefaultColorRow(int numberRow)
+           => DataGridViewFeature.Rows[numberRow].DefaultCellStyle.BackColor = Color.White;
 
-        private void DgvFeature_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void DataGridViewFeature_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            DefaultRow(e.RowIndex);
-            var item = dgvFeature.CurrentRow.DataBoundItem as ModelViewKeyFeature;
-            presenterEntities.CheckInputData(item, e.RowIndex);
+            DefaultColorRow(e.RowIndex);
+            if (!(DataGridViewFeature.CurrentRow.DataBoundItem is ModelViewKeyFeature row))
+            {
+                MessageError(emptyFeature);
+                return;
+            }            
 
-            if (presenterEntities.CheckSelected(item))
-                dgvFeature[6, e.RowIndex].Value = true;
+            presenterEntities.CheckInputData(row, e.RowIndex);
+            if (presenterEntities.CheckSelected(row))
+                DataGridViewFeature[6, e.RowIndex].Value = true;
+            else
+                if(DataGridViewFeature[5, e.RowIndex].Value == null ||
+                   DataGridViewFeature[4, e.RowIndex].Value == null)
+                ErrorRow(e.RowIndex);
+
+            change = true;
         }
 
         private void EditKeyFeatureView_Load(object sender, EventArgs e)
@@ -105,18 +123,30 @@ namespace HASPKey
                     return;
 
                 if(presenterEntities.CheckKey(item))
-                    dgvHaspKey.Rows[i].DefaultCellStyle.BackColor = Color.Wheat;
+                    DataGridViewHaspKey.Rows[i].DefaultCellStyle.BackColor = Color.Wheat;
                 else
-                    dgvHaspKey.Rows[i].DefaultCellStyle.BackColor = Color.White;
+                    DataGridViewHaspKey.Rows[i].DefaultCellStyle.BackColor = Color.White;
             }
         }
 
-        private void DgvFeature_KeyDown(object sender, KeyEventArgs e)
+        private void DataGridViewFeature_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Delete)
-            {
-                dgvFeature.Rows[dgvFeature.CurrentCell.RowIndex].Cells[dgvFeature.CurrentCell.ColumnIndex].Value = null;
-            }
+                DataGridViewFeature.Rows[DataGridViewFeature.CurrentCell.RowIndex]
+                                   .Cells[DataGridViewFeature.CurrentCell.ColumnIndex]
+                                   .Value = null;
+        }
+
+        private void DataGridViewHaspKey_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow row in DataGridViewHaspKey.Rows)
+                row.HeaderCell.Value = (row.Index + 1).ToString();
+        }
+
+        private void DataGridViewFeature_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow row in DataGridViewFeature.Rows)
+                row.HeaderCell.Value = (row.Index + 1).ToString();
         }
     }
 }

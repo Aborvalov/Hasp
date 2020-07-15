@@ -43,53 +43,62 @@ namespace Presenter
             if (keyFeatModel == null)
                 throw new ArgumentNullException(nameof(keyFeatModel));
                        
-            string error = string.Empty;
-            var delete = keyFeatModel
-                        .Where(x => x.IdKeyFeaure != 0 && !x.Selected)
-                        .Select(item => item.IdKeyFeaure);
-
-            var add = keyFeatModel
-                     .Where(x => x.IdKeyFeaure == 0 && 
-                                 x.Selected &&
-                                 x.StartDate != null &&
-                                 x.EndDate != null)
-                     .ToList();
-
-            var update = keyFeatModel
-                        .Where(x => x.IdKeyFeaure != 0 && 
-                                    x.StartDate != null &&
-                                    x.EndDate != null &&
-                                    x.Selected)
-                        .ToList();
-                       
-            if (delete.Any())
-            {
-                featureModel.Remove(delete, out error);
-                if (error != string.Empty)
-                    entitiesView.MessageError(error);
-            }
-            
-            if (add.Any())
-            {
-                error = string.Empty;
-                featureModel.Add(add, out error);
-                if (error != string.Empty)
-                    entitiesView.MessageError(error);
-            }
-
-            if (update.Any())
-            {
-                error = string.Empty;
-                featureModel.Update(update, out error);
-                if (error != string.Empty)
-                    entitiesView.MessageError(error);
-            }
+            Delete(keyFeatModel);
+            Add(keyFeatModel);
+            Update(keyFeatModel);
 
             DisplayFeatureAtKey(keyFeatModel[0].IdKey);
             keyFeatures = featureModel.GetAllKeyFeature();
             entitiesView.EmptyFeatureAsKey();
             entitiesView.DataChange();
         }
+
+        private void Update(List<ModelViewKeyFeature> keyFeatModel)
+        {
+            var update = keyFeatModel
+                                    .Where(x => x.IdKeyFeature != 0 &&
+                                                x.StartDate != null &&
+                                                x.EndDate != null &&
+                                                x.Selected)
+                                    .ToList();
+            if (update.Any())
+            {
+                featureModel.Update(update, out string error);
+                if (error != string.Empty)
+                    entitiesView.MessageError(error);
+            }
+        }
+
+        private void Add(List<ModelViewKeyFeature> keyFeatModel)
+        {
+            var add = keyFeatModel
+                    .Where(x => x.IdKeyFeature == 0 &&
+                                x.Selected &&
+                                x.StartDate != null &&
+                                x.EndDate != null)
+                    .ToList();
+            if (add.Any())
+            {
+                featureModel.Add(add, out string error);
+                if (error != string.Empty)
+                    entitiesView.MessageError(error);
+            }
+        }
+
+        private void Delete(List<ModelViewKeyFeature> keyFeatModel)
+        {
+            var delete = keyFeatModel
+                                    .Where(x => x.IdKeyFeature != 0 && !x.Selected)
+                                    .Select(item => item.IdKeyFeature);
+
+            if (delete.Any())
+            {
+                featureModel.Remove(delete, out string error);
+                if (error != string.Empty)
+                    entitiesView.MessageError(error);
+            }
+        }
+
         public bool CheckInputData(List<ModelViewKeyFeature> item)
         {
             if (item == null)
@@ -113,7 +122,7 @@ namespace Presenter
             if (item.StartDate != null &&
                 item.EndDate != null &&
                 item.StartDate.Value.Date > item.EndDate.Value.Date &&
-                (item.Selected || item.IdKeyFeaure == 0))
+                (item.Selected || item.IdKeyFeature == 0))
             {
                 entitiesView.ErrorRow(numverRow);
                 return false;
@@ -136,7 +145,7 @@ namespace Presenter
             if (item == null)
                 throw new ArgumentNullException(nameof(item));
 
-            return item.IdKeyFeaure == 0 &&
+            return item.IdKeyFeature == 0 &&
                    item.StartDate != null &&
                    item.EndDate != null &&
                    item.StartDate.Value.Date < item.EndDate.Value.Date;

@@ -16,8 +16,6 @@ namespace ModelEntities
             Note = keyFeatureClient.Note;
         }
         public KeyFeatureClient KeyFeatureClient { get; private set; }
-        [DisplayName("№ п/п")]
-        public int SerialNumber { get; set; }
         [DisplayName("Номер ключа")]
         public string NumberKey { get; set; }
         [DisplayName("Функциональность")]
@@ -27,32 +25,32 @@ namespace ModelEntities
         [Browsable(false)]
         public int Id           
         {
-            get { return KeyFeatureClient.Id; }
-            set { KeyFeatureClient.Id = value; }
+            get => KeyFeatureClient.Id; 
+            set => KeyFeatureClient.Id = value;
         }
         [Browsable(false)]
         public int IdKeyFeature
         {
-            get { return KeyFeatureClient.IdKeyFeature; }
-            set { KeyFeatureClient.IdKeyFeature = value; }
+            get => KeyFeatureClient.IdKeyFeature; 
+            set => KeyFeatureClient.IdKeyFeature = value;
         }
         [Browsable(false)]
         public int IdClient
         {
-            get { return KeyFeatureClient.IdClient; }
-            set { KeyFeatureClient.IdClient = value; }
+            get => KeyFeatureClient.IdClient; 
+            set => KeyFeatureClient.IdClient = value;
         }
         [DisplayName("Прочие")]
         public string Note
         {
-            get { return KeyFeatureClient.Note; }
-            set { KeyFeatureClient.Note = value; }
+            get => KeyFeatureClient.Note; 
+            set => KeyFeatureClient.Note = value;
         }
         [DisplayName("Инициатор")]
         public string Initiator
         {
-            get { return KeyFeatureClient.Initiator; }
-            set { KeyFeatureClient .Initiator = value; }
+            get => KeyFeatureClient.Initiator; 
+            set => KeyFeatureClient.Initiator = value;
         }
 
         public override int GetHashCode() => KeyFeatureClient.GetHashCode();

@@ -28,7 +28,7 @@ namespace HASPKey
         {
             InitializeComponent();
             presenterHaspKey = new PresenterHaspKey(this);
-            dgvHaspKey.Height = dgvHaspKey.Size.Height + sizeH;
+            DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + sizeH;
             
             comboBoxTypeKey.DataSource = Enum.GetValues(typeof(TypeKey));
             comboBoxTypeKey.SelectedIndex = -1;
@@ -37,7 +37,7 @@ namespace HASPKey
         public HaspKeyView(bool search) : this()
         {
             this.search = search;
-            dgvHaspKey.Height = dgvHaspKey.Size.Height + 28;
+            DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
         }
 
         public void Bind(List<ModelViewHaspKey> entity) 
@@ -51,16 +51,19 @@ namespace HASPKey
 
         private void RadioButtonAll_CheckedChanged(object sender, EventArgs e)
         {
+            DefaultView();
             presenterHaspKey.Display();
             labelClient.Text = string.Empty;
         }
         private void RadioButtonPastDue_CheckedChanged(object sender, EventArgs e)
         {
+            DefaultView();
             presenterHaspKey.GetByPastDue();
             labelClient.Text = string.Empty;
         }
         private void RadioButtonActive_CheckedChanged(object sender, EventArgs e)
         {
+            DefaultView();
             presenterHaspKey.GetByActive();
             labelClient.Text = string.Empty;
         }
@@ -69,7 +72,7 @@ namespace HASPKey
             DefaultView();
             if (size)
             {
-                dgvHaspKey.Height = dgvHaspKey.Size.Height - sizeH;
+                DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height - sizeH;
                 size = !size;               
                 buttonAdd.Enabled = false;
             }            
@@ -86,9 +89,9 @@ namespace HASPKey
             DefaultView();            
         }
 
-        private void DgvHaspKey_DoubleClick(object sender, EventArgs e)
+        private void DataGridViewHaspKey_DoubleClick(object sender, EventArgs e)
         {
-            if (!(dgvHaspKey.CurrentRow.DataBoundItem is ModelViewHaspKey row))
+            if (!(DataGridViewHaspKey.CurrentRow.DataBoundItem is ModelViewHaspKey row))
             {
                 MessageError(emptyHaspKey);
                 return;
@@ -102,7 +105,7 @@ namespace HASPKey
             if (size)
             {
                 DefaultView();
-                dgvHaspKey.Height = dgvHaspKey.Size.Height - sizeH;
+                DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height - sizeH;
                 size = !size;
                 presenterHaspKey.FillInputItem(row);
                 buttonAdd.Enabled = false;
@@ -113,7 +116,7 @@ namespace HASPKey
         {
             if (!size)
             {
-                dgvHaspKey.Height = dgvHaspKey.Size.Height + sizeH;
+                DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + sizeH;
                 size = !size;
             }
 
@@ -148,15 +151,15 @@ namespace HASPKey
             }
         }
 
-        private void DgvHaspKey_CellClick(object sender, DataGridViewCellEventArgs e) => FillDate();
+        private void DataGridViewHaspKey_CellClick(object sender, DataGridViewCellEventArgs e) => FillDate();
 
-        private void DgvHaspKey_SelectionChanged(object sender, EventArgs e) => FillDate();
+        private void DataGridViewHaspKey_SelectionChanged(object sender, EventArgs e) => FillDate();
 
         private void FillDate()
         {
             if (!size)
             {
-                if (!(dgvHaspKey.CurrentRow.DataBoundItem is ModelViewHaspKey row))
+                if (!(DataGridViewHaspKey.CurrentRow.DataBoundItem is ModelViewHaspKey row))
                 {
                     MessageError(emptyHaspKey);
                     return;
@@ -172,14 +175,14 @@ namespace HASPKey
             }
         }
 
-        private void dgvHaspKey_KeyDown(object sender, KeyEventArgs e)
+        private void DataGridViewHaspKey_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
                 DeleteItem();
         }
         private void DeleteItem()
         {
-            if (!(dgvHaspKey.CurrentRow.DataBoundItem is ModelViewHaspKey row))
+            if (!(DataGridViewHaspKey.CurrentRow.DataBoundItem is ModelViewHaspKey row))
             {
                 MessageError(emptyHaspKey);
                 return;
@@ -196,6 +199,12 @@ namespace HASPKey
                 presenterHaspKey.Remove(row.Id);
                 DefaultView();
             }
+        }
+
+        private void DataGridViewHaspKey_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow row in DataGridViewHaspKey.Rows)
+                row.HeaderCell.Value = (row.Index + 1).ToString();
         }
     }
 }

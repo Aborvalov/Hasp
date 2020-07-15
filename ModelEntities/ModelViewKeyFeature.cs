@@ -16,37 +16,35 @@ namespace ModelEntities
             Description = feature.Description;
         }
         [Browsable(false)]
-        public Feature Feature { get; private set; } = new Feature();
-        [DisplayName("№ п/п")]
-        public int SerialNumber { get; set; }
+        public Feature Feature { get; private set; } = new Feature(); 
         [Browsable(false)]
         public int IdFeature
         {
-            get { return Feature.Id; }
-            set { Feature.Id = value; }
+            get => Feature.Id; 
+            set => Feature.Id = value;
         }
         [DisplayName("Номер")]
         public int Number
         {
-            get { return Feature.Number; }
-            set { Feature.Number = value; }
+            get => Feature.Number; 
+            set => Feature.Number = value;
         }
         [DisplayName("Наименование")]
         public string Name
         {
-            get { return Feature.Name; }
-            set { Feature.Name = value; }
+            get => Feature.Name; 
+            set => Feature.Name = value;
         }
         [DisplayName("Описание")]
         public string Description
         {
-            get { return Feature.Description; }
-            set { Feature.Description = value; }
+            get => Feature.Description; 
+            set => Feature.Description = value;
         }
         [Browsable(false)]
         public int IdKey { get; set; }
         [Browsable(false)]
-        public int IdKeyFeaure { get; set; }
+        public int IdKeyFeature { get; set; }
 
         [DisplayName("Начало действие")]
         public DateTime? StartDate { get; set; }

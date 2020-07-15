@@ -33,8 +33,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientView));
-            this.dgvClient = new System.Windows.Forms.DataGridView();
-            this.serialNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DataGridViewClient = new System.Windows.Forms.DataGridView();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phoneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,28 +57,32 @@
             this.labelSearchInnerId = new System.Windows.Forms.Label();
             this.tbInnerIdHaspKey = new System.Windows.Forms.TextBox();
             this.Headline = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingItem)).BeginInit();
             this.SuspendLayout();
             // 
-            // dgvClient
+            // DataGridViewClient
             // 
-            this.dgvClient.AllowUserToAddRows = false;
-            this.dgvClient.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.DataGridViewClient.AllowUserToAddRows = false;
+            this.DataGridViewClient.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvClient.AutoGenerateColumns = false;
-            this.dgvClient.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvClient.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgvClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClient.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.serialNumberDataGridViewTextBoxColumn,
+            this.DataGridViewClient.AutoGenerateColumns = false;
+            this.DataGridViewClient.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DataGridViewClient.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.DataGridViewClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridViewClient.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nameDataGridViewTextBoxColumn,
             this.addressDataGridViewTextBoxColumn,
             this.phoneDataGridViewTextBoxColumn,
             this.contactPersonDataGridViewTextBoxColumn});
-            this.dgvClient.DataSource = this.bindingClient;
+            this.DataGridViewClient.DataSource = this.bindingClient;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F);
@@ -87,26 +90,17 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvClient.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvClient.Location = new System.Drawing.Point(12, 58);
-            this.dgvClient.Name = "dgvClient";
-            this.dgvClient.ReadOnly = true;
-            this.dgvClient.RowHeadersVisible = false;
-            this.dgvClient.Size = new System.Drawing.Size(582, 446);
-            this.dgvClient.TabIndex = 0;
-            this.dgvClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvClient_CellClick);
-            this.dgvClient.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvClient_CellDoubleClick);
-            this.dgvClient.SelectionChanged += new System.EventHandler(this.DgvClient_SelectionChanged);
-            this.dgvClient.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvClient_KeyDown);
-            // 
-            // serialNumberDataGridViewTextBoxColumn
-            // 
-            this.serialNumberDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.serialNumberDataGridViewTextBoxColumn.DataPropertyName = "SerialNumber";
-            this.serialNumberDataGridViewTextBoxColumn.HeaderText = "№ п/п";
-            this.serialNumberDataGridViewTextBoxColumn.Name = "serialNumberDataGridViewTextBoxColumn";
-            this.serialNumberDataGridViewTextBoxColumn.ReadOnly = true;
-            this.serialNumberDataGridViewTextBoxColumn.Width = 65;
+            this.DataGridViewClient.DefaultCellStyle = dataGridViewCellStyle1;
+            this.DataGridViewClient.Location = new System.Drawing.Point(12, 58);
+            this.DataGridViewClient.Name = "DataGridViewClient";
+            this.DataGridViewClient.ReadOnly = true;
+            this.DataGridViewClient.Size = new System.Drawing.Size(582, 446);
+            this.DataGridViewClient.TabIndex = 0;
+            this.DataGridViewClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewClient_CellClick);
+            this.DataGridViewClient.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewClient_CellDoubleClick);
+            this.DataGridViewClient.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewClient_DataBindingComplete);
+            this.DataGridViewClient.SelectionChanged += new System.EventHandler(this.DataGridViewClient_SelectionChanged);
+            this.DataGridViewClient.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DataGridViewClient_KeyDown);
             // 
             // nameDataGridViewTextBoxColumn
             // 
@@ -223,7 +217,7 @@
             // buttonAdd
             // 
             this.buttonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonAdd.Location = new System.Drawing.Point(12, 550);
+            this.buttonAdd.Location = new System.Drawing.Point(13, 550);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 9;
@@ -234,7 +228,7 @@
             // buttonDelete
             // 
             this.buttonDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDelete.Location = new System.Drawing.Point(518, 550);
+            this.buttonDelete.Location = new System.Drawing.Point(519, 550);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonDelete.TabIndex = 10;
@@ -307,11 +301,52 @@
             // 
             this.Headline.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.Headline.AutoSize = true;
-            this.Headline.Location = new System.Drawing.Point(256, 43);
+            this.Headline.Location = new System.Drawing.Point(15, 42);
             this.Headline.Name = "Headline";
             this.Headline.Size = new System.Drawing.Size(94, 13);
             this.Headline.TabIndex = 17;
             this.Headline.Text = "Список клиентов";
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "SerialNumber";
+            this.dataGridViewTextBoxColumn1.HeaderText = "№ п/п";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 65;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Наименование";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 119;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Address";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Адрес";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 118;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Phone";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Телефон";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 119;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "ContactPerson";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Контактное лицо";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 118;
             // 
             // ClientView
             // 
@@ -323,7 +358,7 @@
             this.Controls.Add(this.labelSearchInnerId);
             this.Controls.Add(this.buttonAll);
             this.Controls.Add(this.buttonSearchByFeature);
-            this.Controls.Add(this.dgvClient);
+            this.Controls.Add(this.DataGridViewClient);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonAdd);
@@ -341,7 +376,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Клиетны";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewClient)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingClient)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingItem)).EndInit();
             this.ResumeLayout(false);
@@ -351,13 +386,8 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvClient;
+        private System.Windows.Forms.DataGridView DataGridViewClient;
         private System.Windows.Forms.BindingSource bindingClient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn serialNumberDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn addressDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn phoneDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn contactPersonDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.Label labelAddress;
         private System.Windows.Forms.Label labelPhone;
@@ -376,5 +406,14 @@
         private System.Windows.Forms.TextBox tbInnerIdHaspKey;
         private System.Windows.Forms.Label Headline;
         private System.Windows.Forms.BindingSource bindingItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn addressDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn phoneDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn contactPersonDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
     }
 }

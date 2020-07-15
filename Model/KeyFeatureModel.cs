@@ -11,8 +11,8 @@ namespace Model
     public class KeyFeatureModel : IKeyFeatureModel
     {
         private readonly EntitesContext db;
-        private IFeatureLogic featLogic;
-        private IKeyFeatureLogic keyFeatureLogic;
+        private readonly IFeatureLogic featLogic;
+        private readonly IKeyFeatureLogic keyFeatureLogic;
         private readonly IFactoryLogic factoryLogic;
         private ModelViewKeyFeature model;
         private readonly DateTime date = DateTime.Now.Date;
@@ -59,15 +59,8 @@ namespace Model
         public List<ModelViewKeyFeature> GetAll()
         {
             var viewFeature = new List<ModelViewKeyFeature>();
-            int i = 1;
             foreach (var item in featLogic.GetAll())
-            {
-                var model = new ModelViewKeyFeature(item)
-                {
-                    SerialNumber = i++,
-                };
-                viewFeature.Add(model);
-            }
+                viewFeature.Add(new ModelViewKeyFeature(item));
             return viewFeature;
         }
 
@@ -77,12 +70,10 @@ namespace Model
                               .Where(x => x.IdHaspKey == idKey);
 
             var viewFeature = new List<ModelViewKeyFeature>();
-            int i = 1;
             foreach (var item in featLogic.GetAll())
             {
                 model = new ModelViewKeyFeature(item)
                 {
-                    SerialNumber = i++,
                     IdKey = idKey,
                 };
 
@@ -95,7 +86,7 @@ namespace Model
                     model.Selected = true;
                     model.StartDate = itemKeyFeature.StartDate;
                     model.EndDate = itemKeyFeature.EndDate;
-                    model.IdKeyFeaure = itemKeyFeature.Id;                 
+                    model.IdKeyFeature = itemKeyFeature.Id;                 
                 }                
 
                 viewFeature.Add(model);
@@ -127,16 +118,15 @@ namespace Model
             foreach (var item in keyFeat)
             {
                 if (all
-                    .Where(x => x.IdKeyFeaure == item.IdKeyFeaure &&
+                    .Any(x => x.IdKeyFeature == item.IdKeyFeature &&
                                    x.Selected == item.Selected &&
                                    x.EndDate == item.EndDate &&
-                                   x.StartDate == item.StartDate)
-                    .Any())
+                                   x.StartDate == item.StartDate))
                     break;
                 
                 var keyFeature = new KeyFeature()
                 {
-                    Id = item.IdKeyFeaure,
+                    Id = item.IdKeyFeature,
                     IdFeature = item.IdFeature,
                     IdHaspKey = item.IdKey,
                     StartDate = (DateTime)item.StartDate,

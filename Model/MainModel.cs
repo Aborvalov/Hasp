@@ -26,7 +26,6 @@ namespace Model
             List<Client> clients;
             List<Feature> features;
             List<HaspKey> haspKeys;
-            int i = 1;
             
             keyFeatureClients = logic.CreateKeyFeatureClient(db).GetAll();
             keyFeatures       = logic.CreateKeyFeature(db).GetAll();
@@ -45,8 +44,7 @@ namespace Model
                             on keyFeat.IdHaspKey equals key.Id
                        where keyFeat.EndDate >= date
                        select new ModelViewMain
-                       {
-                           SerialNumber = i++,                           
+                       {                     
                            Client       = cl.Name + (cl.Address == string.Empty || cl.Address == null 
                                                     ? string.Empty : " - " + cl.Address) ,                          
                            EndDate      = keyFeat.EndDate,

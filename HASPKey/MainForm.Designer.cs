@@ -42,8 +42,7 @@
             this.ClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.KeyFeatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReferenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.HomeView = new System.Windows.Forms.DataGridView();
-            this.serialNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DataGridViewHomeView = new System.Windows.Forms.DataGridView();
             this.numberKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.featureDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clientDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,7 +50,7 @@
             this.bindingHome = new System.Windows.Forms.BindingSource(this.components);
             this.Headline = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.HomeView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewHomeView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHome)).BeginInit();
             this.SuspendLayout();
             // 
@@ -127,23 +126,22 @@
             this.ReferenceToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.ReferenceToolStripMenuItem.Text = "Справка";
             // 
-            // HomeView
+            // DataGridViewHomeView
             // 
-            this.HomeView.AllowUserToAddRows = false;
-            this.HomeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.DataGridViewHomeView.AllowUserToAddRows = false;
+            this.DataGridViewHomeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.HomeView.AutoGenerateColumns = false;
-            this.HomeView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.HomeView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.HomeView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.HomeView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.serialNumberDataGridViewTextBoxColumn,
+            this.DataGridViewHomeView.AutoGenerateColumns = false;
+            this.DataGridViewHomeView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DataGridViewHomeView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.DataGridViewHomeView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridViewHomeView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.numberKeyDataGridViewTextBoxColumn,
             this.featureDataGridViewTextBoxColumn,
             this.clientDataGridViewTextBoxColumn,
             this.endDateDataGridViewTextBoxColumn});
-            this.HomeView.DataSource = this.bindingHome;
+            this.DataGridViewHomeView.DataSource = this.bindingHome;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F);
@@ -151,24 +149,13 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.HomeView.DefaultCellStyle = dataGridViewCellStyle1;
-            this.HomeView.Location = new System.Drawing.Point(12, 46);
-            this.HomeView.Name = "HomeView";
-            this.HomeView.ReadOnly = true;
-            this.HomeView.RowHeadersVisible = false;
-            this.HomeView.Size = new System.Drawing.Size(594, 337);
-            this.HomeView.TabIndex = 3;
-            // 
-            // serialNumberDataGridViewTextBoxColumn
-            // 
-            this.serialNumberDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.serialNumberDataGridViewTextBoxColumn.DataPropertyName = "SerialNumber";
-            this.serialNumberDataGridViewTextBoxColumn.FillWeight = 50F;
-            this.serialNumberDataGridViewTextBoxColumn.HeaderText = "№ п/п";
-            this.serialNumberDataGridViewTextBoxColumn.MaxInputLength = 50;
-            this.serialNumberDataGridViewTextBoxColumn.Name = "serialNumberDataGridViewTextBoxColumn";
-            this.serialNumberDataGridViewTextBoxColumn.ReadOnly = true;
-            this.serialNumberDataGridViewTextBoxColumn.Width = 65;
+            this.DataGridViewHomeView.DefaultCellStyle = dataGridViewCellStyle1;
+            this.DataGridViewHomeView.Location = new System.Drawing.Point(12, 46);
+            this.DataGridViewHomeView.Name = "DataGridViewHomeView";
+            this.DataGridViewHomeView.ReadOnly = true;
+            this.DataGridViewHomeView.Size = new System.Drawing.Size(594, 337);
+            this.DataGridViewHomeView.TabIndex = 3;
+            this.DataGridViewHomeView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewHomeView_DataBindingComplete);
             // 
             // numberKeyDataGridViewTextBoxColumn
             // 
@@ -208,7 +195,7 @@
             // 
             this.Headline.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.Headline.AutoSize = true;
-            this.Headline.Location = new System.Drawing.Point(235, 30);
+            this.Headline.Location = new System.Drawing.Point(12, 30);
             this.Headline.Name = "Headline";
             this.Headline.Size = new System.Drawing.Size(146, 13);
             this.Headline.TabIndex = 4;
@@ -222,7 +209,7 @@
             this.ClientSize = new System.Drawing.Size(617, 395);
             this.Controls.Add(this.Headline);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.HomeView);
+            this.Controls.Add(this.DataGridViewHomeView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
@@ -231,7 +218,7 @@
             this.Text = "HASP-ключи";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.HomeView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewHomeView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHome)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -244,10 +231,9 @@
         private System.Windows.Forms.ToolStripMenuItem ExitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EditToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ReferenceToolStripMenuItem;
-        private System.Windows.Forms.DataGridView HomeView;
+        private System.Windows.Forms.DataGridView DataGridViewHomeView;
         private System.Windows.Forms.BindingSource bindingHome;
         private System.Windows.Forms.ToolStripMenuItem KeyToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn serialNumberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberKeyDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn featureDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn clientDataGridViewTextBoxColumn;
