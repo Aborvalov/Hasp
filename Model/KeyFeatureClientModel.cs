@@ -79,6 +79,7 @@ namespace Model
                          {
                              Id = keyFeatCl.Id,
                              IdClient = idClient,
+                             IdKeyFeature = keyFeat.Id,
                              Initiator = keyFeatCl.Initiator,
                              Feature = feature.Name,
                              Note = keyFeatCl.Note,
@@ -90,16 +91,41 @@ namespace Model
 
                 keyFeatureClient.AddRange(kf);
             }
+
+
             // Список доступных ключей.
+            var listIdKeyFeatAtClient = keyFeatureClientLogic.GetAll()
+                                                    .Select(x => x.IdKeyFeature)
+                                                    .Distinct();
 
+            var listKeyFeatureNoyClient = new List<KeyFeature>();
 
+            foreach (var keyFet in keyFeatureLogic.GetAll().Where(x => x.EndDate >= date))
+                if (listIdKeyFeatAtClient.Any(x => x != keyFet.Id))
+                    listKeyFeatureNoyClient.Add(keyFet);
 
+                        
+            
+           
+            List<Feature> features = featureLogic.GetAll();
+            List<HaspKey> haspKeys = haspKeyLogic.GetAll();
 
+            var item_ = 
+                       from keyFeat in listKeyFeatureNoyClient  
+                       join feature in features
+                            on keyFeat.IdFeature equals feature.Id
+                       join key in haspKeys
+                            on keyFeat.IdHaspKey equals key.Id
+                       where keyFeat.EndDate >= date
+                       select new ModelViewKeyFeatureClient
+                       {
+                           IdKeyFeature = keyFeat.Id,  
+                           EndDate = keyFeat.EndDate,
+                           Feature = feature.Name,
+                           NumberKey = key.InnerId.ToString() + " - \"" + key.Number + "\"",
+                       };
 
-
-
-                
-
+            keyFeatureClient.AddRange(item_.ToList());
 
 
 
