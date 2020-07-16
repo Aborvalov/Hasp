@@ -15,6 +15,6 @@ namespace View
         void BindClient(List<ModelViewClient> client);
         void BindKey(List<ModelViewKeyFeatureClient> keyClient);
         string NameClient { get; set; }
-
+        void ErrorRow(int numberRow);
     }
 }

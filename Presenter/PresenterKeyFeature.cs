@@ -109,7 +109,6 @@ namespace Presenter
                 error &= CheckInputData(i, numverRow);
                 numverRow++;
             }
-
             return error;
         }
         public bool CheckInputData(ModelViewKeyFeature item, int numverRow)
@@ -125,7 +124,6 @@ namespace Presenter
                 entitiesView.ErrorRow(numverRow);
                 return false;
             }
-
             return true;
         }
         public bool CheckKey(ModelViewHaspKey item)

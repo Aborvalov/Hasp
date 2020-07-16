@@ -82,7 +82,10 @@ namespace HASPKey
         }
 
         public void ErrorRow(int numberRow)
-            =>DataGridViewFeature.Rows[numberRow].DefaultCellStyle.BackColor = Color.Red;
+            =>DataGridViewFeature
+                .Rows[numberRow]
+                .DefaultCellStyle
+                .BackColor = Color.Red;
 
         private void DefaultColorRow()
         {

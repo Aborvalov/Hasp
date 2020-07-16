@@ -1,14 +1,11 @@
-﻿using System;
+﻿using ModelEntities;
+using Presenter;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ModelEntities;
-using Presenter;
 using View;
 
 namespace HASPKey
@@ -21,6 +18,10 @@ namespace HASPKey
 
         private const string error = "Ошибка";
         private const string emptyClient = "Данный клиент не найден.";
+        private const string caption = "Внести изменеия";
+        private const string message = "Вы уверены, что хотите внести изменеия?";
+        private const string errorString = "Не заполнено поле \"Инициатор\".";
+        private const string emptyKeyFeature = "Данный ключ не найден.";
 
         public string NameClient { get ; set; }
 
@@ -66,9 +67,56 @@ namespace HASPKey
                 MessageError(emptyClient);
                 return;
             }
-            //if (change)
-            //    Save();
+            if (change)
+                Save();
             presenterEntities.DisplayHaspKeyAtClient(row.Id);
+        }
+
+        private void ButtonSave_Click(object sender, EventArgs e)
+            => Save();
+
+        private void Save()
+        {
+            var item = (bindingKeyFeatureClient.DataSource as BindingList<ModelViewKeyFeatureClient>).ToList();
+
+            DefaultColorRow();
+            if (presenterEntities.CheckInputData(item))
+            {
+                if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    presenterEntities.Edit(item);
+
+                change = false;
+            }
+            else
+                MessageError(errorString);
+        }
+        public void ErrorRow(int numberRow)
+            => DataGridViewKeyFeature
+                .Rows[numberRow]
+                .DefaultCellStyle
+                .BackColor = Color.Red;
+        private void DefaultColorRow()
+        {
+            for (int i = 0; i < DataGridViewKeyFeature.RowCount; i++)
+                DefaultColorRow(i);
+        }
+        public void DefaultColorRow(int numberRow)
+           => DataGridViewKeyFeature
+                .Rows[numberRow]
+                .DefaultCellStyle
+                .BackColor = Color.White;
+
+        private void DataGridViewKeyFeature_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            DefaultColorRow(e.RowIndex);
+            if (!(DataGridViewKeyFeature.CurrentRow.DataBoundItem is ModelViewKeyFeatureClient row))
+            {
+                MessageError(emptyKeyFeature);
+                return;
+            }
+                        
+            if (presenterEntities.CheckInputData(row, e.RowIndex))
+                change = true;
         }
     }
 }

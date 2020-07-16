@@ -1,9 +1,6 @@
 ﻿using ModelEntities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Presenter
 {
@@ -12,5 +9,7 @@ namespace Presenter
         void DisplayClient();
         void DisplayHaspKeyAtClient(int idClient);
         void Edit(List<ModelViewKeyFeatureClient> keyClient);
+        bool CheckInputData(List<ModelViewKeyFeatureClient> item);
+        bool CheckInputData(ModelViewKeyFeatureClient item, int numverRow);
     }
 }

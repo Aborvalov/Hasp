@@ -54,7 +54,7 @@ namespace Model
         {
             var keyFeatureClient = new List<ModelViewKeyFeatureClient>();
             ListKeyAtClient(idClient, keyFeatureClient);
-            ListKeyFeatureAvailableClient(keyFeatureClient);
+            ListKeyFeatureAvailableClient(keyFeatureClient, idClient);
 
             return keyFeatureClient
                         .OrderBy(x => x.NumberKey)
@@ -104,7 +104,7 @@ namespace Model
                 keyFeatureClient.AddRange(kyeFeature);
             }
         }
-        private void ListKeyFeatureAvailableClient(List<ModelViewKeyFeatureClient> keyFeatureClient)
+        private void ListKeyFeatureAvailableClient(List<ModelViewKeyFeatureClient> keyFeatureClient, int idClient)
         {
             if (keyFeatureClient == null)
                 throw new ArgumentNullException(nameof(keyFeatureClient));
@@ -148,6 +148,7 @@ namespace Model
                            EndDate = keyFeat.EndDate,
                            Feature = feature.Name,
                            NumberKey = key.InnerId.ToString() + " - \"" + key.Number + "\"",
+                           IdClient = idClient,
                        };
 
             keyFeatureClient.AddRange(item_);

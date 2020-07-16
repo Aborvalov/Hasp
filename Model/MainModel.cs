@@ -52,7 +52,9 @@ namespace Model
                            NumberKey    = key.InnerId.ToString() + " - \"" + key.Number + "\"",
                        };            
 
-            return item.ToList();
+            return item
+                    .OrderBy(x => x.Client)
+                    .ToList();
         }       
     }
 }

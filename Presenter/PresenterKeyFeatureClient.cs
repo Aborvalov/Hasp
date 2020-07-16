@@ -52,10 +52,11 @@ namespace Presenter
                             .Where(x => x.Id != 0 &&
                                         x.IdClient != 0 &&
                                         x.IdKeyFeature != 0 &&
+                                        !string.IsNullOrEmpty(x.Initiator) &&
                                         x.Selected);
             if (update.Any())
             {
-                keyFeatureClientModel.Add(update, out string error);
+                keyFeatureClientModel.Update(update, out string error);
                 if (!string.IsNullOrEmpty(error))
                     entitiesView.MessageError(error);
             }
@@ -67,6 +68,7 @@ namespace Presenter
                         .Where(x => x.Id == 0 &&
                                     x.IdClient != 0 &&
                                     x.IdKeyFeature != 0 &&
+                                    !string.IsNullOrEmpty(x.Initiator) &&
                                     x.Selected);
             if (add.Any())
             {
@@ -87,6 +89,34 @@ namespace Presenter
                 if (!string.IsNullOrEmpty(error))
                     entitiesView.MessageError(error);
             }
+        }
+
+        public bool CheckInputData(List<ModelViewKeyFeatureClient> item)
+        {
+            if (item == null)
+                throw new ArgumentNullException(nameof(item));
+
+            int numverRow = 0;
+            bool error = true;
+            foreach (var i in item)
+            {
+                error &= CheckInputData(i, numverRow);
+                numverRow++;
+            }
+            return error;
+        }
+        public bool CheckInputData(ModelViewKeyFeatureClient item, int numverRow)
+        {
+            if (item == null)
+                throw new ArgumentNullException(nameof(item));
+
+            if (string.IsNullOrEmpty(item.Initiator) &&
+                item.Selected)
+            {
+                entitiesView.ErrorRow(numverRow);
+                return false;
+            }
+            return true;
         }
     }
 }

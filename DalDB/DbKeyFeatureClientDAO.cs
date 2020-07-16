@@ -63,7 +63,7 @@ namespace DalDB
             if (keyFeatureClient == null)
                 return false;
 
-            keyFeatureClient.IdClient     = entity.IdKeyFeature;
+            keyFeatureClient.IdClient     = entity.IdClient;
             keyFeatureClient.IdKeyFeature = entity.IdKeyFeature;
             keyFeatureClient.Note         = entity.Note;
             keyFeatureClient.Initiator    = entity.Initiator;

@@ -80,7 +80,7 @@
             // 
             // bindingFeature
             // 
-            this.bindingFeature.DataSource = typeof(ModelEntities.ModelViewKeyFeature);
+            this.bindingFeature.DataSource = typeof(ModelEntities.ModelViewKeyFeatureClient);
             // 
             // DataGridViewFeature
             // 

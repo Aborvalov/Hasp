@@ -46,12 +46,7 @@
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingKeyFeatureClient = new System.Windows.Forms.BindingSource(this.components);
-            this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phoneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contactPersonDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingClient = new System.Windows.Forms.BindingSource(this.components);
+            this.buttonSave = new System.Windows.Forms.Button();
             this.numberKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.featureDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,6 +54,12 @@
             this.initiatorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.noteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.selectedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.bindingKeyFeatureClient = new System.Windows.Forms.BindingSource(this.components);
+            this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phoneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contactPersonDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingClient = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewKeyFeature)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingKeyFeatureClient)).BeginInit();
@@ -89,10 +90,10 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DataGridViewClient.DefaultCellStyle = dataGridViewCellStyle1;
-            this.DataGridViewClient.Location = new System.Drawing.Point(12, 27);
+            this.DataGridViewClient.Location = new System.Drawing.Point(12, 17);
             this.DataGridViewClient.Name = "DataGridViewClient";
             this.DataGridViewClient.ReadOnly = true;
-            this.DataGridViewClient.Size = new System.Drawing.Size(676, 277);
+            this.DataGridViewClient.Size = new System.Drawing.Size(676, 271);
             this.DataGridViewClient.TabIndex = 0;
             this.DataGridViewClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewClient_CellClick);
             this.DataGridViewClient.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewClient_DataBindingComplete);
@@ -124,16 +125,17 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DataGridViewKeyFeature.DefaultCellStyle = dataGridViewCellStyle2;
-            this.DataGridViewKeyFeature.Location = new System.Drawing.Point(12, 336);
+            this.DataGridViewKeyFeature.Location = new System.Drawing.Point(12, 310);
             this.DataGridViewKeyFeature.Name = "DataGridViewKeyFeature";
-            this.DataGridViewKeyFeature.Size = new System.Drawing.Size(676, 150);
+            this.DataGridViewKeyFeature.Size = new System.Drawing.Size(676, 154);
             this.DataGridViewKeyFeature.TabIndex = 1;
+            this.DataGridViewKeyFeature.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewKeyFeature_CellEndEdit);
             this.DataGridViewKeyFeature.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewKeyFeature_DataBindingComplete);
             // 
             // HeaderlineClient
             // 
             this.HeaderlineClient.AutoSize = true;
-            this.HeaderlineClient.Location = new System.Drawing.Point(12, 11);
+            this.HeaderlineClient.Location = new System.Drawing.Point(12, 1);
             this.HeaderlineClient.Name = "HeaderlineClient";
             this.HeaderlineClient.Size = new System.Drawing.Size(94, 13);
             this.HeaderlineClient.TabIndex = 2;
@@ -141,8 +143,9 @@
             // 
             // HeaderlineKey
             // 
+            this.HeaderlineKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.HeaderlineKey.AutoSize = true;
-            this.HeaderlineKey.Location = new System.Drawing.Point(12, 320);
+            this.HeaderlineKey.Location = new System.Drawing.Point(12, 294);
             this.HeaderlineKey.Name = "HeaderlineKey";
             this.HeaderlineKey.Size = new System.Drawing.Size(235, 13);
             this.HeaderlineKey.TabIndex = 3;
@@ -234,41 +237,16 @@
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.Width = 79;
             // 
-            // bindingKeyFeatureClient
+            // buttonSave
             // 
-            this.bindingKeyFeatureClient.DataSource = typeof(ModelEntities.ModelViewKeyFeatureClient);
-            // 
-            // nameDataGridViewTextBoxColumn1
-            // 
-            this.nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn1.HeaderText = "Наименование";
-            this.nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
-            this.nameDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // addressDataGridViewTextBoxColumn
-            // 
-            this.addressDataGridViewTextBoxColumn.DataPropertyName = "Address";
-            this.addressDataGridViewTextBoxColumn.HeaderText = "Адрес";
-            this.addressDataGridViewTextBoxColumn.Name = "addressDataGridViewTextBoxColumn";
-            this.addressDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // phoneDataGridViewTextBoxColumn
-            // 
-            this.phoneDataGridViewTextBoxColumn.DataPropertyName = "Phone";
-            this.phoneDataGridViewTextBoxColumn.HeaderText = "Телефон";
-            this.phoneDataGridViewTextBoxColumn.Name = "phoneDataGridViewTextBoxColumn";
-            this.phoneDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // contactPersonDataGridViewTextBoxColumn
-            // 
-            this.contactPersonDataGridViewTextBoxColumn.DataPropertyName = "ContactPerson";
-            this.contactPersonDataGridViewTextBoxColumn.HeaderText = "Контактное лицо";
-            this.contactPersonDataGridViewTextBoxColumn.Name = "contactPersonDataGridViewTextBoxColumn";
-            this.contactPersonDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // bindingClient
-            // 
-            this.bindingClient.DataSource = typeof(ModelEntities.ModelViewClient);
+            this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonSave.Location = new System.Drawing.Point(12, 469);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 4;
+            this.buttonSave.Text = "Сохранить";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
             // numberKeyDataGridViewTextBoxColumn
             // 
@@ -316,11 +294,48 @@
             this.selectedDataGridViewCheckBoxColumn.HeaderText = "Выбран";
             this.selectedDataGridViewCheckBoxColumn.Name = "selectedDataGridViewCheckBoxColumn";
             // 
+            // bindingKeyFeatureClient
+            // 
+            this.bindingKeyFeatureClient.DataSource = typeof(ModelEntities.ModelViewKeyFeatureClient);
+            // 
+            // nameDataGridViewTextBoxColumn1
+            // 
+            this.nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn1.HeaderText = "Наименование";
+            this.nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
+            this.nameDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // addressDataGridViewTextBoxColumn
+            // 
+            this.addressDataGridViewTextBoxColumn.DataPropertyName = "Address";
+            this.addressDataGridViewTextBoxColumn.HeaderText = "Адрес";
+            this.addressDataGridViewTextBoxColumn.Name = "addressDataGridViewTextBoxColumn";
+            this.addressDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // phoneDataGridViewTextBoxColumn
+            // 
+            this.phoneDataGridViewTextBoxColumn.DataPropertyName = "Phone";
+            this.phoneDataGridViewTextBoxColumn.HeaderText = "Телефон";
+            this.phoneDataGridViewTextBoxColumn.Name = "phoneDataGridViewTextBoxColumn";
+            this.phoneDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // contactPersonDataGridViewTextBoxColumn
+            // 
+            this.contactPersonDataGridViewTextBoxColumn.DataPropertyName = "ContactPerson";
+            this.contactPersonDataGridViewTextBoxColumn.HeaderText = "Контактное лицо";
+            this.contactPersonDataGridViewTextBoxColumn.Name = "contactPersonDataGridViewTextBoxColumn";
+            this.contactPersonDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // bindingClient
+            // 
+            this.bindingClient.DataSource = typeof(ModelEntities.ModelViewClient);
+            // 
             // KeyFeatureClientView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(700, 498);
+            this.ClientSize = new System.Drawing.Size(700, 496);
+            this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.HeaderlineKey);
             this.Controls.Add(this.HeaderlineClient);
             this.Controls.Add(this.DataGridViewKeyFeature);
@@ -368,5 +383,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn initiatorDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn noteDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn selectedDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.Button buttonSave;
     }
 }
