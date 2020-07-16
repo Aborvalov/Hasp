@@ -28,9 +28,7 @@ namespace HASPKey
         {
             InitializeComponent();
             presenterEntities = new PresenterKeyFeatureClient(this);
-        }
-
-        
+        }        
 
         public void DataChange() => DataUpdated?.Invoke();
 
@@ -40,7 +38,6 @@ namespace HASPKey
         public void BindClient(List<ModelViewClient> client) 
             => bindingClient.DataSource = client != null ? new BindingList<ModelViewClient>(client)
                                                          : new BindingList<ModelViewClient>();
-
 
         public void BindKey(List<ModelViewKeyFeatureClient> keyClient)
          => bindingKeyFeatureClient.DataSource = keyClient != null ? new BindingList<ModelViewKeyFeatureClient>(keyClient)

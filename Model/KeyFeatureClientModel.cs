@@ -4,7 +4,6 @@ using LogicContract;
 using ModelEntities;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 
 namespace Model
@@ -22,7 +21,7 @@ namespace Model
 
         private const string errorAdd = "Не удалось создать данную запись: ";
         private const string errorDelete = "Не удалось удалить запись: ";
-        private const string errorUpdate = "Не удалось удалось запись: ";
+        private const string errorUpdate = "Не удалось обновить запись: ";
 
         public KeyFeatureClientModel(IFactoryLogic factoryLogic)
         {
@@ -54,9 +53,22 @@ namespace Model
         public List<ModelViewKeyFeatureClient> GetAllAtClient(int idClient)
         {
             var keyFeatureClient = new List<ModelViewKeyFeatureClient>();
+            ListKeyAtClient(idClient, keyFeatureClient);
+            ListKeyFeatureAvailableClient(keyFeatureClient);
+
+            return keyFeatureClient
+                        .OrderBy(x => x.NumberKey)
+                        .OrderByDescending(x => x.Selected)
+                        .Distinct()
+                        .ToList();
+        }
+        private void ListKeyAtClient(int idClient, List<ModelViewKeyFeatureClient> keyFeatureClient)
+        {
+            if (keyFeatureClient == null)
+                throw new ArgumentNullException(nameof(keyFeatureClient));
 
             var listKeyFeatureClient = keyFeatureClientLogic.GetAll()
-                                        .Where(x=>x.IdClient == idClient);
+                                                    .Where(x => x.IdClient == idClient);
 
             var listActiveKeyFeature = keyFeatureLogic.GetAll()
                                         .Where(x => x.EndDate >= date)
@@ -68,11 +80,11 @@ namespace Model
                 var item = listActiveKeyFeature
                             .FirstOrDefault(x => x.Id == keyFeatCl.IdKeyFeature);
 
-                var kf = from keyFeat in keyFeatureLogic.GetAll()
+                var kyeFeature = from keyFeat in keyFeatureLogic.GetAll()
                          join key in haspKeyLogic.GetAll()
-                         on keyFeat.IdHaspKey equals key.Id
+                              on keyFeat.IdHaspKey equals key.Id
                          join feature in featureLogic.GetAll()
-                         on keyFeat.IdFeature equals feature.Id
+                              on keyFeat.IdFeature equals feature.Id
                          where keyFeat.IdHaspKey == item.IdHaspKey &&
                                keyFeat.EndDate >= date
                          select new ModelViewKeyFeatureClient
@@ -89,29 +101,42 @@ namespace Model
                              Selected = keyFeat.Id == item.Id,
                          };
 
-                keyFeatureClient.AddRange(kf);
+                keyFeatureClient.AddRange(kyeFeature);
             }
+        }
+        private void ListKeyFeatureAvailableClient(List<ModelViewKeyFeatureClient> keyFeatureClient)
+        {
+            if (keyFeatureClient == null)
+                throw new ArgumentNullException(nameof(keyFeatureClient));
 
+            var listKeyFeatureNoyClient = new List<KeyFeature>();
 
             // Список доступных ключей.
             var listIdKeyFeatAtClient = keyFeatureClientLogic.GetAll()
                                                     .Select(x => x.IdKeyFeature)
                                                     .Distinct();
 
-            var listKeyFeatureNoyClient = new List<KeyFeature>();
+            var listActiveKeyFeature = keyFeatureLogic.GetAll()
+                                        .Where(x => x.EndDate >= date)
+                                        .ToList();
 
-            foreach (var keyFet in keyFeatureLogic.GetAll().Where(x => x.EndDate >= date))
-                if (listIdKeyFeatAtClient.Any(x => x != keyFet.Id))
-                    listKeyFeatureNoyClient.Add(keyFet);
+            var listIdHaspKeyAtClient = from client in listIdKeyFeatAtClient
+                       join keyFeature in listActiveKeyFeature
+                            on client equals keyFeature.Id
+                       select new
+                       {
+                           keyFeature.IdHaspKey,
+                       };
 
-                        
-            
+            foreach (var keyFeat in keyFeatureLogic.GetAll().Where(x => x.EndDate >= date))
+                if (!listIdHaspKeyAtClient.Any(x => x.IdHaspKey == keyFeat.IdHaspKey))
+                    listKeyFeatureNoyClient.Add(keyFeat);
+                                 
+            var features = featureLogic.GetAll();
+            var haspKeys = haspKeyLogic.GetAll();
            
-            List<Feature> features = featureLogic.GetAll();
-            List<HaspKey> haspKeys = haspKeyLogic.GetAll();
-
-            var item_ = 
-                       from keyFeat in listKeyFeatureNoyClient  
+            var item_ =
+                       from keyFeat in listKeyFeatureNoyClient
                        join feature in features
                             on keyFeat.IdFeature equals feature.Id
                        join key in haspKeys
@@ -119,20 +144,16 @@ namespace Model
                        where keyFeat.EndDate >= date
                        select new ModelViewKeyFeatureClient
                        {
-                           IdKeyFeature = keyFeat.Id,  
+                           IdKeyFeature = keyFeat.Id,
                            EndDate = keyFeat.EndDate,
                            Feature = feature.Name,
                            NumberKey = key.InnerId.ToString() + " - \"" + key.Number + "\"",
                        };
 
-            keyFeatureClient.AddRange(item_.ToList());
-
-
-
-            return keyFeatureClient;
+            keyFeatureClient.AddRange(item_);
         }
-
-        public List<KeyFeatureClient> GetAllKeyClient() => keyFeatureClientLogic.GetAll();
+        public List<KeyFeatureClient> GetAllKeyClient() 
+            => keyFeatureClientLogic.GetAll();
 
         public bool Remove(IEnumerable<int> idKeyClient, out string error)
         {

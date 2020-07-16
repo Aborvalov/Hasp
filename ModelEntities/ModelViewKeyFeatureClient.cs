@@ -65,5 +65,4 @@ namespace ModelEntities
         public override int GetHashCode() => KeyFeatureClient.GetHashCode();
         public override bool Equals(object obj) => KeyFeatureClient.Equals(obj);
     }
-
 }
