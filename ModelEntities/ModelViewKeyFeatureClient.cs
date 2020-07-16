@@ -22,7 +22,7 @@ namespace ModelEntities
         [DisplayName("Номер ключа")]
         public string NumberKey { get; set; }
         [DisplayName("Тип ключа")]
-        public TypeKey TypeKey { get; set; }
+        public TypeKey? TypeKey { get; set; } = null;
         [DisplayName("Функциональность")]
         public string Feature { get; set; }
         [Browsable(false)]
