@@ -115,7 +115,7 @@ namespace HASPKey
                 return;
             }
                      
-            DataGridViewKeyFeature[6, e.RowIndex].Value = presenterEntities.CheckSelected(row);
+            DataGridViewKeyFeature["selectedDataGridViewCheckBoxColumn", e.RowIndex].Value = presenterEntities.CheckSelected(row);
 
             presenterEntities.CheckInputData(row, e.RowIndex);
             change = true;

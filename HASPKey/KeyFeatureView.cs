@@ -106,10 +106,10 @@ namespace HASPKey
 
             presenterEntities.CheckInputData(row, e.RowIndex);
             if (presenterEntities.CheckSelected(row))
-                DataGridViewFeature[6, e.RowIndex].Value = true;
+                DataGridViewFeature["selectedDataGridViewCheckBoxColumn", e.RowIndex].Value = true;
             else
-                if(DataGridViewFeature[5, e.RowIndex].Value == null ||
-                   DataGridViewFeature[4, e.RowIndex].Value == null)
+                if(DataGridViewFeature["dataGridViewTextBoxColumn12", e.RowIndex].Value == null ||
+                   DataGridViewFeature["endDateDataGridViewTextBoxColumn", e.RowIndex].Value == null)
                 ErrorRow(e.RowIndex);
 
             change = true;
