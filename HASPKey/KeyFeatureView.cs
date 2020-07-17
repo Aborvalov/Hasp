@@ -23,7 +23,7 @@ namespace HASPKey
         private const string emptyKey = "Данный ключ не найден.";
         private const string emptyFeature = "Данная функциональность не найдена.";
         private const string caption = "Внести изменеия";
-        private const string message = "Вы уверены, что хотите внести изменеия?";
+        private const string message = "Данные были изменены, внести изменеия?";
         private const string headlineFeature = "Список действующих функциональностей у ключа - ";
         public KeyFeatureView()
         {

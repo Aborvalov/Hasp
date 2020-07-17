@@ -152,7 +152,7 @@ namespace Model
                 if (!listIdHaspKeyAtClient.Any(x => x.IdHaspKey == keyFeat.IdHaspKey))
                     listKeyFeatureNoyClient.Add(keyFeat);
             
-            var item_ = from keyFeat in listKeyFeatureNoyClient
+            var item = from keyFeat in listKeyFeatureNoyClient
                         join feature in features
                              on keyFeat.IdFeature equals feature.Id
                         join key in haspKeys
@@ -167,7 +167,7 @@ namespace Model
                             IdClient = idClient,
                         };
 
-            keyFeatureClient.AddRange(item_);
+            keyFeatureClient.AddRange(item);
         }
         public List<KeyFeatureClient> GetAllKeyClient() 
             => keyFeatureClientLogic.GetAll();
@@ -190,13 +190,17 @@ namespace Model
         {
             if (keyClient == null)
                 throw new ArgumentNullException(nameof(keyClient));
-
+            
             error = string.Empty;
-            var allKeyAtClient = GetAllAtClient(keyClient.First().IdClient);
+
+            if (!keyClient.Any())
+                return true;
+
+            var allKeyAtClient = GetAllAtClient(keyClient.First().IdClient); ;
             foreach (var item in keyClient)
             {
                 if (allKeyAtClient
-                    .Any(x => x.Equals(item.KeyFeatureClient)))
+                    .Any(x => x.KeyFeatureClient.Equals(item.KeyFeatureClient)))
                     continue;
 
                 if(!keyFeatureClientLogic.Update(item.KeyFeatureClient))

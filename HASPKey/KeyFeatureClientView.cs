@@ -19,7 +19,7 @@ namespace HASPKey
         private const string error = "Ошибка";
         private const string emptyClient = "Данный клиент не найден.";
         private const string caption = "Внести изменеия";
-        private const string message = "Вы уверены, что хотите внести изменеия?";
+        private const string message = "Данные были изменены, внести изменеия?";
         private const string errorString = "Не заполнено поле \"Инициатор\".";
         private const string emptyKeyFeature = "Данный ключ не найден.";
 
@@ -84,7 +84,6 @@ namespace HASPKey
             {
                 if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     presenterEntities.Edit(item);
-
                 change = false;
             }
             else
@@ -108,15 +107,24 @@ namespace HASPKey
 
         private void DataGridViewKeyFeature_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            DefaultColorRow(e.RowIndex);
-            if (!(DataGridViewKeyFeature.CurrentRow.DataBoundItem is ModelViewKeyFeatureClient row))
-            {
-                MessageError(emptyKeyFeature);
-                return;
-            }
-                        
-            if (presenterEntities.CheckInputData(row, e.RowIndex))
+            //DefaultColorRow(e.RowIndex);
+            //if (!(DataGridViewKeyFeature.CurrentRow.DataBoundItem is ModelViewKeyFeatureClient row))
+            //{
+            //    MessageError(emptyKeyFeature);
+            //    return;
+            //}
+
+            //if (presenterEntities.CheckInputData(row, e.RowIndex))
+            //    change = true;
+        }
+
+        private void DataGridViewKeyFeature_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (presenterEntities.CheckInputData(e, DataGridViewKeyFeature.CurrentCell.RowIndex))
                 change = true;
+                change = true;
+
         }
     }
 }
