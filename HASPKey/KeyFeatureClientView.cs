@@ -114,9 +114,8 @@ namespace HASPKey
                 MessageError(emptyKeyFeature);
                 return;
             }
-                          
-            //if (presenterEntities.CheckSelected(row))
-                DataGridViewKeyFeature[6, e.RowIndex].Value = presenterEntities.CheckSelected(row);
+                     
+            DataGridViewKeyFeature[6, e.RowIndex].Value = presenterEntities.CheckSelected(row);
 
             presenterEntities.CheckInputData(row, e.RowIndex);
             change = true;
