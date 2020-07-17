@@ -47,10 +47,10 @@ namespace Presenter
             Add(keyFeatModel);
             Update(keyFeatModel);
 
+            entitiesView.DataChange();
             DisplayFeatureAtKey(keyFeatModel[0].IdKey);
             keyFeatures = featureModel.GetAllKeyFeature();
-            entitiesView.EmptyFeatureAsKey();
-            entitiesView.DataChange();
+            entitiesView.EmptyFeatureAsKey();            
         }
 
         private void Update(List<ModelViewKeyFeature> keyFeatModel)

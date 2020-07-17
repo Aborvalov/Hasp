@@ -10,7 +10,7 @@ namespace Model
     public class HaspKeyModel : IHaspKeyModel
     {
         private readonly EntitesContext db;
-        private IHaspKeyLogic keyLogic;
+        private readonly IHaspKeyLogic keyLogic;
 
         public HaspKeyModel(IFactoryLogic factoryLogic)
         {

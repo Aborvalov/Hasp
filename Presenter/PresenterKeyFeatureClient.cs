@@ -25,7 +25,9 @@ namespace Presenter
         }
         public void DisplayClient() => entitiesView.BindClient(clientModel.GetAll());
 
-        public void DisplayHaspKeyAtClient(int idClient) => entitiesView.BindKey(keyFeatureClientModel.GetAllAtClient(idClient));
+        public void DisplayHaspKeyAtClient(int idClient) 
+            => entitiesView
+                .BindKey(keyFeatureClientModel.GetAllAtClient(idClient));
         
         public void Dispose()
         {

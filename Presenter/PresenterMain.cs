@@ -6,19 +6,19 @@ namespace Presenter
 {
     public class PresenterMain : IPresenterMain
     {
-        private readonly IMainModel homeModel;
-        private readonly IMainView homeView;
+        private readonly IMainModel mainModel;
+        private readonly IMainView mainView;
 
         public PresenterMain(IMainView homeView)
         {            
-            this.homeView = homeView ?? throw new System.ArgumentNullException(nameof(homeView));
+            this.mainView = homeView ?? throw new System.ArgumentNullException(nameof(homeView));
 
-            homeModel = new MainModel(new Logics());
+            mainModel = new MainModel(new Logics());
             Views();
         }
 
-        public void Dispose() => homeModel.Dispose();
+        public void Dispose() => mainModel.Dispose();
 
-        public void Views() => homeView.Bind(homeModel.GetAll());
+        public void Views() => mainView.Bind(mainModel.GetAll());
     }
 }

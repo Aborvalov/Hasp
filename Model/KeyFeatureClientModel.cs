@@ -62,61 +62,81 @@ namespace Model
                         .Distinct()
                         .ToList();
         }
+        /// <summary>
+        /// Список ключей у клиента.
+        /// </summary>
+        /// <param name="idClient"></param>
+        /// <param name="keyFeatureClient"></param>
         private void ListKeyAtClient(int idClient, List<ModelViewKeyFeatureClient> keyFeatureClient)
-        {
+        {            
             if (keyFeatureClient == null)
                 throw new ArgumentNullException(nameof(keyFeatureClient));
 
+            var allKeyFeature = keyFeatureLogic.GetAll();
             var listKeyFeatureClient = keyFeatureClientLogic.GetAll()
                                                     .Where(x => x.IdClient == idClient);
+                        
+            var listIdHaspKeyAtClient = from keyFeatCl in listKeyFeatureClient
+                                        join keyActFeat in allKeyFeature
+                                             on keyFeatCl.IdKeyFeature equals keyActFeat.Id
+                                        select keyActFeat.IdHaspKey;
 
-            var listActiveKeyFeature = keyFeatureLogic.GetAll()
-                                        .Where(x => x.EndDate >= date)
-                                        .ToList();
+            var listKeyFeatureAtClient = from keyFeat in allKeyFeature
+                                         join keyInCl in listIdHaspKeyAtClient
+                                              on keyFeat.IdHaspKey equals keyInCl
+                                         where keyFeat.EndDate >= date
+                                         select keyFeat;
 
-            // Список ключей у клиента. 
-            foreach (var keyFeatCl in listKeyFeatureClient)
+            var kyeFeature = from keyFeat in listKeyFeatureAtClient.Distinct()
+                             join key in haspKeyLogic.GetAll()
+                                  on keyFeat.IdHaspKey equals key.Id
+                             join feature in featureLogic.GetAll()
+                                  on keyFeat.IdFeature equals feature.Id
+                             where keyFeat.EndDate >= date
+                             select new ModelViewKeyFeatureClient
+                             {                                 
+                                 IdClient = idClient,
+                                 IdKeyFeature = keyFeat.Id,                                 
+                                 Feature = feature.Name,                                
+                                 NumberKey = key.InnerId.ToString() + " - \"" + key.Number + "\"",
+                                 EndDate = keyFeat.EndDate,
+                                 TypeKey = key.TypeKey
+                             };
+
+            foreach (var item in kyeFeature)
             {
-                var item = listActiveKeyFeature
-                            .FirstOrDefault(x => x.Id == keyFeatCl.IdKeyFeature);
+                var client = listKeyFeatureClient.FirstOrDefault(x => x.IdKeyFeature == item.IdKeyFeature);
+                if (client != null)
+                {
+                    item.Id = client.Id;
+                    item.Selected = true;
+                    item.Initiator = client.Initiator;
+                    item.Note = client.Note;
+                }
 
-                var kyeFeature = from keyFeat in keyFeatureLogic.GetAll()
-                         join key in haspKeyLogic.GetAll()
-                              on keyFeat.IdHaspKey equals key.Id
-                         join feature in featureLogic.GetAll()
-                              on keyFeat.IdFeature equals feature.Id
-                         where keyFeat.IdHaspKey == item.IdHaspKey &&
-                               keyFeat.EndDate >= date
-                         select new ModelViewKeyFeatureClient
-                         {
-                             Id = keyFeatCl.Id,
-                             IdClient = idClient,
-                             IdKeyFeature = keyFeat.Id,
-                             Initiator = keyFeatCl.Initiator,
-                             Feature = feature.Name,
-                             Note = keyFeatCl.Note,
-                             NumberKey = key.InnerId.ToString() + " - \"" + key.Number + "\"",
-                             EndDate = keyFeat.EndDate,
-                             TypeKey = key.TypeKey,
-                             Selected = keyFeat.Id == item.Id,
-                         };
-
-                keyFeatureClient.AddRange(kyeFeature);
+                keyFeatureClient.Add(item);
             }
         }
+        /// <summary>
+        /// Список доступных ключей.
+        /// </summary>
+        /// <param name="keyFeatureClient"></param>
+        /// <param name="idClient"></param>
         private void ListKeyFeatureAvailableClient(List<ModelViewKeyFeatureClient> keyFeatureClient, int idClient)
         {
             if (keyFeatureClient == null)
                 throw new ArgumentNullException(nameof(keyFeatureClient));
 
             var listKeyFeatureNoyClient = new List<KeyFeature>();
+            var allListKeyFeat = keyFeatureLogic.GetAll();
+            var features = featureLogic.GetAll();
+            var haspKeys = haspKeyLogic.GetAll();
 
-            // Список доступных ключей.
             var listIdKeyFeatAtClient = keyFeatureClientLogic.GetAll()
                                                     .Select(x => x.IdKeyFeature)
                                                     .Distinct();
 
-            var listActiveKeyFeature = keyFeatureLogic.GetAll()
+            var listActiveKeyFeature = allListKeyFeat
                                         .Where(x => x.EndDate >= date)
                                         .ToList();
 
@@ -128,28 +148,24 @@ namespace Model
                            keyFeature.IdHaspKey,
                        };
 
-            foreach (var keyFeat in keyFeatureLogic.GetAll().Where(x => x.EndDate >= date))
+            foreach (var keyFeat in allListKeyFeat.Where(x => x.EndDate >= date))
                 if (!listIdHaspKeyAtClient.Any(x => x.IdHaspKey == keyFeat.IdHaspKey))
                     listKeyFeatureNoyClient.Add(keyFeat);
-                                 
-            var features = featureLogic.GetAll();
-            var haspKeys = haspKeyLogic.GetAll();
-           
-            var item_ =
-                       from keyFeat in listKeyFeatureNoyClient
-                       join feature in features
-                            on keyFeat.IdFeature equals feature.Id
-                       join key in haspKeys
-                            on keyFeat.IdHaspKey equals key.Id
-                       where keyFeat.EndDate >= date
-                       select new ModelViewKeyFeatureClient
-                       {
-                           IdKeyFeature = keyFeat.Id,
-                           EndDate = keyFeat.EndDate,
-                           Feature = feature.Name,
-                           NumberKey = key.InnerId.ToString() + " - \"" + key.Number + "\"",
-                           IdClient = idClient,
-                       };
+            
+            var item_ = from keyFeat in listKeyFeatureNoyClient
+                        join feature in features
+                             on keyFeat.IdFeature equals feature.Id
+                        join key in haspKeys
+                             on keyFeat.IdHaspKey equals key.Id
+                        where keyFeat.EndDate >= date
+                        select new ModelViewKeyFeatureClient
+                        {
+                            IdKeyFeature = keyFeat.Id,
+                            EndDate = keyFeat.EndDate,
+                            Feature = feature.Name,
+                            NumberKey = key.InnerId.ToString() + " - \"" + key.Number + "\"",
+                            IdClient = idClient,
+                        };
 
             keyFeatureClient.AddRange(item_);
         }

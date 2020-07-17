@@ -7,7 +7,10 @@ namespace ModelEntities
     public class ModelViewKeyFeatureClient
     {
         public ModelViewKeyFeatureClient()
-        { }
+        {
+            this.Note = string.Empty;
+            this.Initiator = string.Empty;
+        }
         public ModelViewKeyFeatureClient(KeyFeatureClient keyFeatureClient) : this()
         {
             Id = keyFeatureClient.Id;
@@ -49,14 +52,14 @@ namespace ModelEntities
         public string Note
         {
             get => KeyFeatureClient.Note; 
-            set => KeyFeatureClient.Note = value;
+            set => KeyFeatureClient.Note = value ?? string.Empty;
         }
         [DisplayName("Инициатор")]
         public string Initiator
         {
-            get => KeyFeatureClient.Initiator; 
-            set => KeyFeatureClient.Initiator = value;
-        }        
+            get => KeyFeatureClient.Initiator;
+            set => KeyFeatureClient.Initiator = value ?? string.Empty;
+        }
         [DisplayName("Окончание действия")]
         public DateTime? EndDate { get; set; }
         [DisplayName("Выбран")]
