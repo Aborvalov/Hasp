@@ -112,13 +112,21 @@ namespace Presenter
             if (item == null)
                 throw new ArgumentNullException(nameof(item));
 
-            if (string.IsNullOrEmpty(item.Initiator) &&
-                item.Selected)
+            if (item.Selected && string.IsNullOrEmpty(item.Initiator))
             {
                 entitiesView.ErrorRow(numverRow);
                 return false;
             }
             return true;
+        }
+
+        public bool CheckSelected(ModelViewKeyFeatureClient item)
+        {
+            if (item == null)
+                throw new ArgumentNullException(nameof(item));
+
+            return item.Id == 0 &&
+                   !string.IsNullOrEmpty(item.Initiator);
         }
     }
 }

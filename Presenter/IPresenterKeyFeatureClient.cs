@@ -11,5 +11,6 @@ namespace Presenter
         void Edit(List<ModelViewKeyFeatureClient> keyClient);
         bool CheckInputData(List<ModelViewKeyFeatureClient> item);
         bool CheckInputData(ModelViewKeyFeatureClient item, int numverRow);
+        bool CheckSelected(ModelViewKeyFeatureClient item);
     }
 }

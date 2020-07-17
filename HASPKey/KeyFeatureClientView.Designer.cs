@@ -162,8 +162,7 @@
             this.DataGridViewKeyFeature.Size = new System.Drawing.Size(676, 154);
             this.DataGridViewKeyFeature.TabIndex = 1;
             this.DataGridViewKeyFeature.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewKeyFeature_CellEndEdit);
-            this.DataGridViewKeyFeature.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewKeyFeature_DataBindingComplete);
-            this.DataGridViewKeyFeature.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DataGridViewKeyFeature_KeyDown);
+            this.DataGridViewKeyFeature.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewKeyFeature_DataBindingComplete);           
             // 
             // numberKeyDataGridViewTextBoxColumn
             // 

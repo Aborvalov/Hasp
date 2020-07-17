@@ -69,6 +69,7 @@ namespace HASPKey
             }
             if (change)
                 Save();
+            
             presenterEntities.DisplayHaspKeyAtClient(row.Id);
         }
 
@@ -91,9 +92,9 @@ namespace HASPKey
         }
         public void ErrorRow(int numberRow)
             => DataGridViewKeyFeature
-                .Rows[numberRow]
-                .DefaultCellStyle
-                .BackColor = Color.Red;
+                   .Rows[numberRow]
+                   .DefaultCellStyle
+                   .BackColor = Color.Red;
         private void DefaultColorRow()
         {
             for (int i = 0; i < DataGridViewKeyFeature.RowCount; i++)
@@ -107,24 +108,18 @@ namespace HASPKey
 
         private void DataGridViewKeyFeature_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            //DefaultColorRow(e.RowIndex);
-            //if (!(DataGridViewKeyFeature.CurrentRow.DataBoundItem is ModelViewKeyFeatureClient row))
-            //{
-            //    MessageError(emptyKeyFeature);
-            //    return;
-            //}
+            DefaultColorRow(e.RowIndex);
+            if (!(DataGridViewKeyFeature.CurrentRow.DataBoundItem is ModelViewKeyFeatureClient row))
+            {
+                MessageError(emptyKeyFeature);
+                return;
+            }
+                          
+            //if (presenterEntities.CheckSelected(row))
+                DataGridViewKeyFeature[6, e.RowIndex].Value = presenterEntities.CheckSelected(row);
 
-            //if (presenterEntities.CheckInputData(row, e.RowIndex))
-            //    change = true;
-        }
-
-        private void DataGridViewKeyFeature_KeyDown(object sender, KeyEventArgs e)
-        {
-            
-            if (presenterEntities.CheckInputData(e, DataGridViewKeyFeature.CurrentCell.RowIndex))
-                change = true;
-                change = true;
-
+            presenterEntities.CheckInputData(row, e.RowIndex);
+            change = true;
         }
     }
 }
