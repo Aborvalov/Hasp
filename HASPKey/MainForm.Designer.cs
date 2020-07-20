@@ -41,6 +41,7 @@
             this.FeatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.KeyFeatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.KeyFeatureClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReferenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DataGridViewHomeView = new System.Windows.Forms.DataGridView();
             this.numberKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,7 +50,6 @@
             this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingHome = new System.Windows.Forms.BindingSource(this.components);
             this.Headline = new System.Windows.Forms.Label();
-            this.KeyFeatureClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewHomeView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHome)).BeginInit();
@@ -121,6 +121,13 @@
             this.KeyFeatureToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
             this.KeyFeatureToolStripMenuItem.Text = "Связь ключ-функциональность";
             this.KeyFeatureToolStripMenuItem.Click += new System.EventHandler(this.KeyFeatureToolStripMenuItem_Click);
+            // 
+            // KeyFeatureClientToolStripMenuItem
+            // 
+            this.KeyFeatureClientToolStripMenuItem.Name = "KeyFeatureClientToolStripMenuItem";
+            this.KeyFeatureClientToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.KeyFeatureClientToolStripMenuItem.Text = "Связь ключ-клиент";
+            this.KeyFeatureClientToolStripMenuItem.Click += new System.EventHandler(this.KeyFeatureClientToolStripMenuItem_Click);
             // 
             // ReferenceToolStripMenuItem
             // 
@@ -203,13 +210,6 @@
             this.Headline.Text = "Действующие HASP-ключи";
             this.Headline.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // KeyFeatureClientToolStripMenuItem
-            // 
-            this.KeyFeatureClientToolStripMenuItem.Name = "KeyFeatureClientToolStripMenuItem";
-            this.KeyFeatureClientToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
-            this.KeyFeatureClientToolStripMenuItem.Text = "Связь ключ-клиент";
-            this.KeyFeatureClientToolStripMenuItem.Click += new System.EventHandler(this.KeyFeatureClientToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -220,6 +220,7 @@
             this.Controls.Add(this.DataGridViewHomeView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(627, 427);
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

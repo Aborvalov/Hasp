@@ -162,7 +162,7 @@
             this.DataGridViewKeyFeature.Size = new System.Drawing.Size(676, 154);
             this.DataGridViewKeyFeature.TabIndex = 1;
             this.DataGridViewKeyFeature.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewKeyFeature_CellEndEdit);
-            this.DataGridViewKeyFeature.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewKeyFeature_DataBindingComplete);           
+            this.DataGridViewKeyFeature.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewKeyFeature_DataBindingComplete);
             // 
             // numberKeyDataGridViewTextBoxColumn
             // 
@@ -340,6 +340,7 @@
             this.Controls.Add(this.HeaderlineClient);
             this.Controls.Add(this.DataGridViewKeyFeature);
             this.Controls.Add(this.DataGridViewClient);
+            this.MinimumSize = new System.Drawing.Size(710, 528);
             this.Name = "KeyFeatureClientView";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

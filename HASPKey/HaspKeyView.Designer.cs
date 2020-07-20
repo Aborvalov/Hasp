@@ -348,6 +348,7 @@
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.labelClient);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(455, 624);
             this.Name = "HaspKeyView";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -250,6 +250,7 @@
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.labelNumber);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(534, 437);
             this.Name = "FeatureView";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
