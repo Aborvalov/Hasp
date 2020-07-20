@@ -16,6 +16,7 @@ namespace HASPKey
             InitializeComponent();
             presenter = new PresenterMain(this);
         }
+       
         private void ВыходToolStripMenuItem_Click(object sender, EventArgs e)
             =>  this.Close();
         public void Bind(List<ModelEntities.ModelViewMain> homes)

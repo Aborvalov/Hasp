@@ -25,17 +25,16 @@ namespace HASPKey
         public ClientView(bool search)
         {
             InitializeComponent();
-            this.search = search;
             presenterClient = new PresenterClient(this);
+            labelFeature.Text = string.Empty;
             DataGridViewClient.Height = DataGridViewClient.Size.Height + sizeH;
 
-            if (this.search)
+            this.search = search;
+            if (this.search || !Admin.IsAdmin)
                 DataGridViewClient.Height = DataGridViewClient.Size.Height + 28;
-
-            labelFeature.Text = string.Empty;
         }
         public ClientView() : this(false)
-        { }
+        {}
 
         public void DataChange() => DataUpdated?.Invoke();
 
@@ -60,7 +59,7 @@ namespace HASPKey
         }
 
         private void DataGridViewClient_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
+        {           
             if (!(DataGridViewClient.CurrentRow.DataBoundItem is ModelViewClient row))
             {
                 MessageError(emptyClient);
@@ -71,9 +70,8 @@ namespace HASPKey
                 this.SearchIdClient = row;
                 this.Close();
                 return;
-            }
-
-            if (size)
+            }            
+            if (size && Admin.IsAdmin)
             {
                 DefaultView();
                 DataGridViewClient.Height = DataGridViewClient.Size.Height - sizeH;

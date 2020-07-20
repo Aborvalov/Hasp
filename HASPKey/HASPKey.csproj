@@ -89,6 +89,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin.cs" />
     <Compile Include="CalendarCell.cs" />
     <Compile Include="CalendarColumn.cs" />
     <Compile Include="CalendarEditingControl.cs">
@@ -202,6 +203,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="key.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="users.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

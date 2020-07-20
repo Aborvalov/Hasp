@@ -22,17 +22,18 @@ namespace HASPKey
         private const string caption = "Удалить фичу";
         private const string message = "Вы уверены, что хотите удалить фичу?";
         
-        public FeatureView(bool search) : this()
-        { 
-            this.search = search;            
-            DataGridViewFeature.Height = DataGridViewFeature.Size.Height + 28;
-        }
-        public FeatureView() 
+        public FeatureView(bool search) 
         {
             InitializeComponent();
             presenterFeature = new PresenterFeature(this);
-            DataGridViewFeature.Height = DataGridViewFeature.Size.Height + sizeH;            
+            DataGridViewFeature.Height = DataGridViewFeature.Size.Height + sizeH;
+
+            this.search = search;
+            if (this.search || !Admin.IsAdmin)
+                DataGridViewFeature.Height = DataGridViewFeature.Size.Height + 28;
         }
+        public FeatureView() : this(false)
+        {}
 
         public void DataChange() => DataUpdated?.Invoke();    
 
@@ -71,7 +72,7 @@ namespace HASPKey
                 return;
             }
                         
-            if (size)
+            if (size && Admin.IsAdmin)
             {
                 DefaultView();
                 DataGridViewFeature.Height = DataGridViewFeature.Size.Height - sizeH;
@@ -124,9 +125,7 @@ namespace HASPKey
         private void TbNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
                 e.Handled = true;
-            }
         }
 
         private void DataGridViewFeatureFeature_KeyDown(object sender, KeyEventArgs e)

@@ -372,10 +372,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 495);
+            this.Controls.Add(this.DataGridViewFeature);
             this.Controls.Add(this.HeadliheHaspKey);
             this.Controls.Add(this.HeadlineFeature);
             this.Controls.Add(this.DataGridViewHaspKey);
-            this.Controls.Add(this.DataGridViewFeature);
             this.Controls.Add(this.buttonSave);
             this.MinimumSize = new System.Drawing.Size(774, 527);
             this.Name = "KeyFeatureView";
@@ -414,10 +414,10 @@
         private DataGridViewCalendarColumn dataGridViewCalendarColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
-        private DataGridViewCalendarColumn startDateDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
+        //private DataGridViewCalendarColumn startDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn innerIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeKeyDataGridViewTextBoxColumn;

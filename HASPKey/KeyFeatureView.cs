@@ -16,8 +16,7 @@ namespace HASPKey
         public string NumberHaspKey { get; set; }
         private readonly IPresenterKeyFeature presenterEntities;
         private bool change = false;
-
-
+        
         private const string error = "Ошибка";
         private const string errorString = "Неправильно заполнена дата, окончание действия меньше начала.";
         private const string emptyKey = "Данный ключ не найден.";
@@ -29,6 +28,11 @@ namespace HASPKey
         {
             InitializeComponent();
             presenterEntities = new PresenterKeyFeature(this);
+            if (!Admin.IsAdmin)
+            {
+                DataGridViewFeature.Height = DataGridViewFeature.Size.Height + 28;
+                DataGridViewFeature.ReadOnly = true;
+            }
         }
               
         public void DataChange() => DataUpdated?.Invoke();
@@ -63,7 +67,6 @@ namespace HASPKey
                 Save();
             presenterEntities.DisplayFeatureAtKey(row.Id);
         }
-        
         private void ButtonSave_Click(object sender, EventArgs e) => Save();
 
         private void Save()

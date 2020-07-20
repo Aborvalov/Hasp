@@ -335,10 +335,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(700, 496);
+            this.Controls.Add(this.DataGridViewKeyFeature);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.HeaderlineKey);
             this.Controls.Add(this.HeaderlineClient);
-            this.Controls.Add(this.DataGridViewKeyFeature);
             this.Controls.Add(this.DataGridViewClient);
             this.MinimumSize = new System.Drawing.Size(710, 528);
             this.Name = "KeyFeatureClientView";

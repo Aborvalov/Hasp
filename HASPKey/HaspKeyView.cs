@@ -4,7 +4,6 @@ using Presenter;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows.Forms;
 using View;
 
@@ -15,8 +14,7 @@ namespace HASPKey
         private readonly IPresenterHaspKey presenterHaspKey;
         private bool size = true;
         private const int sizeH = 40;
-        public event Action DataUpdated;
-        private bool search = false;
+        public event Action DataUpdated;       
         internal ModelViewHaspKey SearchHaspKey { get; private set; } = null;
         
         private const string error = "Ошибка";
@@ -29,17 +27,14 @@ namespace HASPKey
             InitializeComponent();
             presenterHaspKey = new PresenterHaspKey(this);
             DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + sizeH;
-            
+
             comboBoxTypeKey.DataSource = Enum.GetValues(typeof(TypeKey));
             comboBoxTypeKey.SelectedIndex = -1;
             labelClient.Text = string.Empty;
-        }
-        public HaspKeyView(bool search) : this()
-        {
-            this.search = search;
-            DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
-        }
 
+            if (!Admin.IsAdmin)
+                DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
+        }  
         public void Bind(List<ModelViewHaspKey> entity) 
             => bindingHaspKey.DataSource = entity != null ? new BindingList<ModelViewHaspKey>(entity)
                                                           : new BindingList<ModelViewHaspKey>();
@@ -95,14 +90,8 @@ namespace HASPKey
             {
                 MessageError(emptyHaspKey);
                 return;
-            }
-            if (search)
-            {
-                SearchHaspKey = row;
-                Close();
-                return;
-            }
-            if (size)
+            }            
+            if (size && Admin.IsAdmin)
             {
                 DefaultView();
                 DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height - sizeH;
@@ -174,7 +163,6 @@ namespace HASPKey
                 e.Handled = true;
             }
         }
-
         private void DataGridViewHaspKey_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
@@ -200,7 +188,6 @@ namespace HASPKey
                 DefaultView();
             }
         }
-
         private void DataGridViewHaspKey_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             foreach (DataGridViewRow row in DataGridViewHaspKey.Rows)
