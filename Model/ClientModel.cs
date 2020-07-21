@@ -16,7 +16,7 @@ namespace Model
             if (factoryLogic == null)
                 throw new ArgumentNullException(nameof(factoryLogic));
 
-            db = new EntitesContext();
+            db = Context.GetContext();
             clientLogic = factoryLogic.CreateClient(db);
         }
 

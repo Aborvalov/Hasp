@@ -10,7 +10,7 @@ namespace Model
 {
     public class KeyFeatureClientModel : IKeyFeatureClientModel
     {
-        private readonly EntitesContext db;
+        private readonly IEntitesContext db;
         private readonly IFactoryLogic factoryLogic;
         private readonly IClientLogic clientLogic;
         private readonly IKeyFeatureClientLogic keyFeatureClientLogic;
@@ -27,7 +27,7 @@ namespace Model
         {
             this.factoryLogic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
 
-            db = new EntitesContext();
+            db = Context.GetContext();
             clientLogic = this.factoryLogic.CreateClient(db);
             keyFeatureClientLogic = this.factoryLogic.CreateKeyFeatureClient(db);
             haspKeyLogic = this.factoryLogic.CreateHaspKey(db);

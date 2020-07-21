@@ -35,29 +35,29 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SelectDataBaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.KeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FeatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.KeyFeatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.KeyFeatureClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReferenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Reference = new System.Windows.Forms.ToolStripMenuItem();
             this.DataGridViewHomeView = new System.Windows.Forms.DataGridView();
+            this.numberKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.featureDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clientDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingHome = new System.Windows.Forms.BindingSource(this.components);
             this.Headline = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.featureDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clientDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SelectDataBaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Reference = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewHomeView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHome)).BeginInit();
@@ -84,6 +84,17 @@
             this.FileToolStripMenuItem.Name = "FileToolStripMenuItem";
             this.FileToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.FileToolStripMenuItem.Text = "Файл";
+            // 
+            // SelectDataBaseToolStripMenuItem
+            // 
+            this.SelectDataBaseToolStripMenuItem.Name = "SelectDataBaseToolStripMenuItem";
+            this.SelectDataBaseToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.SelectDataBaseToolStripMenuItem.Text = "Выбор базы данных";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(181, 6);
             // 
             // ExitToolStripMenuItem
             // 
@@ -126,6 +137,11 @@
             this.ClientToolStripMenuItem.Text = "Клиент";
             this.ClientToolStripMenuItem.Click += new System.EventHandler(this.ClientToolStripMenuItem_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(246, 6);
+            // 
             // KeyFeatureToolStripMenuItem
             // 
             this.KeyFeatureToolStripMenuItem.Name = "KeyFeatureToolStripMenuItem";
@@ -147,6 +163,13 @@
             this.ReferenceToolStripMenuItem.Name = "ReferenceToolStripMenuItem";
             this.ReferenceToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.ReferenceToolStripMenuItem.Text = "Справка";
+            // 
+            // Reference
+            // 
+            this.Reference.Name = "Reference";
+            this.Reference.Size = new System.Drawing.Size(180, 22);
+            this.Reference.Text = "Справка";
+            this.Reference.Click += new System.EventHandler(this.Reference_Click);
             // 
             // DataGridViewHomeView
             // 
@@ -178,6 +201,40 @@
             this.DataGridViewHomeView.Size = new System.Drawing.Size(594, 337);
             this.DataGridViewHomeView.TabIndex = 3;
             this.DataGridViewHomeView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewHomeView_DataBindingComplete);
+            // 
+            // numberKeyDataGridViewTextBoxColumn
+            // 
+            this.numberKeyDataGridViewTextBoxColumn.DataPropertyName = "NumberKey";
+            this.numberKeyDataGridViewTextBoxColumn.HeaderText = "Номер ключа";
+            this.numberKeyDataGridViewTextBoxColumn.Name = "numberKeyDataGridViewTextBoxColumn";
+            this.numberKeyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.numberKeyDataGridViewTextBoxColumn.ToolTipText = "Номер ключа (нутренный номер + номер на ключе)";
+            // 
+            // featureDataGridViewTextBoxColumn
+            // 
+            this.featureDataGridViewTextBoxColumn.DataPropertyName = "Feature";
+            this.featureDataGridViewTextBoxColumn.HeaderText = "Функциональность";
+            this.featureDataGridViewTextBoxColumn.Name = "featureDataGridViewTextBoxColumn";
+            this.featureDataGridViewTextBoxColumn.ReadOnly = true;
+            this.featureDataGridViewTextBoxColumn.ToolTipText = "Наименование функциональности";
+            // 
+            // clientDataGridViewTextBoxColumn
+            // 
+            this.clientDataGridViewTextBoxColumn.DataPropertyName = "Client";
+            this.clientDataGridViewTextBoxColumn.HeaderText = "Клиент";
+            this.clientDataGridViewTextBoxColumn.Name = "clientDataGridViewTextBoxColumn";
+            this.clientDataGridViewTextBoxColumn.ReadOnly = true;
+            this.clientDataGridViewTextBoxColumn.ToolTipText = "Наименование клиента + адрес";
+            // 
+            // endDateDataGridViewTextBoxColumn
+            // 
+            this.endDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.endDateDataGridViewTextBoxColumn.DataPropertyName = "EndDate";
+            this.endDateDataGridViewTextBoxColumn.HeaderText = "Срок действия";
+            this.endDateDataGridViewTextBoxColumn.Name = "endDateDataGridViewTextBoxColumn";
+            this.endDateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.endDateDataGridViewTextBoxColumn.ToolTipText = "Окончание срока действия у ключа";
+            this.endDateDataGridViewTextBoxColumn.Width = 131;
             // 
             // bindingHome
             // 
@@ -225,62 +282,6 @@
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ToolTipText = "Окончание срока действия у ключа";
             this.dataGridViewTextBoxColumn4.Width = 131;
-            // 
-            // numberKeyDataGridViewTextBoxColumn
-            // 
-            this.numberKeyDataGridViewTextBoxColumn.DataPropertyName = "NumberKey";
-            this.numberKeyDataGridViewTextBoxColumn.HeaderText = "Номер ключа";
-            this.numberKeyDataGridViewTextBoxColumn.Name = "numberKeyDataGridViewTextBoxColumn";
-            this.numberKeyDataGridViewTextBoxColumn.ReadOnly = true;
-            this.numberKeyDataGridViewTextBoxColumn.ToolTipText = "Номер ключа (нутренный номер + номер на ключе)";
-            // 
-            // featureDataGridViewTextBoxColumn
-            // 
-            this.featureDataGridViewTextBoxColumn.DataPropertyName = "Feature";
-            this.featureDataGridViewTextBoxColumn.HeaderText = "Функциональность";
-            this.featureDataGridViewTextBoxColumn.Name = "featureDataGridViewTextBoxColumn";
-            this.featureDataGridViewTextBoxColumn.ReadOnly = true;
-            this.featureDataGridViewTextBoxColumn.ToolTipText = "Наименование функциональности";
-            // 
-            // clientDataGridViewTextBoxColumn
-            // 
-            this.clientDataGridViewTextBoxColumn.DataPropertyName = "Client";
-            this.clientDataGridViewTextBoxColumn.HeaderText = "Клиент";
-            this.clientDataGridViewTextBoxColumn.Name = "clientDataGridViewTextBoxColumn";
-            this.clientDataGridViewTextBoxColumn.ReadOnly = true;
-            this.clientDataGridViewTextBoxColumn.ToolTipText = "Наименование клиента + адрес";
-            // 
-            // endDateDataGridViewTextBoxColumn
-            // 
-            this.endDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.endDateDataGridViewTextBoxColumn.DataPropertyName = "EndDate";
-            this.endDateDataGridViewTextBoxColumn.HeaderText = "Срок действия";
-            this.endDateDataGridViewTextBoxColumn.Name = "endDateDataGridViewTextBoxColumn";
-            this.endDateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.endDateDataGridViewTextBoxColumn.ToolTipText = "Окончание срока действия у ключа";
-            this.endDateDataGridViewTextBoxColumn.Width = 131;
-            // 
-            // SelectDataBaseToolStripMenuItem
-            // 
-            this.SelectDataBaseToolStripMenuItem.Name = "SelectDataBaseToolStripMenuItem";
-            this.SelectDataBaseToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.SelectDataBaseToolStripMenuItem.Text = "Выбор базы данных";
-            // 
-            // Reference
-            // 
-            this.Reference.Name = "Reference";
-            this.Reference.Size = new System.Drawing.Size(180, 22);
-            this.Reference.Text = "Справка";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(181, 6);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(246, 6);
             // 
             // MainForm
             // 

@@ -9,7 +9,7 @@ namespace Model
 {
     public class HaspKeyModel : IHaspKeyModel
     {
-        private readonly EntitesContext db;
+        private readonly IEntitesContext db;
         private readonly IHaspKeyLogic keyLogic;
 
         public HaspKeyModel(IFactoryLogic factoryLogic)
@@ -17,7 +17,7 @@ namespace Model
             if (factoryLogic == null)
                 throw new ArgumentNullException(nameof(factoryLogic));
 
-            db = new EntitesContext();
+            db = Context.GetContext();
             keyLogic = factoryLogic.CreateHaspKey(db);
         }
         public bool Add(ModelViewHaspKey entity)

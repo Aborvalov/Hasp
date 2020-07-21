@@ -7,7 +7,7 @@ using View;
 
 namespace Presenter
 {
-    public class PresenterClient : IPresenterClient
+    public class PresenterClient : IPresenterReference
     {
         private readonly IClientModel clientModel;
         private readonly IEntitiesView<ModelViewClient> entitiesView;

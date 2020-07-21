@@ -1,6 +1,5 @@
 ﻿using Entities;
 using Logic;
-using LogicContract;
 using ModelEntities;
 using System;
 using System.Collections.Generic;
@@ -12,17 +11,17 @@ namespace Model
     {
         private readonly DateTime date = DateTime.Now.Date;
         private readonly IFactoryLogic logic;
-        private  EntitesContext db;
+        private  IEntitesContext db;
         
         public MainModel(IFactoryLogic factoryLogic)
         {
             logic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
-            db = new EntitesContext();
+            db = Context.GetContext();
         }
         public void Dispose() => db.Dispose();
         public List<ModelViewMain> GetAll()
         {
-            using (db = new EntitesContext())
+            using (db = Context.GetContext())
             {
                 List<KeyFeatureClient> keyFeatureClients = logic.CreateKeyFeatureClient(db).GetAll();
                 List<KeyFeature> keyFeatures = logic.CreateKeyFeature(db).GetAll();

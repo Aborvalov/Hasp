@@ -10,7 +10,7 @@ namespace Model
 {
     public class KeyFeatureModel : IKeyFeatureModel
     {
-        private readonly EntitesContext db;
+        private readonly IEntitesContext db;
         private readonly IFeatureLogic featLogic;
         private readonly IKeyFeatureLogic keyFeatureLogic;
         private readonly IFactoryLogic factoryLogic;
@@ -25,7 +25,7 @@ namespace Model
         {
             this.factoryLogic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
 
-            db = new EntitesContext();
+            db = Context.GetContext();
             featLogic = this.factoryLogic.CreateFeature(db);
             keyFeatureLogic = this.factoryLogic.CreateKeyFeature(db);
         }

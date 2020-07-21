@@ -10,9 +10,9 @@ namespace DalDB
     {
         private readonly EntitesContext db;
 
-        public DbKeyFeatureClientDAO(EntitesContext db)
+        public DbKeyFeatureClientDAO(IEntitesContext db)
         {
-            this.db = db ?? throw new ArgumentNullException(nameof(db));
+            this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
         }
         public int Add(KeyFeatureClient entity)
         {

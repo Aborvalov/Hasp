@@ -63,5 +63,11 @@ namespace HASPKey
             keyFeatureClientView.DataUpdated += presenter.Views;
             keyFeatureClientView.ShowDialog();
         }
+
+        private void Reference_Click(object sender, EventArgs e)
+        {
+            ReferenceView referenceView = new ReferenceView();
+            referenceView.ShowDialog();
+        }
     }
 }

@@ -6,9 +6,9 @@ namespace Logic
     public interface IFactoryLogic
     {
         IClientLogic CreateClient(IEntitesContext db);
-        IFeatureLogic CreateFeature(EntitesContext db);
-        IHaspKeyLogic CreateHaspKey(EntitesContext db);
-        IKeyFeatureLogic CreateKeyFeature(EntitesContext db);
-        IKeyFeatureClientLogic CreateKeyFeatureClient(EntitesContext db);
+        IFeatureLogic CreateFeature(IEntitesContext db);
+        IHaspKeyLogic CreateHaspKey(IEntitesContext db);
+        IKeyFeatureLogic CreateKeyFeature(IEntitesContext db);
+        IKeyFeatureClientLogic CreateKeyFeatureClient(IEntitesContext db);
     }
 }

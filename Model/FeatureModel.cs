@@ -10,14 +10,14 @@ namespace Model
     public class FeatureModel : IEntitiesModel<ModelViewFeature>
     {
         private IFeatureLogic featLogic;
-        private readonly EntitesContext db;
+        private readonly IEntitesContext db;
 
         public FeatureModel(IFactoryLogic factoryLogic)
         {
             if (factoryLogic == null)
                 throw new ArgumentNullException(nameof(factoryLogic));
 
-            db = new EntitesContext();            
+            db = Context.GetContext();
             featLogic = factoryLogic.CreateFeature(db);
         }
 

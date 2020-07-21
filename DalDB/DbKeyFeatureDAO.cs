@@ -9,9 +9,9 @@ namespace DalDB
     public class DbKeyFeatureDAO : IContractKeyFeatureDAO
     {
         private readonly EntitesContext db;
-        public DbKeyFeatureDAO(EntitesContext db)
+        public DbKeyFeatureDAO(IEntitesContext db)
         {
-            this.db = db ?? throw new ArgumentNullException(nameof(db));
+            this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
         }
         public int Add(KeyFeature entity)
         {

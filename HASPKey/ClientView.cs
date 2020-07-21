@@ -10,7 +10,7 @@ namespace HASPKey
 {
     public partial class ClientView : DevExpress.XtraEditors.XtraForm, IEntitiesView<ModelViewClient>
     {
-        private readonly IPresenterClient presenterClient;
+        private readonly IPresenterReference presenterClient;
         private const int sizeH = 40;
         private bool size = true;        
         private bool search = false;

@@ -12,9 +12,9 @@ namespace DalDB
         private readonly EntitesContext db;
         private readonly DateTime date = DateTime.Now.Date;
 
-        public DbHaspKeyDAO(EntitesContext db)
+        public DbHaspKeyDAO(IEntitesContext db)
         {
-            this.db = db ?? throw new ArgumentNullException(nameof(db));
+            this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
         }
 
         public int Add(HaspKey entity)
