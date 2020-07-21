@@ -55,6 +55,7 @@
     <Compile Include="EntitesContext.cs" />
     <Compile Include="Feature.cs" />
     <Compile Include="HaspKey.cs" />
+    <Compile Include="IEntitesContext.cs" />
     <Compile Include="KeyFeature.cs" />
     <Compile Include="KeyFeatureClient.cs" />
     <Compile Include="TypeKey.cs" />

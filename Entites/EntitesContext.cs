@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 namespace Entities
 {
-    public class EntitesContext : DbContext
+    public class EntitesContext : DbContext, IEntitesContext
     {
         public DbSet<Client> Clients { get; set; }
         public DbSet<Feature> Features { get; set; }

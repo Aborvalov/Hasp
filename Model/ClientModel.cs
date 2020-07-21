@@ -10,7 +10,7 @@ namespace Model
     public class ClientModel : IClientModel
     {
         private IClientLogic clientLogic;
-        private readonly EntitesContext db;
+        private readonly IEntitesContext db;
         public ClientModel(IFactoryLogic factoryLogic)
         {
             if (factoryLogic == null)

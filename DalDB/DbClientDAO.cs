@@ -10,9 +10,9 @@ namespace DalDB
     {
         private readonly EntitesContext db;
 
-        public DbClientDAO(EntitesContext db)
+        public DbClientDAO(IEntitesContext db)
         {
-            this.db = db ?? throw new ArgumentNullException(nameof(db));
+            this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
         }
         public int Add(Client entity)
         {
