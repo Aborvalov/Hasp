@@ -28,6 +28,7 @@ namespace Presenter
 
         public void Dispose() => mainModel.Dispose();
 
-        public void Views() => mainView.Bind(mainModel.GetAll());
+        public void Views() 
+            => mainView.Bind(mainModel != null ? mainModel.GetAll() : null);
     }
 }

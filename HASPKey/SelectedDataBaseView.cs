@@ -23,6 +23,12 @@ namespace HASPKey
                 case TypeDateBase.Work:
                     radioButtonWorkDataBase.Checked = true;
                     break;
+                default:
+                    {
+                        radioButtonTestDataBase.Checked = false;
+                        radioButtonWorkDataBase.Checked = false;
+                        break;
+                    }
             }
         }
     }
