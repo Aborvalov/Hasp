@@ -17,7 +17,9 @@ namespace Model
             if (factoryLogic == null)
                 throw new ArgumentNullException(nameof(factoryLogic));
 
-            db = Context.GetContext();
+            db = Context.GetContext(); if (db == null)
+                throw new ArgumentNullException(nameof(db));
+
             keyLogic = factoryLogic.CreateHaspKey(db);
         }
         public bool Add(ModelViewHaspKey entity)

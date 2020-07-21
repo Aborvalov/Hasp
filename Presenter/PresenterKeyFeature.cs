@@ -15,15 +15,23 @@ namespace Presenter
         private readonly IKeyFeatureModel featureModel;
         private readonly IKeyFeatureView entitiesView;
         private List<KeyFeature> keyFeatures;
+        private const string nullDB = "База данных не найдена.";
 
         public PresenterKeyFeature(IKeyFeatureView entitiesView)
         {
             this.entitiesView = entitiesView ?? throw new ArgumentNullException(nameof(entitiesView));
+                                
+            try
+            {
+                keyModel = new HaspKeyModel(new Logics());
+                featureModel = new KeyFeatureModel(new Logics());
+            }
+            catch (ArgumentNullException)
+            {
+                entitiesView.MessageError(nullDB);
+            }
 
-            keyModel = new HaspKeyModel(new Logics());
-            featureModel = new KeyFeatureModel(new Logics());
             keyFeatures = featureModel.GetAllKeyFeature();
-            
             DisplayHaspKey();
         }
 

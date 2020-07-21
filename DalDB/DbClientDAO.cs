@@ -131,12 +131,9 @@ namespace DalDB
                                       .Where(kfc => kfc.IdClient == id);
 
             db.Clients.Remove(client);
-
-            foreach (var kfc in keyFeatureClients)
-                db.KeyFeatureClients.Remove(kfc);
-
-            db.SaveChanges();
-                        
+            db.KeyFeatureClients.RemoveRange(keyFeatureClients);
+            
+            db.SaveChanges();                        
             return true;
         }
 

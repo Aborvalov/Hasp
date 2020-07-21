@@ -155,19 +155,16 @@ namespace DalDB
 
             var keyFeature = db.KeyFeatures
                                .Where(kf => kf.IdHaspKey == id);
-
+            db.KeyFeatures.RemoveRange(keyFeature);
 
             db.HaspKeys.Remove(haspKey);
 
             foreach (var kf in keyFeature)
             {
-                db.KeyFeatures.Remove(kf);
-
                 var keyFeatureClients = db.KeyFeatureClients
                                       .Where(kefFeatureClient => kefFeatureClient.IdKeyFeature == kf.Id);
 
-                foreach (var kfc in keyFeatureClients)
-                    db.KeyFeatureClients.Remove(kfc);
+                 db.KeyFeatureClients.RemoveRange(keyFeatureClients);
             }
 
             db.SaveChanges();

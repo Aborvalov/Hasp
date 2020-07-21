@@ -3,10 +3,10 @@ using View;
 
 namespace Presenter
 {
-    public class PresenterReference : IPresenterRefernce
+    public class PresenterReference : IPresenterView
     {
         private readonly IReferenceView referenceView;
-        private readonly IReferenceModel referenceModel;
+        private readonly IItemModel<string> referenceModel;
         public PresenterReference(IReferenceView reference)
         {
             this.referenceView = reference ?? throw new System.ArgumentNullException(nameof(reference));
@@ -14,6 +14,6 @@ namespace Presenter
             this.referenceModel = new ReferenceModel();
             Display();
         }
-        public void Display() => referenceView.BindItem(referenceModel.GetText());
+        public void Display() => referenceView.BindItem(referenceModel.GetItem());
     }
 }

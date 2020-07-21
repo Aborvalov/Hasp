@@ -1,10 +1,8 @@
 ﻿namespace Model
 {
-    public class ReferenceModel : IReferenceModel
+    public class ReferenceModel : IItemModel<string>
     {
-        public string GetText()
-        {
-            return "Тут должно быть какое-то описание.";
-        }
+        public string GetItem() 
+            => "Тут должно быть какое-то описание.";
     }
 }

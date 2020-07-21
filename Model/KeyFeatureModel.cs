@@ -26,6 +26,9 @@ namespace Model
             this.factoryLogic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
 
             db = Context.GetContext();
+            if (db == null)
+                throw new ArgumentNullException(nameof(db));
+
             featLogic = this.factoryLogic.CreateFeature(db);
             keyFeatureLogic = this.factoryLogic.CreateKeyFeature(db);
         }

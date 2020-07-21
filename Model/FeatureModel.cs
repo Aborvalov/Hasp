@@ -18,6 +18,8 @@ namespace Model
                 throw new ArgumentNullException(nameof(factoryLogic));
 
             db = Context.GetContext();
+            if (db == null)
+                throw new ArgumentNullException(nameof(db));
             featLogic = factoryLogic.CreateFeature(db);
         }
 

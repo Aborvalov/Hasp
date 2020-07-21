@@ -28,12 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReferenceView));
-            this.bindingSourceText = new System.Windows.Forms.BindingSource(this.components);
             this.labelHeaderline = new System.Windows.Forms.Label();
             this.labelReference = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceText)).BeginInit();
             this.SuspendLayout();
             // 
             // labelHeaderline
@@ -56,9 +53,9 @@
             this.labelReference.Font = new System.Drawing.Font("Tahoma", 12F);
             this.labelReference.Location = new System.Drawing.Point(12, 45);
             this.labelReference.Name = "labelReference";
-            this.labelReference.Size = new System.Drawing.Size(51, 19);
+            this.labelReference.Size = new System.Drawing.Size(42, 19);
             this.labelReference.TabIndex = 1;
-            this.labelReference.Text = "label1";
+            this.labelReference.Text = "label";
             // 
             // ReferenceView
             // 
@@ -67,20 +64,20 @@
             this.ClientSize = new System.Drawing.Size(512, 490);
             this.Controls.Add(this.labelReference);
             this.Controls.Add(this.labelHeaderline);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ReferenceView";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Справка";
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceText)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.BindingSource bindingSourceText;
         private System.Windows.Forms.Label labelHeaderline;
         private System.Windows.Forms.Label labelReference;
     }

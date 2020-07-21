@@ -11,16 +11,23 @@ namespace Presenter
     public class PresenterKeyFeatureClient : IPresenterKeyFeatureClient
     {
         private readonly IEntitiesModel<ModelViewClient> clientModel;
-        private readonly IKeyFeatureClientModel keyFeatureClientModel;
-        
+        private readonly IKeyFeatureClientModel keyFeatureClientModel;        
         private readonly IKeyFeatureClientView entitiesView;
+        private const string nullDB = "База данных не найдена.";
+
         public PresenterKeyFeatureClient(IKeyFeatureClientView entitiesView)
         {
             this.entitiesView = entitiesView ?? throw new ArgumentNullException(nameof(entitiesView));
 
-            clientModel = new ClientModel(new Logics());
-            keyFeatureClientModel = new KeyFeatureClientModel(new Logics());
-
+            try
+            {
+                clientModel = new ClientModel(new Logics());
+                keyFeatureClientModel = new KeyFeatureClientModel(new Logics());
+            }
+            catch (ArgumentNullException)
+            {
+                entitiesView.MessageError(nullDB);
+            }
             DisplayClient();
         }
         public void DisplayClient() => entitiesView.BindClient(clientModel.GetAll());

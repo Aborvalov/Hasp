@@ -51,16 +51,12 @@ namespace DalDB
                                 .Where(kf => kf.IdFeature == id);
                         
             db.Features.Remove(feature);
-
+            db.KeyFeatures.RemoveRange(keyFeatures);
             foreach (var kf in keyFeatures)
             {
-                db.KeyFeatures.Remove(kf);
-
                 var keyFeatureClients = db.KeyFeatureClients
                                       .Where(kfc => kfc.IdKeyFeature == kf.Id);
-
-                foreach (var kfc in keyFeatureClients)
-                    db.KeyFeatureClients.Remove(kfc);
+                    db.KeyFeatureClients.RemoveRange(keyFeatureClients);
             }
 
             db.SaveChanges();

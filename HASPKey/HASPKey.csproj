@@ -146,6 +146,12 @@
     <Compile Include="ReferenceView.Designer.cs">
       <DependentUpon>ReferenceView.cs</DependentUpon>
     </Compile>
+    <Compile Include="SelectedDataBaseView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectedDataBaseView.Designer.cs">
+      <DependentUpon>SelectedDataBaseView.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ClientView.resx">
       <DependentUpon>ClientView.cs</DependentUpon>
     </EmbeddedResource>
@@ -176,6 +182,9 @@
     </Compile>
     <EmbeddedResource Include="ReferenceView.resx">
       <DependentUpon>ReferenceView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectedDataBaseView.resx">
+      <DependentUpon>SelectedDataBaseView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="packages.config" />

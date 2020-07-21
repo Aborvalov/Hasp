@@ -16,12 +16,20 @@ namespace Presenter
         private const string errorDelete = "Не удалось удалить функциональность.";
         private const string errorNumber = "\u2022 Неверное значение номера, должно быть числом. \n";
         private const string erroremptyName = "\u2022 Не заполнено поля \"Наименование\", не должно быть пустым. \n";
+        private const string nullDB = "База данных не найдена.";
 
         public PresenterFeature(IEntitiesView<ModelViewFeature> entitesView)
         {
             this.entitiesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
 
-            featureModel = new FeatureModel(new Logics());
+            try
+            {
+                featureModel = new FeatureModel(new Logics());
+            }
+            catch (ArgumentNullException)
+            {
+                entitiesView.MessageError(nullDB);
+            }
             Display();
         }
 

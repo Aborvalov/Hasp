@@ -19,12 +19,20 @@ namespace Presenter
         private const string errorInnerId = "Некорректный номер ключа.";
         private const string errorEmptyName = "\u2022 Не заполнено поля \"Наименование\", не должно быть пустым. \n";
         private const string errorEmptyAddress = "\u2022 Не заполнено поля \"Адрес\", не должно быть пустым. \n";
+        private const string nullDB = "База данных не найдена.";
 
         public PresenterClient(IEntitiesView<ModelViewClient> entitesView)
         {
             this.entitiesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
-
-            clientModel = new ClientModel(new Logics());
+            
+            try
+            {
+                clientModel = new ClientModel(new Logics());
+            }
+            catch (ArgumentNullException)
+            {
+                entitiesView.MessageError(nullDB);
+            }            
             Display();
         }
 

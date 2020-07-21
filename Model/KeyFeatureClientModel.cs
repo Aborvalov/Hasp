@@ -28,6 +28,9 @@ namespace Model
             this.factoryLogic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
 
             db = Context.GetContext();
+            if (db == null)
+                throw new ArgumentNullException(nameof(db));
+
             clientLogic = this.factoryLogic.CreateClient(db);
             keyFeatureClientLogic = this.factoryLogic.CreateKeyFeatureClient(db);
             haspKeyLogic = this.factoryLogic.CreateHaspKey(db);
@@ -58,7 +61,7 @@ namespace Model
 
             return keyFeatureClient
                         .OrderBy(x => x.NumberKey)
-                        .OrderByDescending(x => x.Selected)
+                            .ThenByDescending(x => x.Selected)
                         .Distinct()
                         .ToList();
         }

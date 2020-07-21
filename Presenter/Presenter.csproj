@@ -55,6 +55,7 @@
     <Compile Include="PresenterKeyFeatureClient.cs" />
     <Compile Include="PresenterMain.cs" />
     <Compile Include="PresenterReference.cs" />
+    <Compile Include="PresenterSelectedDataBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

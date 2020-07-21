@@ -45,7 +45,8 @@
     <Compile Include="IKeyFeatureClientView.cs" />
     <Compile Include="IKeyFeatureView.cs" />
     <Compile Include="IMainView.cs" />
-    <Compile Include="IReference.cs" />
+    <Compile Include="IReferenceView.cs" />
+    <Compile Include="ISelectedDataBaseView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

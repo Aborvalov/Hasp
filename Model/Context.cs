@@ -1,4 +1,5 @@
 ﻿using Entities;
+using ModelEntities;
 
 namespace Model
 {
@@ -12,8 +13,18 @@ namespace Model
 
         internal static IEntitesContext GetContext()
         {
-            return FactoryContext.CreateTestContext();
-           // return factoryContext.CreateWorkContext();
+            IItemModel<TypeDateBase> test = new SelectedDataBaseModel();
+            var dateBase = test.GetItem();
+
+            switch (dateBase)
+            {
+                case TypeDateBase.Test:
+                    return FactoryContext.CreateTestContext();
+                case TypeDateBase.Work:
+                    return FactoryContext.CreateWorkContext();
+            }
+
+            return null;
         }
     }
 }

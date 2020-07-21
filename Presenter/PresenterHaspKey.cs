@@ -18,12 +18,20 @@ namespace Presenter
         private const string errorHaspKey = "\u2022 Неверное значение внутреннего ключа, должно быть числом. \n";
         private const string errorEmptyTypeKey = "\u2022 Не выбран тип ключа. \n";
         private const string errorEmptyNumber = "\u2022 Не заполнено поля \"Номер\", не должно быть пустым. \n";
-        
+        private const string nullDB = "База данных не найдена.";
+
         public PresenterHaspKey(IEntitiesView<ModelViewHaspKey> entitesView)
         {
             this.entitiesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
 
-            haspKeyModel = new HaspKeyModel(new Logics());
+            try
+            {
+                haspKeyModel = new HaspKeyModel(new Logics());
+            }
+            catch (ArgumentNullException)
+            {
+                entitiesView.MessageError(nullDB);
+            }            
             Display();
         }
 

@@ -52,9 +52,7 @@ namespace DalDB
                                      .ToList();
 
             db.KeyFeatures.Remove(keyFeature);
-
-            foreach (var kfc in keyFeatureClient)
-                db.KeyFeatureClients.Remove(kfc);
+            db.KeyFeatureClients.RemoveRange(keyFeatureClient);
 
             db.SaveChanges();
            

@@ -17,12 +17,17 @@ namespace Model
         {
             logic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
             db = Context.GetContext();
+            if (db == null)
+                throw new ArgumentNullException(nameof(db));
         }
         public void Dispose() => db.Dispose();
         public List<ModelViewMain> GetAll()
         {
             using (db = Context.GetContext())
             {
+                if (db == null)
+                    throw new ArgumentNullException(nameof(db));
+
                 List<KeyFeatureClient> keyFeatureClients = logic.CreateKeyFeatureClient(db).GetAll();
                 List<KeyFeature> keyFeatures = logic.CreateKeyFeature(db).GetAll();
                 List<Client> clients = logic.CreateClient(db).GetAll();

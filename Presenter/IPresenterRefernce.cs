@@ -2,7 +2,7 @@
 
 namespace Presenter
 {
-    public interface IPresenterRefernce
+    public interface IPresenterView
     {
         void Display();
     }
