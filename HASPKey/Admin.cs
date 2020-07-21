@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace HASPKey
 {
-    internal class Admin
+    internal static class Admin
     {
         internal static bool IsAdmin { get; } = false;
 
