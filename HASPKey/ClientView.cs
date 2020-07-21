@@ -11,15 +11,16 @@ namespace HASPKey
     public partial class ClientView : DevExpress.XtraEditors.XtraForm, IEntitiesView<ModelViewClient>
     {
         private readonly IPresenterClient presenterClient;
-        private bool size = true;
         private const int sizeH = 40;
+        private bool size = true;        
         private bool search = false;
+        private bool error = false;
         public event Action DataUpdated;
         internal ModelViewClient SearchIdClient { get; private set; }
 
         private const string caption = "Удалить клиента";
         private const string message = "Вы уверены, что хотите удалить клиента?";
-        private const string error = "Ошибка";
+        private const string errorStr = "Ошибка";
         private const string emptyClient = "Данная клиент не найден.";
         
         public ClientView(bool search)
@@ -45,7 +46,10 @@ namespace HASPKey
            => bindingItem.DataSource = entity ?? new ModelViewClient();
 
         public void MessageError(string errorText)
-            => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        {
+            MessageBox.Show(errorText, errorStr, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            error = true;
+        }
        
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
@@ -85,9 +89,11 @@ namespace HASPKey
         {
             if (size)
                 return;
-            
+
+            error = false;
             presenterClient.FillModel(bindingItem.DataSource as ModelViewClient);
-            DefaultView();
+            if(!error)
+                DefaultView();
         }
         private void DefaultView()
         {

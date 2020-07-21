@@ -62,6 +62,7 @@
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingItem)).BeginInit();
@@ -108,6 +109,7 @@
             this.nameDataGridViewTextBoxColumn.HeaderText = "Наименование";
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.nameDataGridViewTextBoxColumn.ToolTipText = "Наименование организации";
             // 
             // addressDataGridViewTextBoxColumn
             // 
@@ -115,6 +117,7 @@
             this.addressDataGridViewTextBoxColumn.HeaderText = "Адрес";
             this.addressDataGridViewTextBoxColumn.Name = "addressDataGridViewTextBoxColumn";
             this.addressDataGridViewTextBoxColumn.ReadOnly = true;
+            this.addressDataGridViewTextBoxColumn.ToolTipText = "Адрес организации";
             // 
             // phoneDataGridViewTextBoxColumn
             // 
@@ -122,6 +125,7 @@
             this.phoneDataGridViewTextBoxColumn.HeaderText = "Телефон";
             this.phoneDataGridViewTextBoxColumn.Name = "phoneDataGridViewTextBoxColumn";
             this.phoneDataGridViewTextBoxColumn.ReadOnly = true;
+            this.phoneDataGridViewTextBoxColumn.ToolTipText = "Контактный телефон";
             // 
             // contactPersonDataGridViewTextBoxColumn
             // 
@@ -129,6 +133,7 @@
             this.contactPersonDataGridViewTextBoxColumn.HeaderText = "Контактное лицо";
             this.contactPersonDataGridViewTextBoxColumn.Name = "contactPersonDataGridViewTextBoxColumn";
             this.contactPersonDataGridViewTextBoxColumn.ReadOnly = true;
+            this.contactPersonDataGridViewTextBoxColumn.ToolTipText = "Контактное лицо";
             // 
             // bindingClient
             // 
@@ -274,6 +279,7 @@
             this.buttonAll.Size = new System.Drawing.Size(75, 23);
             this.buttonAll.TabIndex = 14;
             this.buttonAll.Text = "Все";
+            this.toolTip.SetToolTip(this.buttonAll, "Список всех клиентов.");
             this.buttonAll.UseVisualStyleBackColor = true;
             this.buttonAll.Click += new System.EventHandler(this.ButtonAll_Click);
             // 
@@ -294,6 +300,7 @@
             this.tbInnerIdHaspKey.Name = "tbInnerIdHaspKey";
             this.tbInnerIdHaspKey.Size = new System.Drawing.Size(100, 21);
             this.tbInnerIdHaspKey.TabIndex = 16;
+            this.toolTip.SetToolTip(this.tbInnerIdHaspKey, "Введите внутренний номер ключа и нажмите \"Enter\".");
             this.tbInnerIdHaspKey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbInnerIdHaspKey_KeyDown);
             this.tbInnerIdHaspKey.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbInnerIdHaspKey_KeyPress);
             // 
@@ -406,14 +413,15 @@
         private System.Windows.Forms.TextBox tbInnerIdHaspKey;
         private System.Windows.Forms.Label Headline;
         private System.Windows.Forms.BindingSource bindingItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn addressDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn phoneDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn contactPersonDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn addressDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn phoneDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn contactPersonDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

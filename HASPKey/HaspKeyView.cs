@@ -13,11 +13,12 @@ namespace HASPKey
     {
         private readonly IPresenterHaspKey presenterHaspKey;
         private bool size = true;
+        private bool error = false;
         private const int sizeH = 40;
         public event Action DataUpdated;       
         internal ModelViewHaspKey SearchHaspKey { get; private set; } = null;
         
-        private const string error = "Ошибка";
+        private const string errorStr = "Ошибка";
         private const string caption = "Удалить ключ";
         private const string emptyHaspKey = "Данный ключ не найден.";
         private const string message = "Вы уверены, что хотите удалить Hasp-ключ?";
@@ -70,18 +71,24 @@ namespace HASPKey
                 DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height - sizeH;
                 size = !size;               
                 buttonAdd.Enabled = false;
+                checkBoxIsHome.Checked = true;
             }            
         }
         public void MessageError(string errorText)
-            => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        {
+            MessageBox.Show(errorText, errorStr, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            error = true;
+        }
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             if (size)
                 return;
 
+            error = false;
             presenterHaspKey.FillModel(bindingItem.DataSource as ModelViewHaspKey);
-            DefaultView();            
+            if(!error)
+                DefaultView();            
         }
 
         private void DataGridViewHaspKey_DoubleClick(object sender, EventArgs e)

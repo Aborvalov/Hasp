@@ -10,7 +10,15 @@ namespace HASPKey
         static Admin()
         {
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(@".\users.xml");
+            try
+            {
+                xDoc.Load(@".\users.xml");
+            }
+            catch
+            {
+                IsAdmin = false;
+                return;
+            }
             foreach (XmlNode xnode in xDoc.DocumentElement)
             {
                 if (xnode.Attributes == null)

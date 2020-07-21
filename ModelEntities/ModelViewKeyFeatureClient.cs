@@ -62,7 +62,7 @@ namespace ModelEntities
         }
         [DisplayName("Окончание действия")]
         public DateTime? EndDate { get; set; }
-        [DisplayName("Выбран")]
+        [DisplayName("У клиента")]
         public bool Selected { get; set; }
 
         public override int GetHashCode() => KeyFeatureClient.GetHashCode();

@@ -14,10 +14,11 @@ namespace HASPKey
         private bool size = true;
         private int sizeH = 40;       
         private bool search = false;
+        private bool error = false;
         public event Action DataUpdated;
         internal ModelViewFeature SearchFeature { get; private set; } = null;
         
-        private const string error = "Ошибка";
+        private const string errorStr = "Ошибка";
         private const string emptyFeature = "Функциональность не найдена.";
         private const string caption = "Удалить фичу";
         private const string message = "Вы уверены, что хотите удалить фичу?";
@@ -45,7 +46,10 @@ namespace HASPKey
             => bindingItem.DataSource = entity ?? new ModelViewFeature();
 
         public void MessageError(string errorText)
-            => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);              
+        {
+            MessageBox.Show(errorText, errorStr, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            error = true;
+        }           
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
@@ -87,8 +91,10 @@ namespace HASPKey
             if (size)
                 return;
 
+            error = false;
             presenterFeature.FillModel(bindingItem.DataSource as ModelViewFeature);
-            DefaultView();           
+            if (!error)
+                DefaultView();
         }
 
         private void ButtonDelete_Click(object sender, EventArgs e) => DeleteIrem();
