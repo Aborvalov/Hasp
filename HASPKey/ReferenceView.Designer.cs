@@ -38,11 +38,11 @@
             this.labelHeaderline.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelHeaderline.AutoSize = true;
             this.labelHeaderline.Font = new System.Drawing.Font("Tahoma", 15F);
-            this.labelHeaderline.Location = new System.Drawing.Point(210, 9);
+            this.labelHeaderline.Location = new System.Drawing.Point(197, 9);
             this.labelHeaderline.Name = "labelHeaderline";
-            this.labelHeaderline.Size = new System.Drawing.Size(92, 24);
+            this.labelHeaderline.Size = new System.Drawing.Size(130, 24);
             this.labelHeaderline.TabIndex = 0;
-            this.labelHeaderline.Text = "Справка.";
+            this.labelHeaderline.Text = "О программе";
             // 
             // labelReference
             // 
