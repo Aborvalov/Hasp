@@ -12,7 +12,7 @@ namespace HASPKey
             XmlDocument xDoc = new XmlDocument();
             try
             {
-                xDoc.Load(@".\users.xml");
+                xDoc.Load(@".\Common\users.xml");
             }
             catch
             {

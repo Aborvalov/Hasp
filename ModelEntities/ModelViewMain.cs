@@ -8,6 +8,8 @@ namespace ModelEntities
     /// </summary>
     public class ModelViewMain
     {
+        [Browsable(false)]
+        public int IdClient { get; set; }
         [DisplayName("Номер ключа")]
         public string NumberKey { get; set; }
         [DisplayName("Функциональность")]

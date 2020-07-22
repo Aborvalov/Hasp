@@ -53,11 +53,14 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonSearchClient = new System.Windows.Forms.Button();
+            this.buttonAll = new System.Windows.Forms.Button();
             this.numberKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.featureDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clientDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingHome = new System.Windows.Forms.BindingSource(this.components);
+            this.toolTipButton = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewHomeView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHome)).BeginInit();
@@ -196,17 +199,17 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DataGridViewHomeView.DefaultCellStyle = dataGridViewCellStyle1;
-            this.DataGridViewHomeView.Location = new System.Drawing.Point(12, 46);
+            this.DataGridViewHomeView.Location = new System.Drawing.Point(12, 54);
             this.DataGridViewHomeView.Name = "DataGridViewHomeView";
             this.DataGridViewHomeView.ReadOnly = true;
-            this.DataGridViewHomeView.Size = new System.Drawing.Size(594, 337);
+            this.DataGridViewHomeView.Size = new System.Drawing.Size(594, 393);
             this.DataGridViewHomeView.TabIndex = 3;
             this.DataGridViewHomeView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewHomeView_DataBindingComplete);
             // 
             // Headline
             // 
             this.Headline.AutoSize = true;
-            this.Headline.Location = new System.Drawing.Point(12, 30);
+            this.Headline.Location = new System.Drawing.Point(14, 38);
             this.Headline.Name = "Headline";
             this.Headline.Size = new System.Drawing.Size(146, 13);
             this.Headline.TabIndex = 4;
@@ -245,6 +248,30 @@
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ToolTipText = "Окончание срока действия у ключа";
             this.dataGridViewTextBoxColumn4.Width = 131;
+            // 
+            // buttonSearchClient
+            // 
+            this.buttonSearchClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSearchClient.Location = new System.Drawing.Point(395, 28);
+            this.buttonSearchClient.Name = "buttonSearchClient";
+            this.buttonSearchClient.Size = new System.Drawing.Size(129, 23);
+            this.buttonSearchClient.TabIndex = 5;
+            this.buttonSearchClient.Text = "Поиск по клиенту";
+            this.toolTipButton.SetToolTip(this.buttonSearchClient, "Выбор клиента для поиска.");
+            this.buttonSearchClient.UseVisualStyleBackColor = true;
+            this.buttonSearchClient.Click += new System.EventHandler(this.buttonSearchClient_Click);
+            // 
+            // buttonAll
+            // 
+            this.buttonAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAll.Location = new System.Drawing.Point(530, 28);
+            this.buttonAll.Name = "buttonAll";
+            this.buttonAll.Size = new System.Drawing.Size(75, 23);
+            this.buttonAll.TabIndex = 6;
+            this.buttonAll.Text = "Все";
+            this.toolTipButton.SetToolTip(this.buttonAll, "Список всех клиентов и действующих ключей.");
+            this.buttonAll.UseVisualStyleBackColor = true;
+            this.buttonAll.Click += new System.EventHandler(this.buttonAll_Click);
             // 
             // numberKeyDataGridViewTextBoxColumn
             // 
@@ -288,7 +315,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(617, 395);
+            this.ClientSize = new System.Drawing.Size(617, 459);
+            this.Controls.Add(this.buttonAll);
+            this.Controls.Add(this.buttonSearchClient);
             this.Controls.Add(this.Headline);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.DataGridViewHomeView);
@@ -334,6 +363,9 @@
         private System.Windows.Forms.ToolStripMenuItem Reference;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.Button buttonSearchClient;
+        private System.Windows.Forms.Button buttonAll;
+        private System.Windows.Forms.ToolTip toolTipButton;
     }
 }
 

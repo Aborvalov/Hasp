@@ -48,6 +48,7 @@ namespace Model
                            {
                                Client = cl.Name + (string.IsNullOrEmpty(cl.Address)
                                                         ? string.Empty : " - " + cl.Address),
+                               IdClient = cl.Id,
                                EndDate = keyFeat.EndDate,
                                Feature = feature.Name,
                                NumberKey = key.InnerId.ToString() + " - \"" + key.Number + "\"",
@@ -57,6 +58,11 @@ namespace Model
                         .OrderBy(x => x.Client)
                         .ToList();
             }
-        }       
+        }
+
+        public List<ModelViewMain> GetByClient(ModelViewClient client)
+            => GetAll()
+                .Where(x => x.IdClient == client.Id)
+                .ToList();        
     }
 }

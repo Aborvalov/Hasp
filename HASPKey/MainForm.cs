@@ -111,5 +111,21 @@ namespace HASPKey
             presenter = new PresenterMain(this);
             ErrorDB();
         }
+
+        private void buttonSearchClient_Click(object sender, EventArgs e)
+        {
+            using (ClientView client = new ClientView(true))
+            {
+                client.ShowDialog();
+
+                if (client.SearchIdClient != null)
+                {                    
+                    presenter.GetByClient(client.SearchIdClient);
+                }
+            }
+        }
+
+        private void buttonAll_Click(object sender, EventArgs e)
+            => presenter.Views();
     }
 }

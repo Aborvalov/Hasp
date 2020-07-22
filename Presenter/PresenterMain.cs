@@ -1,5 +1,6 @@
 ﻿using Logic;
 using Model;
+using ModelEntities;
 using System;
 using View;
 
@@ -30,5 +31,8 @@ namespace Presenter
         public void Dispose() => mainModel?.Dispose();
         public void Views() 
             => mainView.Bind(mainModel?.GetAll());
+
+        public void GetByClient(ModelViewClient client) 
+            => mainView.Bind(mainModel?.GetByClient(client));
     }
 }
