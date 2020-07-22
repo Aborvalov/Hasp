@@ -18,45 +18,52 @@ namespace Model
             logic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
             db = Context.GetContext();
             if (db == null)
-                throw new ArgumentNullException(nameof(db));
-        }
+                throw new ArgumentNullException(nameof(db));           
+        }       
         public void Dispose() => db.Dispose();
         public List<ModelViewMain> GetAll()
         {
-            using (db = Context.GetContext())
+            try
             {
-                if (db == null)
-                    throw new ArgumentNullException(nameof(db));
+                using (db = Context.GetContext())
+                {
+                    if (db == null)
+                        throw new ArgumentNullException(nameof(db));
 
-                List<KeyFeatureClient> keyFeatureClients = logic.CreateKeyFeatureClient(db).GetAll();
-                List<KeyFeature> keyFeatures = logic.CreateKeyFeature(db).GetAll();
-                List<Client> clients = logic.CreateClient(db).GetAll();
-                List<Feature> features = logic.CreateFeature(db).GetAll();
-                List<HaspKey> haspKeys = logic.CreateHaspKey(db).GetByActive(); ;
+                    List<KeyFeatureClient> keyFeatureClients = logic.CreateKeyFeatureClient(db).GetAll();
+                    List<KeyFeature> keyFeatures = logic.CreateKeyFeature(db).GetAll();
+                    List<Client> clients = logic.CreateClient(db).GetAll();
+                    List<Feature> features = logic.CreateFeature(db).GetAll();
+                    List<HaspKey> haspKeys = logic.CreateHaspKey(db).GetByActive(); ;
 
-                var item = from keyFeatCl in keyFeatureClients
-                           join keyFeat in keyFeatures
-                                on keyFeatCl.IdKeyFeature equals keyFeat.Id
-                           join cl in clients
-                                on keyFeatCl.IdClient equals cl.Id
-                           join feature in features
-                                on keyFeat.IdFeature equals feature.Id
-                           join key in haspKeys
-                                on keyFeat.IdHaspKey equals key.Id
-                           where keyFeat.EndDate >= date
-                           select new ModelViewMain
-                           {
-                               Client = cl.Name + (string.IsNullOrEmpty(cl.Address)
-                                                        ? string.Empty : " - " + cl.Address),
-                               IdClient = cl.Id,
-                               EndDate = keyFeat.EndDate,
-                               Feature = feature.Name,
-                               NumberKey = key.InnerId.ToString() + " - \"" + key.Number + "\"",
-                           };
+                    var item = from keyFeatCl in keyFeatureClients
+                               join keyFeat in keyFeatures
+                                    on keyFeatCl.IdKeyFeature equals keyFeat.Id
+                               join cl in clients
+                                    on keyFeatCl.IdClient equals cl.Id
+                               join feature in features
+                                    on keyFeat.IdFeature equals feature.Id
+                               join key in haspKeys
+                                    on keyFeat.IdHaspKey equals key.Id
+                               where keyFeat.EndDate >= date
+                               select new ModelViewMain
+                               {
+                                   Client = cl.Name + (string.IsNullOrEmpty(cl.Address)
+                                                            ? string.Empty : " - " + cl.Address),
+                                   IdClient = cl.Id,
+                                   EndDate = keyFeat.EndDate,
+                                   Feature = feature.Name,
+                                   NumberKey = key.InnerId.ToString() + " - \"" + key.Number + "\"",
+                               };
 
-                return item
-                        .OrderBy(x => x.Client)
-                        .ToList();
+                    return item
+                            .OrderBy(x => x.Client)
+                            .ToList();
+                }
+            }
+            catch
+            {
+                throw;
             }
         }
 

@@ -21,9 +21,17 @@ namespace HASPKey
         private void ErrorDB()
         {
             if (ErrorDataBase)
+            {
                 EditToolStripMenuItem.Enabled = false;
+                buttonAll.Enabled = false;
+                buttonSearchClient.Enabled = false;
+            }
             else
+            {
                 EditToolStripMenuItem.Enabled = true;
+                buttonAll.Enabled = true;
+                buttonSearchClient.Enabled = true;
+            }
         }
 
         public void MessageError(string errorText)
