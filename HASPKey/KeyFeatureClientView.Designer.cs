@@ -39,6 +39,13 @@
             this.contactPersonDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingClient = new System.Windows.Forms.BindingSource(this.components);
             this.DataGridViewKeyFeature = new System.Windows.Forms.DataGridView();
+            this.numberKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.featureDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.initiatorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.noteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.selectedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.bindingKeyFeatureClient = new System.Windows.Forms.BindingSource(this.components);
             this.HeaderlineClient = new System.Windows.Forms.Label();
             this.HeaderlineKey = new System.Windows.Forms.Label();
@@ -54,13 +61,6 @@
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.typeKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.featureDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.initiatorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.noteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.selectedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewKeyFeature)).BeginInit();
@@ -94,7 +94,7 @@
             this.DataGridViewClient.Location = new System.Drawing.Point(12, 17);
             this.DataGridViewClient.Name = "DataGridViewClient";
             this.DataGridViewClient.ReadOnly = true;
-            this.DataGridViewClient.Size = new System.Drawing.Size(676, 271);
+            this.DataGridViewClient.Size = new System.Drawing.Size(678, 336);
             this.DataGridViewClient.TabIndex = 0;
             this.DataGridViewClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewClient_CellClick);
             this.DataGridViewClient.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewClient_DataBindingComplete);
@@ -162,12 +162,64 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DataGridViewKeyFeature.DefaultCellStyle = dataGridViewCellStyle2;
-            this.DataGridViewKeyFeature.Location = new System.Drawing.Point(12, 310);
+            this.DataGridViewKeyFeature.Location = new System.Drawing.Point(12, 372);
             this.DataGridViewKeyFeature.Name = "DataGridViewKeyFeature";
-            this.DataGridViewKeyFeature.Size = new System.Drawing.Size(676, 154);
+            this.DataGridViewKeyFeature.Size = new System.Drawing.Size(678, 211);
             this.DataGridViewKeyFeature.TabIndex = 1;
             this.DataGridViewKeyFeature.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewKeyFeature_CellEndEdit);
             this.DataGridViewKeyFeature.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewKeyFeature_DataBindingComplete);
+            // 
+            // numberKeyDataGridViewTextBoxColumn
+            // 
+            this.numberKeyDataGridViewTextBoxColumn.DataPropertyName = "NumberKey";
+            this.numberKeyDataGridViewTextBoxColumn.HeaderText = "Номер ключа";
+            this.numberKeyDataGridViewTextBoxColumn.Name = "numberKeyDataGridViewTextBoxColumn";
+            this.numberKeyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.numberKeyDataGridViewTextBoxColumn.ToolTipText = "Номер ключа (нутренный номер + номер на ключе)";
+            // 
+            // typeKeyDataGridViewTextBoxColumn
+            // 
+            this.typeKeyDataGridViewTextBoxColumn.DataPropertyName = "TypeKey";
+            this.typeKeyDataGridViewTextBoxColumn.HeaderText = "Тип ключа";
+            this.typeKeyDataGridViewTextBoxColumn.Name = "typeKeyDataGridViewTextBoxColumn";
+            this.typeKeyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.typeKeyDataGridViewTextBoxColumn.ToolTipText = "Тип ключа";
+            // 
+            // featureDataGridViewTextBoxColumn
+            // 
+            this.featureDataGridViewTextBoxColumn.DataPropertyName = "Feature";
+            this.featureDataGridViewTextBoxColumn.HeaderText = "Функциональность";
+            this.featureDataGridViewTextBoxColumn.Name = "featureDataGridViewTextBoxColumn";
+            this.featureDataGridViewTextBoxColumn.ReadOnly = true;
+            this.featureDataGridViewTextBoxColumn.ToolTipText = "Функциональность на ключе";
+            // 
+            // endDateDataGridViewTextBoxColumn
+            // 
+            this.endDateDataGridViewTextBoxColumn.DataPropertyName = "EndDate";
+            this.endDateDataGridViewTextBoxColumn.HeaderText = "Окончание действия";
+            this.endDateDataGridViewTextBoxColumn.Name = "endDateDataGridViewTextBoxColumn";
+            this.endDateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.endDateDataGridViewTextBoxColumn.ToolTipText = "Окончание действия функциональности на ключе";
+            // 
+            // initiatorDataGridViewTextBoxColumn
+            // 
+            this.initiatorDataGridViewTextBoxColumn.DataPropertyName = "Initiator";
+            this.initiatorDataGridViewTextBoxColumn.HeaderText = "Инициатор";
+            this.initiatorDataGridViewTextBoxColumn.Name = "initiatorDataGridViewTextBoxColumn";
+            this.initiatorDataGridViewTextBoxColumn.ToolTipText = "Инициатор предоставить ключ с данной функциональностью клиенту";
+            // 
+            // noteDataGridViewTextBoxColumn
+            // 
+            this.noteDataGridViewTextBoxColumn.DataPropertyName = "Note";
+            this.noteDataGridViewTextBoxColumn.HeaderText = "Прочие";
+            this.noteDataGridViewTextBoxColumn.Name = "noteDataGridViewTextBoxColumn";
+            this.noteDataGridViewTextBoxColumn.ToolTipText = "Дополнительная информация";
+            // 
+            // selectedDataGridViewCheckBoxColumn
+            // 
+            this.selectedDataGridViewCheckBoxColumn.DataPropertyName = "Selected";
+            this.selectedDataGridViewCheckBoxColumn.HeaderText = "У клиента";
+            this.selectedDataGridViewCheckBoxColumn.Name = "selectedDataGridViewCheckBoxColumn";
             // 
             // bindingKeyFeatureClient
             // 
@@ -186,7 +238,7 @@
             // 
             this.HeaderlineKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.HeaderlineKey.AutoSize = true;
-            this.HeaderlineKey.Location = new System.Drawing.Point(12, 294);
+            this.HeaderlineKey.Location = new System.Drawing.Point(9, 356);
             this.HeaderlineKey.Name = "HeaderlineKey";
             this.HeaderlineKey.Size = new System.Drawing.Size(235, 13);
             this.HeaderlineKey.TabIndex = 3;
@@ -195,7 +247,7 @@
             // buttonSave
             // 
             this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonSave.Location = new System.Drawing.Point(12, 469);
+            this.buttonSave.Location = new System.Drawing.Point(12, 588);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 4;
@@ -296,63 +348,11 @@
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.Width = 79;
             // 
-            // numberKeyDataGridViewTextBoxColumn
-            // 
-            this.numberKeyDataGridViewTextBoxColumn.DataPropertyName = "NumberKey";
-            this.numberKeyDataGridViewTextBoxColumn.HeaderText = "Номер ключа";
-            this.numberKeyDataGridViewTextBoxColumn.Name = "numberKeyDataGridViewTextBoxColumn";
-            this.numberKeyDataGridViewTextBoxColumn.ReadOnly = true;
-            this.numberKeyDataGridViewTextBoxColumn.ToolTipText = "Номер ключа (нутренный номер + номер на ключе)";
-            // 
-            // typeKeyDataGridViewTextBoxColumn
-            // 
-            this.typeKeyDataGridViewTextBoxColumn.DataPropertyName = "TypeKey";
-            this.typeKeyDataGridViewTextBoxColumn.HeaderText = "Тип ключа";
-            this.typeKeyDataGridViewTextBoxColumn.Name = "typeKeyDataGridViewTextBoxColumn";
-            this.typeKeyDataGridViewTextBoxColumn.ReadOnly = true;
-            this.typeKeyDataGridViewTextBoxColumn.ToolTipText = "Тип ключа";
-            // 
-            // featureDataGridViewTextBoxColumn
-            // 
-            this.featureDataGridViewTextBoxColumn.DataPropertyName = "Feature";
-            this.featureDataGridViewTextBoxColumn.HeaderText = "Функциональность";
-            this.featureDataGridViewTextBoxColumn.Name = "featureDataGridViewTextBoxColumn";
-            this.featureDataGridViewTextBoxColumn.ReadOnly = true;
-            this.featureDataGridViewTextBoxColumn.ToolTipText = "Функциональность на ключе";
-            // 
-            // endDateDataGridViewTextBoxColumn
-            // 
-            this.endDateDataGridViewTextBoxColumn.DataPropertyName = "EndDate";
-            this.endDateDataGridViewTextBoxColumn.HeaderText = "Окончание действия";
-            this.endDateDataGridViewTextBoxColumn.Name = "endDateDataGridViewTextBoxColumn";
-            this.endDateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.endDateDataGridViewTextBoxColumn.ToolTipText = "Окончание действия функциональности на ключе";
-            // 
-            // initiatorDataGridViewTextBoxColumn
-            // 
-            this.initiatorDataGridViewTextBoxColumn.DataPropertyName = "Initiator";
-            this.initiatorDataGridViewTextBoxColumn.HeaderText = "Инициатор";
-            this.initiatorDataGridViewTextBoxColumn.Name = "initiatorDataGridViewTextBoxColumn";
-            this.initiatorDataGridViewTextBoxColumn.ToolTipText = "Инициатор предоставить ключ с данной функциональностью клиенту";
-            // 
-            // noteDataGridViewTextBoxColumn
-            // 
-            this.noteDataGridViewTextBoxColumn.DataPropertyName = "Note";
-            this.noteDataGridViewTextBoxColumn.HeaderText = "Прочие";
-            this.noteDataGridViewTextBoxColumn.Name = "noteDataGridViewTextBoxColumn";
-            this.noteDataGridViewTextBoxColumn.ToolTipText = "Дополнительная информация";
-            // 
-            // selectedDataGridViewCheckBoxColumn
-            // 
-            this.selectedDataGridViewCheckBoxColumn.DataPropertyName = "Selected";
-            this.selectedDataGridViewCheckBoxColumn.HeaderText = "У клиента";
-            this.selectedDataGridViewCheckBoxColumn.Name = "selectedDataGridViewCheckBoxColumn";
-            // 
             // KeyFeatureClientView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(700, 496);
+            this.ClientSize = new System.Drawing.Size(702, 615);
             this.Controls.Add(this.DataGridViewKeyFeature);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.HeaderlineKey);
