@@ -96,9 +96,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin.cs" />
-    <Compile Include="CalendarCell.cs" />
-    <Compile Include="CalendarColumn.cs" />
-    <Compile Include="CalendarEditingControl.cs">
+    <Compile Include="CalendarDataGridView\CalendarCell.cs" />
+    <Compile Include="CalendarDataGridView\CalendarColumn.cs" />
+    <Compile Include="CalendarDataGridView\CalendarEditingControl.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ClientView.cs">
@@ -107,7 +107,7 @@
     <Compile Include="ClientView.Designer.cs">
       <DependentUpon>ClientView.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataGridViewCalendarColumn.cs" />
+    <Compile Include="CalendarDataGridView\DataGridViewCalendarColumn.cs" />
     <Compile Include="KeyFeatureClientView.cs">
       <SubType>Form</SubType>
     </Compile>

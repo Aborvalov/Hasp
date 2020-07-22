@@ -64,22 +64,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientModel.cs" />
-    <Compile Include="Context.cs" />
-    <Compile Include="FactoryContext.cs" />
-    <Compile Include="IFactoryContext.cs" />
-    <Compile Include="IKeyFeatureClientModel.cs" />
-    <Compile Include="IItemModel.cs" />
-    <Compile Include="ISelectedDataBaseModel.cs" />
+    <Compile Include="Context\Context.cs" />
+    <Compile Include="Context\FactoryContext.cs" />
+    <Compile Include="Context\IFactoryContext.cs" />
+    <Compile Include="Contract\IKeyFeatureClientModel.cs" />
+    <Compile Include="Contract\IItemModel.cs" />
+    <Compile Include="Contract\ISelectedDataBaseModel.cs" />
     <Compile Include="KeyFeatureClientModel.cs" />
     <Compile Include="KeyFeatureModel.cs" />
     <Compile Include="FeatureModel.cs" />
     <Compile Include="HaspKeyModel.cs" />
-    <Compile Include="IKeyFeatureModel.cs" />
+    <Compile Include="Contract\IKeyFeatureModel.cs" />
     <Compile Include="MainModel.cs" />
-    <Compile Include="IClientModel.cs" />
-    <Compile Include="IEntitiesModel.cs" />
-    <Compile Include="IHaspKeyModel.cs" />
-    <Compile Include="IMainModel.cs" />
+    <Compile Include="Contract\IClientModel.cs" />
+    <Compile Include="Contract\IEntitiesModel.cs" />
+    <Compile Include="Contract\IHaspKeyModel.cs" />
+    <Compile Include="Contract\IMainModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferenceModel.cs" />
     <Compile Include="SelectedDataBaseModel.cs" />
