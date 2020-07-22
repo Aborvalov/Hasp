@@ -1,7 +1,7 @@
 ﻿using ModelEntities;
 using System.Collections.Generic;
 
-namespace View
+namespace ViewContract
 {
     public interface IMainView
     {
