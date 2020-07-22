@@ -1,5 +1,5 @@
 ﻿using Model;
-using ViewContract;
+using View;
 
 namespace Presenter
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using ModelEntities;
 using Presenter;
-using ViewContract;
+using View;
 
 namespace HASPKey
 {

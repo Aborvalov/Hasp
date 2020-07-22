@@ -5,7 +5,7 @@ using ModelEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ViewContract;
+using View;
 
 namespace Presenter
 {

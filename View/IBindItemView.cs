@@ -1,4 +1,4 @@
-﻿namespace ViewContract
+﻿namespace View
 {
     public interface IBindItemView<T>
     {

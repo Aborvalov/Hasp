@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ViewContract
+namespace View
 {
     public interface IKeyFeatureView
     {

@@ -1,5 +1,5 @@
 ﻿using Presenter;
-using ViewContract;
+using View;
 
 namespace HASPKey
 {

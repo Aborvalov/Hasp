@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
-using ViewContract;
+using View;
 
 namespace HASPKey
 {

@@ -3,7 +3,7 @@ using Model;
 using ModelEntities;
 using System;
 using System.Collections.Generic;
-using ViewContract;
+using View;
 
 namespace Presenter
 {

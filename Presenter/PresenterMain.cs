@@ -2,7 +2,7 @@
 using Model;
 using ModelEntities;
 using System;
-using ViewContract;
+using View;
 
 namespace Presenter
 {
