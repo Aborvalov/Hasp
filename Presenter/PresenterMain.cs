@@ -15,7 +15,7 @@ namespace Presenter
 
         public PresenterMain(IMainView homeView)
         {            
-            this.mainView = homeView ?? throw new System.ArgumentNullException(nameof(homeView));
+            this.mainView = homeView ?? throw new ArgumentNullException(nameof(homeView));
 
             try
             {
