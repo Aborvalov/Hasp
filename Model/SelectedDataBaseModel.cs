@@ -2,11 +2,19 @@
 
 namespace Model
 {
-    public class SelectedDataBaseModel : IItemModel<TypeDateBase>
+    public class SelectedDataBaseModel : ISelectedDataBaseModel
     {
-        public TypeDateBase GetItem()
+        static TypeDataBase typeDateBase = (TypeDataBase)4;
+
+        public void EditItem(TypeDataBase dateBase)
         {
-            return (TypeDateBase)4;
+            typeDateBase = dateBase;
         }
+
+        public TypeDataBase GetItem()
+        {
+            return typeDateBase;
+        }
+
     }
 }

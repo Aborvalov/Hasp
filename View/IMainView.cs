@@ -7,5 +7,6 @@ namespace View
     {
         void Bind(List<ModelViewMain> homes);
         void MessageError(string error);
+        bool ErrorDataBase { get; set; }
     }
 }

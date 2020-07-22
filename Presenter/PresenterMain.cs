@@ -20,15 +20,15 @@ namespace Presenter
                 mainModel = new MainModel(new Logics());
             }
             catch (ArgumentNullException)
-            {
+            {                
                 mainView.MessageError(nullDB);
+                mainView.ErrorDataBase = true;
             }
             Views();
         }
 
-        public void Dispose() => mainModel.Dispose();
-
+        public void Dispose() => mainModel?.Dispose();
         public void Views() 
-            => mainView.Bind(mainModel != null ? mainModel.GetAll() : null);
+            => mainView.Bind(mainModel?.GetAll());
     }
 }

@@ -7,18 +7,30 @@ using View;
 
 namespace HASPKey
 {
-    public partial class MainForm : DevExpress.XtraEditors.XtraForm, IMainView
+    public partial class MainForm : DevExpress.XtraEditors.XtraForm, IMainView, IUpdateDataBaseMain
     {
-        private readonly IPresenterMain presenter;
-        private const string error = "Ошибка";
-
+        private IPresenterMain presenter;
+        private const string errorStr = "Ошибка";
+        public bool ErrorDataBase { get; set; } = false;
         public MainForm()
         {
             InitializeComponent();
             presenter = new PresenterMain(this);
+            ErrorDB();
         }
+        private void ErrorDB()
+        {
+            if (ErrorDataBase)
+                EditToolStripMenuItem.Enabled = false;
+            else
+                EditToolStripMenuItem.Enabled = true;
+        }
+
         public void MessageError(string errorText)
-    => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        {
+            MessageBox.Show(errorText, errorStr, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            ErrorDB();
+        }
 
         private void ВыходToolStripMenuItem_Click(object sender, EventArgs e)
             => this.Close();
@@ -87,10 +99,17 @@ namespace HASPKey
 
         private void SelectDataBaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (SelectedDataBaseView selectedDataBaseView = new SelectedDataBaseView())
+            using (SelectedDataBaseView selectedDataBaseView = new SelectedDataBaseView(this))
             {
                 selectedDataBaseView.ShowDialog();
             }
+        }
+
+        void IUpdateDataBaseMain.UpdateDataBaseMain()
+        {
+            ErrorDataBase = false;
+            presenter = new PresenterMain(this);
+            ErrorDB();
         }
     }
 }

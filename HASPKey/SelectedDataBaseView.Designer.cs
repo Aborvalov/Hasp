@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectedDataBaseView));
             this.groupBoxListDataBase = new System.Windows.Forms.GroupBox();
-            this.radioButtonTestDataBase = new System.Windows.Forms.RadioButton();
             this.radioButtonWorkDataBase = new System.Windows.Forms.RadioButton();
+            this.radioButtonTestDataBase = new System.Windows.Forms.RadioButton();
             this.groupBoxListDataBase.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,17 +49,6 @@
             this.groupBoxListDataBase.TabStop = false;
             this.groupBoxListDataBase.Text = "Список баз данных";
             // 
-            // radioButtonTestDataBase
-            // 
-            this.radioButtonTestDataBase.AutoSize = true;
-            this.radioButtonTestDataBase.Location = new System.Drawing.Point(6, 20);
-            this.radioButtonTestDataBase.Name = "radioButtonTestDataBase";
-            this.radioButtonTestDataBase.Size = new System.Drawing.Size(98, 17);
-            this.radioButtonTestDataBase.TabIndex = 0;
-            this.radioButtonTestDataBase.TabStop = true;
-            this.radioButtonTestDataBase.Text = "Тестовая база";
-            this.radioButtonTestDataBase.UseVisualStyleBackColor = true;
-            // 
             // radioButtonWorkDataBase
             // 
             this.radioButtonWorkDataBase.AutoSize = true;
@@ -67,9 +56,20 @@
             this.radioButtonWorkDataBase.Name = "radioButtonWorkDataBase";
             this.radioButtonWorkDataBase.Size = new System.Drawing.Size(93, 17);
             this.radioButtonWorkDataBase.TabIndex = 1;
-            this.radioButtonWorkDataBase.TabStop = true;
             this.radioButtonWorkDataBase.Text = "Рабочая база";
             this.radioButtonWorkDataBase.UseVisualStyleBackColor = true;
+            this.radioButtonWorkDataBase.CheckedChanged += new System.EventHandler(this.RadioButtonWorkDataBase_CheckedChanged);
+            // 
+            // radioButtonTestDataBase
+            // 
+            this.radioButtonTestDataBase.AutoSize = true;
+            this.radioButtonTestDataBase.Location = new System.Drawing.Point(6, 20);
+            this.radioButtonTestDataBase.Name = "radioButtonTestDataBase";
+            this.radioButtonTestDataBase.Size = new System.Drawing.Size(98, 17);
+            this.radioButtonTestDataBase.TabIndex = 0;
+            this.radioButtonTestDataBase.Text = "Тестовая база";
+            this.radioButtonTestDataBase.UseVisualStyleBackColor = true;
+            this.radioButtonTestDataBase.CheckedChanged += new System.EventHandler(this.RadioButtonTestDataBase_CheckedChanged);
             // 
             // SelectedDataBaseView
             // 

@@ -1,35 +1,56 @@
-﻿using ModelEntities;
+﻿using System;
+using ModelEntities;
 using Presenter;
 using View;
 
 namespace HASPKey
 {
-    public partial class SelectedDataBaseView : DevExpress.XtraEditors.XtraForm, ISelectedDataBaseView
+    public partial class SelectedDataBaseView : DevExpress.XtraEditors.XtraForm, IBindItemView<TypeDataBase>
     {
-        private readonly IPresenterView presenterRefernce;
-        public SelectedDataBaseView()
+        private readonly IPresenterSelectedDataBase presenterSelectedDataBase;
+        private readonly IMainView mainView;
+ 
+        public SelectedDataBaseView(IMainView homeView)
         {
             InitializeComponent();
-            presenterRefernce = new PresenterSelectedDataBase(this);
+            this.mainView = homeView ?? throw new System.ArgumentNullException(nameof(homeView));            
+            presenterSelectedDataBase = new PresenterSelectedDataBase(this,(IUpdateDataBaseMain)homeView);
         }
 
-        public void BindItem(TypeDateBase dateBase)
+        public void BindItem(TypeDataBase dateBase)
         {
             switch (dateBase)
             {
-                case TypeDateBase.Test:
+                case TypeDataBase.Test:
                     radioButtonTestDataBase.Checked = true;
+                    mainView.ErrorDataBase = false;                    
                     break;
-                case TypeDateBase.Work:
+                case TypeDataBase.Work:
                     radioButtonWorkDataBase.Checked = true;
+                    mainView.ErrorDataBase = false;
                     break;
                 default:
                     {
                         radioButtonTestDataBase.Checked = false;
                         radioButtonWorkDataBase.Checked = false;
+                        mainView.ErrorDataBase = true;
                         break;
                     }
             }
+        }
+
+        private void RadioButtonTestDataBase_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonTestDataBase.Checked && 
+                presenterSelectedDataBase!= null)
+                presenterSelectedDataBase.Edit(TypeDataBase.Test);
+        }
+
+        private void RadioButtonWorkDataBase_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonWorkDataBase.Checked && 
+                presenterSelectedDataBase != null)
+                presenterSelectedDataBase.Edit(TypeDataBase.Work);
         }
     }
 }

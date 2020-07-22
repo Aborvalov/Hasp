@@ -69,6 +69,7 @@
     <Compile Include="IFactoryContext.cs" />
     <Compile Include="IKeyFeatureClientModel.cs" />
     <Compile Include="IItemModel.cs" />
+    <Compile Include="ISelectedDataBaseModel.cs" />
     <Compile Include="KeyFeatureClientModel.cs" />
     <Compile Include="KeyFeatureModel.cs" />
     <Compile Include="FeatureModel.cs" />
