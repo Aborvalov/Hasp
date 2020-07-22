@@ -1,7 +1,7 @@
 ﻿using Model;
 using ModelEntities;
 using System;
-using View;
+using ViewContract;
 
 namespace Presenter
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace View
+namespace ViewContract
 {
     public interface IEntitiesView<T> : IBindItemView<T>
     {

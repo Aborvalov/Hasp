@@ -259,7 +259,7 @@
             this.buttonSearchClient.Text = "Поиск по клиенту";
             this.toolTipButton.SetToolTip(this.buttonSearchClient, "Выбор клиента для поиска.");
             this.buttonSearchClient.UseVisualStyleBackColor = true;
-            this.buttonSearchClient.Click += new System.EventHandler(this.buttonSearchClient_Click);
+            this.buttonSearchClient.Click += new System.EventHandler(this.ButtonSearchClient_Click);
             // 
             // buttonAll
             // 
@@ -271,7 +271,7 @@
             this.buttonAll.Text = "Все";
             this.toolTipButton.SetToolTip(this.buttonAll, "Список всех клиентов и действующих ключей.");
             this.buttonAll.UseVisualStyleBackColor = true;
-            this.buttonAll.Click += new System.EventHandler(this.buttonAll_Click);
+            this.buttonAll.Click += new System.EventHandler(this.ButtonAll_Click);
             // 
             // numberKeyDataGridViewTextBoxColumn
             // 

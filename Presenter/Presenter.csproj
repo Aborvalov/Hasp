@@ -76,9 +76,9 @@
       <Project>{3af74fc5-74be-45f6-ad0a-d317975cf11f}</Project>
       <Name>Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\View\View.csproj">
+    <ProjectReference Include="..\View\ViewContract.csproj">
       <Project>{698d2ac3-fc9e-47d6-87b7-a5835bd507ee}</Project>
-      <Name>View</Name>
+      <Name>ViewContract</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

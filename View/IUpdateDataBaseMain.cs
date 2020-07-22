@@ -1,4 +1,4 @@
-﻿namespace View
+﻿namespace ViewContract
 {
     public interface IUpdateDataBaseMain
     {

@@ -7,8 +7,8 @@
     <ProjectGuid>{698D2AC3-FC9E-47D6-87B7-A5835BD507EE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>View</RootNamespace>
-    <AssemblyName>View</AssemblyName>
+    <RootNamespace>ViewContract</RootNamespace>
+    <AssemblyName>ViewContract</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

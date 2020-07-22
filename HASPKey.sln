@@ -37,7 +37,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model_", "Model_", "{33A69274-24AD-48B5-8B9B-50671ADFFA79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "View\View.csproj", "{698D2AC3-FC9E-47D6-87B7-A5835BD507EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewContract", "View\ViewContract.csproj", "{698D2AC3-FC9E-47D6-87B7-A5835BD507EE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelEntities", "ModelEntities\ModelEntities.csproj", "{C5312C7B-ADE7-462E-B945-3EA7E1EFB4A0}"
 EndProject

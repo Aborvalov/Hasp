@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
-using View;
+using ViewContract;
 
 namespace HASPKey
 {
@@ -120,7 +120,7 @@ namespace HASPKey
             ErrorDB();
         }
 
-        private void buttonSearchClient_Click(object sender, EventArgs e)
+        private void ButtonSearchClient_Click(object sender, EventArgs e)
         {
             using (ClientView client = new ClientView(true))
             {
@@ -133,7 +133,7 @@ namespace HASPKey
             }
         }
 
-        private void buttonAll_Click(object sender, EventArgs e)
+        private void ButtonAll_Click(object sender, EventArgs e)
             => presenter.Views();
     }
 }
