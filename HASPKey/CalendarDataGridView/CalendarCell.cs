@@ -18,7 +18,7 @@ namespace HASPKey
             CalendarEditingControl ctl =
                 DataGridView.EditingControl as CalendarEditingControl;
 
-            ctl.MinDate = DateTime.Now.Date;
+            //ctl.MinDate = DateTime.Now.Date;
             if (this.Value == null)
                 ctl.NValue = (DateTime?)this.DefaultNewRowValue;
             else

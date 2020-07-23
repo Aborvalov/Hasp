@@ -119,8 +119,9 @@ namespace HASPKey
                 MessageError(emptyKeyFeature);
                 return;
             }
-                     
-            DataGridViewKeyFeature["selectedDataGridViewCheckBoxColumn", e.RowIndex].Value = presenterEntities.CheckSelected(row);
+             
+            if(row.Id == 0)
+                DataGridViewKeyFeature["selectedDataGridViewCheckBoxColumn", e.RowIndex].Value = presenterEntities.CheckSelected(row);
 
             presenterEntities.CheckInputData(row, e.RowIndex);
             change = true;

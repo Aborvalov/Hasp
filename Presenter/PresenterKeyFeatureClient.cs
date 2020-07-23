@@ -132,8 +132,7 @@ namespace Presenter
             if (item == null)
                 throw new ArgumentNullException(nameof(item));
 
-            return item.Id == 0 &&
-                   !string.IsNullOrEmpty(item.Initiator);
+            return !string.IsNullOrEmpty(item.Initiator);
         }
     }
 }
