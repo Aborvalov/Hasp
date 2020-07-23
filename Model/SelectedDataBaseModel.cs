@@ -5,7 +5,7 @@ namespace Model
 {
     public class SelectedDataBaseModel : ISelectedDataBaseModel
     {
-        private const string path = @".\DataBase.txt";
+        private const string path = @".\Common\DataBase.txt";
 
         public void EditItem(TypeDataBase dateBase)
         {
