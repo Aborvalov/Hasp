@@ -39,8 +39,6 @@ namespace Logic
 
             CheckArgument(entity);
 
-            entity.StartDate = date;
-
             int id;
             if (!keyFeatureDAO.ContainsDB(entity))
                 id = keyFeatureDAO.Add(entity);
