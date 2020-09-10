@@ -50,7 +50,7 @@ namespace DalDB
                                      ContactPerson = client.ContactPerson,
                                      Phone         = client.Phone,
                                  })
-                                 .ToList();
+                                 .Distinct().ToList();
 
             return clientFeature;
             #region SQlзапрос

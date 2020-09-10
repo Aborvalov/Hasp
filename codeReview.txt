@@ -1,0 +1,139 @@
+View
+
+IEntitesView.cs
+IEntites -> IEntities
+IHomeView - название Home не очень подходит 
+void Build(List<ModelViewHome> homes); ->
+
+UI
+*Home.cs   - название Home не очень подходит
+-Фича - надо нормальное название
+
+-public void Build(List<ModelEntities.ModelViewHome> homes)
+            => bindingHome.DataSource = homes != null ? new BindingList<ModelEntities.ModelViewHome>(homes) 
+                                                      : new BindingList<ModelEntities.ModelViewHome>();
+Лучше проверить на null
+Build - Bind
+
+-private void ФичаToolStripMenuItem_Click(object sender, EventArgs e) - Русские имена в коде
+
+HaspKeyView.cs
+- Выровнять кнопки
+- Не очень понятна логика добавления
+- comboBox - убрать редактор
+- поиск работает не всегда
+- labelClient
+- Может поля внизу отображать постоянно, а при навигации их заполнять
+-comboBoxTypeKey.DataSource = Enum.GetValues(typeof(Entities.TypeKey));
+Для enum лучше сделать атрибуты с описаниями и ими заполнять список
+- private ModelViewHaspKey haspKey = null; избавиться, формировать при нажатии кнопки
+- private void ButtonSave_Click(object sender, EventArgs e) - заполнял бы в презентере спрашивая эти значения у view
+- private void DgvHaspKey_DoubleClick(object sender, EventArgs e) - заполнялбы в презентере спрашивая эти значения у view
+- private bool CheckInputData(out int innNumber) ? проверку и валидацию можно тоже вынести в презентер
+- private void ButtonDelete_Click(object sender, EventArgs e)
+	Объединить
+	DialogResult result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                Remove(row.Id);
+                DefaultView();
+            }
+- private void ButtonSearchByClient_Click(object sender, EventArgs e)
+	Обернуть в  using
+
+	ClientView client = new ClientView(true);
+            client.ShowDialog();
+
+            if (client.SearchIdClient != null)
+            {
+                presenterHaspKey.GetByClient(client.SearchIdClient);
+                
+                labelClient.Text = client.SearchIdClient.Name;
+                labelClient.Location = new System.Drawing.Point(labelClient.Location.X - labelClient.Width, labelClientHeight);
+            }
+
+FeatureView.cs
+- Выровнять кнопки
+- private ModelViewFeature feature = null; Либо сделать локальной либо убрать в презентер
+- private void DgvFeature_DoubleClick(object sender, EventArgs e)
+  dgvFeature.CurrentRow.DataBoundItem as ModelViewFeature; - сделать 1 раз и заодно проверить на null
+- private void ButtonSave_Click(object sender, EventArgs e)
+ if (!size) - инвертировать и сразу выходить
+ - feature.Number = number;
+                feature.Name = tbName.Text;
+                feature.Description = tbDescription.Text;
+
+                if (feature.Id < 1)
+                    Add(feature);
+                else
+                    Update(feature); вынес бы в презентер
+- private bool CheckInputData(out int number)
+  string erroeMess = string.Empty; - errorMessages
+- private bool CheckInputData(out int number)
+	bool isInt = Int32.TryParse(tbNumber.Text, out number);
+            if (!isInt)
+            {
+                erroeMess = '\u2022' + " Неверное значение номера, должно быть числом." + '\n';
+                tbNumber.Text = string.Empty;
+            } - можно объединить
+
+ClientView.cs
+- Выровнять кнопки
+- кнопку все - размер, привязать справа
+- labelFeature можно разместить рядом с кнопкой
+- private ModelViewClient clientForDB = null; - сделать локальной или внести в  презентер
+- public void Build(List<ModelViewClient> entity) - Bind
+- private void DgvClient_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+  SearchIdClient = dgvClient.CurrentRow.DataBoundItem as ModelViewClient; - сделать 1 раз и заодно проверить на null
+- private bool CheckInputData()
+	string erroeMess = string.Empty; - errorMessages
+	
+PresenterHaspKey.cs
+- строки вынести в константы
+- private readonly IEntitesView<ModelViewHaspKey> entitesView; - entitiesView
+- public void View() => this.entitesView.Build(haspKeyModel.GetAll()); - не очень удачное название
+- public void Add(ModelViewHaspKey entity) - проверить на null
+
+PresenterFeature.cs
+- строки вынести в константы
+- private readonly IEntitesView<ModelViewHaspKey> entitesView; - entitiesView
+- public void Add(ModelViewFeature entity) - проверить на null
+- public void View() => this.entitesView.Build(featureModel.GetAll()); - не очень удачное название
+
+PresenterClient.cs
+- все аналогично
+
+По презентерам -  я больше функционала по проверке и созанию сущностей вынес туда
+
+ModelEntities
+
+- [DisplayName("№ п/п")]
+public int SerialNumber { get; set; } = i++; Может формирование порядкового номера переложиь на Grid
+
+ModelViewFeature
+ModelViewClient
+ModelViewHaspKey  - либо непонятны, либо в них переносить из сущностей атрибуты [DisplayName] [Browsable(false)], и делать NotifyPropertyChanged
+они должны содержать сущность тогда в модели в ADD и Update не пришлось создавать новую из полей
+
+
+HaspKeyModel.cs
+- public bool Add(ModelViewHaspKey entity) проверить на null входные параметры 
+  ModelViewHaspKey если будет содержать HaspKey то можно убрать присваиване полей
+- private readonly IFactoryLogic logic;
+  private IHaspKeyLogic keyLogic;
+  и в каждом методе 
+  using (var db = new EntitesContext())
+  {
+                keyLogic = logic.CreateHaspKey(db);                
+                return keyLogic.Save(haspKey);
+   } Может все это вынести в конструктор, сделать его Disposable
+   https://docs.microsoft.com/ru-ru/ef/ef6/fundamentals/working-with-dbcontext
+- public List<ModelViewHaspKey> GetByClient(ModelViewClient client) проверить на null входные параметры 
+- public bool Update(ModelViewHaspKey entity) проверить на null входные параметры
+
+FeatureModel.cs
+- аналогично
+
+ClientModel.cs
+- аналогично 
