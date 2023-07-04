@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1000
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HASPKey", "HASPKey\HASPKey.csproj", "{6DE50CFB-1A4D-41E2-925D-A15BC3DD4EFC}"
 EndProject
@@ -42,6 +42,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelEntities", "ModelEntities\ModelEntities.csproj", "{C5312C7B-ADE7-462E-B945-3EA7E1EFB4A0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "View", "View", "{69547663-1766-48C0-ABB0-FA685F9DEA46}"
+	ProjectSection(SolutionItems) = preProject
+		HASPKey\ReferenceView.cs = HASPKey\ReferenceView.cs
+		HASPKey\ReferenceView.Designer.cs = HASPKey\ReferenceView.Designer.cs
+		HASPKey\ReferenceView.resx = HASPKey\ReferenceView.resx
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

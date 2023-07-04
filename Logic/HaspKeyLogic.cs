@@ -65,7 +65,7 @@ namespace Logic
 
             return haspKeyDAO.GetByClient(client);
         }
-
+       
         private void CheckArgument(HaspKey haspKey)
         {
             if (haspKey.InnerId < 0)
@@ -75,5 +75,7 @@ namespace Logic
             if (!Enum.IsDefined(typeof(TypeKey), haspKey.TypeKey))
                 throw new ArgumentException(nameof(haspKey.TypeKey));
         }
+
+        //public HaspKey ShowOldKeys() => return haspKeyDAO.ShowOldKeys();
     }
 }

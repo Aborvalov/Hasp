@@ -1,8 +1,8 @@
-﻿using Logic;
-using Model;
-using ModelEntities;
-using System;
+﻿using System;
 using ViewContract;
+using ModelEntities;
+using Model;
+using Logic;
 
 namespace Presenter
 {
@@ -14,7 +14,7 @@ namespace Presenter
         private const string errorDB = "Ошибка базы данных.";
 
         public PresenterMain(IMainView homeView)
-        {            
+        {
             this.mainView = homeView ?? throw new ArgumentNullException(nameof(homeView));
 
             try
@@ -26,7 +26,7 @@ namespace Presenter
                 mainView.MessageError(nullDB);
                 mainView.ErrorDataBase = true;
             }
-            
+
             Views();
         }
 
@@ -35,7 +35,7 @@ namespace Presenter
         {
             try
             {
-                mainView.Bind(mainModel?.GetAll());
+                mainView.Bind(mainModel?.GetActuallKeys());
             }
             catch
             {
@@ -44,7 +44,10 @@ namespace Presenter
             }
         }
 
-        public void GetByClient(ModelViewClient client) 
+        public void GetByClient(ModelViewClient client)
             => mainView.Bind(mainModel?.GetByClient(client));
+
+        public void ShowOldKeys()
+            => mainView.Bind(mainModel?.ShowOldKeys());
     }
 }

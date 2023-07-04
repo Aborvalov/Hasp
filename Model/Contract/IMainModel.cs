@@ -6,7 +6,8 @@ namespace Model
 {
     public interface IMainModel : IDisposable
     {
-        List<ModelViewMain> GetAll();
+        List<ModelViewMain> GetActuallKeys();
         List<ModelViewMain> GetByClient(ModelViewClient client);
+        List<ModelViewMain> ShowOldKeys();
     }
 }

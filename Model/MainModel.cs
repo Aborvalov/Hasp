@@ -10,6 +10,7 @@ namespace Model
     public class MainModel : IMainModel
     {
         private readonly DateTime date = DateTime.Now.Date;
+
         private readonly IFactoryLogic logic;
         private  IEntitesContext db;
         
@@ -21,6 +22,8 @@ namespace Model
                 throw new ArgumentNullException(nameof(db));           
         }       
         public void Dispose() => db.Dispose();
+
+
         public List<ModelViewMain> GetAll()
         {
             try
@@ -34,7 +37,7 @@ namespace Model
                     List<KeyFeature> keyFeatures = logic.CreateKeyFeature(db).GetAll();
                     List<Client> clients = logic.CreateClient(db).GetAll();
                     List<Feature> features = logic.CreateFeature(db).GetAll();
-                    List<HaspKey> haspKeys = logic.CreateHaspKey(db).GetByActive(); ;
+                    List<HaspKey> haspKeys = logic.CreateHaspKey(db).GetAll(); ;
 
                     var item = from keyFeatCl in keyFeatureClients
                                join keyFeat in keyFeatures
@@ -45,7 +48,7 @@ namespace Model
                                     on keyFeat.IdFeature equals feature.Id
                                join key in haspKeys
                                     on keyFeat.IdHaspKey equals key.Id
-                               where keyFeat.EndDate >= date
+                               
                                select new ModelViewMain
                                {
                                    Client = cl.Name + (string.IsNullOrEmpty(cl.Address)
@@ -56,9 +59,7 @@ namespace Model
                                    NumberKey = key.InnerId.ToString() + " - \"" + key.Number + "\"",
                                };
 
-                    return item
-                            .OrderBy(x => x.Client)
-                            .ToList();
+                    return item.OrderBy(x => x.Client).ToList();
                 }
             }
             catch
@@ -67,9 +68,14 @@ namespace Model
             }
         }
 
+        public List<ModelViewMain> GetActuallKeys() 
+            => GetAll().Where(x => x.EndDate >= date).ToList();
+
         public List<ModelViewMain> GetByClient(ModelViewClient client)
-            => GetAll()
-                .Where(x => x.IdClient == client.Id)
-                .ToList();        
+            => GetActuallKeys().Where(x => x.IdClient == client.Id).ToList();
+
+        public List<ModelViewMain> ShowOldKeys()
+            => GetAll().Where(x => x.EndDate < date).ToList();
+
     }
 }

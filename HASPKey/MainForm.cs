@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using ViewContract;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+using CheckBox = System.Windows.Forms.CheckBox;
 
 namespace HASPKey
 {
@@ -12,6 +14,8 @@ namespace HASPKey
         private IPresenterMain presenter;
         private const string errorStr = "Ошибка";
         public bool ErrorDataBase { get; set; } = false;
+
+        public bool Checked { get; set; }
         public MainForm()
         {
             InitializeComponent();
@@ -135,5 +139,20 @@ namespace HASPKey
 
         private void ButtonAll_Click(object sender, EventArgs e)
             => presenter.Views();
+
+        private void viewOldKeys_CheckedChanged(object sender, EventArgs e)
+        {
+            if (sender is CheckBox checkBox)
+            {
+                if (checkBox.Checked)
+                {
+                    presenter.ShowOldKeys();
+                }
+                else
+                {
+                    presenter.Views();
+                }
+            }
+        }
     }
 }
