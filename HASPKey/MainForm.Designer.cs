@@ -61,6 +61,7 @@
             this.buttonSearchClient = new System.Windows.Forms.Button();
             this.buttonAll = new System.Windows.Forms.Button();
             this.toolTipButton = new System.Windows.Forms.ToolTip(this.components);
+            this.viewOldKeys = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewHomeView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHome)).BeginInit();
@@ -68,13 +69,15 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileToolStripMenuItem,
             this.EditToolStripMenuItem,
             this.ReferenceToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(617, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(720, 28);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -85,25 +88,25 @@
             this.toolStripSeparator1,
             this.ExitToolStripMenuItem});
             this.FileToolStripMenuItem.Name = "FileToolStripMenuItem";
-            this.FileToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.FileToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
             this.FileToolStripMenuItem.Text = "Файл";
             // 
             // SelectDataBaseToolStripMenuItem
             // 
             this.SelectDataBaseToolStripMenuItem.Name = "SelectDataBaseToolStripMenuItem";
-            this.SelectDataBaseToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.SelectDataBaseToolStripMenuItem.Size = new System.Drawing.Size(234, 26);
             this.SelectDataBaseToolStripMenuItem.Text = "Выбор базы данных";
             this.SelectDataBaseToolStripMenuItem.Click += new System.EventHandler(this.SelectDataBaseToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(181, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(231, 6);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(234, 26);
             this.ExitToolStripMenuItem.Text = "Выход";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ВыходToolStripMenuItem_Click);
             // 
@@ -117,46 +120,46 @@
             this.KeyFeatureToolStripMenuItem,
             this.KeyFeatureClientToolStripMenuItem});
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
-            this.EditToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(137, 24);
             this.EditToolStripMenuItem.Text = "Редактирование";
             // 
             // KeyToolStripMenuItem
             // 
             this.KeyToolStripMenuItem.Name = "KeyToolStripMenuItem";
-            this.KeyToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.KeyToolStripMenuItem.Size = new System.Drawing.Size(309, 26);
             this.KeyToolStripMenuItem.Text = "Ключ";
             this.KeyToolStripMenuItem.Click += new System.EventHandler(this.KeyToolStripMenuItem_Click);
             // 
             // FeatureToolStripMenuItem
             // 
             this.FeatureToolStripMenuItem.Name = "FeatureToolStripMenuItem";
-            this.FeatureToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.FeatureToolStripMenuItem.Size = new System.Drawing.Size(309, 26);
             this.FeatureToolStripMenuItem.Text = "Функциональность";
             this.FeatureToolStripMenuItem.Click += new System.EventHandler(this.FeatureToolStripMenuItem_Click);
             // 
             // ClientToolStripMenuItem
             // 
             this.ClientToolStripMenuItem.Name = "ClientToolStripMenuItem";
-            this.ClientToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.ClientToolStripMenuItem.Size = new System.Drawing.Size(309, 26);
             this.ClientToolStripMenuItem.Text = "Клиент";
             this.ClientToolStripMenuItem.Click += new System.EventHandler(this.ClientToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(246, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(306, 6);
             // 
             // KeyFeatureToolStripMenuItem
             // 
             this.KeyFeatureToolStripMenuItem.Name = "KeyFeatureToolStripMenuItem";
-            this.KeyFeatureToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.KeyFeatureToolStripMenuItem.Size = new System.Drawing.Size(309, 26);
             this.KeyFeatureToolStripMenuItem.Text = "Связь ключ-функциональность";
             this.KeyFeatureToolStripMenuItem.Click += new System.EventHandler(this.KeyFeatureToolStripMenuItem_Click);
             // 
             // KeyFeatureClientToolStripMenuItem
             // 
             this.KeyFeatureClientToolStripMenuItem.Name = "KeyFeatureClientToolStripMenuItem";
-            this.KeyFeatureClientToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.KeyFeatureClientToolStripMenuItem.Size = new System.Drawing.Size(309, 26);
             this.KeyFeatureClientToolStripMenuItem.Text = "Связь ключ-клиент";
             this.KeyFeatureClientToolStripMenuItem.Click += new System.EventHandler(this.KeyFeatureClientToolStripMenuItem_Click);
             // 
@@ -165,13 +168,13 @@
             this.ReferenceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Reference});
             this.ReferenceToolStripMenuItem.Name = "ReferenceToolStripMenuItem";
-            this.ReferenceToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.ReferenceToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
             this.ReferenceToolStripMenuItem.Text = "Справка";
             // 
             // Reference
             // 
             this.Reference.Name = "Reference";
-            this.Reference.Size = new System.Drawing.Size(180, 22);
+            this.Reference.Size = new System.Drawing.Size(187, 26);
             this.Reference.Text = "О программе";
             this.Reference.Click += new System.EventHandler(this.Reference_Click);
             // 
@@ -193,16 +196,18 @@
             this.DataGridViewHomeView.DataSource = this.bindingHome;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DataGridViewHomeView.DefaultCellStyle = dataGridViewCellStyle1;
-            this.DataGridViewHomeView.Location = new System.Drawing.Point(12, 54);
+            this.DataGridViewHomeView.Location = new System.Drawing.Point(14, 66);
+            this.DataGridViewHomeView.Margin = new System.Windows.Forms.Padding(4);
             this.DataGridViewHomeView.Name = "DataGridViewHomeView";
             this.DataGridViewHomeView.ReadOnly = true;
-            this.DataGridViewHomeView.Size = new System.Drawing.Size(594, 393);
+            this.DataGridViewHomeView.RowHeadersWidth = 51;
+            this.DataGridViewHomeView.Size = new System.Drawing.Size(693, 484);
             this.DataGridViewHomeView.TabIndex = 3;
             this.DataGridViewHomeView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewHomeView_DataBindingComplete);
             // 
@@ -210,6 +215,7 @@
             // 
             this.numberKeyDataGridViewTextBoxColumn.DataPropertyName = "NumberKey";
             this.numberKeyDataGridViewTextBoxColumn.HeaderText = "Номер ключа";
+            this.numberKeyDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.numberKeyDataGridViewTextBoxColumn.Name = "numberKeyDataGridViewTextBoxColumn";
             this.numberKeyDataGridViewTextBoxColumn.ReadOnly = true;
             this.numberKeyDataGridViewTextBoxColumn.ToolTipText = "Номер ключа (нутренный номер + номер на ключе)";
@@ -218,6 +224,7 @@
             // 
             this.featureDataGridViewTextBoxColumn.DataPropertyName = "Feature";
             this.featureDataGridViewTextBoxColumn.HeaderText = "Функциональность";
+            this.featureDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.featureDataGridViewTextBoxColumn.Name = "featureDataGridViewTextBoxColumn";
             this.featureDataGridViewTextBoxColumn.ReadOnly = true;
             this.featureDataGridViewTextBoxColumn.ToolTipText = "Наименование функциональности";
@@ -226,6 +233,7 @@
             // 
             this.clientDataGridViewTextBoxColumn.DataPropertyName = "Client";
             this.clientDataGridViewTextBoxColumn.HeaderText = "Клиент";
+            this.clientDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.clientDataGridViewTextBoxColumn.Name = "clientDataGridViewTextBoxColumn";
             this.clientDataGridViewTextBoxColumn.ReadOnly = true;
             this.clientDataGridViewTextBoxColumn.ToolTipText = "Наименование клиента + адрес";
@@ -235,6 +243,7 @@
             this.endDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.endDateDataGridViewTextBoxColumn.DataPropertyName = "EndDate";
             this.endDateDataGridViewTextBoxColumn.HeaderText = "Срок действия";
+            this.endDateDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.endDateDataGridViewTextBoxColumn.Name = "endDateDataGridViewTextBoxColumn";
             this.endDateDataGridViewTextBoxColumn.ReadOnly = true;
             this.endDateDataGridViewTextBoxColumn.ToolTipText = "Окончание срока действия у ключа";
@@ -247,9 +256,10 @@
             // Headline
             // 
             this.Headline.AutoSize = true;
-            this.Headline.Location = new System.Drawing.Point(14, 38);
+            this.Headline.Location = new System.Drawing.Point(16, 47);
+            this.Headline.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Headline.Name = "Headline";
-            this.Headline.Size = new System.Drawing.Size(146, 13);
+            this.Headline.Size = new System.Drawing.Size(167, 16);
             this.Headline.TabIndex = 4;
             this.Headline.Text = "Действующие HASP-ключи";
             this.Headline.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -258,6 +268,7 @@
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "NumberKey";
             this.dataGridViewTextBoxColumn1.HeaderText = "Номер ключа";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ToolTipText = "Номер ключа (нутренный номер + номер на ключе)";
             this.dataGridViewTextBoxColumn1.Width = 140;
@@ -266,6 +277,7 @@
             // 
             this.dataGridViewTextBoxColumn2.DataPropertyName = "Feature";
             this.dataGridViewTextBoxColumn2.HeaderText = "Функциональность";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ToolTipText = "Наименование функциональности";
             this.dataGridViewTextBoxColumn2.Width = 140;
@@ -274,6 +286,7 @@
             // 
             this.dataGridViewTextBoxColumn3.DataPropertyName = "Client";
             this.dataGridViewTextBoxColumn3.HeaderText = "Клиент";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.ToolTipText = "Наименование клиента + адрес";
             this.dataGridViewTextBoxColumn3.Width = 140;
@@ -283,6 +296,7 @@
             this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.dataGridViewTextBoxColumn4.DataPropertyName = "EndDate";
             this.dataGridViewTextBoxColumn4.HeaderText = "Срок действия";
+            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ToolTipText = "Окончание срока действия у ключа";
             this.dataGridViewTextBoxColumn4.Width = 131;
@@ -290,9 +304,10 @@
             // buttonSearchClient
             // 
             this.buttonSearchClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSearchClient.Location = new System.Drawing.Point(395, 28);
+            this.buttonSearchClient.Location = new System.Drawing.Point(461, 34);
+            this.buttonSearchClient.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSearchClient.Name = "buttonSearchClient";
-            this.buttonSearchClient.Size = new System.Drawing.Size(129, 23);
+            this.buttonSearchClient.Size = new System.Drawing.Size(150, 28);
             this.buttonSearchClient.TabIndex = 5;
             this.buttonSearchClient.Text = "Поиск по клиенту";
             this.toolTipButton.SetToolTip(this.buttonSearchClient, "Выбор клиента для поиска.");
@@ -302,30 +317,44 @@
             // buttonAll
             // 
             this.buttonAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAll.Location = new System.Drawing.Point(530, 28);
+            this.buttonAll.Location = new System.Drawing.Point(618, 34);
+            this.buttonAll.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAll.Name = "buttonAll";
-            this.buttonAll.Size = new System.Drawing.Size(75, 23);
+            this.buttonAll.Size = new System.Drawing.Size(88, 28);
             this.buttonAll.TabIndex = 6;
             this.buttonAll.Text = "Все";
             this.toolTipButton.SetToolTip(this.buttonAll, "Список всех клиентов и действующих ключей.");
             this.buttonAll.UseVisualStyleBackColor = true;
             this.buttonAll.Click += new System.EventHandler(this.ButtonAll_Click);
             // 
+            // viewOldKeys
+            // 
+            this.viewOldKeys.AutoSize = true;
+            this.viewOldKeys.Location = new System.Drawing.Point(208, 39);
+            this.viewOldKeys.Name = "viewOldKeys";
+            this.viewOldKeys.Size = new System.Drawing.Size(246, 20);
+            this.viewOldKeys.TabIndex = 7;
+            this.viewOldKeys.Text = "Отображение просроченных ключей";
+            this.viewOldKeys.UseVisualStyleBackColor = true;
+            this.viewOldKeys.CheckedChanged += new System.EventHandler(this.ViewOldKeys_CheckedChanged);
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(617, 459);
+            this.ClientSize = new System.Drawing.Size(720, 565);
+            this.Controls.Add(this.viewOldKeys);
             this.Controls.Add(this.buttonAll);
             this.Controls.Add(this.buttonSearchClient);
             this.Controls.Add(this.Headline);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.DataGridViewHomeView);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("MainForm.IconOptions.Icon")));
+            this.IconOptions.ShowIcon = false;
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(627, 427);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(619, 427);
             this.Name = "MainForm";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HASP-ключи";
             this.menuStrip1.ResumeLayout(false);
@@ -366,6 +395,7 @@
         private System.Windows.Forms.Button buttonSearchClient;
         private System.Windows.Forms.Button buttonAll;
         private System.Windows.Forms.ToolTip toolTipButton;
+        private System.Windows.Forms.CheckBox viewOldKeys;
     }
 }
 

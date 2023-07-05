@@ -12,6 +12,7 @@ namespace HASPKey
         private IPresenterMain presenter;
         private const string errorStr = "Ошибка";
         public bool ErrorDataBase { get; set; } = false;
+
         public MainForm()
         {
             InitializeComponent();
@@ -135,5 +136,17 @@ namespace HASPKey
 
         private void ButtonAll_Click(object sender, EventArgs e)
             => presenter.Views();
+
+        private void ViewOldKeys_CheckedChanged(object sender, EventArgs e)
+        {
+           if (viewOldKeys.Checked)
+           {
+                presenter.ShowOldKeys();
+           }
+           else
+           {
+                presenter.Views();
+           }
+        }
     }
 }

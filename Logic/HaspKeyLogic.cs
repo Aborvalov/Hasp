@@ -65,7 +65,7 @@ namespace Logic
 
             return haspKeyDAO.GetByClient(client);
         }
-
+       
         private void CheckArgument(HaspKey haspKey)
         {
             if (haspKey.InnerId < 0)
