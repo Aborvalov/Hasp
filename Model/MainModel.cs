@@ -48,7 +48,7 @@ namespace Model
                                     on keyFeat.IdFeature equals feature.Id
                                join key in haspKeys
                                     on keyFeat.IdHaspKey equals key.Id
-                               
+
                                select new ModelViewMain
                                {
                                    Client = cl.Name + (string.IsNullOrEmpty(cl.Address)
@@ -68,13 +68,13 @@ namespace Model
             }
         }
 
-        public List<ModelViewMain> GetActuallKeys() 
+        public List<ModelViewMain> GetActiveKeys() 
             => GetAll().Where(x => x.EndDate >= date).ToList();
 
         public List<ModelViewMain> GetByClient(ModelViewClient client)
-            => GetActuallKeys().Where(x => x.IdClient == client.Id).ToList();
+            => GetActiveKeys().Where(x => x.IdClient == client.Id).ToList();
 
-        public List<ModelViewMain> ShowOldKeys()
+        public List<ModelViewMain> ShowExpiredKeys()
             => GetAll().Where(x => x.EndDate < date).ToList();
 
     }

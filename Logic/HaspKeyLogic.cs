@@ -75,7 +75,5 @@ namespace Logic
             if (!Enum.IsDefined(typeof(TypeKey), haspKey.TypeKey))
                 throw new ArgumentException(nameof(haspKey.TypeKey));
         }
-
-        //public HaspKey ShowOldKeys() => return haspKeyDAO.ShowOldKeys();
     }
 }

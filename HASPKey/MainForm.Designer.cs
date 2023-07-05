@@ -77,7 +77,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(720, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(720, 28);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -88,7 +88,7 @@
             this.toolStripSeparator1,
             this.ExitToolStripMenuItem});
             this.FileToolStripMenuItem.Name = "FileToolStripMenuItem";
-            this.FileToolStripMenuItem.Size = new System.Drawing.Size(59, 26);
+            this.FileToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
             this.FileToolStripMenuItem.Text = "Файл";
             // 
             // SelectDataBaseToolStripMenuItem
@@ -120,7 +120,7 @@
             this.KeyFeatureToolStripMenuItem,
             this.KeyFeatureClientToolStripMenuItem});
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
-            this.EditToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(137, 24);
             this.EditToolStripMenuItem.Text = "Редактирование";
             // 
             // KeyToolStripMenuItem
@@ -168,7 +168,7 @@
             this.ReferenceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Reference});
             this.ReferenceToolStripMenuItem.Name = "ReferenceToolStripMenuItem";
-            this.ReferenceToolStripMenuItem.Size = new System.Drawing.Size(81, 26);
+            this.ReferenceToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
             this.ReferenceToolStripMenuItem.Text = "Справка";
             // 
             // Reference
@@ -203,7 +203,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DataGridViewHomeView.DefaultCellStyle = dataGridViewCellStyle1;
             this.DataGridViewHomeView.Location = new System.Drawing.Point(14, 66);
-            this.DataGridViewHomeView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DataGridViewHomeView.Margin = new System.Windows.Forms.Padding(4);
             this.DataGridViewHomeView.Name = "DataGridViewHomeView";
             this.DataGridViewHomeView.ReadOnly = true;
             this.DataGridViewHomeView.RowHeadersWidth = 51;
@@ -305,7 +305,7 @@
             // 
             this.buttonSearchClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonSearchClient.Location = new System.Drawing.Point(461, 34);
-            this.buttonSearchClient.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonSearchClient.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSearchClient.Name = "buttonSearchClient";
             this.buttonSearchClient.Size = new System.Drawing.Size(150, 28);
             this.buttonSearchClient.TabIndex = 5;
@@ -318,7 +318,7 @@
             // 
             this.buttonAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonAll.Location = new System.Drawing.Point(618, 34);
-            this.buttonAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonAll.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAll.Name = "buttonAll";
             this.buttonAll.Size = new System.Drawing.Size(88, 28);
             this.buttonAll.TabIndex = 6;
@@ -336,7 +336,7 @@
             this.viewOldKeys.TabIndex = 7;
             this.viewOldKeys.Text = "Отображение просроченных ключей";
             this.viewOldKeys.UseVisualStyleBackColor = true;
-            this.viewOldKeys.CheckedChanged += new System.EventHandler(this.viewOldKeys_CheckedChanged);
+            this.viewOldKeys.CheckedChanged += new System.EventHandler(this.ViewOldKeys_CheckedChanged);
             // 
             // MainForm
             // 
@@ -352,7 +352,7 @@
             this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("MainForm.IconOptions.Icon")));
             this.IconOptions.ShowIcon = false;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(619, 427);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

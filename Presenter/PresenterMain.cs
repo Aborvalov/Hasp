@@ -35,7 +35,7 @@ namespace Presenter
         {
             try
             {
-                mainView.Bind(mainModel?.GetActuallKeys());
+                mainView.Bind(mainModel?.GetActiveKeys());
             }
             catch
             {
@@ -48,6 +48,6 @@ namespace Presenter
             => mainView.Bind(mainModel?.GetByClient(client));
 
         public void ShowOldKeys()
-            => mainView.Bind(mainModel?.ShowOldKeys());
+            => mainView.Bind(mainModel?.ShowExpiredKeys());
     }
 }
