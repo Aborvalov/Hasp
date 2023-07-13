@@ -134,9 +134,10 @@ namespace HASPKey
                     DataGridViewHaspKey.Rows[i].DefaultCellStyle.BackColor = Color.White;
             }
         }
-        private void DelItem(int lastColumnIndex)
+        private void DelItem(int firstColumnIndex, int lastColumnIndex)
         {
-            for (int i = 3; i <= lastColumnIndex; ++i) {
+            for (int i = firstColumnIndex; i <= lastColumnIndex; ++i)
+            {
                 DataGridViewFeature
                     .Rows[DataGridViewFeature.CurrentCell.RowIndex]
                     .Cells[i]
@@ -149,21 +150,18 @@ namespace HASPKey
             if (e.KeyData == Keys.Delete)
             {
                 int columnIndex = DataGridViewFeature.CurrentCell.ColumnIndex;
-                string columnName = DataGridViewFeature.Columns[columnIndex].Name;
-                int lastColumnIndex = DataGridViewFeature.Columns["endDateDataGridViewTextBoxColumn"].Index;
+                int lastColumnIndex = DataGridViewFeature.Columns["selectedDataGridViewCheckBoxColumn"].Index;
 
-                if (columnName == "dataGridViewTextBoxColumn11")
+                if (0 <= columnIndex && columnIndex < 3)
                 {
-                    DelItem(lastColumnIndex + 1);
+                    DelItem(3, lastColumnIndex);
+                    change = true;
                 }
-                else if (columnName != "dataGridViewTextBoxColumn9" && columnName != "dataGridViewTextBoxColumn10")
-                {
-                    DataGridViewFeature
-                        .Rows[DataGridViewFeature.CurrentCell.RowIndex]
-                        .Cells[columnIndex]
-                        .Value = null;
+                else {
+                    DelItem(columnIndex, columnIndex);
+                    change = true;
                 }
-                else { DelItem(lastColumnIndex + 1); }
+                  
             }
         }
 
