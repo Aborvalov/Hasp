@@ -18,8 +18,8 @@ namespace HASPKey
 
         private const string error = "Ошибка";
         private const string emptyClient = "Данный клиент не найден.";
-        private const string caption = "Внести изменеия";
-        private const string message = "Данные были изменены, внести изменеия?";
+        private const string caption = "Внести изменения";
+        private const string message = "Данные были изменены, внести изменения?";
         private const string errorString = "Не заполнено поле \"Инициатор\".";
         private const string emptyKeyFeature = "Данный ключ не найден.";
 
@@ -89,7 +89,7 @@ namespace HASPKey
             if (presenterEntities.CheckInputData(item))
             {
                 if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    presenterEntities.Edit(item);
+                    presenterEntities.Edit(item); 
                 change = false;
             }
             else

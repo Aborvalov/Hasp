@@ -86,16 +86,19 @@
             this.DataGridViewClient.DataSource = this.bindingClient;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DataGridViewClient.DefaultCellStyle = dataGridViewCellStyle1;
-            this.DataGridViewClient.Location = new System.Drawing.Point(12, 58);
+            this.DataGridViewClient.Location = new System.Drawing.Point(14, 71);
+            this.DataGridViewClient.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.DataGridViewClient.Name = "DataGridViewClient";
             this.DataGridViewClient.ReadOnly = true;
-            this.DataGridViewClient.Size = new System.Drawing.Size(582, 446);
+            this.DataGridViewClient.RowHeadersVisible = false;
+            this.DataGridViewClient.RowHeadersWidth = 51;
+            this.DataGridViewClient.Size = new System.Drawing.Size(679, 549);
             this.DataGridViewClient.TabIndex = 0;
             this.DataGridViewClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewClient_CellClick);
             this.DataGridViewClient.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewClient_CellDoubleClick);
@@ -107,6 +110,7 @@
             // 
             this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
             this.nameDataGridViewTextBoxColumn.HeaderText = "Наименование";
+            this.nameDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             this.nameDataGridViewTextBoxColumn.ReadOnly = true;
             this.nameDataGridViewTextBoxColumn.ToolTipText = "Наименование организации";
@@ -115,6 +119,7 @@
             // 
             this.addressDataGridViewTextBoxColumn.DataPropertyName = "Address";
             this.addressDataGridViewTextBoxColumn.HeaderText = "Адрес";
+            this.addressDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.addressDataGridViewTextBoxColumn.Name = "addressDataGridViewTextBoxColumn";
             this.addressDataGridViewTextBoxColumn.ReadOnly = true;
             this.addressDataGridViewTextBoxColumn.ToolTipText = "Адрес организации";
@@ -123,6 +128,7 @@
             // 
             this.phoneDataGridViewTextBoxColumn.DataPropertyName = "Phone";
             this.phoneDataGridViewTextBoxColumn.HeaderText = "Телефон";
+            this.phoneDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.phoneDataGridViewTextBoxColumn.Name = "phoneDataGridViewTextBoxColumn";
             this.phoneDataGridViewTextBoxColumn.ReadOnly = true;
             this.phoneDataGridViewTextBoxColumn.ToolTipText = "Контактный телефон";
@@ -131,6 +137,7 @@
             // 
             this.contactPersonDataGridViewTextBoxColumn.DataPropertyName = "ContactPerson";
             this.contactPersonDataGridViewTextBoxColumn.HeaderText = "Контактное лицо";
+            this.contactPersonDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.contactPersonDataGridViewTextBoxColumn.Name = "contactPersonDataGridViewTextBoxColumn";
             this.contactPersonDataGridViewTextBoxColumn.ReadOnly = true;
             this.contactPersonDataGridViewTextBoxColumn.ToolTipText = "Контактное лицо";
@@ -143,9 +150,10 @@
             // 
             this.labelName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(10, 507);
+            this.labelName.Location = new System.Drawing.Point(12, 624);
+            this.labelName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(80, 13);
+            this.labelName.Size = new System.Drawing.Size(93, 16);
             this.labelName.TabIndex = 1;
             this.labelName.Text = "Наименование";
             // 
@@ -153,9 +161,10 @@
             // 
             this.labelAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelAddress.AutoSize = true;
-            this.labelAddress.Location = new System.Drawing.Point(175, 507);
+            this.labelAddress.Location = new System.Drawing.Point(204, 624);
+            this.labelAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelAddress.Name = "labelAddress";
-            this.labelAddress.Size = new System.Drawing.Size(38, 13);
+            this.labelAddress.Size = new System.Drawing.Size(42, 16);
             this.labelAddress.TabIndex = 2;
             this.labelAddress.Text = "Адрес";
             // 
@@ -163,9 +172,10 @@
             // 
             this.labelPhone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelPhone.AutoSize = true;
-            this.labelPhone.Location = new System.Drawing.Point(333, 507);
+            this.labelPhone.Location = new System.Drawing.Point(388, 624);
+            this.labelPhone.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPhone.Name = "labelPhone";
-            this.labelPhone.Size = new System.Drawing.Size(51, 13);
+            this.labelPhone.Size = new System.Drawing.Size(60, 16);
             this.labelPhone.TabIndex = 3;
             this.labelPhone.Text = "Телефон";
             // 
@@ -173,9 +183,10 @@
             // 
             this.labelContactPerson.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelContactPerson.AutoSize = true;
-            this.labelContactPerson.Location = new System.Drawing.Point(463, 507);
+            this.labelContactPerson.Location = new System.Drawing.Point(540, 624);
+            this.labelContactPerson.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelContactPerson.Name = "labelContactPerson";
-            this.labelContactPerson.Size = new System.Drawing.Size(95, 13);
+            this.labelContactPerson.Size = new System.Drawing.Size(106, 16);
             this.labelContactPerson.TabIndex = 4;
             this.labelContactPerson.Text = "Контактное лицо";
             // 
@@ -183,9 +194,10 @@
             // 
             this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingItem, "Name", true));
-            this.tbName.Location = new System.Drawing.Point(13, 523);
+            this.tbName.Location = new System.Drawing.Point(15, 644);
+            this.tbName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(159, 21);
+            this.tbName.Size = new System.Drawing.Size(185, 23);
             this.tbName.TabIndex = 5;
             // 
             // bindingItem
@@ -196,35 +208,39 @@
             // 
             this.tbAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbAddress.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingItem, "Address", true));
-            this.tbAddress.Location = new System.Drawing.Point(178, 523);
+            this.tbAddress.Location = new System.Drawing.Point(208, 644);
+            this.tbAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbAddress.Name = "tbAddress";
-            this.tbAddress.Size = new System.Drawing.Size(149, 21);
+            this.tbAddress.Size = new System.Drawing.Size(173, 23);
             this.tbAddress.TabIndex = 6;
             // 
             // tbPhone
             // 
             this.tbPhone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbPhone.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingItem, "Phone", true));
-            this.tbPhone.Location = new System.Drawing.Point(333, 523);
+            this.tbPhone.Location = new System.Drawing.Point(388, 644);
+            this.tbPhone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbPhone.Name = "tbPhone";
-            this.tbPhone.Size = new System.Drawing.Size(119, 21);
+            this.tbPhone.Size = new System.Drawing.Size(138, 23);
             this.tbPhone.TabIndex = 7;
             // 
             // tbContactPerson
             // 
             this.tbContactPerson.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbContactPerson.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingItem, "ContactPerson", true));
-            this.tbContactPerson.Location = new System.Drawing.Point(458, 523);
+            this.tbContactPerson.Location = new System.Drawing.Point(534, 644);
+            this.tbContactPerson.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbContactPerson.Name = "tbContactPerson";
-            this.tbContactPerson.Size = new System.Drawing.Size(136, 21);
+            this.tbContactPerson.Size = new System.Drawing.Size(158, 23);
             this.tbContactPerson.TabIndex = 8;
             // 
             // buttonAdd
             // 
             this.buttonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonAdd.Location = new System.Drawing.Point(13, 550);
+            this.buttonAdd.Location = new System.Drawing.Point(15, 677);
+            this.buttonAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(75, 23);
+            this.buttonAdd.Size = new System.Drawing.Size(88, 28);
             this.buttonAdd.TabIndex = 9;
             this.buttonAdd.Text = "Добавить";
             this.buttonAdd.UseVisualStyleBackColor = true;
@@ -233,9 +249,10 @@
             // buttonDelete
             // 
             this.buttonDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDelete.Location = new System.Drawing.Point(519, 550);
+            this.buttonDelete.Location = new System.Drawing.Point(606, 677);
+            this.buttonDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelete.Size = new System.Drawing.Size(88, 28);
             this.buttonDelete.TabIndex = 10;
             this.buttonDelete.Text = "Удалить";
             this.buttonDelete.UseVisualStyleBackColor = true;
@@ -244,9 +261,10 @@
             // buttonSave
             // 
             this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonSave.Location = new System.Drawing.Point(97, 550);
+            this.buttonSave.Location = new System.Drawing.Point(113, 677);
+            this.buttonSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.Size = new System.Drawing.Size(88, 28);
             this.buttonSave.TabIndex = 11;
             this.buttonSave.Text = "Сохранить";
             this.buttonSave.UseVisualStyleBackColor = true;
@@ -254,9 +272,10 @@
             // 
             // buttonSearchByFeature
             // 
-            this.buttonSearchByFeature.Location = new System.Drawing.Point(13, 13);
+            this.buttonSearchByFeature.Location = new System.Drawing.Point(15, 16);
+            this.buttonSearchByFeature.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonSearchByFeature.Name = "buttonSearchByFeature";
-            this.buttonSearchByFeature.Size = new System.Drawing.Size(96, 23);
+            this.buttonSearchByFeature.Size = new System.Drawing.Size(112, 28);
             this.buttonSearchByFeature.TabIndex = 12;
             this.buttonSearchByFeature.Text = "Поиск по фиче";
             this.buttonSearchByFeature.UseVisualStyleBackColor = true;
@@ -265,18 +284,20 @@
             // labelFeature
             // 
             this.labelFeature.AutoSize = true;
-            this.labelFeature.Location = new System.Drawing.Point(115, 18);
+            this.labelFeature.Location = new System.Drawing.Point(134, 22);
+            this.labelFeature.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelFeature.Name = "labelFeature";
-            this.labelFeature.Size = new System.Drawing.Size(67, 13);
+            this.labelFeature.Size = new System.Drawing.Size(78, 16);
             this.labelFeature.TabIndex = 13;
             this.labelFeature.Text = "labelFeature";
             // 
             // buttonAll
             // 
             this.buttonAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAll.Location = new System.Drawing.Point(518, 13);
+            this.buttonAll.Location = new System.Drawing.Point(604, 16);
+            this.buttonAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonAll.Name = "buttonAll";
-            this.buttonAll.Size = new System.Drawing.Size(75, 23);
+            this.buttonAll.Size = new System.Drawing.Size(88, 28);
             this.buttonAll.TabIndex = 14;
             this.buttonAll.Text = "Все";
             this.toolTip.SetToolTip(this.buttonAll, "Список всех клиентов.");
@@ -287,18 +308,20 @@
             // 
             this.labelSearchInnerId.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelSearchInnerId.AutoSize = true;
-            this.labelSearchInnerId.Location = new System.Drawing.Point(281, 0);
+            this.labelSearchInnerId.Location = new System.Drawing.Point(328, 0);
+            this.labelSearchInnerId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelSearchInnerId.Name = "labelSearchInnerId";
-            this.labelSearchInnerId.Size = new System.Drawing.Size(196, 13);
+            this.labelSearchInnerId.Size = new System.Drawing.Size(225, 16);
             this.labelSearchInnerId.TabIndex = 15;
             this.labelSearchInnerId.Text = "Поиск по внутреннему номеру ключа";
             // 
             // tbInnerIdHaspKey
             // 
             this.tbInnerIdHaspKey.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tbInnerIdHaspKey.Location = new System.Drawing.Point(284, 15);
+            this.tbInnerIdHaspKey.Location = new System.Drawing.Point(331, 18);
+            this.tbInnerIdHaspKey.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbInnerIdHaspKey.Name = "tbInnerIdHaspKey";
-            this.tbInnerIdHaspKey.Size = new System.Drawing.Size(100, 21);
+            this.tbInnerIdHaspKey.Size = new System.Drawing.Size(116, 23);
             this.tbInnerIdHaspKey.TabIndex = 16;
             this.toolTip.SetToolTip(this.tbInnerIdHaspKey, "Введите внутренний номер ключа и нажмите \"Enter\".");
             this.tbInnerIdHaspKey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbInnerIdHaspKey_KeyDown);
@@ -307,9 +330,10 @@
             // Headline
             // 
             this.Headline.AutoSize = true;
-            this.Headline.Location = new System.Drawing.Point(15, 42);
+            this.Headline.Location = new System.Drawing.Point(18, 52);
+            this.Headline.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Headline.Name = "Headline";
-            this.Headline.Size = new System.Drawing.Size(94, 13);
+            this.Headline.Size = new System.Drawing.Size(106, 16);
             this.Headline.TabIndex = 17;
             this.Headline.Text = "Список клиентов";
             // 
@@ -318,6 +342,7 @@
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.dataGridViewTextBoxColumn1.DataPropertyName = "SerialNumber";
             this.dataGridViewTextBoxColumn1.HeaderText = "№ п/п";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.Width = 65;
@@ -326,6 +351,7 @@
             // 
             this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
             this.dataGridViewTextBoxColumn2.HeaderText = "Наименование";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
             this.dataGridViewTextBoxColumn2.Width = 119;
@@ -334,6 +360,7 @@
             // 
             this.dataGridViewTextBoxColumn3.DataPropertyName = "Address";
             this.dataGridViewTextBoxColumn3.HeaderText = "Адрес";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
             this.dataGridViewTextBoxColumn3.Width = 118;
@@ -342,6 +369,7 @@
             // 
             this.dataGridViewTextBoxColumn4.DataPropertyName = "Phone";
             this.dataGridViewTextBoxColumn4.HeaderText = "Телефон";
+            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             this.dataGridViewTextBoxColumn4.Width = 119;
@@ -350,15 +378,16 @@
             // 
             this.dataGridViewTextBoxColumn5.DataPropertyName = "ContactPerson";
             this.dataGridViewTextBoxColumn5.HeaderText = "Контактное лицо";
+            this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.ReadOnly = true;
             this.dataGridViewTextBoxColumn5.Width = 118;
             // 
             // ClientView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(605, 578);
+            this.ClientSize = new System.Drawing.Size(706, 711);
             this.Controls.Add(this.Headline);
             this.Controls.Add(this.tbInnerIdHaspKey);
             this.Controls.Add(this.labelSearchInnerId);
@@ -377,10 +406,11 @@
             this.Controls.Add(this.labelAddress);
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.labelFeature);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(615, 610);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("ClientView.IconOptions.Icon")));
+            this.IconOptions.ShowIcon = false;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MinimumSize = new System.Drawing.Size(607, 610);
             this.Name = "ClientView";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Клиетны";
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewClient)).EndInit();

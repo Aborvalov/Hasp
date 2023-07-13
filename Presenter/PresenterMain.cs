@@ -3,6 +3,7 @@ using ViewContract;
 using ModelEntities;
 using Model;
 using Logic;
+using System.Collections.Generic;
 
 namespace Presenter
 {
@@ -35,7 +36,7 @@ namespace Presenter
         {
             try
             {
-                mainView.Bind(mainModel?.GetActiveKeys());
+                mainView.Bind(Converter(mainModel?.GetActiveKeys()));
             }
             catch
             {
@@ -45,9 +46,33 @@ namespace Presenter
         }
 
         public void GetByClient(ModelViewClient client)
-            => mainView.Bind(mainModel?.GetByClient(client));
+            => mainView.Bind(Converter(mainModel?.GetByClient(client)));
 
-        public void ShowOldKeys()
-            => mainView.Bind(mainModel?.ShowExpiredKeys());
+        public void ShowExpiredKeys()
+            => mainView.Bind(Converter(mainModel?.ShowExpiredKeys()));
+
+        private List<ModelViewMain> Converter(List<ModelMain> models)
+        {
+            if (models is null)
+            {
+                throw new ArgumentNullException(nameof(models));
+            }
+
+            var result = new List<ModelViewMain>();
+            foreach (var model in models) 
+            {
+                result.Add(
+                    new ModelViewMain()
+                    {
+                        IdClient = model.IdClient,
+                        NumberKey = model.NumberKey,
+                        Feature = model.Feature,
+                        Client = model.Client,
+                        EndDate = model.EndDate.ToString(),
+                    });
+            }
+
+            return result;
+        }
     }
 }

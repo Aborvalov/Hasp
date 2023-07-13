@@ -6,7 +6,7 @@ namespace ModelEntities
     /// <summary>
     /// Связка (ключ-фича)-клиент, таблица KeyFeatureClient.
     /// </summary>
-    public class ModelViewMain 
+    public class ModelMain
     {
         [Browsable(false)]
         public int IdClient { get; set; }
@@ -16,27 +16,8 @@ namespace ModelEntities
         public string Feature { get; set; }
         [DisplayName("Клиент")]
         public string Client { get; set; }
-
-        private string endDate;
+        
         [DisplayName("Окончание действия")]
-
-        public string EndDate {
-            get {
-                return endDate;
-
-
-            }
-            set {
-                if (value.IndexOf("2111") >= 0)
-                {
-                    endDate = "бессрочные";
-                }
-                else
-                {
-                    endDate = value;
-                }
-            }
-        }
-
+        public DateTime EndDate { get; set;}
     }
 }

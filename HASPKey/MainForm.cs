@@ -1,9 +1,12 @@
-﻿using Presenter;
+﻿using DevExpress.Charts.Native;
+using Presenter;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using ViewContract;
+using System.Linq;
+
 
 namespace HASPKey
 {
@@ -17,7 +20,7 @@ namespace HASPKey
         {
             InitializeComponent();
             presenter = new PresenterMain(this);
-            ErrorDB();
+            ErrorDB(); 
         }
         private void ErrorDB()
         {
@@ -135,18 +138,59 @@ namespace HASPKey
         }
 
         private void ButtonAll_Click(object sender, EventArgs e)
-            => presenter.Views();
+        {
+            presenter.Views();
+           
+        }
 
-        private void ViewOldKeys_CheckedChanged(object sender, EventArgs e)
+
+        private void ViewExpiredKeys_CheckedChanged(object sender, EventArgs e)
         {
            if (viewOldKeys.Checked)
            {
-                presenter.ShowOldKeys();
+                presenter.ShowExpiredKeys();
            }
            else
            {
                 presenter.Views();
            }
         }
+        
+        private void Sort (Func<ModelEntities.ModelViewMain, object> param)
+        {
+            var currentList = bindingHome.List.Cast<ModelEntities.ModelViewMain>().ToList();
+            var sortedList = currentList.OrderBy(param).ToList();
+
+            if (currentList.SequenceEqual(sortedList))
+            {
+                sortedList = currentList.OrderByDescending(param).ToList();
+            }
+       
+            Bind(sortedList);
+        }
+
+        private void DataGridViewHomeView_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            string columnName = DataGridViewHomeView.Columns[e.ColumnIndex].Name;
+
+            if (columnName == "endDateDataGridViewTextBoxColumn")
+            {
+                Sort(x => x.EndDate);
+            }
+             if (columnName == "clientDataGridViewTextBoxColumn")
+            {
+                Sort(x => x.Client);    
+            }
+            else if (columnName == "featureDataGridViewTextBoxColumn")
+            {               
+                Sort(x => x.Feature);
+            }
+            else if (columnName == "numberKeyDataGridViewTextBoxColumn")
+            {
+                Sort(x => x.NumberKey);
+            }
+            
+        }
+
     }
 }
