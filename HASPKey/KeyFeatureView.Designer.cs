@@ -35,6 +35,12 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.bindingFeature = new System.Windows.Forms.BindingSource(this.components);
             this.DataGridViewFeature = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new HASPKey.CalendarColumn();
+            this.endDateDataGridViewTextBoxColumn = new HASPKey.CalendarColumn();
+            this.selectedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.DataGridViewHaspKey = new System.Windows.Forms.DataGridView();
             this.innerIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numberDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,12 +64,6 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new HASPKey.CalendarColumn();
-            this.endDateDataGridViewTextBoxColumn = new HASPKey.CalendarColumn();
-            this.selectedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingFeature)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewFeature)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewHaspKey)).BeginInit();
@@ -124,6 +124,71 @@
             this.DataGridViewFeature.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewFeature_CellEndEdit);
             this.DataGridViewFeature.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewFeature_DataBindingComplete);
             this.DataGridViewFeature.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DataGridViewFeature_KeyDown);
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "Number";
+            this.dataGridViewTextBoxColumn9.FillWeight = 87.56348F;
+            this.dataGridViewTextBoxColumn9.HeaderText = "Номер";
+            this.dataGridViewTextBoxColumn9.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            this.dataGridViewTextBoxColumn9.ToolTipText = "Номер функциональности";
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn10.FillWeight = 87.56348F;
+            this.dataGridViewTextBoxColumn10.HeaderText = "Наименование";
+            this.dataGridViewTextBoxColumn10.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            this.dataGridViewTextBoxColumn10.ToolTipText = "Наименование функциональности";
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "Description";
+            this.dataGridViewTextBoxColumn11.FillWeight = 87.56348F;
+            this.dataGridViewTextBoxColumn11.HeaderText = "Описание";
+            this.dataGridViewTextBoxColumn11.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            this.dataGridViewTextBoxColumn11.ToolTipText = "Описание функциональности";
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "StartDate";
+            this.dataGridViewTextBoxColumn12.FillWeight = 122.5888F;
+            this.dataGridViewTextBoxColumn12.HeaderText = "Начало действие";
+            this.dataGridViewTextBoxColumn12.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dataGridViewTextBoxColumn12.ToolTipText = "Начало действия функциональности";
+            this.dataGridViewTextBoxColumn12.Width = 110;
+            // 
+            // endDateDataGridViewTextBoxColumn
+            // 
+            this.endDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.endDateDataGridViewTextBoxColumn.DataPropertyName = "EndDate";
+            this.endDateDataGridViewTextBoxColumn.FillWeight = 16.75127F;
+            this.endDateDataGridViewTextBoxColumn.HeaderText = "Окончание действия";
+            this.endDateDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.endDateDataGridViewTextBoxColumn.Name = "endDateDataGridViewTextBoxColumn";
+            this.endDateDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.endDateDataGridViewTextBoxColumn.ToolTipText = "Окончание действия функциональности";
+            this.endDateDataGridViewTextBoxColumn.Width = 110;
+            // 
+            // selectedDataGridViewCheckBoxColumn
+            // 
+            this.selectedDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.selectedDataGridViewCheckBoxColumn.DataPropertyName = "Selected";
+            this.selectedDataGridViewCheckBoxColumn.FillWeight = 197.9695F;
+            this.selectedDataGridViewCheckBoxColumn.HeaderText = "У клиента";
+            this.selectedDataGridViewCheckBoxColumn.MinimumWidth = 6;
+            this.selectedDataGridViewCheckBoxColumn.Name = "selectedDataGridViewCheckBoxColumn";
+            this.selectedDataGridViewCheckBoxColumn.ToolTipText = "Присвоен клиенту";
+            this.selectedDataGridViewCheckBoxColumn.Width = 65;
             // 
             // DataGridViewHaspKey
             // 
@@ -369,71 +434,6 @@
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
             // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "Number";
-            this.dataGridViewTextBoxColumn9.FillWeight = 87.56348F;
-            this.dataGridViewTextBoxColumn9.HeaderText = "Номер";
-            this.dataGridViewTextBoxColumn9.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            this.dataGridViewTextBoxColumn9.ToolTipText = "Номер функциональности";
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn10.FillWeight = 87.56348F;
-            this.dataGridViewTextBoxColumn10.HeaderText = "Наименование";
-            this.dataGridViewTextBoxColumn10.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
-            this.dataGridViewTextBoxColumn10.ToolTipText = "Наименование функциональности";
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "Description";
-            this.dataGridViewTextBoxColumn11.FillWeight = 87.56348F;
-            this.dataGridViewTextBoxColumn11.HeaderText = "Описание";
-            this.dataGridViewTextBoxColumn11.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
-            this.dataGridViewTextBoxColumn11.ToolTipText = "Описание функциональности";
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "StartDate";
-            this.dataGridViewTextBoxColumn12.FillWeight = 122.5888F;
-            this.dataGridViewTextBoxColumn12.HeaderText = "Начало действие";
-            this.dataGridViewTextBoxColumn12.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dataGridViewTextBoxColumn12.ToolTipText = "Начало действия функциональности";
-            this.dataGridViewTextBoxColumn12.Width = 110;
-            // 
-            // endDateDataGridViewTextBoxColumn
-            // 
-            this.endDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.endDateDataGridViewTextBoxColumn.DataPropertyName = "EndDate";
-            this.endDateDataGridViewTextBoxColumn.FillWeight = 16.75127F;
-            this.endDateDataGridViewTextBoxColumn.HeaderText = "Окончание действия";
-            this.endDateDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.endDateDataGridViewTextBoxColumn.Name = "endDateDataGridViewTextBoxColumn";
-            this.endDateDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.endDateDataGridViewTextBoxColumn.ToolTipText = "Окончание действия функциональности";
-            this.endDateDataGridViewTextBoxColumn.Width = 110;
-            // 
-            // selectedDataGridViewCheckBoxColumn
-            // 
-            this.selectedDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.selectedDataGridViewCheckBoxColumn.DataPropertyName = "Selected";
-            this.selectedDataGridViewCheckBoxColumn.FillWeight = 197.9695F;
-            this.selectedDataGridViewCheckBoxColumn.HeaderText = "У клиента";
-            this.selectedDataGridViewCheckBoxColumn.MinimumWidth = 6;
-            this.selectedDataGridViewCheckBoxColumn.Name = "selectedDataGridViewCheckBoxColumn";
-            this.selectedDataGridViewCheckBoxColumn.ToolTipText = "Присвоен клиенту";
-            this.selectedDataGridViewCheckBoxColumn.Width = 65;
-            // 
             // KeyFeatureView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -450,6 +450,7 @@
             this.Name = "KeyFeatureView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Редактирование отношений ключ-функциональность";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.KeyFeatureView_FormClosed);
             this.Load += new System.EventHandler(this.EditKeyFeatureView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bindingFeature)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewFeature)).EndInit();
