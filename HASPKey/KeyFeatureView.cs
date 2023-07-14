@@ -163,6 +163,15 @@ namespace HASPKey
                 }
                   
             }
+            
+        }
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (change) {
+                Save();
+            }
+            else { Close(); }
+          
         }
 
         private void DataGridViewHaspKey_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
