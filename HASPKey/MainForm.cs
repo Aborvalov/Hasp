@@ -155,27 +155,14 @@ namespace HASPKey
                 presenter.Views();
            }
         }
-        
-        private void Sort (Func<ModelEntities.ModelViewMain, object> param)
-        {
-            var currentList = bindingHome.List.Cast<ModelEntities.ModelViewMain>().ToList();
-            var sortedList = currentList.OrderBy(param).ToList();
-
-            if (currentList.SequenceEqual(sortedList))
-            {
-                sortedList = currentList.OrderByDescending(param).ToList();
-            }
-       
-            Bind(sortedList);
-        }
-
+                
         private void DataGridViewHomeView_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             string columnName = DataGridViewHomeView.Columns[e.ColumnIndex].Name;
 
             if (columnName == "endDateDataGridViewTextBoxColumn")
             {
-                Sort(x => x.EndDate);
+                Sort(x => x.Date);
             }
              if (columnName == "clientDataGridViewTextBoxColumn")
             {
@@ -191,6 +178,34 @@ namespace HASPKey
             }
             
         }
+
+        private void Sort(Func<ModelEntities.ModelViewMain, object> param)
+        {
+            var currentList = bindingHome.List.Cast<ModelEntities.ModelViewMain>().ToList();
+            var sortedList = currentList.OrderBy(param).ToList();
+
+            if (currentList.SequenceEqual(sortedList))
+            {
+                sortedList = currentList.OrderByDescending(param).ToList();
+            }
+
+            Bind(sortedList);
+        }
+
+        private void Sort(Func<ModelEntities.ModelViewMain, object> param1, Func<ModelEntities.ModelViewMain, object> param2)
+        {
+            var currentList = bindingHome.List.Cast<ModelEntities.ModelViewMain>().ToList();
+            var sortedList = currentList.OrderBy(param1).ThenBy(param2).ToList();
+
+
+            if (currentList.SequenceEqual(sortedList))
+            {
+                sortedList = currentList.OrderByDescending(param1).ThenByDescending(param2).ToList();
+            }
+
+            Bind(sortedList);
+        }
+
 
     }
 }

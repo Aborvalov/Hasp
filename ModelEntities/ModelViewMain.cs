@@ -16,6 +16,8 @@ namespace ModelEntities
         public string Feature { get; set; }
         [DisplayName("Клиент")]
         public string Client { get; set; }
+        [Browsable(false)]
+        public DateTime Date { get; set; }
 
         private string endDate;
         [DisplayName("Окончание действия")]
@@ -23,8 +25,6 @@ namespace ModelEntities
         public string EndDate {
             get {
                 return endDate;
-
-
             }
             set {
                 if (value.IndexOf("2111") >= 0)

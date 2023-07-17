@@ -68,7 +68,8 @@ namespace Presenter
                         NumberKey = model.NumberKey,
                         Feature = model.Feature,
                         Client = model.Client,
-                        EndDate = model.EndDate.ToString(),
+                        Date = model.EndDate,
+                        EndDate = model.EndDate.ToString("dd.MM.yyyy"),
                     });
             }
 
