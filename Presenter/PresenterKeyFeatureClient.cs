@@ -50,8 +50,8 @@ namespace Presenter
             Delete(keyClient);
             Add(keyClient);
             Update(keyClient);
-
-            DisplayHaspKeyAtClient(keyClient[0].IdClient);            
+          
+            DisplayHaspKeyAtClient(keyClient[0].IdClient);  
             entitiesView.DataChange();
         }
 

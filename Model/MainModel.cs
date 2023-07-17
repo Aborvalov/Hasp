@@ -8,8 +8,9 @@ using System.Linq;
 namespace Model
 {
     public class MainModel : IMainModel
-    {
-        private readonly DateTime date = DateTime.Now.Date;
+    {    
+        private static readonly DateTime date = DateTime.Now.Date;
+        const string noLimit = "бессрочные";
 
         private readonly IFactoryLogic logic;
         private  IEntitesContext db;
@@ -24,7 +25,7 @@ namespace Model
         public void Dispose() => db.Dispose();
 
 
-        public List<ModelViewMain> GetAll()
+        public List<ModelMain> GetAll()
         {
             try
             {
@@ -48,8 +49,9 @@ namespace Model
                                     on keyFeat.IdFeature equals feature.Id
                                join key in haspKeys
                                     on keyFeat.IdHaspKey equals key.Id
+                               
 
-                               select new ModelViewMain
+                               select new ModelMain
                                {
                                    Client = cl.Name + (string.IsNullOrEmpty(cl.Address)
                                                             ? string.Empty : " - " + cl.Address),
@@ -59,7 +61,12 @@ namespace Model
                                    NumberKey = key.InnerId.ToString() + " - \"" + key.Number + "\"",
                                };
 
-                    return item.OrderBy(x => x.Client).ToList();
+                    return item
+                            .GroupBy(x => x.Client)
+                            .SelectMany(g => g
+                            .GroupBy(x => x.Feature)
+                            .SelectMany(f => f.OrderBy(x => x.EndDate)))
+                            .ToList();
                 }
             }
             catch
@@ -67,15 +74,13 @@ namespace Model
                 throw;
             }
         }
+        public List<ModelMain> GetActiveKeys() 
+            => GetAll().Where(x => x.EndDate.ToString() == noLimit || x.EndDate >= date).ToList();
 
-        public List<ModelViewMain> GetActiveKeys() 
-            => GetAll().Where(x => x.EndDate >= date).ToList();
-
-        public List<ModelViewMain> GetByClient(ModelViewClient client)
+        public List<ModelMain> GetByClient(ModelViewClient client)
             => GetActiveKeys().Where(x => x.IdClient == client.Id).ToList();
 
-        public List<ModelViewMain> ShowExpiredKeys()
-            => GetAll().Where(x => x.EndDate < date).ToList();
-
+        public List<ModelMain> ShowExpiredKeys()
+            => GetAll().Where(x => x.EndDate.ToString() != noLimit && x.EndDate < date).ToList();
     }
 }

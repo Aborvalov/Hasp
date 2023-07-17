@@ -16,13 +16,13 @@ namespace HASPKey
         public string NumberHaspKey { get; set; }
         private readonly IPresenterKeyFeature presenterEntities;
         private bool change = false;
-        
+
         private const string error = "Ошибка";
         private const string errorString = "Неправильно заполнена дата, окончание действия меньше начала.";
         private const string emptyKey = "Данный ключ не найден.";
         private const string emptyFeature = "Данная функциональность не найдена.";
-        private const string caption = "Внести изменеия";
-        private const string message = "Данные были изменены, внести изменеия?";
+        private const string caption = "Внести изменения";
+        private const string message = "Данные были изменены, внести изменения?";
         private const string headlineFeature = "Список действующих функциональностей у ключа - ";
         public KeyFeatureView()
         {
@@ -34,7 +34,7 @@ namespace HASPKey
                 DataGridViewFeature.ReadOnly = true;
             }
         }
-              
+
         public void DataChange() => DataUpdated?.Invoke();
         public void MessageError(string errorText)
             => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -46,11 +46,11 @@ namespace HASPKey
 
             HeadlineFeature.Text = headlineFeature + NumberHaspKey;
         }
-        public void BindKey(List<ModelViewHaspKey> key) 
+        public void BindKey(List<ModelViewHaspKey> key)
             => bindingHaspKey.DataSource = key != null ? new BindingList<ModelViewHaspKey>(key)
                                                        : new BindingList<ModelViewHaspKey>();
 
-        private void  DataGridViewHaspKey_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void DataGridViewHaspKey_CellClick(object sender, DataGridViewCellEventArgs e)
             => FillFeatureAtKey();
 
         private void DataGridViewHaspKey_SelectionChanged(object sender, EventArgs e)
@@ -85,7 +85,7 @@ namespace HASPKey
         }
 
         public void ErrorRow(int numberRow)
-            =>DataGridViewFeature
+            => DataGridViewFeature
                 .Rows[numberRow]
                 .DefaultCellStyle
                 .BackColor = Color.Red;
@@ -105,13 +105,13 @@ namespace HASPKey
             {
                 MessageError(emptyFeature);
                 return;
-            }            
+            }
 
             presenterEntities.CheckInputData(row, e.RowIndex);
             if (presenterEntities.CheckSelected(row))
                 DataGridViewFeature["selectedDataGridViewCheckBoxColumn", e.RowIndex].Value = true;
             else
-                if(DataGridViewFeature["dataGridViewTextBoxColumn12", e.RowIndex].Value == null ||
+                if (DataGridViewFeature["dataGridViewTextBoxColumn12", e.RowIndex].Value == null ||
                    DataGridViewFeature["endDateDataGridViewTextBoxColumn", e.RowIndex].Value == null)
                 ErrorRow(e.RowIndex);
 
@@ -120,28 +120,51 @@ namespace HASPKey
 
         private void EditKeyFeatureView_Load(object sender, EventArgs e)
             => EmptyFeatureAsKey();
-        
+
         public void EmptyFeatureAsKey()
-        {            
+        {
             for (int i = 0; i < bindingHaspKey.Count; i++)
             {
                 if (!(bindingHaspKey[i] is ModelViewHaspKey item))
                     return;
 
-                if(presenterEntities.CheckKey(item))
+                if (presenterEntities.CheckKey(item))
                     DataGridViewHaspKey.Rows[i].DefaultCellStyle.BackColor = Color.Wheat;
                 else
                     DataGridViewHaspKey.Rows[i].DefaultCellStyle.BackColor = Color.White;
+            }
+        }
+        private void DelItem(int firstColumnIndex, int lastColumnIndex)
+        {
+            for (int i = firstColumnIndex; i <= lastColumnIndex; ++i)
+            {
+                DataGridViewFeature
+                    .Rows[DataGridViewFeature.CurrentCell.RowIndex]
+                    .Cells[i]
+                    .Value = null;
             }
         }
 
         private void DataGridViewFeature_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Delete)
-                DataGridViewFeature.Rows[DataGridViewFeature.CurrentCell.RowIndex]
-                                   .Cells[DataGridViewFeature.CurrentCell.ColumnIndex]
-                                   .Value = null;
-        }
+            {
+                int columnIndex = DataGridViewFeature.CurrentCell.ColumnIndex;
+                int lastColumnIndex = DataGridViewFeature.Columns["selectedDataGridViewCheckBoxColumn"].Index;
+
+                if (0 <= columnIndex && columnIndex < 3)
+                {
+                    DelItem(3, lastColumnIndex);
+                    change = true;
+                }
+                else {
+                    DelItem(columnIndex, columnIndex);
+                    change = true;
+                }
+                  
+            }
+            
+        }        
 
         private void DataGridViewHaspKey_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
@@ -153,6 +176,14 @@ namespace HASPKey
         {
             foreach (DataGridViewRow row in DataGridViewFeature.Rows)
                 row.HeaderCell.Value = (row.Index + 1).ToString();
+        }
+
+        private void KeyFeatureView_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (change)
+                Save();            
+            else 
+                Close();
         }
     }
 }

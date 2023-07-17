@@ -16,7 +16,7 @@ namespace ModelEntities
             Description = feature.Description;
         }
         [Browsable(false)]
-        public Feature Feature { get; private set; } = new Feature(); 
+        public Feature Feature { get; private set; } = new Feature();
         [Browsable(false)]
         public int IdFeature
         {

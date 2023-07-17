@@ -7,7 +7,6 @@ namespace ViewContract
     {
         void Bind(List<T> entity);        
         void DataChange();
-        void MessageError(string error);
-        event Action DataUpdated;
+        void MessageError(string error);   
     }
 }

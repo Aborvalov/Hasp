@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,11 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModelViewMain.cs" />
     <Compile Include="ModelViewClient.cs" />
     <Compile Include="ModelViewFeature.cs" />
     <Compile Include="ModelViewKeyFeature.cs" />
     <Compile Include="ModelViewHaspKey.cs" />
-    <Compile Include="ModelViewMain.cs" />
+    <Compile Include="ModelMain.cs" />
     <Compile Include="ModelViewKeyFeatureClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeDateBase.cs" />
