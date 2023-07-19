@@ -67,6 +67,8 @@ namespace HASPKey
             this.numberKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewHomeView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHome)).BeginInit();
             this.SuspendLayout();
             // 
@@ -177,7 +179,7 @@ namespace HASPKey
             // Reference
             // 
             this.Reference.Name = "Reference";
-            this.Reference.Size = new System.Drawing.Size(187, 26);
+            this.Reference.Size = new System.Drawing.Size(224, 26);
             this.Reference.Text = "О программе";
             this.Reference.Click += new System.EventHandler(this.Reference_Click);
             // 
@@ -378,6 +380,8 @@ namespace HASPKey
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewHomeView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHome)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

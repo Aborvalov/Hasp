@@ -14,6 +14,8 @@ namespace Presenter
         private const string nullDB = "База данных не найдена.";
         private const string errorDB = "Ошибка базы данных.";
 
+       
+
         public PresenterMain(IMainView homeView)
         {
             this.mainView = homeView ?? throw new ArgumentNullException(nameof(homeView));
@@ -30,6 +32,8 @@ namespace Presenter
 
             Views();
         }
+
+        
 
         public void Dispose() => mainModel?.Dispose();
         public void Views()

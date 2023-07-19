@@ -73,6 +73,7 @@
     <Compile Include="FeatureModel.cs" />
     <Compile Include="HaspKeyModel.cs" />
     <Compile Include="Contract\IKeyFeatureModel.cs" />
+    <Compile Include="MainModel2.cs" />
     <Compile Include="MainModel.cs" />
     <Compile Include="Contract\IClientModel.cs" />
     <Compile Include="Contract\IEntitiesModel.cs" />

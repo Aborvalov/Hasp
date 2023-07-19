@@ -48,6 +48,7 @@
     <Compile Include="Contract\IPresenterKeyFeature.cs" />
     <Compile Include="Contract\IPresenterKeyFeatureClient.cs" />
     <Compile Include="Contract\IPresenterMain.cs" />
+    <Compile Include="Contract\IPresenterMain_2.cs" />
     <Compile Include="Contract\IPresenterRefernce.cs" />
     <Compile Include="Contract\IPresenterSelectedDataBase.cs" />
     <Compile Include="PresenterClient.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="PresenterHaspKey.cs" />
     <Compile Include="PresenterKeyFeatureClient.cs" />
     <Compile Include="PresenterMain.cs" />
+    <Compile Include="PresenterMain_2.cs" />
     <Compile Include="PresenterReference.cs" />
     <Compile Include="PresenterSelectedDataBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

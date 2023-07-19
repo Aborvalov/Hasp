@@ -47,6 +47,7 @@
     <Compile Include="IKeyFeatureView.cs" />
     <Compile Include="IMainView.cs" />
     <Compile Include="IBindItemView.cs" />
+    <Compile Include="IMainView_2.cs" />
     <Compile Include="IUpdateDataBaseMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

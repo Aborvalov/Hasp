@@ -21,7 +21,7 @@ namespace HASPKey
             Application.SetCompatibleTextRenderingDefault(false);
 
             BonusSkins.Register();
-            Application.Run(new MainForm());
+            Application.Run(new MainForm_2());
         }
     }
 }
