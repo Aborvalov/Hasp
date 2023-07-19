@@ -12,6 +12,7 @@ namespace HASPKey
         public NewDataForm()
         {
             InitializeComponent();
+            DataWindow.Text = LoadFromXml.GetItem().ToString();
         }
         private void DataWindowTextChanged(object sender, EventArgs e)
         => change = true;
