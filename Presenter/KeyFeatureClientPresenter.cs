@@ -8,7 +8,7 @@ using ViewContract;
 
 namespace Presenter
 {
-    public class KeyFeatureClientPresenter : IPresenterKeyFeatureClient
+    public class KeyFeatureClientPresenter : IKeyFeatureClientPresenter
     {
         private readonly IEntitiesModel<ModelViewClient> clientModel;
         private readonly IKeyFeatureClientModel keyFeatureClientModel;        

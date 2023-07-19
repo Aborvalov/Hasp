@@ -3,7 +3,7 @@ using ViewContract;
 
 namespace Presenter
 {
-    public class ReferencePresenter : IPresenterView
+    public class ReferencePresenter : IViewPresenter
     {
         private readonly IBindItemView<string> referenceView;
         private readonly IItemModel<string> referenceModel;

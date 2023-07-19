@@ -7,7 +7,7 @@ namespace HASPKey
 {
     public partial class SelectedDataBaseView : DevExpress.XtraEditors.XtraForm, IBindItemView<TypeDataBase>
     {
-        private readonly IPresenterSelectedDataBase presenterSelectedDataBase;
+        private readonly ISelectedDataBasePresenter presenterSelectedDataBase;
         private readonly IMainView mainView;
         public SelectedDataBaseView(IMainView homeView)
         {

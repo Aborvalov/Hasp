@@ -5,7 +5,7 @@ namespace HASPKey
 {
     public partial class ReferenceView : DevExpress.XtraEditors.XtraForm, IBindItemView<string>
     {
-        private readonly IPresenterView presenterRefernce;
+        private readonly IViewPresenter presenterRefernce;
         public ReferenceView()
         {
             InitializeComponent();

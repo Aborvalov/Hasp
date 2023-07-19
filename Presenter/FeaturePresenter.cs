@@ -6,7 +6,7 @@ using ViewContract;
 
 namespace Presenter
 {
-    public class FeaturePresenter : IPresenterEntities<ModelViewFeature>
+    public class FeaturePresenter : IEntitiesPresenter<ModelViewFeature>
     {
         private readonly IEntitiesModel<ModelViewFeature> featureModel;
         private readonly IEntitiesView<ModelViewFeature> entitiesView;

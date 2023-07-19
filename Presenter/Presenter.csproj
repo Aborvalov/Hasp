@@ -73,14 +73,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contract\IPresenterClient.cs" />
-    <Compile Include="Contract\IPresenterEntities.cs" />
-    <Compile Include="Contract\IPresenterHaspKey.cs" />
-    <Compile Include="Contract\IPresenterKeyFeature.cs" />
-    <Compile Include="Contract\IPresenterKeyFeatureClient.cs" />
+    <Compile Include="Contract\IClientPresenter.cs" />
+    <Compile Include="Contract\IEntitiesPresenter.cs" />
+    <Compile Include="Contract\IHaspKeyPresenter.cs" />
+    <Compile Include="Contract\IKeyFeaturePresenter.cs" />
+    <Compile Include="Contract\IKeyFeatureClientPresenter.cs" />
     <Compile Include="Contract\IMainPresenter.cs" />
-    <Compile Include="Contract\IPresenterRefernce.cs" />
-    <Compile Include="Contract\IPresenterSelectedDataBase.cs" />
+    <Compile Include="Contract\IReferencePresenter.cs" />
+    <Compile Include="Contract\ISelectedDataBasePresenter.cs" />
     <Compile Include="СlientPresenter.cs" />
     <Compile Include="KeyFeaturePresenter.cs" />
     <Compile Include="FeaturePresenter.cs" />

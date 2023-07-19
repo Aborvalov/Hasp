@@ -5,7 +5,7 @@ using ViewContract;
 
 namespace Presenter
 {
-    public class SelectedDataBasePresenter : IPresenterSelectedDataBase
+    public class SelectedDataBasePresenter : ISelectedDataBasePresenter
     {
         private readonly IBindItemView<TypeDataBase> selectedDataBaseView;
         private readonly ISelectedDataBaseModel selectedDBModel;

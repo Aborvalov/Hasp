@@ -261,7 +261,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Common\days.xml" />
+    <Content Include="Common\days.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Common\key.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

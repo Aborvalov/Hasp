@@ -11,14 +11,26 @@ namespace HASPKey
         {
             InitializeComponent();
         }
-        private void TextBox1TextChanged(object sender, EventArgs e)
+        private void DataWindowTextChanged(object sender, EventArgs e)
         => change = true;
 
         private void DXFormFormClosed(object sender, FormClosedEventArgs e)
         {
             if (change)
-                LoadFromXml.Save(textBox1.Text);
+                LoadFromXml.Save(DataWindow.Text);
             
+        }
+
+        private void DataWindowKeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            else 
+            {
+                e.Handled = false;
+            }
         }
     }
 }

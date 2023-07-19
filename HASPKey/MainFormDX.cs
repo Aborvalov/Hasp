@@ -99,13 +99,10 @@ namespace HASPKey
         }
         private void BarButtonItem5ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
             using (SelectedDataBaseView selectedDataBaseView = new SelectedDataBaseView(this))
             {
                 selectedDataBaseView.ShowDialog();
             }
-
-
         }
 
         private void BarButtonItem15ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

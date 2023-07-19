@@ -13,7 +13,7 @@ namespace Model
         const string noLimit = "бессрочные";
         private readonly IFactoryLogic logic;
         private  IEntitesContext db;
-        private static readonly int days = LoadFromXml.Load();
+        private static readonly int days = LoadFromXml.GetItem();
 
         public MainModel(IFactoryLogic factoryLogic)
         {

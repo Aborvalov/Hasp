@@ -6,7 +6,7 @@ using ViewContract;
 
 namespace Presenter
 {
-    public class HaspKeyPresenter : IPresenterHaspKey
+    public class HaspKeyPresenter : IHaspKeyPresenter
     {
         private readonly IHaspKeyModel haspKeyModel;
         private readonly IEntitiesView<ModelViewHaspKey> entitiesView;

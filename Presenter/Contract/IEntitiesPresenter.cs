@@ -2,7 +2,7 @@
 
 namespace Presenter
 {
-    public interface IPresenterEntities<T> : IDisposable, IPresenterView
+    public interface IEntitiesPresenter<T> : IDisposable, IViewPresenter
     {
         void Add(T entity);
         void Update(T entity);

@@ -9,7 +9,7 @@ using ViewContract;
 
 namespace Presenter
 {
-    public class KeyFeaturePresenter : IPresenterKeyFeature
+    public class KeyFeaturePresenter : IKeyFeaturePresenter
     {
         private readonly IEntitiesModel<ModelViewHaspKey> keyModel;
         private readonly IKeyFeatureModel featureModel;

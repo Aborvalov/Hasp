@@ -12,7 +12,7 @@ namespace HASPKey
 {
     public partial class KeyFeatureClientView : DevExpress.XtraEditors.XtraForm, IKeyFeatureClientView
     {
-        private readonly IPresenterKeyFeatureClient presenterEntities;
+        private readonly IKeyFeatureClientPresenter presenterEntities;
         public event Action DataUpdated;
         private bool change = false;
 

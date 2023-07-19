@@ -11,7 +11,7 @@ namespace HASPKey
 {
     public partial class HaspKeyView : DevExpress.XtraEditors.XtraForm, IEntitiesView<ModelViewHaspKey>
     {
-        private readonly IPresenterHaspKey presenterHaspKey;
+        private readonly IHaspKeyPresenter presenterHaspKey;
         private bool size = true;
         private bool error = false;
         private const int sizeH = 40;

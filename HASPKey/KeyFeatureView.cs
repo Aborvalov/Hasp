@@ -14,7 +14,7 @@ namespace HASPKey
     {
         public event Action DataUpdated;
         public string NumberHaspKey { get; set; }
-        private readonly IPresenterKeyFeature presenterEntities;
+        private readonly IKeyFeaturePresenter presenterEntities;
         private bool change = false;
 
         private const string error = "Ошибка";
