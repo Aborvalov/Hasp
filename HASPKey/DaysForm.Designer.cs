@@ -60,6 +60,7 @@
             this.DataWindow.TabIndex = 1;
             this.DataWindow.TextChanged += new System.EventHandler(this.DataWindowTextChanged);
             this.DataWindow.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DataWindowKeyPress);
+            this.DataWindow.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.DataWindow_MouseDoubleClick);
             // 
             // NewDataForm
             // 

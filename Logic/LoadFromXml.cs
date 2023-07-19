@@ -6,37 +6,34 @@ namespace Logic
 {
     public class LoadFromXml
     {
-        public static readonly string filePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + @"\Common\days.xml";
-        public static void Save(string item)
+        private static readonly string filePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + @"\Common\days.xml";
+        private const int defaultValue = 30;
+        public static void Save(int item)
         {
-            XmlDocument xmlDoc = new XmlDocument();
-            XmlElement rootElement = xmlDoc.CreateElement("Data");
-            XmlElement userElement = xmlDoc.CreateElement("UserValue");
-            if (int.TryParse(item, out _))
-                userElement.InnerText = item;
+            var xmlDoc = new XmlDocument();
+            var rootElement = xmlDoc.CreateElement("Data");
+            var userElement = xmlDoc.CreateElement("UserValue");
+            if (item > 0)
+                userElement.InnerText = item.ToString();
             else 
-                userElement.InnerText = "0";
+                userElement.InnerText = defaultValue.ToString();
+
             rootElement.AppendChild(userElement);
             xmlDoc.AppendChild(rootElement);
             xmlDoc.Save(filePath);
         }
         public static int GetItem()
         {
-            XmlDocument xDoc = new XmlDocument();
+            var xDoc = new XmlDocument();
             xDoc.Load(filePath);
-
-            foreach (XmlNode xnode in xDoc.DocumentElement)
+            var userValue = xDoc.SelectSingleNode("/Data/UserValue").InnerText;
+            try
             {
-                if (xnode.Attributes == null)
-                    continue;
-
-                XmlNode attr = xnode.Attributes.GetNamedItem("UserValue");
-                if (attr != null)
-                {
-                    return int.Parse(attr.Value);
-                }
+                return int.Parse(userValue);
             }
-            return 0;
+            catch { 
+                return defaultValue; 
+            }
         }
     }
 }

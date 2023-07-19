@@ -7,6 +7,8 @@ namespace HASPKey
     public partial class NewDataForm : DevExpress.XtraEditors.XtraForm
     {
         private bool change = false;
+        private const int defaultValue = 30;
+
         public NewDataForm()
         {
             InitializeComponent();
@@ -17,8 +19,14 @@ namespace HASPKey
         private void DXFormFormClosed(object sender, FormClosedEventArgs e)
         {
             if (change)
-                LoadFromXml.Save(DataWindow.Text);
-            
+                try
+                {
+                    LoadFromXml.Save(int.Parse(DataWindow.Text));
+                }
+                catch 
+                {
+                    LoadFromXml.Save(defaultValue);
+                }
         }
 
         private void DataWindowKeyPress(object sender, KeyPressEventArgs e)
@@ -31,6 +39,12 @@ namespace HASPKey
             {
                 e.Handled = false;
             }
+            change = true;
+        }
+
+        private void DataWindow_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            DataWindow.Text = null;
         }
     }
 }
