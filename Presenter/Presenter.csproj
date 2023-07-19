@@ -32,8 +32,39 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FSharp.Compiler.Service, Version=43.7.300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FSharp.Compiler.Service.43.7.300\lib\netstandard2.0\FSharp.Compiler.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="FSharp.Core, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FSharp.Core.7.0.300\lib\netstandard2.0\FSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FSharp.DependencyManager.Nuget, Version=7.0.300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FSharp.Compiler.Service.43.7.300\lib\netstandard2.0\FSharp.DependencyManager.Nuget.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.6.0.0\lib\net461\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.6.0.0\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Metadata, Version=6.0.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.Metadata.6.0.1\lib\net461\System.Reflection.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,19 +78,17 @@
     <Compile Include="Contract\IPresenterHaspKey.cs" />
     <Compile Include="Contract\IPresenterKeyFeature.cs" />
     <Compile Include="Contract\IPresenterKeyFeatureClient.cs" />
-    <Compile Include="Contract\IPresenterMain.cs" />
-    <Compile Include="Contract\IPresenterMain_2.cs" />
+    <Compile Include="Contract\IMainPresenter.cs" />
     <Compile Include="Contract\IPresenterRefernce.cs" />
     <Compile Include="Contract\IPresenterSelectedDataBase.cs" />
-    <Compile Include="PresenterClient.cs" />
-    <Compile Include="PresenterKeyFeature.cs" />
-    <Compile Include="PresenterFeature.cs" />
-    <Compile Include="PresenterHaspKey.cs" />
-    <Compile Include="PresenterKeyFeatureClient.cs" />
-    <Compile Include="PresenterMain.cs" />
-    <Compile Include="PresenterMain_2.cs" />
-    <Compile Include="PresenterReference.cs" />
-    <Compile Include="PresenterSelectedDataBase.cs" />
+    <Compile Include="СlientPresenter.cs" />
+    <Compile Include="KeyFeaturePresenter.cs" />
+    <Compile Include="FeaturePresenter.cs" />
+    <Compile Include="HaspKeyPresenter.cs" />
+    <Compile Include="KeyFeatureClientPresenter.cs" />
+    <Compile Include="MainPresenter.cs" />
+    <Compile Include="ReferencePresenter.cs" />
+    <Compile Include="SelectedDataBasePresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +112,10 @@
       <Project>{698d2ac3-fc9e-47d6-87b7-a5835bd507ee}</Project>
       <Name>ViewContract</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

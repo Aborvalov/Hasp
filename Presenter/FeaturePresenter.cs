@@ -6,7 +6,7 @@ using ViewContract;
 
 namespace Presenter
 {
-    public class PresenterFeature : IPresenterEntities<ModelViewFeature>
+    public class FeaturePresenter : IPresenterEntities<ModelViewFeature>
     {
         private readonly IEntitiesModel<ModelViewFeature> featureModel;
         private readonly IEntitiesView<ModelViewFeature> entitiesView;
@@ -18,7 +18,7 @@ namespace Presenter
         private const string erroremptyName = "\u2022 Не заполнено поля \"Наименование\", не должно быть пустым. \n";
         private const string nullDB = "База данных не найдена.";
 
-        public PresenterFeature(IEntitiesView<ModelViewFeature> entitesView)
+        public FeaturePresenter(IEntitiesView<ModelViewFeature> entitesView)
         {
             this.entitiesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
 

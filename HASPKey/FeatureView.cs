@@ -26,7 +26,7 @@ namespace HASPKey
         public FeatureView(bool search) 
         {
             InitializeComponent();
-            presenterFeature = new PresenterFeature(this);
+            presenterFeature = new FeaturePresenter(this);
             DataGridViewFeature.Height = DataGridViewFeature.Size.Height + sizeH;
 
             this.search = search;

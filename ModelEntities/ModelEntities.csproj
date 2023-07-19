@@ -50,8 +50,6 @@
     <Compile Include="ModelViewHaspKey.cs" />
     <Compile Include="ModelMain.cs" />
     <Compile Include="ModelViewKeyFeatureClient.cs" />
-    <Compile Include="ModelViewMain2.cs" />
-    <Compile Include="ModelViewNumber2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeDateBase.cs" />
   </ItemGroup>

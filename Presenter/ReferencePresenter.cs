@@ -3,11 +3,11 @@ using ViewContract;
 
 namespace Presenter
 {
-    public class PresenterReference : IPresenterView
+    public class ReferencePresenter : IPresenterView
     {
         private readonly IBindItemView<string> referenceView;
         private readonly IItemModel<string> referenceModel;
-        public PresenterReference(IBindItemView<string> reference)
+        public ReferencePresenter(IBindItemView<string> reference)
         {
             this.referenceView = reference ?? throw new System.ArgumentNullException(nameof(reference));
 

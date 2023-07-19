@@ -47,7 +47,6 @@
     <Compile Include="IKeyFeatureView.cs" />
     <Compile Include="IMainView.cs" />
     <Compile Include="IBindItemView.cs" />
-    <Compile Include="IMainView_2.cs" />
     <Compile Include="IUpdateDataBaseMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -59,6 +58,10 @@
     <ProjectReference Include="..\ModelEntities\ModelEntities.csproj">
       <Project>{c5312c7b-ade7-462e-b945-3ea7e1efb4a0}</Project>
       <Name>ModelEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{3af74fc5-74be-45f6-ad0a-d317975cf11f}</Project>
+      <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

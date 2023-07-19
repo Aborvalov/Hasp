@@ -9,7 +9,7 @@ using ViewContract;
 
 namespace Presenter
 {
-    public class PresenterKeyFeature : IPresenterKeyFeature
+    public class KeyFeaturePresenter : IPresenterKeyFeature
     {
         private readonly IEntitiesModel<ModelViewHaspKey> keyModel;
         private readonly IKeyFeatureModel featureModel;
@@ -17,7 +17,7 @@ namespace Presenter
         private List<KeyFeature> keyFeatures;
         private const string nullDB = "База данных не найдена.";
 
-        public PresenterKeyFeature(IKeyFeatureView entitiesView)
+        public KeyFeaturePresenter(IKeyFeatureView entitiesView)
         {
             this.entitiesView = entitiesView ?? throw new ArgumentNullException(nameof(entitiesView));
                                 

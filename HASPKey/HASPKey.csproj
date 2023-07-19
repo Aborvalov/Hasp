@@ -158,11 +158,17 @@
     <Compile Include="SelectedDataBaseView.Designer.cs">
       <DependentUpon>SelectedDataBaseView.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm_2.cs">
+    <Compile Include="MainFormDX.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm_2.Designer.cs">
-      <DependentUpon>MainForm_2.cs</DependentUpon>
+    <Compile Include="MainFormDX.Designer.cs">
+      <DependentUpon>MainFormDX.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DaysForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DaysForm.Designer.cs">
+      <DependentUpon>DaysForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="ClientView.resx">
       <DependentUpon>ClientView.cs</DependentUpon>
@@ -200,8 +206,11 @@
     <EmbeddedResource Include="SelectedDataBaseView.resx">
       <DependentUpon>SelectedDataBaseView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm_2.resx">
-      <DependentUpon>MainForm_2.cs</DependentUpon>
+    <EmbeddedResource Include="MainFormDX.resx">
+      <DependentUpon>MainFormDX.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DaysForm.resx">
+      <DependentUpon>DaysForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="packages.config" />
@@ -230,9 +239,17 @@
       <Project>{22d9c86f-1103-47fc-bcd6-5e35fc54de22}</Project>
       <Name>Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Logic\Logic.csproj">
+      <Project>{77C069C5-75C2-4DC0-B576-55A894ED471D}</Project>
+      <Name>Logic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ModelEntities\ModelEntities.csproj">
       <Project>{c5312c7b-ade7-462e-b945-3ea7e1efb4a0}</Project>
       <Name>ModelEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{3af74fc5-74be-45f6-ad0a-d317975cf11f}</Project>
+      <Name>Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\Presenter\Presenter.csproj">
       <Project>{cc3588fa-a420-486f-b886-1e569220987b}</Project>
@@ -244,6 +261,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Common\days.xml" />
     <Content Include="Common\key.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

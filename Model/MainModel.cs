@@ -11,10 +11,10 @@ namespace Model
     {    
         private static readonly DateTime date = DateTime.Now.Date;
         const string noLimit = "бессрочные";
-
         private readonly IFactoryLogic logic;
         private  IEntitesContext db;
-        
+        private static readonly int days = LoadFromXml.Load();
+
         public MainModel(IFactoryLogic factoryLogic)
         {
             logic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
@@ -23,8 +23,6 @@ namespace Model
                 throw new ArgumentNullException(nameof(db));           
         }       
         public void Dispose() => db.Dispose();
-
-
         public List<ModelMain> GetAll()
         {
             try
@@ -74,6 +72,7 @@ namespace Model
                 throw;
             }
         }
+
         public List<ModelMain> GetActiveKeys() 
             => GetAll().Where(x => x.EndDate.ToString() == noLimit || x.EndDate >= date).ToList();
 

@@ -9,9 +9,8 @@ namespace HASPKey
         public ReferenceView()
         {
             InitializeComponent();
-            presenterRefernce = new PresenterReference(this);
+            presenterRefernce = new ReferencePresenter(this);
         }
-
         public void BindItem(string text) 
             => labelReference.Text = text;
     }

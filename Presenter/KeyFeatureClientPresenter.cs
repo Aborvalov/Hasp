@@ -8,14 +8,14 @@ using ViewContract;
 
 namespace Presenter
 {
-    public class PresenterKeyFeatureClient : IPresenterKeyFeatureClient
+    public class KeyFeatureClientPresenter : IPresenterKeyFeatureClient
     {
         private readonly IEntitiesModel<ModelViewClient> clientModel;
         private readonly IKeyFeatureClientModel keyFeatureClientModel;        
         private readonly IKeyFeatureClientView entitiesView;
         private const string nullDB = "База данных не найдена.";
 
-        public PresenterKeyFeatureClient(IKeyFeatureClientView entitiesView)
+        public KeyFeatureClientPresenter(IKeyFeatureClientView entitiesView)
         {
             this.entitiesView = entitiesView ?? throw new ArgumentNullException(nameof(entitiesView));
 

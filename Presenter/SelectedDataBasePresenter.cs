@@ -5,12 +5,12 @@ using ViewContract;
 
 namespace Presenter
 {
-    public class PresenterSelectedDataBase : IPresenterSelectedDataBase
+    public class SelectedDataBasePresenter : IPresenterSelectedDataBase
     {
         private readonly IBindItemView<TypeDataBase> selectedDataBaseView;
         private readonly ISelectedDataBaseModel selectedDBModel;
         private readonly IUpdateDataBaseMain updateDataBaseMain;
-        public PresenterSelectedDataBase(IBindItemView<TypeDataBase> selectedDataBaseView, IUpdateDataBaseMain updateDataBaseMain)
+        public SelectedDataBasePresenter(IBindItemView<TypeDataBase> selectedDataBaseView, IUpdateDataBaseMain updateDataBaseMain)
         {
             this.selectedDataBaseView = selectedDataBaseView ?? throw new ArgumentNullException(nameof(selectedDataBaseView));
             this.updateDataBaseMain = updateDataBaseMain ?? throw new ArgumentNullException(nameof(updateDataBaseMain));

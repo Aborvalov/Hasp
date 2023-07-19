@@ -67,9 +67,7 @@ namespace HASPKey
             this.numberKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewHomeView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingHome)).BeginInit();
+                ((System.ComponentModel.ISupportInitialize)(this.bindingHome)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -101,7 +99,7 @@ namespace HASPKey
             this.SelectDataBaseToolStripMenuItem.Name = "SelectDataBaseToolStripMenuItem";
             this.SelectDataBaseToolStripMenuItem.Size = new System.Drawing.Size(234, 26);
             this.SelectDataBaseToolStripMenuItem.Text = "Выбор базы данных";
-            this.SelectDataBaseToolStripMenuItem.Click += new System.EventHandler(this.SelectDataBaseToolStripMenuItem_Click);
+            this.SelectDataBaseToolStripMenuItem.Click += new System.EventHandler(this.SelectDataBaseToolStripMenuItemClick);
             // 
             // toolStripSeparator1
             // 
@@ -133,21 +131,21 @@ namespace HASPKey
             this.KeyToolStripMenuItem.Name = "KeyToolStripMenuItem";
             this.KeyToolStripMenuItem.Size = new System.Drawing.Size(309, 26);
             this.KeyToolStripMenuItem.Text = "Ключ";
-            this.KeyToolStripMenuItem.Click += new System.EventHandler(this.KeyToolStripMenuItem_Click);
+            this.KeyToolStripMenuItem.Click += new System.EventHandler(this.KeyToolStripMenuItemClick);
             // 
             // FeatureToolStripMenuItem
             // 
             this.FeatureToolStripMenuItem.Name = "FeatureToolStripMenuItem";
             this.FeatureToolStripMenuItem.Size = new System.Drawing.Size(309, 26);
             this.FeatureToolStripMenuItem.Text = "Функциональность";
-            this.FeatureToolStripMenuItem.Click += new System.EventHandler(this.FeatureToolStripMenuItem_Click);
+            this.FeatureToolStripMenuItem.Click += new System.EventHandler(this.FeatureToolStripMenuItemClick);
             // 
             // ClientToolStripMenuItem
             // 
             this.ClientToolStripMenuItem.Name = "ClientToolStripMenuItem";
             this.ClientToolStripMenuItem.Size = new System.Drawing.Size(309, 26);
             this.ClientToolStripMenuItem.Text = "Клиент";
-            this.ClientToolStripMenuItem.Click += new System.EventHandler(this.ClientToolStripMenuItem_Click);
+            this.ClientToolStripMenuItem.Click += new System.EventHandler(this.ClientToolStripMenuItemClick);
             // 
             // toolStripSeparator2
             // 
@@ -159,14 +157,14 @@ namespace HASPKey
             this.KeyFeatureToolStripMenuItem.Name = "KeyFeatureToolStripMenuItem";
             this.KeyFeatureToolStripMenuItem.Size = new System.Drawing.Size(309, 26);
             this.KeyFeatureToolStripMenuItem.Text = "Связь ключ-функциональность";
-            this.KeyFeatureToolStripMenuItem.Click += new System.EventHandler(this.KeyFeatureToolStripMenuItem_Click);
+            this.KeyFeatureToolStripMenuItem.Click += new System.EventHandler(this.KeyFeatureToolStripMenuItemClick);
             // 
             // KeyFeatureClientToolStripMenuItem
             // 
             this.KeyFeatureClientToolStripMenuItem.Name = "KeyFeatureClientToolStripMenuItem";
             this.KeyFeatureClientToolStripMenuItem.Size = new System.Drawing.Size(309, 26);
             this.KeyFeatureClientToolStripMenuItem.Text = "Связь ключ-клиент";
-            this.KeyFeatureClientToolStripMenuItem.Click += new System.EventHandler(this.KeyFeatureClientToolStripMenuItem_Click);
+            this.KeyFeatureClientToolStripMenuItem.Click += new System.EventHandler(this.KeyFeatureClientToolStripMenuItemClick);
             // 
             // ReferenceToolStripMenuItem
             // 
@@ -181,7 +179,7 @@ namespace HASPKey
             this.Reference.Name = "Reference";
             this.Reference.Size = new System.Drawing.Size(224, 26);
             this.Reference.Text = "О программе";
-            this.Reference.Click += new System.EventHandler(this.Reference_Click);
+            this.Reference.Click += new System.EventHandler(this.ReferenceClick);
             // 
             // Headline
             // 
@@ -205,7 +203,7 @@ namespace HASPKey
             this.buttonSearchClient.Text = "Поиск по клиенту";
             this.toolTipButton.SetToolTip(this.buttonSearchClient, "Выбор клиента для поиска.");
             this.buttonSearchClient.UseVisualStyleBackColor = true;
-            this.buttonSearchClient.Click += new System.EventHandler(this.ButtonSearchClient_Click);
+            this.buttonSearchClient.Click += new System.EventHandler(this.ButtonSearchClientClick);
             // 
             // buttonAll
             // 
@@ -218,7 +216,7 @@ namespace HASPKey
             this.buttonAll.Text = "Все";
             this.toolTipButton.SetToolTip(this.buttonAll, "Список всех клиентов и действующих ключей.");
             this.buttonAll.UseVisualStyleBackColor = true;
-            this.buttonAll.Click += new System.EventHandler(this.ButtonAll_Click);
+            this.buttonAll.Click += new System.EventHandler(this.ButtonAllClick);
             // 
             // viewOldKeys
             // 
@@ -229,7 +227,7 @@ namespace HASPKey
             this.viewOldKeys.TabIndex = 7;
             this.viewOldKeys.Text = "Отображение просроченных ключей";
             this.viewOldKeys.UseVisualStyleBackColor = true;
-            this.viewOldKeys.CheckedChanged += new System.EventHandler(this.ViewExpiredKeys_CheckedChanged);
+            this.viewOldKeys.CheckedChanged += new System.EventHandler(this.ViewExpiredKeysCheckedChanged);
             // 
             // DataGridViewHomeView
             // 
@@ -263,8 +261,8 @@ namespace HASPKey
             this.DataGridViewHomeView.RowHeadersWidth = 51;
             this.DataGridViewHomeView.Size = new System.Drawing.Size(693, 484);
             this.DataGridViewHomeView.TabIndex = 3;
-            this.DataGridViewHomeView.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewHomeView_ColumnHeaderMouseClick);
-            this.DataGridViewHomeView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewHomeView_DataBindingComplete);
+            this.DataGridViewHomeView.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewHomeViewColumnHeaderMouseClick);
+            this.DataGridViewHomeView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewHomeViewDataBindingComplete);
             // 
             // bindingHome
             // 
@@ -380,8 +378,6 @@ namespace HASPKey
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewHomeView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHome)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

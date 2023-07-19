@@ -6,7 +6,7 @@ using ViewContract;
 
 namespace Presenter
 {
-    public class PresenterHaspKey : IPresenterHaspKey
+    public class HaspKeyPresenter : IPresenterHaspKey
     {
         private readonly IHaspKeyModel haspKeyModel;
         private readonly IEntitiesView<ModelViewHaspKey> entitiesView;
@@ -20,7 +20,7 @@ namespace Presenter
         private const string errorEmptyNumber = "\u2022 Не заполнено поля \"Номер\", не должно быть пустым. \n";
         private const string nullDB = "База данных не найдена.";
 
-        public PresenterHaspKey(IEntitiesView<ModelViewHaspKey> entitesView)
+        public HaspKeyPresenter(IEntitiesView<ModelViewHaspKey> entitesView)
         {
             this.entitiesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
 

@@ -28,7 +28,7 @@ namespace HASPKey
         public KeyFeatureClientView()
         {
             InitializeComponent();
-            presenterEntities = new PresenterKeyFeatureClient(this);
+            presenterEntities = new KeyFeatureClientPresenter(this);
             if (!Admin.IsAdmin)
             {
                 DataGridViewKeyFeature.Height = DataGridViewKeyFeature.Size.Height + 28;

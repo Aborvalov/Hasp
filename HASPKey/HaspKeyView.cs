@@ -26,7 +26,7 @@ namespace HASPKey
         public HaspKeyView()
         {
             InitializeComponent();
-            presenterHaspKey = new PresenterHaspKey(this);
+            presenterHaspKey = new HaspKeyPresenter(this);
             DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + sizeH;
 
             comboBoxTypeKey.DataSource = Enum.GetValues(typeof(TypeKey));

@@ -3,7 +3,7 @@ using System;
 
 namespace Presenter
 {
-    public interface IPresenterMain : IDisposable
+    public interface IMainPresenter : IDisposable
     {
        void Views();
        void GetByClient(ModelViewClient client);
