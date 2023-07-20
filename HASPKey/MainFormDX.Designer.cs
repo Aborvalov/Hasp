@@ -424,7 +424,6 @@
             this.NextDays.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NextDays.Location = new System.Drawing.Point(2, 2);
             this.NextDays.MainView = this.gridView2;
-            this.NextDays.MenuManager = this.barManager1;
             this.NextDays.Name = "NextDays";
             this.NextDays.Size = new System.Drawing.Size(807, 224);
             this.NextDays.TabIndex = 1;

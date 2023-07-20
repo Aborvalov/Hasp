@@ -46,7 +46,7 @@
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(88, 27);
+            this.labelControl1.Location = new System.Drawing.Point(99, 28);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(100, 16);
             this.labelControl1.TabIndex = 2;
@@ -54,22 +54,25 @@
             // 
             // DataWindow
             // 
-            this.DataWindow.Location = new System.Drawing.Point(88, 58);
+            this.DataWindow.Location = new System.Drawing.Point(99, 67);
             this.DataWindow.Name = "DataWindow";
             this.DataWindow.Size = new System.Drawing.Size(100, 23);
             this.DataWindow.TabIndex = 1;
             this.DataWindow.TextChanged += new System.EventHandler(this.DataWindowTextChanged);
             this.DataWindow.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DataWindowKeyPress);
-            this.DataWindow.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.DataWindow_MouseDoubleClick);
             // 
             // NewDataForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(296, 156);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.ClientSize = new System.Drawing.Size(295, 152);
             this.Controls.Add(this.panelControl1);
             this.IconOptions.ShowIcon = false;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(297, 192);
+            this.MinimumSize = new System.Drawing.Size(297, 192);
             this.Name = "NewDataForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Настройки";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DXFormFormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();

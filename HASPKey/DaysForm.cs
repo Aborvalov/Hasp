@@ -32,20 +32,11 @@ namespace HASPKey
 
         private void DataWindowKeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar))
-            {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
                 e.Handled = true;
-            }
-            else 
-            {
+            else
                 e.Handled = false;
-            }
             change = true;
-        }
-
-        private void DataWindow_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            DataWindow.Text = null;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace HASPKey
         public MainFormDX()
         {
             InitializeComponent();
-            IMainPresenter presenter = new MainPresenter(this);
+            IMainPresenter presenter = new MainPresenter(this);            
         }
 
         public void Bind(List<DXModelClient> homes)
