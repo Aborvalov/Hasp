@@ -191,7 +191,7 @@
             // 
             // barSubItem3
             // 
-            this.barSubItem3.Caption = "Настройки";
+            this.barSubItem3.Caption = "Редактирование";
             this.barSubItem3.Id = 9;
             this.barSubItem3.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem8),

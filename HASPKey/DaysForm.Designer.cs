@@ -41,7 +41,7 @@
             this.panelControl1.Controls.Add(this.DataWindow);
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(297, 156);
+            this.panelControl1.Size = new System.Drawing.Size(296, 158);
             this.panelControl1.TabIndex = 0;
             // 
             // labelControl1
@@ -65,12 +65,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(295, 152);
+            this.ClientSize = new System.Drawing.Size(295, 157);
             this.Controls.Add(this.panelControl1);
             this.IconOptions.ShowIcon = false;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(297, 192);
-            this.MinimumSize = new System.Drawing.Size(297, 192);
+            this.MaximumSize = new System.Drawing.Size(297, 197);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(297, 197);
             this.Name = "NewDataForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Настройки";
