@@ -80,9 +80,6 @@
     <Compile Include="Contract\IEntitiesModel.cs" />
     <Compile Include="Contract\IHaspKeyModel.cs" />
     <Compile Include="Contract\IMainModel.cs" />
-    <Compile Include="DXModelFeature.cs" />
-    <Compile Include="DXModelKeys.cs" />
-    <Compile Include="DXModelClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferenceModel.cs" />
     <Compile Include="SelectedDataBaseModel.cs" />

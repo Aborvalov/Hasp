@@ -5,6 +5,8 @@ using Model;
 using Logic;
 using System.Collections.Generic;
 using System.Linq;
+using Entities;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace Presenter
 {
@@ -12,8 +14,11 @@ namespace Presenter
     {
         private readonly IMainModel mainModel;
         private readonly IMainView mainView;
+        private DateTime NowDate = DateTime.Now;
         private const string nullDB = "База данных не найдена.";
         private const string errorDB = "Ошибка базы данных.";
+        public event Action DataUpdated;
+
         public MainPresenter(IMainView homeView)
         {
             this.mainView = homeView ?? throw new ArgumentNullException(nameof(homeView));
@@ -30,12 +35,15 @@ namespace Presenter
 
             Views();
         }
+
+        public void DataChange() => DataUpdated?.Invoke();
         public void Dispose() => mainModel?.Dispose();
         public void Views()
         {
             try
             {
-                mainView.Bind(DXConverterTo(mainModel?.GetActiveKeys()));
+                mainView.Bind(DXConverterTo(mainModel?.GetKeysNextNDays()));
+                mainView.BindForm(DXConverterTo(mainModel?.GetKeysPastNDays()));
             }
             catch
             {
@@ -75,27 +83,42 @@ namespace Presenter
             }
             return result;
         }
+
+        private string CountDays(DateTime model, DateTime now) 
+        {
+            if (model.ToString().IndexOf("2111") > -1)
+            {
+                return "\u221E";
+            }
+            else 
+            {
+                return ((int)(model - NowDate).TotalDays).ToString();
+            }          
+        }
         private List<DXModelClient> DXConverterTo(List<ModelMain> models)
         {
-            if (models is null)
-            {
-                throw new ArgumentNullException(nameof(models));
-            }
-            var result = new List<DXModelClient>();
-            foreach (var model in models)
-            {
-                var convertedModel = new DXModelClient()
+            return models
+                .GroupBy(model => model.Client)
+                .Select(group => new DXModelClient
                 {
-                    Client = model.Client,
-                    Features = new List<DXModelFeature>(),
-                };
-                var tmp = models.GroupBy(x => x.Client)
-                    .SelectMany(g => g
-                    .GroupBy(x => x.Feature)).ToList();
-                result.Add(convertedModel);
-            }
-            return result;
+                    Client = group.Key,
+                    Features = group
+                        .GroupBy(model => model.Feature)
+                        .Select(featureGroup => new DXModelFeature
+                        {
+                            Name = featureGroup.Key.ToString(),
+                            Keys = featureGroup
+                                .Select(model => new DXModelKeys
+                                {
+                                    Number = model.NumberKey,
+                                    EndDate = model.EndDate.ToString(),
+                                    RemainedDays = CountDays(model.EndDate, NowDate)
+                                })
+                                .ToList()
+                        })
+                        .ToList()
+                })
+                .ToList();
         }
-
     }
 }

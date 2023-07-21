@@ -22,11 +22,14 @@ namespace ModelEntities
         private string endDate;
         [DisplayName("Окончание действия")]
 
-        public string EndDate {
-            get {
+        public string EndDate 
+        {
+            get
+            {
                 return endDate;
             }
-            set {
+            set 
+            {
                 if (value.IndexOf("2111") >= 0)
                 {
                     endDate = "бессрочные";
@@ -37,6 +40,5 @@ namespace ModelEntities
                 }
             }
         }
-
     }
 }

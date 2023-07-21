@@ -1,5 +1,4 @@
-﻿using DevExpress.Charts.Native;
-using Presenter;
+﻿using Presenter;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -44,13 +43,18 @@ namespace HASPKey
         }
 
         private void ВыходToolStripMenuItem_Click(object sender, EventArgs e)
-            => this.Close();
+            => Close();
+
+        public void BindForm(List<DXModelClient> clients)
+        => bindingHome.DataSource = clients != null ? new BindingList<DXModelClient>(clients)
+                                          : new BindingList<DXModelClient>();
+
         public void Bind(List<ModelViewMain> homes)
         => bindingHome.DataSource = homes != null ? new BindingList<ModelViewMain>(homes)
                                                   : new BindingList<ModelViewMain>();
-        public void Bind(List<DXModelClient> homes)
-       => bindingHome.DataSource = homes != null ? new BindingList<DXModelClient>(homes)
-                                                 : new BindingList<DXModelClient>();
+        public void Bind(List<DXModelClient> clients)
+         => bindingHome.DataSource = clients != null ? new BindingList<DXModelClient>(clients)
+                                          : new BindingList<DXModelClient>();
         private void KeyToolStripMenuItemClick(object sender, EventArgs e)
         {
             using (HaspKeyView haspKey = new HaspKeyView())

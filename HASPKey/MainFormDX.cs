@@ -1,7 +1,11 @@
-﻿using ModelEntities;
+﻿using Entities;
+using Model;
+using ModelEntities;
 using Presenter;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Windows.Forms;
 using ViewContract;
 
@@ -12,15 +16,22 @@ namespace HASPKey
         private const string errorStr = "Ошибка";
         public bool ErrorDataBase { get; set; } = false;
         private IMainPresenter presenter;
-
+        public event Action DataUpdated;
         public MainFormDX()
         {
             InitializeComponent();
-            IMainPresenter presenter = new MainPresenter(this);            
+            presenter = new MainPresenter(this);            
         }
 
-        public void Bind(List<DXModelClient> homes)
-        => NextDays.DataSource = homes;
+
+
+        public void BindForm(List<DXModelClient> clients)
+        => PastDays.DataSource = clients != null ? new BindingList<DXModelClient>(clients)
+                                          : new BindingList<DXModelClient>();
+
+        public void Bind(List<DXModelClient> clients)
+        => NextDays.DataSource = clients != null ? new BindingList<DXModelClient>(clients)
+                                          : new BindingList<DXModelClient>();
 
         public void Bind(List<ModelViewMain> homes)
         => NextDays.DataSource = homes != null ? new BindingList<ModelViewMain>(homes)
@@ -78,6 +89,7 @@ namespace HASPKey
         {
             using (ClientView client = new ClientView())
             {
+                
                 client.ShowDialog();
             }
         }
@@ -111,6 +123,6 @@ namespace HASPKey
             {
                 form.ShowDialog();
             }
-        }
+        }  
     }
 }
