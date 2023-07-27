@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Presenter
 {
-    public interface IPresenterKeyFeature : IDisposable
+    public interface IKeyFeaturePresenter : IDisposable
     {        
         void DisplayHaspKey();
         void DisplayFeatureAtKey(int idKey);

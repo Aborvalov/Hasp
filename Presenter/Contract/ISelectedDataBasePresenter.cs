@@ -2,7 +2,7 @@
 
 namespace Presenter
 {
-    public interface IPresenterSelectedDataBase : IPresenterView
+    public interface ISelectedDataBasePresenter : IViewPresenter
     {
         void Edit(TypeDataBase dateBase);
     }

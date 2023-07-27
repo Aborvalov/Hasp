@@ -14,7 +14,7 @@ namespace HASPKey
     {
         public event Action DataUpdated;
         public string NumberHaspKey { get; set; }
-        private readonly IPresenterKeyFeature presenterEntities;
+        private readonly IKeyFeaturePresenter presenterEntities;
         private bool change = false;
 
         private const string error = "Ошибка";
@@ -27,7 +27,7 @@ namespace HASPKey
         public KeyFeatureView()
         {
             InitializeComponent();
-            presenterEntities = new PresenterKeyFeature(this);
+            presenterEntities = new KeyFeaturePresenter(this);
             if (!Admin.IsAdmin)
             {
                 DataGridViewFeature.Height = DataGridViewFeature.Size.Height + 28;

@@ -7,7 +7,7 @@ using ViewContract;
 
 namespace Presenter
 {
-    public class PresenterClient : IPresenterReference
+    public class СlientPresenter : IPresenterReference
     {
         private readonly IClientModel clientModel;
         private readonly IEntitiesView<ModelViewClient> entitiesView;
@@ -21,7 +21,7 @@ namespace Presenter
         private const string errorEmptyAddress = "\u2022 Не заполнено поля \"Адрес\", не должно быть пустым. \n";
         private const string nullDB = "База данных не найдена.";
 
-        public PresenterClient(IEntitiesView<ModelViewClient> entitesView)
+        public СlientPresenter(IEntitiesView<ModelViewClient> entitesView)
         {
             this.entitiesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
             

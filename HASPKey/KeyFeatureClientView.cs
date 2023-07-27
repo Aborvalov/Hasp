@@ -12,7 +12,7 @@ namespace HASPKey
 {
     public partial class KeyFeatureClientView : DevExpress.XtraEditors.XtraForm, IKeyFeatureClientView
     {
-        private readonly IPresenterKeyFeatureClient presenterEntities;
+        private readonly IKeyFeatureClientPresenter presenterEntities;
         public event Action DataUpdated;
         private bool change = false;
 
@@ -28,7 +28,7 @@ namespace HASPKey
         public KeyFeatureClientView()
         {
             InitializeComponent();
-            presenterEntities = new PresenterKeyFeatureClient(this);
+            presenterEntities = new KeyFeatureClientPresenter(this);
             if (!Admin.IsAdmin)
             {
                 DataGridViewKeyFeature.Height = DataGridViewKeyFeature.Size.Height + 28;

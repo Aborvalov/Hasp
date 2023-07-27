@@ -50,6 +50,7 @@
     <Compile Include="IFactoryLogic.cs" />
     <Compile Include="KeyFeatureClientLogic.cs" />
     <Compile Include="KeyFeatureLogic.cs" />
+    <Compile Include="LoadFromXml.cs" />
     <Compile Include="Logics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -7,16 +7,14 @@ namespace HASPKey
 {
     public partial class SelectedDataBaseView : DevExpress.XtraEditors.XtraForm, IBindItemView<TypeDataBase>
     {
-        private readonly IPresenterSelectedDataBase presenterSelectedDataBase;
+        private readonly ISelectedDataBasePresenter presenterSelectedDataBase;
         private readonly IMainView mainView;
- 
         public SelectedDataBaseView(IMainView homeView)
         {
             InitializeComponent();
             this.mainView = homeView ?? throw new System.ArgumentNullException(nameof(homeView));            
-            presenterSelectedDataBase = new PresenterSelectedDataBase(this,(IUpdateDataBaseMain)homeView);
+            presenterSelectedDataBase = new SelectedDataBasePresenter(this,(IUpdateDataBaseMain)homeView);
         }
-
         public void BindItem(TypeDataBase dateBase)
         {
             switch (dateBase)
