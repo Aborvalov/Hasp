@@ -26,7 +26,7 @@ namespace HASPKey
         public ClientView(bool search)
         {
             InitializeComponent();
-            presenterClient = new PresenterClient(this);
+            presenterClient = new СlientPresenter(this);
             labelFeature.Text = string.Empty;
             DataGridViewClient.Height = DataGridViewClient.Size.Height + sizeH;
 

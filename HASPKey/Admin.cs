@@ -5,7 +5,7 @@ namespace HASPKey
 {
     internal static class Admin
     {
-        internal static bool IsAdmin { get; } = false;
+        internal static bool IsAdmin { get; } = true;
 
         static Admin()
         {

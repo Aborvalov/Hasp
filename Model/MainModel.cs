@@ -8,23 +8,21 @@ using System.Linq;
 namespace Model
 {
     public class MainModel : IMainModel
-    {    
-        private static readonly DateTime date = DateTime.Now.Date;
-        const string noLimit = "бессрочные";
-
+    {
+        private readonly DateTime dateNow = DateTime.Now.Date;
+        private const string yearInEternalKey = "2111";
         private readonly IFactoryLogic logic;
-        private  IEntitesContext db;
-        
+        private IEntitesContext db;
+        private readonly int days = LoadFromXml.GetItem();
+
         public MainModel(IFactoryLogic factoryLogic)
         {
             logic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
             db = Context.GetContext();
             if (db == null)
-                throw new ArgumentNullException(nameof(db));           
-        }       
+                throw new ArgumentNullException(nameof(db));
+        }
         public void Dispose() => db.Dispose();
-
-
         public List<ModelMain> GetAll()
         {
             try
@@ -49,7 +47,6 @@ namespace Model
                                     on keyFeat.IdFeature equals feature.Id
                                join key in haspKeys
                                     on keyFeat.IdHaspKey equals key.Id
-                               
 
                                select new ModelMain
                                {
@@ -74,13 +71,35 @@ namespace Model
                 throw;
             }
         }
-        public List<ModelMain> GetActiveKeys() 
-            => GetAll().Where(x => x.EndDate.ToString() == noLimit || x.EndDate >= date).ToList();
+
+        public List<ModelMain> GetActiveKeys()
+        => GetAll()
+            .Where(x => x.EndDate.ToString().IndexOf(yearInEternalKey) == 0 ||
+            x.EndDate >= dateNow)
+            .ToList();
+
+        public List<ModelMain> GetKeysNextNDays()
+        => GetAll()
+            .Where(x => x.EndDate.ToString().IndexOf(yearInEternalKey) >= 0 || 
+            (dateNow <= x.EndDate && 
+            x.EndDate <= dateNow.AddDays(days))).ToList();
+        
+        public List<ModelMain> GetKeysPastNDays()
+        => GetAll()
+            .Where(x => x.EndDate.ToString().IndexOf(yearInEternalKey) != 0 &&
+            dateNow > x.EndDate && 
+            x.EndDate > dateNow.AddDays(-days))
+            .ToList();
 
         public List<ModelMain> GetByClient(ModelViewClient client)
-            => GetActiveKeys().Where(x => x.IdClient == client.Id).ToList();
+            => GetActiveKeys()
+            .Where(x => x.IdClient == client.Id)
+            .ToList();
 
         public List<ModelMain> ShowExpiredKeys()
-            => GetAll().Where(x => x.EndDate.ToString() != noLimit && x.EndDate < date).ToList();
+            => GetAll()
+            .Where(x => x.EndDate.ToString().IndexOf(yearInEternalKey) != 0 &&
+            x.EndDate < dateNow)
+            .ToList();
     }
 }

@@ -10,7 +10,7 @@ namespace HASPKey
 {
     public partial class FeatureView : DevExpress.XtraEditors.XtraForm, IEntitiesView<ModelViewFeature>
     {
-        private readonly IPresenterEntities<ModelViewFeature> presenterFeature;
+        private readonly IEntitiesPresenter<ModelViewFeature> presenterFeature;
         private bool size = true;
         private int sizeH = 40;       
         private bool search = false;
@@ -26,7 +26,7 @@ namespace HASPKey
         public FeatureView(bool search) 
         {
             InitializeComponent();
-            presenterFeature = new PresenterFeature(this);
+            presenterFeature = new FeaturePresenter(this);
             DataGridViewFeature.Height = DataGridViewFeature.Size.Height + sizeH;
 
             this.search = search;
