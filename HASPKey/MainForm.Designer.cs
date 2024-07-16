@@ -99,7 +99,7 @@ namespace HASPKey
             this.SelectDataBaseToolStripMenuItem.Name = "SelectDataBaseToolStripMenuItem";
             this.SelectDataBaseToolStripMenuItem.Size = new System.Drawing.Size(234, 26);
             this.SelectDataBaseToolStripMenuItem.Text = "Выбор базы данных";
-            this.SelectDataBaseToolStripMenuItem.Click += new System.EventHandler(this.SelectDataBaseToolStripMenuItemClick);
+            
             // 
             // toolStripSeparator1
             // 

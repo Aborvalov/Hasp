@@ -13,17 +13,7 @@ namespace Model
 
         internal static IEntitesContext GetContext()
         {
-            IItemModel<TypeDataBase> dataBase = new SelectedDataBaseModel();
-            var dateBase = dataBase.GetItem();
-
-            switch (dateBase)
-            {
-                case TypeDataBase.Test:
-                    return FactoryContext.CreateTestContext();
-                case TypeDataBase.Work:
-                    return FactoryContext.CreateWorkContext();
-            }
-            return null;
+            return FactoryContext.CreateWorkContext();
         }        
     }
 }

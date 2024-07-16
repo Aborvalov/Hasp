@@ -165,5 +165,10 @@ namespace HASPKey
             foreach (DataGridViewRow row in DataGridViewFeature.Rows)
                 row.HeaderCell.Value = (row.Index + 1).ToString();
         }
+
+        private void ButtonCancel_Click(object sender, EventArgs e)
+        {
+            DefaultView();
+        }
     }
 }

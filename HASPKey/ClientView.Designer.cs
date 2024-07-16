@@ -63,6 +63,7 @@
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingItem)).BeginInit();
@@ -93,7 +94,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DataGridViewClient.DefaultCellStyle = dataGridViewCellStyle1;
             this.DataGridViewClient.Location = new System.Drawing.Point(14, 71);
-            this.DataGridViewClient.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DataGridViewClient.Margin = new System.Windows.Forms.Padding(4);
             this.DataGridViewClient.Name = "DataGridViewClient";
             this.DataGridViewClient.ReadOnly = true;
             this.DataGridViewClient.RowHeadersVisible = false;
@@ -195,7 +196,7 @@
             this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingItem, "Name", true));
             this.tbName.Location = new System.Drawing.Point(15, 644);
-            this.tbName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbName.Margin = new System.Windows.Forms.Padding(4);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(185, 23);
             this.tbName.TabIndex = 5;
@@ -209,7 +210,7 @@
             this.tbAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbAddress.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingItem, "Address", true));
             this.tbAddress.Location = new System.Drawing.Point(208, 644);
-            this.tbAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbAddress.Margin = new System.Windows.Forms.Padding(4);
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(173, 23);
             this.tbAddress.TabIndex = 6;
@@ -219,7 +220,7 @@
             this.tbPhone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbPhone.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingItem, "Phone", true));
             this.tbPhone.Location = new System.Drawing.Point(388, 644);
-            this.tbPhone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPhone.Margin = new System.Windows.Forms.Padding(4);
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(138, 23);
             this.tbPhone.TabIndex = 7;
@@ -229,7 +230,7 @@
             this.tbContactPerson.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbContactPerson.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingItem, "ContactPerson", true));
             this.tbContactPerson.Location = new System.Drawing.Point(534, 644);
-            this.tbContactPerson.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbContactPerson.Margin = new System.Windows.Forms.Padding(4);
             this.tbContactPerson.Name = "tbContactPerson";
             this.tbContactPerson.Size = new System.Drawing.Size(158, 23);
             this.tbContactPerson.TabIndex = 8;
@@ -238,7 +239,7 @@
             // 
             this.buttonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonAdd.Location = new System.Drawing.Point(15, 677);
-            this.buttonAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonAdd.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(88, 28);
             this.buttonAdd.TabIndex = 9;
@@ -250,7 +251,7 @@
             // 
             this.buttonDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonDelete.Location = new System.Drawing.Point(606, 677);
-            this.buttonDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonDelete.Margin = new System.Windows.Forms.Padding(4);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(88, 28);
             this.buttonDelete.TabIndex = 10;
@@ -261,8 +262,8 @@
             // buttonSave
             // 
             this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonSave.Location = new System.Drawing.Point(113, 677);
-            this.buttonSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonSave.Location = new System.Drawing.Point(111, 677);
+            this.buttonSave.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(88, 28);
             this.buttonSave.TabIndex = 11;
@@ -273,7 +274,7 @@
             // buttonSearchByFeature
             // 
             this.buttonSearchByFeature.Location = new System.Drawing.Point(15, 16);
-            this.buttonSearchByFeature.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonSearchByFeature.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSearchByFeature.Name = "buttonSearchByFeature";
             this.buttonSearchByFeature.Size = new System.Drawing.Size(112, 28);
             this.buttonSearchByFeature.TabIndex = 12;
@@ -295,7 +296,7 @@
             // 
             this.buttonAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonAll.Location = new System.Drawing.Point(604, 16);
-            this.buttonAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonAll.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAll.Name = "buttonAll";
             this.buttonAll.Size = new System.Drawing.Size(88, 28);
             this.buttonAll.TabIndex = 14;
@@ -319,7 +320,7 @@
             // 
             this.tbInnerIdHaspKey.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.tbInnerIdHaspKey.Location = new System.Drawing.Point(331, 18);
-            this.tbInnerIdHaspKey.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbInnerIdHaspKey.Margin = new System.Windows.Forms.Padding(4);
             this.tbInnerIdHaspKey.Name = "tbInnerIdHaspKey";
             this.tbInnerIdHaspKey.Size = new System.Drawing.Size(116, 23);
             this.tbInnerIdHaspKey.TabIndex = 16;
@@ -383,11 +384,24 @@
             this.dataGridViewTextBoxColumn5.ReadOnly = true;
             this.dataGridViewTextBoxColumn5.Width = 118;
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.Location = new System.Drawing.Point(208, 677);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(88, 28);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "Отменить";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.ButtonСancel_Click);
+            // 
             // ClientView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(706, 711);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.Headline);
             this.Controls.Add(this.tbInnerIdHaspKey);
             this.Controls.Add(this.labelSearchInnerId);
@@ -408,7 +422,7 @@
             this.Controls.Add(this.labelFeature);
             this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("ClientView.IconOptions.Icon")));
             this.IconOptions.ShowIcon = false;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(607, 610);
             this.Name = "ClientView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -453,5 +467,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn phoneDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn contactPersonDataGridViewTextBoxColumn;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.Button button1;
     }
 }

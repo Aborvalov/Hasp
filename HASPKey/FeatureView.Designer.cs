@@ -50,6 +50,7 @@
             this.ButtonDelete = new System.Windows.Forms.Button();
             this.ButtonSave = new System.Windows.Forms.Button();
             this.Headline = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bindingFeature)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewFeature)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingItem)).BeginInit();
@@ -83,7 +84,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DataGridViewFeature.DefaultCellStyle = dataGridViewCellStyle1;
             this.DataGridViewFeature.Location = new System.Drawing.Point(14, 31);
-            this.DataGridViewFeature.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DataGridViewFeature.Margin = new System.Windows.Forms.Padding(4);
             this.DataGridViewFeature.Name = "DataGridViewFeature";
             this.DataGridViewFeature.ReadOnly = true;
             this.DataGridViewFeature.RowHeadersVisible = false;
@@ -175,7 +176,7 @@
             this.tbNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbNumber.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingItem, "Number", true));
             this.tbNumber.Location = new System.Drawing.Point(14, 432);
-            this.tbNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbNumber.Margin = new System.Windows.Forms.Padding(4);
             this.tbNumber.Name = "tbNumber";
             this.tbNumber.Size = new System.Drawing.Size(132, 23);
             this.tbNumber.TabIndex = 4;
@@ -190,7 +191,7 @@
             this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingItem, "Name", true));
             this.tbName.Location = new System.Drawing.Point(152, 432);
-            this.tbName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbName.Margin = new System.Windows.Forms.Padding(4);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(140, 23);
             this.tbName.TabIndex = 5;
@@ -200,7 +201,7 @@
             this.tbDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbDescription.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingItem, "Description", true));
             this.tbDescription.Location = new System.Drawing.Point(299, 432);
-            this.tbDescription.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbDescription.Margin = new System.Windows.Forms.Padding(4);
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -211,7 +212,7 @@
             // 
             this.ButtonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ButtonAdd.Location = new System.Drawing.Point(14, 464);
-            this.ButtonAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ButtonAdd.Margin = new System.Windows.Forms.Padding(4);
             this.ButtonAdd.Name = "ButtonAdd";
             this.ButtonAdd.Size = new System.Drawing.Size(88, 28);
             this.ButtonAdd.TabIndex = 7;
@@ -223,7 +224,7 @@
             // 
             this.ButtonDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonDelete.Location = new System.Drawing.Point(510, 464);
-            this.ButtonDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ButtonDelete.Margin = new System.Windows.Forms.Padding(4);
             this.ButtonDelete.Name = "ButtonDelete";
             this.ButtonDelete.Size = new System.Drawing.Size(88, 28);
             this.ButtonDelete.TabIndex = 8;
@@ -234,8 +235,8 @@
             // ButtonSave
             // 
             this.ButtonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ButtonSave.Location = new System.Drawing.Point(108, 464);
-            this.ButtonSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ButtonSave.Location = new System.Drawing.Point(206, 464);
+            this.ButtonSave.Margin = new System.Windows.Forms.Padding(4);
             this.ButtonSave.Name = "ButtonSave";
             this.ButtonSave.Size = new System.Drawing.Size(88, 28);
             this.ButtonSave.TabIndex = 9;
@@ -253,11 +254,24 @@
             this.Headline.TabIndex = 10;
             this.Headline.Text = "Список функциональностей";
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.Location = new System.Drawing.Point(110, 463);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(88, 28);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Отменить";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.ButtonCancel_Click);
+            // 
             // FeatureView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(611, 498);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.Headline);
             this.Controls.Add(this.DataGridViewFeature);
             this.Controls.Add(this.ButtonSave);
@@ -271,7 +285,7 @@
             this.Controls.Add(this.labelNumber);
             this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("FeatureView.IconOptions.Icon")));
             this.IconOptions.ShowIcon = false;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(526, 437);
             this.Name = "FeatureView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -303,5 +317,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button button1;
     }
 }
