@@ -12,22 +12,21 @@ namespace Model
         private readonly DateTime dateNow = DateTime.Now.Date;
         private const string yearInEternalKey = "2111";
         private readonly IFactoryLogic logic;
-        private IEntitesContext db;
         private readonly int days = LoadFromXml.GetItem();
 
         public MainModel(IFactoryLogic factoryLogic)
         {
             logic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
-            db = Context.GetContext();
+            var db = Context.GetContext();
             if (db == null)
                 throw new ArgumentNullException(nameof(db));
         }
-        public void Dispose() => db.Dispose();
+        public void Dispose() => Context.GetContext().Dispose();
         public List<ModelMain> GetAll()
         {
             try
             {
-                using (db = Context.GetContext())
+                using (var db = Context.GetContext())
                 {
                     if (db == null)
                         throw new ArgumentNullException(nameof(db));
