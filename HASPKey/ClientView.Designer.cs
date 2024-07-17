@@ -394,7 +394,7 @@
             this.button1.TabIndex = 18;
             this.button1.Text = "Отменить";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.ButtonСancel_Click);
+            this.button1.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
             // ClientView
             // 
