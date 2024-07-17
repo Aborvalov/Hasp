@@ -63,7 +63,7 @@
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingItem)).BeginInit();
@@ -386,22 +386,22 @@
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(208, 677);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(88, 28);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "Отменить";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.ButtonCancel_Click);
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonCancel.Location = new System.Drawing.Point(208, 677);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonCancel.Name = "button1";
+            this.buttonCancel.Size = new System.Drawing.Size(88, 28);
+            this.buttonCancel.TabIndex = 18;
+            this.buttonCancel.Text = "Отменить";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
             // ClientView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(706, 711);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.Headline);
             this.Controls.Add(this.tbInnerIdHaspKey);
             this.Controls.Add(this.labelSearchInnerId);
@@ -467,6 +467,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn phoneDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn contactPersonDataGridViewTextBoxColumn;
         private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonCancel;
     }
 }

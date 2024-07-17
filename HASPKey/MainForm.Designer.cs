@@ -38,7 +38,6 @@ namespace HASPKey
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.SelectDataBaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,19 +86,11 @@ namespace HASPKey
             // FileToolStripMenuItem
             // 
             this.FileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.SelectDataBaseToolStripMenuItem,
             this.toolStripSeparator1,
             this.ExitToolStripMenuItem});
             this.FileToolStripMenuItem.Name = "FileToolStripMenuItem";
             this.FileToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
             this.FileToolStripMenuItem.Text = "Файл";
-            // 
-            // SelectDataBaseToolStripMenuItem
-            // 
-            this.SelectDataBaseToolStripMenuItem.Name = "SelectDataBaseToolStripMenuItem";
-            this.SelectDataBaseToolStripMenuItem.Size = new System.Drawing.Size(234, 26);
-            this.SelectDataBaseToolStripMenuItem.Text = "Выбор базы данных";
-            
             // 
             // toolStripSeparator1
             // 
@@ -401,7 +392,6 @@ namespace HASPKey
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.ToolStripMenuItem SelectDataBaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem Reference;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;

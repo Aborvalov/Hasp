@@ -1,6 +1,7 @@
-﻿namespace Entities
+﻿/*namespace Entities
 {
     public class WorkContext : EntitesContext
     {
     }
 }
+*/

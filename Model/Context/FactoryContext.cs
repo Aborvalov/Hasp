@@ -1,4 +1,4 @@
-﻿using Entities;
+﻿/*using Entities;
 
 namespace Model
 {
@@ -7,3 +7,4 @@ namespace Model
         public IEntitesContext CreateWorkContext() => new WorkContext();
     }
 }
+*/

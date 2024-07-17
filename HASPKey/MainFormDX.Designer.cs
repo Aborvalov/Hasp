@@ -289,12 +289,6 @@
             this.barButtonItem1.Id = 1;
             this.barButtonItem1.Name = "barButtonItem1";
             // 
-            // barButtonItem3
-            // 
-            this.barButtonItem3.Caption = "Выбор бызы данных";
-            this.barButtonItem3.Id = 4;
-            this.barButtonItem3.Name = "barButtonItem3";
-            // 
             // barButtonItem4
             // 
             this.barButtonItem4.Caption = "Выход";

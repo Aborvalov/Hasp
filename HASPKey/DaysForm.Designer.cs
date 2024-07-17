@@ -32,14 +32,14 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.DataWindow = new System.Windows.Forms.TextBox();
             this.ButtonDelete = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelControl1
             // 
-            this.panelControl1.Controls.Add(this.button1);
+            this.panelControl1.Controls.Add(this.buttonCancel);
             this.panelControl1.Controls.Add(this.ButtonDelete);
             this.panelControl1.Controls.Add(this.labelControl1);
             this.panelControl1.Controls.Add(this.DataWindow);
@@ -77,15 +77,15 @@
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(183, 116);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(88, 28);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Отмена";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.ButtonUndo_Click);
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCancel.Location = new System.Drawing.Point(183, 116);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonCancel.Name = "button1";
+            this.buttonCancel.Size = new System.Drawing.Size(88, 28);
+            this.buttonCancel.TabIndex = 10;
+            this.buttonCancel.Text = "Отмена";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.ButtonUndo_Click);
             // 
             // NewDataForm
             // 
@@ -115,6 +115,6 @@
         private System.Windows.Forms.TextBox DataWindow;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private System.Windows.Forms.Button ButtonDelete;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonCancel;
     }
 }
