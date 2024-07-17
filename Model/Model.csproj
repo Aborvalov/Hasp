@@ -65,8 +65,6 @@
   <ItemGroup>
     <Compile Include="ClientModel.cs" />
     <Compile Include="Context\Context.cs" />
-    <Compile Include="Context\FactoryContext.cs" />
-    <Compile Include="Context\IFactoryContext.cs" />
     <Compile Include="Contract\IKeyFeatureClientModel.cs" />
     <Compile Include="Contract\IItemModel.cs" />
     <Compile Include="KeyFeatureClientModel.cs" />
