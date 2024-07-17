@@ -99,7 +99,7 @@ namespace Presenter
         {
             return models
                 .GroupBy(model => model.Client)
-                .OrderBy(group => group.Key) // Sort by Client
+                .OrderBy(group => group.Key)
                 .Select(group => new DXModelClient
                 {
                     Client = group.Key,
