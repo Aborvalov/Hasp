@@ -99,7 +99,6 @@ namespace Presenter
         {
             return models
                 .GroupBy(model => model.Client)
-                .OrderBy(group => group.Key)
                 .Select(group => new DXModelClient
                 {
                     Client = group.Key,
@@ -107,20 +106,16 @@ namespace Presenter
                         .GroupBy(model => model.NumberKey)
                         .Select(featureGroup => new DXModelKeys
                         {
-                            Name = featureGroup.Key,
-                            Feature = featureGroup
-                                .Select(model => new DXModelFeature
-                                {
-                                    Name = model.Feature,
-                                    EndDate = model.EndDate.ToString(),
-                                    //RemainedDays = CountDays(model.EndDate, NowDate)
-                                })
-                                .ToList()
+                            Number = featureGroup.Key,
+                            Feature = featureGroup.FirstOrDefault().Feature.ToString(),
+                            EndDate = featureGroup.FirstOrDefault().EndDate.ToString(), 
                         })
                         .ToList()
                 })
                 .ToList();
         }
+
+
 
     }
 }

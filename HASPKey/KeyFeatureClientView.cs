@@ -126,5 +126,28 @@ namespace HASPKey
             presenterEntities.CheckInputData(row, e.RowIndex);
             change = true;
         }
+
+        private void ButtonCancel_Click(object sender, EventArgs e)
+        {
+            /*if (!change)
+            { 
+                
+            }
+
+            change = false;*/
+            
+
+            //Close();
+        }
+
+        private void ButtonAdd_Click(object sender, EventArgs e)
+        {
+            
+/*            ModelViewKeyFeatureClient newKeyFeature = new ModelViewKeyFeatureClient();
+            (bindingKeyFeatureClient.DataSource as BindingList<ModelViewKeyFeatureClient>).Add(newKeyFeature);
+            DataGridViewKeyFeature.CurrentCell = DataGridViewKeyFeature.Rows[DataGridViewKeyFeature.Rows.Count - 1].Cells[0];
+
+            change = true; */
+        }
     }
 }

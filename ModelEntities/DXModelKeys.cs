@@ -8,9 +8,12 @@ namespace ModelEntities
     {
         [DisplayName("Номер")]
         public string Number { get; set; }
-        //private string endDate;
-        //[DisplayName("Окончание действия")]
-        /*public string EndDate
+        [Browsable(false)]
+        public string Name { get; set; }
+
+        private string endDate;
+        [DisplayName("Окончание действия")]
+        public string EndDate
         {
             get
             {
@@ -27,11 +30,10 @@ namespace ModelEntities
                     endDate = DateTime.Parse(value).ToString("dd.MM.yyyy");
                 }
             }
-        }*/
-        //[DisplayName("Осталось дней")]
-        /*public string RemainedDays { get; set; }
-        public List<DXModelFeature> Keys { get; set; }*/
-        public string Name { get; set; }
-        public List<DXModelFeature> Feature { get; set; }
+        }
+        [DisplayName("Функциональность")]
+
+        public String Feature { get; set; }
+        
     }
 }

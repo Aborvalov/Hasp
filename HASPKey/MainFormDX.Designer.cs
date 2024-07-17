@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.NextDays = new DevExpress.XtraGrid.GridControl();
-            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
@@ -58,24 +58,24 @@
             this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
             this.barButtonItem14 = new DevExpress.XtraBars.BarButtonItem();
             this.barDockingMenuItem1 = new DevExpress.XtraBars.BarDockingMenuItem();
+            this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.PastDays = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.splitterControl1 = new DevExpress.XtraEditors.SplitterControl();
             ((System.ComponentModel.ISupportInitialize)(this.NextDays)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PastDays)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
@@ -86,22 +86,24 @@
             this.NextDays.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NextDays.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.NextDays.Location = new System.Drawing.Point(2, 2);
-            this.NextDays.MainView = this.gridView2;
+            this.NextDays.MainView = this.gridView3;
             this.NextDays.Margin = new System.Windows.Forms.Padding(2);
             this.NextDays.MenuManager = this.barManager1;
-            this.NextDays.MinimumSize = new System.Drawing.Size(781, 250);
+            this.NextDays.MinimumSize = new System.Drawing.Size(1220, 390);
             this.NextDays.Name = "NextDays";
-            this.NextDays.Size = new System.Drawing.Size(1082, 275);
+            this.NextDays.Size = new System.Drawing.Size(1220, 432);
             this.NextDays.TabIndex = 1;
             this.NextDays.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView2});
+            this.gridView3});
             // 
-            // gridView2
+            // gridView3
             // 
-            this.gridView2.GridControl = this.NextDays;
-            this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsBehavior.ReadOnly = true;
-            this.gridView2.OptionsView.ShowColumnHeaders = false;
+            this.gridView3.DetailHeight = 546;
+            this.gridView3.GridControl = this.NextDays;
+            this.gridView3.Name = "gridView3";
+            this.gridView3.OptionsBehavior.ReadOnly = true;
+            this.gridView3.OptionsView.AutoCalcPreviewLineCount = true;
+            this.gridView3.OptionsView.ShowColumnHeaders = false;
             // 
             // barManager1
             // 
@@ -345,10 +347,10 @@
             this.panelControl2.ContentImageAlignment = System.Drawing.ContentAlignment.BottomCenter;
             this.panelControl2.Controls.Add(this.PastDays);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl2.Location = new System.Drawing.Point(0, 345);
+            this.panelControl2.Location = new System.Drawing.Point(0, 483);
             this.panelControl2.Margin = new System.Windows.Forms.Padding(2);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(1086, 427);
+            this.panelControl2.Size = new System.Drawing.Size(1086, 289);
             this.panelControl2.TabIndex = 13;
             // 
             // PastDays
@@ -360,13 +362,14 @@
             this.PastDays.Margin = new System.Windows.Forms.Padding(2);
             this.PastDays.MenuManager = this.barManager1;
             this.PastDays.Name = "PastDays";
-            this.PastDays.Size = new System.Drawing.Size(1082, 423);
+            this.PastDays.Size = new System.Drawing.Size(1082, 285);
             this.PastDays.TabIndex = 2;
             this.PastDays.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             // 
             // gridView1
             // 
+            this.gridView1.DetailHeight = 546;
             this.gridView1.GridControl = this.PastDays;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.ReadOnly = true;
@@ -386,7 +389,7 @@
             this.panelControl1.Location = new System.Drawing.Point(0, 25);
             this.panelControl1.Margin = new System.Windows.Forms.Padding(2);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1086, 29);
+            this.panelControl1.Size = new System.Drawing.Size(1086, 10);
             this.panelControl1.TabIndex = 18;
             // 
             // panelControl3
@@ -394,17 +397,17 @@
             this.panelControl3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelControl3.Controls.Add(this.NextDays);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl3.Location = new System.Drawing.Point(0, 54);
+            this.panelControl3.Location = new System.Drawing.Point(0, 35);
             this.panelControl3.Margin = new System.Windows.Forms.Padding(2);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(1086, 279);
+            this.panelControl3.Size = new System.Drawing.Size(1086, 436);
             this.panelControl3.TabIndex = 19;
             // 
             // splitterControl1
             // 
             this.splitterControl1.Cursor = System.Windows.Forms.Cursors.HSplit;
             this.splitterControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitterControl1.Location = new System.Drawing.Point(0, 333);
+            this.splitterControl1.Location = new System.Drawing.Point(0, 471);
             this.splitterControl1.Margin = new System.Windows.Forms.Padding(2);
             this.splitterControl1.Name = "splitterControl1";
             this.splitterControl1.Size = new System.Drawing.Size(1086, 12);
@@ -433,15 +436,15 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HASP-ключи";
             ((System.ComponentModel.ISupportInitialize)(this.NextDays)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PastDays)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.panelControl3.ResumeLayout(false);
@@ -480,7 +483,6 @@
         private DevExpress.XtraBars.BarDockingMenuItem barDockingMenuItem1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem15;
         private DevExpress.XtraGrid.GridControl NextDays;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
         private System.Windows.Forms.BindingSource bindingSource;
         private DevExpress.XtraGrid.GridControl PastDays;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
@@ -488,5 +490,6 @@
         private DevExpress.XtraEditors.PanelControl panelControl3;
         private DevExpress.XtraEditors.PanelControl panelControl1;
         private DevExpress.XtraEditors.SplitterControl splitterControl1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
     }
 }
