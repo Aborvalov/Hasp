@@ -24,8 +24,6 @@ namespace HASPKey
             presenter = new MainPresenter(this);            
         }
 
-
-
         public void BindForm(List<DXModelClient> clients)
         => PastDays.DataSource = clients != null ? new BindingList<DXModelClient>(clients)
                                           : new BindingList<DXModelClient>();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace ModelEntities
@@ -7,9 +8,9 @@ namespace ModelEntities
     {
         [DisplayName("Номер")]
         public string Number { get; set; }
-        private string endDate;
-        [DisplayName("Окончание действия")]
-        public string EndDate
+        //private string endDate;
+        //[DisplayName("Окончание действия")]
+        /*public string EndDate
         {
             get
             {
@@ -26,9 +27,11 @@ namespace ModelEntities
                     endDate = DateTime.Parse(value).ToString("dd.MM.yyyy");
                 }
             }
-        }
-        [DisplayName("Осталось дней")]
-        public string RemainedDays { get; set; }
-
+        }*/
+        //[DisplayName("Осталось дней")]
+        /*public string RemainedDays { get; set; }
+        public List<DXModelFeature> Keys { get; set; }*/
+        public string Name { get; set; }
+        public List<DXModelFeature> Feature { get; set; }
     }
 }
