@@ -31,7 +31,7 @@ namespace HASPKey
             DataGridViewClient.Height = DataGridViewClient.Size.Height + sizeH;
 
             this.search = search;
-            if (this.search || !Admin.IsAdmin())
+            if (this.search || !Admin.IsAdmin)
                 DataGridViewClient.Height = DataGridViewClient.Size.Height + 28;
         }
         public ClientView() : this(false)
@@ -75,7 +75,7 @@ namespace HASPKey
                 this.Close();
                 return;
             }            
-            if (size && Admin.IsAdmin())
+            if (size && Admin.IsAdmin)
             {
                 DefaultView();
                 DataGridViewClient.Height = DataGridViewClient.Size.Height - sizeH;

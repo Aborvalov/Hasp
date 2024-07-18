@@ -21,7 +21,8 @@ namespace HASPKey
         public MainFormDX()
         {
             InitializeComponent();
-            presenter = new MainPresenter(this);            
+            presenter = new MainPresenter(this);
+            if (!Admin.IsAdmin) barSubItem3.Enabled = false;
         }
 
         public void BindForm(List<DXModelClient> clients)
@@ -46,16 +47,13 @@ namespace HASPKey
             {
                 barButtonItem2.Enabled = false;
                 barButtonItem6.Enabled = false;
-                barSubItem3.Enabled = false;
+
             }
             else
             {
                 barButtonItem2.Enabled = true;
                 barButtonItem6.Enabled = true;
-                if (!Admin.IsAdmin()) {
-                    barSubItem3.Enabled = false;
-                }
-                else { barSubItem3.Enabled = true; }
+
             }
         }
         private void BarButtonItem2ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -76,74 +74,40 @@ namespace HASPKey
 
         private void BarButtonItem8ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (Admin.IsAdmin())
+            using (HaspKeyView haspKey = new HaspKeyView())
             {
-                using (HaspKeyView haspKey = new HaspKeyView())
-                {
-                    haspKey.ShowDialog();
-                }
+               haspKey.ShowDialog();
             }
-            else 
-            {
-                barButtonItem8.Enabled = false;
-            }
+            
         }
         private void BarButtonItem9ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (Admin.IsAdmin())
+            using (FeatureView feature = new FeatureView())
             {
-                using (FeatureView feature = new FeatureView())
-                {
-                    feature.ShowDialog();
-                }
-            }
-            else
-            {
-                barButtonItem9.Enabled = false;
+                feature.ShowDialog();
             }
         }
         private void BarButtonItem10ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (Admin.IsAdmin())
+            using (ClientView client = new ClientView())
             {
-                using (ClientView client = new ClientView())
-                {
-                    client.ShowDialog();
-                }
-            }
-            else
-            {
-                barButtonItem10.Enabled = false;
+                client.ShowDialog();
             }
         }
 
         private void BarButtonItem11ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (Admin.IsAdmin())
+            using (KeyFeatureView keyFeatureView = new KeyFeatureView())
             {
-                using (KeyFeatureView keyFeatureView = new KeyFeatureView())
-                {
-                    keyFeatureView.ShowDialog();
-                }
-            }
-            else
-            {
-                barButtonItem11.Enabled = false;
+                keyFeatureView.ShowDialog();
             }
         }
 
         private void BarButtonItem12ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (Admin.IsAdmin())
+            using (KeyFeatureClientView keyFeatureClientView = new KeyFeatureClientView())
             {
-                using (KeyFeatureClientView keyFeatureClientView = new KeyFeatureClientView())
-                {
-                    keyFeatureClientView.ShowDialog();
-                }
-            }
-            else
-            {
-                barButtonItem12.Enabled = false;
+                keyFeatureClientView.ShowDialog();
             }
         }
 
