@@ -30,7 +30,7 @@ namespace HASPKey
             DataGridViewFeature.Height = DataGridViewFeature.Size.Height + sizeH;
 
             this.search = search;
-            if (this.search || !Admin.IsAdmin)
+            if (this.search || !Admin.IsAdmin())
                 DataGridViewFeature.Height = DataGridViewFeature.Size.Height + 28;
         }
         public FeatureView() : this(false)
@@ -76,7 +76,7 @@ namespace HASPKey
                 return;
             }
                         
-            if (size && Admin.IsAdmin)
+            if (size && Admin.IsAdmin())
             {
                 DefaultView();
                 DataGridViewFeature.Height = DataGridViewFeature.Size.Height - sizeH;

@@ -33,7 +33,7 @@ namespace HASPKey
             comboBoxTypeKey.SelectedIndex = -1;
             labelClient.Text = string.Empty;
 
-            if (!Admin.IsAdmin)
+            if (!Admin.IsAdmin())
                 DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
         }  
         public void Bind(List<ModelViewHaspKey> entity) 
@@ -98,7 +98,7 @@ namespace HASPKey
                 MessageError(emptyHaspKey);
                 return;
             }            
-            if (size && Admin.IsAdmin)
+            if (size && Admin.IsAdmin())
             {
                 DefaultView();
                 DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height - sizeH;

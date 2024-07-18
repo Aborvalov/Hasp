@@ -99,16 +99,17 @@ namespace Presenter
         {
             return models
                 .GroupBy(model => model.Client)
+                .OrderBy(group => group.Key)
                 .Select(group => new DXModelClient
                 {
                     Client = group.Key,
                     Keys = group
-                        .GroupBy(model => model.NumberKey)
                         .Select(featureGroup => new DXModelKeys
                         {
-                            Number = featureGroup.Key,
-                            Feature = featureGroup.FirstOrDefault().Feature.ToString(),
-                            EndDate = featureGroup.FirstOrDefault().EndDate.ToString(), 
+                            Number = featureGroup.NumberKey,
+                            Feature = featureGroup.Feature.ToString(),
+                            EndDate = featureGroup.EndDate.ToString(),
+                            RemainedDays = CountDays(featureGroup.EndDate, DateTime.Now),
                         })
                         .ToList()
                 })

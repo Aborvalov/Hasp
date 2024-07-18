@@ -19,7 +19,6 @@ namespace ModelEntities
         
         [DisplayName("Окончание действия")]
         public DateTime EndDate { get; set;}
-        [Browsable(false)]
-        public int Name { get; set; }
+       
     }
 }

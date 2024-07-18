@@ -7,9 +7,7 @@ namespace ModelEntities
     public class DXModelFeature
     {
         public string Name { get; set; }
-       // public List<DXModelKeys> Keys { get; set; }
 
-        //public string Number { get; set; }
         private string endDate;
         [DisplayName("Окончание действия")]
         public string EndDate
@@ -30,8 +28,7 @@ namespace ModelEntities
                 }
             }
         }
-        //[DisplayName("Осталось дней")]
-        //public string RemainedDays { get; set; }
+
 
     }
 }

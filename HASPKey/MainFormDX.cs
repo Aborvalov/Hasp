@@ -52,7 +52,7 @@ namespace HASPKey
             {
                 barButtonItem2.Enabled = true;
                 barButtonItem6.Enabled = true;
-                if (!Admin.IsAdmin) {
+                if (!Admin.IsAdmin()) {
                     barSubItem3.Enabled = false;
                 }
                 else { barSubItem3.Enabled = true; }
@@ -76,54 +76,74 @@ namespace HASPKey
 
         private void BarButtonItem8ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (Admin.IsAdmin)
+            if (Admin.IsAdmin())
             {
                 using (HaspKeyView haspKey = new HaspKeyView())
                 {
                     haspKey.ShowDialog();
                 }
             }
+            else 
+            {
+                barButtonItem8.Enabled = false;
+            }
         }
         private void BarButtonItem9ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (Admin.IsAdmin)
+            if (Admin.IsAdmin())
             {
                 using (FeatureView feature = new FeatureView())
                 {
                     feature.ShowDialog();
                 }
             }
+            else
+            {
+                barButtonItem9.Enabled = false;
+            }
         }
         private void BarButtonItem10ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (Admin.IsAdmin)
+            if (Admin.IsAdmin())
             {
                 using (ClientView client = new ClientView())
                 {
                     client.ShowDialog();
                 }
             }
+            else
+            {
+                barButtonItem10.Enabled = false;
+            }
         }
 
         private void BarButtonItem11ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (Admin.IsAdmin)
+            if (Admin.IsAdmin())
             {
                 using (KeyFeatureView keyFeatureView = new KeyFeatureView())
                 {
                     keyFeatureView.ShowDialog();
                 }
             }
+            else
+            {
+                barButtonItem11.Enabled = false;
+            }
         }
 
         private void BarButtonItem12ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (Admin.IsAdmin)
+            if (Admin.IsAdmin())
             {
                 using (KeyFeatureClientView keyFeatureClientView = new KeyFeatureClientView())
                 {
                     keyFeatureClientView.ShowDialog();
                 }
+            }
+            else
+            {
+                barButtonItem12.Enabled = false;
             }
         }
 

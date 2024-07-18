@@ -8,10 +8,12 @@ namespace ModelEntities
     {
         [DisplayName("Номер")]
         public string Number { get; set; }
-        [Browsable(false)]
-        public string Name { get; set; }
+
+        [DisplayName("Функциональность")]
+        public string Feature { get; set; }
 
         private string endDate;
+
         [DisplayName("Окончание действия")]
         public string EndDate
         {
@@ -31,9 +33,9 @@ namespace ModelEntities
                 }
             }
         }
-        [DisplayName("Функциональность")]
 
-        public String Feature { get; set; }
-        
+        [DisplayName("Осталось дней")]
+        public string RemainedDays { get; set; }
+
     }
 }

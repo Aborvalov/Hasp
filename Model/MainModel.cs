@@ -17,9 +17,6 @@ namespace Model
         public MainModel(IFactoryLogic factoryLogic)
         {
             logic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
-            var db = Context.GetContext();
-            if (db == null)
-                throw new ArgumentNullException(nameof(db));
         }
         public void Dispose() => Context.GetContext().Dispose();
         public List<ModelMain> GetAll()
