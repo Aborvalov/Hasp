@@ -25,9 +25,9 @@ namespace HASPKey
             if (!Admin.IsAdmin) barSubItem3.Enabled = false;
         }
 
-        public void BindForm(List<DXModelClient> clients)
-        => PastDays.DataSource = clients != null ? new BindingList<DXModelClient>(clients)
-                                          : new BindingList<DXModelClient>();
+        public void BindForm(List<DXModelClient2> clients)
+        => PastDays.DataSource = clients != null ? new BindingList<DXModelClient2>(clients)
+                                          : new BindingList<DXModelClient2>();
 
         public void Bind(List<DXModelClient> clients)
         => NextDays.DataSource = clients != null ? new BindingList<DXModelClient>(clients)

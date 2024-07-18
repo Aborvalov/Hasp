@@ -43,7 +43,8 @@ namespace Presenter
             try
             {
                 mainView.Bind(DXConverterTo(mainModel?.GetKeysNextNDays()));
-                mainView.BindForm(DXConverterTo(mainModel?.GetKeysPastNDays()));
+                mainView.BindForm(DXConverterTo2(mainModel?.GetKeysNextNDays()));
+                //mainView.BindForm(DXConverterTo2(mainModel?.GetKeysPastNDays()));
             }
             catch
             {
@@ -101,6 +102,27 @@ namespace Presenter
                 .GroupBy(model => model.Client)
                 .OrderBy(group => group.Key)
                 .Select(group => new DXModelClient
+                {
+                    Client = group.Key,
+                    Keys = group
+                        .Select(featureGroup => new DXModelKeys
+                        {
+                            Number = featureGroup.NumberKey,
+                            Feature = featureGroup.Feature.ToString(),
+                            EndDate = featureGroup.EndDate.ToString(),
+                            RemainedDays = CountDays(featureGroup.EndDate, DateTime.Now),
+                        })
+                        .ToList()
+                })
+                .ToList();
+        }
+
+        private List<DXModelClient2> DXConverterTo2(List<ModelMain> models)
+        {
+            return models
+                .GroupBy(model => model.Client)
+                .OrderBy(group => group.Key)
+                .Select(group => new DXModelClient2
                 {
                     Client = group.Key,
                     Keys = group

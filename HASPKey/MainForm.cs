@@ -45,9 +45,9 @@ namespace HASPKey
         private void ВыходToolStripMenuItem_Click(object sender, EventArgs e)
             => Close();
 
-        public void BindForm(List<DXModelClient> clients)
-        => bindingHome.DataSource = clients != null ? new BindingList<DXModelClient>(clients)
-                                          : new BindingList<DXModelClient>();
+        public void BindForm(List<DXModelClient2> clients)
+        => bindingHome.DataSource = clients != null ? new BindingList<DXModelClient2>(clients)
+                                          : new BindingList<DXModelClient2>();
 
         public void Bind(List<ModelViewMain> homes)
         => bindingHome.DataSource = homes != null ? new BindingList<ModelViewMain>(homes)

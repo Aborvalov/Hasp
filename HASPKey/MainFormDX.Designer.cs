@@ -98,12 +98,13 @@
             // 
             // gridView3
             // 
+            this.gridView3.Appearance.HeaderPanel.BackColor = System.Drawing.Color.Black;
+            this.gridView3.Appearance.HeaderPanel.Options.UseBackColor = true;
             this.gridView3.DetailHeight = 546;
             this.gridView3.GridControl = this.NextDays;
             this.gridView3.Name = "gridView3";
             this.gridView3.OptionsBehavior.ReadOnly = true;
             this.gridView3.OptionsView.AutoCalcPreviewLineCount = true;
-            this.gridView3.OptionsView.ShowColumnHeaders = false;
             // 
             // barManager1
             // 
@@ -347,10 +348,10 @@
             this.panelControl2.ContentImageAlignment = System.Drawing.ContentAlignment.BottomCenter;
             this.panelControl2.Controls.Add(this.PastDays);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl2.Location = new System.Drawing.Point(0, 420);
+            this.panelControl2.Location = new System.Drawing.Point(0, 447);
             this.panelControl2.Margin = new System.Windows.Forms.Padding(2);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(1229, 352);
+            this.panelControl2.Size = new System.Drawing.Size(1229, 325);
             this.panelControl2.TabIndex = 13;
             // 
             // PastDays
@@ -362,18 +363,19 @@
             this.PastDays.Margin = new System.Windows.Forms.Padding(2);
             this.PastDays.MenuManager = this.barManager1;
             this.PastDays.Name = "PastDays";
-            this.PastDays.Size = new System.Drawing.Size(1225, 348);
+            this.PastDays.Size = new System.Drawing.Size(1225, 321);
             this.PastDays.TabIndex = 2;
             this.PastDays.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             // 
             // gridView1
             // 
+            this.gridView1.Appearance.HeaderPanel.BackColor = System.Drawing.Color.Black;
+            this.gridView1.Appearance.HeaderPanel.Options.UseBackColor = true;
             this.gridView1.DetailHeight = 546;
             this.gridView1.GridControl = this.PastDays;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.ReadOnly = true;
-            this.gridView1.OptionsView.ShowColumnHeaders = false;
             // 
             // bar1
             // 
@@ -389,7 +391,7 @@
             this.panelControl1.Location = new System.Drawing.Point(0, 25);
             this.panelControl1.Margin = new System.Windows.Forms.Padding(2);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1229, 10);
+            this.panelControl1.Size = new System.Drawing.Size(1229, 37);
             this.panelControl1.TabIndex = 18;
             // 
             // panelControl3
@@ -397,7 +399,7 @@
             this.panelControl3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelControl3.Controls.Add(this.NextDays);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl3.Location = new System.Drawing.Point(0, 35);
+            this.panelControl3.Location = new System.Drawing.Point(0, 62);
             this.panelControl3.Margin = new System.Windows.Forms.Padding(2);
             this.panelControl3.Name = "panelControl3";
             this.panelControl3.Size = new System.Drawing.Size(1229, 373);
@@ -407,7 +409,7 @@
             // 
             this.splitterControl1.Cursor = System.Windows.Forms.Cursors.HSplit;
             this.splitterControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitterControl1.Location = new System.Drawing.Point(0, 408);
+            this.splitterControl1.Location = new System.Drawing.Point(0, 435);
             this.splitterControl1.Margin = new System.Windows.Forms.Padding(2);
             this.splitterControl1.Name = "splitterControl1";
             this.splitterControl1.Size = new System.Drawing.Size(1229, 12);
