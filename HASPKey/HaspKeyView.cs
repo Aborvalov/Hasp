@@ -47,12 +47,22 @@ namespace HASPKey
 
         private void RadioButtonAll_CheckedChanged(object sender, EventArgs e)
         {
+/*            if (buttonSearchByClient.Focused) 
+            {
+                if (radioButtonAll.Checked) 
+                {
+                    presenterHaspKey.Display();
+
+                }
+               
+            }*/
             DefaultView();
             presenterHaspKey.Display();
             labelClient.Text = string.Empty;
         }
         private void RadioButtonPastDue_CheckedChanged(object sender, EventArgs e)
         {
+
             DefaultView();
             presenterHaspKey.GetByPastDue();
             labelClient.Text = string.Empty;
@@ -128,9 +138,9 @@ namespace HASPKey
        
         private void ButtonSearchByClient_Click(object sender, EventArgs e)
         {
-            radioButtonActive.Checked = false;
-            radioButtonAll.Checked = false;
-            radioButtonPastDue.Checked = false;
+            radioButtonActive.Visible = true;
+            radioButtonAll.Visible = true;
+            radioButtonPastDue.Visible = true;
 
             using (ClientView client = new ClientView(true))
             {

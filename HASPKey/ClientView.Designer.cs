@@ -394,7 +394,7 @@
             this.buttonCancel.TabIndex = 18;
             this.buttonCancel.Text = "Отменить";
             this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
+            //this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
             // ClientView
             // 

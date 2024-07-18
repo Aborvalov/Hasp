@@ -21,7 +21,7 @@ namespace HASPKey
         private const string caption = "Удалить клиента";
         private const string message = "Вы уверены, что хотите удалить клиента?";
         private const string errorStr = "Ошибка";
-        private const string emptyClient = "Данная клиент не найден.";
+        private const string emptyClient = "Данный клиент не найден.";
         
         public ClientView(bool search)
         {
@@ -194,9 +194,9 @@ namespace HASPKey
                 row.HeaderCell.Value = (row.Index + 1).ToString();
         }
 
-        private void ButtonCancel_Click(object sender, EventArgs e)
+        /*private void ButtonCancel_Click(object sender, EventArgs e)
         {
             DefaultView();
-        }
+        }*/
     }
 }
