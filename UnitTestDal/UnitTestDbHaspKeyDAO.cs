@@ -14,6 +14,8 @@ namespace UnitTestDal
     {
         private const int erroneousId = -123;
         private IContractHaspKeyDAO haspKeyDAO;
+        private Client id;
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void NullEntitesContextHaspKey()
@@ -267,7 +269,7 @@ namespace UnitTestDal
                 db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
                 db.SaveChanges();
 
-                GetByActive = haspKeyDAO.GetByPastDue();
+                GetByActive = haspKeyDAO.GetByPastDue(id);
             }
 
             CollectionAssert.AreEqual(GetByActive, GetByActiveExpected);

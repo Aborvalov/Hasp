@@ -1,5 +1,6 @@
 ﻿using ModelEntities;
 using System.Collections.Generic;
+using System.Deployment.Internal;
 
 namespace Model
 {
@@ -10,11 +11,13 @@ namespace Model
         /// Поиск просроченных ключей.
         /// </summary>
         /// <returns>Список просроченных ключей.</returns>
-        List<ModelViewHaspKey> GetByPastDue();
         /// <summary>
         /// Поиск действующих ключей.
         /// </summary>
         /// <returns>Список действующих ключей.</returns>
         List<ModelViewHaspKey> GetByActive();
+        List<ModelViewHaspKey> GetAllInCompany(ModelViewClient id);
+        List<ModelViewHaspKey> GetActiveInCompany(ModelViewClient id);
+        List<ModelViewHaspKey> GetByPastDue(ModelViewClient id);
     }
 }

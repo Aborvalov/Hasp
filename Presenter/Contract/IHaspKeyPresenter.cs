@@ -9,7 +9,10 @@ namespace Presenter
         /// Поиск просроченных ключей.
         /// </summary>
         /// <returns>Список просроченных ключей.</returns>
-        void GetByPastDue();
+        void GetByPastDue(ModelViewClient id);
+        void GetAllInCompany(ModelViewClient id);
+        void GetActiveInCompany(ModelViewClient id);
+        
         /// <summary>
         /// Поиск действующих ключей.
         /// </summary>

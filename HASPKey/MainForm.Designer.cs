@@ -94,13 +94,6 @@ namespace HASPKey
             this.FileToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
             this.FileToolStripMenuItem.Text = "Файл";
             // 
-            // SelectDataBaseToolStripMenuItem
-            // 
-            this.SelectDataBaseToolStripMenuItem.Name = "SelectDataBaseToolStripMenuItem";
-            this.SelectDataBaseToolStripMenuItem.Size = new System.Drawing.Size(234, 26);
-            this.SelectDataBaseToolStripMenuItem.Text = "Выбор базы данных";
-            this.SelectDataBaseToolStripMenuItem.Click += new System.EventHandler(this.SelectDataBaseToolStripMenuItemClick);
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
