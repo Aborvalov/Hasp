@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using DevExpress.XtraBars;
+using Entities;
 using Model;
 using ModelEntities;
 using Presenter;
@@ -20,7 +21,8 @@ namespace HASPKey
         public MainFormDX()
         {
             InitializeComponent();
-            presenter = new MainPresenter(this);            
+            presenter = new MainPresenter(this);
+            if (!Admin.IsAdmin) barSubItem3.Enabled = false;
         }
 
 
@@ -47,13 +49,13 @@ namespace HASPKey
             {
                 barButtonItem2.Enabled = false;
                 barButtonItem6.Enabled = false;
-                //barButtonItem5.Enabled = false;
+
             }
             else
             {
                 barButtonItem2.Enabled = true;
                 barButtonItem6.Enabled = true;
-                //barButtonItem5.Enabled = true;
+
             }
         }
         private void BarButtonItem2ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -116,6 +118,6 @@ namespace HASPKey
             {
                 form.ShowDialog();
             }
-        }  
+        }
     }
 }
