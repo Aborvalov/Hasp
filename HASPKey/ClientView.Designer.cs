@@ -412,7 +412,7 @@
             this.MinimumSize = new System.Drawing.Size(607, 610);
             this.Name = "ClientView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Клиетны";
+            this.Text = "Клиенты";
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewClient)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingClient)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingItem)).EndInit();
