@@ -26,6 +26,12 @@ namespace HASPKey
         private const string emptyHaspKey = "Данный ключ не найден.";
         private const string message = "Вы уверены, что хотите удалить Hasp-ключ?";
 
+        private void SetRadioButtonsVisibility(bool visibility)
+        {
+            radioButtonActive.Visible = visibility;
+            radioButtonAll.Visible = visibility;
+            radioButtonPastDue.Visible = visibility;
+        }
         public HaspKeyView()
         {
             InitializeComponent();
@@ -135,9 +141,7 @@ namespace HASPKey
 
         private void ButtonSearchByClient_Click(object sender, EventArgs e)
         {
-            radioButtonActive.Visible = true;
-            radioButtonAll.Visible = true;
-            radioButtonPastDue.Visible = true;
+            SetRadioButtonsVisibility(true);
 
             using (ClientView client = new ClientView(true))
             {
@@ -225,8 +229,11 @@ namespace HASPKey
             DefaultView();
         }
 
+
+
         private void ButtonAllKeys_Click(object sender, EventArgs e)
         {
+            SetRadioButtonsVisibility(false);
             DefaultView();
             presenterHaspKey.Display();
             labelClient.Text = string.Empty;
