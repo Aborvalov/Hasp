@@ -36,6 +36,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HaspKeyView));
             this.DataGridViewHaspKey = new System.Windows.Forms.DataGridView();
             this.isHomeDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.innerIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingHaspKey = new System.Windows.Forms.BindingSource(this.components);
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
@@ -58,10 +61,8 @@
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.innerIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.typeKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
+            this.buttonAllKeys = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewHaspKey)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingHaspKey)).BeginInit();
             this.panelFiltr.SuspendLayout();
@@ -71,8 +72,8 @@
             // DataGridViewHaspKey
             // 
             this.DataGridViewHaspKey.AllowUserToAddRows = false;
-            this.DataGridViewHaspKey.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.DataGridViewHaspKey.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DataGridViewHaspKey.AutoGenerateColumns = false;
             this.DataGridViewHaspKey.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -120,6 +121,36 @@
             this.isHomeDataGridViewCheckBoxColumn.ReadOnly = true;
             this.isHomeDataGridViewCheckBoxColumn.ToolTipText = "Нахождение ключа";
             this.isHomeDataGridViewCheckBoxColumn.Width = 80;
+            // 
+            // innerIdDataGridViewTextBoxColumn
+            // 
+            this.innerIdDataGridViewTextBoxColumn.DataPropertyName = "InnerId";
+            this.innerIdDataGridViewTextBoxColumn.FillWeight = 83.75635F;
+            this.innerIdDataGridViewTextBoxColumn.HeaderText = "Внутренний номер";
+            this.innerIdDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.innerIdDataGridViewTextBoxColumn.Name = "innerIdDataGridViewTextBoxColumn";
+            this.innerIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.innerIdDataGridViewTextBoxColumn.ToolTipText = "Внутренний номер ключа";
+            // 
+            // numberDataGridViewTextBoxColumn
+            // 
+            this.numberDataGridViewTextBoxColumn.DataPropertyName = "Number";
+            this.numberDataGridViewTextBoxColumn.FillWeight = 83.75635F;
+            this.numberDataGridViewTextBoxColumn.HeaderText = "Номер";
+            this.numberDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
+            this.numberDataGridViewTextBoxColumn.ReadOnly = true;
+            this.numberDataGridViewTextBoxColumn.ToolTipText = "Номер ключа на корпусе";
+            // 
+            // typeKeyDataGridViewTextBoxColumn
+            // 
+            this.typeKeyDataGridViewTextBoxColumn.DataPropertyName = "TypeKey";
+            this.typeKeyDataGridViewTextBoxColumn.FillWeight = 83.75635F;
+            this.typeKeyDataGridViewTextBoxColumn.HeaderText = "Тип ключа";
+            this.typeKeyDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.typeKeyDataGridViewTextBoxColumn.Name = "typeKeyDataGridViewTextBoxColumn";
+            this.typeKeyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.typeKeyDataGridViewTextBoxColumn.ToolTipText = "Тиа ключа";
             // 
             // bindingHaspKey
             // 
@@ -182,6 +213,7 @@
             this.radioButtonPastDue.TabIndex = 9;
             this.radioButtonPastDue.Text = "Просроченные";
             this.radioButtonPastDue.UseVisualStyleBackColor = true;
+            this.radioButtonPastDue.Visible = false;
             this.radioButtonPastDue.CheckedChanged += new System.EventHandler(this.RadioButtonPastDue_CheckedChanged);
             // 
             // radioButtonAll
@@ -196,6 +228,7 @@
             this.radioButtonAll.TabStop = true;
             this.radioButtonAll.Text = "Все";
             this.radioButtonAll.UseVisualStyleBackColor = true;
+            this.radioButtonAll.Visible = false;
             this.radioButtonAll.CheckedChanged += new System.EventHandler(this.RadioButtonAll_CheckedChanged);
             // 
             // radioButtonActive
@@ -208,6 +241,7 @@
             this.radioButtonActive.TabIndex = 8;
             this.radioButtonActive.Text = "Активные";
             this.radioButtonActive.UseVisualStyleBackColor = true;
+            this.radioButtonActive.Visible = false;
             this.radioButtonActive.CheckedChanged += new System.EventHandler(this.RadioButtonActive_CheckedChanged);
             // 
             // LInnerNumber
@@ -311,7 +345,7 @@
             this.labelClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelClient.AutoSize = true;
             this.labelClient.BackColor = System.Drawing.Color.Transparent;
-            this.labelClient.Location = new System.Drawing.Point(506, 38);
+            this.labelClient.Location = new System.Drawing.Point(415, 43);
             this.labelClient.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelClient.Name = "labelClient";
             this.labelClient.Size = new System.Drawing.Size(39, 16);
@@ -359,36 +393,6 @@
             this.dataGridViewTextBoxColumn3.ToolTipText = "Тиа ключа";
             this.dataGridViewTextBoxColumn3.Width = 99;
             // 
-            // innerIdDataGridViewTextBoxColumn
-            // 
-            this.innerIdDataGridViewTextBoxColumn.DataPropertyName = "InnerId";
-            this.innerIdDataGridViewTextBoxColumn.FillWeight = 83.75635F;
-            this.innerIdDataGridViewTextBoxColumn.HeaderText = "Внутренний номер";
-            this.innerIdDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.innerIdDataGridViewTextBoxColumn.Name = "innerIdDataGridViewTextBoxColumn";
-            this.innerIdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.innerIdDataGridViewTextBoxColumn.ToolTipText = "Внутренний номер ключа";
-            // 
-            // numberDataGridViewTextBoxColumn
-            // 
-            this.numberDataGridViewTextBoxColumn.DataPropertyName = "Number";
-            this.numberDataGridViewTextBoxColumn.FillWeight = 83.75635F;
-            this.numberDataGridViewTextBoxColumn.HeaderText = "Номер";
-            this.numberDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
-            this.numberDataGridViewTextBoxColumn.ReadOnly = true;
-            this.numberDataGridViewTextBoxColumn.ToolTipText = "Номер ключа на корпусе";
-            // 
-            // typeKeyDataGridViewTextBoxColumn
-            // 
-            this.typeKeyDataGridViewTextBoxColumn.DataPropertyName = "TypeKey";
-            this.typeKeyDataGridViewTextBoxColumn.FillWeight = 83.75635F;
-            this.typeKeyDataGridViewTextBoxColumn.HeaderText = "Тип ключа";
-            this.typeKeyDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.typeKeyDataGridViewTextBoxColumn.Name = "typeKeyDataGridViewTextBoxColumn";
-            this.typeKeyDataGridViewTextBoxColumn.ReadOnly = true;
-            this.typeKeyDataGridViewTextBoxColumn.ToolTipText = "Тиа ключа";
-            // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -401,11 +405,24 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
+            // button2
+            // 
+            this.buttonAllKeys.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAllKeys.Location = new System.Drawing.Point(310, 11);
+            this.buttonAllKeys.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonAllKeys.Name = "button2";
+            this.buttonAllKeys.Size = new System.Drawing.Size(62, 28);
+            this.buttonAllKeys.TabIndex = 19;
+            this.buttonAllKeys.Text = "Все";
+            this.buttonAllKeys.UseVisualStyleBackColor = true;
+            this.buttonAllKeys.Click += new System.EventHandler(this.ButtonAllKeys_Click);
+            // 
             // HaspKeyView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(519, 729);
+            this.Controls.Add(this.buttonAllKeys);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.Headline);
             this.Controls.Add(this.buttonSearchByClient);
@@ -469,5 +486,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonAllKeys;
     }
 }

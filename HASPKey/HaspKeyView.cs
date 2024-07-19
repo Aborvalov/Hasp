@@ -1,9 +1,12 @@
-﻿using Entities;
+﻿using DevExpress.XtraEditors;
+using Entities;
 using ModelEntities;
 using Presenter;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Deployment.Internal;
 using System.Windows.Forms;
 using ViewContract;
 
@@ -48,20 +51,22 @@ namespace HASPKey
         private void RadioButtonAll_CheckedChanged(object sender, EventArgs e)
         {
             DefaultView();
-            presenterHaspKey.Display();
-            labelClient.Text = string.Empty;
+            if (id != null)
+            {
+                presenterHaspKey.GetAllInCompany(id);
+                labelClient.Text = id.Name;
+            }
         }
-        private void RadioButtonPastDue_CheckedChanged(object sender, EventArgs e)
-        {
-            DefaultView();
-            presenterHaspKey.GetByPastDue();
-            labelClient.Text = string.Empty;
-        }
+        
         private void RadioButtonActive_CheckedChanged(object sender, EventArgs e)
         {
             DefaultView();
-            presenterHaspKey.GetByActive();
-            labelClient.Text = string.Empty;
+            if (id != null)
+            {
+                presenterHaspKey.GetActiveInCompany(id);
+                labelClient.Text = id.Name;
+            }
+            
         }
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
@@ -126,11 +131,13 @@ namespace HASPKey
 
         private void ButtonDelete_Click(object sender, EventArgs e) => DeleteItem();
 
+        public ModelViewClient id;
+
         private void ButtonSearchByClient_Click(object sender, EventArgs e)
         {
-            radioButtonActive.Checked = false;
-            radioButtonAll.Checked = false;
-            radioButtonPastDue.Checked = false;
+            radioButtonActive.Visible = true;
+            radioButtonAll.Visible = true;
+            radioButtonPastDue.Visible = true;
 
             using (ClientView client = new ClientView(true))
             {
@@ -138,12 +145,24 @@ namespace HASPKey
 
                 if (client.SearchIdClient != null)
                 {
+                    id = client.SearchIdClient;
                     DefaultView();
-                    presenterHaspKey.GetByClient(client.SearchIdClient);
+                    presenterHaspKey.GetByClient(id);
 
-                    labelClient.Text = client.SearchIdClient.Name;
+                    labelClient.Text = id.Name;
                     labelClient.Location = new System.Drawing.Point((this.Width - 25) - labelClient.Width, labelClient.Location.Y);
                 }
+            }
+        }
+
+
+        private void RadioButtonPastDue_CheckedChanged(object sender, EventArgs e)
+        {
+            DefaultView();
+            if (id != null)
+            {
+                presenterHaspKey.GetByPastDue(id);
+                labelClient.Text = id.Name;
             }
         }
 
@@ -204,6 +223,13 @@ namespace HASPKey
         private void ButtonCancel_Click(object sender, EventArgs e)
         {
             DefaultView();
+        }
+
+        private void ButtonAllKeys_Click(object sender, EventArgs e)
+        {
+            DefaultView();
+            presenterHaspKey.Display();
+            labelClient.Text = string.Empty;
         }
     }
 }
