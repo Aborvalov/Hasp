@@ -61,6 +61,22 @@ namespace HelperForUnitTest
                 },
         };
         }
+        public static List<ClientNumberKeys> ClientNumberKeys()
+        {
+            return new List<ClientNumberKeys>
+            {
+                new ClientNumberKeys
+                {
+                    Id      = 1,
+                    Name    = "Ivanov Ivan",
+                },
+                new ClientNumberKeys
+                {
+                    Id      = 2,
+                    Name    = "Petrov FD",
+                },
+        };
+        }
         public static List<KeyFeature> KeyFeatures()
         {
             return new List<KeyFeature>

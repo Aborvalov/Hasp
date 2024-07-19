@@ -8,5 +8,6 @@ namespace Entities
         public DbSet<HaspKey> HaspKeys { get; set; }
         public DbSet<KeyFeature> KeyFeatures { get; set; }
         public DbSet<KeyFeatureClient> KeyFeatureClients { get; set; }
+        public DbSet<ClientNumberKeys> ClientNumberKeys { get; set; }
     }
 }

@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UnitTestDbClientDAO.cs" />
+    <Compile Include="UnitTestDbClientNumberKeysDAO.cs" />
     <Compile Include="UnitTestDbFeatureDAO.cs" />
     <Compile Include="UnitTestDbHaspKeyDAO.cs" />
     <Compile Include="UnitTestDbKeyFeatureClientDAO.cs" />

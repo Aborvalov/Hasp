@@ -10,7 +10,9 @@ namespace LogicContract
         /// Поиск просроченных ключей.
         /// </summary>
         /// <returns>Список просроченных ключей.</returns>
-        List<HaspKey> GetByPastDue();
+        List<HaspKey> GetByPastDue(Client client);
+        List<HaspKey> GetAllInCompany(Client client);
+        List<HaspKey> GetActiveInCompany(Client client);
         /// <summary>
         /// Поиск действующих ключей.
         /// </summary>
