@@ -15,14 +15,14 @@ namespace HASPKey
         private bool size = true;
         private bool error = false;
         private const int sizeH = 40;
-        public event Action DataUpdated;       
+        public event Action DataUpdated;
         internal ModelViewHaspKey SearchHaspKey { get; private set; } = null;
-        
+
         private const string errorStr = "Ошибка";
         private const string caption = "Удалить ключ";
         private const string emptyHaspKey = "Данный ключ не найден.";
         private const string message = "Вы уверены, что хотите удалить Hasp-ключ?";
-                    
+
         public HaspKeyView()
         {
             InitializeComponent();
@@ -35,8 +35,8 @@ namespace HASPKey
 
             if (!Admin.IsAdmin)
                 DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
-        }  
-        public void Bind(List<ModelViewHaspKey> entity) 
+        }
+        public void Bind(List<ModelViewHaspKey> entity)
             => bindingHaspKey.DataSource = entity != null ? new BindingList<ModelViewHaspKey>(entity)
                                                           : new BindingList<ModelViewHaspKey>();
 
@@ -69,10 +69,10 @@ namespace HASPKey
             if (size)
             {
                 DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height - sizeH;
-                size = !size;               
+                size = !size;
                 buttonAdd.Enabled = false;
                 checkBoxIsHome.Checked = true;
-            }            
+            }
         }
         public void MessageError(string errorText)
         {
@@ -87,8 +87,8 @@ namespace HASPKey
 
             error = false;
             presenterHaspKey.FillModel(bindingItem.DataSource as ModelViewHaspKey);
-            if(!error)
-                DefaultView();            
+            if (!error)
+                DefaultView();
         }
 
         private void DataGridViewHaspKey_DoubleClick(object sender, EventArgs e)
@@ -97,7 +97,7 @@ namespace HASPKey
             {
                 MessageError(emptyHaspKey);
                 return;
-            }            
+            }
             if (size && Admin.IsAdmin)
             {
                 DefaultView();
@@ -105,7 +105,7 @@ namespace HASPKey
                 size = !size;
                 presenterHaspKey.FillInputItem(row);
                 buttonAdd.Enabled = false;
-            }            
+            }
         }
 
         private void DefaultView()
@@ -118,14 +118,14 @@ namespace HASPKey
 
             bindingItem.DataSource = new ModelViewHaspKey();
             presenterHaspKey.FillInputItem(bindingItem.DataSource as ModelViewHaspKey);
-            tbInnerNumber.Text = string.Empty;            
-            comboBoxTypeKey.SelectedIndex = -1;            
+            tbInnerNumber.Text = string.Empty;
+            comboBoxTypeKey.SelectedIndex = -1;
             labelClient.Text = string.Empty;
             buttonAdd.Enabled = true;
         }
 
         private void ButtonDelete_Click(object sender, EventArgs e) => DeleteItem();
-       
+
         private void ButtonSearchByClient_Click(object sender, EventArgs e)
         {
             radioButtonActive.Checked = false;
@@ -199,6 +199,11 @@ namespace HASPKey
         {
             foreach (DataGridViewRow row in DataGridViewHaspKey.Rows)
                 row.HeaderCell.Value = (row.Index + 1).ToString();
+        }
+
+        private void ButtonCancel_Click(object sender, EventArgs e)
+        {
+            DefaultView();
         }
     }
 }
