@@ -43,7 +43,8 @@ namespace Presenter
             try
             {
                 mainView.Bind(DXConverterTo(mainModel?.GetKeysNextNDays()));
-                mainView.BindForm(DXConverterTo(mainModel?.GetKeysPastNDays()));
+                mainView.BindForm(DXConverterTo2(mainModel?.GetKeysNextNDays()));
+                //mainView.BindForm(DXConverterTo2(mainModel?.GetKeysPastNDays()));
             }
             catch
             {
@@ -68,7 +69,7 @@ namespace Presenter
                 throw new ArgumentNullException(nameof(models));
             }
             var result = new List<ModelViewMain>();
-            foreach (var model in models) 
+            foreach (var model in models)
             {
                 result.Add(
                     new ModelViewMain()
@@ -84,41 +85,60 @@ namespace Presenter
             return result;
         }
 
-        private string CountDays(DateTime model, DateTime now) 
+        private string CountDays(DateTime model, DateTime now)
         {
             if (model.ToString().IndexOf("2111") > -1)
             {
                 return "\u221E";
             }
-            else 
+            else
             {
                 return ((int)(model - NowDate).TotalDays).ToString();
-            }          
+            }
         }
         private List<DXModelClient> DXConverterTo(List<ModelMain> models)
         {
             return models
                 .GroupBy(model => model.Client)
+                .OrderBy(group => group.Key)
                 .Select(group => new DXModelClient
                 {
                     Client = group.Key,
-                    Features = group
-                        .GroupBy(model => model.Feature)
-                        .Select(featureGroup => new DXModelFeature
+                    Keys = group
+                        .Select(featureGroup => new DXModelKeys
                         {
-                            Name = featureGroup.Key.ToString(),
-                            Keys = featureGroup
-                                .Select(model => new DXModelKeys
-                                {
-                                    Number = model.NumberKey,
-                                    EndDate = model.EndDate.ToString(),
-                                    RemainedDays = CountDays(model.EndDate, NowDate)
-                                })
-                                .ToList()
+                            Number = featureGroup.NumberKey,
+                            Feature = featureGroup.Feature.ToString(),
+                            EndDate = featureGroup.EndDate.ToString(),
+                            RemainedDays = CountDays(featureGroup.EndDate, DateTime.Now),
                         })
                         .ToList()
                 })
                 .ToList();
         }
+
+        private List<DXModelClient2> DXConverterTo2(List<ModelMain> models)
+        {
+            return models
+                .GroupBy(model => model.Client)
+                .OrderBy(group => group.Key)
+                .Select(group => new DXModelClient2
+                {
+                    Client = group.Key,
+                    Keys = group
+                        .Select(featureGroup => new DXModelKeys
+                        {
+                            Number = featureGroup.NumberKey,
+                            Feature = featureGroup.Feature.ToString(),
+                            EndDate = featureGroup.EndDate.ToString(),
+                            RemainedDays = CountDays(featureGroup.EndDate, DateTime.Now),
+                        })
+                        .ToList()
+                })
+                .ToList();
+        }
+
+
+
     }
 }
