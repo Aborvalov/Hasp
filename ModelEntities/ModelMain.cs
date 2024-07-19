@@ -16,10 +16,9 @@ namespace ModelEntities
         public string Feature { get; set; }
         [DisplayName("Клиент")]
         public string Client { get; set; }
-        
+
         [DisplayName("Окончание действия")]
-        public DateTime EndDate { get; set;}
-        [Browsable(false)]
-        public int Name { get; set; }
+        public DateTime EndDate { get; set; }
+
     }
 }

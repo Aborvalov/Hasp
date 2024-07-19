@@ -18,7 +18,7 @@ namespace HASPKey
         {
             InitializeComponent();
             presenter = new MainPresenter(this);
-            ErrorDB(); 
+            ErrorDB();
         }
         private void ErrorDB()
         {
@@ -45,9 +45,9 @@ namespace HASPKey
         private void ВыходToolStripMenuItem_Click(object sender, EventArgs e)
             => Close();
 
-        public void BindForm(List<DXModelClient> clients)
-        => bindingHome.DataSource = clients != null ? new BindingList<DXModelClient>(clients)
-                                          : new BindingList<DXModelClient>();
+        public void BindForm(List<DXModelClient2> clients)
+        => bindingHome.DataSource = clients != null ? new BindingList<DXModelClient2>(clients)
+                                          : new BindingList<DXModelClient2>();
 
         public void Bind(List<ModelViewMain> homes)
         => bindingHome.DataSource = homes != null ? new BindingList<ModelViewMain>(homes)
@@ -128,7 +128,7 @@ namespace HASPKey
                 client.ShowDialog();
 
                 if (client.SearchIdClient != null)
-                {                    
+                {
                     presenter.GetByClient(client.SearchIdClient);
                 }
             }
@@ -136,19 +136,19 @@ namespace HASPKey
         private void ButtonAllClick(object sender, EventArgs e)
         {
             presenter.Views();
-           
+
         }
         private void ViewExpiredKeysCheckedChanged(object sender, EventArgs e)
         {
-           if (viewOldKeys.Checked)
-           {
+            if (viewOldKeys.Checked)
+            {
                 presenter.ShowExpiredKeys();
-           }
-           else
-           {
+            }
+            else
+            {
                 presenter.Views();
-           }
-        }    
+            }
+        }
         private void DataGridViewHomeViewColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             string columnName = DataGridViewHomeView.Columns[e.ColumnIndex].Name;
@@ -157,18 +157,18 @@ namespace HASPKey
             {
                 Sort(x => x.Date);
             }
-             if (columnName == "clientDataGridViewTextBoxColumn")
+            if (columnName == "clientDataGridViewTextBoxColumn")
             {
-                Sort(x => x.Client);    
+                Sort(x => x.Client);
             }
             else if (columnName == "featureDataGridViewTextBoxColumn")
-            {               
+            {
                 Sort(x => x.Feature);
             }
             else if (columnName == "numberKeyDataGridViewTextBoxColumn")
             {
                 Sort(x => x.NumberKey);
-            }   
+            }
         }
         private void Sort(Func<ModelViewMain, object> param)
         {

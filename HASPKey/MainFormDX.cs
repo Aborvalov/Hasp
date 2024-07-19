@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using DevExpress.XtraBars;
+using Entities;
 using Model;
 using ModelEntities;
 using Presenter;
@@ -20,14 +21,13 @@ namespace HASPKey
         public MainFormDX()
         {
             InitializeComponent();
-            presenter = new MainPresenter(this);            
+            presenter = new MainPresenter(this);
+            if (!Admin.IsAdmin) barSubItem3.Enabled = false;
         }
 
-
-
-        public void BindForm(List<DXModelClient> clients)
-        => PastDays.DataSource = clients != null ? new BindingList<DXModelClient>(clients)
-                                          : new BindingList<DXModelClient>();
+        public void BindForm(List<DXModelClient2> clients)
+        => PastDays.DataSource = clients != null ? new BindingList<DXModelClient2>(clients)
+                                          : new BindingList<DXModelClient2>();
 
         public void Bind(List<DXModelClient> clients)
         => NextDays.DataSource = clients != null ? new BindingList<DXModelClient>(clients)
@@ -47,13 +47,13 @@ namespace HASPKey
             {
                 barButtonItem2.Enabled = false;
                 barButtonItem6.Enabled = false;
-                //barButtonItem5.Enabled = false;
+
             }
             else
             {
                 barButtonItem2.Enabled = true;
                 barButtonItem6.Enabled = true;
-                //barButtonItem5.Enabled = true;
+
             }
         }
         private void BarButtonItem2ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -71,12 +71,14 @@ namespace HASPKey
             presenter = new MainPresenter(this);
             ErrorDB();
         }
+
         private void BarButtonItem8ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             using (HaspKeyView haspKey = new HaspKeyView())
             {
                 haspKey.ShowDialog();
             }
+
         }
         private void BarButtonItem9ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -89,7 +91,6 @@ namespace HASPKey
         {
             using (ClientView client = new ClientView())
             {
-                
                 client.ShowDialog();
             }
         }
@@ -116,6 +117,6 @@ namespace HASPKey
             {
                 form.ShowDialog();
             }
-        }  
+        }
     }
 }
