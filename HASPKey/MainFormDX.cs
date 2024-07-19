@@ -47,13 +47,11 @@ namespace HASPKey
             {
                 barButtonItem2.Enabled = false;
                 barButtonItem6.Enabled = false;
-                //barButtonItem5.Enabled = false;
             }
             else
             {
                 barButtonItem2.Enabled = true;
                 barButtonItem6.Enabled = true;
-                //barButtonItem5.Enabled = true;
             }
         }
         private void BarButtonItem2ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -87,9 +85,8 @@ namespace HASPKey
         }
         private void BarButtonItem10ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            using (ClientView client = new ClientView())
+            using (ClientNumberKeys client = new ClientNumberKeys())
             {
-                
                 client.ShowDialog();
             }
         }
@@ -107,13 +104,6 @@ namespace HASPKey
             using (KeyFeatureClientView keyFeatureClientView = new KeyFeatureClientView())
             {
                 keyFeatureClientView.ShowDialog();
-            }
-        }
-        private void BarButtonItem5ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            using (SelectedDataBaseView selectedDataBaseView = new SelectedDataBaseView(this))
-            {
-                selectedDataBaseView.ShowDialog();
             }
         }
 

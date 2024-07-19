@@ -73,6 +73,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientNumberKeysPresenter.cs" />
+    <Compile Include="Contract\IClientNumberKeysPresenter.cs" />
     <Compile Include="Contract\IClientPresenter.cs" />
     <Compile Include="Contract\IEntitiesPresenter.cs" />
     <Compile Include="Contract\IHaspKeyPresenter.cs" />
@@ -80,7 +82,6 @@
     <Compile Include="Contract\IKeyFeatureClientPresenter.cs" />
     <Compile Include="Contract\IMainPresenter.cs" />
     <Compile Include="Contract\IReferencePresenter.cs" />
-    <Compile Include="Contract\ISelectedDataBasePresenter.cs" />
     <Compile Include="СlientPresenter.cs" />
     <Compile Include="KeyFeaturePresenter.cs" />
     <Compile Include="FeaturePresenter.cs" />
@@ -88,7 +89,6 @@
     <Compile Include="KeyFeatureClientPresenter.cs" />
     <Compile Include="MainPresenter.cs" />
     <Compile Include="ReferencePresenter.cs" />
-    <Compile Include="SelectedDataBasePresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
