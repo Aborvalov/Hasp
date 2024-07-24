@@ -17,6 +17,8 @@ namespace UnitTestLogic
     {
         private const int erroneousId = -123;
         private IHaspKeyLogic haspKeyL;
+        private Client client;
+
         private IHaspKeyLogic Get(EntitesContext db) => new Logics().CreateHaspKey(db);
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
@@ -297,7 +299,7 @@ namespace UnitTestLogic
                 db.KeyFeatures.AddRange(CreateListEntities.KeyFeatures());
                 db.SaveChanges();
 
-                GetByActive = haspKeyL.GetByPastDue();
+                GetByActive = haspKeyL.GetByPastDue(client);
             }
 
             CollectionAssert.AreEqual(GetByActive, GetByActiveExpected);

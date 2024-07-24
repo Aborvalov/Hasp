@@ -10,7 +10,10 @@ namespace DalContract
         /// Поиск просроченных ключей.
         /// </summary>
         /// <returns>Список просроченных ключей.</returns>
-        List<HaspKey> GetByPastDue();
+        List<HaspKey> GetByPastDue(Client Client);
+        List<HaspKey> GetAllInCompany(Client Client);
+        List<HaspKey> GetActiveInCompany(Client Client);
+        
         /// <summary>
         /// Поиск действующих ключей.
         /// </summary>
