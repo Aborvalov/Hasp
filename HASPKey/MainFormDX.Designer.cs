@@ -96,13 +96,6 @@
             this.NextDays.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
             // 
-            // gridView3
-            // 
-            this.gridView2.GridControl = this.NextDays;
-            this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsBehavior.ReadOnly = true;
-            this.gridView2.OptionsView.ShowColumnHeaders = false;
-            // 
             // barManager1
             // 
             this.barManager1.AllowMoveBarOnToolbar = false;

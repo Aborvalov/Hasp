@@ -43,8 +43,7 @@ namespace Presenter
             try
             {
                 mainView.Bind(DXConverterTo(mainModel?.GetKeysNextNDays()));
-                mainView.BindForm(DXConverterTo2(mainModel?.GetKeysNextNDays()));
-                //mainView.BindForm(DXConverterTo2(mainModel?.GetKeysPastNDays()));
+                mainView.Bind(DXConverterTo2(mainModel?.GetKeysPastNDays()));
             }
             catch
             {
@@ -117,12 +116,12 @@ namespace Presenter
                 .ToList();
         }
 
-        private List<DXModelClient2> DXConverterTo2(List<ModelMain> models)
+        private List<DXModelLicenseEnd> DXConverterTo2(List<ModelMain> models)
         {
             return models
                 .GroupBy(model => model.Client)
                 .OrderBy(group => group.Key)
-                .Select(group => new DXModelClient2
+                .Select(group => new DXModelLicenseEnd
                 {
                     Client = group.Key,
                     Keys = group
