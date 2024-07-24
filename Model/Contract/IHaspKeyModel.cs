@@ -16,8 +16,8 @@ namespace Model
         /// </summary>
         /// <returns>Список действующих ключей.</returns>
         List<ModelViewHaspKey> GetByActive();
-        List<ModelViewHaspKey> GetAllInCompany(ModelViewClient id);
-        List<ModelViewHaspKey> GetActiveInCompany(ModelViewClient id);
-        List<ModelViewHaspKey> GetByPastDue(ModelViewClient id);
+        List<ModelViewHaspKey> GetAllInCompany(ModelViewClient client);
+        List<ModelViewHaspKey> GetActiveInCompany(ModelViewClient client);
+        List<ModelViewHaspKey> GetByPastDue(ModelViewClient client);
     }
 }

@@ -15,6 +15,7 @@ namespace HASPKey
     public partial class HaspKeyView : DevExpress.XtraEditors.XtraForm, IEntitiesView<ModelViewHaspKey>
     {
         private readonly IHaspKeyPresenter presenterHaspKey;
+        public ModelViewClient client;
         private bool size = true;
         private bool error = false;
         private const int sizeH = 40;
@@ -57,20 +58,20 @@ namespace HASPKey
         private void RadioButtonAll_CheckedChanged(object sender, EventArgs e)
         {
             DefaultView();
-            if (id != null)
+            if (client != null)
             {
-                presenterHaspKey.GetAllInCompany(id);
-                labelClient.Text = id.Name;
+                presenterHaspKey.GetAllInCompany(client);
+                labelClient.Text = client.Name;
             }
         }
         
         private void RadioButtonActive_CheckedChanged(object sender, EventArgs e)
         {
             DefaultView();
-            if (id != null)
+            if (client != null)
             {
-                presenterHaspKey.GetActiveInCompany(id);
-                labelClient.Text = id.Name;
+                presenterHaspKey.GetActiveInCompany(client);
+                labelClient.Text = client.Name;
             }
             
         }
@@ -137,8 +138,6 @@ namespace HASPKey
 
         private void ButtonDelete_Click(object sender, EventArgs e) => DeleteItem();
 
-        public ModelViewClient id;
-
         private void ButtonSearchByClient_Click(object sender, EventArgs e)
         {
             SetRadioButtonsVisibility(true);
@@ -149,11 +148,11 @@ namespace HASPKey
 
                 if (client.SearchIdClient != null)
                 {
-                    id = client.SearchIdClient;
+                    this.client = client.SearchIdClient;
                     DefaultView();
-                    presenterHaspKey.GetByClient(id);
+                    presenterHaspKey.GetByClient(this.client);
 
-                    labelClient.Text = id.Name;
+                    labelClient.Text = this.client.Name;
                     labelClient.Location = new System.Drawing.Point((this.Width - 25) - labelClient.Width, labelClient.Location.Y);
                 }
             }
@@ -163,10 +162,10 @@ namespace HASPKey
         private void RadioButtonPastDue_CheckedChanged(object sender, EventArgs e)
         {
             DefaultView();
-            if (id != null)
+            if (client != null)
             {
-                presenterHaspKey.GetByPastDue(id);
-                labelClient.Text = id.Name;
+                presenterHaspKey.GetByPastDue(client);
+                labelClient.Text = client.Name;
             }
         }
 

@@ -59,7 +59,7 @@ namespace DalDB
 
         public List<HaspKey> GetAll() => db.HaspKeys.ToList();
 
-        public List<HaspKey> GetAllInCompany(Client id)
+        public List<HaspKey> GetAllInCompany(Client client)
         {
             var keyFeatures = db.KeyFeatures;
             var keyFeatureClients = db.KeyFeatureClients;
@@ -72,7 +72,7 @@ namespace DalDB
                                join kfc in keyFeatureClients
                                   on keyFeature.Id equals kfc.IdKeyFeature
 
-                               where (id.Id == kfc.IdClient)
+                               where (client.Id == kfc.IdClient)
 
                                select new HaspKey
                                {
@@ -86,12 +86,12 @@ namespace DalDB
 
             return haspKeysAll;
         }
-        public List<HaspKey> GetActiveInCompany(Client id)
+        public List<HaspKey> GetActiveInCompany(Client client)
         {
             var keyFeatures = db.KeyFeatures;
             var keyFeatureClients = db.KeyFeatureClients;
 
-            var haspKeysAllActive = (from haspKey in GetAllInCompany(id)
+            var haspKeysAllActive = (from haspKey in GetAllInCompany(client)
 
                                join keyFeature in keyFeatures
                                  on haspKey.Id equals keyFeature.IdHaspKey
@@ -104,7 +104,7 @@ namespace DalDB
                                                              select keyFea)
                                                              .Max(x => x.EndDate)) &&
                                        (keyFeature.EndDate >= date) && 
-                                       (id.Id == kfc.IdClient)
+                                       (client.Id == kfc.IdClient)
 
                                select new HaspKey
                                {
@@ -121,7 +121,7 @@ namespace DalDB
 
 
 
-        public List<HaspKey> GetByPastDue(Client id)
+        public List<HaspKey> GetByPastDue(Client client)
         {
             var keyFeatures = db.KeyFeatures;
             var keyFeatureClients = db.KeyFeatureClients;
@@ -141,7 +141,7 @@ namespace DalDB
                                                                 select keyFea)
                                                                .Max(x => x.EndDate)) &&
                                          (keyFeature.EndDate < date) && 
-                                         (id.Id == kfc.IdClient)
+                                         (client.Id == kfc.IdClient)
                                         
                                    select new HaspKey
                                    {
