@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="ClientNumberKeys.cs" />
     <Compile Include="Context\EntitesContext.cs" />
     <Compile Include="Feature.cs" />
     <Compile Include="HaspKey.cs" />

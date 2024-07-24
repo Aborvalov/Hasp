@@ -164,6 +164,12 @@
     <Compile Include="DaysForm.Designer.cs">
       <DependentUpon>DaysForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClientNumberKeys.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientNumberKeys.Designer.cs">
+      <DependentUpon>ClientNumberKeys.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ClientView.resx">
       <DependentUpon>ClientView.cs</DependentUpon>
     </EmbeddedResource>
@@ -203,13 +209,18 @@
     <EmbeddedResource Include="DaysForm.resx">
       <DependentUpon>DaysForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ClientNumberKeys.resx">
+      <DependentUpon>ClientNumberKeys.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Entities.ClientNumberKeys.datasource" />
     <None Include="Properties\DataSources\Entities.Feature.datasource" />
     <None Include="Properties\DataSources\Entities.KeyFeature.datasource" />
     <None Include="Properties\DataSources\Entity.datasource" />
     <None Include="Properties\DataSources\Model.HomeView.datasource" />
     <None Include="Properties\DataSources\ModelEntities.ModelViewClient.datasource" />
+    <None Include="Properties\DataSources\ModelEntities.ModelViewClientNumberKeys.datasource" />
     <None Include="Properties\DataSources\ModelEntities.ModelViewFeature.datasource" />
     <None Include="Properties\DataSources\ModelEntities.ModelViewFeatureForEditKeyFeat.datasource" />
     <None Include="Properties\DataSources\ModelEntities.ModelViewHaspKey.datasource" />

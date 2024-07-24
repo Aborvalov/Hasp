@@ -58,7 +58,6 @@ namespace Model
             var keyFeatureClient = new List<ModelViewKeyFeatureClient>();
             ListKeyAtClient(idClient, keyFeatureClient);
             ListKeyFeatureAvailableClient(keyFeatureClient, idClient);
-
             return keyFeatureClient
                         .OrderBy(x => x.NumberKey)
                             .ThenByDescending(x => x.Selected)

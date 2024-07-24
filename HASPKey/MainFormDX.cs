@@ -87,9 +87,8 @@ namespace HASPKey
         }
         private void BarButtonItem10ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            using (ClientView client = new ClientView())
+            using (ClientNumberKeys client = new ClientNumberKeys())
             {
-                
                 client.ShowDialog();
             }
         }
