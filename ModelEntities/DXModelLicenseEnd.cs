@@ -4,13 +4,13 @@ using System.ComponentModel;
 
 namespace ModelEntities
 {
-    public class DXModelClient
+    public class DXModelLicenseEnd
     {
         [DisplayName("Ключ")]
         public List<DXModelKeys> Keys { get; set; }
 
-        [DisplayName("Лицензия закончится в следующие <N> дней")]
+        [DisplayName("Лицензия закончилась в последующие <N> дней")]
         public string Client { get; set; }
-
     }
+
 }
