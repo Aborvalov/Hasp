@@ -59,90 +59,18 @@ namespace DalDB
 
         public List<HaspKey> GetAll() => db.HaspKeys.ToList();
 
-        public List<HaspKey> GetAllInCompany(Client client)
+        public List<HaspKey> GetByPastDue()
         {
             var keyFeatures = db.KeyFeatures;
-            var keyFeatureClients = db.KeyFeatureClients;
-
-            var haspKeysAll = (from haspKey in GetAll()
-
-                               join keyFeature in keyFeatures
-                                 on haspKey.Id equals keyFeature.IdHaspKey
-
-                               join kfc in keyFeatureClients
-                                  on keyFeature.Id equals kfc.IdKeyFeature
-
-                               where (client.Id == kfc.IdClient)
-
-                               select new HaspKey
-                               {
-                                   Id = haspKey.Id,
-                                   InnerId = haspKey.InnerId,
-                                   Number = haspKey.Number,
-                                   IsHome = haspKey.IsHome,
-                                   TypeKey = haspKey.TypeKey,
-                               })
-                               .Distinct().ToList();
-
-            return haspKeysAll;
-        }
-        public List<HaspKey> GetActiveInCompany(Client client)
-        {
-            var keyFeatures = db.KeyFeatures;
-            var keyFeatureClients = db.KeyFeatureClients;
-
-            var haspKeysAllActive = (from haspKey in GetAllInCompany(client)
-
-                               join keyFeature in keyFeatures
-                                 on haspKey.Id equals keyFeature.IdHaspKey
-
-                               join kfc in keyFeatureClients
-                                  on keyFeature.Id equals kfc.IdKeyFeature
-
-                               where keyFeature.EndDate == ((from keyFea in keyFeatures
-                                                             where keyFea.IdHaspKey == haspKey.Id
-                                                             select keyFea)
-                                                             .Max(x => x.EndDate)) &&
-                                       (keyFeature.EndDate >= date) && 
-                                       (client.Id == kfc.IdClient)
-
-                               select new HaspKey
-                               {
-                                   Id = haspKey.Id,
-                                   InnerId = haspKey.InnerId,
-                                   Number = haspKey.Number,
-                                   IsHome = haspKey.IsHome,
-                                   TypeKey = haspKey.TypeKey,
-                               })
-                               .Distinct().ToList();
-
-            return haspKeysAllActive;
-        }
-
-
-
-        public List<HaspKey> GetByPastDue(Client client)
-        {
-            var keyFeatures = db.KeyFeatures;
-            var keyFeatureClients = db.KeyFeatureClients;
 
             var haspKeysPastDue = (from haspKey in GetAll()
-
                                    join keyFeature in keyFeatures
                                      on haspKey.Id equals keyFeature.IdHaspKey
-
-                                   join kfc in keyFeatureClients
-                                      on keyFeature.Id equals kfc.IdKeyFeature
-                                   
-                                   
-
-                                   where keyFeature.EndDate == ((from keyFea in keyFeatures
+                                   where keyFeature.EndDate == (from keyFea in keyFeatures
                                                                 where keyFea.IdHaspKey == haspKey.Id
                                                                 select keyFea)
-                                                               .Max(x => x.EndDate)) &&
-                                         (keyFeature.EndDate < date) && 
-                                         (client.Id == kfc.IdClient)
-                                        
+                                                               .Max(x => x.EndDate) &&
+                                         keyFeature.EndDate < date
                                    select new HaspKey
                                    {
                                        Id = haspKey.Id,
@@ -154,6 +82,20 @@ namespace DalDB
                                   .Distinct().ToList();
 
             return haspKeysPastDue;
+            #region SQL запрос.
+
+            /*
+             *
+            select * // Distinct
+            from HaspKeys as hk inner join KeyFeatures as kf
+                 on hk.Id = kf.IdHaspKey
+            where EndDate = (select max(EndDate)
+                                from keyFeatures
+                                where IdHaspKey = hk.Id) and
+                EndDate < date()
+            */
+
+            #endregion
         }
 
         public List<HaspKey> GetByClient(Client client)

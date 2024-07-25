@@ -48,12 +48,7 @@ namespace Logic
         }
         public List<HaspKey> GetByActive() => haspKeyDAO.GetByActive();
         public List<HaspKey> GetAll() => haspKeyDAO.GetAll();
-
-        public List<HaspKey> GetAllInCompany(Client client) => haspKeyDAO.GetAllInCompany(client);
-        public List<HaspKey> GetActiveInCompany(Client client) => haspKeyDAO.GetActiveInCompany(client);
         
-
-
         public HaspKey GetById(int id)
         {
             if (id < 1)
@@ -62,7 +57,7 @@ namespace Logic
             return haspKeyDAO.GetById(id);
         }
 
-        public List<HaspKey> GetByPastDue(Client client) => haspKeyDAO.GetByPastDue(client);
+        public List<HaspKey> GetByPastDue() => haspKeyDAO.GetByPastDue();
         public List<HaspKey> GetByClient(Client client)
         {
             if (client == null)

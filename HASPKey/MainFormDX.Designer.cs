@@ -89,15 +89,16 @@
             this.NextDays.MainView = this.gridView2;
             this.NextDays.Margin = new System.Windows.Forms.Padding(2);
             this.NextDays.MenuManager = this.barManager1;
-            this.NextDays.MinimumSize = new System.Drawing.Size(781, 250);
+            this.NextDays.MinimumSize = new System.Drawing.Size(625, 200);
             this.NextDays.Name = "NextDays";
-            this.NextDays.Size = new System.Drawing.Size(1082, 275);
+            this.NextDays.Size = new System.Drawing.Size(865, 219);
             this.NextDays.TabIndex = 1;
             this.NextDays.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
             // 
             // gridView2
             // 
+            this.gridView2.DetailHeight = 280;
             this.gridView2.GridControl = this.NextDays;
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsBehavior.ReadOnly = true;
@@ -135,7 +136,7 @@
             this.barDockingMenuItem1,
             this.barButtonItem15});
             this.barManager1.MainMenu = this.bar2;
-            this.barManager1.MaxItemId = 21;
+            this.barManager1.MaxItemId = 20;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemDateEdit1});
             // 
@@ -146,7 +147,7 @@
             this.bar2.DockRow = 0;
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barSubItem1, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem1),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem3),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem2)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
@@ -160,14 +161,17 @@
             this.barSubItem1.Caption = "Меню";
             this.barSubItem1.Id = 0;
             this.barSubItem1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem5),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem15),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem6)});
             this.barSubItem1.Name = "barSubItem1";
             // 
             // barButtonItem5
             // 
-            this.barButtonItem5.Id = 20;
+            this.barButtonItem5.Caption = "Выбор базы данных";
+            this.barButtonItem5.Id = 6;
             this.barButtonItem5.Name = "barButtonItem5";
+            this.barButtonItem5.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BarButtonItem5ItemClick);
             // 
             // barButtonItem15
             // 
@@ -252,34 +256,34 @@
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
             this.barDockControlTop.Margin = new System.Windows.Forms.Padding(2);
-            this.barDockControlTop.Size = new System.Drawing.Size(1086, 25);
+            this.barDockControlTop.Size = new System.Drawing.Size(869, 20);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 772);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 618);
             this.barDockControlBottom.Manager = this.barManager1;
             this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(2);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1086, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(869, 0);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 25);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 20);
             this.barDockControlLeft.Manager = this.barManager1;
             this.barDockControlLeft.Margin = new System.Windows.Forms.Padding(2);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 747);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 598);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1086, 25);
+            this.barDockControlRight.Location = new System.Drawing.Point(869, 20);
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Margin = new System.Windows.Forms.Padding(2);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 747);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 598);
             // 
             // barButtonItem1
             // 
@@ -345,10 +349,10 @@
             this.panelControl2.ContentImageAlignment = System.Drawing.ContentAlignment.BottomCenter;
             this.panelControl2.Controls.Add(this.PastDays);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl2.Location = new System.Drawing.Point(0, 345);
+            this.panelControl2.Location = new System.Drawing.Point(0, 276);
             this.panelControl2.Margin = new System.Windows.Forms.Padding(2);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(1086, 427);
+            this.panelControl2.Size = new System.Drawing.Size(869, 342);
             this.panelControl2.TabIndex = 13;
             // 
             // PastDays
@@ -360,13 +364,14 @@
             this.PastDays.Margin = new System.Windows.Forms.Padding(2);
             this.PastDays.MenuManager = this.barManager1;
             this.PastDays.Name = "PastDays";
-            this.PastDays.Size = new System.Drawing.Size(1082, 423);
+            this.PastDays.Size = new System.Drawing.Size(865, 338);
             this.PastDays.TabIndex = 2;
             this.PastDays.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             // 
             // gridView1
             // 
+            this.gridView1.DetailHeight = 280;
             this.gridView1.GridControl = this.PastDays;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.ReadOnly = true;
@@ -383,10 +388,10 @@
             // panelControl1
             // 
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl1.Location = new System.Drawing.Point(0, 25);
+            this.panelControl1.Location = new System.Drawing.Point(0, 20);
             this.panelControl1.Margin = new System.Windows.Forms.Padding(2);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1086, 29);
+            this.panelControl1.Size = new System.Drawing.Size(869, 23);
             this.panelControl1.TabIndex = 18;
             // 
             // panelControl3
@@ -394,20 +399,20 @@
             this.panelControl3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelControl3.Controls.Add(this.NextDays);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl3.Location = new System.Drawing.Point(0, 54);
+            this.panelControl3.Location = new System.Drawing.Point(0, 43);
             this.panelControl3.Margin = new System.Windows.Forms.Padding(2);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(1086, 279);
+            this.panelControl3.Size = new System.Drawing.Size(869, 223);
             this.panelControl3.TabIndex = 19;
             // 
             // splitterControl1
             // 
             this.splitterControl1.Cursor = System.Windows.Forms.Cursors.HSplit;
             this.splitterControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitterControl1.Location = new System.Drawing.Point(0, 333);
+            this.splitterControl1.Location = new System.Drawing.Point(0, 266);
             this.splitterControl1.Margin = new System.Windows.Forms.Padding(2);
             this.splitterControl1.Name = "splitterControl1";
-            this.splitterControl1.Size = new System.Drawing.Size(1086, 12);
+            this.splitterControl1.Size = new System.Drawing.Size(869, 10);
             this.splitterControl1.TabIndex = 24;
             this.splitterControl1.TabStop = false;
             // 
@@ -415,10 +420,10 @@
             // 
             this.Appearance.BackColor = System.Drawing.Color.Silver;
             this.Appearance.Options.UseBackColor = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1086, 772);
+            this.ClientSize = new System.Drawing.Size(869, 618);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.splitterControl1);
             this.Controls.Add(this.panelControl3);

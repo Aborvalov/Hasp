@@ -46,17 +46,6 @@ namespace HelperForUnitTest
                                             ); ");
             db.SaveChanges();
         }
-        public static void ClientNumberKeys(EntitesContext db)
-        {
-            db.Database.ExecuteSqlCommand("DROP TABLE ClientNumberKeys");
-            db.Database.ExecuteSqlCommand(@"CREATE TABLE ClientNumberKeys (
-                                                Id            INTEGER PRIMARY KEY AUTOINCREMENT
-                                                                      NOT NULL
-                                                                      UNIQUE,
-                                                Name          STRING  NOT NULL,
-                                            ); ");
-            db.SaveChanges();
-        }
         public static void KeyFeatures(EntitesContext db)
         {
             db.Database.ExecuteSqlCommand("DROP TABLE KeyFeatures");

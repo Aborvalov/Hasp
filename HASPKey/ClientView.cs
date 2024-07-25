@@ -12,7 +12,7 @@ namespace HASPKey
     {
         private readonly IPresenterReference presenterClient;
         private const int sizeH = 40;
-        private bool size = true;
+        private bool size = true;        
         private bool search = false;
         private bool error = false;
         public event Action DataUpdated;
@@ -22,7 +22,7 @@ namespace HASPKey
         private const string message = "Вы уверены, что хотите удалить клиента?";
         private const string errorStr = "Ошибка";
         private const string emptyClient = "Данная клиент не найден.";
-
+        
         public ClientView(bool search)
         {
             InitializeComponent();
@@ -35,7 +35,7 @@ namespace HASPKey
                 DataGridViewClient.Height = DataGridViewClient.Size.Height + 28;
         }
         public ClientView() : this(false)
-        { }
+        {}
 
         public void DataChange() => DataUpdated?.Invoke();
 
@@ -50,7 +50,7 @@ namespace HASPKey
             MessageBox.Show(errorText, errorStr, MessageBoxButtons.OK, MessageBoxIcon.Error);
             error = true;
         }
-
+       
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             DefaultView();
@@ -59,11 +59,11 @@ namespace HASPKey
                 DataGridViewClient.Height = DataGridViewClient.Size.Height - sizeH;
                 size = !size;
                 buttonAdd.Enabled = false;
-            }
+            }            
         }
 
         private void DataGridViewClient_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
+        {           
             if (!(DataGridViewClient.CurrentRow.DataBoundItem is ModelViewClient row))
             {
                 MessageError(emptyClient);
@@ -74,7 +74,7 @@ namespace HASPKey
                 this.SearchIdClient = row;
                 this.Close();
                 return;
-            }
+            }            
             if (size && Admin.IsAdmin)
             {
                 DefaultView();
@@ -84,7 +84,7 @@ namespace HASPKey
                 buttonAdd.Enabled = false;
             }
         }
-
+       
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             if (size)
@@ -92,7 +92,7 @@ namespace HASPKey
 
             error = false;
             presenterClient.FillModel(bindingItem.DataSource as ModelViewClient);
-            if (!error)
+            if(!error)
                 DefaultView();
         }
         private void DefaultView()
@@ -136,7 +136,7 @@ namespace HASPKey
         private void TbInnerIdHaspKey_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-            {
+            {                
                 presenterClient.GetByNumberKey(int.Parse(tbInnerIdHaspKey.Text));
                 DefaultView();
             }

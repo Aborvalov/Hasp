@@ -66,10 +66,8 @@ namespace Presenter
             entitiesView.Bind(haspKeyModel.GetByClient(client));
         }
 
-        public void GetByPastDue(ModelViewClient client) => entitiesView.Bind(haspKeyModel.GetByPastDue(client));
-        public void GetAllInCompany(ModelViewClient client) => entitiesView.Bind(haspKeyModel.GetAllInCompany(client));
-        public void GetActiveInCompany(ModelViewClient client) => entitiesView.Bind(haspKeyModel.GetActiveInCompany(client));
-        
+        public void GetByPastDue() => entitiesView.Bind(haspKeyModel.GetByPastDue());
+
         public void Remove(int id)
         {
             if (id > 0 && haspKeyModel.Remove(id))
@@ -134,5 +132,6 @@ namespace Presenter
 
             return true;
         }
+
     }
 }

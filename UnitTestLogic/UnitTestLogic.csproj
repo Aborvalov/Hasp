@@ -69,7 +69,6 @@
   <ItemGroup>
     <Compile Include="UnitTestClientLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTestClientNumberKeysLogic.cs" />
     <Compile Include="UnitTestFeatureLogic.cs" />
     <Compile Include="UnitTestHaspKeyLogic.cs" />
     <Compile Include="UnitTestKeyFeatureClientLogic.cs" />

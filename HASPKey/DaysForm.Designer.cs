@@ -31,16 +31,12 @@
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.DataWindow = new System.Windows.Forms.TextBox();
-            this.ButtonDelete = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelControl1
             // 
-            this.panelControl1.Controls.Add(this.buttonCancel);
-            this.panelControl1.Controls.Add(this.ButtonDelete);
             this.panelControl1.Controls.Add(this.labelControl1);
             this.panelControl1.Controls.Add(this.DataWindow);
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
@@ -62,30 +58,6 @@
             this.DataWindow.Name = "DataWindow";
             this.DataWindow.Size = new System.Drawing.Size(100, 23);
             this.DataWindow.TabIndex = 1;
-            // 
-            // ButtonDelete
-            // 
-            this.ButtonDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonDelete.Location = new System.Drawing.Point(13, 116);
-            this.ButtonDelete.Margin = new System.Windows.Forms.Padding(4);
-            this.ButtonDelete.Name = "ButtonDelete";
-            this.ButtonDelete.Size = new System.Drawing.Size(88, 28);
-            this.ButtonDelete.TabIndex = 9;
-            this.ButtonDelete.Text = "ОК";
-            this.ButtonDelete.UseVisualStyleBackColor = true;
-            this.ButtonDelete.Click += new System.EventHandler(this.ButtonOK_Click);
-            // 
-            // button1
-            // 
-            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.Location = new System.Drawing.Point(183, 116);
-            this.buttonCancel.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonCancel.Name = "button1";
-            this.buttonCancel.Size = new System.Drawing.Size(88, 28);
-            this.buttonCancel.TabIndex = 10;
-            this.buttonCancel.Text = "Отмена";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.ButtonUndo_Click);
             // 
             // NewDataForm
             // 
@@ -114,7 +86,5 @@
         private DevExpress.XtraEditors.PanelControl panelControl1;
         private System.Windows.Forms.TextBox DataWindow;
         private DevExpress.XtraEditors.LabelControl labelControl1;
-        private System.Windows.Forms.Button ButtonDelete;
-        private System.Windows.Forms.Button buttonCancel;
     }
 }

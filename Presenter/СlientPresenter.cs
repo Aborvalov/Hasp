@@ -15,7 +15,7 @@ namespace Presenter
         private const string errorAdd = "Не удалось создать клиента.";
         private const string errorUpdate = "Не удалось обновить клиента.";
         private const string errorDelete = "Не удалось удалить клиента.";
-        private const string errorEmptyFeature = "Данная функциональность пуста.";
+        private const string errorEmptyFeature = "Данноя функциональность пуста.";
         private const string errorInnerId = "Некорректный номер ключа.";
         private const string errorEmptyName = "\u2022 Не заполнено поля \"Наименование\", не должно быть пустым. \n";
         private const string errorEmptyAddress = "\u2022 Не заполнено поля \"Адрес\", не должно быть пустым. \n";
@@ -24,6 +24,7 @@ namespace Presenter
         public СlientPresenter(IEntitiesView<ModelViewClient> entitesView)
         {
             this.entitiesView = entitesView ?? throw new ArgumentNullException(nameof(entitesView));
+            
             try
             {
                 clientModel = new ClientModel(new Logics());

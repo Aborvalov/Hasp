@@ -12,18 +12,22 @@ namespace Model
         private readonly DateTime dateNow = DateTime.Now.Date;
         private const string yearInEternalKey = "2111";
         private readonly IFactoryLogic logic;
+        private IEntitesContext db;
         private readonly int days = LoadFromXml.GetItem();
 
         public MainModel(IFactoryLogic factoryLogic)
         {
             logic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
+            db = Context.GetContext();
+            if (db == null)
+                throw new ArgumentNullException(nameof(db));
         }
-        public void Dispose() => Context.GetContext().Dispose();
+        public void Dispose() => db.Dispose();
         public List<ModelMain> GetAll()
         {
             try
             {
-                using (var db = Context.GetContext())
+                using (db = Context.GetContext())
                 {
                     if (db == null)
                         throw new ArgumentNullException(nameof(db));
@@ -76,14 +80,14 @@ namespace Model
 
         public List<ModelMain> GetKeysNextNDays()
         => GetAll()
-            .Where(x => x.EndDate.ToString().IndexOf(yearInEternalKey) >= 0 ||
-            (dateNow <= x.EndDate &&
+            .Where(x => x.EndDate.ToString().IndexOf(yearInEternalKey) >= 0 || 
+            (dateNow <= x.EndDate && 
             x.EndDate <= dateNow.AddDays(days))).ToList();
-
+        
         public List<ModelMain> GetKeysPastNDays()
         => GetAll()
             .Where(x => x.EndDate.ToString().IndexOf(yearInEternalKey) != 0 &&
-            dateNow > x.EndDate &&
+            dateNow > x.EndDate && 
             x.EndDate > dateNow.AddDays(-days))
             .ToList();
 

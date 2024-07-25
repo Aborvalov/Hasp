@@ -64,11 +64,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientModel.cs" />
-    <Compile Include="ClientNumberKeysModel.cs" />
     <Compile Include="Context\Context.cs" />
-    <Compile Include="Contract\IClientNumberKeysModel.cs" />
+    <Compile Include="Context\FactoryContext.cs" />
+    <Compile Include="Context\IFactoryContext.cs" />
     <Compile Include="Contract\IKeyFeatureClientModel.cs" />
     <Compile Include="Contract\IItemModel.cs" />
+    <Compile Include="Contract\ISelectedDataBaseModel.cs" />
     <Compile Include="KeyFeatureClientModel.cs" />
     <Compile Include="KeyFeatureModel.cs" />
     <Compile Include="FeatureModel.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Contract\IMainModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferenceModel.cs" />
+    <Compile Include="SelectedDataBaseModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entites\Entities.csproj">

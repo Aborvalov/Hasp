@@ -108,7 +108,7 @@ namespace Presenter
                 entitiesView.MessageError(errorMess.Trim());
                 return false;
             }
-            
+
             return true;
         }
        

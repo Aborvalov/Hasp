@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IClientNumberKeysView.cs" />
     <Compile Include="IEntitiesView.cs" />
     <Compile Include="IKeyFeatureClientView.cs" />
     <Compile Include="IKeyFeatureView.cs" />

@@ -114,6 +114,14 @@ namespace HASPKey
             }
         }
 
+        private void SelectDataBaseToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            using (SelectedDataBaseView selectedDataBaseView = new SelectedDataBaseView(this))
+            {
+                selectedDataBaseView.ShowDialog();
+            }
+        }
+
         void IUpdateDataBaseMain.UpdateDataBaseMain()
         {
             ErrorDataBase = false;

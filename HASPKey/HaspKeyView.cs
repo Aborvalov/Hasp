@@ -1,12 +1,9 @@
-﻿using DevExpress.XtraEditors;
-using Entities;
+﻿using Entities;
 using ModelEntities;
 using Presenter;
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Deployment.Internal;
 using System.Windows.Forms;
 using ViewContract;
 
@@ -15,24 +12,17 @@ namespace HASPKey
     public partial class HaspKeyView : DevExpress.XtraEditors.XtraForm, IEntitiesView<ModelViewHaspKey>
     {
         private readonly IHaspKeyPresenter presenterHaspKey;
-        public ModelViewClient client;
         private bool size = true;
         private bool error = false;
         private const int sizeH = 40;
-        public event Action DataUpdated;
+        public event Action DataUpdated;       
         internal ModelViewHaspKey SearchHaspKey { get; private set; } = null;
-
+        
         private const string errorStr = "Ошибка";
         private const string caption = "Удалить ключ";
         private const string emptyHaspKey = "Данный ключ не найден.";
         private const string message = "Вы уверены, что хотите удалить Hasp-ключ?";
-
-        private void SetRadioButtonsVisibility(bool visibility)
-        {
-            radioButtonActive.Visible = visibility;
-            radioButtonAll.Visible = visibility;
-            radioButtonPastDue.Visible = visibility;
-        }
+                    
         public HaspKeyView()
         {
             InitializeComponent();
@@ -45,8 +35,8 @@ namespace HASPKey
 
             if (!Admin.IsAdmin)
                 DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
-        }
-        public void Bind(List<ModelViewHaspKey> entity)
+        }  
+        public void Bind(List<ModelViewHaspKey> entity) 
             => bindingHaspKey.DataSource = entity != null ? new BindingList<ModelViewHaspKey>(entity)
                                                           : new BindingList<ModelViewHaspKey>();
 
@@ -58,22 +48,20 @@ namespace HASPKey
         private void RadioButtonAll_CheckedChanged(object sender, EventArgs e)
         {
             DefaultView();
-            if (client != null)
-            {
-                presenterHaspKey.GetAllInCompany(client);
-                labelClient.Text = client.Name;
-            }
+            presenterHaspKey.Display();
+            labelClient.Text = string.Empty;
         }
-        
+        private void RadioButtonPastDue_CheckedChanged(object sender, EventArgs e)
+        {
+            DefaultView();
+            presenterHaspKey.GetByPastDue();
+            labelClient.Text = string.Empty;
+        }
         private void RadioButtonActive_CheckedChanged(object sender, EventArgs e)
         {
             DefaultView();
-            if (client != null)
-            {
-                presenterHaspKey.GetActiveInCompany(client);
-                labelClient.Text = client.Name;
-            }
-            
+            presenterHaspKey.GetByActive();
+            labelClient.Text = string.Empty;
         }
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
@@ -81,10 +69,10 @@ namespace HASPKey
             if (size)
             {
                 DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height - sizeH;
-                size = !size;
+                size = !size;               
                 buttonAdd.Enabled = false;
                 checkBoxIsHome.Checked = true;
-            }
+            }            
         }
         public void MessageError(string errorText)
         {
@@ -99,8 +87,8 @@ namespace HASPKey
 
             error = false;
             presenterHaspKey.FillModel(bindingItem.DataSource as ModelViewHaspKey);
-            if (!error)
-                DefaultView();
+            if(!error)
+                DefaultView();            
         }
 
         private void DataGridViewHaspKey_DoubleClick(object sender, EventArgs e)
@@ -109,7 +97,7 @@ namespace HASPKey
             {
                 MessageError(emptyHaspKey);
                 return;
-            }
+            }            
             if (size && Admin.IsAdmin)
             {
                 DefaultView();
@@ -117,7 +105,7 @@ namespace HASPKey
                 size = !size;
                 presenterHaspKey.FillInputItem(row);
                 buttonAdd.Enabled = false;
-            }
+            }            
         }
 
         private void DefaultView()
@@ -130,17 +118,19 @@ namespace HASPKey
 
             bindingItem.DataSource = new ModelViewHaspKey();
             presenterHaspKey.FillInputItem(bindingItem.DataSource as ModelViewHaspKey);
-            tbInnerNumber.Text = string.Empty;
-            comboBoxTypeKey.SelectedIndex = -1;
+            tbInnerNumber.Text = string.Empty;            
+            comboBoxTypeKey.SelectedIndex = -1;            
             labelClient.Text = string.Empty;
             buttonAdd.Enabled = true;
         }
 
         private void ButtonDelete_Click(object sender, EventArgs e) => DeleteItem();
-
+       
         private void ButtonSearchByClient_Click(object sender, EventArgs e)
         {
-            SetRadioButtonsVisibility(true);
+            radioButtonActive.Checked = false;
+            radioButtonAll.Checked = false;
+            radioButtonPastDue.Checked = false;
 
             using (ClientView client = new ClientView(true))
             {
@@ -148,24 +138,12 @@ namespace HASPKey
 
                 if (client.SearchIdClient != null)
                 {
-                    this.client = client.SearchIdClient;
                     DefaultView();
-                    presenterHaspKey.GetByClient(this.client);
+                    presenterHaspKey.GetByClient(client.SearchIdClient);
 
-                    labelClient.Text = this.client.Name;
+                    labelClient.Text = client.SearchIdClient.Name;
                     labelClient.Location = new System.Drawing.Point((this.Width - 25) - labelClient.Width, labelClient.Location.Y);
                 }
-            }
-        }
-
-
-        private void RadioButtonPastDue_CheckedChanged(object sender, EventArgs e)
-        {
-            DefaultView();
-            if (client != null)
-            {
-                presenterHaspKey.GetByPastDue(client);
-                labelClient.Text = client.Name;
             }
         }
 
@@ -221,21 +199,6 @@ namespace HASPKey
         {
             foreach (DataGridViewRow row in DataGridViewHaspKey.Rows)
                 row.HeaderCell.Value = (row.Index + 1).ToString();
-        }
-
-        private void ButtonCancel_Click(object sender, EventArgs e)
-        {
-            DefaultView();
-        }
-
-
-
-        private void ButtonAllKeys_Click(object sender, EventArgs e)
-        {
-            SetRadioButtonsVisibility(false);
-            DefaultView();
-            presenterHaspKey.Display();
-            labelClient.Text = string.Empty;
         }
     }
 }
