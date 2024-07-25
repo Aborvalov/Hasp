@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientLogic.cs" />
+    <Compile Include="ClientNumberKeysLogic.cs" />
     <Compile Include="FeatureLogic.cs" />
     <Compile Include="HaspKeyLogic.cs" />
     <Compile Include="IFactoryLogic.cs" />

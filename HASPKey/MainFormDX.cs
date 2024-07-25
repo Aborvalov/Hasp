@@ -87,9 +87,8 @@ namespace HASPKey
         }
         private void BarButtonItem10ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            using (ClientView client = new ClientView())
+            using (ClientNumberKeys client = new ClientNumberKeys())
             {
-                
                 client.ShowDialog();
             }
         }
@@ -107,13 +106,6 @@ namespace HASPKey
             using (KeyFeatureClientView keyFeatureClientView = new KeyFeatureClientView())
             {
                 keyFeatureClientView.ShowDialog();
-            }
-        }
-        private void BarButtonItem5ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            using (SelectedDataBaseView selectedDataBaseView = new SelectedDataBaseView(this))
-            {
-                selectedDataBaseView.ShowDialog();
             }
         }
 

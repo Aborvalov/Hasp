@@ -12,18 +12,18 @@ namespace HASPKey
     {
         private readonly IEntitiesPresenter<ModelViewFeature> presenterFeature;
         private bool size = true;
-        private int sizeH = 40;       
+        private int sizeH = 40;
         private bool search = false;
         private bool error = false;
         public event Action DataUpdated;
         internal ModelViewFeature SearchFeature { get; private set; } = null;
-        
+
         private const string errorStr = "Ошибка";
         private const string emptyFeature = "Функциональность не найдена.";
         private const string caption = "Удалить фичу";
         private const string message = "Вы уверены, что хотите удалить фичу?";
-        
-        public FeatureView(bool search) 
+
+        public FeatureView(bool search)
         {
             InitializeComponent();
             presenterFeature = new FeaturePresenter(this);
@@ -34,11 +34,11 @@ namespace HASPKey
                 DataGridViewFeature.Height = DataGridViewFeature.Size.Height + 28;
         }
         public FeatureView() : this(false)
-        {}
+        { }
 
-        public void DataChange() => DataUpdated?.Invoke();    
+        public void DataChange() => DataUpdated?.Invoke();
 
-        public void Bind(List<ModelViewFeature> entity) 
+        public void Bind(List<ModelViewFeature> entity)
             => bindingFeature.DataSource = entity != null ? new BindingList<ModelViewFeature>(entity)
                                                           : new BindingList<ModelViewFeature>();
 
@@ -49,7 +49,7 @@ namespace HASPKey
         {
             MessageBox.Show(errorText, errorStr, MessageBoxButtons.OK, MessageBoxIcon.Error);
             error = true;
-        }           
+        }
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
@@ -58,8 +58,8 @@ namespace HASPKey
             {
                 DataGridViewFeature.Height = DataGridViewFeature.Size.Height - sizeH;
                 size = !size;
-                ButtonAdd.Enabled = false;               
-            }            
+                ButtonAdd.Enabled = false;
+            }
         }
 
         private void DataGridViewFeatureFeature_DoubleClick(object sender, EventArgs e)
@@ -75,7 +75,7 @@ namespace HASPKey
                 Close();
                 return;
             }
-                        
+
             if (size && Admin.IsAdmin)
             {
                 DefaultView();
@@ -84,7 +84,7 @@ namespace HASPKey
                 presenterFeature.FillInputItem(row);
                 ButtonAdd.Enabled = false;
             }
-        }       
+        }
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
@@ -105,14 +105,14 @@ namespace HASPKey
                 DataGridViewFeature.Height = DataGridViewFeature.Size.Height + sizeH;
                 size = !size;
             }
-            
+
             bindingItem.DataSource = new ModelViewFeature();
             presenterFeature.FillInputItem(bindingItem.DataSource as ModelViewFeature);
-            tbNumber.Text = string.Empty;           
+            tbNumber.Text = string.Empty;
             ButtonAdd.Enabled = true;
         }
 
-        private void DataGridViewFeatureFeature_CellClick(object sender, DataGridViewCellEventArgs e)=> FillDate();
+        private void DataGridViewFeatureFeature_CellClick(object sender, DataGridViewCellEventArgs e) => FillDate();
         private void DataGridViewFeatureFeature_SelectionChanged(object sender, EventArgs e) => FillDate();
 
         private void FillDate()
@@ -127,7 +127,7 @@ namespace HASPKey
                 presenterFeature.FillInputItem(row);
             }
         }
-               
+
         private void TbNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -164,6 +164,11 @@ namespace HASPKey
         {
             foreach (DataGridViewRow row in DataGridViewFeature.Rows)
                 row.HeaderCell.Value = (row.Index + 1).ToString();
+        }
+
+        private void ButtonCancel_Click(object sender, EventArgs e)
+        {
+            DefaultView();
         }
     }
 }

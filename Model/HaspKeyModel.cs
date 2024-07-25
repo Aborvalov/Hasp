@@ -50,6 +50,8 @@ namespace Model
         
         public List<ModelViewHaspKey> GetByPastDue() => Convert(keyLogic.GetByPastDue());
 
+
+
         public bool Remove(int id) => keyLogic.Remove(id);
 
         public bool Update(ModelViewHaspKey entity)

@@ -21,25 +21,37 @@ namespace HASPKey
             DataWindow.Text = oldValue.ToString();
             this.updateDataBaseMain = updateDataBaseMain ?? throw new ArgumentNullException(nameof(updateDataBaseMain));
         }
-        private void DXFormFormClosed(object sender, FormClosedEventArgs e)
+
+        private void ButtonOK_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(DataWindow.Text, out int currentValue))
                 return;
 
             if (oldValue != currentValue)
             {
-                if (MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    try
-                    {
-                        LoadFromXml.Save(currentValue);
-                    }
-                    catch
-                    {
-                        LoadFromXml.Save(defaultValue);
-                    }
+                try
+                {
+                    LoadFromXml.Save(currentValue);
+                }
+                catch
+                {
+                    LoadFromXml.Save(defaultValue);
+                }
 
                 updateDataBaseMain.UpdateDataBaseMain();
             }
+
+            Close();
+        }
+
+        private void DXFormFormClosed(object sender, FormClosedEventArgs e)
+        {
+            Close();
+        }
+
+        private void ButtonUndo_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
