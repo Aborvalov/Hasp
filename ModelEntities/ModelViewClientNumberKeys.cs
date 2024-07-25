@@ -12,8 +12,6 @@ namespace ModelEntities
         {
             Id = clientNumberKeys.Id;
             Name = clientNumberKeys.Name;
-
-
         }
         [Browsable(false)]
         public ClientNumberKeys ClientNumberKeys { get; private set; } = new ClientNumberKeys();

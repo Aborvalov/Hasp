@@ -1,7 +1,10 @@
 ﻿using DalContract;
 using Entities;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.ModelConfiguration.Configuration;
 using System.Linq;
 
 namespace DalDB
@@ -18,18 +21,26 @@ namespace DalDB
         public int Add(ClientNumberKeys entity)
         {
             if (entity == null)
+            {
                 throw new ArgumentNullException(nameof(entity));
+            }
 
-            var keyFeatureClient = db.ClientNumberKeys.Add(entity);
+            var client = db.ClientNumberKeys.Add(entity);
 
+            
+            var tmp = client.Id;
             db.SaveChanges();
 
-            return keyFeatureClient.Id;
+            return client.Id;
         }
 
         public bool ContainsDB(ClientNumberKeys entity)
         {
-            var kfc = db.ClientNumberKeys.SingleOrDefault(x => x.Id == entity.Id);
+            if (entity == null) 
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+            var kfc = db.ClientNumberKeys.SingleOrDefault(x => x.Id == entity.Id && x.Name == entity.Name);
             return kfc != null;
         }
 
@@ -57,7 +68,6 @@ namespace DalDB
 
             db.ClientNumberKeys.Remove(clientNumberKeys);
             db.SaveChanges();
-
             return true;
         }
 
@@ -66,16 +76,17 @@ namespace DalDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            var clientNumberKeys = GetById(entity.Id);
-            
-            if (clientNumberKeys == null)
+            var existingEntity = db.ClientNumberKeys.Find(entity.Id);
+
+            if (existingEntity == null)
                 return false;
 
-            clientNumberKeys.Id = entity.Id;
-            clientNumberKeys.Name = entity.Name;
-            db.SaveChanges();
+            existingEntity.Id = entity.Id;
+            existingEntity.Name = entity.Name;
 
+            db.SaveChanges();
             return true;
         }
+
     }
 }

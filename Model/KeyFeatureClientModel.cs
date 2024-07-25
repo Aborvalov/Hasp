@@ -60,7 +60,7 @@ namespace Model
             ListKeyFeatureAvailableClient(keyFeatureClient, idClient);
             return keyFeatureClient
                         .OrderBy(x => x.NumberKey)
-                            .ThenByDescending(x => x.Selected)
+                        .ThenByDescending(x => x.Selected)
                         .Distinct()
                         .ToList();
         }

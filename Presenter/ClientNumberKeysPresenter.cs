@@ -45,9 +45,14 @@ namespace Presenter
                 throw new ArgumentNullException(nameof(keyClient));
 
             Delete(keyClient);
+            Display();
+            
             Add(keyClient);
+            Display();
+
             Update(keyClient);
             Display();
+
             entitiesclnkView.DataChange();
         }
 
@@ -58,8 +63,7 @@ namespace Presenter
                 entitiesclnkView.MessageError(errorUpdate);
                 return;
             }
-
-            if (clientNumberKeysModel.Update(entity))
+            if (clientNumberKeysModel.Update(entity)) 
             {
                 entitiesclnkView.DataChange();
                 Display();
@@ -72,9 +76,8 @@ namespace Presenter
         {
             var update = keyClient
                             .Where(x => x.Id != 0 &&
-                                        x.NumberKeys != 0 &&
-                                        x.NumberKeys != 0 &&
-                                        x.NumberFeatures != 0);
+                                        !string.IsNullOrEmpty(x.Name) &&
+                                        x.NumberKeys != -1);
             if (update.Any())
             {
                 clientNumberKeysModel.Update(update, out string error);
@@ -86,10 +89,9 @@ namespace Presenter
         public void Add(List<ModelViewClientNumberKeys> keyClient)
         {
             var add = keyClient
-                        .Where(x => x.Id == 0 &&
-                                    x.NumberKeys == 0 &&
-                                    x.NumberKeys == 0 &&
-                                    x.NumberFeatures == 0);
+                        .Where(x => x.Id != 0 &&
+                                    !string.IsNullOrEmpty(x.Name) &&
+                                    x.NumberKeys == -1 && x.NumberFeatures == -1);
             if (add.Any())
             {
                 clientNumberKeysModel.Add(add, out string error);
@@ -101,8 +103,7 @@ namespace Presenter
         public void Delete(List<ModelViewClientNumberKeys> keyClient)
         {
             var delete = keyClient
-                            .Where(x => x.Id != 0)
-                            .Select(x => x.Id);
+                            .Where(x => x.Id != 0 && x.NumberKeys != -1);
             if (delete.Any())
             {
                 clientNumberKeysModel.Remove(delete, out string error);
@@ -124,19 +125,16 @@ namespace Presenter
 
         public bool CheckInputData()
         {
-            string errorMess = string.Empty;
+            string errorMess = String.Empty;
             if (string.IsNullOrWhiteSpace(Entities.Name))
                 errorMess += errorEmptyName;
-
             if (errorMess != string.Empty)
             {
                 entitiesclnkView.MessageError(errorMess.Trim());
                 return false;
             }
-
             return true;
         }
-
 
         public void FillInputItem(ModelViewClientNumberKeys item)
         {
@@ -147,13 +145,12 @@ namespace Presenter
         public void FillModel(ModelViewClientNumberKeys item)
         {
             Entities = item ?? throw new ArgumentNullException(nameof(item));
-
             if (!CheckInputData())
                 return;
             if (Entities.Id < 1)
                 Add(Entities);
             else
-                Update(Entities); ;
+                Update(Entities);
         }
 
         public void Add(ModelViewClientNumberKeys entity)
@@ -171,6 +168,21 @@ namespace Presenter
             }
             else
                 entitiesclnkView.MessageError(errorAdd);
+        }
+
+        public bool CheckInputData(List<ModelViewClientNumberKeys> item)
+        {
+            string errorMess = string.Empty;
+
+            if (string.IsNullOrWhiteSpace(item.ToString()))
+                errorMess += errorEmptyName;
+
+            if (errorMess != string.Empty)
+            {
+                entitiesclnkView.MessageError(errorMess.Trim());
+                return false;
+            }
+            return true;
         }
     }
 }

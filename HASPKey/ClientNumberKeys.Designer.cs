@@ -32,10 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonSearchByFeature = new System.Windows.Forms.Button();
             this.DataGridViewClientNumberKeys = new System.Windows.Forms.DataGridView();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberKeysDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberfeaturesKeysDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.enddateKeysDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingClientNumberKeys = new System.Windows.Forms.BindingSource(this.components);
             this.labelFeature = new System.Windows.Forms.Label();
             this.labelSearchInnerId = new System.Windows.Forms.Label();
@@ -48,6 +44,10 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numberKeysDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numberFeatureKeysDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endDateNumberKeysDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewClientNumberKeys)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingClientNumberKeys)).BeginInit();
             this.SuspendLayout();
@@ -75,8 +75,8 @@
             this.DataGridViewClientNumberKeys.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nameDataGridViewTextBoxColumn,
             this.numberKeysDataGridViewTextBoxColumn,
-            this.numberfeaturesKeysDataGridViewTextBoxColumn,
-            this.enddateKeysDataGridViewTextBoxColumn});
+            this.numberFeatureKeysDataGridViewTextBoxColumn,
+            this.endDateNumberKeysDataGridViewTextBoxColumn});
             this.DataGridViewClientNumberKeys.DataSource = this.bindingClientNumberKeys;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -88,43 +88,17 @@
             this.DataGridViewClientNumberKeys.DefaultCellStyle = dataGridViewCellStyle1;
             this.DataGridViewClientNumberKeys.Location = new System.Drawing.Point(14, 70);
             this.DataGridViewClientNumberKeys.Margin = new System.Windows.Forms.Padding(4);
+            this.DataGridViewClientNumberKeys.MinimumSize = new System.Drawing.Size(756, 516);
             this.DataGridViewClientNumberKeys.Name = "DataGridViewClientNumberKeys";
             this.DataGridViewClientNumberKeys.RowHeadersVisible = false;
             this.DataGridViewClientNumberKeys.RowHeadersWidth = 51;
             this.DataGridViewClientNumberKeys.Size = new System.Drawing.Size(756, 516);
             this.DataGridViewClientNumberKeys.TabIndex = 14;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Наименование";
-            this.nameDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            // 
-            // numberKeysDataGridViewTextBoxColumn
-            // 
-            this.numberKeysDataGridViewTextBoxColumn.DataPropertyName = "NumberKeys";
-            this.numberKeysDataGridViewTextBoxColumn.HeaderText = "Количество ключей";
-            this.numberKeysDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.numberKeysDataGridViewTextBoxColumn.Name = "numberKeysDataGridViewTextBoxColumn";
-            // 
-            // numberfeaturesKeysDataGridViewTextBoxColumn
-            // 
-            this.numberfeaturesKeysDataGridViewTextBoxColumn.DataPropertyName = "NumberFeatures";
-            this.numberfeaturesKeysDataGridViewTextBoxColumn.HeaderText = "Количество функциональностей";
-            this.numberfeaturesKeysDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.numberfeaturesKeysDataGridViewTextBoxColumn.Name = "numberfeaturesKeysDataGridViewTextBoxColumn";
-            // 
-            // enddateKeysDataGridViewTextBoxColumn
-            // 
-            this.enddateKeysDataGridViewTextBoxColumn.DataPropertyName = "EndDate";
-            this.enddateKeysDataGridViewTextBoxColumn.HeaderText = "Дата окончания";
-            this.enddateKeysDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.enddateKeysDataGridViewTextBoxColumn.Name = "enddateKeysDataGridViewTextBoxColumn";
+            this.DataGridViewClientNumberKeys.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewClientNumberKeys_ColumnHeaderMouseClick);
             // 
             // bindingClientNumberKeys
             // 
-            this.bindingClientNumberKeys.DataSource = typeof(ModelEntities.ModelViewClientNumberKeys);
+            this.bindingClientNumberKeys.DataSource = typeof(ModelEntities.ModelViewFeature);
             // 
             // labelFeature
             // 
@@ -211,6 +185,7 @@
             this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.dataGridViewTextBoxColumn1.Width = 251;
             // 
             // dataGridViewTextBoxColumn2
@@ -220,6 +195,7 @@
             this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.dataGridViewTextBoxColumn2.Width = 251;
             // 
             // dataGridViewTextBoxColumn3
@@ -229,14 +205,52 @@
             this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.dataGridViewTextBoxColumn3.Width = 251;
             // 
             // dataGridViewTextBoxColumn4
             // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "EndDate";
             this.dataGridViewTextBoxColumn4.HeaderText = "Дата окончания";
             this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.dataGridViewTextBoxColumn4.Width = 188;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Наименование";
+            this.nameDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // numberKeysDataGridViewTextBoxColumn
+            // 
+            this.numberKeysDataGridViewTextBoxColumn.DataPropertyName = "NumberKeys";
+            this.numberKeysDataGridViewTextBoxColumn.HeaderText = "Количество ключей";
+            this.numberKeysDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.numberKeysDataGridViewTextBoxColumn.Name = "numberKeysDataGridViewTextBoxColumn";
+            this.numberKeysDataGridViewTextBoxColumn.ReadOnly = true;
+            this.numberKeysDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // numberFeatureKeysDataGridViewTextBoxColumn
+            // 
+            this.numberFeatureKeysDataGridViewTextBoxColumn.DataPropertyName = "NumberFeatures";
+            this.numberFeatureKeysDataGridViewTextBoxColumn.HeaderText = "Количество функциональностей";
+            this.numberFeatureKeysDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.numberFeatureKeysDataGridViewTextBoxColumn.Name = "numberFeatureKeysDataGridViewTextBoxColumn";
+            this.numberFeatureKeysDataGridViewTextBoxColumn.ReadOnly = true;
+            this.numberFeatureKeysDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // endDateNumberKeysDataGridViewTextBoxColumn
+            // 
+            this.endDateNumberKeysDataGridViewTextBoxColumn.DataPropertyName = "EndDate";
+            this.endDateNumberKeysDataGridViewTextBoxColumn.HeaderText = "Дата окончания";
+            this.endDateNumberKeysDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.endDateNumberKeysDataGridViewTextBoxColumn.Name = "endDateNumberKeysDataGridViewTextBoxColumn";
+            this.endDateNumberKeysDataGridViewTextBoxColumn.ReadOnly = true;
+            this.endDateNumberKeysDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // ClientNumberKeys
             // 
@@ -252,6 +266,8 @@
             this.Controls.Add(this.labelFeature);
             this.Controls.Add(this.DataGridViewClientNumberKeys);
             this.Controls.Add(this.buttonSearchByFeature);
+            this.IconOptions.ShowIcon = false;
+            this.MinimumSize = new System.Drawing.Size(784, 687);
             this.Name = "ClientNumberKeys";
             this.Text = "Клиенты";
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewClientNumberKeys)).EndInit();
@@ -279,7 +295,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberKeysDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn numberfeaturesKeysDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn enddateKeysDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn numberFeatureKeysDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn endDateNumberKeysDataGridViewTextBoxColumn;
     }
 }

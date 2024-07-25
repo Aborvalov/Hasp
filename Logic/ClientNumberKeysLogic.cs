@@ -47,6 +47,7 @@ namespace Logic
 
             return id > 0;
         }
+
         public bool Update(ClientNumberKeys entity)
         {
             if (entity == null)
@@ -54,7 +55,7 @@ namespace Logic
 
             CheckArgument(entity);
 
-            return !clientNumberKeysDAO.ContainsDB(entity) ? clientNumberKeysDAO.Update(entity) : false;
+            return !clientNumberKeysDAO.ContainsDB(entity) && clientNumberKeysDAO.Update(entity);
         }
         private void CheckArgument(ClientNumberKeys entity)
         {

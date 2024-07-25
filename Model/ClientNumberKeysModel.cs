@@ -3,8 +3,10 @@ using Logic;
 using LogicContract;
 using ModelEntities;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace Model
 {
@@ -37,19 +39,6 @@ namespace Model
 
         public bool Remove(int id) => clientNumberKeysLogic.Remove(id);
 
-        public bool Add(IEnumerable<ModelViewClientNumberKeys> keyClient, out string error)
-        {
-            if (keyClient == null)
-                throw new ArgumentNullException(nameof(keyClient));
-
-            error = string.Empty;
-            foreach (var item in keyClient)
-                if (!clientNumberKeysLogic.Save(item.ClientNumberKeys))
-                    error += errorAdd + item.Id + " - " + item.Name + '\n';
-
-            return string.IsNullOrEmpty(error);
-        }
-
         public List<ModelViewClientNumberKeys> NumberKeys()
         {
             var CNK = clientNumberKeysLogic.GetAll();
@@ -80,26 +69,27 @@ namespace Model
                                              ClosestEndDate = g.Select(x => x.vk?.ClosestEndDate).FirstOrDefault()
                                          };
 
-            var result = from ckfc in clientKeyFeatureCounts
-                         join c in CNK on ckfc.IdClient equals c.Id
+            var result = from c in CNK
+                         join ckfc in clientKeyFeatureCounts on c.Id equals ckfc.IdClient into ckfcJoin
+                         from ckfc in ckfcJoin.DefaultIfEmpty()
+                         orderby c.Name
                          select new ModelViewClientNumberKeys
                          {
-                             Id = ckfc.IdClient,
+                             Id = c.Id,
                              Name = c.Name,
-                             NumberKeys = ckfc.ValidFeatureCount == 0 ? 0 : ckfc.ValidKeyCount,
-                             NumberFeatures = ckfc.ValidFeatureCount,
-                             EndDate = ckfc.ClosestEndDate.HasValue
-                                        ? (ckfc.ClosestEndDate.Value.Year == 2111 ? "\u221E" : ckfc.ClosestEndDate.Value.ToString("yyyy-MM-dd"))
+                             NumberKeys = ckfc?.ValidFeatureCount == 0 ? 0 : ckfc?.ValidKeyCount ?? -1,
+                             NumberFeatures = ckfc?.ValidFeatureCount ?? 0,
+                             EndDate = ckfc?.ClosestEndDate.HasValue ?? false
+                                        ? (ckfc.ClosestEndDate.Value.Year == 2111 ? "\u221E" : ckfc.ClosestEndDate.Value.ToString("dd-MM-yyyy"))
                                         : "нет активных"
                          };
 
             return result.ToList();
         }
 
-
         public bool Update(ModelViewClientNumberKeys entity)
         {
-            if (entity == null) 
+            if (entity == null)
             {
                 throw new ArgumentNullException(nameof(entity));
             }
@@ -115,14 +105,70 @@ namespace Model
             return clientNumberKeysLogic.Save(entity.ClientNumberKeys);
         }
 
-        public bool Update(IEnumerable<ModelViewClientNumberKeys> keyClient, out string error)
+        public bool Add(IEnumerable<ModelViewClientNumberKeys> keyClient, out string error)
         {
-            throw new NotImplementedException();
+            if (keyClient == null) 
+            {
+                throw new ArgumentException(nameof(keyClient)); 
+            }
+
+            error = string.Empty;
+
+            if (!keyClient.Any())
+                return true;
+
+            foreach (var item in keyClient)
+            {
+                if (!clientNumberKeysLogic.Save(item.ClientNumberKeys))
+                    error += errorAdd + item.Id + " - " + item.Name + '\n';
+            }
+            return string.IsNullOrEmpty(error);
         }
 
-        public bool Remove(IEnumerable<int> idKeyClient, out string error)
+        public bool Update(IEnumerable<ModelViewClientNumberKeys> keyClient, out string error)
         {
-            throw new NotImplementedException();
+            if (keyClient == null)
+            {
+                throw new ArgumentException(nameof(keyClient));
+            }
+
+            error = string.Empty;
+
+            if (!keyClient.Any())
+                return true;
+
+            var allKeyAtClient = NumberKeys();
+            var updateList = new List<ModelViewClientNumberKeys>();
+            foreach (var item in keyClient)
+            {
+                if (allKeyAtClient.Any(x => x.ClientNumberKeys.Equals(item.ClientNumberKeys)))
+                    continue;
+                updateList.Add(item);
+                if (!clientNumberKeysLogic.Update(item.ClientNumberKeys))
+                    error += errorUpdate + item.Id + " - " + item.Name + '\n';
+            }
+            return string.IsNullOrEmpty(error);
+        }
+
+        public bool Remove(IEnumerable<ModelViewClientNumberKeys> keyClient, out string error)
+        {
+            if (keyClient == null)
+            {
+                throw new ArgumentException(nameof(keyClient));
+            }
+
+            error = string.Empty;
+            var updateList = new List<ModelViewClientNumberKeys>();
+            var all = NumberKeys();
+            foreach (var item in keyClient)
+            {
+                if (all.Any(x => x.ClientNumberKeys.Equals(item.ClientNumberKeys)))
+                    continue;
+                updateList.Add(item);
+                if (!clientNumberKeysLogic.Update(item.ClientNumberKeys))
+                    error += errorUpdate + item.Id + " - " + item.Name + '\n';
+            }
+            return string.IsNullOrEmpty(error); ;
         }
     }
 }

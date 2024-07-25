@@ -8,7 +8,7 @@ namespace Presenter
 {
     public interface IClientNumberKeysPresenter: IEntitiesPresenter<ModelViewClientNumberKeys>
     {
-        bool CheckInputData();
-
+        bool CheckInputData(List<ModelViewClientNumberKeys> item);   
+        void Edit(List<ModelViewClientNumberKeys> item);
     }
 }

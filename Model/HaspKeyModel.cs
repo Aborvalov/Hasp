@@ -48,8 +48,6 @@ namespace Model
         public ModelViewHaspKey GetById(int id) 
             => new ModelViewHaspKey(keyLogic.GetById(id));
 
-        //public List<ModelViewHaspKey> GetByPastDue(int id) => Convert(keyLogic.GetByPastDue(id));
-
         public List<ModelViewHaspKey> GetByPastDue(ModelViewClient client) => Convert(keyLogic.GetByPastDue(client.Client));
         public List<ModelViewHaspKey> GetAllInCompany(ModelViewClient client) => Convert(keyLogic.GetAllInCompany(client.Client));
         public List<ModelViewHaspKey> GetActiveInCompany(ModelViewClient client) => Convert(keyLogic.GetActiveInCompany(client.Client));
