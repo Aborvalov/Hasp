@@ -20,6 +20,7 @@ namespace Presenter
         private const string errorDelete = "Не удалось удалить клиента.";
         private const string errorEmptyName = "\u2022 Не заполнено поля \"Наименование\", не должно быть пустым. \n";
         private const string errorAdd = "Не удалось создать клиента.";
+        private const string errorInnerId = "Некорректный номер ключа.";
 
         public ClientNumberKeysPresenter(IClientNumberKeysView entitiesclnkView)
         {

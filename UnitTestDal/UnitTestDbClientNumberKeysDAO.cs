@@ -9,14 +9,14 @@ using HelperForUnitTest;
 namespace UnitTestDal
 {
     [TestClass]
-    [DeploymentItem("HASPKeyTest.db")]
+    [DeploymentItem("HASPKey.db")]
     public class UnitTestDbClientNumberKeys
     {
         private const int erroneousId = -123;
         private IContractClientNumberKeysDAO clientNumberKeysDAO;
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void NullEntitesContextClientNumberKeys()
         {
             Assert.ThrowsException<ArgumentNullException>(() => clientNumberKeysDAO = new DbClientNumberKeysDAO(null));
@@ -44,7 +44,7 @@ namespace UnitTestDal
         }
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void AddClientNK()
         {
             int idExpected = 1;
@@ -61,7 +61,7 @@ namespace UnitTestDal
         }
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void AddNullClient()
         {
             using (var db = new EntitesContext())
@@ -72,7 +72,7 @@ namespace UnitTestDal
         }
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetAllClient()
         {
             List<ClientNumberKeys> getAll;
@@ -93,7 +93,7 @@ namespace UnitTestDal
         }
         
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByIdClient()
         {
             ClientNumberKeys getById;
@@ -111,7 +111,7 @@ namespace UnitTestDal
         }
        
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByErroneousIdClient()
         {
             using (var db = new EntitesContext())
@@ -122,7 +122,7 @@ namespace UnitTestDal
         }
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByIdNoDBClient()
         {
             ClientNumberKeys getById;
@@ -138,7 +138,7 @@ namespace UnitTestDal
         }
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void UpdateClient()
         {
             bool update;
@@ -158,7 +158,7 @@ namespace UnitTestDal
         }
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void UpdateNullClient()
         {
             using (var db = new EntitesContext())
@@ -169,7 +169,7 @@ namespace UnitTestDal
         }
         
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void UpdateNoDBClient()
         {
             ClientNumberKeys clientNoDB = new ClientNumberKeys
@@ -189,7 +189,7 @@ namespace UnitTestDal
         }
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void RemoveClient()
         {
             bool remove;
@@ -210,7 +210,7 @@ namespace UnitTestDal
         }
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void RemoveErroneousIdClient()
         {
             using (var db = new EntitesContext())
@@ -221,7 +221,7 @@ namespace UnitTestDal
         }
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void RemoveNoDBClient()
         {
             using (var db = new EntitesContext())
@@ -235,7 +235,7 @@ namespace UnitTestDal
         }
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void ContainsDBClient()
         {
             var client = CreateNew();
@@ -249,7 +249,7 @@ namespace UnitTestDal
         }
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void NoContainsDBClient()
         {
             var client = CreateNew();

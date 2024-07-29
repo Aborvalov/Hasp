@@ -12,7 +12,7 @@ namespace UnitTestLogic
     /// Summary description for UnitTestHaspKey
     /// </summary>
     [TestClass]
-    [DeploymentItem("HASPKeyTest.db")]
+    [DeploymentItem("HASPKey.db")]
     public class UnitTestHaspKeyLogic
     {
         private const int erroneousId = -123;
@@ -21,13 +21,13 @@ namespace UnitTestLogic
 
         private IHaspKeyLogic Get(EntitesContext db) => new Logics().CreateHaspKey(db);
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void NullEntitesContextHaspKey()
         {
             Assert.ThrowsException<ArgumentNullException>(() => haspKeyL = Get(null));
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void SaveHaspKey()
         {
             bool add;
@@ -41,7 +41,7 @@ namespace UnitTestLogic
             Assert.IsTrue(add);
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void SaveNullHaspKey()
         {
             using (var db = new EntitesContext())
@@ -51,7 +51,7 @@ namespace UnitTestLogic
             }
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void SaveDuplicateHaspKey()
         {
             bool add;
@@ -66,7 +66,7 @@ namespace UnitTestLogic
             Assert.IsFalse(add);
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void ErroneousArgumentSaveHaspKey()
         {
             HaspKey haspKey = CreateNew();
@@ -90,7 +90,7 @@ namespace UnitTestLogic
             }
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetAllHaspKey()
         {
             var getAll = new List<HaspKey>(); ;
@@ -110,7 +110,7 @@ namespace UnitTestLogic
             CollectionAssert.AreEqual(getAll, haspKeys);
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetAllEmptyHaspKey()
         {
             var getAll = new List<HaspKey>();
@@ -126,7 +126,7 @@ namespace UnitTestLogic
             CollectionAssert.AreEqual(getAll, haspKeysExpected);
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByIdHaspKey()
         {
             HaspKey getById;
@@ -146,7 +146,7 @@ namespace UnitTestLogic
         /// Поиск неправильного id.
         /// </summary>
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByErroneousIdHaspKey()
         {
             using (var db = new EntitesContext())
@@ -159,7 +159,7 @@ namespace UnitTestLogic
         /// Поиск id которого нет в базе.
         /// </summary>
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByIdNoDBHaspKey()
         {
             using (var db = new EntitesContext())
@@ -170,7 +170,7 @@ namespace UnitTestLogic
             }
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void UpdateHaspKey()
         {
             bool update;
@@ -193,7 +193,7 @@ namespace UnitTestLogic
             Assert.IsTrue(update);
         }        
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void UpdateNullHaspKey()
         {
             using (var db = new EntitesContext())
@@ -206,7 +206,7 @@ namespace UnitTestLogic
         /// Дублирование ключа при обновлении.
         /// </summary>
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void UpdateDuplicateHaspKey()
         {
             var haspKey = CreateNew();
@@ -227,7 +227,7 @@ namespace UnitTestLogic
         /// Обновление ключа которого не существует в базе.
         /// </summary>
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void UpdateNoDBHaspKey()
         {
             var keyNoDB = new HaspKey
@@ -248,7 +248,7 @@ namespace UnitTestLogic
             }
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByActiveHaspKey()
         {
             List<HaspKey> GetByActive;
@@ -274,7 +274,7 @@ namespace UnitTestLogic
             CollectionAssert.AreEqual(GetByActive, GetByActiveExpected);
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByPastDueHaspKey()
         {
             List<HaspKey> GetByActive;
@@ -305,7 +305,7 @@ namespace UnitTestLogic
             CollectionAssert.AreEqual(GetByActive, GetByActiveExpected);
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByClientHaspKey()
         {
             List<HaspKey> getByClient;
@@ -339,7 +339,7 @@ namespace UnitTestLogic
         }
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByNullClientHaspKey()
         {
             using (var db = new EntitesContext())
@@ -349,7 +349,7 @@ namespace UnitTestLogic
             }
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void RemoveHaspKey()
         {
             bool remove;
@@ -374,7 +374,7 @@ namespace UnitTestLogic
         /// Удаление неправильного id.
         /// </summary>
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void RemoveErroneousIdHaspKey()
         {
             using (var db = new EntitesContext())
@@ -387,7 +387,7 @@ namespace UnitTestLogic
         /// Удаление ключа которого не существует в базе.
         /// </summary>
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void RemoveNoDBHaspKey()
         {
             using (var db = new EntitesContext())

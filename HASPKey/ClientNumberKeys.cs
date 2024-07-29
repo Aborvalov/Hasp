@@ -1,6 +1,7 @@
 ﻿using DevExpress.Data;
 using DevExpress.XtraLayout.Customization.Templates;
 using DevExpress.XtraReports.Localization;
+using Logic;
 using Model;
 using ModelEntities;
 using Presenter;
@@ -17,8 +18,10 @@ namespace HASPKey
     public partial class ClientNumberKeys : DevExpress.XtraEditors.XtraForm, IClientNumberKeysView
     {
         private readonly IClientNumberKeysPresenter presenterClientNumberKeys;
+        private readonly IPresenterReference presenterClient;
         private readonly IClientNumberKeysModel clientNumberKeysModel;
         private readonly IClientNumberKeysView entitiesclnkView;
+
         private bool sortAscending = true;
 
         public bool error = false;
@@ -39,34 +42,45 @@ namespace HASPKey
             buttonDelete.Visible = isVisible;
             buttonSave.Visible = isVisible;
             buttonSearchByFeature.Visible = isVisible;
+            labelSearchInnerId.Visible = isVisible;
+            tbInnerIdHaspKey.Visible = isVisible;
+            buttonCancel.Visible = isVisible;
         }
 
         public ClientNumberKeys(bool search)
         {
             InitializeComponent();
-            presenterClientNumberKeys = new ClientNumberKeysPresenter(this);
+            presenterClientNumberKeys = new ClientNumberKeysPresenter(this); 
             SetButtonVisibility(false);
             labelFeature.Visible = false;
         }
         public ClientNumberKeys() : this(false)
         { }
 
+        private void DefaultView()
+        {
+            bindingClientNumberKeys.DataSource = new ModelViewClient();
+            presenterClient.FillInputItem(bindingClientNumberKeys.DataSource as ModelViewClient);
+;
+        }
         private void ButtonSearchByFeature_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            DefaultView();
+            using (FeatureView feature = new FeatureView(true))
+            {
+                feature.ShowDialog();
+
+                if (feature.SearchFeature != null)
+                {
+                    presenterClient.GetByFeature(feature.SearchFeature);
+                    labelFeature.Text = feature.SearchFeature.Name;
+                }
+            }
         }
 
         private void ButtonAll_Click(object sender, EventArgs e) =>
             presenterClientNumberKeys.Display();
         
-
-        private void DefaultView() 
-        {
-            bindingClientNumberKeys.DataSource = new ModelViewClientNumberKeys();
-            presenterClientNumberKeys.FillInputItem(bindingClientNumberKeys.DataSource as ModelViewClientNumberKeys);
-            labelFeature.Text = string.Empty;
-        }
-
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             var bindingList = bindingClientNumberKeys.DataSource as BindingList<ModelViewClientNumberKeys>;
@@ -184,6 +198,28 @@ namespace HASPKey
             if (columnSorters.ContainsKey(columnName))
             {
                 Sort(columnSorters[columnName]);
+            }
+        }
+
+        private void ButtonCancel_Click(object sender, EventArgs e)
+        {
+            SetButtonVisibility(false);
+        }
+
+        private void tbInnerIdHaspKey_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                var tmp = int.Parse(tbInnerIdHaspKey.Text);
+                presenterClient.GetByNumberKey(int.Parse(tbInnerIdHaspKey.Text));
+            }
+        }
+
+        private void tbInnerIdHaspKey_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
             }
         }
     }
