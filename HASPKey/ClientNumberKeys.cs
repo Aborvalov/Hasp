@@ -82,8 +82,8 @@ namespace HASPKey
             var bindingList = bindingClientNumberKeys.DataSource as BindingList<ModelViewClientNumberKeys>;
             error = false;
             presenterClientNumberKeys.Edit(bindingList.ToList());
-            /*if (!error)
-                DefaultView();*/
+            if (!error)
+                DefaultView();
         }
 
         private void ButtonDelete_Click(object sender, EventArgs e)

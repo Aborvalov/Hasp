@@ -27,8 +27,6 @@ namespace DalDB
 
             var client = db.ClientNumberKeys.Add(entity);
 
-            
-            var tmp = client.Id;
             db.SaveChanges();
 
             return client.Id;

@@ -101,7 +101,9 @@ namespace Model
         public bool Add(ModelViewClientNumberKeys entity)
         {
             if (entity == null)
-                throw new ArgumentNullException(nameof(entity));
+            {
+                throw new ArgumentException(nameof(entity));
+            }
             return clientNumberKeysLogic.Save(entity.ClientNumberKeys);
         }
 

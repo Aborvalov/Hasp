@@ -74,6 +74,10 @@ namespace Presenter
 
         public void Update(List<ModelViewClientNumberKeys> keyClient)
         {
+            if (keyClient == null)
+            {
+                throw new ArgumentException(nameof(keyClient));
+            }
             var update = keyClient
                             .Where(x => x.Id != 0 &&
                                         !string.IsNullOrEmpty(x.Name) &&
@@ -88,6 +92,10 @@ namespace Presenter
 
         public void Add(List<ModelViewClientNumberKeys> keyClient)
         {
+            if (keyClient == null)
+            {
+                throw new ArgumentException(nameof(keyClient));
+            }
             var add = keyClient
                         .Where(x => x.Id != 0 &&
                                     !string.IsNullOrEmpty(x.Name) &&
@@ -102,6 +110,10 @@ namespace Presenter
 
         public void Delete(List<ModelViewClientNumberKeys> keyClient)
         {
+            if (keyClient == null)
+            {
+                throw new ArgumentException(nameof(keyClient));
+            }
             var delete = keyClient
                             .Where(x => x.Id != 0 && x.NumberKeys != -1);
             if (delete.Any())
