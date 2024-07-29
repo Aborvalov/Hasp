@@ -156,6 +156,7 @@ namespace Model
             {
                 throw new ArgumentException(nameof(keyClient));
             }
+
             error = string.Empty;
             var updateList = new List<ModelViewClientNumberKeys>();
             var all = NumberKeys();

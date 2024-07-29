@@ -48,7 +48,7 @@ namespace Presenter
 
             Delete(keyClient);
             Display();
-
+            
             Add(keyClient);
             Display();
 

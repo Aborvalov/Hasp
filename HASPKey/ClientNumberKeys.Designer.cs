@@ -38,6 +38,8 @@
             this.endDateNumberKeysDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingClientNumberKeys = new System.Windows.Forms.BindingSource(this.components);
             this.labelFeature = new System.Windows.Forms.Label();
+            this.labelSearchInnerId = new System.Windows.Forms.Label();
+            this.tbInnerIdHaspKey = new System.Windows.Forms.TextBox();
             this.buttonAll = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
@@ -143,6 +145,26 @@
             this.labelFeature.Size = new System.Drawing.Size(78, 16);
             this.labelFeature.TabIndex = 15;
             this.labelFeature.Text = "labelFeature";
+            // 
+            // labelSearchInnerId
+            // 
+            this.labelSearchInnerId.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labelSearchInnerId.AutoSize = true;
+            this.labelSearchInnerId.Location = new System.Drawing.Point(324, -2);
+            this.labelSearchInnerId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelSearchInnerId.Name = "labelSearchInnerId";
+            this.labelSearchInnerId.Size = new System.Drawing.Size(225, 16);
+            this.labelSearchInnerId.TabIndex = 16;
+            this.labelSearchInnerId.Text = "Поиск по внутреннему номеру ключа";
+            // 
+            // tbInnerIdHaspKey
+            // 
+            this.tbInnerIdHaspKey.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tbInnerIdHaspKey.Location = new System.Drawing.Point(376, 18);
+            this.tbInnerIdHaspKey.Margin = new System.Windows.Forms.Padding(4);
+            this.tbInnerIdHaspKey.Name = "tbInnerIdHaspKey";
+            this.tbInnerIdHaspKey.Size = new System.Drawing.Size(116, 23);
+            this.tbInnerIdHaspKey.TabIndex = 17;
             // 
             // buttonAll
             // 
@@ -253,6 +275,8 @@
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.buttonAll);
+            this.Controls.Add(this.tbInnerIdHaspKey);
+            this.Controls.Add(this.labelSearchInnerId);
             this.Controls.Add(this.labelFeature);
             this.Controls.Add(this.DataGridViewClientNumberKeys);
             this.Controls.Add(this.buttonSearchByFeature);
@@ -272,6 +296,8 @@
         private System.Windows.Forms.Button buttonSearchByFeature;
         private System.Windows.Forms.DataGridView DataGridViewClientNumberKeys;
         private System.Windows.Forms.Label labelFeature;
+        private System.Windows.Forms.Label labelSearchInnerId;
+        private System.Windows.Forms.TextBox tbInnerIdHaspKey;
         private System.Windows.Forms.Button buttonAll;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonSave;

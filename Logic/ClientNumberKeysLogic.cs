@@ -37,6 +37,8 @@ namespace Logic
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
+            CheckArgument(entity);
+
             int id;
             if (!clientNumberKeysDAO.ContainsDB(entity))
                 id = clientNumberKeysDAO.Add(entity);

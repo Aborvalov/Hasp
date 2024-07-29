@@ -58,7 +58,14 @@ namespace HASPKey
 
         private void ButtonAll_Click(object sender, EventArgs e) =>
             presenterClientNumberKeys.Display();
+        
 
+        private void DefaultView() 
+        {
+            bindingClientNumberKeys.DataSource = new ModelViewClientNumberKeys();
+            presenterClientNumberKeys.FillInputItem(bindingClientNumberKeys.DataSource as ModelViewClientNumberKeys);
+            labelFeature.Text = string.Empty;
+        }
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
@@ -74,7 +81,7 @@ namespace HASPKey
             
             bindingList.Add(newItem);
             DataGridViewClientNumberKeys.Refresh();
-
+         
             int rowIndex = bindingList.IndexOf(newItem);
             if (rowIndex >= 0)
             {
@@ -89,7 +96,7 @@ namespace HASPKey
             error = false;
             if (MessageBox.Show(messageSave, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                presenterClientNumberKeys.Edit(bindingList.ToList());
+            presenterClientNumberKeys.Edit(bindingList.ToList());
             }
         }
 
@@ -126,9 +133,9 @@ namespace HASPKey
 
         public void Bind(List<ModelViewClientNumberKeys> entity)
         {
-            bindingClientNumberKeys.DataSource = entity != null ?
-                new BindingList<ModelViewClientNumberKeys>(entity) :
-                new BindingList<ModelViewClientNumberKeys>();
+            bindingClientNumberKeys.DataSource = entity != null ? 
+            new BindingList<ModelViewClientNumberKeys>(entity) : 
+            new BindingList<ModelViewClientNumberKeys>();
             DataGridViewClientNumberKeys.DataSource = bindingClientNumberKeys;
         }
 
