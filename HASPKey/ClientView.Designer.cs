@@ -34,13 +34,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientView));
             this.DataGridViewClient = new System.Windows.Forms.DataGridView();
-            this.timeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberKeysDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingClient = new System.Windows.Forms.BindingSource(this.components);
             this.labelName = new System.Windows.Forms.Label();
             this.labelAddress = new System.Windows.Forms.Label();
             this.labelPhone = new System.Windows.Forms.Label();
             this.labelContactPerson = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
+            this.bindingItem = new System.Windows.Forms.BindingSource(this.components);
             this.tbAddress = new System.Windows.Forms.TextBox();
             this.tbPhone = new System.Windows.Forms.TextBox();
             this.tbContactPerson = new System.Windows.Forms.TextBox();
@@ -53,15 +53,17 @@
             this.tbInnerIdHaspKey = new System.Windows.Forms.TextBox();
             this.Headline = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.buttonAll = new System.Windows.Forms.Button();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingClient = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingItem = new System.Windows.Forms.BindingSource(this.components);
-            this.buttonAll = new System.Windows.Forms.Button();
+            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContactPerson = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingItem)).BeginInit();
@@ -79,8 +81,9 @@
             this.DataGridViewClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridViewClient.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nameDataGridViewTextBoxColumn,
-            this.timeDataGridViewTextBoxColumn,
-            this.numberKeysDataGridViewTextBoxColumn});
+            this.Address,
+            this.Phone,
+            this.ContactPerson});
             this.DataGridViewClient.DataSource = this.bindingClient;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -104,21 +107,9 @@
             this.DataGridViewClient.SelectionChanged += new System.EventHandler(this.DataGridViewClient_SelectionChanged);
             this.DataGridViewClient.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DataGridViewClient_KeyDown);
             // 
-            // timeDataGridViewTextBoxColumn
+            // bindingClient
             // 
-            this.timeDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.timeDataGridViewTextBoxColumn.HeaderText = "Срок действия";
-            this.timeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.timeDataGridViewTextBoxColumn.Name = "timeDataGridViewTextBoxColumn";
-            this.timeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // numberKeysDataGridViewTextBoxColumn
-            // 
-            this.numberKeysDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.numberKeysDataGridViewTextBoxColumn.HeaderText = "Количество ключей";
-            this.numberKeysDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.numberKeysDataGridViewTextBoxColumn.Name = "numberKeysDataGridViewTextBoxColumn";
-            this.numberKeysDataGridViewTextBoxColumn.ReadOnly = true;
+            this.bindingClient.DataSource = typeof(ModelEntities.ModelViewClient);
             // 
             // labelName
             // 
@@ -173,6 +164,10 @@
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(185, 23);
             this.tbName.TabIndex = 5;
+            // 
+            // bindingItem
+            // 
+            this.bindingItem.DataSource = typeof(ModelEntities.ModelViewClient);
             // 
             // tbAddress
             // 
@@ -294,6 +289,19 @@
             this.Headline.TabIndex = 17;
             this.Headline.Text = "Список клиентов";
             // 
+            // buttonAll
+            // 
+            this.buttonAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAll.Location = new System.Drawing.Point(604, 16);
+            this.buttonAll.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonAll.Name = "buttonAll";
+            this.buttonAll.Size = new System.Drawing.Size(88, 28);
+            this.buttonAll.TabIndex = 14;
+            this.buttonAll.Text = "Все";
+            this.toolTip.SetToolTip(this.buttonAll, "Список всех клиентов.");
+            this.buttonAll.UseVisualStyleBackColor = true;
+            this.buttonAll.Click += new System.EventHandler(this.ButtonAll_Click);
+            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -341,6 +349,18 @@
             this.dataGridViewTextBoxColumn5.ReadOnly = true;
             this.dataGridViewTextBoxColumn5.Width = 118;
             // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonCancel.Location = new System.Drawing.Point(209, 677);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(88, 28);
+            this.buttonCancel.TabIndex = 18;
+            this.buttonCancel.Text = "Отменить";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
             // nameDataGridViewTextBoxColumn
             // 
             this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
@@ -350,32 +370,36 @@
             this.nameDataGridViewTextBoxColumn.ReadOnly = true;
             this.nameDataGridViewTextBoxColumn.ToolTipText = "Наименование организации";
             // 
-            // bindingClient
+            // Address
             // 
-            this.bindingClient.DataSource = typeof(ModelEntities.ModelViewClient);
+            this.Address.DataPropertyName = "Address";
+            this.Address.HeaderText = "Адрес";
+            this.Address.MinimumWidth = 6;
+            this.Address.Name = "Address";
+            this.Address.ReadOnly = true;
             // 
-            // bindingItem
+            // Phone
             // 
-            this.bindingItem.DataSource = typeof(ModelEntities.ModelViewClient);
+            this.Phone.DataPropertyName = "Phone";
+            this.Phone.HeaderText = "Телефон";
+            this.Phone.MinimumWidth = 6;
+            this.Phone.Name = "Phone";
+            this.Phone.ReadOnly = true;
             // 
-            // buttonAll
+            // ContactPerson
             // 
-            this.buttonAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAll.Location = new System.Drawing.Point(604, 16);
-            this.buttonAll.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonAll.Name = "buttonAll";
-            this.buttonAll.Size = new System.Drawing.Size(88, 28);
-            this.buttonAll.TabIndex = 14;
-            this.buttonAll.Text = "Все";
-            this.toolTip.SetToolTip(this.buttonAll, "Список всех клиентов.");
-            this.buttonAll.UseVisualStyleBackColor = true;
-            this.buttonAll.Click += new System.EventHandler(this.ButtonAll_Click);
+            this.ContactPerson.DataPropertyName = "ContactPerson";
+            this.ContactPerson.HeaderText = "Представитель";
+            this.ContactPerson.MinimumWidth = 6;
+            this.ContactPerson.Name = "ContactPerson";
+            this.ContactPerson.ReadOnly = true;
             // 
             // ClientView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(706, 711);
+            this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.Headline);
             this.Controls.Add(this.tbInnerIdHaspKey);
             this.Controls.Add(this.labelSearchInnerId);
@@ -436,9 +460,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn timeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn numberKeysDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button buttonAll;
+        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Address;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Phone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ContactPerson;
     }
 }

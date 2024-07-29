@@ -27,6 +27,7 @@ namespace HASPKey
         {
             InitializeComponent();
             presenterFeature = new FeaturePresenter(this);
+            buttonCancel.Visible = false;
             DataGridViewFeature.Height = DataGridViewFeature.Size.Height + sizeH;
 
             this.search = search;
@@ -54,6 +55,7 @@ namespace HASPKey
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             DefaultView();
+            buttonCancel.Visible = true;
             if (size)
             {
                 DataGridViewFeature.Height = DataGridViewFeature.Size.Height - sizeH;
@@ -69,18 +71,25 @@ namespace HASPKey
                 MessageError(emptyFeature);
                 return;
             }
+
             if (search)
             {
+                var clientViewForm = new ClientView(row);
+                var tmp = row;
+                
                 SearchFeature = row;
+                clientViewForm.ShowDialog();
                 Close();
                 return;
             }
 
             if (size && Admin.IsAdmin)
             {
-                DefaultView();
-                DataGridViewFeature.Height = DataGridViewFeature.Size.Height - sizeH;
-                size = !size;
+                var clientViewForm = new ClientView(row);
+                clientViewForm.ShowDialog();
+
+                //DefaultView();
+                
                 presenterFeature.FillInputItem(row);
                 ButtonAdd.Enabled = false;
             }
@@ -92,6 +101,7 @@ namespace HASPKey
                 return;
 
             error = false;
+            buttonCancel.Visible = true;
             presenterFeature.FillModel(bindingItem.DataSource as ModelViewFeature);
             if (!error)
                 DefaultView();

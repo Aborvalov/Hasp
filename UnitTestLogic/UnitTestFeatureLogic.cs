@@ -8,20 +8,20 @@ using System.Collections.Generic;
 namespace UnitTestLogic
 {
     [TestClass]
-    [DeploymentItem("HASPKeyTest.db")]
+    [DeploymentItem("HASPKey.db")]
     public class UnitTestFeatureLogic
     {
         private const int erroneousId = -123;
         private IFeatureLogic featureL;
         private IFeatureLogic Get(EntitesContext db) => new Logics().CreateFeature(db);
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void NullEntitesContextFeature()
         {
             Assert.ThrowsException<ArgumentNullException>(() => featureL = Get(null));
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void SaveFeature()
         {
             bool add;
@@ -35,7 +35,7 @@ namespace UnitTestLogic
             Assert.IsTrue(add);
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void SaveDuplicateFeature()
         {
             bool add;
@@ -51,7 +51,7 @@ namespace UnitTestLogic
             Assert.IsFalse(add);
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void ErroneousArgumentSaveFeature()
         {
             Feature feature = CreateNew();
@@ -73,7 +73,7 @@ namespace UnitTestLogic
             }
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void SaveNullFeature()
         {
             using (var db = new EntitesContext())
@@ -83,7 +83,7 @@ namespace UnitTestLogic
             }
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetAllFeature()
         {
             var getAll = new List<Feature>();
@@ -103,7 +103,7 @@ namespace UnitTestLogic
             CollectionAssert.AreEqual(getAll, features);
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetAllEmptyFeature()
         {
             var getAll = new List<Feature>();
@@ -119,7 +119,7 @@ namespace UnitTestLogic
             CollectionAssert.AreEqual(getAll, featureExpected);
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByIdFeature()
         {
             Feature getById;
@@ -139,7 +139,7 @@ namespace UnitTestLogic
         /// Поиск неправильного id.
         /// </summary>
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByErroneousIdFeaturey()
         {
             using (var db = new EntitesContext())
@@ -152,7 +152,7 @@ namespace UnitTestLogic
         /// Поиск id которого нет в базе.
         /// </summary>
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByIdNoDBFeature()
         {
             Feature getById;
@@ -165,7 +165,7 @@ namespace UnitTestLogic
             Assert.IsNull(getById);
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void UpdateFeature()
         {
             bool update;
@@ -185,7 +185,7 @@ namespace UnitTestLogic
             Assert.IsTrue(update);
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void UpdateDuplicateFeature()
         {
             bool update;
@@ -202,7 +202,7 @@ namespace UnitTestLogic
             Assert.IsFalse(update);
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void UpdateNullFeature()
         {
             using (var db = new EntitesContext())
@@ -212,7 +212,7 @@ namespace UnitTestLogic
             }
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void UpdateNoDBFeature()
         {
             var featureNoDB = new Feature
@@ -232,7 +232,7 @@ namespace UnitTestLogic
             }
         }
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void RemoveFeature()
         {
             bool remove;
@@ -257,7 +257,7 @@ namespace UnitTestLogic
         /// Удаление неправильного id.
         /// </summary>
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void RemoveErroneousIdFeature()
         {
             using (var db = new EntitesContext())
@@ -270,7 +270,7 @@ namespace UnitTestLogic
         /// Удаление фичи которой не существует в базе.
         /// </summary>
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void RemoveNoDBFeature()
         {
             using (var db = new EntitesContext())

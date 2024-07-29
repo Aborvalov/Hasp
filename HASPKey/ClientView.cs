@@ -3,6 +3,7 @@ using Presenter;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 using ViewContract;
 
@@ -16,6 +17,7 @@ namespace HASPKey
         private bool search = false;
         private bool error = false;
         public event Action DataUpdated;
+        private ModelViewFeature selectedFeature;
         internal ModelViewClient SearchIdClient { get; private set; }
 
         private const string caption = "Удалить клиента";
@@ -29,11 +31,45 @@ namespace HASPKey
             presenterClient = new СlientPresenter(this);
             labelFeature.Text = string.Empty;
             DataGridViewClient.Height = DataGridViewClient.Size.Height + sizeH;
+            buttonCancel.Visible = false;
 
             this.search = search;
             if (this.search || !Admin.IsAdmin)
                 DataGridViewClient.Height = DataGridViewClient.Size.Height + 28;
         }
+
+        public ClientView(ModelViewFeature feature) : this(false)
+        {
+            selectedFeature = feature;
+            InitializeView();
+            PerformSearch();
+        }
+
+        public ClientView(int innerIdHaspKey) : this(false)
+        {
+            InitializeView();
+            PerformSearch(innerIdHaspKey);
+        }
+
+        private void PerformSearch(int innerIdHaspKey)
+        {
+            presenterClient.GetByNumberKey(innerIdHaspKey);
+        }
+
+        private void InitializeView()
+        {
+            labelFeature.Text = string.Empty;
+            DataGridViewClient.Location = new Point(DataGridViewClient.Location.X, DataGridViewClient.Location.Y - 20);
+            buttonCancel.Visible = false;
+            foreach (Control control in Controls)
+            {
+                if (!(control is DataGridView))
+                {
+                    control.Visible = false;
+                }
+            }
+        }
+
         public ClientView() : this(false)
         { }
 
@@ -54,6 +90,7 @@ namespace HASPKey
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             DefaultView();
+            buttonCancel.Visible = true;
             if (size)
             {
                 DataGridViewClient.Height = DataGridViewClient.Size.Height - sizeH;
@@ -91,6 +128,7 @@ namespace HASPKey
                 return;
 
             error = false;
+            buttonCancel.Visible = true;
             presenterClient.FillModel(bindingItem.DataSource as ModelViewClient);
             if (!error)
                 DefaultView();
@@ -108,6 +146,7 @@ namespace HASPKey
             labelFeature.Text = string.Empty;
             tbInnerIdHaspKey.Text = string.Empty;
             buttonAdd.Enabled = true;
+            buttonCancel.Visible = false;
         }
 
         private void ButtonDelete_Click(object sender, EventArgs e) => DeleteItem();
@@ -192,6 +231,21 @@ namespace HASPKey
         {
             foreach (DataGridViewRow row in DataGridViewClient.Rows)
                 row.HeaderCell.Value = (row.Index + 1).ToString();
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            DefaultView();
+        }
+
+        private void PerformSearch()
+        {
+            if (selectedFeature != null)
+            {  
+                labelFeature.Text = selectedFeature.Name;
+
+                presenterClient.GetByFeature(selectedFeature);
+            }
         }
     }
 }

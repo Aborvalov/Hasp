@@ -9,7 +9,7 @@ using System.Collections.Generic;
 namespace UnitTestLogic
 {
     [TestClass]
-    [DeploymentItem("HASPKeyTest.db")]
+    [DeploymentItem("HASPKey.db")]
     public class UnitTestClientNumberKeysLogic
     {
         private const int erroneousId = -123;
@@ -17,7 +17,7 @@ namespace UnitTestLogic
         private IClientNumberKeysLogic Get(EntitesContext db) => new Logics().CreateClientNumberKeys(db);
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void NullIContractClientNumberKeysDAO() => Assert.ThrowsException<ArgumentNullException>(() => clientNK = Get(null));
 
         private ClientNumberKeys CreateNew()
@@ -42,7 +42,7 @@ namespace UnitTestLogic
         }
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void SaveClientNumberKeys()
         {
             bool add;
@@ -56,7 +56,7 @@ namespace UnitTestLogic
         }
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void SaveDuplicateClient()
         {
             bool add;
@@ -73,7 +73,7 @@ namespace UnitTestLogic
         }
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void SaveNullClient()
         {
             using (var db = new EntitesContext())
@@ -84,7 +84,7 @@ namespace UnitTestLogic
         }
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void ErroneousArgumentSaveClient()
         {
             ClientNumberKeys client = CreateNew();
@@ -102,7 +102,7 @@ namespace UnitTestLogic
         }
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetAllClient()
         {
             List<ClientNumberKeys> getAll;
@@ -122,7 +122,7 @@ namespace UnitTestLogic
         }
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetAllEmptyClient()
         {
             var getAll = new List<ClientNumberKeys>();
@@ -137,7 +137,7 @@ namespace UnitTestLogic
         }
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByIdClient()
         {
             ClientNumberKeys getById;

@@ -36,6 +36,7 @@ namespace Model
         
         public List<ModelViewClient> GetByFeature(ModelViewFeature feature)
         {
+            var tmp = feature;
             if (feature == null)
                 throw new ArgumentNullException(nameof(feature));
                         

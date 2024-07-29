@@ -1,6 +1,4 @@
-﻿using DevExpress.Data;
-using DevExpress.XtraLayout.Customization.Templates;
-using DevExpress.XtraReports.Localization;
+﻿using DevExpress.ExpressApp.Editors;
 using Model;
 using ModelEntities;
 using Presenter;
@@ -17,10 +15,13 @@ namespace HASPKey
     public partial class ClientNumberKeys : DevExpress.XtraEditors.XtraForm, IClientNumberKeysView
     {
         private readonly IClientNumberKeysPresenter presenterClientNumberKeys;
+        private readonly IPresenterReference presenterClient;
         private readonly IClientNumberKeysModel clientNumberKeysModel;
         private readonly IClientNumberKeysView entitiesclnkView;
-        private bool sortAscending = true;
+        private ModelViewClientNumberKeys newItem;
 
+        private bool sortAscending = true;
+        internal ModelViewFeature SearchFeature { get; set; } = null;
         public bool error = false;
 
         private const string errorStr = "Ошибка";
@@ -39,12 +40,15 @@ namespace HASPKey
             buttonDelete.Visible = isVisible;
             buttonSave.Visible = isVisible;
             buttonSearchByFeature.Visible = isVisible;
+            labelSearchInnerId.Visible = isVisible;
+            tbInnerIdHaspKey.Visible = isVisible;
+            buttonCancel.Visible = isVisible;
         }
 
         public ClientNumberKeys(bool search)
         {
             InitializeComponent();
-            presenterClientNumberKeys = new ClientNumberKeysPresenter(this);
+            presenterClientNumberKeys = new ClientNumberKeysPresenter(this); 
             SetButtonVisibility(false);
             labelFeature.Visible = false;
         }
@@ -53,25 +57,20 @@ namespace HASPKey
 
         private void ButtonSearchByFeature_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            using (FeatureView feature = new FeatureView(true))
+            {
+                feature.ShowDialog();
+            }
         }
 
         private void ButtonAll_Click(object sender, EventArgs e) =>
             presenterClientNumberKeys.Display();
         
-
-        private void DefaultView() 
-        {
-            bindingClientNumberKeys.DataSource = new ModelViewClientNumberKeys();
-            presenterClientNumberKeys.FillInputItem(bindingClientNumberKeys.DataSource as ModelViewClientNumberKeys);
-            labelFeature.Text = string.Empty;
-        }
-
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             var bindingList = bindingClientNumberKeys.DataSource as BindingList<ModelViewClientNumberKeys>;
             
-            var newItem = new ModelViewClientNumberKeys
+            newItem = new ModelViewClientNumberKeys
             {
                 Id = -1,
                 NumberKeys = 0,
@@ -96,7 +95,8 @@ namespace HASPKey
             error = false;
             if (MessageBox.Show(messageSave, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-            presenterClientNumberKeys.Edit(bindingList.ToList());
+                presenterClientNumberKeys.Edit(bindingList.ToList());
+                newItem = null;
             }
         }
 
@@ -185,6 +185,44 @@ namespace HASPKey
             {
                 Sort(columnSorters[columnName]);
             }
+        }
+
+        private void ButtonCancel_Click(object sender, EventArgs e)
+        {
+            presenterClientNumberKeys.Display();
+        }
+
+        private void tbInnerIdHaspKey_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                int innerIdHaspKey;
+                if (int.TryParse(tbInnerIdHaspKey.Text, out innerIdHaspKey))
+                {
+                    using (ClientView client = new ClientView(innerIdHaspKey))
+                    {
+                        client.ShowDialog();
+                    }
+                }
+                else
+                {
+                    MessageError(errorString);
+                }
+            }
+        }
+
+        private void tbInnerIdHaspKey_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void DataGridViewClientNumberKeys_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            
+            DataGridViewClientNumberKeys.Refresh();
         }
     }
 }

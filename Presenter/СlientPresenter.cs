@@ -56,6 +56,7 @@ namespace Presenter
 
         public void GetByFeature(ModelViewFeature feature)
         {
+            var tmp = feature;
             if (feature == null)
             {
                 entitiesView.MessageError(errorEmptyFeature);
