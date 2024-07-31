@@ -55,6 +55,12 @@ namespace HASPKey
         public ClientNumberKeys() : this(false)
         { }
 
+        private void DefaultView()
+        {
+            bindingClientNumberKeys.DataSource = new ModelViewClient();
+            presenterClient.FillInputItem(bindingClientNumberKeys.DataSource as ModelViewClient);
+;
+        }
         private void ButtonSearchByFeature_Click(object sender, EventArgs e)
         {
             using (FeatureView feature = new FeatureView(true))
@@ -223,6 +229,28 @@ namespace HASPKey
         {
             
             DataGridViewClientNumberKeys.Refresh();
+        }
+
+        private void ButtonCancel_Click(object sender, EventArgs e)
+        {
+            SetButtonVisibility(false);
+        }
+
+        private void tbInnerIdHaspKey_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                var tmp = int.Parse(tbInnerIdHaspKey.Text);
+                presenterClient.GetByNumberKey(int.Parse(tbInnerIdHaspKey.Text));
+            }
+        }
+
+        private void tbInnerIdHaspKey_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }
