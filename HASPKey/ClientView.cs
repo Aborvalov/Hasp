@@ -17,7 +17,6 @@ namespace HASPKey
         private bool search = false;
         private bool error = false;
         public event Action DataUpdated;
-        private ModelViewFeature selectedFeature;
         internal ModelViewClient SearchIdClient { get; private set; }
 
         private const string caption = "Удалить клиента";
@@ -36,38 +35,6 @@ namespace HASPKey
             this.search = search;
             if (this.search || !Admin.IsAdmin)
                 DataGridViewClient.Height = DataGridViewClient.Size.Height + 28;
-        }
-
-        public ClientView(ModelViewFeature feature) : this(false)
-        {
-            selectedFeature = feature;
-            InitializeView();
-            PerformSearch();
-        }
-
-        public ClientView(int innerIdHaspKey) : this(false)
-        {
-            InitializeView();
-            PerformSearch(innerIdHaspKey);
-        }
-
-        private void PerformSearch(int innerIdHaspKey)
-        {
-            presenterClient.GetByNumberKey(innerIdHaspKey);
-        }
-
-        private void InitializeView()
-        {
-            labelFeature.Text = string.Empty;
-            DataGridViewClient.Location = new Point(DataGridViewClient.Location.X, DataGridViewClient.Location.Y - 20);
-            buttonCancel.Visible = false;
-            foreach (Control control in Controls)
-            {
-                if (!(control is DataGridView))
-                {
-                    control.Visible = false;
-                }
-            }
         }
 
         public ClientView() : this(false)
@@ -236,16 +203,6 @@ namespace HASPKey
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             DefaultView();
-        }
-
-        private void PerformSearch()
-        {
-            if (selectedFeature != null)
-            {  
-                labelFeature.Text = selectedFeature.Name;
-
-                presenterClient.GetByFeature(selectedFeature);
-            }
         }
     }
 }

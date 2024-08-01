@@ -91,13 +91,6 @@ namespace HASPKey
                 client.ShowDialog();
             }
         }
-/*        private void BarButtonItem10ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            using (ClientView client = new ClientView())
-            {
-                client.ShowDialog();
-            }
-        }*/
 
         private void BarButtonItem11ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {

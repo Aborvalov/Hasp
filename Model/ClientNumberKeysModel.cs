@@ -12,14 +12,12 @@ namespace Model
 {
     public class ClientNumberKeysModel : IClientNumberKeysModel
     {
-        public IClientNumberKeysLogic clientNumberKeysLogic;
+        public readonly IClientNumberKeysLogic clientNumberKeysLogic;
         private readonly IKeyFeatureClientLogic keyFeatureClientLogic;
         private readonly IKeyFeatureLogic keyFeatureLogic;
+        private readonly IFeatureLogic featureLogic;
+        private readonly IHaspKeyLogic haspKeyLogic;
         private readonly IEntitesContext db;
-
-        private const string errorAdd = "Не удалось создать данную запись: ";
-        private const string errorDelete = "Не удалось удалить запись: ";
-        private const string errorUpdate = "Не удалось обновить запись: ";
 
         public ClientNumberKeysModel(IFactoryLogic factoryLogic)
         {
@@ -35,6 +33,8 @@ namespace Model
             clientNumberKeysLogic = factoryLogic.CreateClientNumberKeys(db);
             keyFeatureClientLogic = factoryLogic.CreateKeyFeatureClient(db);
             keyFeatureLogic = factoryLogic.CreateKeyFeature(db);
+            featureLogic = factoryLogic.CreateFeature(db);
+            haspKeyLogic = factoryLogic.CreateHaspKey(db);
         }
 
         public bool Remove(int id) => clientNumberKeysLogic.Remove(id);
@@ -51,8 +51,8 @@ namespace Model
                             group kf by new { kfc.IdClient, kf.IdHaspKey } into g
                             select new
                             {
-                                IdClient = g.Key.IdClient,
-                                IdHaspKey = g.Key.IdHaspKey,
+                                g.Key.IdClient,
+                                g.Key.IdHaspKey,
                                 ClosestEndDate = g.Min(k => k.EndDate)
                             };
 
@@ -168,6 +168,120 @@ namespace Model
                 clientNumberKeysLogic.Update(item.ClientNumberKeys);
             }
             return string.IsNullOrEmpty(error); ;
+        }
+
+        public List<ModelViewClientNumberKeys> GetByFeature(int id)
+        {
+            var CNK = clientNumberKeysLogic.GetAll();
+            var KFC = keyFeatureClientLogic.GetAll();
+            var KF = keyFeatureLogic.GetAll();
+            var F = featureLogic.GetAll();
+
+            var validKeys = from kfc in KFC
+                            join kf in KF on kfc.IdKeyFeature equals kf.Id
+                            where kf.EndDate >= DateTime.Now
+                            group kf by new { kfc.IdClient, kf.IdHaspKey } into g
+                            select new
+                            {
+                                g.Key.IdClient,
+                                g.Key.IdHaspKey,
+                                ClosestEndDate = g.Min(k => k.EndDate)
+                            };
+
+            var clientKeyFeatureCounts = from kfc in KFC
+                                         join kf in KF on kfc.IdKeyFeature equals kf.Id
+                                         join f in F on kf.IdFeature equals f.Id
+                                         join vk in validKeys on new { kf.IdHaspKey, kfc.IdClient } equals new { vk.IdHaspKey, vk.IdClient } into vkJoin
+                                         from vk in vkJoin.DefaultIfEmpty()
+                                         where f.Id == id
+                                         group new { kfc, kf, vk } by kfc.IdClient into g
+                                         select new
+                                         {
+                                             IdClient = g.Key,
+                                             ValidKeyCount = g.Select(x => x.vk?.IdHaspKey).Distinct().Count(x => x != null),
+                                             ValidFeatureCount = g.Sum(x => x.kf.EndDate >= DateTime.Now ? 1 : 0),
+                                             ClosestEndDate = g
+                                                 .Select(x => x.vk?.ClosestEndDate)
+                                                 .Where(date => date >= DateTime.Now)
+                                                 .DefaultIfEmpty(null)
+                                                 .Min()
+                                         };
+
+            var result = (from c in CNK
+                          join ckfc in clientKeyFeatureCounts on c.Id equals ckfc.IdClient into ckfcJoin
+                          from ckfc in ckfcJoin.DefaultIfEmpty()
+                          where ckfc != null && ckfc.ValidFeatureCount > 0
+                          orderby c.Name
+                          select new ModelViewClientNumberKeys
+                          {
+                              Id = c.Id,
+                              Name = c.Name,
+                              NumberKeys = ckfc.ValidFeatureCount == 0 ? 0 : ckfc.ValidKeyCount,
+                              NumberFeatures = ckfc.ValidFeatureCount,
+                              EndDate = ckfc.ClosestEndDate.HasValue
+                                         ? (ckfc.ClosestEndDate.Value.Year == 2111 ? "\u221E" : ckfc.ClosestEndDate.Value.ToString("yyyy-MM-dd"))
+                                         : "нет активных"
+                          }).ToList();
+
+            return result.GroupBy(r => r.Id).Select(g => g.First()).ToList();
+        }
+
+        public List<ModelViewClientNumberKeys> GetByInnerId(int id)
+        {
+            var CNK = clientNumberKeysLogic.GetAll();
+            var KFC = keyFeatureClientLogic.GetAll();
+            var KF = keyFeatureLogic.GetAll();
+            var HK = haspKeyLogic.GetAll();
+
+            var validKeys = from kfc in KFC
+                            join kf in KF on kfc.IdKeyFeature equals kf.Id
+                            join hk in HK on kf.IdHaspKey equals hk.Id
+                            where kf.EndDate >= DateTime.Now && hk.InnerId == id
+                            group kf by new { kfc.IdClient, kf.IdHaspKey } into g
+                            select new
+                            {
+                                g.Key.IdClient,
+                                g.Key.IdHaspKey,
+                                ClosestEndDate = g.Min(k => k.EndDate)
+                            };
+
+            var clientKeyFeatureCounts = from kfc in KFC
+                                         join kf in KF on kfc.IdKeyFeature equals kf.Id
+                                         join hk in HK on kf.IdHaspKey equals hk.Id
+                                         where kf.EndDate >= DateTime.Now && hk.InnerId == id
+                                         group kf by new { kfc.IdClient, kf.IdHaspKey } into g
+                                         select new
+                                         {
+                                             g.Key.IdClient,
+                                             g.Key.IdHaspKey,
+                                             ValidFeatureCount = g.Count()
+                                         };
+
+            var result = (from c in CNK
+                          join kfc in KFC on c.Id equals kfc.IdClient
+                          join kf in KF on kfc.IdKeyFeature equals kf.Id
+                          join hk in HK on kf.IdHaspKey equals hk.Id
+                          where hk.InnerId == id
+                          join vk in validKeys on new { IdClient = c.Id, kf.IdHaspKey } equals new { vk.IdClient, vk.IdHaspKey } into vkJoin
+                          from vk in vkJoin.DefaultIfEmpty()
+                          join ckfc in clientKeyFeatureCounts on new { IdClient = c.Id, kf.IdHaspKey } equals new { ckfc.IdClient, ckfc.IdHaspKey } into ckfcJoin
+                          from ckfc in ckfcJoin.DefaultIfEmpty()
+                          orderby c.Name
+
+                          select new ModelViewClientNumberKeys
+                          {
+                             Id = c.Id,
+                             Name = c.Name,
+                             NumberKeys = 1,
+                             NumberFeatures = ckfc != null ? ckfc.ValidFeatureCount : 0,
+                             EndDate = vk != null && vk.ClosestEndDate != DateTime.MinValue
+                             ? (vk.ClosestEndDate.Year == 2111 ? "\u221E" : vk.ClosestEndDate.ToString("yyyy-MM-dd"))
+                             : "нет активных"
+                          }).GroupBy(x => new { x.Name })
+                            .Select(g => g.First())
+                            .ToList();
+
+            return result.Distinct().ToList();
         }
     }
 }
