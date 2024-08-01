@@ -47,6 +47,15 @@ namespace ModelEntities
             get => Client.ContactPerson;
             set => Client.ContactPerson = value; 
         }
+
+        [DisplayName("Количество ключей")]
+        public int NumberKeys { get; set; }
+
+        [DisplayName("Количество функциональностей")]
+        public int NumberFeatures { get; set; }
+
+        [DisplayName("Дата окончания")]
+        public string EndDate { get; set; }
         public override bool Equals(object obj) => Client.Equals(obj);
         public override int GetHashCode() => Client.GetHashCode();
     }

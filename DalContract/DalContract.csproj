@@ -45,7 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IContractClientDAO.cs" />
-    <Compile Include="IContractClientNumberKeysDAO.cs" />
     <Compile Include="IContractEntitesDAO.cs" />
     <Compile Include="IContractFeatureDAO.cs" />
     <Compile Include="IContractHaspKeyDAO.cs" />

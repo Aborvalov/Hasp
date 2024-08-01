@@ -1,6 +1,4 @@
-﻿using Entities;
-using Model;
-using ModelEntities;
+﻿using ModelEntities;
 using Presenter;
 using System;
 using System.Collections.Generic;
@@ -15,12 +13,12 @@ namespace HASPKey
     public partial class ClientNumberKeys : DevExpress.XtraEditors.XtraForm, IClientNumberKeysView
     {
         private readonly IClientNumberKeysPresenter presenterClientNumberKeys;
-        private readonly IPresenterReference presenterClient;
-        private ModelViewClientNumberKeys newItem;
+        private ModelViewClient newItem;
 
         private bool sortAscending = true;
         internal ModelViewFeature SearchFeature { get; set; } = null;
         public bool error = false;
+        private bool isSomethingChanged = false;
 
         private const string errorStr = "Ошибка";
         private const string caption = "Удалить клиента";
@@ -34,12 +32,11 @@ namespace HASPKey
         private void SetButtonVisibility(bool isVisible)
         {
             buttonAdd.Visible = isVisible;
-            buttonAll.Visible = isVisible;
             buttonDelete.Visible = isVisible;
             buttonSave.Visible = isVisible;
-            buttonSearchByFeature.Visible = true;
-            labelSearchInnerId.Visible = true;
-            tbInnerIdHaspKey.Visible = true;
+            buttonSearchByFeature.Visible = !isVisible;
+            labelSearchInnerId.Visible = !isVisible;
+            tbInnerIdHaspKey.Visible = !isVisible;
             buttonCancel.Visible = isVisible;
         }
 
@@ -49,7 +46,9 @@ namespace HASPKey
             presenterClientNumberKeys = new ClientNumberKeysPresenter(this); 
             SetButtonVisibility(false);
             labelFeature.Visible = false;
+            buttonAll.Visible = true;
         }
+
         public ClientNumberKeys() : this(false)
         { }
 
@@ -57,18 +56,12 @@ namespace HASPKey
         {
             using (FeatureView feature = new FeatureView(true))
             {
-                feature.FeatureSelected += (selectedFeature) =>
-                {
-                    if (selectedFeature != null)
-                    {
-                        presenterClientNumberKeys.GetByFeature(selectedFeature.Id);
-                        labelFeature.Visible = true;
-                        labelFeature.Text = selectedFeature.Name;
-                        numberKeysDataGridViewTextBoxColumn.Visible = false;
-                        feature.Close();
-                    }
-                };
                 feature.ShowDialog();
+                if (feature.SearchFeature != null) 
+                {
+                    presenterClientNumberKeys.GetByFeature(feature.SearchFeature.Id);
+                    labelFeature.Text = feature.SearchFeature.Name;
+                }
             }
         }
 
@@ -83,11 +76,14 @@ namespace HASPKey
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             numberKeysDataGridViewTextBoxColumn.Visible = true;
-            var bindingList = bindingClientNumberKeys.DataSource as BindingList<ModelViewClientNumberKeys>;
+            var bindingList = bindingClientNumberKeys.DataSource as BindingList<ModelViewClient>;
             
-            newItem = new ModelViewClientNumberKeys
+            newItem = new ModelViewClient
             {
                 Id = -1,
+                Address = null,
+                Phone = null,
+                ContactPerson = null,
                 NumberKeys = 0,
                 NumberFeatures = 0,
                 EndDate = "нет активных"
@@ -102,12 +98,13 @@ namespace HASPKey
                 DataGridViewClientNumberKeys.CurrentCell = DataGridViewClientNumberKeys.Rows[rowIndex].Cells[0];
                 DataGridViewClientNumberKeys.BeginEdit(true);
             }
+            isSomethingChanged = true;
         }
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             numberKeysDataGridViewTextBoxColumn.Visible = true;
-            var bindingList = bindingClientNumberKeys.DataSource as BindingList<ModelViewClientNumberKeys>;
+            var bindingList = bindingClientNumberKeys.DataSource as BindingList<ModelViewClient>;
             error = false;
             if (MessageBox.Show(messageSave, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -119,7 +116,7 @@ namespace HASPKey
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
             numberKeysDataGridViewTextBoxColumn.Visible = true;
-            if (!(DataGridViewClientNumberKeys.CurrentRow.DataBoundItem is ModelViewClientNumberKeys row))
+            if (!(DataGridViewClientNumberKeys.CurrentRow.DataBoundItem is ModelViewClient row))
             {
                 MessageError(emptyClient);
                 return;
@@ -151,22 +148,22 @@ namespace HASPKey
             error = true;
         }
 
-        public void Bind(List<ModelViewClientNumberKeys> entity)
+        public void Bind(List<ModelViewClient> entity)
         {
             bindingClientNumberKeys.DataSource = entity != null ? 
-            new BindingList<ModelViewClientNumberKeys>(entity) : 
-            new BindingList<ModelViewClientNumberKeys>();
+            new BindingList<ModelViewClient>(entity) : 
+            new BindingList<ModelViewClient>();
             DataGridViewClientNumberKeys.DataSource = bindingClientNumberKeys;
         }
 
-        public void BindItem(ModelViewClientNumberKeys entity)
+        public void BindItem(ModelViewClient entity)
         {
-            bindingClientNumberKeys.DataSource = entity ?? new ModelViewClientNumberKeys();
+            bindingClientNumberKeys.DataSource = entity ?? new ModelViewClient();
             DataGridViewClientNumberKeys.DataSource = bindingClientNumberKeys;
         }
 
 
-        private readonly Dictionary<string, Func<ModelViewClientNumberKeys, IComparable>> columnSorters = new Dictionary<string, Func<ModelViewClientNumberKeys, IComparable>>
+        private readonly Dictionary<string, Func<ModelViewClient, IComparable>> columnSorters = new Dictionary<string, Func<ModelViewClient, IComparable>>
         {
             { "nameDataGridViewTextBoxColumn", x => x.Name },
             { "numberKeysDataGridViewTextBoxColumn", x => x.NumberKeys },
@@ -189,9 +186,9 @@ namespace HASPKey
             }
         };
 
-        private void Sort(Func<ModelViewClientNumberKeys, IComparable> param)
+        private void Sort(Func<ModelViewClient, IComparable> param)
         {
-            var currentList = bindingClientNumberKeys.List.Cast<ModelViewClientNumberKeys>().ToList();
+            var currentList = bindingClientNumberKeys.List.Cast<ModelViewClient>().ToList();
             var sortedList = sortAscending ? currentList.OrderBy(param).ToList() : currentList.OrderByDescending(param).ToList();
             sortAscending = !sortAscending; 
             Bind(sortedList);
@@ -207,9 +204,22 @@ namespace HASPKey
             }
         }
 
+        private void DataGridViewClientNumberKeys_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            isSomethingChanged = true;
+        }
+
         private void ButtonCancel_Click(object sender, EventArgs e)
         {
-            presenterClientNumberKeys.Display();
+            if (isSomethingChanged)
+            {
+                presenterClientNumberKeys.Display();
+                isSomethingChanged = false;
+            }
+            else
+            {
+                SetButtonVisibility(false);
+            }
         }
 
         private void tbInnerIdHaspKey_KeyDown(object sender, KeyEventArgs e)

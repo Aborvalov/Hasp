@@ -12,8 +12,8 @@ namespace Presenter
     public class ClientNumberKeysPresenter : IClientNumberKeysPresenter
     {
         private readonly IClientNumberKeysView entitiesClientNumberKeysView;
-        private readonly IClientNumberKeysModel clientNumberKeysModel;
-        private List<ModelViewClientNumberKeys> clientNumberKeys;
+        private readonly IClientModel clientNumberKeysModel;
+
         private const string nullDB = "База данных не найдена.";
         private const string errorUpdate = "Не удалось обновить клиента.";
         private const string errorDelete = "Не удалось удалить клиента.";
@@ -21,44 +21,41 @@ namespace Presenter
         private const string errorAdd = "Не удалось создать клиента.";
         private const string errorEmptyId = "Данный id пустой.";
 
-        public ClientNumberKeysPresenter(IClientNumberKeysView entitiesclnkView)
+        public ClientNumberKeysPresenter(IClientNumberKeysView entitiesClientNumberKeysView)
         {
-            this.entitiesClientNumberKeysView = entitiesclnkView ?? throw new ArgumentNullException(nameof(entitiesclnkView));
+            this.entitiesClientNumberKeysView = entitiesClientNumberKeysView ?? throw new ArgumentNullException(nameof(entitiesClientNumberKeysView));
             try
             {
-                clientNumberKeysModel = new ClientNumberKeysModel(new Logics());
+                clientNumberKeysModel = new ClientModel(new Logics());
             }
             catch (ArgumentNullException)
             {
-                entitiesclnkView.MessageError(nullDB);
+                entitiesClientNumberKeysView.MessageError(nullDB);
             }
             Display();
         }
 
-        public ModelViewClientNumberKeys Entities { set; get; } = null;
+        public ModelViewClient Entities { set; get; } = null;
 
-        public void Display() => entitiesClientNumberKeysView.Bind(clientNumberKeysModel.NumberKeys());
+        public void Display() => entitiesClientNumberKeysView.Bind(clientNumberKeysModel.GetNumberOfKeysAndFeatures());
 
         public void Dispose() => clientNumberKeysModel.Dispose();
 
-        public void Edit(List<ModelViewClientNumberKeys> keyClient)
+        public void Edit(List<ModelViewClient> keyClient)
         {
             if (keyClient == null)
                 throw new ArgumentNullException(nameof(keyClient));
 
             Delete(keyClient);
-            Display();
-            
             Add(keyClient);
-            Display();
-
             Update(keyClient);
+
             Display();
 
             entitiesClientNumberKeysView.DataChange();
         }
 
-        public void Update(ModelViewClientNumberKeys entity)
+        public void Update(ModelViewClient entity)
         {
             if (entity == null)
             {
@@ -74,7 +71,7 @@ namespace Presenter
                 entitiesClientNumberKeysView.MessageError(errorUpdate);
         }
 
-        public void Update(List<ModelViewClientNumberKeys> keyClient)
+        public void Update(List<ModelViewClient> keyClient)
         {
             if (keyClient == null)
             {
@@ -90,7 +87,7 @@ namespace Presenter
             }
         }
 
-        public void Add(List<ModelViewClientNumberKeys> keyClient)
+        public void Add(List<ModelViewClient> keyClient)
         {
             if (keyClient == null)
             {
@@ -106,7 +103,7 @@ namespace Presenter
             }
         }
 
-        public void Delete(List<ModelViewClientNumberKeys> keyClient)
+        public void Delete(List<ModelViewClient> keyClient)
         {
             if (keyClient == null)
             {
@@ -145,13 +142,13 @@ namespace Presenter
             return true;
         }
 
-        public void FillInputItem(ModelViewClientNumberKeys item)
+        public void FillInputItem(ModelViewClient item)
         {
             Entities = item ?? throw new ArgumentNullException(nameof(item));
             entitiesClientNumberKeysView.BindItem(item);
         }
 
-        public void FillModel(ModelViewClientNumberKeys item)
+        public void FillModel(ModelViewClient item)
         {
             Entities = item ?? throw new ArgumentNullException(nameof(item));
             if (!CheckInputData())
@@ -162,7 +159,7 @@ namespace Presenter
                 Update(Entities);
         }
 
-        public void Add(ModelViewClientNumberKeys entity)
+        public void Add(ModelViewClient entity)
         {
             if (entity == null)
             {
@@ -179,7 +176,7 @@ namespace Presenter
                 entitiesClientNumberKeysView.MessageError(errorAdd);
         }
 
-        public bool CheckInputData(List<ModelViewClientNumberKeys> item)
+        public bool CheckInputData(List<ModelViewClient> item)
         {
             string errorMess = string.Empty;
 
@@ -212,7 +209,6 @@ namespace Presenter
                 return;
             }
             entitiesClientNumberKeysView.Bind(clientNumberKeysModel.GetByInnerId(id));
-
         }
     }
 }

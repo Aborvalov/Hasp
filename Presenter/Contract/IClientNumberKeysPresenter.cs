@@ -6,10 +6,10 @@ using ViewContract;
 
 namespace Presenter
 {
-    public interface IClientNumberKeysPresenter: IEntitiesPresenter<ModelViewClientNumberKeys>
+    public interface IClientNumberKeysPresenter : IEntitiesPresenter<ModelViewClient>
     {
-        bool CheckInputData(List<ModelViewClientNumberKeys> item);   
-        void Edit(List<ModelViewClientNumberKeys> item);
+        bool CheckInputData(List<ModelViewClient> item);
+        void Edit(List<ModelViewClient> item);
         void GetByFeature(int id);
         void GetByInnerId(int id);
     }

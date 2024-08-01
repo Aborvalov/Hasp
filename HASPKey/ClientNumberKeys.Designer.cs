@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DataGridViewClientNumberKeys = new System.Windows.Forms.DataGridView();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numberKeysDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,14 +70,14 @@
             this.numberFeatureKeysDataGridViewTextBoxColumn,
             this.endDateNumberKeysDataGridViewTextBoxColumn});
             this.DataGridViewClientNumberKeys.DataSource = this.bindingClientNumberKeys;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 7.8F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGridViewClientNumberKeys.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridViewClientNumberKeys.DefaultCellStyle = dataGridViewCellStyle1;
             this.DataGridViewClientNumberKeys.Location = new System.Drawing.Point(14, 70);
             this.DataGridViewClientNumberKeys.Margin = new System.Windows.Forms.Padding(4);
             this.DataGridViewClientNumberKeys.MinimumSize = new System.Drawing.Size(756, 516);
@@ -86,6 +86,7 @@
             this.DataGridViewClientNumberKeys.RowHeadersWidth = 51;
             this.DataGridViewClientNumberKeys.Size = new System.Drawing.Size(756, 516);
             this.DataGridViewClientNumberKeys.TabIndex = 14;
+            this.DataGridViewClientNumberKeys.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewClientNumberKeys_CellValueChanged);
             this.DataGridViewClientNumberKeys.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewClientNumberKeys_ColumnHeaderMouseClick);
             // 
             // nameDataGridViewTextBoxColumn

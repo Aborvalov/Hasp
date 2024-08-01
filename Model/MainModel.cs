@@ -53,7 +53,6 @@ namespace Model
                                    Feature = feature.Name,
                                    NumberKey = key.InnerId.ToString() + " - \"" + key.Number + "\"",
                                };
-
                     return item
                             .GroupBy(x => x.Client)
                             .SelectMany(g => g
@@ -70,7 +69,7 @@ namespace Model
 
         public List<ModelMain> GetActiveKeys()
         => GetAll()
-            .Where(x => x.EndDate.ToString().IndexOf(yearInEternalKey) == 0 ||
+            .Where(x => x.EndDate.ToString().IndexOf(yearInEternalKey) >= 0 ||
             x.EndDate >= dateNow)
             .ToList();
 
@@ -82,7 +81,7 @@ namespace Model
 
         public List<ModelMain> GetKeysPastNDays()
         => GetAll()
-            .Where(x => x.EndDate.ToString().IndexOf(yearInEternalKey) != 0 &&
+            .Where(x => x.EndDate.ToString().IndexOf(yearInEternalKey) < 0 &&
             dateNow > x.EndDate &&
             x.EndDate > dateNow.AddDays(-days))
             .ToList();
@@ -94,7 +93,7 @@ namespace Model
 
         public List<ModelMain> ShowExpiredKeys()
             => GetAll()
-            .Where(x => x.EndDate.ToString().IndexOf(yearInEternalKey) != 0 &&
+            .Where(x => x.EndDate.ToString().IndexOf(yearInEternalKey) < 0 &&
             x.EndDate < dateNow)
             .ToList();
     }

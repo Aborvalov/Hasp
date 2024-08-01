@@ -70,15 +70,13 @@ namespace Logic
 
             CheckArgument(entity);
 
-            return !clientDAO.ContainsDB(entity) ? clientDAO.Update(entity) : false;
+            return !clientDAO.ContainsDB(entity) && clientDAO.Update(entity);
         }
 
         private void CheckArgument(Client client)
         {
             if (string.IsNullOrWhiteSpace(client.Name))
                 throw new ArgumentException(nameof(client.Name));
-            if (string.IsNullOrWhiteSpace(client.Address))
-                throw new ArgumentException(nameof(client.Address));
         }
     }
 }

@@ -7,9 +7,9 @@ namespace ViewContract
 {
     public interface IClientNumberKeysView
     {
-        void BindItem(ModelViewClientNumberKeys entity);
+        void BindItem(ModelViewClient entity);
         void DataChange();
         void MessageError(string errorText);
-        void Bind(List<ModelViewClientNumberKeys> modelViewClientsNumberKeys);
+        void Bind(List<ModelViewClient> modelViewClientsNumberKeys);
     }
 }

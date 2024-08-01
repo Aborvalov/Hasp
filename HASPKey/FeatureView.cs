@@ -1,4 +1,5 @@
-﻿using ModelEntities;
+﻿using Entities;
+using ModelEntities;
 using Presenter;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,6 @@ namespace HASPKey
         private bool search = false;
         private bool error = false;
         public event Action DataUpdated;
-        public event Action<ModelViewFeature> FeatureSelected;
         internal ModelViewFeature SearchFeature { get; private set; } = null;
 
         private const string errorStr = "Ошибка";
@@ -76,7 +76,7 @@ namespace HASPKey
             if (search)
             {
                 SearchFeature = row;
-                FeatureSelected?.Invoke(row);
+                Close();
                 return;
             }
 
@@ -172,5 +172,6 @@ namespace HASPKey
         {
             DefaultView();
         }
+
     }
 }

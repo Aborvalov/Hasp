@@ -46,7 +46,6 @@
     <Compile Include="DXModelClient.cs" />
     <Compile Include="DXModelFeature.cs" />
     <Compile Include="DXModelKeys.cs" />
-    <Compile Include="ModelViewClientNumberKeys.cs" />
     <Compile Include="ModelViewMain.cs" />
     <Compile Include="ModelViewClient.cs" />
     <Compile Include="ModelViewFeature.cs" />

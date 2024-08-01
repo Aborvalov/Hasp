@@ -12,7 +12,7 @@ namespace UnitTestLogic
     /// Summary description for UnitTestKeyFeatureClient
     /// </summary>
     [TestClass]
-    [DeploymentItem("       .db")]
+    [DeploymentItem("HASPKey.db")]
     public class UnitTestKeyFeatureClientLogic
     {
         private const int erroneousId = -123;

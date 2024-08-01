@@ -34,9 +34,9 @@ namespace DalDB
                 throw new ArgumentNullException(nameof(feature));
 
             var keyFeatures      = db.KeyFeatures.ToList();
-            var keyFeatureCliets = db.KeyFeatureClients.ToList();
+            var keyFeatureClients = db.KeyFeatureClients.ToList();
 
-            var clientFeature = (from keyFeatureClient in keyFeatureCliets
+            var clientFeature = (from keyFeatureClient in keyFeatureClients
                                  join keyFeature in keyFeatures
                                    on keyFeatureClient.IdKeyFeature equals keyFeature.Id
                                  join client in GetAll()
@@ -168,6 +168,10 @@ namespace DalDB
                                              c.ContactPerson == entity.ContactPerson &&
                                              c.Phone         == entity.Phone);
             return client != null;
-        }        
+        }
+
+
+
+
     }
 }
