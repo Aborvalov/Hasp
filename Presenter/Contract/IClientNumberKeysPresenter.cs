@@ -10,5 +10,7 @@ namespace Presenter
     {
         bool CheckInputData(List<ModelViewClientNumberKeys> item);   
         void Edit(List<ModelViewClientNumberKeys> item);
+        void GetByFeature(ModelViewFeature searchFeature);
+        void GetByInnerId(int id);
     }
 }

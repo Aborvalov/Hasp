@@ -14,5 +14,7 @@ namespace Model
         bool Remove(IEnumerable<ModelViewClientNumberKeys> idKeyClient, out string error);
         bool Remove(int id);
         bool Update(ModelViewClientNumberKeys entity);
+        List<ModelViewClientNumberKeys> GetByFeature(ModelViewFeature feature);
+        List<ModelViewClientNumberKeys> GetByInnerId(int id);
     }
 }

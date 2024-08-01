@@ -16,6 +16,7 @@ namespace HASPKey
         private bool search = false;
         private bool error = false;
         public event Action DataUpdated;
+        public event Action<ModelViewFeature> FeatureSelected;
         internal ModelViewFeature SearchFeature { get; private set; } = null;
 
         private const string errorStr = "Ошибка";
@@ -74,22 +75,13 @@ namespace HASPKey
 
             if (search)
             {
-                var clientViewForm = new ClientView(row);
-                var tmp = row;
-                
                 SearchFeature = row;
-                clientViewForm.ShowDialog();
-                Close();
+                FeatureSelected?.Invoke(row);
                 return;
             }
 
             if (size && Admin.IsAdmin)
             {
-                var clientViewForm = new ClientView(row);
-                clientViewForm.ShowDialog();
-
-                //DefaultView();
-                
                 presenterFeature.FillInputItem(row);
                 ButtonAdd.Enabled = false;
             }

@@ -1,4 +1,4 @@
-﻿using DevExpress.ExpressApp.Editors;
+﻿using Entities;
 using Model;
 using ModelEntities;
 using Presenter;
@@ -16,8 +16,6 @@ namespace HASPKey
     {
         private readonly IClientNumberKeysPresenter presenterClientNumberKeys;
         private readonly IPresenterReference presenterClient;
-        private readonly IClientNumberKeysModel clientNumberKeysModel;
-        private readonly IClientNumberKeysView entitiesclnkView;
         private ModelViewClientNumberKeys newItem;
 
         private bool sortAscending = true;
@@ -39,9 +37,9 @@ namespace HASPKey
             buttonAll.Visible = isVisible;
             buttonDelete.Visible = isVisible;
             buttonSave.Visible = isVisible;
-            buttonSearchByFeature.Visible = isVisible;
-            labelSearchInnerId.Visible = isVisible;
-            tbInnerIdHaspKey.Visible = isVisible;
+            buttonSearchByFeature.Visible = true;
+            labelSearchInnerId.Visible = true;
+            tbInnerIdHaspKey.Visible = true;
             buttonCancel.Visible = isVisible;
         }
 
@@ -55,25 +53,35 @@ namespace HASPKey
         public ClientNumberKeys() : this(false)
         { }
 
-        private void DefaultView()
-        {
-            bindingClientNumberKeys.DataSource = new ModelViewClient();
-            presenterClient.FillInputItem(bindingClientNumberKeys.DataSource as ModelViewClient);
-;
-        }
         private void ButtonSearchByFeature_Click(object sender, EventArgs e)
         {
             using (FeatureView feature = new FeatureView(true))
             {
+                feature.FeatureSelected += (selectedFeature) =>
+                {
+                    if (selectedFeature != null)
+                    {
+                        presenterClientNumberKeys.GetByFeature(selectedFeature);
+                        labelFeature.Visible = true;
+                        labelFeature.Text = selectedFeature.Name;
+                        numberKeysDataGridViewTextBoxColumn.Visible = false;
+                    }
+                };
                 feature.ShowDialog();
             }
         }
 
-        private void ButtonAll_Click(object sender, EventArgs e) =>
+        private void ButtonAll_Click(object sender, EventArgs e)
+        {
+            numberKeysDataGridViewTextBoxColumn.Visible = true;
+            labelFeature.Visible = false;
             presenterClientNumberKeys.Display();
+
+        }
         
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
+            numberKeysDataGridViewTextBoxColumn.Visible = true;
             var bindingList = bindingClientNumberKeys.DataSource as BindingList<ModelViewClientNumberKeys>;
             
             newItem = new ModelViewClientNumberKeys
@@ -97,6 +105,7 @@ namespace HASPKey
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
+            numberKeysDataGridViewTextBoxColumn.Visible = true;
             var bindingList = bindingClientNumberKeys.DataSource as BindingList<ModelViewClientNumberKeys>;
             error = false;
             if (MessageBox.Show(messageSave, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -108,6 +117,7 @@ namespace HASPKey
 
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
+            numberKeysDataGridViewTextBoxColumn.Visible = true;
             if (!(DataGridViewClientNumberKeys.CurrentRow.DataBoundItem is ModelViewClientNumberKeys row))
             {
                 MessageError(emptyClient);
@@ -126,6 +136,9 @@ namespace HASPKey
 
         private void ButtonEdit_Click(object sender, EventArgs e)
         {
+            numberKeysDataGridViewTextBoxColumn.Visible = true;
+            labelFeature.Visible = false;
+            presenterClientNumberKeys.Display();
             SetButtonVisibility(true);
         }
 
@@ -205,10 +218,7 @@ namespace HASPKey
                 int innerIdHaspKey;
                 if (int.TryParse(tbInnerIdHaspKey.Text, out innerIdHaspKey))
                 {
-                    using (ClientView client = new ClientView(innerIdHaspKey))
-                    {
-                        client.ShowDialog();
-                    }
+                    presenterClientNumberKeys.GetByInnerId(innerIdHaspKey);
                 }
                 else
                 {
@@ -223,12 +233,6 @@ namespace HASPKey
             {
                 e.Handled = true;
             }
-        }
-
-        private void DataGridViewClientNumberKeys_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            
-            DataGridViewClientNumberKeys.Refresh();
         }
     }
 }

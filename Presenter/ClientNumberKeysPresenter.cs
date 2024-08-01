@@ -1,6 +1,4 @@
-﻿using FSharp.Compiler.EditorServices;
-using FSharp.Compiler.Text;
-using Logic;
+﻿using Logic;
 using Model;
 using ModelEntities;
 using System;
@@ -13,18 +11,19 @@ namespace Presenter
 {
     public class ClientNumberKeysPresenter : IClientNumberKeysPresenter
     {
-        private readonly IClientNumberKeysView entitiesclnkView;
+        private readonly IClientNumberKeysView entitiesClientNumberKeysView;
         private readonly IClientNumberKeysModel clientNumberKeysModel;
+        private List<ModelViewClientNumberKeys> clientNumberKeys;
         private const string nullDB = "База данных не найдена.";
         private const string errorUpdate = "Не удалось обновить клиента.";
         private const string errorDelete = "Не удалось удалить клиента.";
         private const string errorEmptyName = "\u2022 Не заполнено поля \"Наименование\", не должно быть пустым. \n";
         private const string errorAdd = "Не удалось создать клиента.";
-        private const string errorInnerId = "Некорректный номер ключа.";
+        private const string errorEmptyFeature = "Данная функциональность пуста.";
 
         public ClientNumberKeysPresenter(IClientNumberKeysView entitiesclnkView)
         {
-            this.entitiesclnkView = entitiesclnkView ?? throw new ArgumentNullException(nameof(entitiesclnkView));
+            this.entitiesClientNumberKeysView = entitiesclnkView ?? throw new ArgumentNullException(nameof(entitiesclnkView));
             try
             {
                 clientNumberKeysModel = new ClientNumberKeysModel(new Logics());
@@ -38,7 +37,7 @@ namespace Presenter
 
         public ModelViewClientNumberKeys Entities { set; get; } = null;
 
-        public void Display() => entitiesclnkView.Bind(clientNumberKeysModel.NumberKeys());
+        public void Display() => entitiesClientNumberKeysView.Bind(clientNumberKeysModel.NumberKeys());
 
         public void Dispose() => clientNumberKeysModel.Dispose();
 
@@ -56,23 +55,23 @@ namespace Presenter
             Update(keyClient);
             Display();
 
-            entitiesclnkView.DataChange();
+            entitiesClientNumberKeysView.DataChange();
         }
 
         public void Update(ModelViewClientNumberKeys entity)
         {
             if (entity == null)
             {
-                entitiesclnkView.MessageError(errorUpdate);
+                entitiesClientNumberKeysView.MessageError(errorUpdate);
                 return;
             }
             if (clientNumberKeysModel.Update(entity)) 
             {
-                entitiesclnkView.DataChange();
+                entitiesClientNumberKeysView.DataChange();
                 Display();
             }
             else
-                entitiesclnkView.MessageError(errorUpdate);
+                entitiesClientNumberKeysView.MessageError(errorUpdate);
         }
 
         public void Update(List<ModelViewClientNumberKeys> keyClient)
@@ -87,7 +86,7 @@ namespace Presenter
             {
                 clientNumberKeysModel.Update(update, out string error);
                 if (!string.IsNullOrEmpty(error))
-                    entitiesclnkView.MessageError(error);
+                    entitiesClientNumberKeysView.MessageError(error);
             }
         }
 
@@ -103,7 +102,7 @@ namespace Presenter
             {
                 clientNumberKeysModel.Add(add, out string error);
                 if (!string.IsNullOrEmpty(error))
-                    entitiesclnkView.MessageError(error);
+                    entitiesClientNumberKeysView.MessageError(error);
             }
         }
 
@@ -113,13 +112,12 @@ namespace Presenter
             {
                 throw new ArgumentException(nameof(keyClient));
             }
-            var delete = keyClient
-                            .Where(x => x.Id > 0);
+            var delete = keyClient.Where(x => x.Id > 0);
             if (delete.Any())
             {
                 clientNumberKeysModel.Remove(delete, out string error);
                 if (!string.IsNullOrEmpty(error))
-                    entitiesclnkView.MessageError(error);
+                    entitiesClientNumberKeysView.MessageError(error);
             }
         }
 
@@ -127,21 +125,21 @@ namespace Presenter
         {
             if (id > 0 && clientNumberKeysModel.Remove(id))
             {
-                entitiesclnkView.DataChange();
+                entitiesClientNumberKeysView.DataChange();
                 Display();
             }
             else
-                entitiesclnkView.MessageError(errorDelete);
+                entitiesClientNumberKeysView.MessageError(errorDelete);
         }
 
         public bool CheckInputData()
         {
-            string errorMess = String.Empty;
+            string errorMess = string.Empty;
             if (string.IsNullOrWhiteSpace(Entities.Name))
                 errorMess += errorEmptyName;
             if (errorMess != string.Empty)
             {
-                entitiesclnkView.MessageError(errorMess.Trim());
+                entitiesClientNumberKeysView.MessageError(errorMess.Trim());
                 return false;
             }
             return true;
@@ -150,7 +148,7 @@ namespace Presenter
         public void FillInputItem(ModelViewClientNumberKeys item)
         {
             Entities = item ?? throw new ArgumentNullException(nameof(item));
-            entitiesclnkView.BindItem(item);
+            entitiesClientNumberKeysView.BindItem(item);
         }
 
         public void FillModel(ModelViewClientNumberKeys item)
@@ -168,17 +166,17 @@ namespace Presenter
         {
             if (entity == null)
             {
-                entitiesclnkView.MessageError(errorAdd);
+                entitiesClientNumberKeysView.MessageError(errorAdd);
                 return;
             }
 
             if (clientNumberKeysModel.Add(entity))
             {
-                entitiesclnkView.DataChange();
+                entitiesClientNumberKeysView.DataChange();
                 Display();
             }
             else
-                entitiesclnkView.MessageError(errorAdd);
+                entitiesClientNumberKeysView.MessageError(errorAdd);
         }
 
         public bool CheckInputData(List<ModelViewClientNumberKeys> item)
@@ -190,10 +188,30 @@ namespace Presenter
 
             if (errorMess != string.Empty)
             {
-                entitiesclnkView.MessageError(errorMess.Trim());
+                entitiesClientNumberKeysView.MessageError(errorMess.Trim());
                 return false;
             }
             return true;
+        }
+       
+        public void GetByFeature(ModelViewFeature feature)
+        {
+            if (feature == null)
+            {
+                entitiesClientNumberKeysView.MessageError(errorEmptyFeature);
+                return;
+            }
+            entitiesClientNumberKeysView.Bind(clientNumberKeysModel.GetByFeature(feature));
+        }
+        public void GetByInnerId(int id) 
+        {
+            if (id <= 0)
+            {
+                entitiesClientNumberKeysView.MessageError(errorEmptyFeature);
+                return;
+            }
+            entitiesClientNumberKeysView.Bind(clientNumberKeysModel.GetByInnerId(id));
+
         }
     }
 }
