@@ -13,6 +13,7 @@ namespace Presenter
     {
         private readonly IClientNumberKeysView entitiesClientNumberKeysView;
         private readonly IClientNumberKeysModel clientNumberKeysModel;
+        private List<ModelViewClientNumberKeys> clientNumberKeys;
         private const string nullDB = "База данных не найдена.";
         private const string errorUpdate = "Не удалось обновить клиента.";
         private const string errorDelete = "Не удалось удалить клиента.";
