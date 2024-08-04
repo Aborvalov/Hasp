@@ -8,6 +8,7 @@ namespace ModelEntities
     {
         [DisplayName("Функциональность")]
         public List<DXModelFeature> Features { get; set; }
+
         [DisplayName("Клиент")]
         public string Client { get; set; }
     }

@@ -8,9 +8,6 @@ using System.Collections.Generic;
 
 namespace UnitTestLogic
 {
-    /// <summary>
-    /// Summary description for UnitTestKeyFeatureLogic
-    /// </summary>
     [TestClass]
     [DeploymentItem("HASPKey.db")]
     public class UnitTestKeyFeatureLogic
@@ -26,6 +23,7 @@ namespace UnitTestLogic
         {
             Assert.ThrowsException<ArgumentNullException>(() => keyFeatureL = Get(null));
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void SaveKeyFeature()
@@ -39,6 +37,7 @@ namespace UnitTestLogic
             }
             Assert.IsTrue(add);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void SaveDuplicateKeyFeature()
@@ -53,6 +52,7 @@ namespace UnitTestLogic
             }
             Assert.IsFalse(add);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void SaveNullKeyFeature()
@@ -63,6 +63,7 @@ namespace UnitTestLogic
                 Assert.ThrowsException<ArgumentNullException>(() => keyFeatureL.Save(null));
             }
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void ErroneousArgumentSaveKeyFeature()
@@ -88,6 +89,7 @@ namespace UnitTestLogic
                 Assert.ThrowsException<ArgumentException>(() => keyFeatureL.Save(keyFeature));
             }
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void GetAllKeyFeature()
@@ -100,7 +102,6 @@ namespace UnitTestLogic
                 ClearTable.KeyFeatures(db);
                 keyFeatureL = Get(db);
 
-                // Добавляем на прямую, чтобы избежать проверки логики.
                 foreach (var kf in keyFeats)
                     db.KeyFeatures.Add(kf);
                 db.SaveChanges();
@@ -110,6 +111,7 @@ namespace UnitTestLogic
 
             CollectionAssert.AreEqual(getAll, keyFeats);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void GetAllEmptyKeyFeature()
@@ -126,6 +128,7 @@ namespace UnitTestLogic
             }
             CollectionAssert.AreEqual(getAll, kfExpected);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void GetByIdKeyFeature()
@@ -143,9 +146,7 @@ namespace UnitTestLogic
 
             Assert.AreEqual(getById, kfExpected);
         }
-        /// <summary>
-        /// Поиск неправильного id.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void GetByErroneousIdKeyFeaturey()
@@ -156,9 +157,7 @@ namespace UnitTestLogic
                 Assert.ThrowsException<ArgumentException>(() => keyFeatureL.GetById(erroneousId));
             }
         }
-        /// <summary>
-        /// Поиск id которого нет в базе.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void GetByIdNoDBKeyFeature()
@@ -174,6 +173,7 @@ namespace UnitTestLogic
 
             Assert.IsNull(getById);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void UpdateKeyFeature()
@@ -197,6 +197,7 @@ namespace UnitTestLogic
 
             Assert.IsTrue(update);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void UpdateDuplicateKeyKeyFeature()
@@ -214,6 +215,7 @@ namespace UnitTestLogic
 
             Assert.IsFalse(update);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void UpdateNullKeyFeature()
@@ -224,9 +226,7 @@ namespace UnitTestLogic
                 Assert.ThrowsException<ArgumentNullException>(() => keyFeatureL.Update(null));
             }
         }
-        /// <summary>
-        /// Обновление связи ключ-фича которой не существует в базе.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void UpdateNoDBKeyFeature()
@@ -247,6 +247,7 @@ namespace UnitTestLogic
                 Assert.IsFalse(keyFeatureL.Update(kfNoDB));
             }
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void RemoveKeyFeature()
@@ -267,9 +268,7 @@ namespace UnitTestLogic
 
             Assert.IsTrue(remove);
         }
-        /// <summary>
-        /// Удаление неправильного id.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void RemoveErroneousIdKeyFeature()
@@ -280,9 +279,7 @@ namespace UnitTestLogic
                 Assert.ThrowsException<ArgumentException>(() => keyFeatureL.Remove(erroneousId));
             }
         }
-        /// <summary>
-        /// Удаление связи ключ-фича которой не существует в базе.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void RemoveNoDBKeyFeature()
@@ -309,13 +306,6 @@ namespace UnitTestLogic
         {
             KeyFeature kf = CreateNew();
             kf.Id = id;
-            return kf;
-        }
-        private KeyFeature CreateNew(int id, int idHaspKey, int idFeature)
-        {
-            KeyFeature kf = CreateNew(id);
-            kf.IdHaspKey = idHaspKey;
-            kf.IdFeature = idFeature;
             return kf;
         }
     }

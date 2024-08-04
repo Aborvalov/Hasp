@@ -22,6 +22,7 @@ namespace UnitTestDal
         {
             Assert.ThrowsException<ArgumentNullException>(() => haspKeyDAO = new DbHaspKeyDAO(null));
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void AddHaspKey()
@@ -37,6 +38,7 @@ namespace UnitTestDal
             }
             Assert.AreEqual(add, idExpected);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void AddNullHaspKey()
@@ -47,6 +49,7 @@ namespace UnitTestDal
                 Assert.ThrowsException<ArgumentNullException>(() => haspKeyDAO.Add(null));
             }
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void AddDuplicateHaspKey()
@@ -59,6 +62,7 @@ namespace UnitTestDal
                 Assert.AreEqual(haspKeyDAO.Add(CreateNew()), -1);
             }
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void GetAllHaspKey()
@@ -79,6 +83,7 @@ namespace UnitTestDal
 
             CollectionAssert.AreEqual(getAll, haspKeys);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void GetAllEmptyHaspKey()
@@ -95,6 +100,7 @@ namespace UnitTestDal
 
             CollectionAssert.AreEqual(getAll, haspKeysExpected);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void GetByIdHaspKey()
@@ -112,9 +118,7 @@ namespace UnitTestDal
 
             Assert.AreEqual(getById, keyExpected);
         }
-        /// <summary>
-        /// Поиск неправильного id.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void GetByErroneousIdHaspKey()
@@ -125,9 +129,7 @@ namespace UnitTestDal
                 Assert.ThrowsException<ArgumentException>(() => haspKeyDAO.GetById(erroneousId));
             }
         }
-        /// <summary>
-        /// Поиск id которого нет в базе.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void GetByIdNoDBHaspKey()
@@ -139,6 +141,7 @@ namespace UnitTestDal
                 Assert.IsNull(haspKeyDAO.GetById(1));
             }
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void UpdateHaspKey()
@@ -162,6 +165,7 @@ namespace UnitTestDal
 
             Assert.IsTrue(update);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void UpdateNullHaspKey()
@@ -172,9 +176,7 @@ namespace UnitTestDal
                 Assert.ThrowsException<ArgumentNullException>(() => haspKeyDAO.Update(null));
             }
         }
-        /// <summary>
-        /// Дублирование ключа при обновлении.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void UpdateDuplicateHaspKey()
@@ -193,9 +195,7 @@ namespace UnitTestDal
                 Assert.IsFalse(haspKeyDAO.Update(CreateNew(2)));
             }
         }
-        /// <summary>
-        /// Обновление ключа которого не существует в базе.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void UpdateNoDBHaspKey()
@@ -217,6 +217,7 @@ namespace UnitTestDal
                 Assert.IsFalse(haspKeyDAO.Update(keyNoDB));
             }
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void GetByActiveHaspKey()
@@ -243,6 +244,7 @@ namespace UnitTestDal
 
             CollectionAssert.AreEqual(GetByActive, GetByActiveExpected);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void GetByPastDueHaspKey()
@@ -274,6 +276,7 @@ namespace UnitTestDal
 
             CollectionAssert.AreEqual(GetByActive, GetByActiveExpected);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void GetByClientHaspKey()
@@ -318,6 +321,7 @@ namespace UnitTestDal
                 Assert.ThrowsException<ArgumentNullException>(() => haspKeyDAO.GetByClient(null));
             }
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void RemoveHaspKey()
@@ -340,9 +344,7 @@ namespace UnitTestDal
 
             Assert.IsTrue(remove);
         }
-        /// <summary>
-        /// Удаление неправильного id.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void RemoveErroneousIdHaspKey()
@@ -353,9 +355,7 @@ namespace UnitTestDal
                 Assert.ThrowsException<ArgumentException>(() => haspKeyDAO.Remove(erroneousId));
             }
         }
-        /// <summary>
-        /// Удаление ключа которого не существует в базе.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void RemoveNoDBHaspKey()
@@ -368,6 +368,7 @@ namespace UnitTestDal
                 Assert.IsFalse(haspKeyDAO.Remove(123));
             }
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void ContainsDBHaspKey()
@@ -381,6 +382,7 @@ namespace UnitTestDal
                 Assert.IsTrue(haspKeyDAO.ContainsDB(key));
             }
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void NoContainsDBHaspKey()
@@ -395,6 +397,7 @@ namespace UnitTestDal
                 Assert.IsFalse(haspKeyDAO.ContainsDB(key));
             }
         }
+
         private HaspKey CreateNew()
         {
             return new HaspKey
@@ -405,16 +408,11 @@ namespace UnitTestDal
                 TypeKey  = TypeKey.Pro,
             };
         }
+
         private HaspKey CreateNew(int id)
         {
             HaspKey haspKey = CreateNew();
             haspKey.Id      = id;
-            return haspKey;
-        }
-        private HaspKey CreateNew(int id, int innerId)
-        {
-            HaspKey haspKey = CreateNew(id);
-            haspKey.InnerId = innerId;
             return haspKey;
         }
     }

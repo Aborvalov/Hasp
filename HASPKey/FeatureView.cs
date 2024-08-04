@@ -1,5 +1,4 @@
-﻿using Entities;
-using ModelEntities;
+﻿using ModelEntities;
 using Presenter;
 using System;
 using System.Collections.Generic;
@@ -99,7 +98,8 @@ namespace HASPKey
                 DefaultView();
         }
 
-        private void ButtonDelete_Click(object sender, EventArgs e) => DeleteIrem();
+        private void ButtonDelete_Click(object sender, EventArgs e) => DeleteItem();
+        
         private void DefaultView()
         {
             if (!size)
@@ -115,6 +115,7 @@ namespace HASPKey
         }
 
         private void DataGridViewFeatureFeature_CellClick(object sender, DataGridViewCellEventArgs e) => FillDate();
+        
         private void DataGridViewFeatureFeature_SelectionChanged(object sender, EventArgs e) => FillDate();
 
         private void FillDate()
@@ -139,10 +140,10 @@ namespace HASPKey
         private void DataGridViewFeatureFeature_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
-                DeleteIrem();
+                DeleteItem();
         }
 
-        private void DeleteIrem()
+        private void DeleteItem()
         {
             if (!(DataGridViewFeature.CurrentRow.DataBoundItem is ModelViewFeature row))
             {

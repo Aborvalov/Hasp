@@ -18,7 +18,9 @@ namespace Model
         {
             logic = factoryLogic ?? throw new ArgumentNullException(nameof(factoryLogic));
         }
+
         public void Dispose() => Context.GetContext().Dispose();
+        
         public List<ModelMain> GetAll()
         {
             try

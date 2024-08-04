@@ -7,6 +7,7 @@ namespace ModelEntities
     {
         public ModelViewClient()
         { }
+
         public ModelViewClient(Client client) :this()
         {
             Id = client.Id;
@@ -15,32 +16,38 @@ namespace ModelEntities
             Phone = client.Phone;
             ContactPerson = client.ContactPerson;
         }
+
         [Browsable(false)]
-        public Client Client { get; private set; } = new Client();        
+        public Client Client { get; private set; } = new Client();    
+        
         [Browsable(false)]
         public int Id
         {
             get => Client.Id; 
             set => Client.Id = value; 
         }
+
         [DisplayName("Наименование")]
         public string Name
         {
             get => Client.Name;
             set => Client.Name = value;
         }
+
         [DisplayName("Адрес")]
         public string Address
         {
             get => Client.Address; 
             set => Client.Address = value; 
         }
+
         [DisplayName("Телефон")]
         public string Phone
         {
             get => Client.Phone; 
             set => Client.Phone = value;
         }
+
         [DisplayName("Контактное лицо")]
         public string ContactPerson
         {
@@ -56,6 +63,7 @@ namespace ModelEntities
 
         [DisplayName("Дата окончания")]
         public string EndDate { get; set; }
+
         public override bool Equals(object obj) => Client.Equals(obj);
         public override int GetHashCode() => Client.GetHashCode();
     }

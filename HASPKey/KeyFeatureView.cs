@@ -36,6 +36,7 @@ namespace HASPKey
         }
 
         public void DataChange() => DataUpdated?.Invoke();
+
         public void MessageError(string errorText)
             => MessageBox.Show(errorText, error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -46,6 +47,7 @@ namespace HASPKey
 
             HeadlineFeature.Text = headlineFeature + NumberHaspKey;
         }
+
         public void BindKey(List<ModelViewHaspKey> key)
             => bindingHaspKey.DataSource = key != null ? new BindingList<ModelViewHaspKey>(key)
                                                        : new BindingList<ModelViewHaspKey>();
@@ -67,6 +69,7 @@ namespace HASPKey
                 Save();
             presenterEntities.DisplayFeatureAtKey(row.Id);
         }
+
         private void ButtonSave_Click(object sender, EventArgs e) => Save();
 
         private void Save()
@@ -95,6 +98,7 @@ namespace HASPKey
             for (int i = 0; i < DataGridViewFeature.RowCount; i++)
                 DefaultColorRow(i);
         }
+
         public void DefaultColorRow(int numberRow)
            => DataGridViewFeature.Rows[numberRow].DefaultCellStyle.BackColor = Color.White;
 
@@ -134,6 +138,7 @@ namespace HASPKey
                     DataGridViewHaspKey.Rows[i].DefaultCellStyle.BackColor = Color.White;
             }
         }
+
         private void DelItem(int firstColumnIndex, int lastColumnIndex)
         {
             for (int i = firstColumnIndex; i <= lastColumnIndex; ++i)

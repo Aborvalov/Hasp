@@ -113,6 +113,7 @@ namespace Presenter
         }
 
         public void Display() => entitiesView.Bind(clientModel.GetAll());
+        
         public void Dispose() => clientModel.Dispose();
               
         public void FillInputItem(ModelViewClient item)
@@ -120,6 +121,7 @@ namespace Presenter
             Entities = item ?? throw new ArgumentNullException(nameof(item));
             entitiesView.BindItem(item);
         }
+
         public void FillModel(ModelViewClient item)
         {
             Entities = item ?? throw new ArgumentNullException(nameof(item));
@@ -132,6 +134,7 @@ namespace Presenter
             else
                 Update(Entities);
         }
+
         private bool CheckInputData()
         {
             string errorMess = string.Empty;

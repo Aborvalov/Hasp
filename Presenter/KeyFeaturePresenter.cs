@@ -36,16 +36,19 @@ namespace Presenter
         }
 
         public void DisplayHaspKey() => entitiesView.BindKey(keyModel.GetAll());
+        
         public void DisplayFeatureAtKey(int idKey)
         {
             entitiesView.NumberHaspKey = keyModel.GetById(idKey).InnerId.ToString();
             entitiesView.BindFeature(featureModel.GetAllFeatureAtKey(idKey));            
         }
+        
         public void Dispose()
         {
             keyModel.Dispose();
             featureModel.Dispose();            
         }       
+        
         public void Edit(List<ModelViewKeyFeature> keyFeatModel)
         {
             if (keyFeatModel == null)
@@ -119,6 +122,7 @@ namespace Presenter
             }
             return error;
         }
+
         public bool CheckInputData(ModelViewKeyFeature item, int numverRow)
         {
             if (item == null)
@@ -134,6 +138,7 @@ namespace Presenter
             }
             return true;
         }
+
         public bool CheckKey(ModelViewHaspKey item)
         {
             if (item == null)

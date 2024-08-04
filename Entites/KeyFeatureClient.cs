@@ -7,7 +7,6 @@
         public int IdClient { get; set; }
         public string Note { get; set; }
         public string Initiator { get; set; }
-
         public override bool Equals(object obj)
         {
             if (!(obj is KeyFeatureClient other))

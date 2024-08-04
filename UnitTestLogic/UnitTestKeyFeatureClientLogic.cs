@@ -8,9 +8,6 @@ using System.Collections.Generic;
 
 namespace UnitTestLogic
 {
-    /// <summary>
-    /// Summary description for UnitTestKeyFeatureClient
-    /// </summary>
     [TestClass]
     [DeploymentItem("HASPKey.db")]
     public class UnitTestKeyFeatureClientLogic
@@ -18,12 +15,14 @@ namespace UnitTestLogic
         private const int erroneousId = -123;
         private IKeyFeatureClientLogic keyFeatureClientL;
         private IKeyFeatureClientLogic Get(EntitesContext db) => new Logics().CreateKeyFeatureClient(db);
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void NullEntitesContextKeyFeatureClient()
         {
             Assert.ThrowsException<ArgumentNullException>(() => keyFeatureClientL = Get(null));
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void SaveKeyFeatureClient()
@@ -39,6 +38,7 @@ namespace UnitTestLogic
 
             Assert.IsTrue(add);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void SaveNullKeyFeatureClient()
@@ -49,6 +49,7 @@ namespace UnitTestLogic
                 Assert.ThrowsException<ArgumentNullException>(() => keyFeatureClientL.Save(null));
             }
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void SaveDuplicateKeyFeatureClient()
@@ -65,6 +66,7 @@ namespace UnitTestLogic
 
             Assert.IsFalse(add);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void ErroneousArgumentSaveKeyFeatureClient()
@@ -94,6 +96,7 @@ namespace UnitTestLogic
                 Assert.ThrowsException<ArgumentException>(() => keyFeatureClientL.Save(keyFeatureClient));
             }
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void GetAllKeyFeatureClient()
@@ -113,6 +116,7 @@ namespace UnitTestLogic
 
             CollectionAssert.AreEqual(getAll, keyFeatCls);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void GetAllEmptyKeyFeatureClient()
@@ -130,6 +134,7 @@ namespace UnitTestLogic
 
             CollectionAssert.AreEqual(getAll, kfcExpected);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void GetByIdKeyFeatureClient()
@@ -147,9 +152,7 @@ namespace UnitTestLogic
 
             Assert.AreEqual(getById, kfcExpected);
         }
-        /// <summary>
-        /// Поиск неправильного id.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void GetByErroneousIdKeyFeatureClient()
@@ -160,9 +163,7 @@ namespace UnitTestLogic
                 Assert.ThrowsException<ArgumentException>(() => keyFeatureClientL.GetById(erroneousId));
             }
         }
-        /// <summary>
-        /// Поиск id которого нет в базе.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void GetByIdNoDBKeyFeatureClient()
@@ -178,6 +179,7 @@ namespace UnitTestLogic
 
             Assert.IsNull(getById);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void UpdateKeyFeatureClient()
@@ -199,6 +201,7 @@ namespace UnitTestLogic
             }
             Assert.IsTrue(update);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void UpdateDuplicateKeyFeatureClient()
@@ -215,6 +218,7 @@ namespace UnitTestLogic
             }
             Assert.IsFalse(update);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void UpdateNullKeyFeatureClient()
@@ -225,9 +229,7 @@ namespace UnitTestLogic
                 Assert.ThrowsException<ArgumentNullException>(() => keyFeatureClientL.Update(null));
             }
         }
-        /// <summary>
-        /// Обновление связи (ключ-фича)-клиент которой не существует в базе.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void UpdateNoDBKeyFeatureClient()
@@ -249,6 +251,7 @@ namespace UnitTestLogic
                 Assert.IsFalse(keyFeatureClientL.Update(kfcNoDB));
             }
         }
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void RemoveKeyFeatureClient()
@@ -267,9 +270,7 @@ namespace UnitTestLogic
 
             Assert.IsTrue(remove);
         }
-        /// <summary>
-        /// Удаление неправильного id.
-        /// </summary>
+ 
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void RemoveErroneousIdKeyFeatureClient()
@@ -280,9 +281,7 @@ namespace UnitTestLogic
                 Assert.ThrowsException<ArgumentException>(() => keyFeatureClientL.Remove(erroneousId));
             }
         }
-        /// <summary>
-        /// Удаление связи (ключ-фича)-клиент которой не существует в базе.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKey.db")]
         public void RemoveNoDBHaspKey()
@@ -295,6 +294,7 @@ namespace UnitTestLogic
                 Assert.IsFalse(keyFeatureClientL.Remove(12));
             }
         }
+
         private KeyFeatureClient CreateNew()
         {
             return new KeyFeatureClient
@@ -305,17 +305,11 @@ namespace UnitTestLogic
                 Note = "Bla bla bla.",
             };
         }
+
         private KeyFeatureClient CreateNew(int id)
         {
             KeyFeatureClient kfc = CreateNew();
             kfc.Id = id;
-            return kfc;
-        }
-        private KeyFeatureClient CreateNew(int id, int idClient, int idKeyFeature)
-        {
-            KeyFeatureClient kfc = CreateNew(id);
-            kfc.IdClient = idClient;
-            kfc.IdKeyFeature = idKeyFeature;
             return kfc;
         }
     }

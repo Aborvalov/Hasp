@@ -7,7 +7,6 @@
         public string Address { get; set; }
         public string Phone { get; set; }
         public string ContactPerson { get; set; }
-
         public override bool Equals(object obj)
         {
             if (!(obj is Client other))

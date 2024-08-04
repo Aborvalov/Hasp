@@ -16,6 +16,7 @@ namespace Model
         private readonly IHaspKeyLogic haspKeyLogic;
         private readonly IClientLogic clientLogic;
         private readonly IEntitesContext db;
+
         public ClientModel(IFactoryLogic factoryLogic)
         {
             if (factoryLogic == null)

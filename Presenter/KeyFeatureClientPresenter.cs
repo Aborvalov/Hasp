@@ -30,6 +30,7 @@ namespace Presenter
             }
             DisplayClient();
         }
+
         public void DisplayClient() => entitiesView.BindClient(clientModel.GetAll());
 
         public void DisplayHaspKeyAtClient(int idClient) 
@@ -114,6 +115,7 @@ namespace Presenter
             }
             return error;
         }
+
         public bool CheckInputData(ModelViewKeyFeatureClient item, int numverRow)
         {
             if (item == null)

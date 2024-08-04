@@ -14,12 +14,14 @@ namespace HASPKey
         private IMainPresenter presenter;
         private const string errorStr = "Ошибка";
         public bool ErrorDataBase { get; set; } = false;
+
         public MainForm()
         {
             InitializeComponent();
             presenter = new MainPresenter(this);
             ErrorDB(); 
         }
+
         private void ErrorDB()
         {
             if (ErrorDataBase)
@@ -42,8 +44,7 @@ namespace HASPKey
             ErrorDB();
         }
 
-        private void ВыходToolStripMenuItem_Click(object sender, EventArgs e)
-            => Close();
+        private void ВыходToolStripMenuItem_Click(object sender, EventArgs e) => Close();
 
         public void BindForm(List<DXModelClient> clients)
         => bindingHome.DataSource = clients != null ? new BindingList<DXModelClient>(clients)
@@ -52,9 +53,11 @@ namespace HASPKey
         public void Bind(List<ModelViewMain> homes)
         => bindingHome.DataSource = homes != null ? new BindingList<ModelViewMain>(homes)
                                                   : new BindingList<ModelViewMain>();
+
         public void Bind(List<DXModelClient> clients)
          => bindingHome.DataSource = clients != null ? new BindingList<DXModelClient>(clients)
                                           : new BindingList<DXModelClient>();
+
         private void KeyToolStripMenuItemClick(object sender, EventArgs e)
         {
             using (HaspKeyView haspKey = new HaspKeyView())
@@ -133,11 +136,13 @@ namespace HASPKey
                 }
             }
         }
+
         private void ButtonAllClick(object sender, EventArgs e)
         {
             presenter.Views();
            
         }
+
         private void ViewExpiredKeysCheckedChanged(object sender, EventArgs e)
         {
            if (viewOldKeys.Checked)
@@ -148,7 +153,8 @@ namespace HASPKey
            {
                 presenter.Views();
            }
-        }    
+        }
+        
         private void DataGridViewHomeViewColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             string columnName = DataGridViewHomeView.Columns[e.ColumnIndex].Name;
@@ -170,6 +176,7 @@ namespace HASPKey
                 Sort(x => x.NumberKey);
             }   
         }
+
         private void Sort(Func<ModelViewMain, object> param)
         {
             var currentList = bindingHome.List.Cast<ModelViewMain>().ToList();

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DataGridViewClientNumberKeys = new System.Windows.Forms.DataGridView();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numberKeysDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,14 +70,14 @@
             this.numberFeatureKeysDataGridViewTextBoxColumn,
             this.endDateNumberKeysDataGridViewTextBoxColumn});
             this.DataGridViewClientNumberKeys.DataSource = this.bindingClientNumberKeys;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 7.8F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGridViewClientNumberKeys.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridViewClientNumberKeys.DefaultCellStyle = dataGridViewCellStyle2;
             this.DataGridViewClientNumberKeys.Location = new System.Drawing.Point(14, 70);
             this.DataGridViewClientNumberKeys.Margin = new System.Windows.Forms.Padding(4);
             this.DataGridViewClientNumberKeys.MinimumSize = new System.Drawing.Size(756, 516);
@@ -131,7 +131,7 @@
             // labelFeature
             // 
             this.labelFeature.AutoSize = true;
-            this.labelFeature.Location = new System.Drawing.Point(133, 21);
+            this.labelFeature.Location = new System.Drawing.Point(133, 25);
             this.labelFeature.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelFeature.Name = "labelFeature";
             this.labelFeature.Size = new System.Drawing.Size(78, 16);
@@ -142,7 +142,7 @@
             // 
             this.labelSearchInnerId.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelSearchInnerId.AutoSize = true;
-            this.labelSearchInnerId.Location = new System.Drawing.Point(324, -2);
+            this.labelSearchInnerId.Location = new System.Drawing.Point(322, -1);
             this.labelSearchInnerId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelSearchInnerId.Name = "labelSearchInnerId";
             this.labelSearchInnerId.Size = new System.Drawing.Size(225, 16);
@@ -152,7 +152,7 @@
             // tbInnerIdHaspKey
             // 
             this.tbInnerIdHaspKey.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tbInnerIdHaspKey.Location = new System.Drawing.Point(376, 18);
+            this.tbInnerIdHaspKey.Location = new System.Drawing.Point(375, 19);
             this.tbInnerIdHaspKey.Margin = new System.Windows.Forms.Padding(4);
             this.tbInnerIdHaspKey.Name = "tbInnerIdHaspKey";
             this.tbInnerIdHaspKey.Size = new System.Drawing.Size(116, 23);
@@ -163,7 +163,7 @@
             // buttonAll
             // 
             this.buttonAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAll.Location = new System.Drawing.Point(666, 13);
+            this.buttonAll.Location = new System.Drawing.Point(666, 19);
             this.buttonAll.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAll.Name = "buttonAll";
             this.buttonAll.Size = new System.Drawing.Size(88, 28);
@@ -273,7 +273,7 @@
             // 
             // buttonSearchByFeature
             // 
-            this.buttonSearchByFeature.Location = new System.Drawing.Point(13, 13);
+            this.buttonSearchByFeature.Location = new System.Drawing.Point(13, 19);
             this.buttonSearchByFeature.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSearchByFeature.Name = "buttonSearchByFeature";
             this.buttonSearchByFeature.Size = new System.Drawing.Size(112, 28);

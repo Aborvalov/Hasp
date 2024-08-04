@@ -12,7 +12,6 @@ namespace Model
     {
         private readonly IEntitesContext db;
         private readonly IFactoryLogic factoryLogic;
-        private readonly IClientLogic clientLogic;
         private readonly IKeyFeatureClientLogic keyFeatureClientLogic;
         private readonly IHaspKeyLogic haspKeyLogic;
         private readonly IFeatureLogic featureLogic;
@@ -31,7 +30,6 @@ namespace Model
             if (db == null)
                 throw new ArgumentNullException(nameof(db));
 
-            clientLogic = this.factoryLogic.CreateClient(db);
             keyFeatureClientLogic = this.factoryLogic.CreateKeyFeatureClient(db);
             haspKeyLogic = this.factoryLogic.CreateHaspKey(db);
             keyFeatureLogic = this.factoryLogic.CreateKeyFeature(db);
@@ -64,11 +62,7 @@ namespace Model
                         .Distinct()
                         .ToList();
         }
-        /// <summary>
-        /// Список ключей у клиента.
-        /// </summary>
-        /// <param name="idClient"></param>
-        /// <param name="keyFeatureClient"></param>
+
         private void ListKeyAtClient(int idClient, List<ModelViewKeyFeatureClient> keyFeatureClient)
         {            
             if (keyFeatureClient == null)
@@ -119,11 +113,7 @@ namespace Model
                 keyFeatureClient.Add(item);
             }
         }
-        /// <summary>
-        /// Список доступных ключей.
-        /// </summary>
-        /// <param name="keyFeatureClient"></param>
-        /// <param name="idClient"></param>
+
         private void ListKeyFeatureAvailableClient(List<ModelViewKeyFeatureClient> keyFeatureClient, int idClient)
         {
             if (keyFeatureClient == null)
@@ -171,8 +161,8 @@ namespace Model
 
             keyFeatureClient.AddRange(item);
         }
-        public List<KeyFeatureClient> GetAllKeyClient() 
-            => keyFeatureClientLogic.GetAll();
+
+        public List<KeyFeatureClient> GetAllKeyClient() => keyFeatureClientLogic.GetAll();
 
         public bool Remove(IEnumerable<int> idKeyClient, out string error)
         {

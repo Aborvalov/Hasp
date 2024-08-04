@@ -3,7 +3,6 @@ using Presenter;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 using ViewContract;
 
@@ -139,6 +138,7 @@ namespace HASPKey
             DefaultView();
             presenterClient.Display();
         }
+        
         private void TbInnerIdHaspKey_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -147,6 +147,7 @@ namespace HASPKey
                 DefaultView();
             }
         }
+        
         private void TbInnerIdHaspKey_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -154,8 +155,11 @@ namespace HASPKey
                 e.Handled = true;
             }
         }
+        
         private void DataGridViewClient_CellClick(object sender, DataGridViewCellEventArgs e) => FillDate();
+        
         private void DataGridViewClient_SelectionChanged(object sender, EventArgs e) => FillDate();
+        
         private void FillDate()
         {
             if (!size)
@@ -174,6 +178,7 @@ namespace HASPKey
             if (e.KeyCode == Keys.Delete)
                 DeleteItem();
         }
+        
         private void DeleteItem()
         {
             if (!(DataGridViewClient.CurrentRow.DataBoundItem is ModelViewClient row))

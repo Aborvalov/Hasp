@@ -5,19 +5,12 @@ namespace Entities
 {
     public class HaspKey : IEquatable<HaspKey>
     {
-        public int Id { get; set; }
-        /// <summary>
-        /// Внутренний идентификатор.
-        /// </summary>      
+        public int Id { get; set; }    
         public int InnerId { get; set; }
         public string Number { get; set; }      
         public TypeKey TypeKey { get; set; }
-        /// <summary>
-        /// Местонахождение (у нас / клиент).
-        /// </summary>
         [Column("Location")]
         public bool IsHome { get; set; }
-
         bool IEquatable<HaspKey>.Equals(HaspKey other) => Equals(other);
         public override int GetHashCode()
         {

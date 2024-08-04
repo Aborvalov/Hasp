@@ -22,6 +22,7 @@ namespace Model
 
             keyLogic = factoryLogic.CreateHaspKey(db);
         }
+
         public bool Add(ModelViewHaspKey entity)
         {
             if (entity == null)
@@ -49,10 +50,10 @@ namespace Model
             => new ModelViewHaspKey(keyLogic.GetById(id));
 
         public List<ModelViewHaspKey> GetByPastDue(ModelViewClient client) => Convert(keyLogic.GetByPastDue(client.Client));
+        
         public List<ModelViewHaspKey> GetAllInCompany(ModelViewClient client) => Convert(keyLogic.GetAllInCompany(client.Client));
+        
         public List<ModelViewHaspKey> GetActiveInCompany(ModelViewClient client) => Convert(keyLogic.GetActiveInCompany(client.Client));
-
-
 
         public bool Remove(int id) => keyLogic.Remove(id);
 

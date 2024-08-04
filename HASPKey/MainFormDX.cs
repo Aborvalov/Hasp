@@ -17,6 +17,7 @@ namespace HASPKey
         public bool ErrorDataBase { get; set; } = false;
         private IMainPresenter presenter;
         public event Action DataUpdated;
+
         public MainFormDX()
         {
             InitializeComponent();
@@ -34,11 +35,13 @@ namespace HASPKey
         public void Bind(List<ModelViewMain> homes)
         => NextDays.DataSource = homes != null ? new BindingList<ModelViewMain>(homes)
                                                   : new BindingList<ModelViewMain>();
+
         public void MessageError(string errorText)
         {
             MessageBox.Show(errorText, errorStr, MessageBoxButtons.OK, MessageBoxIcon.Error);
             ErrorDB();
         }
+
         private void ErrorDB()
         {
             if (ErrorDataBase)
@@ -52,6 +55,7 @@ namespace HASPKey
                 barButtonItem6.Enabled = true;
             }
         }
+
         private void BarButtonItem2ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             using (ReferenceView referenceView = new ReferenceView())
@@ -59,14 +63,16 @@ namespace HASPKey
                 referenceView.ShowDialog();
             }
         }
-        private void BarButtonItem6ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-             => Close();
+
+        private void BarButtonItem6ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) => Close();
+
         void IUpdateDataBaseMain.UpdateDataBaseMain()
         {
             ErrorDataBase = false;
             presenter = new MainPresenter(this);
             ErrorDB();
         }
+
         private void BarButtonItem8ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             using (HaspKeyView haspKey = new HaspKeyView())
@@ -74,6 +80,7 @@ namespace HASPKey
                 haspKey.ShowDialog();
             }
         }
+
         private void BarButtonItem9ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             using (FeatureView feature = new FeatureView())

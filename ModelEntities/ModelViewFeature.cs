@@ -7,6 +7,7 @@ namespace ModelEntities
     {
         public ModelViewFeature()
         { }
+
         public ModelViewFeature(Feature feature) : this()
         {
             Id = feature.Id;
@@ -14,26 +15,31 @@ namespace ModelEntities
             Number = feature.Number;
             Description = feature.Description;            
         }
+
         [Browsable(false)]
-        public Feature Feature { get; private set; } = new Feature();         
+        public Feature Feature { get; private set; } = new Feature();        
+        
         [Browsable(false)]
         public int Id
         {
             get => Feature.Id; 
             set => Feature.Id = value;
         }
+
         [DisplayName("Номер")]
         public int Number
         {
             get => Feature.Number; 
             set => Feature.Number = value;
         }
+
         [DisplayName("Наименование")]
         public string Name
         {
             get => Feature.Name; 
             set => Feature.Name = value;
         }
+
         [DisplayName("Описание")]
         public string Description
         {

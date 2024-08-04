@@ -6,26 +6,26 @@ namespace HelperForUnitTest
 {
     public class CreateListEntities
     {
-        private static DateTime date = DateTime.Now.Date;
+        private static readonly DateTime date = DateTime.Now.Date;
         public static List<HaspKey> HaspKeys()
         {
             return new List<HaspKey>
             {
                 new HaspKey
-            {
-                InnerId  = 1,
-                Number   = "uz-2",
-                IsHome = true,
-                TypeKey  = TypeKey.Pro,
-            },
-            new HaspKey
-            {
-                InnerId  = 2,
-                Number   = "uz-3",
-                IsHome = true,
-                TypeKey  = TypeKey.Pro,
-            },
-        };
+                {
+                    InnerId  = 1,
+                    Number   = "uz-2",
+                    IsHome = true,
+                    TypeKey  = TypeKey.Pro,
+                },
+                new HaspKey
+                {
+                    InnerId  = 2,
+                    Number   = "uz-3",
+                    IsHome = true,
+                    TypeKey  = TypeKey.Pro,
+                },
+            };
         }
         public static List<Feature> Features()
         {
@@ -59,23 +59,7 @@ namespace HelperForUnitTest
                     Name    = "Petrov FD",
                     Address = "Perm ul.Pushkina 8.",
                 },
-        };
-        }
-        public static List<ClientNumberKeys> ClientNumberKeys()
-        {
-            return new List<ClientNumberKeys>
-            {
-                new ClientNumberKeys
-                {
-                    Id      = 1,
-                    Name    = "Ivanov Ivan",
-                },
-                new ClientNumberKeys
-                {
-                    Id      = 2,
-                    Name    = "Petrov FD",
-                },
-        };
+            };
         }
         public static List<KeyFeature> KeyFeatures()
         {

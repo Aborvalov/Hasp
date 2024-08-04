@@ -95,16 +95,19 @@ namespace HASPKey
             else
                 MessageError(errorString);
         }
+
         public void ErrorRow(int numberRow)
             => DataGridViewKeyFeature
                    .Rows[numberRow]
                    .DefaultCellStyle
                    .BackColor = Color.Red;
+
         private void DefaultColorRow()
         {
             for (int i = 0; i < DataGridViewKeyFeature.RowCount; i++)
                 DefaultColorRow(i);
         }
+
         public void DefaultColorRow(int numberRow)
            => DataGridViewKeyFeature
                 .Rows[numberRow]

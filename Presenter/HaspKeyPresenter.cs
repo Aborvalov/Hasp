@@ -15,8 +15,6 @@ namespace Presenter
         private const string errorUpdate = "Не удалось обновить Hasp-ключ.";
         private const string errorDelete = "Не удалось удалить Hasp-ключ.";
         private const string errorEmptyClient = "Данный клиент имеет пустые значения.";
-        private const string errorHaspKey = "\u2022 Неверное значение внутреннего ключа, должно быть числом. \n";
-        private const string errorEmptyTypeKey = "\u2022 Не выбран тип ключа. \n";
         private const string errorEmptyNumber = "\u2022 Не заполнено поля \"Номер\", не должно быть пустым. \n";
         private const string nullDB = "База данных не найдена.";
 
@@ -67,7 +65,9 @@ namespace Presenter
         }
 
         public void GetByPastDue(ModelViewClient client) => entitiesView.Bind(haspKeyModel.GetByPastDue(client));
+        
         public void GetAllInCompany(ModelViewClient client) => entitiesView.Bind(haspKeyModel.GetAllInCompany(client));
+        
         public void GetActiveInCompany(ModelViewClient client) => entitiesView.Bind(haspKeyModel.GetActiveInCompany(client));
         
         public void Remove(int id)

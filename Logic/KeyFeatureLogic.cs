@@ -9,7 +9,6 @@ namespace Logic
     internal class KeyFeatureLogic : IKeyFeatureLogic
     {
         private readonly IContractKeyFeatureDAO keyFeatureDAO;
-        private readonly DateTime date = DateTime.Now.Date;
         public KeyFeatureLogic(IContractKeyFeatureDAO keyFeatureDAO)
         {
             this.keyFeatureDAO = keyFeatureDAO ?? throw new ArgumentNullException(nameof(keyFeatureDAO));
@@ -54,7 +53,7 @@ namespace Logic
 
             CheckArgument(entity);
 
-            return !keyFeatureDAO.ContainsDB(entity) ? keyFeatureDAO.Update(entity) : false;
+            return !keyFeatureDAO.ContainsDB(entity) && keyFeatureDAO.Update(entity);
         }
         private void CheckArgument(KeyFeature entity)
         {

@@ -1,6 +1,4 @@
-﻿using Entities;
-using ModelEntities;
-using System;
+﻿using ModelEntities;
 using System.Collections.Generic;
 
 namespace ViewContract

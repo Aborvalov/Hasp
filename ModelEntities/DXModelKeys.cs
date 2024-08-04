@@ -7,7 +7,9 @@ namespace ModelEntities
     {
         [DisplayName("Номер")]
         public string Number { get; set; }
+
         private string endDate;
+
         [DisplayName("Окончание действия")]
         public string EndDate
         {
@@ -27,6 +29,7 @@ namespace ModelEntities
                 }
             }
         }
+
         [DisplayName("Осталось дней")]
         public string RemainedDays { get; set; }
 

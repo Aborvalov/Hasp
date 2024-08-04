@@ -81,11 +81,7 @@ namespace DalDB
             
             return true;
         }
-        /// <summary>
-        /// Проверка на дубли.(При)
-        /// </summary>
-        /// <param name="entity">Функционал.</param>
-        /// <returns>Результат проверки.</returns>
+
         public bool ContainsDB(Feature entity)
         {
             var feature = db.Features
