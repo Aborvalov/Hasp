@@ -14,7 +14,7 @@ namespace Presenter
     {
         private readonly IMainModel mainModel;
         private readonly IMainView mainView;
-        private readonly DateTime NowDate = DateTime.Now;
+        private DateTime NowDate = DateTime.Now;
         private const string nullDB = "База данных не найдена.";
         private const string errorDB = "Ошибка базы данных.";
         public event Action DataUpdated;
@@ -37,9 +37,7 @@ namespace Presenter
         }
 
         public void DataChange() => DataUpdated?.Invoke();
-        
         public void Dispose() => mainModel?.Dispose();
-        
         public void Views()
         {
             try
@@ -53,7 +51,6 @@ namespace Presenter
                 mainView.ErrorDataBase = true;
             }
         }
-
         public void GetByClient(ModelViewClient client)
         {
             if (client is null)
@@ -62,10 +59,8 @@ namespace Presenter
             }
             mainView.Bind(ConverterTo(mainModel?.GetByClient(client)));
         }
-       
         public void ShowExpiredKeys()
             => mainView.Bind(ConverterTo(mainModel?.ShowExpiredKeys()));
-        
         private List<ModelViewMain> ConverterTo(List<ModelMain> models)
         {
             if (models is null)
@@ -100,7 +95,6 @@ namespace Presenter
                 return ((int)(model - NowDate).TotalDays).ToString();
             }
         }
-
         private List<DXModelClient> DXConverterTo(List<ModelMain> models)
         {
             return models

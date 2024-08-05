@@ -6,10 +6,11 @@ namespace ModelEntities
 {
     public class DXModelClient
     {
-        [DisplayName("Функциональность")]
-        public List<DXModelFeature> Features { get; set; }
+        [DisplayName("Ключ")]
+        public List<DXModelKeys> Keys { get; set; }
 
-        [DisplayName("Клиент")]
+        [DisplayName("Лицензия закончится в следующие <N> дней")]
         public string Client { get; set; }
+
     }
 }
