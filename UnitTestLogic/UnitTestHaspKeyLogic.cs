@@ -1,4 +1,4 @@
-﻿using Entities;
+using Entities;
 using HelperForUnitTest;
 using Logic;
 using LogicContract;

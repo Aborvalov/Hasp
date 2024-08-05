@@ -1,4 +1,4 @@
-﻿using Entities;
+using Entities;
 using Model;
 using ModelEntities;
 using Presenter;

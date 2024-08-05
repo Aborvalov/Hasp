@@ -1,4 +1,4 @@
-﻿using ModelEntities;
+using ModelEntities;
 
 namespace Presenter
 {

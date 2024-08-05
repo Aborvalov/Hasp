@@ -1,4 +1,4 @@
-﻿using ModelEntities;
+using ModelEntities;
 using System.Collections.Generic;
 using System.Deployment.Internal;
 

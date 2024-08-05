@@ -1,4 +1,4 @@
-﻿using Entities;
+using Entities;
 using Logic;
 using ModelEntities;
 using System;

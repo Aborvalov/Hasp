@@ -1,4 +1,4 @@
-﻿using ModelEntities;
+using ModelEntities;
 using Presenter;
 using System;
 using System.Collections.Generic;

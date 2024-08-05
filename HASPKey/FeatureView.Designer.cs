@@ -1,4 +1,4 @@
-﻿namespace HASPKey
+namespace HASPKey
 {
     partial class FeatureView
     {

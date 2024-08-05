@@ -1,4 +1,4 @@
-﻿using DalContract;
+using DalContract;
 using Entities;
 using System;
 using System.Collections.Generic;
