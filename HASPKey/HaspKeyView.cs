@@ -1,12 +1,9 @@
-﻿using DevExpress.XtraEditors;
 using Entities;
 using ModelEntities;
 using Presenter;
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Deployment.Internal;
 using System.Windows.Forms;
 using ViewContract;
 
@@ -33,6 +30,7 @@ namespace HASPKey
             radioButtonAll.Visible = visibility;
             radioButtonPastDue.Visible = visibility;
         }
+
         public HaspKeyView()
         {
             InitializeComponent();
@@ -46,6 +44,7 @@ namespace HASPKey
             if (!Admin.IsAdmin)
                 DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
         }
+
         public void Bind(List<ModelViewHaspKey> entity)
             => bindingHaspKey.DataSource = entity != null ? new BindingList<ModelViewHaspKey>(entity)
                                                           : new BindingList<ModelViewHaspKey>();
@@ -75,6 +74,7 @@ namespace HASPKey
             }
             
         }
+
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             DefaultView();
@@ -86,6 +86,7 @@ namespace HASPKey
                 checkBoxIsHome.Checked = true;
             }
         }
+
         public void MessageError(string errorText)
         {
             MessageBox.Show(errorText, errorStr, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -158,7 +159,6 @@ namespace HASPKey
             }
         }
 
-
         private void RadioButtonPastDue_CheckedChanged(object sender, EventArgs e)
         {
             DefaultView();
@@ -185,6 +185,7 @@ namespace HASPKey
                 presenterHaspKey.FillInputItem(row);
             }
         }
+
         private void TbInnerNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -192,11 +193,13 @@ namespace HASPKey
                 e.Handled = true;
             }
         }
+
         private void DataGridViewHaspKey_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
                 DeleteItem();
         }
+
         private void DeleteItem()
         {
             if (!(DataGridViewHaspKey.CurrentRow.DataBoundItem is ModelViewHaspKey row))
@@ -217,6 +220,7 @@ namespace HASPKey
                 DefaultView();
             }
         }
+
         private void DataGridViewHaspKey_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             foreach (DataGridViewRow row in DataGridViewHaspKey.Rows)
@@ -227,8 +231,6 @@ namespace HASPKey
         {
             DefaultView();
         }
-
-
 
         private void ButtonAllKeys_Click(object sender, EventArgs e)
         {

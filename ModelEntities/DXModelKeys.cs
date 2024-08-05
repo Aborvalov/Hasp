@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.ComponentModel;
 
 namespace ModelEntities
@@ -8,9 +7,6 @@ namespace ModelEntities
     {
         [DisplayName("Номер")]
         public string Number { get; set; }
-
-        [DisplayName("Функциональность")]
-        public string Feature { get; set; }
 
         private string endDate;
 

@@ -1,4 +1,4 @@
-﻿using ModelEntities;
+using ModelEntities;
 using Presenter;
 using System;
 using System.Collections.Generic;
@@ -27,6 +27,7 @@ namespace HASPKey
         {
             InitializeComponent();
             presenterFeature = new FeaturePresenter(this);
+            buttonCancel.Visible = false;
             DataGridViewFeature.Height = DataGridViewFeature.Size.Height + sizeH;
 
             this.search = search;
@@ -54,6 +55,7 @@ namespace HASPKey
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             DefaultView();
+            buttonCancel.Visible = true;
             if (size)
             {
                 DataGridViewFeature.Height = DataGridViewFeature.Size.Height - sizeH;
@@ -69,6 +71,7 @@ namespace HASPKey
                 MessageError(emptyFeature);
                 return;
             }
+
             if (search)
             {
                 SearchFeature = row;
@@ -78,9 +81,6 @@ namespace HASPKey
 
             if (size && Admin.IsAdmin)
             {
-                DefaultView();
-                DataGridViewFeature.Height = DataGridViewFeature.Size.Height - sizeH;
-                size = !size;
                 presenterFeature.FillInputItem(row);
                 ButtonAdd.Enabled = false;
             }
@@ -92,12 +92,14 @@ namespace HASPKey
                 return;
 
             error = false;
+            buttonCancel.Visible = true;
             presenterFeature.FillModel(bindingItem.DataSource as ModelViewFeature);
             if (!error)
                 DefaultView();
         }
 
-        private void ButtonDelete_Click(object sender, EventArgs e) => DeleteIrem();
+        private void ButtonDelete_Click(object sender, EventArgs e) => DeleteItem();
+        
         private void DefaultView()
         {
             if (!size)
@@ -113,6 +115,7 @@ namespace HASPKey
         }
 
         private void DataGridViewFeatureFeature_CellClick(object sender, DataGridViewCellEventArgs e) => FillDate();
+        
         private void DataGridViewFeatureFeature_SelectionChanged(object sender, EventArgs e) => FillDate();
 
         private void FillDate()
@@ -137,10 +140,10 @@ namespace HASPKey
         private void DataGridViewFeatureFeature_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
-                DeleteIrem();
+                DeleteItem();
         }
 
-        private void DeleteIrem()
+        private void DeleteItem()
         {
             if (!(DataGridViewFeature.CurrentRow.DataBoundItem is ModelViewFeature row))
             {
@@ -170,5 +173,6 @@ namespace HASPKey
         {
             DefaultView();
         }
+
     }
 }

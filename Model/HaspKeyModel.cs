@@ -1,4 +1,4 @@
-﻿using Entities;
+using Entities;
 using Logic;
 using LogicContract;
 using ModelEntities;
@@ -22,6 +22,7 @@ namespace Model
 
             keyLogic = factoryLogic.CreateHaspKey(db);
         }
+
         public bool Add(ModelViewHaspKey entity)
         {
             if (entity == null)
@@ -48,10 +49,10 @@ namespace Model
         public ModelViewHaspKey GetById(int id) 
             => new ModelViewHaspKey(keyLogic.GetById(id));
 
-        //public List<ModelViewHaspKey> GetByPastDue(int id) => Convert(keyLogic.GetByPastDue(id));
-
         public List<ModelViewHaspKey> GetByPastDue(ModelViewClient client) => Convert(keyLogic.GetByPastDue(client.Client));
+        
         public List<ModelViewHaspKey> GetAllInCompany(ModelViewClient client) => Convert(keyLogic.GetAllInCompany(client.Client));
+        
         public List<ModelViewHaspKey> GetActiveInCompany(ModelViewClient client) => Convert(keyLogic.GetActiveInCompany(client.Client));
 
         public bool Remove(int id) => keyLogic.Remove(id);

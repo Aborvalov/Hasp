@@ -1,8 +1,5 @@
 ﻿namespace Entities
 {
-    /// <summary>
-    /// Тип ключа.
-    /// </summary>
     public enum TypeKey
     {
         Net     = 0,

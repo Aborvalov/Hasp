@@ -29,11 +29,13 @@ namespace HASPKey
             presenterClient = new СlientPresenter(this);
             labelFeature.Text = string.Empty;
             DataGridViewClient.Height = DataGridViewClient.Size.Height + sizeH;
+            buttonCancel.Visible = false;
 
             this.search = search;
             if (this.search || !Admin.IsAdmin)
                 DataGridViewClient.Height = DataGridViewClient.Size.Height + 28;
         }
+
         public ClientView() : this(false)
         { }
 
@@ -54,6 +56,7 @@ namespace HASPKey
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             DefaultView();
+            buttonCancel.Visible = true;
             if (size)
             {
                 DataGridViewClient.Height = DataGridViewClient.Size.Height - sizeH;
@@ -91,6 +94,7 @@ namespace HASPKey
                 return;
 
             error = false;
+            buttonCancel.Visible = true;
             presenterClient.FillModel(bindingItem.DataSource as ModelViewClient);
             if (!error)
                 DefaultView();
@@ -108,6 +112,7 @@ namespace HASPKey
             labelFeature.Text = string.Empty;
             tbInnerIdHaspKey.Text = string.Empty;
             buttonAdd.Enabled = true;
+            buttonCancel.Visible = false;
         }
 
         private void ButtonDelete_Click(object sender, EventArgs e) => DeleteItem();
@@ -133,6 +138,7 @@ namespace HASPKey
             DefaultView();
             presenterClient.Display();
         }
+        
         private void TbInnerIdHaspKey_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -141,6 +147,7 @@ namespace HASPKey
                 DefaultView();
             }
         }
+        
         private void TbInnerIdHaspKey_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -148,8 +155,11 @@ namespace HASPKey
                 e.Handled = true;
             }
         }
+        
         private void DataGridViewClient_CellClick(object sender, DataGridViewCellEventArgs e) => FillDate();
+        
         private void DataGridViewClient_SelectionChanged(object sender, EventArgs e) => FillDate();
+        
         private void FillDate()
         {
             if (!size)
@@ -168,6 +178,7 @@ namespace HASPKey
             if (e.KeyCode == Keys.Delete)
                 DeleteItem();
         }
+        
         private void DeleteItem()
         {
             if (!(DataGridViewClient.CurrentRow.DataBoundItem is ModelViewClient row))
@@ -192,6 +203,11 @@ namespace HASPKey
         {
             foreach (DataGridViewRow row in DataGridViewClient.Rows)
                 row.HeaderCell.Value = (row.Index + 1).ToString();
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            DefaultView();
         }
     }
 }

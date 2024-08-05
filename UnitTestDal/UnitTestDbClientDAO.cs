@@ -9,36 +9,37 @@ using HelperForUnitTest;
 namespace UnitTestDal
 {
     [TestClass]
-    [DeploymentItem("HASPKeyTest.db")]
+    [DeploymentItem("HASPKey.db")]
     public class UnitTestDbClientDAO
     {
         private const int erroneousId = -123;
         private IContractClientDAO clientDAO;
 
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void NullEntitesContextClient()
         {
             Assert.ThrowsException<ArgumentNullException>(() => clientDAO = new DbClientDAO(null));
         }
+
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void AddClient()
         {
             int idExpected = 1;
             int add;
-
-            using (var db = new EntitesContext())
+            var db = new EntitesContext();
+            using (db)
             {
                 ClearTable.Clients(db);
                 clientDAO = new DbClientDAO(db);
                 add = clientDAO.Add(CreateNew());               
             }
-
             Assert.AreEqual(add, idExpected);
         }
+
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void AddNullClient()
         {
             using (var db = new EntitesContext())
@@ -46,9 +47,10 @@ namespace UnitTestDal
                 clientDAO = new DbClientDAO(db);
                 Assert.ThrowsException<ArgumentNullException>(() => clientDAO.Add(null));
             }
-        }       
+        }
+
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetAllClient()
         {
             List<Client> getAll;
@@ -67,8 +69,9 @@ namespace UnitTestDal
 
             CollectionAssert.AreEqual(getAll, clients);
         }
+
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetAllEmptyClient()
         {
             var getAll = new List<Client>();
@@ -82,8 +85,9 @@ namespace UnitTestDal
             }
             CollectionAssert.AreEqual(getAll, clientExpected);
         }
+
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByIdClient()
         {
             Client getById;
@@ -99,11 +103,9 @@ namespace UnitTestDal
 
             Assert.AreEqual(getById, clientExpected);
         }
-        /// <summary>
-        /// Поиск неправильного id.
-        /// </summary>
+
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByErroneousIdClient()
         {
             using (var db = new EntitesContext())
@@ -112,11 +114,9 @@ namespace UnitTestDal
                 Assert.ThrowsException<ArgumentException>(() => clientDAO.GetById(erroneousId));
             }
         }
-        /// <summary>
-        /// Поиск id которого нет в базе.
-        /// </summary>
+
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByIdNoDBClient()
         {
             Client getById;
@@ -130,8 +130,9 @@ namespace UnitTestDal
 
             Assert.IsNull(getById);
         }
+
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void UpdateClient()
         {
             bool update;
@@ -152,8 +153,9 @@ namespace UnitTestDal
 
             Assert.IsTrue(update);
         }
+
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void UpdateNullClient()
         {
             using (var db = new EntitesContext())
@@ -162,11 +164,9 @@ namespace UnitTestDal
                 Assert.ThrowsException<ArgumentNullException>(() => clientDAO.Update(null));
             }
         }        
-        /// <summary>
-        /// Обновление клиента которого не существует в базе.
-        /// </summary>
+
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void UpdateNoDBClient()
         {
             Client clientNoDB = new Client
@@ -187,8 +187,9 @@ namespace UnitTestDal
                 Assert.IsFalse(clientDAO.Update(clientNoDB));
             }
         }
+
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void RemoveClient()
         {
             bool remove;
@@ -207,11 +208,9 @@ namespace UnitTestDal
 
             Assert.IsTrue(remove);
         }
-        /// <summary>
-        /// Удаление неправильного id.
-        /// </summary>
+
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void RemoveErroneousIdClient()
         {
             using (var db = new EntitesContext())
@@ -220,11 +219,9 @@ namespace UnitTestDal
                 Assert.ThrowsException<ArgumentException>(() => clientDAO.Remove(erroneousId));
             }
         }
-        /// <summary>
-        /// Удаление фичи которой не существует в базе.
-        /// </summary>
+
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void RemoveNoDBClient()
         {
             using (var db = new EntitesContext())
@@ -236,8 +233,9 @@ namespace UnitTestDal
                 
             }
         }
+
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByFeatureClient()
         {
             List<Client> getByFeature;
@@ -266,8 +264,9 @@ namespace UnitTestDal
 
             CollectionAssert.AreEqual(getByFeature, CreateListEntities.Clients());
         }
+
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByNullFeatureClient()
         {
             using (var db = new EntitesContext())
@@ -276,8 +275,9 @@ namespace UnitTestDal
                 Assert.ThrowsException<ArgumentNullException>(() => clientDAO.GetByFeature(null));
             }
         }
+
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByErroneousNumberKeyClient()
         {
             using (var db = new EntitesContext())
@@ -286,8 +286,9 @@ namespace UnitTestDal
                 Assert.ThrowsException<ArgumentException>(() => clientDAO.GetByNumberKey(erroneousId));
             }
         }
+
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByNumberKeyNoDBClient()
         {
             using (var db = new EntitesContext())
@@ -297,8 +298,9 @@ namespace UnitTestDal
                 Assert.IsNull(clientDAO.GetByNumberKey(2));
             }
         }
+
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void GetByNumberKeyClient()
         {
             Client getByNumberKey;
@@ -323,8 +325,9 @@ namespace UnitTestDal
 
             Assert.AreEqual(getByNumberKey, actual);
         }
+
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void ContainsDBClient()
         {
             var client = CreateNew();
@@ -336,8 +339,9 @@ namespace UnitTestDal
                 Assert.IsTrue(clientDAO.ContainsDB(client));
             }
         }
+
         [TestMethod]
-        [DeploymentItem("HASPKeyTest.db")]
+        [DeploymentItem("HASPKey.db")]
         public void NoContainsDBClient()
         {
             var client = CreateNew();
@@ -350,6 +354,7 @@ namespace UnitTestDal
                 Assert.IsFalse(clientDAO.ContainsDB(client));
             }
         }
+
         private Client CreateNew()
         {
             return new Client
@@ -360,16 +365,11 @@ namespace UnitTestDal
                 Phone         = "8-123-432-12-21",
             };
         }
+
         private Client CreateNew(int id)
         {
             Client client = CreateNew();
             client.Id     = id;
-            return client;
-        }
-        private Client CreateNew(int id, string name)
-        {
-            Client client = CreateNew(id);
-            client.Name   = name;
             return client;
         }
     }

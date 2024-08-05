@@ -1,4 +1,4 @@
-﻿using DalContract;
+using DalContract;
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -86,6 +86,7 @@ namespace DalDB
 
             return haspKeysAll;
         }
+
         public List<HaspKey> GetActiveInCompany(Client client)
         {
             var keyFeatures = db.KeyFeatures;
@@ -118,8 +119,6 @@ namespace DalDB
 
             return haspKeysAllActive;
         }
-
-
 
         public List<HaspKey> GetByPastDue(Client client)
         {
@@ -259,11 +258,7 @@ namespace DalDB
 
             return true;
         }
-        /// <summary>
-        /// Проверка на дубли.
-        /// </summary>
-        /// <param name="entity">HASP-ключ</param>
-        /// <returns>Результат проверки.</returns>
+
         public bool ContainsDB(HaspKey entity)
         {
             var key = db.HaspKeys

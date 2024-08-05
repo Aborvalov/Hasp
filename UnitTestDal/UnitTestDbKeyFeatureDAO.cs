@@ -22,6 +22,7 @@ namespace UnitTestDal
         {
             Assert.ThrowsException<ArgumentNullException>(() => kfDAO = new DbKeyFeatureDAO(null));
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void AddKeyFeature()
@@ -37,6 +38,7 @@ namespace UnitTestDal
             }
             Assert.AreEqual(add, idExpected);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void AddNullKeyFeature()
@@ -46,7 +48,8 @@ namespace UnitTestDal
                 kfDAO = new DbKeyFeatureDAO(db);
                 Assert.ThrowsException<ArgumentNullException>(() => kfDAO.Add(null));
             }
-        }        
+        }   
+        
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void GetAllKeyFeature()
@@ -67,6 +70,7 @@ namespace UnitTestDal
 
             CollectionAssert.AreEqual(getAll, keyFeats);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void GetAllEmptyKeyFeature()
@@ -83,6 +87,7 @@ namespace UnitTestDal
             }
             CollectionAssert.AreEqual(getAll, kfExpected);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void GetByIdKeyFeature()
@@ -100,9 +105,7 @@ namespace UnitTestDal
 
             Assert.AreEqual(getById, kfExpected);
         }
-        /// <summary>
-        /// Поиск неправильного id.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void GetByErroneousIdKeyFeaturey()
@@ -113,9 +116,7 @@ namespace UnitTestDal
                 Assert.ThrowsException<ArgumentException>(() => kfDAO.GetById(erroneousId));
             }
         }
-        /// <summary>
-        /// Поиск id которого нет в базе.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void GetByIdNoDBKeyFeature()
@@ -131,6 +132,7 @@ namespace UnitTestDal
 
             Assert.IsNull(getById);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void UpdateKeyFeature()
@@ -154,6 +156,7 @@ namespace UnitTestDal
 
             Assert.IsTrue(update);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void UpdateNullKeyFeature()
@@ -164,9 +167,7 @@ namespace UnitTestDal
                 Assert.ThrowsException<ArgumentNullException>(() => kfDAO.Update(null));
             }
         }        
-        /// <summary>
-        /// Обновление связи ключ-фича которой не существует в базе.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void UpdateNoDBKeyFeature()
@@ -187,6 +188,7 @@ namespace UnitTestDal
                 Assert.IsFalse(kfDAO.Update(kfNoDB));
             }
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void RemoveKeyFeature()
@@ -207,9 +209,7 @@ namespace UnitTestDal
 
             Assert.IsTrue(remove);
         }
-        /// <summary>
-        /// Удаление неправильного id.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void RemoveErroneousIdKeyFeature()
@@ -220,9 +220,7 @@ namespace UnitTestDal
                 Assert.ThrowsException<ArgumentException>(() => kfDAO.Remove(erroneousId));
             }
         }
-        /// <summary>
-        /// Удаление связи ключ-фича которой не существует в базе.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void RemoveNoDBKeyFeature()
@@ -235,6 +233,7 @@ namespace UnitTestDal
                 Assert.IsFalse(kfDAO.Remove(123));
             }
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void ContainsDBKeyFeature()
@@ -248,6 +247,7 @@ namespace UnitTestDal
                 Assert.IsTrue(kfDAO.ContainsDB(keyFeat));
             }
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void NoContainsDBKeyFeature()
@@ -262,6 +262,7 @@ namespace UnitTestDal
                 Assert.IsFalse(kfDAO.ContainsDB(keyFeat));
             }
         }
+
         private KeyFeature CreateNew()
         {
             return new KeyFeature
@@ -272,17 +273,11 @@ namespace UnitTestDal
                 EndDate   = date.AddDays(14),
             };
         }
+
         private KeyFeature CreateNew(int id)
         {
             KeyFeature kf = CreateNew();
             kf.Id = id;
-            return kf;
-        }
-        private KeyFeature CreateNew(int id, int idHaspKey, int idFeature)
-        {
-            KeyFeature kf = CreateNew(id);
-            kf.IdHaspKey  = idHaspKey;
-            kf.IdFeature  = idFeature;
             return kf;
         }
     }

@@ -54,7 +54,7 @@ namespace Logic
 
             CheckArgument(entity);
 
-            return !featureDAO.ContainsDB(entity) ? featureDAO.Update(entity) : false;
+            return !featureDAO.ContainsDB(entity) && featureDAO.Update(entity);
         }
 
             private void CheckArgument(Feature feature)

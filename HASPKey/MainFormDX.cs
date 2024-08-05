@@ -1,4 +1,3 @@
-﻿using DevExpress.XtraBars;
 using Entities;
 using Model;
 using ModelEntities;
@@ -18,16 +17,16 @@ namespace HASPKey
         public bool ErrorDataBase { get; set; } = false;
         private IMainPresenter presenter;
         public event Action DataUpdated;
+
         public MainFormDX()
         {
             InitializeComponent();
-            presenter = new MainPresenter(this);
-            if (!Admin.IsAdmin) barSubItem3.Enabled = false;
+            presenter = new MainPresenter(this);            
         }
 
-        public void Bind(List<DXModelLicenseEnd> clients)
-        => PastDays.DataSource = clients != null ? new BindingList<DXModelLicenseEnd>(clients)
-                                          : new BindingList<DXModelLicenseEnd>();
+        public void BindForm(List<DXModelClient> clients)
+        => PastDays.DataSource = clients != null ? new BindingList<DXModelClient>(clients)
+                                          : new BindingList<DXModelClient>();
 
         public void Bind(List<DXModelClient> clients)
         => NextDays.DataSource = clients != null ? new BindingList<DXModelClient>(clients)
@@ -36,26 +35,27 @@ namespace HASPKey
         public void Bind(List<ModelViewMain> homes)
         => NextDays.DataSource = homes != null ? new BindingList<ModelViewMain>(homes)
                                                   : new BindingList<ModelViewMain>();
+
         public void MessageError(string errorText)
         {
             MessageBox.Show(errorText, errorStr, MessageBoxButtons.OK, MessageBoxIcon.Error);
             ErrorDB();
         }
+
         private void ErrorDB()
         {
             if (ErrorDataBase)
             {
                 barButtonItem2.Enabled = false;
                 barButtonItem6.Enabled = false;
-
             }
             else
             {
                 barButtonItem2.Enabled = true;
                 barButtonItem6.Enabled = true;
-
             }
         }
+
         private void BarButtonItem2ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             using (ReferenceView referenceView = new ReferenceView())
@@ -63,8 +63,9 @@ namespace HASPKey
                 referenceView.ShowDialog();
             }
         }
-        private void BarButtonItem6ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-             => Close();
+
+        private void BarButtonItem6ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) => Close();
+
         void IUpdateDataBaseMain.UpdateDataBaseMain()
         {
             ErrorDataBase = false;
@@ -78,8 +79,8 @@ namespace HASPKey
             {
                 haspKey.ShowDialog();
             }
-
         }
+
         private void BarButtonItem9ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             using (FeatureView feature = new FeatureView())
@@ -87,9 +88,10 @@ namespace HASPKey
                 feature.ShowDialog();
             }
         }
+
         private void BarButtonItem10ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            using (ClientView client = new ClientView())
+            using (ClientNumberKeys client = new ClientNumberKeys())
             {
                 client.ShowDialog();
             }
@@ -117,6 +119,6 @@ namespace HASPKey
             {
                 form.ShowDialog();
             }
-        }
+        }  
     }
 }

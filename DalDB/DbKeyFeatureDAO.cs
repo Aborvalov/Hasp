@@ -9,10 +9,12 @@ namespace DalDB
     public class DbKeyFeatureDAO : IContractKeyFeatureDAO
     {
         private readonly EntitesContext db;
+
         public DbKeyFeatureDAO(IEntitesContext db)
         {
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
         }
+
         public int Add(KeyFeature entity)
         {
             if (entity == null)
@@ -77,11 +79,7 @@ namespace DalDB
             
             return true;
         }
-        /// <summary>
-        /// Проверка на дубли связи ключ-фича.
-        /// </summary>
-        /// <param name="entity">Связь ключ-фича.</param>
-        /// <returns>Результат проверки.</returns>
+
         public bool ContainsDB(KeyFeature entity)
         {
             var keyFeature = db.KeyFeatures

@@ -21,6 +21,7 @@ namespace UnitTestDal
         {
             Assert.ThrowsException<ArgumentNullException>(() => kfcDAO = new DbKeyFeatureClientDAO(null));
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void AddKeyFeatureClient()
@@ -37,6 +38,7 @@ namespace UnitTestDal
 
             Assert.AreEqual(idExpected, add);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void AddNullKeyFeatureClient()
@@ -46,7 +48,8 @@ namespace UnitTestDal
                 kfcDAO = new DbKeyFeatureClientDAO(db);
                 Assert.ThrowsException<ArgumentNullException>(() => kfcDAO.Add(null));
             }
-        }        
+        }
+        
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void GetAllKeyFeatureClient()
@@ -66,6 +69,7 @@ namespace UnitTestDal
 
             CollectionAssert.AreEqual(getAll, keyFeatCls);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void GetAllEmptyKeyFeatureClient()
@@ -83,6 +87,7 @@ namespace UnitTestDal
 
             CollectionAssert.AreEqual(getAll, kfcExpected);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void GetByIdKeyFeatureClient()
@@ -100,9 +105,7 @@ namespace UnitTestDal
 
             Assert.AreEqual(getById, kfcExpected);
         }
-        /// <summary>
-        /// Поиск неправильного id.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void GetByErroneousIdKeyFeatureClient()
@@ -113,9 +116,7 @@ namespace UnitTestDal
                 Assert.ThrowsException<ArgumentException>(() => kfcDAO.GetById(erroneousId));
             }
         }
-        /// <summary>
-        /// Поиск id которого нет в базе.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void GetByIdNoDBKeyFeatureClient()
@@ -131,6 +132,7 @@ namespace UnitTestDal
 
             Assert.IsNull(getById);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void UpdateKeyFeatureClient()
@@ -152,6 +154,7 @@ namespace UnitTestDal
             }
             Assert.IsTrue(update);
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void UpdateNullKeyFeatureClient()
@@ -162,9 +165,7 @@ namespace UnitTestDal
                 Assert.ThrowsException<ArgumentNullException>(() => kfcDAO.Update(null));
             }
         }
-        /// <summary>
-        /// Обновление связи (ключ-фича)-клиент которой не существует в базе.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void UpdateNoDBKeyFeatureClient()
@@ -186,6 +187,7 @@ namespace UnitTestDal
                 Assert.IsFalse(kfcDAO.Update(kfcNoDB));
             }
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void RemoveKeyFeatureClient()
@@ -204,9 +206,7 @@ namespace UnitTestDal
 
             Assert.IsTrue(remove);
         }
-        /// <summary>
-        /// Удаление неправильного id.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void RemoveErroneousIdKeyFeatureClient()
@@ -217,9 +217,7 @@ namespace UnitTestDal
                 Assert.ThrowsException<ArgumentException>(() => kfcDAO.Remove(erroneousId));
             }
         }
-        /// <summary>
-        /// Удаление связи (ключ-фича)-клиент которой не существует в базе.
-        /// </summary>
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void RemoveNoDBHaspKey()
@@ -232,6 +230,7 @@ namespace UnitTestDal
                 Assert.IsFalse(kfcDAO.Remove(12));
             }
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void ContainsDBKeyFeatureClient()
@@ -245,6 +244,7 @@ namespace UnitTestDal
                 Assert.IsTrue(kfcDAO.ContainsDB(keyFeatCl));
             }
         }
+
         [TestMethod]
         [DeploymentItem("HASPKeyTest.db")]
         public void NoContainsDBKeyFeatureClient()
@@ -259,6 +259,7 @@ namespace UnitTestDal
                 Assert.IsFalse(kfcDAO.ContainsDB(keyFeatCl));
             }
         }
+
         private KeyFeatureClient CreateNew()
         {
             return new KeyFeatureClient
@@ -269,17 +270,11 @@ namespace UnitTestDal
                 Note         = "Bla bla bla.",
             };
         }
+
         private KeyFeatureClient CreateNew(int id)
         {
             KeyFeatureClient kfc = CreateNew();
             kfc.Id = id;
-            return kfc;
-        }
-        private KeyFeatureClient CreateNew(int id, int idClient, int idKeyFeature)
-        {
-            KeyFeatureClient kfc = CreateNew(id);
-            kfc.IdClient         = idClient;
-            kfc.IdKeyFeature     = idKeyFeature;
             return kfc;
         }
     }

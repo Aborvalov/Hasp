@@ -10,6 +10,6 @@ namespace Logic
         public IFeatureLogic CreateFeature(IEntitesContext db) => new FeatureLogic(new DbFeatureDAO(db));
         public IHaspKeyLogic CreateHaspKey(IEntitesContext db) => new HaspKeyLogic(new DbHaspKeyDAO(db));
         public IKeyFeatureLogic CreateKeyFeature(IEntitesContext db) => new KeyFeatureLogic(new DbKeyFeatureDAO(db));
-        public IKeyFeatureClientLogic CreateKeyFeatureClient(IEntitesContext db) => new KeyFeatureClientLogic(new DbKeyFeatureClientDAO(db));
+        public IKeyFeatureClientLogic CreateKeyFeatureClient(IEntitesContext db) => new KeyFeatureClientLogic(new DbKeyFeatureClientDAO(db));  
     }
 }

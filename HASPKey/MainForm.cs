@@ -1,4 +1,4 @@
-﻿using Presenter;
+using Presenter;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,12 +14,14 @@ namespace HASPKey
         private IMainPresenter presenter;
         private const string errorStr = "Ошибка";
         public bool ErrorDataBase { get; set; } = false;
+
         public MainForm()
         {
             InitializeComponent();
             presenter = new MainPresenter(this);
-            ErrorDB();
+            ErrorDB(); 
         }
+
         private void ErrorDB()
         {
             if (ErrorDataBase)
@@ -42,19 +44,20 @@ namespace HASPKey
             ErrorDB();
         }
 
-        private void ВыходToolStripMenuItem_Click(object sender, EventArgs e)
-            => Close();
+        private void ВыходToolStripMenuItem_Click(object sender, EventArgs e) => Close();
 
-        public void BindForm(List<DXModelLicenseEnd> clients)
-        => bindingHome.DataSource = clients != null ? new BindingList<DXModelLicenseEnd>(clients)
-                                          : new BindingList<DXModelLicenseEnd>();
+        public void BindForm(List<DXModelClient> clients)
+        => bindingHome.DataSource = clients != null ? new BindingList<DXModelClient>(clients)
+                                          : new BindingList<DXModelClient>();
 
         public void Bind(List<ModelViewMain> homes)
         => bindingHome.DataSource = homes != null ? new BindingList<ModelViewMain>(homes)
                                                   : new BindingList<ModelViewMain>();
+
         public void Bind(List<DXModelClient> clients)
          => bindingHome.DataSource = clients != null ? new BindingList<DXModelClient>(clients)
                                           : new BindingList<DXModelClient>();
+
         private void KeyToolStripMenuItemClick(object sender, EventArgs e)
         {
             using (HaspKeyView haspKey = new HaspKeyView())
@@ -128,27 +131,30 @@ namespace HASPKey
                 client.ShowDialog();
 
                 if (client.SearchIdClient != null)
-                {
+                {                    
                     presenter.GetByClient(client.SearchIdClient);
                 }
             }
         }
+
         private void ButtonAllClick(object sender, EventArgs e)
         {
             presenter.Views();
-
+           
         }
+
         private void ViewExpiredKeysCheckedChanged(object sender, EventArgs e)
         {
-            if (viewOldKeys.Checked)
-            {
+           if (viewOldKeys.Checked)
+           {
                 presenter.ShowExpiredKeys();
-            }
-            else
-            {
+           }
+           else
+           {
                 presenter.Views();
-            }
+           }
         }
+        
         private void DataGridViewHomeViewColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             string columnName = DataGridViewHomeView.Columns[e.ColumnIndex].Name;
@@ -157,19 +163,20 @@ namespace HASPKey
             {
                 Sort(x => x.Date);
             }
-            if (columnName == "clientDataGridViewTextBoxColumn")
+             if (columnName == "clientDataGridViewTextBoxColumn")
             {
-                Sort(x => x.Client);
+                Sort(x => x.Client);    
             }
             else if (columnName == "featureDataGridViewTextBoxColumn")
-            {
+            {               
                 Sort(x => x.Feature);
             }
             else if (columnName == "numberKeyDataGridViewTextBoxColumn")
             {
                 Sort(x => x.NumberKey);
-            }
+            }   
         }
+
         private void Sort(Func<ModelViewMain, object> param)
         {
             var currentList = bindingHome.List.Cast<ModelViewMain>().ToList();

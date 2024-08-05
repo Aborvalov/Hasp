@@ -9,7 +9,7 @@ namespace Model
 {
     public class FeatureModel : IEntitiesModel<ModelViewFeature>
     {
-        private IFeatureLogic featLogic;
+        private readonly IFeatureLogic featLogic;
         private readonly IEntitesContext db;
 
         public FeatureModel(IFactoryLogic factoryLogic)

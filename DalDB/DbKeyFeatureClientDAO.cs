@@ -14,6 +14,7 @@ namespace DalDB
         {
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
         }
+
         public int Add(KeyFeatureClient entity)
         {
             if (entity == null)
@@ -72,11 +73,7 @@ namespace DalDB
             
             return true;
         }
-        /// <summary>
-        /// Проверка на дубли связи (ключ-фича)-клиент.
-        /// </summary>
-        /// <param name="entity">Связь (ключ-фича)-клиент.</param>
-        /// <returns>Результат проверки.</returns>
+
         public bool ContainsDB(KeyFeatureClient entity)
         {
             var kfc = db.KeyFeatureClients

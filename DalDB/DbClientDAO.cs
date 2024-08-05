@@ -14,6 +14,7 @@ namespace DalDB
         {
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
         }
+
         public int Add(Client entity)
         {
             if (entity == null)
@@ -34,9 +35,9 @@ namespace DalDB
                 throw new ArgumentNullException(nameof(feature));
 
             var keyFeatures      = db.KeyFeatures.ToList();
-            var keyFeatureCliets = db.KeyFeatureClients.ToList();
+            var keyFeatureClients = db.KeyFeatureClients.ToList();
 
-            var clientFeature = (from keyFeatureClient in keyFeatureCliets
+            var clientFeature = (from keyFeatureClient in keyFeatureClients
                                  join keyFeature in keyFeatures
                                    on keyFeatureClient.IdKeyFeature equals keyFeature.Id
                                  join client in GetAll()
@@ -83,13 +84,13 @@ namespace DalDB
                 return null;
 
             var keyFeatures      = db.KeyFeatures.ToList();
-            var keyFeatureCliets = db.KeyFeatureClients.ToList();
+            var keyFeatureClients = db.KeyFeatureClients.ToList();
             var haspKeys         = db.HaspKeys.ToList();
 
             int idClient = 0;
             try
             {
-                idClient = (from keyFeatureClient in keyFeatureCliets
+                idClient = (from keyFeatureClient in keyFeatureClients
                             join keyFeature in keyFeatures
                               on keyFeatureClient.IdKeyFeature equals keyFeature.Id
                             join key in haspKeys
@@ -155,11 +156,7 @@ namespace DalDB
            
             return true;
         }
-        /// <summary>
-        /// Проверка на дубли.
-        /// </summary>
-        /// <param name="entity">Клиент.</param>
-        /// <returns>Результат проверки.</returns>
+
         public bool ContainsDB(Client entity)
         {
             var client = db.Clients
@@ -168,6 +165,10 @@ namespace DalDB
                                              c.ContactPerson == entity.ContactPerson &&
                                              c.Phone         == entity.Phone);
             return client != null;
-        }        
+        }
+
+
+
+
     }
 }

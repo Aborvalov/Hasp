@@ -10,18 +10,22 @@ namespace ModelEntities
     {
         [Browsable(false)]
         public int IdClient { get; set; }
+
         [DisplayName("Номер ключа")]
         public string NumberKey { get; set; }
+
         [DisplayName("Функциональность")]
         public string Feature { get; set; }
+
         [DisplayName("Клиент")]
         public string Client { get; set; }
+
         [Browsable(false)]
         public DateTime Date { get; set; }
 
         private string endDate;
-        [DisplayName("Окончание действия")]
 
+        [DisplayName("Окончание действия")]
         public string EndDate 
         {
             get

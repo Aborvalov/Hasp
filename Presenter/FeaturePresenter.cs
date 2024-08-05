@@ -14,8 +14,7 @@ namespace Presenter
         private const string errorAdd = "Не удалось создать функциональность.";
         private const string errorUpdate = "Не удалось обновить функциональность.";
         private const string errorDelete = "Не удалось удалить функциональность.";
-        private const string errorNumber = "\u2022 Неверное значение номера, должно быть числом. \n";
-        private const string erroremptyName = "\u2022 Не заполнено поля \"Наименование\", не должно быть пустым. \n";
+        private const string errorEmptyName = "\u2022 Не заполнено поля \"Наименование\", не должно быть пустым. \n";
         private const string nullDB = "База данных не найдена.";
 
         public FeaturePresenter(IEntitiesView<ModelViewFeature> entitesView)
@@ -101,14 +100,14 @@ namespace Presenter
             string errorMess = string.Empty;
                                   
             if (string.IsNullOrWhiteSpace(Entities.Name))
-                errorMess += erroremptyName;
+                errorMess += errorEmptyName;
 
             if (errorMess != string.Empty)
             {
                 entitiesView.MessageError(errorMess.Trim());
                 return false;
             }
-
+            
             return true;
         }
        

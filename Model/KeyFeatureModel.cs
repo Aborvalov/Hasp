@@ -135,7 +135,6 @@ namespace Model
             return string.IsNullOrEmpty(error);
         }
 
-        public List<KeyFeature> GetAllKeyFeature() 
-            => keyFeatureLogic.GetAll();
+        public List<KeyFeature> GetAllKeyFeature() => keyFeatureLogic.GetAll();
     }
 }
