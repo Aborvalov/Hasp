@@ -2,6 +2,7 @@
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace DalDB
@@ -9,10 +10,25 @@ namespace DalDB
     public class DbKeyFeatureDAO : IContractKeyFeatureDAO
     {
         private readonly EntitesContext db;
+        private static string userAdd = "В таблицу KeyFeatures добавлены несколько записей. ";
+        private static string userDelete = "Из таблицы KeyFeatures удалены несколько записей. ";
+        private static string userUpdate = "В таблице KeyFeatures обновлены несколько записей. ";
 
         public DbKeyFeatureDAO(IEntitesContext db)
         {
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
+        }
+
+        public void UpdateLog(string tableName, string action, int id)
+        {
+            var latestLog = db.Logs.OrderByDescending(l => l.LogId).FirstOrDefault();
+            if (latestLog != null)
+            {
+                var log = tableName + "-" + action + "-" + id + "; ";
+                latestLog.Actions += log;
+                db.Entry(latestLog).State = EntityState.Modified;
+                db.SaveChanges();
+            }
         }
 
         public int Add(KeyFeature entity)
@@ -23,7 +39,9 @@ namespace DalDB
             var keyFeature = db.KeyFeatures.Add(entity);
 
             db.SaveChanges();
-            
+
+            UpdateLog("KeyFeatures", "добавлено", entity.Id);
+
             return keyFeature.Id;
         }
 
@@ -57,7 +75,9 @@ namespace DalDB
             db.KeyFeatureClients.RemoveRange(keyFeatureClient);
 
             db.SaveChanges();
-           
+
+            UpdateLog("KeyFeatures", "удалено", id);
+
             return true;
         }
                 
@@ -76,7 +96,9 @@ namespace DalDB
             keyFeature.EndDate   = entity.EndDate;
 
             db.SaveChanges();
-            
+
+            UpdateLog("KeyFeatures", "обновлено", entity.Id);
+
             return true;
         }
 
