@@ -4,8 +4,6 @@ using LogicContract;
 using ModelEntities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 
 namespace Model
 {
@@ -26,16 +24,6 @@ namespace Model
             logLogic = this.factoryLogic.CreateLog(db);
         }
 
-        public bool Add(ModelViewLog entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
         public List<ModelViewLog> GetAll()
         {
             return Convert(logLogic.GetAll());
@@ -47,26 +35,6 @@ namespace Model
             foreach (var cl in clients)
                 viewClients.Add(new ModelViewLog(cl));
             return viewClients;
-        }
-
-        public ModelViewLog GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Remove(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(ModelViewLog entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(IEnumerable<ModelViewLog> delete, out string error)
-        {
-            throw new NotImplementedException();
         }
     }
 }

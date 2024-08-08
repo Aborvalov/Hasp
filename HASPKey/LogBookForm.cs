@@ -18,6 +18,7 @@ namespace HASPKey
         private ILogPresenter presenterLog;
         public bool error = false;
         private const string errorStr = "Ошибка";
+        public event Action DataUpdated;
 
         public LogBookForm(bool search)
         {
@@ -28,9 +29,9 @@ namespace HASPKey
         public LogBookForm() : this(false)
         { }
 
-        public void Bind(Log check)
+        public void Bind(Log entity)
         {
-            throw new NotImplementedException();
+            logbookBindingSource.DataSource = entity ?? new Log();
         }
 
         public void Bind(List<ModelViewLog> entity)
@@ -39,13 +40,10 @@ namespace HASPKey
 
         public void BindItem(ModelViewLog entity)
         {
-            throw new NotImplementedException();
+            logbookBindingSource.DataSource = entity ?? new ModelViewLog();
         }
 
-        public void DataChange()
-        {
-            throw new NotImplementedException();
-        }
+        public void DataChange() => DataUpdated?.Invoke();
 
         public void MessageError(string errorText)
         {

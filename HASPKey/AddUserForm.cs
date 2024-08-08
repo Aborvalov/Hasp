@@ -4,6 +4,7 @@ using Presenter;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using ViewContract;
 
@@ -14,6 +15,9 @@ namespace HASPKey
         private readonly IUserPresenter presenterUser;
         public bool error = false;
         private const string errorStr = "Ошибка";
+        private const string errorLen = "Длина пароля должна быть больше 5 символов.";
+        private const string errorNoLetters = "Пароль должен содержать хотя бы одну букву.";
+        private const string errorNoDigit = "Пароль должен содержать хотя бы одну цифру.";
         public event Action DataUpdated;
         public ModelViewUser newItem;
 
@@ -35,18 +39,40 @@ namespace HASPKey
             NewItem = item;
             textBoxName.Text = item.Name;
             textBoxLogin.Text = item.Login;
-            textBoxPassword.Text = item.Password;
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
+            string password = textBoxPassword.Text;
+
+            if (password.Length <= 5)
+            {
+                MessageError(errorLen);
+                return;
+            }
+
+            bool containsLetter = password.Any(char.IsLetter);
+            bool containsDigit = password.Any(char.IsDigit);
+
+            if (!containsLetter)
+            {
+                MessageError(errorNoLetters);
+                return;
+            }
+
+            if (!containsDigit)
+            {
+                MessageError(errorNoDigit);
+                return;
+            }
+
             NewItem = new ModelViewUser
             {
                 Id = -1,
                 Name = textBoxName.Text,
                 Login = textBoxLogin.Text,
                 Password = textBoxPassword.Text,
-                LevelAccess = checkEdit2.Checked ? LevelAccess.superadmin : checkEdit3.Checked ? LevelAccess.user : LevelAccess.admin,
+                LevelAccess = checkSuperAdmin.Checked ? LevelAccess.superadmin : checkAdmin.Checked ? LevelAccess.admin : LevelAccess.user,
             };
             DialogResult = DialogResult.OK;
             Close();
