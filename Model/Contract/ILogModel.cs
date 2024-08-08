@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace Model
 {
-    public interface ILogModel : IEntitiesModel<ModelViewLog>
+    public interface ILogModel
     {
-        void Remove(IEnumerable<ModelViewLog> delete, out string error);
+        List<ModelViewLog> GetAll();
     }
 }

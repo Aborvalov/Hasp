@@ -32,6 +32,9 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.panelFiltr = new System.Windows.Forms.Panel();
+            this.checkUser = new System.Windows.Forms.RadioButton();
+            this.checkSuperAdmin = new System.Windows.Forms.RadioButton();
+            this.checkAdmin = new System.Windows.Forms.RadioButton();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.textBoxLogin = new System.Windows.Forms.TextBox();
@@ -39,9 +42,6 @@
             this.buttonCreate = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.loginBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.checkAdmin = new System.Windows.Forms.RadioButton();
-            this.checkEdit2 = new System.Windows.Forms.RadioButton();
-            this.checkEdit3 = new System.Windows.Forms.RadioButton();
             this.panelFiltr.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.loginBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -69,14 +69,50 @@
             // 
             // panelFiltr
             // 
-            this.panelFiltr.Controls.Add(this.checkEdit3);
-            this.panelFiltr.Controls.Add(this.checkEdit2);
+            this.panelFiltr.Controls.Add(this.checkUser);
+            this.panelFiltr.Controls.Add(this.checkSuperAdmin);
             this.panelFiltr.Controls.Add(this.checkAdmin);
             this.panelFiltr.Location = new System.Drawing.Point(87, 97);
             this.panelFiltr.Margin = new System.Windows.Forms.Padding(4);
             this.panelFiltr.Name = "panelFiltr";
             this.panelFiltr.Size = new System.Drawing.Size(311, 56);
             this.panelFiltr.TabIndex = 21;
+            // 
+            // checkUser
+            // 
+            this.checkUser.AutoSize = true;
+            this.checkUser.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.checkUser.Location = new System.Drawing.Point(226, 14);
+            this.checkUser.Name = "checkUser";
+            this.checkUser.Size = new System.Drawing.Size(65, 25);
+            this.checkUser.TabIndex = 30;
+            this.checkUser.TabStop = true;
+            this.checkUser.Text = "User";
+            this.checkUser.UseVisualStyleBackColor = true;
+            // 
+            // checkSuperAdmin
+            // 
+            this.checkSuperAdmin.AutoSize = true;
+            this.checkSuperAdmin.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.checkSuperAdmin.Location = new System.Drawing.Point(100, 14);
+            this.checkSuperAdmin.Name = "checkSuperAdmin";
+            this.checkSuperAdmin.Size = new System.Drawing.Size(120, 25);
+            this.checkSuperAdmin.TabIndex = 29;
+            this.checkSuperAdmin.TabStop = true;
+            this.checkSuperAdmin.Text = "SuperAdmin";
+            this.checkSuperAdmin.UseVisualStyleBackColor = true;
+            // 
+            // checkAdmin
+            // 
+            this.checkAdmin.AutoSize = true;
+            this.checkAdmin.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.checkAdmin.Location = new System.Drawing.Point(3, 14);
+            this.checkAdmin.Name = "checkAdmin";
+            this.checkAdmin.Size = new System.Drawing.Size(78, 25);
+            this.checkAdmin.TabIndex = 28;
+            this.checkAdmin.TabStop = true;
+            this.checkAdmin.Text = "Admin";
+            this.checkAdmin.UseVisualStyleBackColor = true;
             // 
             // labelControl2
             // 
@@ -148,42 +184,6 @@
             // 
             this.loginBindingSource.DataSource = typeof(ModelEntities.ModelViewUser);
             // 
-            // checkAdmin
-            // 
-            this.checkAdmin.AutoSize = true;
-            this.checkAdmin.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.checkAdmin.Location = new System.Drawing.Point(3, 14);
-            this.checkAdmin.Name = "checkAdmin";
-            this.checkAdmin.Size = new System.Drawing.Size(78, 25);
-            this.checkAdmin.TabIndex = 28;
-            this.checkAdmin.TabStop = true;
-            this.checkAdmin.Text = "Admin";
-            this.checkAdmin.UseVisualStyleBackColor = true;
-            // 
-            // checkEdit2
-            // 
-            this.checkEdit2.AutoSize = true;
-            this.checkEdit2.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.checkEdit2.Location = new System.Drawing.Point(100, 14);
-            this.checkEdit2.Name = "checkEdit2";
-            this.checkEdit2.Size = new System.Drawing.Size(120, 25);
-            this.checkEdit2.TabIndex = 29;
-            this.checkEdit2.TabStop = true;
-            this.checkEdit2.Text = "SuperAdmin";
-            this.checkEdit2.UseVisualStyleBackColor = true;
-            // 
-            // checkEdit3
-            // 
-            this.checkEdit3.AutoSize = true;
-            this.checkEdit3.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.checkEdit3.Location = new System.Drawing.Point(226, 14);
-            this.checkEdit3.Name = "checkEdit3";
-            this.checkEdit3.Size = new System.Drawing.Size(65, 25);
-            this.checkEdit3.TabIndex = 30;
-            this.checkEdit3.TabStop = true;
-            this.checkEdit3.Text = "User";
-            this.checkEdit3.UseVisualStyleBackColor = true;
-            // 
             // AddUserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -221,8 +221,8 @@
         private System.Windows.Forms.Button buttonCreate;
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.BindingSource loginBindingSource;
-        private System.Windows.Forms.RadioButton checkEdit3;
-        private System.Windows.Forms.RadioButton checkEdit2;
+        private System.Windows.Forms.RadioButton checkUser;
+        private System.Windows.Forms.RadioButton checkSuperAdmin;
         private System.Windows.Forms.RadioButton checkAdmin;
     }
 }

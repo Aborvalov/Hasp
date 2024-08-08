@@ -8,7 +8,7 @@ namespace ViewContract
     {
         void DataChange();
         void MessageError(string errorText);
-        void Bind(Log check);
+        void Bind(Log entity);
         void Bind(List<ModelViewLog> entity);
         void BindItem(ModelViewLog entity);
     }

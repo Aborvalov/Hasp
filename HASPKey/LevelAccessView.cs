@@ -1,4 +1,5 @@
-﻿using ModelEntities;
+﻿using Entities;
+using ModelEntities;
 using Presenter;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace HASPKey
             var bindingList = loginBindingSource.DataSource as BindingList<ModelViewUser>;
 
             using (AddUserForm user = new AddUserForm(true))
-            {
+            {              
                 if (user.ShowDialog() == DialogResult.OK)
                 {
                     var newItem = user.NewItem; 
@@ -107,9 +108,9 @@ namespace HASPKey
             error = true;
         }
 
-        public void Bind(Entities.User entity)
+        public void Bind(User entity)
         {
-            loginBindingSource.DataSource = entity ?? new Entities.User();
+            loginBindingSource.DataSource = entity ?? new User();
         }
         public void Bind(List<ModelViewUser> entity)
             => loginBindingSource.DataSource = entity != null ? new BindingList<ModelViewUser>(entity)
