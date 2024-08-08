@@ -5,8 +5,6 @@ using Model;
 using Logic;
 using System.Collections.Generic;
 using System.Linq;
-using Entities;
-using System.Runtime.InteropServices.ComTypes;
 
 namespace Presenter
 {
@@ -37,7 +35,9 @@ namespace Presenter
         }
 
         public void DataChange() => DataUpdated?.Invoke();
+
         public void Dispose() => mainModel?.Dispose();
+
         public void Views()
         {
             try
@@ -61,6 +61,7 @@ namespace Presenter
         }
         public void ShowExpiredKeys()
             => mainView.Bind(ConverterTo(mainModel?.ShowExpiredKeys()));
+
         private List<ModelViewMain> ConverterTo(List<ModelMain> models)
         {
             if (models is null)

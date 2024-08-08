@@ -2,6 +2,7 @@ using DalContract;
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 
@@ -15,6 +16,18 @@ namespace DalDB
         public DbHaspKeyDAO(IEntitesContext db)
         {
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
+        }
+
+        public void UpdateLog(string tableName, string action, int id)
+        {
+            var latestLog = db.Logs.OrderByDescending(l => l.LogId).FirstOrDefault();
+            if (latestLog != null)
+            {
+                var log = tableName + "-" + action + "-" + id + "; ";
+                latestLog.Actions += log;
+                db.Entry(latestLog).State = EntityState.Modified;
+                db.SaveChanges();
+            }
         }
 
         public int Add(HaspKey entity)
@@ -36,6 +49,8 @@ namespace DalDB
             {
                 throw;
             }
+
+            UpdateLog("HASPKeys", "добавлено", entity.Id);
 
             return haspKey.Id;
         }
@@ -210,8 +225,8 @@ namespace DalDB
             if (haspKey == null)
                 return false;
 
-            var keyFeature = db.KeyFeatures
-                               .Where(kf => kf.IdHaspKey == id);
+            var keyFeature = db.KeyFeatures.Where(kf => kf.IdHaspKey == id);
+
             db.KeyFeatures.RemoveRange(keyFeature);
 
             db.HaspKeys.Remove(haspKey);
@@ -225,6 +240,8 @@ namespace DalDB
             }
 
             db.SaveChanges();
+
+            UpdateLog("HASPKeys", "удалено", id);
 
             return true;
         }
@@ -255,6 +272,8 @@ namespace DalDB
             {
                 throw;
             }
+
+            UpdateLog("HASPKeys", "обновлено", entity.Id);
 
             return true;
         }
