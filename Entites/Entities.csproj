@@ -59,6 +59,9 @@
     <Compile Include="Context\IEntitesContext.cs" />
     <Compile Include="KeyFeature.cs" />
     <Compile Include="KeyFeatureClient.cs" />
+    <Compile Include="LevelAccess.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="TypeKey.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

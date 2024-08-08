@@ -10,5 +10,6 @@ namespace DalContract
         List<TEntites> GetAll();
         TEntites GetById(int id);
         bool ContainsDB(TEntites entity);
+        void UpdateLog(string tableName, string action, int id);
     }
 }

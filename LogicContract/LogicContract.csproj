@@ -50,6 +50,8 @@
     <Compile Include="IHaspKeyLogic.cs" />
     <Compile Include="IKeyFeatureClientLogic.cs" />
     <Compile Include="IKeyFeatureLogic.cs" />
+    <Compile Include="IUsersLogic.cs" />
+    <Compile Include="ILogLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

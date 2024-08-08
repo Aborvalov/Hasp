@@ -66,6 +66,8 @@
     <Compile Include="DbFeatureDAO.cs" />
     <Compile Include="DbHaspKeyDAO.cs" />
     <Compile Include="DbKeyFeatureDAO.cs" />
+    <Compile Include="DbLogDAO.cs" />
+    <Compile Include="DbUserDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

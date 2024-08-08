@@ -10,5 +10,7 @@ namespace Logic
         IHaspKeyLogic CreateHaspKey(IEntitesContext db);
         IKeyFeatureLogic CreateKeyFeature(IEntitesContext db);
         IKeyFeatureClientLogic CreateKeyFeatureClient(IEntitesContext db);
+        IUsersLogic CreateUser(IEntitesContext db);
+        ILogLogic CreateLog(IEntitesContext db);
     }
 }
