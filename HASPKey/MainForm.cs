@@ -52,9 +52,11 @@ namespace HASPKey
         public void Bind(List<ModelViewMain> homes)
         => bindingHome.DataSource = homes != null ? new BindingList<ModelViewMain>(homes)
                                                   : new BindingList<ModelViewMain>();
+
         public void Bind(List<DXModelClient> clients)
          => bindingHome.DataSource = clients != null ? new BindingList<DXModelClient>(clients)
                                           : new BindingList<DXModelClient>();
+
         private void KeyToolStripMenuItemClick(object sender, EventArgs e)
         {
             using (HaspKeyView haspKey = new HaspKeyView())

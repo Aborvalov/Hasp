@@ -1,7 +1,6 @@
 using DevExpress.XtraBars;
 using ModelEntities;
 using Presenter;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -14,6 +13,7 @@ namespace HASPKey
         private const string errorStr = "Ошибка";
         public bool ErrorDataBase { get; set; } = false;
         private IMainPresenter presenter;
+        public int DataAccess;
 
         public MainFormDX()
         {
@@ -26,7 +26,7 @@ namespace HASPKey
         {
             InitializeComponent();
             presenter = new MainPresenter(this);
-            barSubItem3.Enabled = dataAccess == 1 || dataAccess == 2;
+            DataAccess = dataAccess;
             barSubItem4.Enabled = dataAccess == 2;
         }
 
@@ -82,7 +82,7 @@ namespace HASPKey
 
         private void BarButtonItem8ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            using (HaspKeyView haspKey = new HaspKeyView())
+            using (HaspKeyView haspKey = new HaspKeyView(DataAccess))
             {
                 haspKey.ShowDialog();
             }
@@ -91,7 +91,7 @@ namespace HASPKey
 
         private void BarButtonItem9ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            using (FeatureView feature = new FeatureView())
+            using (FeatureView feature = new FeatureView(DataAccess, true))
             {
                 feature.ShowDialog();
             }
@@ -99,7 +99,7 @@ namespace HASPKey
 
         private void BarButtonItem10ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            using (ClientNumberKeys client = new ClientNumberKeys())
+            using (ClientNumberKeys client = new ClientNumberKeys(DataAccess))
             {
                 client.ShowDialog();
             }

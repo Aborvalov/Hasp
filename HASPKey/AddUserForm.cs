@@ -72,7 +72,7 @@ namespace HASPKey
                 Name = textBoxName.Text,
                 Login = textBoxLogin.Text,
                 Password = textBoxPassword.Text,
-                LevelAccess = checkSuperAdmin.Checked ? LevelAccess.superadmin : checkAdmin.Checked ? LevelAccess.admin : LevelAccess.user,
+                LevelAccess = (LevelAccess)Enum.Parse(typeof(LevelAccess), comboBoxLevelAccess.SelectedItem.ToString(), true)
             };
             DialogResult = DialogResult.OK;
             Close();

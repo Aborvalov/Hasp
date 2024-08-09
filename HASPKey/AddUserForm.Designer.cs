@@ -31,10 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.textBoxName = new System.Windows.Forms.TextBox();
-            this.panelFiltr = new System.Windows.Forms.Panel();
-            this.checkUser = new System.Windows.Forms.RadioButton();
-            this.checkSuperAdmin = new System.Windows.Forms.RadioButton();
-            this.checkAdmin = new System.Windows.Forms.RadioButton();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.textBoxLogin = new System.Windows.Forms.TextBox();
@@ -42,8 +38,9 @@
             this.buttonCreate = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.loginBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.panelFiltr.SuspendLayout();
+            this.comboBoxLevelAccess = new DevExpress.XtraEditors.ComboBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.loginBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxLevelAccess.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // labelControl1
@@ -60,59 +57,12 @@
             // 
             this.textBoxName.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBoxName.Font = new System.Drawing.Font("Tahoma", 11F);
-            this.textBoxName.Location = new System.Drawing.Point(165, 48);
+            this.textBoxName.Location = new System.Drawing.Point(165, 46);
             this.textBoxName.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(202, 30);
             this.textBoxName.TabIndex = 20;
             this.textBoxName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxName_KeyDown);
-            // 
-            // panelFiltr
-            // 
-            this.panelFiltr.Controls.Add(this.checkUser);
-            this.panelFiltr.Controls.Add(this.checkSuperAdmin);
-            this.panelFiltr.Controls.Add(this.checkAdmin);
-            this.panelFiltr.Location = new System.Drawing.Point(87, 97);
-            this.panelFiltr.Margin = new System.Windows.Forms.Padding(4);
-            this.panelFiltr.Name = "panelFiltr";
-            this.panelFiltr.Size = new System.Drawing.Size(311, 56);
-            this.panelFiltr.TabIndex = 21;
-            // 
-            // checkUser
-            // 
-            this.checkUser.AutoSize = true;
-            this.checkUser.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.checkUser.Location = new System.Drawing.Point(226, 14);
-            this.checkUser.Name = "checkUser";
-            this.checkUser.Size = new System.Drawing.Size(65, 25);
-            this.checkUser.TabIndex = 30;
-            this.checkUser.TabStop = true;
-            this.checkUser.Text = "User";
-            this.checkUser.UseVisualStyleBackColor = true;
-            // 
-            // checkSuperAdmin
-            // 
-            this.checkSuperAdmin.AutoSize = true;
-            this.checkSuperAdmin.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.checkSuperAdmin.Location = new System.Drawing.Point(100, 14);
-            this.checkSuperAdmin.Name = "checkSuperAdmin";
-            this.checkSuperAdmin.Size = new System.Drawing.Size(120, 25);
-            this.checkSuperAdmin.TabIndex = 29;
-            this.checkSuperAdmin.TabStop = true;
-            this.checkSuperAdmin.Text = "SuperAdmin";
-            this.checkSuperAdmin.UseVisualStyleBackColor = true;
-            // 
-            // checkAdmin
-            // 
-            this.checkAdmin.AutoSize = true;
-            this.checkAdmin.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.checkAdmin.Location = new System.Drawing.Point(3, 14);
-            this.checkAdmin.Name = "checkAdmin";
-            this.checkAdmin.Size = new System.Drawing.Size(78, 25);
-            this.checkAdmin.TabIndex = 28;
-            this.checkAdmin.TabStop = true;
-            this.checkAdmin.Text = "Admin";
-            this.checkAdmin.UseVisualStyleBackColor = true;
             // 
             // labelControl2
             // 
@@ -138,7 +88,7 @@
             // 
             this.textBoxLogin.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBoxLogin.Font = new System.Drawing.Font("Tahoma", 11F);
-            this.textBoxLogin.Location = new System.Drawing.Point(165, 162);
+            this.textBoxLogin.Location = new System.Drawing.Point(165, 158);
             this.textBoxLogin.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxLogin.Name = "textBoxLogin";
             this.textBoxLogin.Size = new System.Drawing.Size(202, 30);
@@ -149,7 +99,7 @@
             // 
             this.textBoxPassword.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBoxPassword.Font = new System.Drawing.Font("Tahoma", 11F);
-            this.textBoxPassword.Location = new System.Drawing.Point(163, 213);
+            this.textBoxPassword.Location = new System.Drawing.Point(165, 209);
             this.textBoxPassword.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(202, 30);
@@ -184,28 +134,45 @@
             // 
             this.loginBindingSource.DataSource = typeof(ModelEntities.ModelViewUser);
             // 
+            // comboBoxLevelAccess
+            // 
+            this.comboBoxLevelAccess.Location = new System.Drawing.Point(165, 107);
+            this.comboBoxLevelAccess.Name = "comboBoxLevelAccess";
+            this.comboBoxLevelAccess.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11F);
+            this.comboBoxLevelAccess.Properties.Appearance.Options.UseFont = true;
+            this.comboBoxLevelAccess.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comboBoxLevelAccess.Properties.Items.AddRange(new object[] {
+            "Admin",
+            "SuperAdmin",
+            "User"});
+            this.comboBoxLevelAccess.Size = new System.Drawing.Size(202, 28);
+            this.comboBoxLevelAccess.TabIndex = 29;
+            // 
             // AddUserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(465, 319);
+            this.Controls.Add(this.comboBoxLevelAccess);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonCreate);
             this.Controls.Add(this.textBoxPassword);
             this.Controls.Add(this.textBoxLogin);
             this.Controls.Add(this.labelControl3);
             this.Controls.Add(this.labelControl2);
-            this.Controls.Add(this.panelFiltr);
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.labelControl1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.IconOptions.ShowIcon = false;
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(467, 359);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(467, 359);
             this.Name = "AddUserForm";
             this.Text = "Добавление пользователя";
-            this.panelFiltr.ResumeLayout(false);
-            this.panelFiltr.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.loginBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxLevelAccess.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -215,7 +182,6 @@
 
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private System.Windows.Forms.TextBox textBoxName;
-        private System.Windows.Forms.Panel panelFiltr;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private System.Windows.Forms.TextBox textBoxLogin;
@@ -223,8 +189,6 @@
         private System.Windows.Forms.Button buttonCreate;
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.BindingSource loginBindingSource;
-        private System.Windows.Forms.RadioButton checkUser;
-        private System.Windows.Forms.RadioButton checkSuperAdmin;
-        private System.Windows.Forms.RadioButton checkAdmin;
+        private DevExpress.XtraEditors.ComboBoxEdit comboBoxLevelAccess;
     }
 }

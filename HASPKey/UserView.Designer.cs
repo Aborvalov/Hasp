@@ -68,7 +68,7 @@
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(202, 30);
-            this.textBoxPassword.TabIndex = 18;
+            this.textBoxPassword.TabIndex = 1;
             this.textBoxPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxPassword_KeyDown);
             // 
             // textBoxLogin
@@ -79,7 +79,7 @@
             this.textBoxLogin.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxLogin.Name = "textBoxLogin";
             this.textBoxLogin.Size = new System.Drawing.Size(202, 30);
-            this.textBoxLogin.TabIndex = 19;
+            this.textBoxLogin.TabIndex = 0;
             this.textBoxLogin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxLogin_KeyDown);
             // 
             // buttonCancel
@@ -89,7 +89,7 @@
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(4);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(88, 28);
-            this.buttonCancel.TabIndex = 24;
+            this.buttonCancel.TabIndex = 3;
             this.buttonCancel.Text = "Выход";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -101,7 +101,7 @@
             this.buttonEnter.Margin = new System.Windows.Forms.Padding(4);
             this.buttonEnter.Name = "buttonEnter";
             this.buttonEnter.Size = new System.Drawing.Size(88, 28);
-            this.buttonEnter.TabIndex = 25;
+            this.buttonEnter.TabIndex = 2;
             this.buttonEnter.Text = "Вход";
             this.buttonEnter.UseVisualStyleBackColor = true;
             this.buttonEnter.Click += new System.EventHandler(this.buttonEnter_Click);
@@ -112,8 +112,7 @@
             // 
             // UserView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(575, 310);
             this.Controls.Add(this.buttonEnter);
             this.Controls.Add(this.buttonCancel);
@@ -121,12 +120,16 @@
             this.Controls.Add(this.textBoxPassword);
             this.Controls.Add(this.labelControl2);
             this.Controls.Add(this.labelControl1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.IconOptions.ShowIcon = false;
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(577, 350);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(577, 350);
             this.Name = "UserView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Вход";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.UserView_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.loginBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
