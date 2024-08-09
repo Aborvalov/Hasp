@@ -110,7 +110,7 @@
             // 
             this.loginBindingSource.DataSource = typeof(ModelEntities.ModelViewUser);
             // 
-            // LogInView
+            // UserView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -122,7 +122,9 @@
             this.Controls.Add(this.labelControl2);
             this.Controls.Add(this.labelControl1);
             this.IconOptions.ShowIcon = false;
-            this.Name = "LogInView";
+            this.MaximumSize = new System.Drawing.Size(577, 350);
+            this.MinimumSize = new System.Drawing.Size(577, 350);
+            this.Name = "UserView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Вход";
             ((System.ComponentModel.ISupportInitialize)(this.loginBindingSource)).EndInit();

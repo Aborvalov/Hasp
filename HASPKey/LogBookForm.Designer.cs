@@ -64,7 +64,7 @@
             this.DataGridViewLogBook.DefaultCellStyle = dataGridViewCellStyle1;
             this.DataGridViewLogBook.Location = new System.Drawing.Point(18, 13);
             this.DataGridViewLogBook.Margin = new System.Windows.Forms.Padding(4);
-            this.DataGridViewLogBook.MinimumSize = new System.Drawing.Size(756, 516);
+            this.DataGridViewLogBook.MinimumSize = new System.Drawing.Size(756, 555);
             this.DataGridViewLogBook.Name = "DataGridViewLogBook";
             this.DataGridViewLogBook.RowHeadersVisible = false;
             this.DataGridViewLogBook.RowHeadersWidth = 51;

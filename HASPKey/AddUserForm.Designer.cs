@@ -199,6 +199,8 @@
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.labelControl1);
             this.IconOptions.ShowIcon = false;
+            this.MaximumSize = new System.Drawing.Size(467, 359);
+            this.MinimumSize = new System.Drawing.Size(467, 359);
             this.Name = "AddUserForm";
             this.Text = "Добавление пользователя";
             this.panelFiltr.ResumeLayout(false);

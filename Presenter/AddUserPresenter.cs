@@ -19,7 +19,7 @@ namespace Presenter
         private const string errorUpdate = "Не удалось обновить пользователя.";
         private const string errorDelete = "Не удалось удалить пользователя.";
         private const string errorAdd = "Не удалось создать пользователя.";
-        private const string errorEmptyName = "\u2022 Не заполнено поля \"Имя\", не должно быть пустым. \n";
+        private const string errorEmptyName = "\u2022 Не заполнено поля \"Логин\", не должно быть пустым. \n";
 
         public AddUserPresenter(IUserView entitiesLogInView)
         {

@@ -83,7 +83,6 @@
     <Compile Include="Contract\IKeyFeaturePresenter.cs" />
     <Compile Include="Contract\IKeyFeatureClientPresenter.cs" />
     <Compile Include="Contract\IUserPresenter.cs" />
-    <Compile Include="Contract\ILogPresenter.cs" />
     <Compile Include="Contract\IMainPresenter.cs" />
     <Compile Include="Contract\IReferencePresenter.cs" />
     <Compile Include="UserPresenter.cs" />

@@ -108,10 +108,6 @@ namespace HASPKey
             error = true;
         }
 
-        public void Bind(User entity)
-        {
-            loginBindingSource.DataSource = entity ?? new User();
-        }
         public void Bind(List<ModelViewUser> entity)
             => loginBindingSource.DataSource = entity != null ? new BindingList<ModelViewUser>(entity)
                                                          : new BindingList<ModelViewUser>();
