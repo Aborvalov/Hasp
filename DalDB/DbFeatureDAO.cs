@@ -6,13 +6,22 @@ using System.Linq;
 
 namespace DalDB
 {
-    public class DbFeatureDAO : IContractFeatureDAO
+    public class DbFeatureDAO : IContractFeatureDAO, IDisposable
     {
         private readonly EntitesContext db;
+        private bool disposed = false;
+        public Logging logger;
 
         public DbFeatureDAO(IEntitesContext db)
         {
-            this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));  
+            this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
+            logger = new Logging(this.db);
+            logger.LoggingEvent += OnLoggingEvent;
+        }
+
+        private void OnLoggingEvent(object sender, LogEventArgs e)
+        {
+            logger.UpdateLog(e.TableName, e.Action, e.Id);
         }
 
         public int Add(Feature entity)
@@ -23,7 +32,9 @@ namespace DalDB
             var feature = db.Features.Add(entity);
 
             db.SaveChanges();
-            
+
+            logger.OnLogging("Features", "добавлено", entity.Id); 
+
             return feature.Id;
         }
 
@@ -60,7 +71,9 @@ namespace DalDB
             }
 
             db.SaveChanges();
-           
+
+            logger.OnLogging("Features", "удалено", id);
+
             return true;
         }        
 
@@ -78,7 +91,9 @@ namespace DalDB
             feature.Description = entity.Description;
 
             db.SaveChanges();
-            
+
+            logger.OnLogging("Features", "обновлено", entity.Id);
+
             return true;
         }
 
@@ -91,6 +106,24 @@ namespace DalDB
                                         f.Description == entity.Description);
 
             return feature != null;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    logger.LoggingEvent -= OnLoggingEvent;
+                }
+                disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

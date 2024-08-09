@@ -16,6 +16,7 @@ namespace HASPKey
         private bool size = true;
         private bool error = false;
         private const int sizeH = 40;
+        public int DataAccess;
         public event Action DataUpdated;
         internal ModelViewHaspKey SearchHaspKey { get; private set; } = null;
 
@@ -45,6 +46,28 @@ namespace HASPKey
                 DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
         }
 
+        public HaspKeyView(int dataAccess)
+        {
+            InitializeComponent();
+            presenterHaspKey = new HaspKeyPresenter(this);
+            DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + sizeH;
+
+            comboBoxTypeKey.DataSource = Enum.GetValues(typeof(TypeKey));
+            comboBoxTypeKey.SelectedIndex = -1;
+            labelClient.Text = string.Empty;
+            DataAccess = dataAccess;
+
+            if (!Admin.IsAdmin)
+                DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
+            if (dataAccess == 3)
+            {
+                buttonAdd.Enabled = false;
+                buttonCancel.Enabled = false;
+                buttonDelete.Enabled = false;
+                buttonSave.Enabled = false;
+            }
+        }
+
         public void Bind(List<ModelViewHaspKey> entity)
             => bindingHaspKey.DataSource = entity != null ? new BindingList<ModelViewHaspKey>(entity)
                                                           : new BindingList<ModelViewHaspKey>();
@@ -67,6 +90,7 @@ namespace HASPKey
         private void RadioButtonActive_CheckedChanged(object sender, EventArgs e)
         {
             DefaultView();
+            if (DataAccess == 3) buttonAdd.Enabled = false;
             if (client != null)
             {
                 presenterHaspKey.GetActiveInCompany(client);
@@ -151,6 +175,7 @@ namespace HASPKey
                 {
                     this.client = client.SearchIdClient;
                     DefaultView();
+                    if (DataAccess == 3) buttonAdd.Enabled = false;
                     presenterHaspKey.GetByClient(this.client);
 
                     labelClient.Text = this.client.Name;
@@ -162,6 +187,7 @@ namespace HASPKey
         private void RadioButtonPastDue_CheckedChanged(object sender, EventArgs e)
         {
             DefaultView();
+            if (DataAccess == 3) buttonAdd.Enabled = false;
             if (client != null)
             {
                 presenterHaspKey.GetByPastDue(client);
@@ -236,6 +262,7 @@ namespace HASPKey
         {
             SetRadioButtonsVisibility(false);
             DefaultView();
+            if (DataAccess == 3) buttonAdd.Enabled = false;
             presenterHaspKey.Display();
             labelClient.Text = string.Empty;
         }

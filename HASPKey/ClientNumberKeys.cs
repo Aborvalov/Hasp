@@ -40,17 +40,15 @@ namespace HASPKey
             buttonCancel.Visible = isVisible;
         }
 
-        public ClientNumberKeys(bool search)
+        public ClientNumberKeys(int DataAccess)
         {
             InitializeComponent();
-            presenterClientNumberKeys = new ClientNumberKeysPresenter(this); 
+            presenterClientNumberKeys = new ClientNumberKeysPresenter(this);
             SetButtonVisibility(false);
             labelFeature.Visible = false;
             buttonAll.Visible = true;
+            if (DataAccess == 3) buttonEdit.Enabled = false;
         }
-
-        public ClientNumberKeys() : this(false)
-        { }
 
         private void ButtonSearchByFeature_Click(object sender, EventArgs e)
         {

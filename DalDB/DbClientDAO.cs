@@ -6,13 +6,22 @@ using System.Linq;
 
 namespace DalDB
 {
-    public class DbClientDAO : IContractClientDAO
+    public class DbClientDAO : IContractClientDAO, IDisposable
     {
         private readonly EntitesContext db;
+        private bool disposed = false;
+        public Logging logger;
 
         public DbClientDAO(IEntitesContext db)
         {
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
+            logger = new Logging(this.db);
+            logger.LoggingEvent += OnLoggingEvent;
+        }
+
+        private void OnLoggingEvent(object sender, LogEventArgs e)
+        {
+            logger.UpdateLog(e.TableName, e.Action, e.Id);
         }
 
         public int Add(Client entity)
@@ -23,7 +32,9 @@ namespace DalDB
             var client = db.Clients.Add(entity);
 
             db.SaveChanges();
-            
+
+            logger.OnLogging("Users", "добавлено", entity.Id);
+
             return client.Id;
         }
 
@@ -133,8 +144,11 @@ namespace DalDB
 
             db.Clients.Remove(client);
             db.KeyFeatureClients.RemoveRange(keyFeatureClients);
-            
-            db.SaveChanges();                        
+
+            db.SaveChanges();
+
+            logger.OnLogging("Clients", "удалено", id);
+
             return true;
         }
 
@@ -153,7 +167,9 @@ namespace DalDB
             client.Phone         = entity.Phone;
 
             db.SaveChanges();
-           
+
+            logger.OnLogging("Clients", "обновлено", entity.Id);
+
             return true;
         }
 
@@ -167,8 +183,22 @@ namespace DalDB
             return client != null;
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    logger.LoggingEvent -= OnLoggingEvent;
+                }
+                disposed = true;
+            }
+        }
 
-
-
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

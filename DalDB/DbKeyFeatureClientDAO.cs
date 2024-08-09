@@ -6,13 +6,22 @@ using System.Linq;
 
 namespace DalDB
 {
-    public class DbKeyFeatureClientDAO : IContractKeyFeatureClientDAO
+    public class DbKeyFeatureClientDAO : IContractKeyFeatureClientDAO, IDisposable
     {
         private readonly EntitesContext db;
+        private bool disposed = false;
+        public Logging logger;
 
         public DbKeyFeatureClientDAO(IEntitesContext db)
         {
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
+            logger = new Logging(this.db);
+            logger.LoggingEvent += OnLoggingEvent;
+        }
+
+        private void OnLoggingEvent(object sender, LogEventArgs e)
+        {
+            logger.UpdateLog(e.TableName, e.Action, e.Id);
         }
 
         public int Add(KeyFeatureClient entity)
@@ -23,7 +32,9 @@ namespace DalDB
             var keyFeatureClient = db.KeyFeatureClients.Add(entity);
 
             db.SaveChanges();
-            
+
+            logger.OnLogging("KeyFeatureClients", "добавлено", entity.Id);
+
             return keyFeatureClient.Id;
         }
 
@@ -50,8 +61,11 @@ namespace DalDB
                 return false;
 
             db.KeyFeatureClients.Remove(keyFeatureClient);
+
             db.SaveChanges();
-            
+
+            logger.OnLogging("KeyFeatureClients", "удалено", id);
+
             return true;
         }
 
@@ -70,7 +84,9 @@ namespace DalDB
             keyFeatureClient.Initiator    = entity.Initiator;
 
             db.SaveChanges();
-            
+
+            logger.OnLogging("KeyFeatureClients", "обновлено", entity.Id);
+
             return true;
         }
 
@@ -83,6 +99,24 @@ namespace DalDB
                                          x.Initiator    == entity.Initiator &&
                                          x.Note         == entity.Note);
             return kfc != null;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    logger.LoggingEvent -= OnLoggingEvent;
+                }
+                disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

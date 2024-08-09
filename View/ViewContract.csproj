@@ -46,6 +46,8 @@
     <Compile Include="IEntitiesView.cs" />
     <Compile Include="IKeyFeatureClientView.cs" />
     <Compile Include="IKeyFeatureView.cs" />
+    <Compile Include="IUserView.cs" />
+    <Compile Include="ILogView.cs" />
     <Compile Include="IMainView.cs" />
     <Compile Include="IBindItemView.cs" />
     <Compile Include="IUpdateDataBaseMain.cs" />

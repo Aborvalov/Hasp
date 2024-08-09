@@ -67,11 +67,15 @@
     <Compile Include="Context\Context.cs" />
     <Compile Include="Contract\IKeyFeatureClientModel.cs" />
     <Compile Include="Contract\IItemModel.cs" />
+    <Compile Include="Contract\IUserModel.cs" />
+    <Compile Include="Contract\ILogModel.cs" />
     <Compile Include="KeyFeatureClientModel.cs" />
     <Compile Include="KeyFeatureModel.cs" />
     <Compile Include="FeatureModel.cs" />
     <Compile Include="HaspKeyModel.cs" />
     <Compile Include="Contract\IKeyFeatureModel.cs" />
+    <Compile Include="UserModel.cs" />
+    <Compile Include="LogModel.cs" />
     <Compile Include="MainModel.cs" />
     <Compile Include="Contract\IClientModel.cs" />
     <Compile Include="Contract\IEntitiesModel.cs" />

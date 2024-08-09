@@ -52,6 +52,8 @@
     <Compile Include="KeyFeatureLogic.cs" />
     <Compile Include="LoadFromXml.cs" />
     <Compile Include="Logics.cs" />
+    <Compile Include="UsersLogic.cs" />
+    <Compile Include="LogLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

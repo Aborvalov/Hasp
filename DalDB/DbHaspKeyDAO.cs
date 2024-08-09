@@ -7,14 +7,23 @@ using System.Linq;
 
 namespace DalDB
 {
-    public class DbHaspKeyDAO : IContractHaspKeyDAO
+    public class DbHaspKeyDAO : IContractHaspKeyDAO, IDisposable
     {
         private readonly EntitesContext db;
         private readonly DateTime date = DateTime.Now.Date;
+        private bool disposed = false;
+        public Logging logger;
 
         public DbHaspKeyDAO(IEntitesContext db)
         {
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
+            logger = new Logging(this.db);
+            logger.LoggingEvent += OnLoggingEvent;
+        }
+
+        private void OnLoggingEvent(object sender, LogEventArgs e)
+        {
+            logger.UpdateLog(e.TableName, e.Action, e.Id);
         }
 
         public int Add(HaspKey entity)
@@ -36,6 +45,8 @@ namespace DalDB
             {
                 throw;
             }
+
+            logger.OnLogging("HASPKeys", "добавлено", entity.Id);
 
             return haspKey.Id;
         }
@@ -210,8 +221,8 @@ namespace DalDB
             if (haspKey == null)
                 return false;
 
-            var keyFeature = db.KeyFeatures
-                               .Where(kf => kf.IdHaspKey == id);
+            var keyFeature = db.KeyFeatures.Where(kf => kf.IdHaspKey == id);
+
             db.KeyFeatures.RemoveRange(keyFeature);
 
             db.HaspKeys.Remove(haspKey);
@@ -225,6 +236,8 @@ namespace DalDB
             }
 
             db.SaveChanges();
+
+            logger.OnLogging("HASPKeys", "удалено", id);
 
             return true;
         }
@@ -256,6 +269,8 @@ namespace DalDB
                 throw;
             }
 
+            logger.OnLogging("HASPKeys", "обновлено", entity.Id);
+
             return true;
         }
 
@@ -268,6 +283,24 @@ namespace DalDB
                                                hk.IsHome  == entity.IsHome);
 
             return key != null;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    logger.LoggingEvent -= OnLoggingEvent;
+                }
+                disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }
