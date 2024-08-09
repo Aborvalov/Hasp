@@ -6,16 +6,22 @@ using System.Linq;
 
 namespace DalDB
 {
-    public class DbClientDAO : IContractClientDAO
+    public class DbClientDAO : IContractClientDAO, IDisposable
     {
         private readonly EntitesContext db;
+        private bool disposed = false;
         public Logging logger;
 
         public DbClientDAO(IEntitesContext db)
         {
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
             logger = new Logging(this.db);
-            logger.LoggingEvent += (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id);
+            logger.LoggingEvent += OnLoggingEvent;
+        }
+
+        private void OnLoggingEvent(object sender, LogEventArgs e)
+        {
+            logger.UpdateLog(e.TableName, e.Action, e.Id);
         }
 
         public int Add(Client entity)
@@ -175,6 +181,24 @@ namespace DalDB
                                              c.ContactPerson == entity.ContactPerson &&
                                              c.Phone         == entity.Phone);
             return client != null;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    logger.LoggingEvent -= OnLoggingEvent;
+                }
+                disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

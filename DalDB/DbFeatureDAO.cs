@@ -2,21 +2,26 @@
 using Entities;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 
 namespace DalDB
 {
-    public class DbFeatureDAO : IContractFeatureDAO
+    public class DbFeatureDAO : IContractFeatureDAO, IDisposable
     {
         private readonly EntitesContext db;
+        private bool disposed = false;
         public Logging logger;
 
         public DbFeatureDAO(IEntitesContext db)
         {
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
             logger = new Logging(this.db);
-            logger.LoggingEvent += (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id);
+            logger.LoggingEvent += OnLoggingEvent;
+        }
+
+        private void OnLoggingEvent(object sender, LogEventArgs e)
+        {
+            logger.UpdateLog(e.TableName, e.Action, e.Id);
         }
 
         public int Add(Feature entity)
@@ -101,6 +106,24 @@ namespace DalDB
                                         f.Description == entity.Description);
 
             return feature != null;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    logger.LoggingEvent -= OnLoggingEvent;
+                }
+                disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

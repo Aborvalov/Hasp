@@ -8,16 +8,22 @@ using System.Text;
 
 namespace DalDB
 {
-    public class DbUserDAO : IContractUserDAO
+    public class DbUserDAO : IContractUserDAO, IDisposable
     {
         private readonly EntitesContext db;
+        private bool disposed = false;
         public Logging logger;
 
         public DbUserDAO(IEntitesContext db)
         {
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
             logger = new Logging(this.db);
-            logger.LoggingEvent += (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id);
+            logger.LoggingEvent += OnLoggingEvent;
+        }
+
+        private void OnLoggingEvent(object sender, LogEventArgs e)
+        {
+            logger.UpdateLog(e.TableName, e.Action, e.Id);
         }
 
         public List<User> GetAll() => db.Users.ToList();
@@ -134,6 +140,24 @@ namespace DalDB
                                              c.Password == entity.Password &&
                                              c.LevelAccess == entity.LevelAccess);
             return login != null;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    logger.LoggingEvent -= OnLoggingEvent;
+                }
+                disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

@@ -6,16 +6,22 @@ using System.Linq;
 
 namespace DalDB
 {
-    public class DbKeyFeatureDAO : IContractKeyFeatureDAO
+    public class DbKeyFeatureDAO : IContractKeyFeatureDAO, IDisposable
     {
         private readonly EntitesContext db;
+        private bool disposed = false;
         public Logging logger;
 
         public DbKeyFeatureDAO(IEntitesContext db)
         {
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
             logger = new Logging(this.db);
-            logger.LoggingEvent += (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id);
+            logger.LoggingEvent += OnLoggingEvent;
+        }
+
+        private void OnLoggingEvent(object sender, LogEventArgs e)
+        {
+            logger.UpdateLog(e.TableName, e.Action, e.Id);
         }
 
         public int Add(KeyFeature entity)
@@ -98,6 +104,24 @@ namespace DalDB
                                         x.StartDate == entity.StartDate &&
                                         x.EndDate   == entity.EndDate);
             return keyFeature != null;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    logger.LoggingEvent -= OnLoggingEvent;
+                }
+                disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

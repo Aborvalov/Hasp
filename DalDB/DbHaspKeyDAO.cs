@@ -7,17 +7,23 @@ using System.Linq;
 
 namespace DalDB
 {
-    public class DbHaspKeyDAO : IContractHaspKeyDAO
+    public class DbHaspKeyDAO : IContractHaspKeyDAO, IDisposable
     {
         private readonly EntitesContext db;
         private readonly DateTime date = DateTime.Now.Date;
+        private bool disposed = false;
         public Logging logger;
 
         public DbHaspKeyDAO(IEntitesContext db)
         {
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
             logger = new Logging(this.db);
-            logger.LoggingEvent += (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id);
+            logger.LoggingEvent += OnLoggingEvent;
+        }
+
+        private void OnLoggingEvent(object sender, LogEventArgs e)
+        {
+            logger.UpdateLog(e.TableName, e.Action, e.Id);
         }
 
         public int Add(HaspKey entity)
@@ -277,6 +283,24 @@ namespace DalDB
                                                hk.IsHome  == entity.IsHome);
 
             return key != null;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    logger.LoggingEvent -= OnLoggingEvent;
+                }
+                disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }
