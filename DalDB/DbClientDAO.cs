@@ -2,7 +2,6 @@
 using Entities;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 
 namespace DalDB
@@ -10,22 +9,12 @@ namespace DalDB
     public class DbClientDAO : IContractClientDAO
     {
         private readonly EntitesContext db;
+        public Logging logger;
 
         public DbClientDAO(IEntitesContext db)
         {
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
-        }
-
-        public void UpdateLog(string tableName, string action, int id)
-        {
-            var latestLog = db.Logs.OrderByDescending(l => l.LogId).FirstOrDefault();
-            if (latestLog != null)
-            {
-                var log = tableName + "-" + action + "-" + id + "; ";
-                latestLog.Actions += log;
-                db.Entry(latestLog).State = EntityState.Modified;
-                db.SaveChanges();
-            }
+            logger = new Logging(this.db);
         }
 
         public int Add(Client entity)
@@ -37,7 +26,10 @@ namespace DalDB
 
             db.SaveChanges();
 
-            UpdateLog("Clients", "добавлено", entity.Id);
+            logger.Subscribe(
+                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
+                "Clients", "добавлено", entity.Id
+            );
 
             return client.Id;
         }
@@ -151,7 +143,10 @@ namespace DalDB
 
             db.SaveChanges();
 
-            UpdateLog("Clients", "удалено", id);
+            logger.Subscribe(
+                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
+                "Clients", "удалено", id
+            );
 
             return true;
         }
@@ -172,7 +167,10 @@ namespace DalDB
 
             db.SaveChanges();
 
-            UpdateLog("Clients", "обновлено", entity.Id);
+            logger.Subscribe(
+                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
+                "Clients", "обновлено", entity.Id
+            );
 
             return true;
         }

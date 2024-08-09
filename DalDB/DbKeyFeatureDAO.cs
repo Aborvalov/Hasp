@@ -2,7 +2,6 @@
 using Entities;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 
 namespace DalDB
@@ -10,25 +9,12 @@ namespace DalDB
     public class DbKeyFeatureDAO : IContractKeyFeatureDAO
     {
         private readonly EntitesContext db;
-        private static string userAdd = "В таблицу KeyFeatures добавлены несколько записей. ";
-        private static string userDelete = "Из таблицы KeyFeatures удалены несколько записей. ";
-        private static string userUpdate = "В таблице KeyFeatures обновлены несколько записей. ";
+        public Logging logger;
 
         public DbKeyFeatureDAO(IEntitesContext db)
         {
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
-        }
-
-        public void UpdateLog(string tableName, string action, int id)
-        {
-            var latestLog = db.Logs.OrderByDescending(l => l.LogId).FirstOrDefault();
-            if (latestLog != null)
-            {
-                var log = tableName + "-" + action + "-" + id + "; ";
-                latestLog.Actions += log;
-                db.Entry(latestLog).State = EntityState.Modified;
-                db.SaveChanges();
-            }
+            logger = new Logging(this.db);
         }
 
         public int Add(KeyFeature entity)
@@ -40,7 +26,10 @@ namespace DalDB
 
             db.SaveChanges();
 
-            UpdateLog("KeyFeatures", "добавлено", entity.Id);
+            logger.Subscribe(
+                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
+                "KeyFeatures", "добавлено", entity.Id
+            );
 
             return keyFeature.Id;
         }
@@ -76,7 +65,10 @@ namespace DalDB
 
             db.SaveChanges();
 
-            UpdateLog("KeyFeatures", "удалено", id);
+            logger.Subscribe(
+                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
+                "KeyFeatures", "удалено", id
+            );
 
             return true;
         }
@@ -97,7 +89,10 @@ namespace DalDB
 
             db.SaveChanges();
 
-            UpdateLog("KeyFeatures", "обновлено", entity.Id);
+            logger.Subscribe(
+                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
+                "KeyFeatures", "обновлено", entity.Id
+            );
 
             return true;
         }

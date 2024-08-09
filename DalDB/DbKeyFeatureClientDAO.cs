@@ -10,22 +10,12 @@ namespace DalDB
     public class DbKeyFeatureClientDAO : IContractKeyFeatureClientDAO
     {
         private readonly EntitesContext db;
+        public Logging logger;
 
         public DbKeyFeatureClientDAO(IEntitesContext db)
         {
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
-        }
-
-        public void UpdateLog(string tableName, string action, int id)
-        {
-            var latestLog = db.Logs.OrderByDescending(l => l.LogId).FirstOrDefault();
-            if (latestLog != null)
-            {
-                var log = tableName + "-" + action + "-" + id + "; ";
-                latestLog.Actions += log;
-                db.Entry(latestLog).State = EntityState.Modified;
-                db.SaveChanges();
-            }
+            logger = new Logging(this.db);
         }
 
         public int Add(KeyFeatureClient entity)
@@ -37,7 +27,10 @@ namespace DalDB
 
             db.SaveChanges();
 
-            UpdateLog("KeyFeatureClients", "добавлено", entity.Id);
+            logger.Subscribe(
+                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
+                "KeyFeatureClients", "добавлено", entity.Id
+            );
 
             return keyFeatureClient.Id;
         }
@@ -68,7 +61,10 @@ namespace DalDB
 
             db.SaveChanges();
 
-            UpdateLog("KeyFeatureClients", "удалено", id);
+            logger.Subscribe(
+                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
+                "KeyFeatureClients", "удалено", id
+            );
 
             return true;
         }
@@ -89,7 +85,10 @@ namespace DalDB
 
             db.SaveChanges();
 
-            UpdateLog("KeyFeatureClients", "обновлено", entity.Id);
+            logger.Subscribe(
+                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
+                "KeyFeatureClients", "обновлено", entity.Id
+            );
 
             return true;
         }

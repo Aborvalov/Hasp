@@ -68,6 +68,8 @@
     <Compile Include="DbKeyFeatureDAO.cs" />
     <Compile Include="DbLogDAO.cs" />
     <Compile Include="DbUserDAO.cs" />
+    <Compile Include="LogEventArgs.cs" />
+    <Compile Include="Logging.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

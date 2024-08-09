@@ -2,7 +2,6 @@
 using Entities;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -12,22 +11,12 @@ namespace DalDB
     public class DbUserDAO : IContractUserDAO
     {
         private readonly EntitesContext db;
+        public Logging logger;
 
         public DbUserDAO(IEntitesContext db)
         {
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
-        }
-
-        public void UpdateLog(string tableName, string action, int id)
-        {
-            var latestLog = db.Logs.OrderByDescending(l => l.LogId).FirstOrDefault();
-            if (latestLog != null)
-            {
-                var log = tableName + "-" + action + "-" + id + "; ";
-                latestLog.Actions += log;
-                db.Entry(latestLog).State = EntityState.Modified;
-                db.SaveChanges();
-            }
+            logger = new Logging(this.db);
         }
 
         public List<User> GetAll() => db.Users.ToList();
@@ -82,7 +71,10 @@ namespace DalDB
 
             db.SaveChanges();
 
-            UpdateLog("Users", "добавлено", entity.Id);
+            logger.Subscribe(
+                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
+                "Users", "добавлено", entity.Id
+            );
 
             return client.Id;
         }
@@ -101,7 +93,10 @@ namespace DalDB
             db.Users.Remove(client);
             db.SaveChanges();
 
-            UpdateLog("Users", "удалено", id);
+            logger.Subscribe(
+                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
+                "Users", "удалено", id
+            );
 
             return true;
         }
@@ -122,7 +117,10 @@ namespace DalDB
 
             db.SaveChanges();
 
-            UpdateLog("Users", "обновлено", entity.Id);
+            logger.Subscribe(
+                 (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
+                 "Users", "обновлено", entity.Id
+             );
 
             return true;
         }
