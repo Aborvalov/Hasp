@@ -10,9 +10,6 @@ namespace DalDB
     public class DbKeyFeatureDAO : IContractKeyFeatureDAO
     {
         private readonly EntitesContext db;
-        private static string userAdd = "В таблицу KeyFeatures добавлены несколько записей. ";
-        private static string userDelete = "Из таблицы KeyFeatures удалены несколько записей. ";
-        private static string userUpdate = "В таблице KeyFeatures обновлены несколько записей. ";
 
         public DbKeyFeatureDAO(IEntitesContext db)
         {
