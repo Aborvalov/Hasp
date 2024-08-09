@@ -15,15 +15,9 @@ namespace DalDB
             this.db = db ?? throw new ArgumentNullException(nameof(db));
         }
 
-        public void OnLogging(LogEventArgs e)
+        public void OnLogging(string tableName, string action, int id)
         {
-            LoggingEvent?.Invoke(this, e);
-        }
-
-        public void Subscribe(EventHandler<LogEventArgs> handler, string tableName, string action, int id)
-        {
-            LoggingEvent += handler;
-            OnLogging(new LogEventArgs(tableName, action, id));
+            LoggingEvent?.Invoke(this, new LogEventArgs(tableName, action, id));
         }
 
         public void UpdateLog(string tableName, string action, int id)

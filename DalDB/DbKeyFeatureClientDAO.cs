@@ -2,7 +2,6 @@
 using Entities;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 
 namespace DalDB
@@ -16,6 +15,7 @@ namespace DalDB
         {
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
             logger = new Logging(this.db);
+            logger.LoggingEvent += (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id);
         }
 
         public int Add(KeyFeatureClient entity)
@@ -27,10 +27,7 @@ namespace DalDB
 
             db.SaveChanges();
 
-            logger.Subscribe(
-                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
-                "KeyFeatureClients", "добавлено", entity.Id
-            );
+            logger.OnLogging("KeyFeatureClients", "добавлено", entity.Id);
 
             return keyFeatureClient.Id;
         }
@@ -61,10 +58,7 @@ namespace DalDB
 
             db.SaveChanges();
 
-            logger.Subscribe(
-                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
-                "KeyFeatureClients", "удалено", id
-            );
+            logger.OnLogging("KeyFeatureClients", "удалено", id);
 
             return true;
         }
@@ -85,10 +79,7 @@ namespace DalDB
 
             db.SaveChanges();
 
-            logger.Subscribe(
-                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
-                "KeyFeatureClients", "обновлено", entity.Id
-            );
+            logger.OnLogging("KeyFeatureClients", "обновлено", entity.Id);
 
             return true;
         }

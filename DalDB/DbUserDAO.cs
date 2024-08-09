@@ -17,6 +17,7 @@ namespace DalDB
         {
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
             logger = new Logging(this.db);
+            logger.LoggingEvent += (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id);
         }
 
         public List<User> GetAll() => db.Users.ToList();
@@ -71,10 +72,7 @@ namespace DalDB
 
             db.SaveChanges();
 
-            logger.Subscribe(
-                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
-                "Users", "добавлено", entity.Id
-            );
+            logger.OnLogging("Users", "добавлено", entity.Id);
 
             return client.Id;
         }
@@ -93,10 +91,7 @@ namespace DalDB
             db.Users.Remove(client);
             db.SaveChanges();
 
-            logger.Subscribe(
-                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
-                "Users", "удалено", id
-            );
+            logger.OnLogging("Users", "удалено", id);
 
             return true;
         }
@@ -117,10 +112,7 @@ namespace DalDB
 
             db.SaveChanges();
 
-            logger.Subscribe(
-                 (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
-                 "Users", "обновлено", entity.Id
-             );
+            logger.OnLogging("Users", "обновлено", entity.Id);
 
             return true;
         }

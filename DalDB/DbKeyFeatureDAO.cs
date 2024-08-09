@@ -15,6 +15,7 @@ namespace DalDB
         {
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
             logger = new Logging(this.db);
+            logger.LoggingEvent += (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id);
         }
 
         public int Add(KeyFeature entity)
@@ -26,10 +27,7 @@ namespace DalDB
 
             db.SaveChanges();
 
-            logger.Subscribe(
-                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
-                "KeyFeatures", "добавлено", entity.Id
-            );
+            logger.OnLogging("KeyFeatures", "добавлено", entity.Id);
 
             return keyFeature.Id;
         }
@@ -65,10 +63,7 @@ namespace DalDB
 
             db.SaveChanges();
 
-            logger.Subscribe(
-                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
-                "KeyFeatures", "удалено", id
-            );
+            logger.OnLogging("KeyFeatures", "удалено", id);
 
             return true;
         }
@@ -89,10 +84,7 @@ namespace DalDB
 
             db.SaveChanges();
 
-            logger.Subscribe(
-                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
-                "KeyFeatures", "обновлено", entity.Id
-            );
+            logger.OnLogging("KeyFeatures", "обновлено", entity.Id);
 
             return true;
         }

@@ -2,7 +2,6 @@ using DalContract;
 using Entities;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 
@@ -18,6 +17,7 @@ namespace DalDB
         {
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
             logger = new Logging(this.db);
+            logger.LoggingEvent += (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id);
         }
 
         public int Add(HaspKey entity)
@@ -40,10 +40,7 @@ namespace DalDB
                 throw;
             }
 
-            logger.Subscribe(
-                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
-                "HASPKeys", "добавлено", entity.Id
-            );
+            logger.OnLogging("HASPKeys", "добавлено", entity.Id);
 
             return haspKey.Id;
         }
@@ -234,10 +231,7 @@ namespace DalDB
 
             db.SaveChanges();
 
-            logger.Subscribe(
-                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
-                "HASPKeys", "удалено", id
-            );
+            logger.OnLogging("HASPKeys", "удалено", id);
 
             return true;
         }
@@ -269,10 +263,7 @@ namespace DalDB
                 throw;
             }
 
-            logger.Subscribe(
-                (sender, e) => logger.UpdateLog(e.TableName, e.Action, e.Id),
-                "HASPKeys", "обновлено", entity.Id
-            );
+            logger.OnLogging("HASPKeys", "обновлено", entity.Id);
 
             return true;
         }
