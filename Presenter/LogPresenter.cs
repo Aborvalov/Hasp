@@ -1,13 +1,11 @@
 ﻿using Logic;
 using Model;
-using ModelEntities;
 using System;
-using System.Collections.Generic;
 using ViewContract;
 
 namespace Presenter
 {
-    public class LogPresenter : ILogPresenter
+    public class LogPresenter
     {
         private readonly ILogView entitiesLogView;
         private readonly ILogModel logModel;

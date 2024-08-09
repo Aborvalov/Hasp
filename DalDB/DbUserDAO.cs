@@ -48,7 +48,6 @@ namespace DalDB
                     User = user.Name + "-" + access,
                     LoginTime = DateTime.Now,
                     Actions = "Вход в программу. ",
-
                 };
                 var log = db.Logs.Add(newLog);
                 db.SaveChanges();

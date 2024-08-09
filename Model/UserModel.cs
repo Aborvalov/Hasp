@@ -111,6 +111,10 @@ namespace Model
 
         public int GetByLoginAndPassword(string login, string password)
         {
+            if (string.IsNullOrEmpty(login))
+                throw new ArgumentNullException(nameof(login));
+            if (string.IsNullOrEmpty(password))
+                throw new ArgumentNullException(nameof(password));
             return userLogic.GetByLoginAndPassword(login, password);
         }
 
