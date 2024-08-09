@@ -92,7 +92,7 @@
             this.buttonCancel.TabIndex = 3;
             this.buttonCancel.Text = "Выход";
             this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
             // buttonEnter
             // 
@@ -104,7 +104,7 @@
             this.buttonEnter.TabIndex = 2;
             this.buttonEnter.Text = "Вход";
             this.buttonEnter.UseVisualStyleBackColor = true;
-            this.buttonEnter.Click += new System.EventHandler(this.buttonEnter_Click);
+            this.buttonEnter.Click += new System.EventHandler(this.ButtonEnter_Click);
             // 
             // loginBindingSource
             // 

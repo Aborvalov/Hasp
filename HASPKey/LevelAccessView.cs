@@ -32,7 +32,7 @@ namespace HASPKey
         public LevelAccessView() : this(false)
         { }
 
-        private void buttonAdd_Click(object sender, EventArgs e)
+        private void ButtonAdd_Click(object sender, EventArgs e)
         {
             newItem = null;
             var bindingList = loginBindingSource.DataSource as BindingList<ModelViewUser>;
@@ -61,7 +61,7 @@ namespace HASPKey
             }
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void ButtonSave_Click(object sender, EventArgs e)
         {
             var bindingList = loginBindingSource.DataSource as BindingList<ModelViewUser>;
             error = false;
@@ -73,7 +73,7 @@ namespace HASPKey
 
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void ButtonCancel_Click(object sender, EventArgs e)
         {
             if (isSomethingChanged)
             {
@@ -82,7 +82,7 @@ namespace HASPKey
             }
         }
 
-        private void buttonDelete_Click(object sender, EventArgs e)
+        private void ButtonDelete_Click(object sender, EventArgs e)
         {
             if (!(DataGridViewLogIn.CurrentRow.DataBoundItem is ModelViewUser row))
             {
@@ -126,7 +126,7 @@ namespace HASPKey
             }
         }
 
-        private void buttonEdit_Click(object sender, EventArgs e)
+        private void ButtonEdit_Click(object sender, EventArgs e)
         {
             if (DataGridViewLogIn.CurrentRow != null)
             {

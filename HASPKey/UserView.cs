@@ -1,5 +1,4 @@
-﻿using Entities;
-using ModelEntities;
+﻿using ModelEntities;
 using Presenter;
 using System;
 using System.Collections.Generic;
@@ -25,19 +24,18 @@ namespace HASPKey
         public UserView(bool search)
         {
             InitializeComponent();
-            //textBoxLogin.Focus();
             presenterUser = new UserPresenter(this);
         }
 
         public UserView() : this(false)
         { }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void ButtonCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void buttonEnter_Click(object sender, EventArgs e)
+        private void ButtonEnter_Click(object sender, EventArgs e)
         {
             string login = textBoxLogin.Text;
             string password = textBoxPassword.Text;
