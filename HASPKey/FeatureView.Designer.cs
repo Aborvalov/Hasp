@@ -257,7 +257,7 @@ namespace HASPKey
             // buttonCancel
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonCancel.Location = new System.Drawing.Point(110, 463);
+            this.buttonCancel.Location = new System.Drawing.Point(110, 464);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(4);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(88, 28);

@@ -46,7 +46,9 @@ namespace HASPKey
             this.barButtonItem12 = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem2 = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.barSubItem4 = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItem16 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem17 = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -70,8 +72,6 @@ namespace HASPKey
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.splitterControl1 = new DevExpress.XtraEditors.SplitterControl();
-            this.barSubItem4 = new DevExpress.XtraBars.BarSubItem();
-            this.barButtonItem17 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.NextDays)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
@@ -158,8 +158,8 @@ namespace HASPKey
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barSubItem1, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem3),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem2),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem4)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem4),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem2)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -251,12 +251,28 @@ namespace HASPKey
             this.barButtonItem2.Name = "barButtonItem2";
             this.barButtonItem2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BarButtonItem2ItemClick);
             // 
+            // barSubItem4
+            // 
+            this.barSubItem4.Caption = "Администрирование";
+            this.barSubItem4.Id = 25;
+            this.barSubItem4.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.Caption, this.barButtonItem16, "Доступ"),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem17)});
+            this.barSubItem4.Name = "barSubItem4";
+            // 
             // barButtonItem16
             // 
             this.barButtonItem16.Caption = "Доступ";
             this.barButtonItem16.Id = 22;
             this.barButtonItem16.Name = "barButtonItem16";
             this.barButtonItem16.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BarButtonItem16_ItemClick);
+            // 
+            // barButtonItem17
+            // 
+            this.barButtonItem17.Caption = "Журнал";
+            this.barButtonItem17.Id = 26;
+            this.barButtonItem17.Name = "barButtonItem17";
+            this.barButtonItem17.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BarButtonItem17_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -433,22 +449,6 @@ namespace HASPKey
             this.splitterControl1.Size = new System.Drawing.Size(1086, 12);
             this.splitterControl1.TabIndex = 24;
             this.splitterControl1.TabStop = false;
-            // 
-            // barSubItem4
-            // 
-            this.barSubItem4.Caption = "Администрирование";
-            this.barSubItem4.Id = 25;
-            this.barSubItem4.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.Caption, this.barButtonItem16, "Доступ"),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem17)});
-            this.barSubItem4.Name = "barSubItem4";
-            // 
-            // barButtonItem17
-            // 
-            this.barButtonItem17.Caption = "Журнал";
-            this.barButtonItem17.Id = 26;
-            this.barButtonItem17.Name = "barButtonItem17";
-            this.barButtonItem17.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BarButtonItem17_ItemClick);
             // 
             // MainFormDX
             // 

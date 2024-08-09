@@ -18,13 +18,14 @@ namespace HASPKey
         private const string errorStr = "Ошибка";
         private const string emptyLogin = "Поле \"Логин\" не заполнено.";
         private const string emptyPassword = "Поле \"Пароль\" не заполнено.";
-        private const string wrongLoginAndPassword = "Неправильный логин или пароль.";
+        private const string wrongLoginOrPassword = "Неправильный логин или пароль.";
 
         public event Action DataUpdated;
 
         public UserView(bool search)
         {
             InitializeComponent();
+            //textBoxLogin.Focus();
             presenterUser = new UserPresenter(this);
         }
 
@@ -47,26 +48,17 @@ namespace HASPKey
             }
             if (string.IsNullOrEmpty(password))
             {
-                MessageError(emptyPassword); 
+                MessageError(emptyPassword);
                 return;
             }
             dataAccess = presenterUser.GetByLoginAndPassword(login, password);
             if (dataAccess > 0)
             {
-                this.Hide();
-                using (MainFormDX mainFormView = new MainFormDX(dataAccess))
-                {
-                    mainFormView.FormClosed += (s, args) =>
-                    { 
-                        this.Close();
-                    };
-                    mainFormView.ShowDialog();
-                }
-                
+                this.Close();
             }
             else
             {
-                MessageError(wrongLoginAndPassword);
+                MessageError(wrongLoginOrPassword);
             }
         }
 
@@ -95,6 +87,17 @@ namespace HASPKey
         public void BindItem(ModelViewUser entity)
         {
             loginBindingSource.DataSource = entity ?? new ModelViewUser();
+        }
+
+        private void UserView_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (dataAccess > 0)
+            {
+                using (MainFormDX mainFormView = new MainFormDX(dataAccess))
+                {
+                    mainFormView.ShowDialog();
+                }
+            }
         }
     }
 }
