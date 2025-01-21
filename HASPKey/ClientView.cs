@@ -15,13 +15,14 @@ namespace HASPKey
         private bool size = true;
         private bool search = false;
         private bool error = false;
+        public int dataAccess = -1;
         public event Action DataUpdated;
         internal ModelViewClient SearchIdClient { get; private set; }
 
         private const string caption = "Удалить клиента";
         private const string message = "Вы уверены, что хотите удалить клиента?";
         private const string errorStr = "Ошибка";
-        private const string emptyClient = "Данная клиент не найден.";
+        private const string emptyClient = "Данный клиент не найден.";
 
         public ClientView(bool search)
         {
@@ -32,7 +33,7 @@ namespace HASPKey
             buttonCancel.Visible = false;
 
             this.search = search;
-            if (this.search || !Admin.IsAdmin)
+            if (this.search)
                 DataGridViewClient.Height = DataGridViewClient.Size.Height + 28;
         }
 
@@ -78,7 +79,7 @@ namespace HASPKey
                 this.Close();
                 return;
             }
-            if (size && Admin.IsAdmin)
+            if (size)
             {
                 DefaultView();
                 DataGridViewClient.Height = DataGridViewClient.Size.Height - sizeH;

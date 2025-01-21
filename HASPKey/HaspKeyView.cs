@@ -42,8 +42,7 @@ namespace HASPKey
             comboBoxTypeKey.SelectedIndex = -1;
             labelClient.Text = string.Empty;
 
-            if (!Admin.IsAdmin)
-                DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
+            DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
         }
 
         public HaspKeyView(int dataAccess)
@@ -57,12 +56,20 @@ namespace HASPKey
             labelClient.Text = string.Empty;
             DataAccess = dataAccess;
 
-            if (!Admin.IsAdmin)
-                DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
+            if (dataAccess == 2)
+            {
+                DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height - 28;
+                buttonCancel.Visible = true;
+            }
+            DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
+
+            if (dataAccess == 1) buttonCancel.Visible = false;
+
             if (dataAccess == 3)
             {
                 buttonAdd.Enabled = false;
                 buttonCancel.Enabled = false;
+                buttonCancel.Visible = false;
                 buttonDelete.Enabled = false;
                 buttonSave.Enabled = false;
             }
@@ -135,7 +142,7 @@ namespace HASPKey
                 MessageError(emptyHaspKey);
                 return;
             }
-            if (size && Admin.IsAdmin)
+            if (size)
             {
                 DefaultView();
                 DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height - sizeH;
@@ -175,7 +182,10 @@ namespace HASPKey
                 {
                     this.client = client.SearchIdClient;
                     DefaultView();
-                    if (DataAccess == 3) buttonAdd.Enabled = false;
+                    if (DataAccess == 3)
+                    {
+                        buttonAdd.Enabled = false;
+                    }
                     presenterHaspKey.GetByClient(this.client);
 
                     labelClient.Text = this.client.Name;

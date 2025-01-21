@@ -31,7 +31,7 @@ namespace HASPKey
             DataGridViewFeature.Height = DataGridViewFeature.Size.Height + sizeH;
 
             this.search = search;
-            if (this.search || !Admin.IsAdmin)
+            if (this.search)
                 DataGridViewFeature.Height = DataGridViewFeature.Size.Height + 28;
         }
 
@@ -43,7 +43,7 @@ namespace HASPKey
             DataGridViewFeature.Height = DataGridViewFeature.Size.Height + sizeH;
 
             this.search = search;
-            if (this.search || !Admin.IsAdmin)
+            if (this.search)
                 DataGridViewFeature.Height = DataGridViewFeature.Size.Height + 28;
             if (DataAccess == 3)
             {
@@ -99,7 +99,7 @@ namespace HASPKey
                 return;
             }
 
-            if (size && Admin.IsAdmin)
+            if (size)
             {
                 presenterFeature.FillInputItem(row);
                 ButtonAdd.Enabled = false;

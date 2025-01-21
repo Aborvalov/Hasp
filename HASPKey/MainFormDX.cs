@@ -19,7 +19,7 @@ namespace HASPKey
         {
             InitializeComponent();
             presenter = new MainPresenter(this);
-            if (!Admin.IsAdmin) barSubItem3.Enabled = false;
+            barSubItem3.Enabled = false;
         }
 
         public MainFormDX(int dataAccess)
