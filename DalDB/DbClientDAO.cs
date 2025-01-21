@@ -2,6 +2,7 @@
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace DalDB
@@ -15,6 +16,18 @@ namespace DalDB
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
         }
 
+        public void UpdateLog(string tableName, string action, int id)
+        {
+            var latestLog = db.Logs.OrderByDescending(l => l.LogId).FirstOrDefault();
+            if (latestLog != null)
+            {
+                var log = tableName + "-" + action + "-" + id + "; ";
+                latestLog.Actions += log;
+                db.Entry(latestLog).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
         public int Add(Client entity)
         {
             if (entity == null)
@@ -23,7 +36,9 @@ namespace DalDB
             var client = db.Clients.Add(entity);
 
             db.SaveChanges();
-            
+
+            UpdateLog("Clients", "добавлено", entity.Id);
+
             return client.Id;
         }
 
@@ -133,8 +148,11 @@ namespace DalDB
 
             db.Clients.Remove(client);
             db.KeyFeatureClients.RemoveRange(keyFeatureClients);
-            
-            db.SaveChanges();                        
+
+            db.SaveChanges();
+
+            UpdateLog("Clients", "удалено", id);
+
             return true;
         }
 
@@ -153,7 +171,9 @@ namespace DalDB
             client.Phone         = entity.Phone;
 
             db.SaveChanges();
-           
+
+            UpdateLog("Clients", "обновлено", entity.Id);
+
             return true;
         }
 
@@ -166,9 +186,5 @@ namespace DalDB
                                              c.Phone         == entity.Phone);
             return client != null;
         }
-
-
-
-
     }
 }

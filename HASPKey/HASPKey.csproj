@@ -159,7 +159,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin.cs" />
+    <Compile Include="AddUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddUserForm.Designer.cs">
+      <DependentUpon>AddUserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CalendarDataGridView\CalendarCell.cs" />
     <Compile Include="CalendarDataGridView\CalendarColumn.cs" />
     <Compile Include="CalendarDataGridView\CalendarEditingControl.cs">
@@ -196,6 +201,12 @@
     <Compile Include="HaspKeyView.Designer.cs">
       <DependentUpon>HaspKeyView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserView.Designer.cs">
+      <DependentUpon>UserView.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -228,6 +239,21 @@
     <Compile Include="ClientNumberKeys.Designer.cs">
       <DependentUpon>ClientNumberKeys.cs</DependentUpon>
     </Compile>
+    <Compile Include="LevelAccessView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LevelAccessView.Designer.cs">
+      <DependentUpon>LevelAccessView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LogBookForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogBookForm.Designer.cs">
+      <DependentUpon>LogBookForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AddUserForm.resx">
+      <DependentUpon>AddUserForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ClientView.resx">
       <DependentUpon>ClientView.cs</DependentUpon>
     </EmbeddedResource>
@@ -243,6 +269,12 @@
     <EmbeddedResource Include="HaspKeyView.resx">
       <DependentUpon>HaspKeyView.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogBookForm.resx">
+      <DependentUpon>LogBookForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserView.resx">
+      <DependentUpon>UserView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -270,6 +302,9 @@
     <EmbeddedResource Include="ClientNumberKeys.resx">
       <DependentUpon>ClientNumberKeys.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LevelAccessView.resx">
+      <DependentUpon>LevelAccessView.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Entities.ClientNumberKeys.datasource" />
@@ -284,6 +319,8 @@
     <None Include="Properties\DataSources\ModelEntities.ModelViewHaspKey.datasource" />
     <None Include="Properties\DataSources\ModelEntities.ModelViewKeyFeature.datasource" />
     <None Include="Properties\DataSources\ModelEntities.ModelViewKeyFeatureClient.datasource" />
+    <None Include="Properties\DataSources\ModelEntities.ModelViewLog.datasource" />
+    <None Include="Properties\DataSources\ModelEntities.ModelViewLogIn.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -325,9 +362,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Common\key.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Common\users.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

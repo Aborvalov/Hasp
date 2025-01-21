@@ -31,9 +31,29 @@ namespace HASPKey
             DataGridViewFeature.Height = DataGridViewFeature.Size.Height + sizeH;
 
             this.search = search;
-            if (this.search || !Admin.IsAdmin)
+            if (this.search)
                 DataGridViewFeature.Height = DataGridViewFeature.Size.Height + 28;
         }
+
+        public FeatureView(int DataAccess, bool isVisible)
+        {
+            InitializeComponent();
+            presenterFeature = new FeaturePresenter(this);
+            buttonCancel.Visible = isVisible;
+            DataGridViewFeature.Height = DataGridViewFeature.Size.Height + sizeH;
+
+            this.search = search;
+            if (this.search)
+                DataGridViewFeature.Height = DataGridViewFeature.Size.Height + 28;
+            if (DataAccess == 3)
+            {
+                buttonCancel.Enabled = false;
+                ButtonAdd.Enabled = false;
+                ButtonDelete.Enabled = false;
+                ButtonSave.Enabled = false;
+            }
+        }
+
         public FeatureView() : this(false)
         { }
 
@@ -79,7 +99,7 @@ namespace HASPKey
                 return;
             }
 
-            if (size && Admin.IsAdmin)
+            if (size)
             {
                 presenterFeature.FillInputItem(row);
                 ButtonAdd.Enabled = false;

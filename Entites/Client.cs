@@ -1,4 +1,6 @@
-﻿namespace Entities
+﻿using System.Data.Entity.Infrastructure.Design;
+
+namespace Entities
 {
     public class Client
     {

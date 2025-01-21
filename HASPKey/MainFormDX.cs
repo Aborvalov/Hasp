@@ -1,12 +1,8 @@
 using DevExpress.XtraBars;
-using Entities;
-using Model;
 using ModelEntities;
 using Presenter;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Windows.Forms;
 using ViewContract;
 
@@ -17,12 +13,21 @@ namespace HASPKey
         private const string errorStr = "Ошибка";
         public bool ErrorDataBase { get; set; } = false;
         private IMainPresenter presenter;
-        public event Action DataUpdated;
+        public int DataAccess;
+
         public MainFormDX()
         {
             InitializeComponent();
             presenter = new MainPresenter(this);
-            if (!Admin.IsAdmin) barSubItem3.Enabled = false;
+            barSubItem3.Enabled = false;
+        }
+
+        public MainFormDX(int dataAccess)
+        {
+            InitializeComponent();
+            presenter = new MainPresenter(this);
+            DataAccess = dataAccess;
+            barSubItem4.Enabled = dataAccess == 2;
         }
 
         public void Bind(List<DXModelLicenseEnd> clients)
@@ -36,26 +41,27 @@ namespace HASPKey
         public void Bind(List<ModelViewMain> homes)
         => NextDays.DataSource = homes != null ? new BindingList<ModelViewMain>(homes)
                                                   : new BindingList<ModelViewMain>();
+
         public void MessageError(string errorText)
         {
             MessageBox.Show(errorText, errorStr, MessageBoxButtons.OK, MessageBoxIcon.Error);
             ErrorDB();
         }
+
         private void ErrorDB()
         {
             if (ErrorDataBase)
             {
                 barButtonItem2.Enabled = false;
                 barButtonItem6.Enabled = false;
-
             }
             else
             {
                 barButtonItem2.Enabled = true;
                 barButtonItem6.Enabled = true;
-
             }
         }
+
         private void BarButtonItem2ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             using (ReferenceView referenceView = new ReferenceView())
@@ -63,8 +69,10 @@ namespace HASPKey
                 referenceView.ShowDialog();
             }
         }
+
         private void BarButtonItem6ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
              => Close();
+
         void IUpdateDataBaseMain.UpdateDataBaseMain()
         {
             ErrorDataBase = false;
@@ -74,22 +82,24 @@ namespace HASPKey
 
         private void BarButtonItem8ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            using (HaspKeyView haspKey = new HaspKeyView())
+            using (HaspKeyView haspKey = new HaspKeyView(DataAccess))
             {
                 haspKey.ShowDialog();
             }
 
         }
+
         private void BarButtonItem9ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            using (FeatureView feature = new FeatureView())
+            using (FeatureView feature = new FeatureView(DataAccess, true))
             {
                 feature.ShowDialog();
             }
         }
+
         private void BarButtonItem10ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            using (ClientView client = new ClientView())
+            using (ClientNumberKeys client = new ClientNumberKeys(DataAccess))
             {
                 client.ShowDialog();
             }
@@ -116,6 +126,22 @@ namespace HASPKey
             using (NewDataForm form = new NewDataForm(this))
             {
                 form.ShowDialog();
+            }
+        }
+
+        private void BarButtonItem16_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            using (LevelAccessView form = new LevelAccessView())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void BarButtonItem17_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            using (LogBookForm logbook = new LogBookForm()) 
+            {
+                logbook.ShowDialog();
             }
         }
     }

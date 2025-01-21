@@ -50,6 +50,8 @@
     <Compile Include="IContractHaspKeyDAO.cs" />
     <Compile Include="IContractKeyFeatureClientDAO.cs" />
     <Compile Include="IContractKeyFeatureDAO.cs" />
+    <Compile Include="IContractLogDAO.cs" />
+    <Compile Include="IContractUserDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
