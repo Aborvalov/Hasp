@@ -30,6 +30,14 @@ namespace HASPKey
             barSubItem4.Enabled = dataAccess == 2;
         }
 
+        public MainFormDX(int dataAccess)
+        {
+            InitializeComponent();
+            presenter = new MainPresenter(this);
+            DataAccess = dataAccess;
+            barSubItem4.Enabled = dataAccess == 2;
+        }
+
         public void Bind(List<DXModelLicenseEnd> clients)
         => PastDays.DataSource = clients != null ? new BindingList<DXModelLicenseEnd>(clients)
                                           : new BindingList<DXModelLicenseEnd>();
