@@ -2,6 +2,7 @@ using DalContract;
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 
@@ -24,6 +25,18 @@ namespace DalDB
         private void OnLoggingEvent(object sender, LogEventArgs e)
         {
             logger.UpdateLog(e.TableName, e.Action, e.Id);
+        }
+
+        public void UpdateLog(string tableName, string action, int id)
+        {
+            var latestLog = db.Logs.OrderByDescending(l => l.LogId).FirstOrDefault();
+            if (latestLog != null)
+            {
+                var log = tableName + "-" + action + "-" + id + "; ";
+                latestLog.Actions += log;
+                db.Entry(latestLog).State = EntityState.Modified;
+                db.SaveChanges();
+            }
         }
 
         public int Add(HaspKey entity)

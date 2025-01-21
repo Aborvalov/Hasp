@@ -2,6 +2,7 @@
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -24,6 +25,7 @@ namespace DalDB
         private void OnLoggingEvent(object sender, LogEventArgs e)
         {
             logger.UpdateLog(e.TableName, e.Action, e.Id);
+            }
         }
 
         public List<User> GetAll() => db.Users.ToList();
