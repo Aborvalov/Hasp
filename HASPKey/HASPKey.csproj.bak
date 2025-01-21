@@ -55,19 +55,24 @@
     <ApplicationIcon>Common\key.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.BonusSkins.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Data.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.ExpressApp.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Persistent.Base.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Printing.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Sparkline.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Utils.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Xpo.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraEditors.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraLayout.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraPrinting.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraReports.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraVerticalGrid.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.BonusSkins.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.ExpressApp.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Persistent.Base.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v21.2.Core, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Sparkline.v21.2.Core, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.Desktop.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpo.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraBars.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Charts.v21.2.Core, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraVerticalGrid.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -147,11 +152,23 @@
     <Compile Include="ReferenceView.Designer.cs">
       <DependentUpon>ReferenceView.cs</DependentUpon>
     </Compile>
-    <Compile Include="SelectedDataBaseView.cs">
+    <Compile Include="MainFormDX.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SelectedDataBaseView.Designer.cs">
-      <DependentUpon>SelectedDataBaseView.cs</DependentUpon>
+    <Compile Include="MainFormDX.Designer.cs">
+      <DependentUpon>MainFormDX.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DaysForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DaysForm.Designer.cs">
+      <DependentUpon>DaysForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientNumberKeys.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientNumberKeys.Designer.cs">
+      <DependentUpon>ClientNumberKeys.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="ClientView.resx">
       <DependentUpon>ClientView.cs</DependentUpon>
@@ -167,6 +184,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HaspKeyView.resx">
       <DependentUpon>HaspKeyView.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -185,16 +203,24 @@
     <EmbeddedResource Include="ReferenceView.resx">
       <DependentUpon>ReferenceView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SelectedDataBaseView.resx">
-      <DependentUpon>SelectedDataBaseView.cs</DependentUpon>
+    <EmbeddedResource Include="MainFormDX.resx">
+      <DependentUpon>MainFormDX.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DaysForm.resx">
+      <DependentUpon>DaysForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientNumberKeys.resx">
+      <DependentUpon>ClientNumberKeys.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Entities.ClientNumberKeys.datasource" />
     <None Include="Properties\DataSources\Entities.Feature.datasource" />
     <None Include="Properties\DataSources\Entities.KeyFeature.datasource" />
     <None Include="Properties\DataSources\Entity.datasource" />
     <None Include="Properties\DataSources\Model.HomeView.datasource" />
     <None Include="Properties\DataSources\ModelEntities.ModelViewClient.datasource" />
+    <None Include="Properties\DataSources\ModelEntities.ModelViewClientNumberKeys.datasource" />
     <None Include="Properties\DataSources\ModelEntities.ModelViewFeature.datasource" />
     <None Include="Properties\DataSources\ModelEntities.ModelViewFeatureForEditKeyFeat.datasource" />
     <None Include="Properties\DataSources\ModelEntities.ModelViewHaspKey.datasource" />
@@ -215,9 +241,17 @@
       <Project>{22d9c86f-1103-47fc-bcd6-5e35fc54de22}</Project>
       <Name>Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Logic\Logic.csproj">
+      <Project>{77C069C5-75C2-4DC0-B576-55A894ED471D}</Project>
+      <Name>Logic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ModelEntities\ModelEntities.csproj">
       <Project>{c5312c7b-ade7-462e-b945-3ea7e1efb4a0}</Project>
       <Name>ModelEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{3af74fc5-74be-45f6-ad0a-d317975cf11f}</Project>
+      <Name>Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\Presenter\Presenter.csproj">
       <Project>{cc3588fa-a420-486f-b886-1e569220987b}</Project>
@@ -229,6 +263,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Common\days.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Common\key.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
