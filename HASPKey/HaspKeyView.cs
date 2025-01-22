@@ -56,12 +56,20 @@ namespace HASPKey
             labelClient.Text = string.Empty;
             DataAccess = dataAccess;
 
-            if (!Admin.IsAdmin)
-                DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
+            if (dataAccess == 2)
+            {
+                DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height - 28;
+                buttonCancel.Visible = true;
+            }
+            DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
+
+            if (dataAccess == 1) buttonCancel.Visible = false;
+
             if (dataAccess == 3)
             {
                 buttonAdd.Enabled = false;
                 buttonCancel.Enabled = false;
+                buttonCancel.Visible = false;
                 buttonDelete.Enabled = false;
                 buttonSave.Enabled = false;
             }
@@ -85,7 +93,7 @@ namespace HASPKey
                 labelClient.Text = client.Name;
             }
         }
-        
+
         private void RadioButtonActive_CheckedChanged(object sender, EventArgs e)
         {
             DefaultView();
@@ -95,7 +103,7 @@ namespace HASPKey
                 presenterHaspKey.GetActiveInCompany(client);
                 labelClient.Text = client.Name;
             }
-            
+
         }
 
         private void ButtonAdd_Click(object sender, EventArgs e)
@@ -174,7 +182,10 @@ namespace HASPKey
                 {
                     this.client = client.SearchIdClient;
                     DefaultView();
-                    if (DataAccess == 3) buttonAdd.Enabled = false;
+                    if (DataAccess == 3)
+                    {
+                        buttonAdd.Enabled = false;
+                    }
                     presenterHaspKey.GetByClient(this.client);
 
                     labelClient.Text = this.client.Name;

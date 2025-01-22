@@ -165,7 +165,6 @@
     <Compile Include="AddUserForm.Designer.cs">
       <DependentUpon>AddUserForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Admin.cs" />
     <Compile Include="CalendarDataGridView\CalendarCell.cs" />
     <Compile Include="CalendarDataGridView\CalendarColumn.cs" />
     <Compile Include="CalendarDataGridView\CalendarEditingControl.cs">

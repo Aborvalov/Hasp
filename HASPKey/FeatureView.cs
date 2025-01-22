@@ -54,25 +54,6 @@ namespace HASPKey
             }
         }
 
-        public FeatureView(int DataAccess, bool isVisible)
-        {
-            InitializeComponent();
-            presenterFeature = new FeaturePresenter(this);
-            buttonCancel.Visible = isVisible;
-            DataGridViewFeature.Height = DataGridViewFeature.Size.Height + sizeH;
-
-            this.search = search;
-            if (this.search || !Admin.IsAdmin)
-                DataGridViewFeature.Height = DataGridViewFeature.Size.Height + 28;
-            if (DataAccess == 3)
-            {
-                buttonCancel.Enabled = false;
-                ButtonAdd.Enabled = false;
-                ButtonDelete.Enabled = false;
-                ButtonSave.Enabled = false;
-            }
-        }
-
         public FeatureView() : this(false)
         { }
 

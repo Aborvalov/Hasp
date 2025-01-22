@@ -126,5 +126,10 @@ namespace DalDB
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        public void UpdateLog(string tableName, string action, int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
