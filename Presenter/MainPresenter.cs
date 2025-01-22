@@ -137,8 +137,5 @@ namespace Presenter
                 })
                 .ToList();
         }
-
-
-
     }
 }

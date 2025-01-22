@@ -41,8 +41,6 @@ namespace HASPKey
             comboBoxTypeKey.DataSource = Enum.GetValues(typeof(TypeKey));
             comboBoxTypeKey.SelectedIndex = -1;
             labelClient.Text = string.Empty;
-
-            DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
         }
 
         public HaspKeyView(int dataAccess)
@@ -56,14 +54,12 @@ namespace HASPKey
             labelClient.Text = string.Empty;
             DataAccess = dataAccess;
 
-            if (dataAccess == 2)
+            if (dataAccess == 2 || dataAccess == 1)
             {
                 DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height - 28;
                 buttonCancel.Visible = true;
             }
             DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
-
-            if (dataAccess == 1) buttonCancel.Visible = false;
 
             if (dataAccess == 3)
             {

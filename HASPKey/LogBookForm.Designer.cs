@@ -29,13 +29,21 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogBookForm));
             this.DataGridViewLogBook = new System.Windows.Forms.DataGridView();
+            this.comboSorting = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.paginationPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.userDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.loginTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.actionsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.logbookBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.buttonAll = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewLogBook)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboSorting.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logbookBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,21 +62,70 @@
             this.loginTimeDataGridViewTextBoxColumn,
             this.actionsDataGridViewTextBoxColumn});
             this.DataGridViewLogBook.DataSource = this.logbookBindingSource;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 7.8F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGridViewLogBook.DefaultCellStyle = dataGridViewCellStyle1;
-            this.DataGridViewLogBook.Location = new System.Drawing.Point(18, 13);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridViewLogBook.DefaultCellStyle = dataGridViewCellStyle2;
+            this.DataGridViewLogBook.Location = new System.Drawing.Point(18, 44);
             this.DataGridViewLogBook.Margin = new System.Windows.Forms.Padding(4);
             this.DataGridViewLogBook.Name = "DataGridViewLogBook";
             this.DataGridViewLogBook.RowHeadersVisible = false;
             this.DataGridViewLogBook.RowHeadersWidth = 51;
-            this.DataGridViewLogBook.Size = new System.Drawing.Size(756, 555);
+            this.DataGridViewLogBook.Size = new System.Drawing.Size(756, 487);
             this.DataGridViewLogBook.TabIndex = 16;
+            // 
+            // comboSorting
+            // 
+            this.comboSorting.Location = new System.Drawing.Point(572, 9);
+            this.comboSorting.Name = "comboSorting";
+            this.comboSorting.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11F);
+            this.comboSorting.Properties.Appearance.Options.UseFont = true;
+            this.comboSorting.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comboSorting.Properties.Items.AddRange(new object[] {
+            "Вход в программу",
+            "Удаления",
+            "Обновления",
+            "Добавления"});
+            this.comboSorting.Size = new System.Drawing.Size(202, 28);
+            this.comboSorting.TabIndex = 30;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "User";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Имя";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 251;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "LoginTime";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Время";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 251;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Actions";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Действия";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Width = 251;
+            // 
+            // paginationPanel
+            // 
+            this.paginationPanel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.paginationPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("paginationPanel.BackgroundImage")));
+            this.paginationPanel.Location = new System.Drawing.Point(248, 549);
+            this.paginationPanel.Name = "paginationPanel";
+            this.paginationPanel.Size = new System.Drawing.Size(240, 44);
+            this.paginationPanel.TabIndex = 31;
             // 
             // userDataGridViewTextBoxColumn
             // 
@@ -95,17 +152,33 @@
             // 
             this.logbookBindingSource.DataSource = typeof(ModelEntities.ModelViewLog);
             // 
+            // buttonAll
+            // 
+            this.buttonAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAll.Location = new System.Drawing.Point(459, 8);
+            this.buttonAll.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonAll.Name = "buttonAll";
+            this.buttonAll.Size = new System.Drawing.Size(88, 28);
+            this.buttonAll.TabIndex = 32;
+            this.buttonAll.Text = "Все";
+            this.buttonAll.UseVisualStyleBackColor = true;
+            this.buttonAll.Click += new System.EventHandler(this.ButtonAll_Click);
+            // 
             // LogBookForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(787, 601);
+            this.ClientSize = new System.Drawing.Size(787, 605);
+            this.Controls.Add(this.buttonAll);
+            this.Controls.Add(this.paginationPanel);
+            this.Controls.Add(this.comboSorting);
             this.Controls.Add(this.DataGridViewLogBook);
             this.IconOptions.ShowIcon = false;
             this.MinimumSize = new System.Drawing.Size(789, 641);
             this.Name = "LogBookForm";
             this.Text = "Журнал";
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewLogBook)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboSorting.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logbookBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -118,5 +191,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn userDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn loginTimeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn actionsDataGridViewTextBoxColumn;
+        private DevExpress.XtraEditors.ComboBoxEdit comboSorting;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.FlowLayoutPanel paginationPanel;
+        private System.Windows.Forms.Button buttonAll;
     }
 }

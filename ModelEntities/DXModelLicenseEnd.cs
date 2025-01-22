@@ -9,7 +9,7 @@ namespace ModelEntities
         [DisplayName("Ключ")]
         public List<DXModelKeys> Keys { get; set; }
 
-        [DisplayName("Лицензия закончилась в последующие <N> дней")]
+        [DisplayName("Лицензия закончилась в предыдущие <N> дней")]
         public string Client { get; set; }
     }
 

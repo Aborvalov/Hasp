@@ -1,6 +1,8 @@
 using DevExpress.XtraBars;
+using Logic;
 using ModelEntities;
 using Presenter;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -12,15 +14,8 @@ namespace HASPKey
     {
         private const string errorStr = "Ошибка";
         public bool ErrorDataBase { get; set; } = false;
-        private IMainPresenter presenter;
+        public IMainPresenter presenter;
         public int DataAccess;
-
-        public MainFormDX()
-        {
-            InitializeComponent();
-            presenter = new MainPresenter(this);
-            barSubItem3.Enabled = false;
-        }
 
         public MainFormDX(int dataAccess)
         {
@@ -28,6 +23,14 @@ namespace HASPKey
             presenter = new MainPresenter(this);
             DataAccess = dataAccess;
             barSubItem4.Enabled = dataAccess == 2;
+            LoadBarCaptions();
+        }
+
+        private void LoadBarCaptions()
+        {
+            int days = LoadFromXml.GetItem();
+            Headline.Text = $"Истекает через {days} дней";
+            Lowline.Text = $"Истекло в предыдущие {days} дней";
         }
 
         public void Bind(List<DXModelLicenseEnd> clients)
@@ -127,6 +130,7 @@ namespace HASPKey
             {
                 form.ShowDialog();
             }
+            LoadBarCaptions();
         }
 
         private void BarButtonItem16_ItemClick(object sender, ItemClickEventArgs e)
