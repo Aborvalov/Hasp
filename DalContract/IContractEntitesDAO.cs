@@ -4,12 +4,11 @@ namespace DalContract
 {
     public interface IContractEntitesDAO<TEntites>
     {
-        int Add( TEntites entity);
+        int Add(TEntites entity);
         bool Remove(int id);
-        bool Update( TEntites entity);
+        bool Update(TEntites entity);
         List<TEntites> GetAll();
         TEntites GetById(int id);
         bool ContainsDB(TEntites entity);
-        void UpdateLog(string tableName, string action, int id);
     }
 }

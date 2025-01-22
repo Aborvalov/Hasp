@@ -2,7 +2,6 @@
 using Entities;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -25,7 +24,7 @@ namespace DalDB
         private void OnLoggingEvent(object sender, LogEventArgs e)
         {
             logger.UpdateLog(e.TableName, e.Action, e.Id);
-            }
+        }
 
         public List<User> GetAll() => db.Users.ToList();
 
@@ -37,7 +36,7 @@ namespace DalDB
                 throw new ArgumentNullException(nameof(password));
             var user = db.Users.ToList().SingleOrDefault(x => x.Login == login && x.Password == Hash(password));
             int access = -1;
-            if (user != null) 
+            if (user != null)
             {
                 access = (int)user.LevelAccess;
                 Log newLog = new Log
@@ -50,7 +49,7 @@ namespace DalDB
                 db.SaveChanges();
             }
 
-            return access;           
+            return access;
         }
 
         private string Hash(string password)
@@ -72,7 +71,7 @@ namespace DalDB
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
-            
+
             entity.Password = Hash(entity.Password);
 
             var client = db.Users.Add(entity);
@@ -159,11 +158,6 @@ namespace DalDB
         {
             Dispose(true);
             GC.SuppressFinalize(this);
-        }
-
-        public void UpdateLog(string tableName, string action, int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }
