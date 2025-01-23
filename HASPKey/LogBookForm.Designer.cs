@@ -147,10 +147,11 @@
             // 
             this.paginationPanel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.paginationPanel.AutoScroll = true;
+            this.paginationPanel.AutoSize = true;
             this.paginationPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("paginationPanel.BackgroundImage")));
-            this.paginationPanel.Location = new System.Drawing.Point(248, 522);
+            this.paginationPanel.Location = new System.Drawing.Point(202, 522);
             this.paginationPanel.Name = "paginationPanel";
-            this.paginationPanel.Size = new System.Drawing.Size(299, 71);
+            this.paginationPanel.Size = new System.Drawing.Size(382, 71);
             this.paginationPanel.TabIndex = 31;
             this.paginationPanel.WrapContents = false;
             // 
@@ -183,6 +184,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.logbookBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboSorting.Properties)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
