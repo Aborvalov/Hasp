@@ -4,6 +4,7 @@ using Presenter;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using ViewContract;
@@ -102,12 +103,13 @@ namespace HASPKey
                         Text = "...",
                         Width = 40,
                         Height = 30,
-                        TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+                        TextAlign = ContentAlignment.MiddleCenter,
                     };
 
                     paginationPanel.Controls.Add(ellipsisLabel);
                 }
             }
+            paginationPanel.Padding = new Padding((paginationPanel.Width - paginationPanel.Controls.Cast<Control>().Sum(c => c.Width + c.Margin.Horizontal)) / 2, 0, 0, 0);
         }
 
         private void PageButton_Click(object sender, EventArgs e)

@@ -75,7 +75,7 @@
             this.DataGridViewLogBook.Name = "DataGridViewLogBook";
             this.DataGridViewLogBook.RowHeadersVisible = false;
             this.DataGridViewLogBook.RowHeadersWidth = 51;
-            this.DataGridViewLogBook.Size = new System.Drawing.Size(756, 457);
+            this.DataGridViewLogBook.Size = new System.Drawing.Size(756, 513);
             this.DataGridViewLogBook.TabIndex = 16;
             // 
             // userDataGridViewTextBoxColumn
@@ -145,13 +145,14 @@
             // 
             // paginationPanel
             // 
-            this.paginationPanel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.paginationPanel.AutoScroll = true;
             this.paginationPanel.AutoSize = true;
             this.paginationPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("paginationPanel.BackgroundImage")));
-            this.paginationPanel.Location = new System.Drawing.Point(202, 522);
+            this.paginationPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.paginationPanel.Location = new System.Drawing.Point(0, 595);
             this.paginationPanel.Name = "paginationPanel";
-            this.paginationPanel.Size = new System.Drawing.Size(382, 71);
+            this.paginationPanel.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.paginationPanel.Size = new System.Drawing.Size(787, 10);
             this.paginationPanel.TabIndex = 31;
             this.paginationPanel.WrapContents = false;
             // 
