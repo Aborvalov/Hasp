@@ -65,15 +65,14 @@ namespace HASPKey
             this.barDockingMenuItem1 = new DevExpress.XtraBars.BarDockingMenuItem();
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.Lowline = new System.Windows.Forms.Label();
             this.PastDays = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.Headline = new System.Windows.Forms.Label();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.splitterControl1 = new DevExpress.XtraEditors.SplitterControl();
-            this.Lowline = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.NextDays)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
@@ -84,8 +83,6 @@ namespace HASPKey
             ((System.ComponentModel.ISupportInitialize)(this.PastDays)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
             this.SuspendLayout();
@@ -386,13 +383,25 @@ namespace HASPKey
             this.panelControl2.AlwaysScrollActiveControlIntoView = false;
             this.panelControl2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelControl2.ContentImageAlignment = System.Drawing.ContentAlignment.BottomCenter;
+            this.panelControl2.Controls.Add(this.Lowline);
             this.panelControl2.Controls.Add(this.PastDays);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl2.Location = new System.Drawing.Point(0, 363);
+            this.panelControl2.Location = new System.Drawing.Point(0, 334);
             this.panelControl2.Margin = new System.Windows.Forms.Padding(2);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(1086, 409);
+            this.panelControl2.Size = new System.Drawing.Size(1086, 438);
             this.panelControl2.TabIndex = 13;
+            // 
+            // Lowline
+            // 
+            this.Lowline.AutoSize = true;
+            this.Lowline.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.Lowline.Location = new System.Drawing.Point(6, 16);
+            this.Lowline.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Lowline.Name = "Lowline";
+            this.Lowline.Size = new System.Drawing.Size(188, 16);
+            this.Lowline.TabIndex = 30;
+            this.Lowline.Text = "Истекло в предыдущие N дней";
             // 
             // PastDays
             // 
@@ -403,7 +412,7 @@ namespace HASPKey
             this.PastDays.Margin = new System.Windows.Forms.Padding(2);
             this.PastDays.MenuManager = this.barManager1;
             this.PastDays.Name = "PastDays";
-            this.PastDays.Size = new System.Drawing.Size(1082, 405);
+            this.PastDays.Size = new System.Drawing.Size(1082, 434);
             this.PastDays.TabIndex = 2;
             this.PastDays.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -424,20 +433,10 @@ namespace HASPKey
             this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar1.Text = "Сервис";
             // 
-            // panelControl1
-            // 
-            this.panelControl1.Controls.Add(this.Headline);
-            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl1.Location = new System.Drawing.Point(0, 25);
-            this.panelControl1.Margin = new System.Windows.Forms.Padding(2);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1086, 29);
-            this.panelControl1.TabIndex = 18;
-            // 
             // Headline
             // 
             this.Headline.AutoSize = true;
-            this.Headline.Location = new System.Drawing.Point(6, 11);
+            this.Headline.Location = new System.Drawing.Point(6, 15);
             this.Headline.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Headline.Name = "Headline";
             this.Headline.Size = new System.Drawing.Size(142, 16);
@@ -447,9 +446,10 @@ namespace HASPKey
             // panelControl3
             // 
             this.panelControl3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelControl3.Controls.Add(this.Headline);
             this.panelControl3.Controls.Add(this.NextDays);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl3.Location = new System.Drawing.Point(0, 54);
+            this.panelControl3.Location = new System.Drawing.Point(0, 25);
             this.panelControl3.Margin = new System.Windows.Forms.Padding(2);
             this.panelControl3.Name = "panelControl3";
             this.panelControl3.Size = new System.Drawing.Size(1086, 279);
@@ -459,24 +459,13 @@ namespace HASPKey
             // 
             this.splitterControl1.Cursor = System.Windows.Forms.Cursors.HSplit;
             this.splitterControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitterControl1.Location = new System.Drawing.Point(0, 333);
+            this.splitterControl1.Location = new System.Drawing.Point(0, 304);
             this.splitterControl1.Margin = new System.Windows.Forms.Padding(2);
             this.splitterControl1.MinimumSize = new System.Drawing.Size(0, 30);
             this.splitterControl1.Name = "splitterControl1";
             this.splitterControl1.Size = new System.Drawing.Size(1086, 30);
             this.splitterControl1.TabIndex = 24;
             this.splitterControl1.TabStop = false;
-            // 
-            // Lowline
-            // 
-            this.Lowline.AutoSize = true;
-            this.Lowline.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.Lowline.Location = new System.Drawing.Point(6, 345);
-            this.Lowline.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Lowline.Name = "Lowline";
-            this.Lowline.Size = new System.Drawing.Size(188, 16);
-            this.Lowline.TabIndex = 30;
-            this.Lowline.Text = "Истекло в предыдущие N дней";
             // 
             // MainFormDX
             // 
@@ -486,11 +475,9 @@ namespace HASPKey
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1086, 772);
-            this.Controls.Add(this.Lowline);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.splitterControl1);
             this.Controls.Add(this.panelControl3);
-            this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
@@ -507,14 +494,13 @@ namespace HASPKey
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
+            this.panelControl2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PastDays)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            this.panelControl1.ResumeLayout(false);
-            this.panelControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.panelControl3.ResumeLayout(false);
+            this.panelControl3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -556,13 +542,12 @@ namespace HASPKey
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraBars.Bar bar1;
         private DevExpress.XtraEditors.PanelControl panelControl3;
-        private DevExpress.XtraEditors.PanelControl panelControl1;
-        private DevExpress.XtraEditors.SplitterControl splitterControl1;
         private DevExpress.XtraBars.BarStaticItem barStaticItem1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem16;
         private DevExpress.XtraBars.BarSubItem barSubItem4;
         private DevExpress.XtraBars.BarButtonItem barButtonItem17;
         private System.Windows.Forms.Label Headline;
         private System.Windows.Forms.Label Lowline;
+        private DevExpress.XtraEditors.SplitterControl splitterControl1;
     }
 }
