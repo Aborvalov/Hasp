@@ -108,10 +108,10 @@ namespace HASPKey
             // gridView2
             // 
             this.gridView2.GridControl = this.NextDays;
+            this.gridView2.GroupPanelText = " ";
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsBehavior.ReadOnly = true;
             this.gridView2.OptionsView.ShowColumnHeaders = false;
-            this.gridView2.OptionsView.ShowGroupPanel = false;
             // 
             // barManager1
             // 
@@ -411,10 +411,10 @@ namespace HASPKey
             // gridView1
             // 
             this.gridView1.GridControl = this.PastDays;
+            this.gridView1.GroupPanelText = " ";
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.ReadOnly = true;
             this.gridView1.OptionsView.ShowColumnHeaders = false;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // bar1
             // 
