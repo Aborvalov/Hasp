@@ -5,6 +5,6 @@ namespace DalContract
 {
     public interface IContractUserDAO : IContractEntitesDAO<User>
     {
-        int GetByLoginAndPassword(string login, string password);
+        User GetByLoginAndPassword(string login, string password);
     }
 }

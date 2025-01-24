@@ -1,4 +1,5 @@
-﻿using ModelEntities;
+﻿using Entities;
+using ModelEntities;
 using Presenter;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,8 @@ namespace HASPKey
         private readonly IUserPresenter presenterUser;
         public bool error = false;
         public bool click = false;
-        public int dataAccess = -1;
+        public LevelAccess dataAccess;
+        public User user = null;
         private const string errorStr = "Ошибка";
         private const string emptyLogin = "Поле \"Логин\" не заполнено.";
         private const string emptyPassword = "Поле \"Пароль\" не заполнено.";
@@ -39,26 +41,33 @@ namespace HASPKey
         {
             string login = textBoxLogin.Text;
             string password = textBoxPassword.Text;
+
             if (string.IsNullOrEmpty(login))
             {
                 MessageError(emptyLogin);
                 return;
             }
+
             if (string.IsNullOrEmpty(password))
             {
                 MessageError(emptyPassword);
                 return;
             }
-            dataAccess = presenterUser.GetByLoginAndPassword(login, password);
-            if (dataAccess > 0)
+
+            var user = presenterUser.Authenticate(login, password);
+            if (user != null)
             {
+                using (MainFormDX mainFormView = new MainFormDX(user))
+                {
+                    mainFormView.ShowDialog();
+                }
                 this.Close();
             }
             else
             {
                 MessageError(wrongLoginOrPassword);
             }
-        }
+    }
 
         private void textBoxLogin_KeyDown(object sender, KeyEventArgs e)
         {
@@ -89,9 +98,9 @@ namespace HASPKey
 
         private void UserView_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (dataAccess > 0)
+            if (user != null)
             {
-                using (MainFormDX mainFormView = new MainFormDX(dataAccess))
+                using (MainFormDX mainFormView = new MainFormDX(user))
                 {
                     mainFormView.ShowDialog();
                 }

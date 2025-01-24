@@ -25,19 +25,6 @@ namespace Logic
             return usersDAO.GetById(id);
         }
 
-        public int GetByLoginAndPassword(string login, string password)
-        {
-            if (string.IsNullOrEmpty(login))
-            {
-                throw new ArgumentException(nameof(login));
-            }
-            else if (string.IsNullOrEmpty(password))
-            {
-                throw new ArgumentException(nameof(password));
-            }
-            return usersDAO.GetByLoginAndPassword(login, password);
-        }
-
         public bool Remove(int id)
         {
             if (id < 1)
@@ -76,6 +63,15 @@ namespace Logic
         {
             if (string.IsNullOrWhiteSpace(client.Name))
                 throw new ArgumentException(nameof(client.Name));
+        }
+
+        public User GetByLoginAndPassword(string login, string password)
+        {
+            if (string.IsNullOrEmpty(login))
+                throw new ArgumentException(nameof(login));
+            if (string.IsNullOrEmpty(password))
+                throw new ArgumentException(nameof(password));
+            return usersDAO.GetByLoginAndPassword(login, password);
         }
     }
 }

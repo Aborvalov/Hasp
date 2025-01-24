@@ -1,4 +1,5 @@
-﻿using Logic;
+﻿using Entities;
+using Logic;
 using Model;
 using ModelEntities;
 using System;
@@ -36,7 +37,7 @@ namespace Presenter
 
         public ModelViewUser Entities { set; get; } = null;
 
-        public int GetByLoginAndPassword(string login, string password)
+        public User GetByLoginAndPassword(string login, string password)
         {
             if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
             {
@@ -184,5 +185,24 @@ namespace Presenter
         }
 
         public void Dispose() => userModel.Dispose();
+
+        public User Authenticate(string login, string password)
+        {
+            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
+            {
+                entitiesUserView.MessageError(errorEmpty);
+                return null;
+            }
+
+            var user = userModel.GetByLoginAndPassword(login, password);
+
+            if (user == null)
+            {
+                entitiesUserView.MessageError("Неправильный логин или пароль.");
+                return null;
+            }
+            
+            return user;
+        }
     }
 }
