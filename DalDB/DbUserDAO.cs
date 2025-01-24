@@ -136,7 +136,7 @@ namespace DalDB
             GC.SuppressFinalize(this);
         }
 
-        public User GetByLoginAndPassword(string login, string password)
+        public LevelAccess GetByLoginAndPassword(string login, string password)
         {
             if (string.IsNullOrEmpty(login))
                 throw new ArgumentNullException(nameof(login));
@@ -159,7 +159,7 @@ namespace DalDB
                 db.SaveChanges();
             }
 
-            return user;
+            return user.LevelAccess;
         }
     }
 }

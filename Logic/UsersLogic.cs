@@ -65,7 +65,7 @@ namespace Logic
                 throw new ArgumentException(nameof(client.Name));
         }
 
-        public User GetByLoginAndPassword(string login, string password)
+        public LevelAccess GetByLoginAndPassword(string login, string password)
         {
             if (string.IsNullOrEmpty(login))
                 throw new ArgumentException(nameof(login));

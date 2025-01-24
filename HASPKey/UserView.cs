@@ -15,7 +15,6 @@ namespace HASPKey
         public bool error = false;
         public bool click = false;
         public LevelAccess dataAccess;
-        public User user = null;
         private const string errorStr = "Ошибка";
         private const string emptyLogin = "Поле \"Логин\" не заполнено.";
         private const string emptyPassword = "Поле \"Пароль\" не заполнено.";
@@ -54,8 +53,8 @@ namespace HASPKey
                 return;
             }
 
-            var user = presenterUser.Authenticate(login, password);
-            if (user != null)
+            var user = presenterUser.GetByLoginAndPassword(login, password);
+            if (user.ToString() != "")
             {
                 using (MainFormDX mainFormView = new MainFormDX(user))
                 {
@@ -98,9 +97,9 @@ namespace HASPKey
 
         private void UserView_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (user != null)
+            if (dataAccess.ToString() != "")
             {
-                using (MainFormDX mainFormView = new MainFormDX(user))
+                using (MainFormDX mainFormView = new MainFormDX(dataAccess))
                 {
                     mainFormView.ShowDialog();
                 }

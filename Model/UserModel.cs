@@ -120,24 +120,16 @@ namespace Model
 
         public void Dispose() => db.Dispose();
 
-        public User GetByLoginAndPassword(string login, string password)
+        public LevelAccess GetByLoginAndPassword(string login, string password)
         {
             if (string.IsNullOrEmpty(login))
                 throw new ArgumentNullException(nameof(login));
             if (string.IsNullOrEmpty(password))
                 throw new ArgumentNullException(nameof(password));
 
-            var userEntity = userLogic.GetByLoginAndPassword(login, password);
-            if (userEntity == null)
-                return null;
+            var levelAccess = userLogic.GetByLoginAndPassword(login, password);
 
-            return new User
-            {
-                Id = userEntity.Id,
-                Name = userEntity.Name,
-                Login = userEntity.Login,
-                LevelAccess = userEntity.LevelAccess
-            };
+            return levelAccess;
         }
     }
 }

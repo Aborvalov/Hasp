@@ -37,7 +37,7 @@ namespace Presenter
 
         public ModelViewUser Entities { set; get; } = null;
 
-        public User GetByLoginAndPassword(string login, string password)
+        public LevelAccess GetByLoginAndPassword(string login, string password)
         {
             if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
             {
@@ -108,7 +108,6 @@ namespace Presenter
                     entitiesUserView.MessageError(error);
             }
         }
-
 
         public void Add(ModelViewUser entity)
         {
@@ -186,23 +185,21 @@ namespace Presenter
 
         public void Dispose() => userModel.Dispose();
 
-        public User Authenticate(string login, string password)
+        public LevelAccess Authenticate(string login, string password)
         {
             if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
             {
                 entitiesUserView.MessageError(errorEmpty);
-                return null;
             }
 
-            var user = userModel.GetByLoginAndPassword(login, password);
+            var levelAccess = userModel.GetByLoginAndPassword(login, password);
 
-            if (user == null)
+            if (levelAccess.ToString() != "")
             {
                 entitiesUserView.MessageError("Неправильный логин или пароль.");
-                return null;
             }
             
-            return user;
+            return levelAccess;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace HASPKey
         private const string errorStr = "Ошибка";
         public bool ErrorDataBase { get; set; } = false;
         private IMainPresenter presenter;
-        public User DataAccess;
+        public LevelAccess DataAccess;
 
         public MainFormDX()
         {
@@ -23,12 +23,12 @@ namespace HASPKey
             barSubItem3.Enabled = false;
         }
 
-        public MainFormDX(User dataAccess)
+        public MainFormDX(LevelAccess dataAccess)
         {
             InitializeComponent();
             presenter = new MainPresenter(this);
             DataAccess = dataAccess;
-            barSubItem4.Enabled = DataAccess.LevelAccess == Entities.LevelAccess.superadmin;
+            barSubItem4.Enabled = barSubItem4.Enabled = DataAccess == LevelAccess.superadmin;
         }
 
         public void Bind(List<DXModelLicenseEnd> clients)

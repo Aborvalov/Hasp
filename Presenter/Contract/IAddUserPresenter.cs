@@ -7,6 +7,6 @@ namespace Presenter.Contract
     public interface IAddUserPresenter : IEntitiesPresenter<ModelViewUser>
     {
         void Edit(List<ModelViewUser> item);
-        User GetByLoginAndPassword(string login, string password);
+        LevelAccess GetByLoginAndPassword(string login, string password);
     }
 }

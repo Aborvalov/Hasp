@@ -36,7 +36,7 @@ namespace HASPKey
                 DataGridViewFeature.Height = DataGridViewFeature.Size.Height + 28;
         }
 
-        public FeatureView(User DataAccess, bool isVisible)
+        public FeatureView(LevelAccess DataAccess, bool isVisible)
         {
             InitializeComponent();
             presenterFeature = new FeaturePresenter(this);
@@ -46,7 +46,7 @@ namespace HASPKey
             this.search = search;
             if (this.search)
                 DataGridViewFeature.Height = DataGridViewFeature.Size.Height + 28;
-            if (DataAccess.LevelAccess == Entities.LevelAccess.user)
+            if (DataAccess == LevelAccess.user)
             {
                 buttonCancel.Enabled = false;
                 ButtonAdd.Enabled = false;

@@ -16,7 +16,7 @@ namespace HASPKey
         private bool size = true;
         private bool error = false;
         private const int sizeH = 40;
-        public User DataAccess;
+        public LevelAccess DataAccess;
         public event Action DataUpdated;
         internal ModelViewHaspKey SearchHaspKey { get; private set; } = null;
 
@@ -45,7 +45,7 @@ namespace HASPKey
             DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
         }
 
-        public HaspKeyView(User dataAccess)
+        public HaspKeyView(LevelAccess dataAccess)
         {
             InitializeComponent();
             presenterHaspKey = new HaspKeyPresenter(this);
@@ -56,16 +56,16 @@ namespace HASPKey
             labelClient.Text = string.Empty;
             DataAccess = dataAccess;
 
-            if (DataAccess.LevelAccess == Entities.LevelAccess.superadmin)
+            if (DataAccess == LevelAccess.superadmin)
             {
                 DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height - 28;
                 buttonCancel.Visible = true;
             }
             DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
 
-            if (DataAccess.LevelAccess == Entities.LevelAccess.admin) buttonCancel.Visible = false;
+            if (DataAccess == LevelAccess.admin) buttonCancel.Visible = false;
 
-            if (DataAccess.LevelAccess == Entities.LevelAccess.user)
+            if (DataAccess == LevelAccess.user)
             {
                 buttonAdd.Enabled = false;
                 buttonCancel.Enabled = false;
@@ -97,7 +97,7 @@ namespace HASPKey
         private void RadioButtonActive_CheckedChanged(object sender, EventArgs e)
         {
             DefaultView();
-            if (DataAccess.LevelAccess == Entities.LevelAccess.user) buttonAdd.Enabled = false;
+            if (DataAccess == LevelAccess.user) buttonAdd.Enabled = false;
             if (client != null)
             {
                 presenterHaspKey.GetActiveInCompany(client);
@@ -182,7 +182,7 @@ namespace HASPKey
                 {
                     this.client = client.SearchIdClient;
                     DefaultView();
-                    if (DataAccess.LevelAccess == Entities.LevelAccess.user)
+                    if (DataAccess == LevelAccess.user)
                     {
                         buttonAdd.Enabled = false;
                     }
@@ -197,7 +197,7 @@ namespace HASPKey
         private void RadioButtonPastDue_CheckedChanged(object sender, EventArgs e)
         {
             DefaultView();
-            if (DataAccess.LevelAccess == Entities.LevelAccess.user) buttonAdd.Enabled = false;
+            if (DataAccess == LevelAccess.user) buttonAdd.Enabled = false;
             if (client != null)
             {
                 presenterHaspKey.GetByPastDue(client);
@@ -272,7 +272,7 @@ namespace HASPKey
         {
             SetRadioButtonsVisibility(false);
             DefaultView();
-            if (DataAccess.LevelAccess == Entities.LevelAccess.user) buttonAdd.Enabled = false;
+            if (DataAccess == LevelAccess.user) buttonAdd.Enabled = false;
             presenterHaspKey.Display();
             labelClient.Text = string.Empty;
         }

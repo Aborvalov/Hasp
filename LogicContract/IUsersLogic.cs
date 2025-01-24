@@ -4,6 +4,6 @@ namespace LogicContract
 {
     public interface IUsersLogic : IEntitesLogic<User>
     {
-        User GetByLoginAndPassword(string login, string password);
+        LevelAccess GetByLoginAndPassword(string login, string password);
     }
 }
