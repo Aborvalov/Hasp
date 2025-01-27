@@ -56,8 +56,13 @@ namespace HASPKey
 
             dataAccess = presenterUser.GetByLoginAndPassword(login, password);
 
-            LevelAccessSingleton.Instance.SetLevelAccess(dataAccess.Value);
-            
+            UserSingleton.Instance.SetUser(new User
+            {
+                Name = Name,
+                Login = login,
+                LevelAccess = dataAccess.Value
+            }); 
+
             if (dataAccess != null)
             {
                 using (MainFormDX mainFormView = new MainFormDX(dataAccess.Value))

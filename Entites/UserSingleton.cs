@@ -1,35 +1,34 @@
-﻿namespace Entities
+﻿using Entities;
+using System;
+
+public class UserSingleton
 {
-    public class LevelAccessSingleton
+    private static readonly Lazy<UserSingleton> instance = new Lazy<UserSingleton>(() => new UserSingleton());
+
+    public static UserSingleton Instance => instance.Value;
+
+    public int Id { get; private set; }
+    public string Name { get; private set; }
+    public string Login { get; private set; }
+    public LevelAccess? LevelAccess { get; private set; }
+
+    private UserSingleton() { }
+
+    public void ClearUser()
     {
-        private static LevelAccessSingleton _instance;
-        private static readonly object _lock = new object();
-
-        public LevelAccess? CurrentLevelAccess { get; private set; }
-
-        private LevelAccessSingleton()
-        {
-            CurrentLevelAccess = null;
-        }
-
-        public static LevelAccessSingleton Instance
-        {
-            get
-            {
-                lock (_lock)
-                {
-                    if (_instance == null)
-                    {
-                        _instance = new LevelAccessSingleton();
-                    }
-                    return _instance;
-                }
-            }
-        }
-
-        public void SetLevelAccess(LevelAccess levelAccess)
-        {
-            CurrentLevelAccess = levelAccess;
-        }
+        Id = 0;
+        Name = string.Empty;
+        Login = string.Empty;
+        LevelAccess = null;
     }
+
+    public void SetUser(User user)
+    {
+        Id = user.Id;
+        Name = user.Name;
+        Login = user.Login;
+        LevelAccess = user.LevelAccess;
+    }
+
+    public bool IsAuthenticated => Id != 0;
 }
