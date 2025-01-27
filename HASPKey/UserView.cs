@@ -4,6 +4,7 @@ using Presenter;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using ViewContract;
 
@@ -15,10 +16,13 @@ namespace HASPKey
         public bool error = false;
         public bool click = false;
         public LevelAccess dataAccess;
+        public User user;
         private const string errorStr = "Ошибка";
         private const string emptyLogin = "Поле \"Логин\" не заполнено.";
         private const string emptyPassword = "Поле \"Пароль\" не заполнено.";
         private const string wrongLoginOrPassword = "Неправильный логин или пароль.";
+
+        private readonly EntitesContext dbContext;
 
         public event Action DataUpdated;
 
@@ -53,10 +57,15 @@ namespace HASPKey
                 return;
             }
 
-            var user = presenterUser.GetByLoginAndPassword(login, password);
-            if (user.ToString() != "")
+            User user = new User
             {
-                using (MainFormDX mainFormView = new MainFormDX(user))
+                Login = login
+            };
+
+            var dataAccess = presenterUser.GetByLoginAndPassword(user.Login, password);
+            if (dataAccess.ToString() != "")
+            {
+                using (MainFormDX mainFormView = new MainFormDX(dataAccess))
                 {
                     mainFormView.ShowDialog();
                 }
@@ -99,11 +108,15 @@ namespace HASPKey
         {
             if (dataAccess.ToString() != "")
             {
-                using (MainFormDX mainFormView = new MainFormDX(dataAccess))
+                if (Application.OpenForms.OfType<MainFormDX>().Any())
                 {
-                    mainFormView.ShowDialog();
+                    using (MainFormDX mainFormView = new MainFormDX(dataAccess))
+                    {
+                        mainFormView.ShowDialog();
+                    }
                 }
             }
+            Application.Exit();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace HASPKey
     public partial class LevelAccessView : DevExpress.XtraEditors.XtraForm, IUserView
     {
         private readonly IUserPresenter presenterUser;
-        private ModelViewUser newItem;
+        public User newItem = null;
         private bool isSomethingChanged = false;
         public bool error = false;
         private const string errorStr = "Ошибка";
@@ -34,21 +34,34 @@ namespace HASPKey
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
-            newItem = null;
+            if (loginBindingSource.DataSource == null)
+            {
+                loginBindingSource.DataSource = new BindingList<User>();
+            }
+
             var bindingList = loginBindingSource.DataSource as BindingList<ModelViewUser>;
 
             using (AddUserForm user = new AddUserForm(true))
-            {              
+            {
                 if (user.ShowDialog() == DialogResult.OK)
                 {
-                    var newItem = user.NewItem; 
+                    var newItem = user.NewItem;
 
                     if (newItem != null)
                     {
-                        bindingList.Add(newItem);
+                        var modelViewUser = new ModelViewUser
+                        {
+                            Id = newItem.Id,
+                            Name = newItem.Name,
+                            Login = newItem.Login,
+                            Password = newItem.Password,
+                            LevelAccess = newItem.LevelAccess
+                        };
+
+                        bindingList.Add(modelViewUser);
                         DataGridViewLogIn.Refresh();
 
-                        int rowIndex = bindingList.IndexOf(newItem);
+                        int rowIndex = bindingList.IndexOf(modelViewUser);
                         if (rowIndex >= 0)
                         {
                             DataGridViewLogIn.CurrentCell = DataGridViewLogIn.Rows[rowIndex].Cells[0];
@@ -70,7 +83,6 @@ namespace HASPKey
                 presenterUser.Edit(bindingList.ToList());
                 isSomethingChanged = false;
             }
-
         }
 
         private void ButtonCancel_Click(object sender, EventArgs e)
@@ -138,15 +150,46 @@ namespace HASPKey
                         if (user.ShowDialog() == DialogResult.OK)
                         {
                             int selectedRowIndex = DataGridViewLogIn.CurrentRow.Index;
-                            loginBindingSource[selectedRowIndex] = user.NewItem;
+
                             var bindingList = loginBindingSource.DataSource as BindingList<ModelViewUser>;
-                            presenterUser.Edit(bindingList.ToList());
-                            presenterUser.Remove(selectedRow.Id);
+                            if (bindingList != null)
+                            {
+                                var itemToRemove = bindingList.FirstOrDefault(item => item.Id == selectedRow.Id);
+                                if (itemToRemove != null)
+                                {
+                                    bindingList.Remove(itemToRemove);
+                                }
+
+                                var updatedUser = new ModelViewUser
+                                {
+                                    Id = user.NewItem.Id,
+                                    Name = user.NewItem.Name,
+                                    Login = user.NewItem.Login,
+                                    Password = user.NewItem.Password,
+                                    LevelAccess = user.NewItem.LevelAccess
+                                };
+
+                                bindingList.Add(updatedUser);
+
+                                DataGridViewLogIn.Refresh();
+                                isSomethingChanged = true;
+
+                                var modelViewUserList = bindingList.Select(item => new ModelViewUser
+                                {
+                                    Id = item.Id,
+                                    Name = item.Name,
+                                    Login = item.Login,
+                                    Password = item.Password,
+                                    LevelAccess = item.LevelAccess
+                                }).ToList();
+
+                                presenterUser.Edit(modelViewUserList);
+                                presenterUser.Remove(selectedRow.Id);
+                            }
                         }
                     }
                 }
             }
         }
-
     }
 }
