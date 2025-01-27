@@ -15,14 +15,11 @@ namespace HASPKey
         private readonly IUserPresenter presenterUser;
         public bool error = false;
         public bool click = false;
-        public LevelAccess dataAccess;
-        public User user;
+        public LevelAccess? dataAccess = null;
         private const string errorStr = "Ошибка";
         private const string emptyLogin = "Поле \"Логин\" не заполнено.";
         private const string emptyPassword = "Поле \"Пароль\" не заполнено.";
         private const string wrongLoginOrPassword = "Неправильный логин или пароль.";
-
-        private readonly EntitesContext dbContext;
 
         public event Action DataUpdated;
 
@@ -57,15 +54,11 @@ namespace HASPKey
                 return;
             }
 
-            User user = new User
+            dataAccess = presenterUser.GetByLoginAndPassword(login, password);
+            if (dataAccess != null)
             {
-                Login = login
-            };
-
-            var dataAccess = presenterUser.GetByLoginAndPassword(user.Login, password);
-            if (dataAccess.ToString() != "")
-            {
-                using (MainFormDX mainFormView = new MainFormDX(dataAccess))
+                LevelAccessSingleton.Instance.SetLevelAccess(dataAccess.Value);
+                using (MainFormDX mainFormView = new MainFormDX(dataAccess.Value))
                 {
                     mainFormView.ShowDialog();
                 }
@@ -106,7 +99,7 @@ namespace HASPKey
 
         private void UserView_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (dataAccess.ToString() != "")
+            if (dataAccess != null)
             {
                 if (Application.OpenForms.OfType<MainFormDX>().Any())
                 {

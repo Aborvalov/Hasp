@@ -149,6 +149,7 @@ namespace DalDB
 
             if (user != null)
             {
+                LevelAccessSingleton.Instance.SetLevelAccess(user.LevelAccess);
                 Log newLog = new Log
                 {
                     User = $"{user.Name}-{(int)user.LevelAccess}",

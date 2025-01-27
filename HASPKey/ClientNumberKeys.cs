@@ -41,7 +41,7 @@ namespace HASPKey
             buttonCancel.Visible = isVisible;
         }
 
-        public ClientNumberKeys(LevelAccess DataAccess)
+        public ClientNumberKeys(LevelAccess? DataAccess)
         {
             InitializeComponent();
             presenterClientNumberKeys = new ClientNumberKeysPresenter(this);

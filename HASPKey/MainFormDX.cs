@@ -14,7 +14,7 @@ namespace HASPKey
         private const string errorStr = "Ошибка";
         public bool ErrorDataBase { get; set; } = false;
         private IMainPresenter presenter;
-        public LevelAccess DataAccess;
+        public LevelAccess? DataAccess = null;
 
         public MainFormDX()
         {
@@ -23,7 +23,7 @@ namespace HASPKey
             barSubItem3.Enabled = false;
         }
 
-        public MainFormDX(LevelAccess dataAccess)
+        public MainFormDX(LevelAccess? dataAccess)
         {
             InitializeComponent();
             presenter = new MainPresenter(this);

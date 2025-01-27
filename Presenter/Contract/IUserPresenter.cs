@@ -8,6 +8,6 @@ namespace Presenter
     public interface IUserPresenter : IEntitiesPresenter<ModelViewUser>
     {
         void Edit(List<ModelViewUser> item);
-        LevelAccess GetByLoginAndPassword(string login, string password);
+        LevelAccess? GetByLoginAndPassword(string login, string password);
     }
 }

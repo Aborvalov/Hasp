@@ -36,7 +36,7 @@ namespace HASPKey
                 DataGridViewFeature.Height = DataGridViewFeature.Size.Height + 28;
         }
 
-        public FeatureView(LevelAccess DataAccess, bool isVisible)
+        public FeatureView(LevelAccess? DataAccess, bool isVisible)
         {
             InitializeComponent();
             presenterFeature = new FeaturePresenter(this);

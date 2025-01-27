@@ -16,7 +16,7 @@ namespace HASPKey
         private bool size = true;
         private bool error = false;
         private const int sizeH = 40;
-        public LevelAccess DataAccess;
+        public LevelAccess? DataAccess = null;
         public event Action DataUpdated;
         internal ModelViewHaspKey SearchHaspKey { get; private set; } = null;
 
@@ -45,7 +45,7 @@ namespace HASPKey
             DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
         }
 
-        public HaspKeyView(LevelAccess dataAccess)
+        public HaspKeyView(LevelAccess? dataAccess)
         {
             InitializeComponent();
             presenterHaspKey = new HaspKeyPresenter(this);

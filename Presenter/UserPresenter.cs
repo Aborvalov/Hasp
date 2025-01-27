@@ -37,7 +37,7 @@ namespace Presenter
 
         public ModelViewUser Entities { set; get; } = null;
 
-        public LevelAccess GetByLoginAndPassword(string login, string password)
+        public LevelAccess? GetByLoginAndPassword(string login, string password)
         {
             if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
             {
@@ -185,7 +185,7 @@ namespace Presenter
 
         public void Dispose() => userModel.Dispose();
 
-        public LevelAccess Authenticate(string login, string password)
+        public LevelAccess? Authenticate(string login, string password)
         {
             if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
             {
