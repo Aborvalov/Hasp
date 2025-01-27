@@ -18,8 +18,6 @@ namespace HASPKey
             Application.SetCompatibleTextRenderingDefault(false);
 
             BonusSkins.Register();
-
-            var levelAccessSingleton = LevelAccessSingleton.Instance;
             Application.Run(new UserView());
         }
     }

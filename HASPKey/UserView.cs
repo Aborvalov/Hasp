@@ -55,9 +55,11 @@ namespace HASPKey
             }
 
             dataAccess = presenterUser.GetByLoginAndPassword(login, password);
+
+            LevelAccessSingleton.Instance.SetLevelAccess(dataAccess.Value);
+            
             if (dataAccess != null)
             {
-                LevelAccessSingleton.Instance.SetLevelAccess(dataAccess.Value);
                 using (MainFormDX mainFormView = new MainFormDX(dataAccess.Value))
                 {
                     mainFormView.ShowDialog();
