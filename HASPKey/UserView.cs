@@ -56,12 +56,11 @@ namespace HASPKey
 
             dataAccess = presenterUser.GetByLoginAndPassword(login, password);
 
-            UserSingleton.Instance.SetUser(new User
+            UserSingleton.Instance.User = new User
             {
-                Name = Name,
                 Login = login,
                 LevelAccess = dataAccess.Value
-            }); 
+            };
 
             if (dataAccess != null)
             {

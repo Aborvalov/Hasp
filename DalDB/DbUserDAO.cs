@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Xml.Linq;
 
 namespace DalDB
 {
@@ -147,6 +146,8 @@ namespace DalDB
             string hashedPassword = Hash(password);
 
             var user = db.Users.FirstOrDefault(u => u.Login == login && u.Password == hashedPassword);
+
+            UserSingleton.Instance.User = user;
 
             if (user != null)
             {

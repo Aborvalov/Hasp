@@ -1,34 +1,37 @@
-﻿using Entities;
-using System;
+﻿using System;
 
-public class UserSingleton
+namespace Entities
 {
-    private static readonly Lazy<UserSingleton> instance = new Lazy<UserSingleton>(() => new UserSingleton());
-
-    public static UserSingleton Instance => instance.Value;
-
-    public int Id { get; private set; }
-    public string Name { get; private set; }
-    public string Login { get; private set; }
-    public LevelAccess? LevelAccess { get; private set; }
-
-    private UserSingleton() { }
-
-    public void ClearUser()
+    public sealed class UserSingleton
     {
-        Id = 0;
-        Name = string.Empty;
-        Login = string.Empty;
-        LevelAccess = null;
-    }
+        private static readonly Lazy<UserSingleton> instance = new Lazy<UserSingleton>(() => new UserSingleton());
+        private User user;
 
-    public void SetUser(User user)
-    {
-        Id = user.Id;
-        Name = user.Name;
-        Login = user.Login;
-        LevelAccess = user.LevelAccess;
-    }
+        private UserSingleton()
+        {
+            user = new User();
+        }
 
-    public bool IsAuthenticated => Id != 0;
+        public static UserSingleton Instance => instance.Value;
+
+        public User User
+        {
+            get => user;
+            set
+            {
+                if (value != null)
+                {
+                    user.Id = value.Id;
+                    user.Name = value.Name;
+                    user.Login = value.Login;
+                    user.LevelAccess = value.LevelAccess;
+                }
+            }
+        }
+
+        public void Reset()
+        {
+            user = new User();
+        }
+    }
 }
