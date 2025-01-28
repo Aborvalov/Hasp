@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="IClientNumberKeysView.cs" />
     <Compile Include="IEntitiesView.cs" />
+    <Compile Include="IGetUserView.cs" />
     <Compile Include="IKeyFeatureClientView.cs" />
     <Compile Include="IKeyFeatureView.cs" />
     <Compile Include="IUserView.cs" />

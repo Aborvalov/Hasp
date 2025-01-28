@@ -10,9 +10,10 @@ using ViewContract;
 
 namespace HASPKey
 {
-    public partial class UserView : DevExpress.XtraEditors.XtraForm, IUserView
+    public partial class UserView : DevExpress.XtraEditors.XtraForm, IUserView, IGetUserView
     {
         private readonly IUserPresenter presenterUser;
+        private readonly IGetUserPresenter getPresenterUser;
         public bool error = false;
         public bool click = false;
         public LevelAccess? dataAccess = null;
@@ -27,6 +28,7 @@ namespace HASPKey
         {
             InitializeComponent();
             presenterUser = new UserPresenter(this);
+            getPresenterUser = new GetUserPresenter(this);
         }
 
         public UserView() : this(false)
@@ -54,16 +56,16 @@ namespace HASPKey
                 return;
             }
 
-            dataAccess = presenterUser.GetByLoginAndPassword(login, password);
-
-            UserSingleton.Instance.User = new User
-            {
-                Login = login,
-                LevelAccess = dataAccess.Value
-            };
+            dataAccess = getPresenterUser.GetByLoginAndPassword(login, password);
 
             if (dataAccess != null)
             {
+                UserSingleton.Instance.User = new User
+                {
+                    Login = login,
+                    LevelAccess = dataAccess.Value
+                };
+
                 using (MainFormDX mainFormView = new MainFormDX(dataAccess.Value))
                 {
                     mainFormView.ShowDialog();
@@ -74,7 +76,7 @@ namespace HASPKey
             {
                 MessageError(wrongLoginOrPassword);
             }
-    }
+        }
 
         private void textBoxLogin_KeyDown(object sender, KeyEventArgs e)
         {

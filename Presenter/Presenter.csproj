@@ -79,12 +79,14 @@
     <Compile Include="Contract\IClientNumberKeysPresenter.cs" />
     <Compile Include="Contract\IClientPresenter.cs" />
     <Compile Include="Contract\IEntitiesPresenter.cs" />
+    <Compile Include="Contract\IGetUserPresenter.cs" />
     <Compile Include="Contract\IHaspKeyPresenter.cs" />
     <Compile Include="Contract\IKeyFeaturePresenter.cs" />
     <Compile Include="Contract\IKeyFeatureClientPresenter.cs" />
     <Compile Include="Contract\IUserPresenter.cs" />
     <Compile Include="Contract\IMainPresenter.cs" />
     <Compile Include="Contract\IReferencePresenter.cs" />
+    <Compile Include="GetUserPresenter.cs" />
     <Compile Include="UserPresenter.cs" />
     <Compile Include="LogPresenter.cs" />
     <Compile Include="СlientPresenter.cs" />
