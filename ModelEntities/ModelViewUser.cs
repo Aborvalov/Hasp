@@ -45,7 +45,7 @@ namespace ModelEntities
             set => User.Password = value;
         }
         [DisplayName("Уровень доступа")]
-        public LevelAccess LevelAccess
+        public LevelAccess? LevelAccess
         {
             get => User.LevelAccess;
             set => User.LevelAccess = value;

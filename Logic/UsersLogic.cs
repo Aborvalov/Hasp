@@ -9,6 +9,7 @@ namespace Logic
     public class UsersLogic : IUsersLogic
     {
         private readonly IContractUserDAO usersDAO;
+        public LevelAccess? dataAccess = null;
 
         public UsersLogic(IContractUserDAO userDAO)
         {
@@ -65,13 +66,27 @@ namespace Logic
                 throw new ArgumentException(nameof(client.Name));
         }
 
-        public LevelAccess GetByLoginAndPassword(string login, string password)
+        public LevelAccess? GetByLoginAndPassword(string login, string password)
         {
             if (string.IsNullOrEmpty(login))
                 throw new ArgumentException(nameof(login));
             if (string.IsNullOrEmpty(password))
                 throw new ArgumentException(nameof(password));
-            return usersDAO.GetByLoginAndPassword(login, password);
+            
+            dataAccess = usersDAO.GetByLoginAndPassword(login, password);
+
+            if (dataAccess != null)
+            {
+                User user = new User
+                {
+                    Login = login,
+                    LevelAccess = dataAccess
+                };
+
+                UserSingleton.Instance.User = user;
+            }
+
+            return dataAccess;
         }
     }
 }

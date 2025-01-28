@@ -136,7 +136,7 @@ namespace DalDB
             GC.SuppressFinalize(this);
         }
 
-        public LevelAccess GetByLoginAndPassword(string login, string password)
+        public LevelAccess? GetByLoginAndPassword(string login, string password)
         {
             if (string.IsNullOrEmpty(login))
                 throw new ArgumentNullException(nameof(login));

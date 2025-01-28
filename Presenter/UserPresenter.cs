@@ -184,22 +184,5 @@ namespace Presenter
         }
 
         public void Dispose() => userModel.Dispose();
-
-        public LevelAccess? Authenticate(string login, string password)
-        {
-            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
-            {
-                entitiesUserView.MessageError(errorEmpty);
-            }
-
-            var levelAccess = userModel.GetByLoginAndPassword(login, password);
-
-            if (levelAccess.ToString() != "")
-            {
-                entitiesUserView.MessageError("Неправильный логин или пароль.");
-            }
-            
-            return levelAccess;
-        }
     }
 }

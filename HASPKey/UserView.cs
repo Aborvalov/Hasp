@@ -10,7 +10,7 @@ using ViewContract;
 
 namespace HASPKey
 {
-    public partial class UserView : DevExpress.XtraEditors.XtraForm, IUserView, IGetUserView
+    public partial class UserView : DevExpress.XtraEditors.XtraForm, IGetUserView
     {
         private readonly IUserPresenter presenterUser;
         private readonly IGetUserPresenter getPresenterUser;
@@ -27,7 +27,6 @@ namespace HASPKey
         public UserView(bool search)
         {
             InitializeComponent();
-            presenterUser = new UserPresenter(this);
             getPresenterUser = new GetUserPresenter(this);
         }
 
@@ -60,12 +59,6 @@ namespace HASPKey
 
             if (dataAccess != null)
             {
-                UserSingleton.Instance.User = new User
-                {
-                    Login = login,
-                    LevelAccess = dataAccess.Value
-                };
-
                 using (MainFormDX mainFormView = new MainFormDX(dataAccess.Value))
                 {
                     mainFormView.ShowDialog();
@@ -92,17 +85,6 @@ namespace HASPKey
         public void textBoxPassword_KeyDown(object sender, KeyEventArgs e)
         {
             string password = textBoxPassword.Text;
-        }
-
-        public void DataChange() => DataUpdated?.Invoke();
-
-        public void Bind(List<ModelViewUser> entity)
-        => loginBindingSource.DataSource = entity != null ? new BindingList<ModelViewUser>(entity)
-                                                         : new BindingList<ModelViewUser>();
-
-        public void BindItem(ModelViewUser entity)
-        {
-            loginBindingSource.DataSource = entity ?? new ModelViewUser();
         }
 
         private void UserView_FormClosed(object sender, FormClosedEventArgs e)
