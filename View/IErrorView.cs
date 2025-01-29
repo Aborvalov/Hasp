@@ -1,6 +1,6 @@
 ﻿namespace ViewContract
 {
-    public interface IGetUserView
+    public interface IErrorView
     {
         void MessageError(string errorText);
     }

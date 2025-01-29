@@ -8,32 +8,49 @@ namespace Presenter
 {
     public class GetUserPresenter : IGetUserPresenter
     {
-        private readonly IGetUserView entitiesGetUserView;
+        private readonly IErrorView entitiesErrorView;
         private readonly IUserModel userModel;
-
-        private const string errorEmpty = "Одно из полей не заполнено.";
         private const string nullDB = "База данных не найдена.";
+        private const string emptyLogin = "Поле \"Логин\" не заполнено.";
+        private const string emptyPassword = "Поле \"Пароль\" не заполнено.";
+        private const string wrongLoginOrPassword = "Неправильный логин или пароль.";
 
-        public GetUserPresenter(IGetUserView entitiesLogInView)
+        public GetUserPresenter(IErrorView entitiesLogInView)
         {
-            this.entitiesGetUserView = entitiesLogInView ?? throw new ArgumentNullException(nameof(entitiesLogInView));
+            this.entitiesErrorView = entitiesLogInView ?? throw new ArgumentNullException(nameof(entitiesLogInView));
             try
             {
                 userModel = new UserModel(new Logics());
             }
             catch (ArgumentNullException)
             {
-                entitiesLogInView.MessageError(nullDB);
+                entitiesErrorView.MessageError(nullDB);
             }
         }
 
         public LevelAccess? GetByLoginAndPassword(string login, string password)
         {
-            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(login))
             {
-                entitiesGetUserView.MessageError(errorEmpty);
+                entitiesErrorView.MessageError(emptyLogin);
+                return null;
             }
-            return userModel.GetByLoginAndPassword(login, password);
+
+            if (string.IsNullOrEmpty(password))
+            {
+                entitiesErrorView.MessageError(emptyPassword);
+                return null;
+            }
+
+            var accessLevel = userModel.GetByLoginAndPassword(login, password);
+            
+            if (accessLevel == null)
+            {
+                entitiesErrorView.MessageError(wrongLoginOrPassword);
+                return null;
+            }
+
+            return accessLevel;
         }
     }
 }

@@ -159,9 +159,10 @@ namespace DalDB
                 };
                 db.Logs.Add(newLog);
                 db.SaveChanges();
+                return user.LevelAccess;
             }
 
-            return user.LevelAccess;
+            return null;
         }
     }
 }
