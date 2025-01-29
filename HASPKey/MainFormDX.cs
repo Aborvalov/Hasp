@@ -18,19 +18,20 @@ namespace HASPKey
         private IMainPresenter presenter;
         public LevelAccess? DataAccess = null;
 
-        private void LoadBarCaptions()
-        {
-            int days = LoadFromXml.GetItem();
-            Headline.Text = $"Истекает через {days} дней";
-            Lowline.Text = $"Истекло в предыдущие {days} дней";
-        }
-
         public MainFormDX(LevelAccess? dataAccess)
         {
             InitializeComponent();
             presenter = new MainPresenter(this);
             DataAccess = dataAccess;
             barSubItem4.Enabled = barSubItem4.Enabled = DataAccess == LevelAccess.superadmin;
+            LoadBarCaptions();
+        }
+
+        private void LoadBarCaptions()
+        {
+            int days = LoadFromXml.GetItem();
+            Headline.Text = $"Истекает через {days} дней";
+            Lowline.Text = $"Истекло в предыдущие {days} дней";
         }
 
         public void Bind(List<DXModelLicenseEnd> clients)
