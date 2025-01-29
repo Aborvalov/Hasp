@@ -5,7 +5,6 @@ using ModelEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 
 namespace Model
 {
@@ -109,15 +108,6 @@ namespace Model
         public ModelViewUser GetById(int id) =>
             new ModelViewUser(userLogic.GetById(id));
 
-        public int GetByLoginAndPassword(string login, string password)
-        {
-            if (string.IsNullOrEmpty(login))
-                throw new ArgumentNullException(nameof(login));
-            if (string.IsNullOrEmpty(password))
-                throw new ArgumentNullException(nameof(password));
-            return userLogic.GetByLoginAndPassword(login, password);
-        }
-
         public bool Remove(int id) => userLogic.Remove(id);
 
         public bool Update(ModelViewUser entity)
@@ -129,5 +119,17 @@ namespace Model
         }
 
         public void Dispose() => db.Dispose();
+
+        public LevelAccess? GetByLoginAndPassword(string login, string password)
+        {
+            if (string.IsNullOrEmpty(login))
+                throw new ArgumentNullException(nameof(login));
+            if (string.IsNullOrEmpty(password))
+                throw new ArgumentNullException(nameof(password));
+
+            var levelAccess = userLogic.GetByLoginAndPassword(login, password);
+
+            return levelAccess;
+        }
     }
 }

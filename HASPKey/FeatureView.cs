@@ -1,3 +1,4 @@
+using Entities;
 using ModelEntities;
 using Presenter;
 using System;
@@ -35,7 +36,7 @@ namespace HASPKey
                 DataGridViewFeature.Height = DataGridViewFeature.Size.Height + 28;
         }
 
-        public FeatureView(int DataAccess, bool isVisible)
+        public FeatureView(LevelAccess? DataAccess, bool isVisible)
         {
             InitializeComponent();
             presenterFeature = new FeaturePresenter(this);
@@ -45,7 +46,7 @@ namespace HASPKey
             this.search = search;
             if (this.search)
                 DataGridViewFeature.Height = DataGridViewFeature.Size.Height + 28;
-            if (DataAccess == 3)
+            if (DataAccess == LevelAccess.user)
             {
                 buttonCancel.Enabled = false;
                 ButtonAdd.Enabled = false;

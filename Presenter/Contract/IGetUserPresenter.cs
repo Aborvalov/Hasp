@@ -1,8 +1,7 @@
 ﻿using Entities;
-
-namespace LogicContract
+namespace Presenter
 {
-    public interface IUsersLogic : IEntitesLogic<User>
+    public interface IGetUserPresenter
     {
         LevelAccess? GetByLoginAndPassword(string login, string password);
     }

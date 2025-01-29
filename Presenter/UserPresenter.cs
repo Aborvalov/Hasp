@@ -1,4 +1,5 @@
-﻿using Logic;
+﻿using Entities;
+using Logic;
 using Model;
 using ModelEntities;
 using System;
@@ -36,7 +37,7 @@ namespace Presenter
 
         public ModelViewUser Entities { set; get; } = null;
 
-        public int GetByLoginAndPassword(string login, string password)
+        public LevelAccess? GetByLoginAndPassword(string login, string password)
         {
             if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
             {
@@ -107,7 +108,6 @@ namespace Presenter
                     entitiesUserView.MessageError(error);
             }
         }
-
 
         public void Add(ModelViewUser entity)
         {

@@ -9,6 +9,7 @@ namespace Logic
     public class UsersLogic : IUsersLogic
     {
         private readonly IContractUserDAO usersDAO;
+        public LevelAccess? dataAccess = null;
 
         public UsersLogic(IContractUserDAO userDAO)
         {
@@ -23,19 +24,6 @@ namespace Logic
                 throw new ArgumentException(nameof(id));
 
             return usersDAO.GetById(id);
-        }
-
-        public int GetByLoginAndPassword(string login, string password)
-        {
-            if (string.IsNullOrEmpty(login))
-            {
-                throw new ArgumentException(nameof(login));
-            }
-            else if (string.IsNullOrEmpty(password))
-            {
-                throw new ArgumentException(nameof(password));
-            }
-            return usersDAO.GetByLoginAndPassword(login, password);
         }
 
         public bool Remove(int id)
@@ -76,6 +64,29 @@ namespace Logic
         {
             if (string.IsNullOrWhiteSpace(client.Name))
                 throw new ArgumentException(nameof(client.Name));
+        }
+
+        public LevelAccess? GetByLoginAndPassword(string login, string password)
+        {
+            if (string.IsNullOrEmpty(login))
+                throw new ArgumentException(nameof(login));
+            if (string.IsNullOrEmpty(password))
+                throw new ArgumentException(nameof(password));
+            
+            dataAccess = usersDAO.GetByLoginAndPassword(login, password);
+
+            if (dataAccess != null)
+            {
+                User user = new User
+                {
+                    Login = login,
+                    LevelAccess = dataAccess
+                };
+
+                UserSingleton.Instance.User = user;
+            }
+
+            return dataAccess;
         }
     }
 }

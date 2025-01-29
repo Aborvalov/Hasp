@@ -28,30 +28,6 @@ namespace DalDB
 
         public List<User> GetAll() => db.Users.ToList();
 
-        public int GetByLoginAndPassword(string login, string password)
-        {
-            if (string.IsNullOrEmpty(login))
-                throw new ArgumentNullException(nameof(login));
-            if (string.IsNullOrEmpty(password))
-                throw new ArgumentNullException(nameof(password));
-            var user = db.Users.ToList().SingleOrDefault(x => x.Login == login && x.Password == Hash(password));
-            int access = -1;
-            if (user != null)
-            {
-                access = (int)user.LevelAccess;
-                Log newLog = new Log
-                {
-                    User = user.Name + "-" + access,
-                    LoginTime = DateTime.Now,
-                    Actions = "Вход в программу. ",
-                };
-                var log = db.Logs.Add(newLog);
-                db.SaveChanges();
-            }
-
-            return access;
-        }
-
         private string Hash(string password)
         {
             using (SHA256 sha256 = SHA256.Create())
@@ -158,6 +134,35 @@ namespace DalDB
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public LevelAccess? GetByLoginAndPassword(string login, string password)
+        {
+            if (string.IsNullOrEmpty(login))
+                throw new ArgumentNullException(nameof(login));
+            if (string.IsNullOrEmpty(password))
+                throw new ArgumentNullException(nameof(password));
+
+            string hashedPassword = Hash(password);
+
+            var user = db.Users.FirstOrDefault(u => u.Login == login && u.Password == hashedPassword);
+
+            UserSingleton.Instance.User = user;
+
+            if (user != null)
+            {
+                Log newLog = new Log
+                {
+                    User = $"{user.Name}-{(int)user.LevelAccess}",
+                    LoginTime = DateTime.Now,
+                    Actions = "Вход в программу. "
+                };
+                db.Logs.Add(newLog);
+                db.SaveChanges();
+                return user.LevelAccess;
+            }
+
+            return null;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Entities
         [Column("Password")]
         public string Password { get; set; }
         [Column("LevelAccess")]
-        public LevelAccess LevelAccess { get; set; }
+        public LevelAccess? LevelAccess { get; set; }
         public override bool Equals(object obj)
         {
             if (!(obj is User other))
