@@ -159,12 +159,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddUserForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddUserForm.Designer.cs">
-      <DependentUpon>AddUserForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="CalendarDataGridView\CalendarCell.cs" />
     <Compile Include="CalendarDataGridView\CalendarColumn.cs" />
     <Compile Include="CalendarDataGridView\CalendarEditingControl.cs">
@@ -251,9 +245,6 @@
     <Compile Include="LogBookForm.Designer.cs">
       <DependentUpon>LogBookForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddUserForm.resx">
-      <DependentUpon>AddUserForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ClientView.resx">
       <DependentUpon>ClientView.cs</DependentUpon>
     </EmbeddedResource>
