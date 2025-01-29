@@ -4,7 +4,10 @@ using Presenter;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Windows.Forms;
 using ViewContract;
 
@@ -22,67 +25,80 @@ namespace HASPKey
         private const string messageSave = "Вы уверены, что хотите сохранить пользователя?";
         private const string emptyClient = "Данный пользователь не найден.";
         public event Action DataUpdated;
+        public int editingRowId = -1;
 
         public LevelAccessView(bool search)
         {
             InitializeComponent();
             presenterUser = new UserPresenter(this);
+            SetupComboBoxColumn();
         }
 
         public LevelAccessView() : this(false)
         { }
 
+        private void SetupComboBoxColumn()
+        {
+            if (DataGridViewLogIn.Columns["levelAccessDataGridViewTextBoxColumn"] is DataGridViewComboBoxColumn comboBoxColumn)
+            {
+                comboBoxColumn.DataSource = Enum.GetValues(typeof(LevelAccess));
+            }
+        }
+
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             if (loginBindingSource.DataSource == null)
             {
-                loginBindingSource.DataSource = new BindingList<User>();
+                loginBindingSource.DataSource = new BindingList<ModelViewUser>();
             }
 
             var bindingList = loginBindingSource.DataSource as BindingList<ModelViewUser>;
+            if (bindingList == null) return;
 
-            using (AddUserForm user = new AddUserForm(true))
+            int nextId = (bindingList.Count > 0) ? bindingList.Max(u => u.Id) + 1 : 1;
+
+            var newUser = new ModelViewUser
             {
-                if (user.ShowDialog() == DialogResult.OK)
-                {
-                    var newItem = user.NewItem;
+                Id = -1,
+                Name = "",
+                Login = "",
+                Password = "",
+                LevelAccess = LevelAccess.user
+            };
 
-                    if (newItem != null)
-                    {
-                        var modelViewUser = new ModelViewUser
-                        {
-                            Id = newItem.Id,
-                            Name = newItem.Name,
-                            Login = newItem.Login,
-                            Password = newItem.Password,
-                            LevelAccess = newItem.LevelAccess
-                        };
+            bindingList.Add(newUser);
+            DataGridViewLogIn.Refresh();
 
-                        bindingList.Add(modelViewUser);
-                        DataGridViewLogIn.Refresh();
-
-                        int rowIndex = bindingList.IndexOf(modelViewUser);
-                        if (rowIndex >= 0)
-                        {
-                            DataGridViewLogIn.CurrentCell = DataGridViewLogIn.Rows[rowIndex].Cells[0];
-                            DataGridViewLogIn.BeginEdit(true);
-                        }
-
-                        isSomethingChanged = true;
-                    }
-                }
+            int rowIndex = bindingList.IndexOf(newUser);
+            if (rowIndex >= 0)
+            {
+                DataGridViewLogIn.CurrentCell = DataGridViewLogIn.Rows[rowIndex].Cells[1];
+                DataGridViewLogIn.BeginEdit(true);
             }
+
+            editingRowId = nextId;
+
+            isSomethingChanged = true;
         }
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             var bindingList = loginBindingSource.DataSource as BindingList<ModelViewUser>;
+            if (bindingList == null) return;
+
+            if (DataGridViewLogIn.IsCurrentCellInEditMode)
+            {
+                DataGridViewLogIn.EndEdit();
+            }
+            loginBindingSource.EndEdit();
+
             error = false;
             if (MessageBox.Show(messageSave, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 presenterUser.Edit(bindingList.ToList());
                 isSomethingChanged = false;
             }
+            DataGridViewLogIn.Refresh();
         }
 
         private void ButtonCancel_Click(object sender, EventArgs e)
@@ -130,14 +146,6 @@ namespace HASPKey
             
         }
 
-        private void DataGridViewLogIn_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewLogIn.Rows[e.RowIndex].Selected = true;
-            }
-        }
-
         private void ButtonEdit_Click(object sender, EventArgs e)
         {
             if (DataGridViewLogIn.CurrentRow != null)
@@ -145,50 +153,18 @@ namespace HASPKey
                 var selectedRow = DataGridViewLogIn.CurrentRow.DataBoundItem as ModelViewUser;
                 if (selectedRow != null)
                 {
-                    using (AddUserForm user = new AddUserForm(selectedRow))
-                    {
-                        if (user.ShowDialog() == DialogResult.OK)
-                        {
-                            int selectedRowIndex = DataGridViewLogIn.CurrentRow.Index;
-
-                            var bindingList = loginBindingSource.DataSource as BindingList<ModelViewUser>;
-                            if (bindingList != null)
-                            {
-                                var itemToRemove = bindingList.FirstOrDefault(item => item.Id == selectedRow.Id);
-                                if (itemToRemove != null)
-                                {
-                                    bindingList.Remove(itemToRemove);
-                                }
-
-                                var updatedUser = new ModelViewUser
-                                {
-                                    Id = user.NewItem.Id,
-                                    Name = user.NewItem.Name,
-                                    Login = user.NewItem.Login,
-                                    Password = user.NewItem.Password,
-                                    LevelAccess = user.NewItem.LevelAccess
-                                };
-
-                                bindingList.Add(updatedUser);
-
-                                DataGridViewLogIn.Refresh();
-                                isSomethingChanged = true;
-
-                                var modelViewUserList = bindingList.Select(item => new ModelViewUser
-                                {
-                                    Id = item.Id,
-                                    Name = item.Name,
-                                    Login = item.Login,
-                                    Password = item.Password,
-                                    LevelAccess = item.LevelAccess
-                                }).ToList();
-
-                                presenterUser.Edit(modelViewUserList);
-                                presenterUser.Remove(selectedRow.Id);
-                            }
-                        }
-                    }
+                    editingRowId = selectedRow.Id;
+                    DataGridViewLogIn.BeginEdit(true);
                 }
+            }
+        }
+
+        private void DataGridViewLogIn_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (DataGridViewLogIn.Columns[e.ColumnIndex].Name == "RealPassword" && e.Value != null)
+            {
+                e.Value = new string('*', e.Value.ToString().Length);
+                e.FormattingApplied = true;
             }
         }
     }

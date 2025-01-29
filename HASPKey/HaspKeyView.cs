@@ -54,14 +54,12 @@ namespace HASPKey
             labelClient.Text = string.Empty;
             DataAccess = dataAccess;
 
-            if (DataAccess == LevelAccess.superadmin)
+            if (DataAccess == LevelAccess.superadmin || DataAccess == LevelAccess.admin)
             {
                 DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height - 28;
                 buttonCancel.Visible = true;
             }
             DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
-
-            if (DataAccess == LevelAccess.admin) buttonCancel.Visible = false;
 
             if (DataAccess == LevelAccess.user)
             {

@@ -89,7 +89,16 @@ namespace DalDB
 
             client.Name = entity.Name;
             client.Login = entity.Login;
-            client.Password = entity.Password;
+
+            if (entity.Password.Length == 64 && entity.Password.All(c => "0123456789abcdef".Contains(c)))
+            {
+                client.Password = entity.Password;
+            }
+            else
+            {
+                client.Password = Hash(entity.Password);
+            }
+
             client.LevelAccess = entity.LevelAccess;
 
             db.SaveChanges();
