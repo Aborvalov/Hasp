@@ -33,7 +33,6 @@ namespace Entities
 
             int hashProductAction = Actions == null ? 0 : Actions.GetHashCode(); ;
 
-
             return hashProductAction ^
                    hashProductSessionID ^
                    hashProductUser;

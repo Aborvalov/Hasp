@@ -15,6 +15,6 @@ namespace DalDB
             this.db = (EntitesContext)db ?? throw new ArgumentNullException(nameof(db));
         }
 
-        public List<Log> GetAll() => db.Logs.ToList();
+        public List<Log> GetAll() => db.Logs.OrderByDescending(log => log.LoginTime).ToList();
     }
 }

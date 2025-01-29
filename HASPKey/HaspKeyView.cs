@@ -41,8 +41,6 @@ namespace HASPKey
             comboBoxTypeKey.DataSource = Enum.GetValues(typeof(TypeKey));
             comboBoxTypeKey.SelectedIndex = -1;
             labelClient.Text = string.Empty;
-
-            DataGridViewHaspKey.Height = DataGridViewHaspKey.Size.Height + 28;
         }
 
         public HaspKeyView(LevelAccess? dataAccess)

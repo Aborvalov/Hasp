@@ -2,6 +2,7 @@ using DevExpress.XtraBars;
 using Entities;
 using ModelEntities;
 using Presenter;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -16,11 +17,13 @@ namespace HASPKey
         private IMainPresenter presenter;
         public LevelAccess? DataAccess = null;
 
-        public MainFormDX()
+        public MainFormDX(int dataAccess)
         {
             InitializeComponent();
             presenter = new MainPresenter(this);
-            barSubItem3.Enabled = false;
+            DataAccess = dataAccess;
+            barSubItem4.Enabled = dataAccess == 2;
+            LoadBarCaptions();
         }
 
         public MainFormDX(LevelAccess? dataAccess)
@@ -128,6 +131,7 @@ namespace HASPKey
             {
                 form.ShowDialog();
             }
+            LoadBarCaptions();
         }
 
         private void BarButtonItem16_ItemClick(object sender, ItemClickEventArgs e)
