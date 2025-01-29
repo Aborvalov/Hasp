@@ -1,5 +1,6 @@
 using DevExpress.XtraBars;
 using Entities;
+using Logic;
 using ModelEntities;
 using Presenter;
 using System;
@@ -17,13 +18,11 @@ namespace HASPKey
         private IMainPresenter presenter;
         public LevelAccess? DataAccess = null;
 
-        public MainFormDX(int dataAccess)
+        private void LoadBarCaptions()
         {
-            InitializeComponent();
-            presenter = new MainPresenter(this);
-            DataAccess = dataAccess;
-            barSubItem4.Enabled = dataAccess == 2;
-            LoadBarCaptions();
+            int days = LoadFromXml.GetItem();
+            Headline.Text = $"Истекает через {days} дней";
+            Lowline.Text = $"Истекло в предыдущие {days} дней";
         }
 
         public MainFormDX(LevelAccess? dataAccess)
