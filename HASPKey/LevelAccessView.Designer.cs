@@ -81,6 +81,7 @@
             this.DataGridViewLogIn.RowHeadersWidth = 51;
             this.DataGridViewLogIn.Size = new System.Drawing.Size(750, 516);
             this.DataGridViewLogIn.TabIndex = 15;
+            this.DataGridViewLogIn.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DataGridViewLogIn_CellFormatting);
             // 
             // loginBindingSource
             // 

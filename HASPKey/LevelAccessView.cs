@@ -4,6 +4,7 @@ using Presenter;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -40,7 +41,7 @@ namespace HASPKey
         {
             if (DataGridViewLogIn.Columns["levelAccessDataGridViewTextBoxColumn"] is DataGridViewComboBoxColumn comboBoxColumn)
             {
-                comboBoxColumn.DataSource = Enum.GetValues(typeof(Entities.LevelAccess));
+                comboBoxColumn.DataSource = Enum.GetValues(typeof(LevelAccess));
             }
         }
 
@@ -174,6 +175,15 @@ namespace HASPKey
                     editingRowId = selectedRow.Id;
                     DataGridViewLogIn.BeginEdit(true);
                 }
+            }
+        }
+
+        private void DataGridViewLogIn_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (DataGridViewLogIn.Columns[e.ColumnIndex].Name == "RealPassword" && e.Value != null)
+            {
+                e.Value = new string('*', e.Value.ToString().Length);
+                e.FormattingApplied = true;
             }
         }
     }
