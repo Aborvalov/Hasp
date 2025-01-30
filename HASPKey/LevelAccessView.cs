@@ -30,10 +30,19 @@ namespace HASPKey
         {
             InitializeComponent();
             presenterUser = new UserPresenter(this);
+            SetupComboBoxColumn();
         }
 
         public LevelAccessView() : this(false)
         { }
+
+        private void SetupComboBoxColumn()
+        {
+            if (DataGridViewLogIn.Columns["levelAccessDataGridViewTextBoxColumn"] is DataGridViewComboBoxColumn comboBoxColumn)
+            {
+                comboBoxColumn.DataSource = Enum.GetValues(typeof(Entities.LevelAccess));
+            }
+        }
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
@@ -53,7 +62,7 @@ namespace HASPKey
                 Name = "",
                 Login = "",
                 Password = "",
-                LevelAccess = null
+                LevelAccess = LevelAccess.user
             };
 
             bindingList.Add(newUser);

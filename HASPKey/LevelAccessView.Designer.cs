@@ -45,7 +45,7 @@
             this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Login = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RealPassword = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.levelAccessDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.levelAccessDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewLogIn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.loginBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -79,7 +79,7 @@
             this.DataGridViewLogIn.Name = "DataGridViewLogIn";
             this.DataGridViewLogIn.RowHeadersVisible = false;
             this.DataGridViewLogIn.RowHeadersWidth = 51;
-            this.DataGridViewLogIn.Size = new System.Drawing.Size(756, 516);
+            this.DataGridViewLogIn.Size = new System.Drawing.Size(750, 516);
             this.DataGridViewLogIn.TabIndex = 15;
             // 
             // loginBindingSource
@@ -216,9 +216,14 @@
             // 
             this.levelAccessDataGridViewTextBoxColumn.DataPropertyName = "LevelAccess";
             this.levelAccessDataGridViewTextBoxColumn.HeaderText = "Уровень доступа";
+            this.levelAccessDataGridViewTextBoxColumn.Items.AddRange(new object[] {
+            "user",
+            "superadmin",
+            "user"});
             this.levelAccessDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.levelAccessDataGridViewTextBoxColumn.Name = "levelAccessDataGridViewTextBoxColumn";
             this.levelAccessDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.levelAccessDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // LevelAccessView
             // 
@@ -255,10 +260,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Login;
         private System.Windows.Forms.DataGridViewTextBoxColumn RealPassword;
-        private System.Windows.Forms.DataGridViewTextBoxColumn levelAccessDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewComboBoxColumn levelAccessDataGridViewTextBoxColumn;
     }
 }
