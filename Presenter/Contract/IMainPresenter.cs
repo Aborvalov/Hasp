@@ -8,5 +8,6 @@ namespace Presenter
        void Views();
        void GetByClient(ModelViewClient client);
        void ShowExpiredKeys();
+        int GetDaysFromXml();
     }
 }

@@ -34,6 +34,11 @@ namespace Presenter
             Views();
         }
 
+        public int GetDaysFromXml()
+        {
+            return LoadFromXml.GetItem();
+        }
+
         public void DataChange() => DataUpdated?.Invoke();
 
         public void Dispose() => mainModel?.Dispose();

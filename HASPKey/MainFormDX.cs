@@ -1,9 +1,7 @@
 using DevExpress.XtraBars;
 using Entities;
-using Logic;
 using ModelEntities;
 using Presenter;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -24,12 +22,11 @@ namespace HASPKey
             presenter = new MainPresenter(this);
             DataAccess = dataAccess;
             barSubItem4.Enabled = barSubItem4.Enabled = DataAccess == LevelAccess.superadmin;
-            LoadBarCaptions();
+            LoadBarCaptions(presenter.GetDaysFromXml());
         }
 
-        private void LoadBarCaptions()
+        private void LoadBarCaptions(int days)
         {
-            int days = LoadFromXml.GetItem();
             Headline.Text = $"Истекает через {days} дней";
             Lowline.Text = $"Истекло в предыдущие {days} дней";
         }
@@ -131,7 +128,7 @@ namespace HASPKey
             {
                 form.ShowDialog();
             }
-            LoadBarCaptions();
+            LoadBarCaptions(presenter.GetDaysFromXml());
         }
 
         private void BarButtonItem16_ItemClick(object sender, ItemClickEventArgs e)
