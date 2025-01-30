@@ -92,15 +92,6 @@ namespace HASPKey
             }
             loginBindingSource.EndEdit();
 
-            foreach (var user in bindingList)
-            {
-                var password = user.Password;
-                if (!(password.Length == 64 && password.All(c => "0123456789abcdef".Contains(c))))
-                {
-                    user.Password = HashPassword(user.Password);
-                }
-            }
-
             error = false;
             if (MessageBox.Show(messageSave, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -108,16 +99,6 @@ namespace HASPKey
                 isSomethingChanged = false;
             }
             DataGridViewLogIn.Refresh();
-        }
-
-        private string HashPassword(string password)
-        {
-            using (SHA256 sha256 = SHA256.Create())
-            {
-                byte[] bytes = Encoding.UTF8.GetBytes(password);
-                byte[] hashBytes = sha256.ComputeHash(bytes);
-                return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
-            }
         }
 
         private void ButtonCancel_Click(object sender, EventArgs e)
