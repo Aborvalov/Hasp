@@ -13,7 +13,7 @@ namespace ModelEntities
             Id = login.Id;
             Name = login.Name;
             Login = login.Login;
-            Password = login.Password;
+            Password = "•••••••";
             LevelAccess = login.LevelAccess;
         }
 

@@ -4,10 +4,7 @@ using Presenter;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Windows.Forms;
 using ViewContract;
 
@@ -95,6 +92,19 @@ namespace HASPKey
             error = false;
             if (MessageBox.Show(messageSave, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                var originalUsers = presenterUser.GetAllWithPasswords();
+
+                foreach (var user in bindingList)
+                {
+                    var originalUser = originalUsers.FirstOrDefault(u => u.Id == user.Id);
+                    if (originalUser != null)
+                    {
+                        if (user.Password == "•••••••")
+                        {
+                            user.Password = originalUser.Password;
+                        }
+                    }
+                }
                 presenterUser.Edit(bindingList.ToList());
                 isSomethingChanged = false;
             }
@@ -141,10 +151,7 @@ namespace HASPKey
                                                          : new BindingList<ModelViewUser>();
 
         public void BindItem(ModelViewUser entity)
-        {
-            loginBindingSource.DataSource = entity ?? new ModelViewUser();
-            
-        }
+            => loginBindingSource.DataSource = entity ?? new ModelViewUser();
 
         private void ButtonEdit_Click(object sender, EventArgs e)
         {
@@ -161,10 +168,16 @@ namespace HASPKey
 
         private void DataGridViewLogIn_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (DataGridViewLogIn.Columns[e.ColumnIndex].Name == "RealPassword" && e.Value != null)
+            int loginIndex = DataGridViewLogIn.Columns["Login"].Index;
+            if (DataGridViewLogIn.Columns[e.ColumnIndex].Name == "RealPassword" && e.Value != null && 
+                DataGridViewLogIn.Rows[e.RowIndex].Cells[loginIndex].Value != null && 
+                !string.IsNullOrWhiteSpace(DataGridViewLogIn.Rows[e.RowIndex].Cells[loginIndex].Value.ToString()))
             {
-                e.Value = new string('*', e.Value.ToString().Length);
-                e.FormattingApplied = true;
+                if (e.Value != null)
+                {
+                    e.Value = new string('•', 6);
+                    e.FormattingApplied = true;
+                }
             }
         }
     }

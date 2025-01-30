@@ -4,6 +4,7 @@ using Model;
 using ModelEntities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using ViewContract;
 
@@ -45,7 +46,7 @@ namespace Presenter
             }
             return userModel.GetByLoginAndPassword(login, password);
         }
-
+        
         public void Display() => entitiesUserView.Bind(userModel.GetAll());
 
         public void Edit(List<ModelViewUser> user)
@@ -184,5 +185,7 @@ namespace Presenter
         }
 
         public void Dispose() => userModel.Dispose();
+
+        public List<ModelViewUser> GetAllWithPasswords() => userModel.GetAllWithPasswords();
     }
 }

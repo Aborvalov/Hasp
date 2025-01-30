@@ -2,8 +2,8 @@
 using Logic;
 using LogicContract;
 using ModelEntities;
-using System;
 using System.Collections.Generic;
+using System;
 using System.Linq;
 
 namespace Model
@@ -21,7 +21,7 @@ namespace Model
             db = Context.GetContext();
             if (db == null)
                 throw new ArgumentNullException(nameof(db));
-        
+
             userLogic = this.factoryLogic.CreateUser(db);
         }
 
@@ -36,7 +36,7 @@ namespace Model
 
             if (!keyClient.Any())
                 return true;
-            
+
             foreach (var item in keyClient)
             {
                 userLogic.Save(item.User);
@@ -130,6 +130,17 @@ namespace Model
             var levelAccess = userLogic.GetByLoginAndPassword(login, password);
 
             return levelAccess;
+        }
+
+        public List<ModelViewUser> GetAllWithPasswords()
+        {
+            return db.Users.Select(u => new ModelViewUser
+            {
+                Id = u.Id,
+                Name = u.Name,
+                Login = u.Login,
+                Password = u.Password
+            }).ToList();
         }
     }
 }

@@ -3,8 +3,6 @@ using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace DalDB
 {
@@ -28,27 +26,10 @@ namespace DalDB
 
         public List<User> GetAll() => db.Users.ToList();
 
-        private string Hash(string password)
-        {
-            using (SHA256 sha256 = SHA256.Create())
-            {
-                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < bytes.Length; i++)
-                {
-                    builder.Append(bytes[i].ToString("x2"));
-                }
-                string hash = builder.ToString();
-                return hash;
-            }
-        }
-
         public int Add(User entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
-
-            entity.Password = Hash(entity.Password);
 
             var client = db.Users.Add(entity);
 
@@ -89,16 +70,7 @@ namespace DalDB
 
             client.Name = entity.Name;
             client.Login = entity.Login;
-
-            if (entity.Password.Length == 64 && entity.Password.All(c => "0123456789abcdef".Contains(c)))
-            {
-                client.Password = entity.Password;
-            }
-            else
-            {
-                client.Password = Hash(entity.Password);
-            }
-
+            client.Password = entity.Password;
             client.LevelAccess = entity.LevelAccess;
 
             db.SaveChanges();
@@ -107,7 +79,7 @@ namespace DalDB
 
             return true;
         }
-
+        
         public User GetById(int id)
         {
             if (id < 1)
@@ -152,11 +124,7 @@ namespace DalDB
             if (string.IsNullOrEmpty(password))
                 throw new ArgumentNullException(nameof(password));
 
-            string hashedPassword = Hash(password);
-
-            var user = db.Users.FirstOrDefault(u => u.Login == login && u.Password == hashedPassword);
-
-            UserSingleton.Instance.User = user;
+            var user = db.Users.FirstOrDefault(u => u.Login == login && u.Password == password);
 
             if (user != null)
             {
@@ -172,6 +140,20 @@ namespace DalDB
             }
 
             return null;
+        }
+
+        public List<User> GetAllWithPasswords()
+        {
+            return db.Users
+                     .ToList()
+                     .Select(u => new User
+                     {
+                         Id = u.Id,
+                         Name = u.Name,
+                         Login = u.Login,
+                         Password = u.Password
+                     })
+                     .ToList();
         }
     }
 }

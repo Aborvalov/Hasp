@@ -3,6 +3,9 @@ using Entities;
 using LogicContract;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Logic
 {
@@ -34,6 +37,21 @@ namespace Logic
             return usersDAO.Remove(id);
         }
 
+        private string Hash(string password)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                string hash = builder.ToString();
+                return hash;
+            }
+        }
+
         public bool Save(User entity)
         {
             if (entity == null)
@@ -43,7 +61,10 @@ namespace Logic
 
             int id;
             if (!usersDAO.ContainsDB(entity))
+            {
+                entity.Password = Hash(entity.Password);
                 id = usersDAO.Add(entity);
+            }
             else
                 return false;
 
@@ -57,6 +78,10 @@ namespace Logic
 
             CheckArgument(entity);
 
+            if (entity.Password != null && !(entity.Password.Length == 64 && entity.Password.All(c => "0123456789abcdef".Contains(c))))
+            {
+                entity.Password = Hash(entity.Password);
+            }
             return !usersDAO.ContainsDB(entity) && usersDAO.Update(entity);
         }
 
@@ -72,8 +97,8 @@ namespace Logic
                 throw new ArgumentException(nameof(login));
             if (string.IsNullOrEmpty(password))
                 throw new ArgumentException(nameof(password));
-            
-            dataAccess = usersDAO.GetByLoginAndPassword(login, password);
+
+            dataAccess = usersDAO.GetByLoginAndPassword(login, Hash(password));
 
             if (dataAccess != null)
             {
@@ -88,5 +113,7 @@ namespace Logic
 
             return dataAccess;
         }
+
+        public List<User> GetAllWithPasswords() => usersDAO.GetAllWithPasswords();
     }
 }
